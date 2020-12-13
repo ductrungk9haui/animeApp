@@ -6,11 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -49,9 +47,7 @@ public class MoviesFragment extends Fragment {
     @BindView(R.id.item_progress_bar) ProgressBar mProgressBar;
     @BindView(R.id.shimmer_view_container) ShimmerFrameLayout mShimmerLayout;
     @BindView(R.id.swipe_layout) SwipeRefreshLayout mSwipeRefreshLayout;
-    @BindView(R.id.coordinator_lyt) CoordinatorLayout mCoordinatorLayout;
-    @BindView(R.id.tv_noitem) TextView mTvNoItem;
-    @BindView(R.id.recyclerView) RecyclerView recyclerView;
+    @BindView(R.id.recyclerView) RecyclerView mRecycleView;
     Unbinder mUnbinder;
     private CommonGridAdapter mAdapter;
     private List<CommonModels> mListCommonModels = new ArrayList<>();
@@ -90,20 +86,20 @@ public class MoviesFragment extends Fragment {
         mApiResources = new ApiResources();
         mShimmerLayout.startShimmer();
         //----movie's recycler view-----------------
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
-        recyclerView.addItemDecoration(new SpacingItemDecoration(3, Tools.dpToPx(getActivity(), 0), true));
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setNestedScrollingEnabled(false);
+        mRecycleView.setLayoutManager(new GridLayoutManager(getContext(), 3));
+        mRecycleView.addItemDecoration(new SpacingItemDecoration(3, Tools.dpToPx(getActivity(), 0), true));
+        mRecycleView.setHasFixedSize(true);
+        mRecycleView.setNestedScrollingEnabled(false);
         mAdapter = new CommonGridAdapter(getContext(), mListCommonModels);
-        recyclerView.setAdapter(mAdapter);
+        mRecycleView.setAdapter(mAdapter);
 
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        mRecycleView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
 
                 if (!recyclerView.canScrollVertically(1) && !mIsLoading) {
-                    mCoordinatorLayout.setVisibility(View.GONE);
+                    mActivity.setFailure(false);
                     mPageCount = mPageCount + 1;
                     mIsLoading = true;
                     mProgressBar.setVisibility(View.VISIBLE);
@@ -136,29 +132,27 @@ public class MoviesFragment extends Fragment {
         if (new NetworkInst(getContext()).isNetworkAvailable()) {
             getData(mPageCount);
         } else {
-            mTvNoItem.setText(getResources().getString(R.string.no_internet));
             mShimmerLayout.stopShimmer();
             mShimmerLayout.setVisibility(View.GONE);
-            mCoordinatorLayout.setVisibility(View.VISIBLE);
+            mActivity.setFailure(true,getResources().getString(R.string.no_internet));
         }
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
 
-                mCoordinatorLayout.setVisibility(View.GONE);
+                mActivity.setFailure(false);
                 mPageCount = 1;
                 mListCommonModels.clear();
-                recyclerView.removeAllViews();
+                mRecycleView.removeAllViews();
                 mAdapter.notifyDataSetChanged();
                 if (new NetworkInst(getContext()).isNetworkAvailable()) {
                     getData(mPageCount);
                 } else {
-                    mTvNoItem.setText(getResources().getString(R.string.no_internet));
                     mShimmerLayout.stopShimmer();
                     mShimmerLayout.setVisibility(View.GONE);
                     mSwipeRefreshLayout.setRefreshing(false);
-                    mCoordinatorLayout.setVisibility(View.VISIBLE);
+                    mActivity.setFailure(true,getResources().getString(R.string.no_internet));
                 }
             }
         });
@@ -192,15 +186,16 @@ public class MoviesFragment extends Fragment {
             public void onResponse(Call<List<Video>> call, retrofit2.Response<List<Video>> response) {
                 if (response.code() == 200){
                     mIsLoading =false;
+                    if(mSwipeRefreshLayout == null)return;
                     mProgressBar.setVisibility(View.GONE);
                     mShimmerLayout.stopShimmer();
                     mShimmerLayout.setVisibility(View.GONE);
                     mSwipeRefreshLayout.setRefreshing(false);
 
                     if (String.valueOf(response).length()<10 && mPageCount ==1){
-                        mCoordinatorLayout.setVisibility(View.VISIBLE);
+                        mActivity.setFailure(true);
                     }else {
-                        mCoordinatorLayout.setVisibility(View.GONE);
+                        mActivity.setFailure(false);
                     }
 
                     for (int i = 0; i < response.body().size(); i++){
@@ -230,7 +225,7 @@ public class MoviesFragment extends Fragment {
                     mShimmerLayout.setVisibility(View.GONE);
                     mSwipeRefreshLayout.setRefreshing(false);
                     if (mPageCount ==1){
-                        mCoordinatorLayout.setVisibility(View.VISIBLE);
+                        mActivity.setFailure(true);
                     }
                 }
             }
@@ -243,7 +238,7 @@ public class MoviesFragment extends Fragment {
                 mShimmerLayout.setVisibility(View.GONE);
                 mSwipeRefreshLayout.setRefreshing(false);
                 if (mPageCount ==1){
-                    mCoordinatorLayout.setVisibility(View.VISIBLE);
+                    mActivity.setFailure(true);
                 }
             }
         });

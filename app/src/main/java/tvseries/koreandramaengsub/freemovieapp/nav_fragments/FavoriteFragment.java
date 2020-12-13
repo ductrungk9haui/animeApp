@@ -6,11 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -52,8 +50,6 @@ public class FavoriteFragment extends Fragment {
     @BindView(R.id.item_progress_bar) ProgressBar mProgressBar;
     @BindView(R.id.shimmer_view_container) ShimmerFrameLayout mShimmerLayout;
     @BindView(R.id.swipe_layout) SwipeRefreshLayout mSwipeRefreshLayout;
-    @BindView(R.id.coordinator_lyt) CoordinatorLayout mCoordinatorLayout ;
-    @BindView(R.id.tv_noitem) TextView mTvNoItem;
     @BindView(R.id.recyclerView) RecyclerView RecyclerView;
     Unbinder mUnbinder;
     private CommonGridAdapter mAdapter;
@@ -145,11 +141,10 @@ public class FavoriteFragment extends Fragment {
                 if (new NetworkInst(getContext()).isNetworkAvailable()){
                     getData(userId, mPageCount);
                 }else {
-                    mTvNoItem.setText(getString(R.string.no_internet));
                     mShimmerLayout.stopShimmer();
                     mShimmerLayout.setVisibility(View.GONE);
                     mSwipeRefreshLayout.setRefreshing(false);
-                    mCoordinatorLayout.setVisibility(View.VISIBLE);
+                    mActivity.setFailure(true,getString(R.string.no_internet));
                 }
 
             }
@@ -158,18 +153,16 @@ public class FavoriteFragment extends Fragment {
 
         if (new NetworkInst(getContext()).isNetworkAvailable()){
             if (userId == null){
-                mTvNoItem.setText(getString(R.string.please_login_first_to_see_favorite_list));
                 mShimmerLayout.stopShimmer();
                 mShimmerLayout.setVisibility(View.GONE);
-                mCoordinatorLayout.setVisibility(View.VISIBLE);
+                mActivity.setFailure(true,getString(R.string.please_login_first_to_see_favorite_list));
             }else {
                 getData(userId, mPageCount);
             }
         }else {
-            mTvNoItem.setText(getString(R.string.no_internet));
             mShimmerLayout.stopShimmer();
             mShimmerLayout.setVisibility(View.GONE);
-            mCoordinatorLayout.setVisibility(View.VISIBLE);
+            mActivity.setFailure(true,getString(R.string.no_internet));
         }
 
     }
@@ -204,17 +197,17 @@ public class FavoriteFragment extends Fragment {
             public void onResponse(Call<List<Movie>> call, Response<List<Movie>> response) {
                 if (response.code() == 200){
                     mIsLoading =false;
+                    if(mSwipeRefreshLayout == null)return;
                     mSwipeRefreshLayout.setRefreshing(false);
                     mProgressBar.setVisibility(View.GONE);
                     mShimmerLayout.stopShimmer();
                     mShimmerLayout.setVisibility(View.GONE);
 
                     if (response.body().size() == 0 && mPageCount ==1){
-                        mCoordinatorLayout.setVisibility(View.VISIBLE);
-                        mTvNoItem.setText("No items here");
+                        mActivity.setFailure(true,"No items here");
                         mPageCount = 1;
                     }else {
-                        mCoordinatorLayout.setVisibility(View.GONE);
+                        mActivity.setFailure(false);
                     }
 
                     for (int i = 0; i < response.body().size(); i++){
@@ -250,7 +243,7 @@ public class FavoriteFragment extends Fragment {
                 }
 
                 if (mPageCount ==1){
-                    mCoordinatorLayout.setVisibility(View.VISIBLE);
+                    mActivity.setFailure(true);
                 }
             }
         });

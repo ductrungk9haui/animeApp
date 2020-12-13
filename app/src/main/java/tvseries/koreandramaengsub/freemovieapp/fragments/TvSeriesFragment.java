@@ -6,11 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -49,8 +47,6 @@ public class TvSeriesFragment extends Fragment {
     @BindView(R.id.item_progress_bar) ProgressBar mProgressBar;
     @BindView(R.id.shimmer_view_container) ShimmerFrameLayout mShimmerLayout;
     @BindView(R.id.swipe_layout) SwipeRefreshLayout mSwipeRefreshLayout;
-    @BindView(R.id.coordinator_lyt) CoordinatorLayout mCoordinatorLayout;
-    @BindView(R.id.tv_noitem) TextView mTvNoItem;
     @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
     Unbinder mUnbinder;
     private CommonGridAdapter mAdapter;
@@ -98,9 +94,7 @@ public class TvSeriesFragment extends Fragment {
                 super.onScrollStateChanged(recyclerView, newState);
 
                 if (!recyclerView.canScrollVertically(1) && !mIsLoading) {
-
-                    mCoordinatorLayout.setVisibility(View.GONE);
-
+                    mActivity.setFailure(false);
                     mPageCount = mPageCount +1;
                     mIsLoading = true;
 
@@ -135,10 +129,9 @@ public class TvSeriesFragment extends Fragment {
         if (new NetworkInst(getContext()).isNetworkAvailable()){
             getTvSeriesData(mPageCount);
         }else {
-            mTvNoItem.setText(getResources().getString(R.string.no_internet));
             mShimmerLayout.stopShimmer();
             mShimmerLayout.setVisibility(View.GONE);
-            mCoordinatorLayout.setVisibility(View.VISIBLE);
+            mActivity.setFailure(true,getResources().getString(R.string.no_internet));
         }
 
 
@@ -147,18 +140,17 @@ public class TvSeriesFragment extends Fragment {
             public void onRefresh() {
 
                 mPageCount =1;
-                mCoordinatorLayout.setVisibility(View.GONE);
+                mActivity.setFailure(false);
                 mListCommonModels.clear();
                 mRecyclerView.removeAllViews();
                 mAdapter.notifyDataSetChanged();
                 if (new NetworkInst(getContext()).isNetworkAvailable()){
                     getTvSeriesData(mPageCount);
                 }else {
-                    mTvNoItem.setText(getResources().getString(R.string.no_internet));
                     mShimmerLayout.stopShimmer();
                     mShimmerLayout.setVisibility(View.GONE);
                     mSwipeRefreshLayout.setRefreshing(false);
-                    mCoordinatorLayout.setVisibility(View.VISIBLE);
+                    mActivity.setFailure(true,getResources().getString(R.string.no_internet));
                 }
             }
         });
@@ -198,15 +190,16 @@ public class TvSeriesFragment extends Fragment {
             public void onResponse(Call<List<Video>> call, retrofit2.Response<List<Video>> response) {
                 if (response.code() == 200){
                     mIsLoading =false;
+                    if(mSwipeRefreshLayout == null)return;
                     mProgressBar.setVisibility(View.GONE);
                     mShimmerLayout.stopShimmer();
                     mShimmerLayout.setVisibility(View.GONE);
                     mSwipeRefreshLayout.setRefreshing(false);
 
                     if (response.body().size() ==  0 && mPageCount ==1){
-                        mCoordinatorLayout.setVisibility(View.VISIBLE);
+                        mActivity.setFailure(true);
                     }else {
-                        mCoordinatorLayout.setVisibility(View.GONE);
+                        mActivity.setFailure(false);
                     }
 
                     for (int i = 0; i < response.body().size(); i++){
@@ -229,7 +222,7 @@ public class TvSeriesFragment extends Fragment {
                     mShimmerLayout.setVisibility(View.GONE);
                     mSwipeRefreshLayout.setRefreshing(false);
                     if (mPageCount ==1){
-                        mCoordinatorLayout.setVisibility(View.VISIBLE);
+                        mActivity.setFailure(true);
                     }
                 }
             }
@@ -242,7 +235,7 @@ public class TvSeriesFragment extends Fragment {
                 mShimmerLayout.setVisibility(View.GONE);
                 mSwipeRefreshLayout.setRefreshing(false);
                 if (mPageCount ==1){
-                    mCoordinatorLayout.setVisibility(View.VISIBLE);
+                    mActivity.setFailure(true);
                 }
             }
         });

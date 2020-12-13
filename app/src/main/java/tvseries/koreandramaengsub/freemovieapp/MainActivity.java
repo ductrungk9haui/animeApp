@@ -31,6 +31,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.cardview.widget.CardView;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
@@ -46,6 +47,10 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.volcaniccoder.bottomify.BottomifyNavigationView;
+import com.volcaniccoder.bottomify.OnNavigationItemChangeListener;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.Serializable;
@@ -59,13 +64,14 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import tvseries.koreandramaengsub.freemovieapp.adapters.NavigationAdapter;
 import tvseries.koreandramaengsub.freemovieapp.database.DatabaseHelper;
+import tvseries.koreandramaengsub.freemovieapp.fragments.DownFragment;
+import tvseries.koreandramaengsub.freemovieapp.fragments.HomeFragment;
 import tvseries.koreandramaengsub.freemovieapp.fragments.MoviesFragment;
 import tvseries.koreandramaengsub.freemovieapp.fragments.TvSeriesFragment;
 import tvseries.koreandramaengsub.freemovieapp.models.NavigationModel;
 import tvseries.koreandramaengsub.freemovieapp.nav_fragments.CountryFragment;
 import tvseries.koreandramaengsub.freemovieapp.nav_fragments.FavoriteFragment;
 import tvseries.koreandramaengsub.freemovieapp.nav_fragments.GenreFragment;
-import tvseries.koreandramaengsub.freemovieapp.nav_fragments.MainHomeFragment;
 import tvseries.koreandramaengsub.freemovieapp.utils.Constants;
 import tvseries.koreandramaengsub.freemovieapp.utils.PreferenceUtils;
 import tvseries.koreandramaengsub.freemovieapp.utils.RtlUtils;
@@ -86,6 +92,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @BindView(R.id.group_facebook) RelativeLayout mGroupFBLayout;
     @BindView(R.id.rate_app) RelativeLayout mRateApp;
     @BindView(R.id.recyclerView) RecyclerView recyclerView;
+    @BindView(R.id.coordinator_lyt) CoordinatorLayout mCoordinatorLayout;
+    @BindView(R.id.tv_noitem) TextView mTvNoItem;
+    @BindView(R.id.bottomify_nav)
+    BottomifyNavigationView mBottomNaviDark;
+    @BindView(R.id.bottomify_nav_light) BottomifyNavigationView mBottomNaviLight;
+
     Unbinder mUnbinder;
     boolean isSearchBarHide = false;
     private NavigationAdapter mAdapter;
@@ -126,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         checkStorePermission();
         setupNavigation();
         //----external method call--------------
-        loadFragment(new MainHomeFragment());
+        loadFragment(new HomeFragment());
     }
 
     @Override
@@ -136,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
     private boolean loadFragment(Fragment fragment){
-
+        setFailure(false);
         if (fragment!=null){
 
             getSupportFragmentManager()
@@ -191,7 +203,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mDrawerLayout.closeDrawers();
         }
         else if(Config.isOpenChildFragment){
-            loadFragment(new MainHomeFragment());
+            loadFragment(new HomeFragment());
             Config.isOpenChildFragment = false;
         }
         else {
@@ -342,7 +354,71 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         intent.addFlags(flags);
         return intent;
     }
+    private void setupBottomNaviBar(){
+        if (isDark) {
+            mBottomNaviDark.setVisibility(View.VISIBLE);
+            mBottomNaviDark.setBackgroundColor(getResources().getColor(R.color.black_window_light));
 
+            mBottomNaviDark.setActiveNavigationIndex(0);
+            mBottomNaviDark.setOnNavigationItemChangedListener(new OnNavigationItemChangeListener() {
+                @Override
+                public void onNavigationItemChanged(@NotNull BottomifyNavigationView.NavigationItem navigationItem) {
+                    switch (navigationItem.getPosition()) {
+                        case 0:
+                            loadFragment(new HomeFragment());
+                            break;
+                        case 1:
+                            loadFragment(new MoviesFragment());
+                            Config.isOpenChildFragment = true;
+                            break;
+                        case 2:
+                            loadFragment(new TvSeriesFragment());
+                            Config.isOpenChildFragment = true;
+                            break;
+                        case 3:
+                            loadFragment(new DownFragment());
+                            Config.isOpenChildFragment = true;
+                            break;
+                        case 4:
+                            loadFragment(new FavoriteFragment());
+                            Config.isOpenChildFragment = true;
+                            break;
+                    }
+                }
+            });
+        } else {
+            mBottomNaviLight.setVisibility(View.VISIBLE);
+            mBottomNaviLight.setBackgroundColor(getResources().getColor(R.color.white));
+
+            mBottomNaviLight.setActiveNavigationIndex(0);
+            mBottomNaviLight.setOnNavigationItemChangedListener(new OnNavigationItemChangeListener() {
+                @Override
+                public void onNavigationItemChanged(@NotNull BottomifyNavigationView.NavigationItem navigationItem) {
+                    switch (navigationItem.getPosition()) {
+                        case 0:
+                            loadFragment(new HomeFragment());
+                            break;
+                        case 1:
+                            loadFragment(new MoviesFragment());
+                            Config.isOpenChildFragment = true;
+                            break;
+                        case 2:
+                            loadFragment(new TvSeriesFragment());
+                            Config.isOpenChildFragment = true;
+                            break;
+                        case 3:
+                            loadFragment(new DownFragment());
+                            Config.isOpenChildFragment = true;
+                            break;
+                        case 4:
+                            loadFragment(new FavoriteFragment());
+                            Config.isOpenChildFragment = true;
+                            break;
+                    }
+                }
+            });
+        }
+    }
     public void animateSearchBar(final boolean hide) {
         if (isSearchBarHide && hide || !isSearchBarHide && !hide) return;
         isSearchBarHide = hide;
@@ -353,13 +429,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mPageTitle.setText(title);
         mSearchRootLayout.setTranslationY(0);
     }
-    public void onRefresh(boolean isStart){
-        if(isStart){
-           // mSearchRootLayout.setTranslationZ(-1);
-        }else{
-            //mSearchRootLayout.setTranslationZ(0);
-        }
-    }
+
     @OnClick(R.id.bt_menu)
     void onMenuIvClick(View view){
         openDrawer();
@@ -417,6 +487,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mThemeSwitch.setChecked(false);
             mNavHeaderLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
         }
+        setupBottomNaviBar();
     }
 
     private void setupFirebaseAnalytics(){
@@ -489,7 +560,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onItemClick(View view, NavigationModel obj, int position, NavigationAdapter.OriginalViewHolder holder) {
                 //----------------------action for click items nav---------------------
                 if (position==0){
-                    loadFragment(new MainHomeFragment());
+                    loadFragment(new HomeFragment());
                 }
                 else if (position==1){
                     loadFragment(new MoviesFragment());
@@ -610,6 +681,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return mSearchRootLayout;
     }
 
+    public void setFailure(boolean isFailed, String failText){
+        mCoordinatorLayout.setVisibility(isFailed?View.VISIBLE:View.GONE);
+        mTvNoItem.setText(failText);
+    }
+    public void setFailure(boolean isFailed){
+        mCoordinatorLayout.setVisibility(isFailed?View.VISIBLE:View.GONE);
+    }
     @Override
     public void onDestroy() {
         super.onDestroy();

@@ -8,11 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -71,8 +69,6 @@ public class HomeFragment extends Fragment {
     @BindView(R.id.btn_more_series1) Button mBtnMoreSeries1;
     @BindView(R.id.btn_more_movie) Button mBtnMoreMovie;
     @BindView(R.id.shimmer_view_container) ShimmerFrameLayout mShimmerLayout;
-    @BindView(R.id.tv_noitem) TextView mTvNoItem;
-    @BindView(R.id.coordinator_lyt) CoordinatorLayout mCoordinatorLayout;
     @BindView(R.id.swipe_layout) SwipeRefreshLayout mSwipeRefreshLayout;
     @BindView(R.id.scrollView) NestedScrollView mScrollView;
     @BindView(R.id.slider_layout) View mSliderLayout;
@@ -186,17 +182,15 @@ public class HomeFragment extends Fragment {
             getHomeContent();
 
         } else {
-            mTvNoItem.setText(getString(R.string.no_internet));
             mShimmerLayout.stopShimmer();
             mShimmerLayout.setVisibility(View.GONE);
-            mCoordinatorLayout.setVisibility(View.VISIBLE);
+            mActivity.setFailure(true,getString(R.string.no_internet));
             mScrollView.setVisibility(View.GONE);
         }
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mActivity.onRefresh(true);
                 mRecyclerViewMovie.removeAllViews();
 //                recyclerViewTv.removeAllViews();
                 mRecyclerViewTvSeries.removeAllViews();
@@ -220,11 +214,10 @@ public class HomeFragment extends Fragment {
                     getHomeContent();
 
                 } else {
-                    mTvNoItem.setText(getString(R.string.no_internet));
                     mShimmerLayout.stopShimmer();
                     mShimmerLayout.setVisibility(View.GONE);
                     mSwipeRefreshLayout.setRefreshing(false);
-                    mCoordinatorLayout.setVisibility(View.VISIBLE);
+                    mActivity.setFailure(true,getString(R.string.no_internet));
                     mScrollView.setVisibility(View.GONE);
                 }
             }
@@ -258,12 +251,11 @@ public class HomeFragment extends Fragment {
                      if(mSwipeRefreshLayout ==null){
                          return;
                      }
-                    mActivity.onRefresh(false);
                     mSwipeRefreshLayout.setRefreshing(false);
                     mShimmerLayout.stopShimmer();
                     mShimmerLayout.setVisibility(View.GONE);
                     mScrollView.setVisibility(View.VISIBLE);
-                    mCoordinatorLayout.setVisibility(View.GONE);
+                    mActivity.setFailure(false);
 
                     //slider data
                     Slider slider = response.body().getSlider();
@@ -401,7 +393,7 @@ public class HomeFragment extends Fragment {
                      mSwipeRefreshLayout.setRefreshing(false);
                      mShimmerLayout.stopShimmer();
                      mShimmerLayout.setVisibility(View.GONE);
-                     mCoordinatorLayout.setVisibility(View.VISIBLE);
+                     mActivity.setFailure(false);
                      mScrollView.setVisibility(View.GONE);
                  }
 
@@ -412,7 +404,7 @@ public class HomeFragment extends Fragment {
                 mSwipeRefreshLayout.setRefreshing(false);
                 mShimmerLayout.stopShimmer();
                 mShimmerLayout.setVisibility(View.GONE);
-                mCoordinatorLayout.setVisibility(View.VISIBLE);
+                mActivity.setFailure(false);
                 mScrollView.setVisibility(View.GONE);
 
             }

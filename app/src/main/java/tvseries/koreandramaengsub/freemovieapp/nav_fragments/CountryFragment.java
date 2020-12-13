@@ -4,25 +4,25 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
 import tvseries.koreandramaengsub.freemovieapp.Config;
 import tvseries.koreandramaengsub.freemovieapp.MainActivity;
 import tvseries.koreandramaengsub.freemovieapp.R;
@@ -40,154 +40,94 @@ import tvseries.koreandramaengsub.freemovieapp.utils.SpacingItemDecoration;
 import tvseries.koreandramaengsub.freemovieapp.utils.ToastMsg;
 import tvseries.koreandramaengsub.freemovieapp.utils.Tools;
 import tvseries.koreandramaengsub.freemovieapp.utils.ads.BannerAds;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Retrofit;
+import tvseries.koreandramaengsub.freemovieapp.view.SwipeRefreshLayout;
 
 public class CountryFragment extends Fragment {
-
-    ShimmerFrameLayout shimmerFrameLayout;
-    private ApiResources apiResources;
-    private RecyclerView recyclerView;
-    private List<CommonModels> list = new ArrayList<>();
+    @BindView(R.id.adView) RelativeLayout mAdView;
+    @BindView(R.id.shimmer_view_container) ShimmerFrameLayout mShimmerLayout;
+    @BindView(R.id.swipe_layout) SwipeRefreshLayout mSwipeRefreshLayout;
+    @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
+    Unbinder mUnbinder;
+    private ApiResources mApiResources;
+    private List<CommonModels> mListCommonModels = new ArrayList<>();
     private CountryAdapter mAdapter;
-    private SwipeRefreshLayout swipeRefreshLayout;
-    private CoordinatorLayout coordinatorLayout;
-
-    private TextView tvNoItem;
-    private RelativeLayout adView;
-
-    private MainActivity activity;
-
-    private LinearLayout searchRootLayout;
-
+    private MainActivity mActivity;
     private static final int HIDE_THRESHOLD = 20;
-    private int scrolledDistance = 0;
-    private boolean controlsVisible = true;
-
-    private CardView searchBar;
-    private ImageView menuIv, searchIv;
-    private TextView pageTitle;
+    private int mScrolledDistance = 0;
+    private boolean mControlsVisible = true;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        activity = (MainActivity) getActivity();
-        return inflater.inflate(R.layout.layout_country,container,false);
+        View view = inflater.inflate(R.layout.layout_country, container, false);
+        mActivity = (MainActivity) getActivity();
+        mUnbinder = ButterKnife.bind(this,view);
+        mActivity.setTitle(getResources().getString(R.string.country));
+        mSwipeRefreshLayout.setToolbar(mActivity.getToolbar());
+        return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getActivity().setTitle(getResources().getString(R.string.country));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
+        mRecyclerView.addItemDecoration(new SpacingItemDecoration(3, Tools.dpToPx(getActivity(), 10), true));
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setNestedScrollingEnabled(false);
+        mAdapter = new CountryAdapter(mActivity, mListCommonModels, "");
+        mRecyclerView.setAdapter(mAdapter);
 
-        adView=view.findViewById(R.id.adView);
-        coordinatorLayout=view.findViewById(R.id.coordinator_lyt);
-        swipeRefreshLayout=view.findViewById(R.id.swipe_layout);
-        shimmerFrameLayout=view.findViewById(R.id.shimmer_view_container);
-        tvNoItem=view.findViewById(R.id.tv_noitem);
-        searchRootLayout=view.findViewById(R.id.search_root_layout);
-        searchBar           = view.findViewById(R.id.search_bar);
-        menuIv              = view.findViewById(R.id.bt_menu);
-        pageTitle           = view.findViewById(R.id.page_title_tv);
-        searchIv            = view.findViewById(R.id.search_iv);
-
-        pageTitle.setText(getContext().getResources().getString(R.string.country));
-
-        if (activity.isDark) {
-            pageTitle.setTextColor(activity.getResources().getColor(R.color.white));
-            searchBar.setCardBackgroundColor(activity.getResources().getColor(R.color.black_window_light));
-            menuIv.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_menu));
-            searchIv.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_search_white));
-        }
-
-        recyclerView=view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
-        recyclerView.addItemDecoration(new SpacingItemDecoration(3, Tools.dpToPx(getActivity(), 10), true));
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setNestedScrollingEnabled(false);
-        mAdapter = new CountryAdapter(activity, list, "");
-        recyclerView.setAdapter(mAdapter);
-
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
-                if (scrolledDistance > HIDE_THRESHOLD && controlsVisible) {
-                    animateSearchBar(true);
-                    controlsVisible = false;
-                    scrolledDistance = 0;
-                } else if (scrolledDistance < -HIDE_THRESHOLD && !controlsVisible) {
-                    animateSearchBar(false);
-                    controlsVisible = true;
-                    scrolledDistance = 0;
+                if (mScrolledDistance > HIDE_THRESHOLD && mControlsVisible) {
+                    mActivity.animateSearchBar(true);
+                    mControlsVisible = false;
+                    mScrolledDistance = 0;
+                } else if (mScrolledDistance < -HIDE_THRESHOLD && !mControlsVisible) {
+                    mActivity.animateSearchBar(false);
+                    mControlsVisible = true;
+                    mScrolledDistance = 0;
                 }
 
-                if((controlsVisible && dy>0) || (!controlsVisible && dy<0)) {
-                    scrolledDistance += dy;
+                if((mControlsVisible && dy>0) || (!mControlsVisible && dy<0)) {
+                    mScrolledDistance += dy;
                 }
-
-
             }
         });
 
-        shimmerFrameLayout.startShimmer();
-
+        mShimmerLayout.startShimmer();
 
         if (new NetworkInst(getContext()).isNetworkAvailable()){
             getAllCountry();
         }else {
-            tvNoItem.setText(getString(R.string.no_internet));
-            shimmerFrameLayout.stopShimmer();
-            shimmerFrameLayout.setVisibility(View.GONE);
-            coordinatorLayout.setVisibility(View.VISIBLE);
+            mShimmerLayout.stopShimmer();
+            mShimmerLayout.setVisibility(View.GONE);
+            mActivity.setFailure(true,getString(R.string.no_internet));
         }
 
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
-                coordinatorLayout.setVisibility(View.GONE);
-
-                recyclerView.removeAllViews();
-                list.clear();
+                mActivity.setFailure(false);
+                mRecyclerView.removeAllViews();
+                mListCommonModels.clear();
                 mAdapter.notifyDataSetChanged();
 
                 if (new NetworkInst(getContext()).isNetworkAvailable()){
                     getAllCountry();
                 }else {
-                    tvNoItem.setText(getString(R.string.no_internet));
-                    shimmerFrameLayout.stopShimmer();
-                    shimmerFrameLayout.setVisibility(View.GONE);
-                    swipeRefreshLayout.setRefreshing(false);
-                    coordinatorLayout.setVisibility(View.VISIBLE);
+                    mShimmerLayout.stopShimmer();
+                    mShimmerLayout.setVisibility(View.GONE);
+                    mSwipeRefreshLayout.setRefreshing(false);
+                    mActivity.setFailure(true,getString(R.string.no_internet));
                 }
             }
         });
-
         loadAd();
-
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        menuIv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                activity.openDrawer();
-            }
-        });
-        searchIv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                activity.goToSearchActivity();
-            }
-        });
-
     }
 
     private void loadAd(){
@@ -195,13 +135,13 @@ public class CountryFragment extends Fragment {
         if (adsConfig.getAdsEnable().equals("1")) {
 
             if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                BannerAds.ShowAdmobBannerAds(getContext(), adView);
+                BannerAds.ShowAdmobBannerAds(getContext(), mAdView);
 
             } else if (adsConfig.getMobileAdsNetwork().equals(Constants.START_APP)) {
-                BannerAds.showStartAppBanner(getContext(), adView);
+                BannerAds.showStartAppBanner(getContext(), mAdView);
 
             } else if(adsConfig.getMobileAdsNetwork().equals(Constants.NETWORK_AUDIENCE)) {
-                BannerAds.showFANBanner(getContext(), adView);
+                BannerAds.showFANBanner(getContext(), mAdView);
             }
         }
     }
@@ -215,14 +155,15 @@ public class CountryFragment extends Fragment {
             @Override
             public void onResponse(Call<List<AllCountry>> call, retrofit2.Response<List<AllCountry>> response) {
                 if (response.code() == 200){
-                    shimmerFrameLayout.stopShimmer();
-                    shimmerFrameLayout.setVisibility(View.GONE);
-                    swipeRefreshLayout.setRefreshing(false);
+                    if(mSwipeRefreshLayout == null)return;
+                    mShimmerLayout.stopShimmer();
+                    mShimmerLayout.setVisibility(View.GONE);
+                    mSwipeRefreshLayout.setRefreshing(false);
 
                     if (response.body().size() == 0){
-                        coordinatorLayout.setVisibility(View.VISIBLE);
+                        mActivity.setFailure(true);
                     }else {
-                        coordinatorLayout.setVisibility(View.GONE);
+                        mActivity.setFailure(false);
                     }
 
                     for (int i = 0; i < response.body().size(); i++) {
@@ -231,36 +172,30 @@ public class CountryFragment extends Fragment {
                         models.setId(country.getCountryId());
                         models.setTitle(country.getName());
                         models.setImageUrl(country.getImageUrl());
-                        list.add(models);
+                        mListCommonModels.add(models);
                     }
                     mAdapter.notifyDataSetChanged();
                 }else {
-                    swipeRefreshLayout.setRefreshing(false);
-                    shimmerFrameLayout.stopShimmer();
-                    shimmerFrameLayout.setVisibility(View.GONE);
+                    mSwipeRefreshLayout.setRefreshing(false);
+                    mShimmerLayout.stopShimmer();
+                    mShimmerLayout.setVisibility(View.GONE);
                     new ToastMsg(getActivity()).toastIconError(getString(R.string.fetch_error));
-                    coordinatorLayout.setVisibility(View.VISIBLE);
+                    mActivity.setFailure(true);
                 }
             }
 
             @Override
             public void onFailure(Call<List<AllCountry>> call, Throwable t) {
-                swipeRefreshLayout.setRefreshing(false);
-                shimmerFrameLayout.stopShimmer();
-                shimmerFrameLayout.setVisibility(View.GONE);
+                mSwipeRefreshLayout.setRefreshing(false);
+                mShimmerLayout.stopShimmer();
+                mShimmerLayout.setVisibility(View.GONE);
                 new ToastMsg(getActivity()).toastIconError(getString(R.string.fetch_error));
-                coordinatorLayout.setVisibility(View.VISIBLE);
+                mActivity.setFailure(true);
             }
         });
     }
-
-    boolean isSearchBarHide = false;
-
-    private void animateSearchBar(final boolean hide) {
-        if (isSearchBarHide && hide || !isSearchBarHide && !hide) return;
-        isSearchBarHide = hide;
-        int moveY = hide ? -(2 * searchRootLayout.getHeight()) : 0;
-        searchRootLayout.animate().translationY(moveY).setStartDelay(100).setDuration(300).start();
+    public void onDestroy() {
+        super.onDestroy();
+        mUnbinder.unbind();
     }
-
 }

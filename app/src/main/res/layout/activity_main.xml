@@ -16,6 +16,13 @@
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+        <include
+            android:id="@+id/coordinator_lyt"
+            layout="@layout/failure_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:visibility="gone"/>
         <LinearLayout
             android:id="@+id/search_root_layout"
             android:layout_width="match_parent"
@@ -26,8 +33,38 @@
                 android:id="@+id/search_bar"
                 layout="@layout/toolbar" />
         </LinearLayout>
-    </RelativeLayout>
+        <com.volcaniccoder.bottomify.BottomifyNavigationView
+            android:id="@+id/bottomify_nav"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            app:animation_duration="300"
+            app:item_padding="4dp"
+            app:item_text_size="12sp"
+            app:menu="@menu/menu_bottom_navigation"
+            app:active_color="@color/bottomifyActiveColorDark"
+            app:passive_color="@color/bottomifyPassiveColorDark"
+            app:pressed_color="@color/bottomifyPressedColorDark"
+            app:scale_percent="5"
+            android:visibility="gone"/>
 
+        <com.volcaniccoder.bottomify.BottomifyNavigationView
+            android:id="@+id/bottomify_nav_light"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            app:menu="@menu/menu_bottom_navigation"
+            app:active_color="@color/bottomifyActiveColorLight"
+            app:passive_color="@color/bottomifyPassiveColorLight"
+            app:pressed_color="@color/bottomifyPressedColorLight"
+            app:item_text_size="12sp"
+            app:item_padding="4dp"
+            app:animation_duration="300"
+            app:scale_percent="5"
+            android:layout_alignParentBottom="true"
+            android:visibility="gone" />
+    </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
