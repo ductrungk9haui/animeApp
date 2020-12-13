@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +15,9 @@ import com.volcaniccoder.bottomify.OnNavigationItemChangeListener;
 
 import org.jetbrains.annotations.NotNull;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import tvseries.koreandramaengsub.freemovieapp.Config;
 import tvseries.koreandramaengsub.freemovieapp.MainActivity;
 import tvseries.koreandramaengsub.freemovieapp.R;
@@ -27,26 +29,24 @@ import tvseries.koreandramaengsub.freemovieapp.fragments.TvSeriesFragment;
 import static android.content.Context.MODE_PRIVATE;
 
 public class MainHomeFragment extends Fragment {
-    private MainActivity activity;
-    private BottomifyNavigationView bottomifyNavigationViewDark, bottomifyNavigationViewLight;
-    LinearLayout searchRootLayout;
+    @BindView(R.id.bottomify_nav) BottomifyNavigationView bottomifyNavigationViewDark;
+    @BindView(R.id.bottomify_nav_light) BottomifyNavigationView bottomifyNavigationViewLight;
+    private MainActivity mActivity;
+    Unbinder mUnbinder;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        activity = (MainActivity) getActivity();
-        return inflater.inflate(R.layout.fragment_main_home, container,false);
+        View view = inflater.inflate(R.layout.fragment_main_home, container, false);
+        mActivity = (MainActivity) getActivity();
+        mUnbinder = ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        bottomifyNavigationViewDark = view.findViewById(R.id.bottomify_nav);
-        bottomifyNavigationViewLight = view.findViewById(R.id.bottomify_nav_light);
-        searchRootLayout = view.findViewById(R.id.search_root_layout);
-
-        SharedPreferences sharedPreferences = activity.getSharedPreferences("push", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = mActivity.getSharedPreferences("push", MODE_PRIVATE);
         boolean isDark = sharedPreferences.getBoolean("dark", false);
 
         if (isDark) {
@@ -114,11 +114,6 @@ public class MainHomeFragment extends Fragment {
                     case 4:
                         loadFragment(new FavoriteFragment());
                         break;
-                    //case 5:
-
-                    //case 4:
-
-
                 }
             }
         });
@@ -142,5 +137,12 @@ public class MainHomeFragment extends Fragment {
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(mUnbinder!=null){
+            mUnbinder.unbind();
+        }
+    }
 
 }

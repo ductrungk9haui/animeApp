@@ -18,18 +18,19 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
@@ -42,8 +43,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.cast.framework.CastContext;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.play.core.review.ReviewInfo;
-import com.google.android.play.core.review.ReviewManager;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -53,6 +52,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnCheckedChanged;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 import tvseries.koreandramaengsub.freemovieapp.adapters.NavigationAdapter;
 import tvseries.koreandramaengsub.freemovieapp.database.DatabaseHelper;
 import tvseries.koreandramaengsub.freemovieapp.fragments.MoviesFragment;
@@ -70,320 +74,59 @@ import tvseries.koreandramaengsub.freemovieapp.utils.Tools;
 import tvseries.koreandramaengsub.freemovieapp.utils.ads.PopUpAds;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, Serializable {
-    private DrawerLayout mDrawerLayout;
-    private Toolbar toolbar;
-    private LinearLayout navHeaderLayout;
-
-    private RecyclerView recyclerView;
+    @BindView(R.id.search_root_layout) LinearLayout mSearchRootLayout;
+    @BindView(R.id.search_bar) CardView mSearchBar;
+    @BindView(R.id.bt_menu) ImageView mMenuIv;
+    @BindView(R.id.page_title_tv) TextView mPageTitle;
+    @BindView(R.id.search_iv) ImageView mSearchIv;
+    @BindView(R.id.nav_view) NavigationView mNavigationView;
+    @BindView(R.id.drawer_layout) DrawerLayout mDrawerLayout;
+    @BindView(R.id.nav_head_layout) LinearLayout mNavHeaderLayout;
+    @BindView(R.id.theme_switch) SwitchCompat mThemeSwitch;
+    @BindView(R.id.group_facebook) RelativeLayout mGroupFBLayout;
+    @BindView(R.id.rate_app) RelativeLayout mRateApp;
+    @BindView(R.id.recyclerView) RecyclerView recyclerView;
+    Unbinder mUnbinder;
+    boolean isSearchBarHide = false;
     private NavigationAdapter mAdapter;
-    private List<NavigationModel> list =new ArrayList<>();
-    private NavigationView navigationView;
-    private String[] navItemImage;
-
-    ReviewInfo reviewInfo;
-    ReviewManager manager;
-
-    private String[] navItemName2;
-    private String[] navItemImage2;
-    private boolean status=false;
-
+    private List<NavigationModel> mListNavi =new ArrayList<>();
+    private boolean mStatus =false;
     private FirebaseAnalytics mFirebaseAnalytics;
     public boolean isDark;
     private String navMenuStyle;
-
-    private Switch themeSwitch;
-    private RelativeLayout relativeLayout, rateapp;
     private final int PERMISSION_REQUEST_CODE = 100;
-    private String searchType;
-    private boolean[] selectedtype = new boolean[3]; // 0 for movie, 1 for series, 2 for live tv....
-    private DatabaseHelper db;
+    private DatabaseHelper mDBHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         RtlUtils.setScreenDirection(this);
-        db = new DatabaseHelper(MainActivity.this);
+        mDBHelper = new DatabaseHelper(MainActivity.this);
+        navMenuStyle = mDBHelper.getConfigurationData().getAppConfig().getMenu();
 
         SharedPreferences sharedPreferences = getSharedPreferences("push", MODE_PRIVATE);
         isDark = sharedPreferences.getBoolean("dark", true);
-        
         if (isDark) {
             setTheme(R.style.AppThemeDark);
         } else {
             setTheme(R.style.AppThemeLight);
         }
-
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
+        mUnbinder = ButterKnife.bind(this);
+        setupTheme();
         PopUpAds.ShowAdmobInterstitialAds(MainActivity.this);
         // To resolve cast button visibility problem. Check Cast State when app is open.
         CastContext castContext = CastContext.getSharedInstance(this);
         castContext.getCastState();
-
-        navMenuStyle = db.getConfigurationData().getAppConfig().getMenu();
-
-        //---analytics-----------
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-        Bundle bundle = new Bundle();
-        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "id");
-        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "main_activity");
-        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "activity");
-        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+        setupFirebaseAnalytics();
 
         if (sharedPreferences.getBoolean("firstTime", true)) {
             showTermServicesDialog();
         }
-
-        // checking storage permission
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkStoragePermission()) {
-                createDownloadDir();
-            } else {
-                requestPermission();
-            }
-        } else {
-            createDownloadDir();
-        }
-
-        //----init---------------------------
-        navigationView = findViewById(R.id.nav_view);
-        mDrawerLayout = findViewById(R.id.drawer_layout);
-        navHeaderLayout = findViewById(R.id.nav_head_layout);
-        themeSwitch = findViewById(R.id.theme_switch);
-        relativeLayout=findViewById(R.id.group_facebook);
-        rateapp=findViewById(R.id.rate_app);
-
-        relativeLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String urlString = "https://www.facebook.com/Korean-Drama-Engsub-112928027254307";
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlString));
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            }
-        });
-
-
-
-        rateapp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                rateApp();
-            }
-        });
-
-
-        if (isDark) {
-            themeSwitch.setChecked(true);
-        }else {
-            themeSwitch.setChecked(false);
-        }
-
-
-        //----navDrawer------------------------
-        //toolbar = findViewById(R.id.toolbar);
-        if (!isDark) {
-            //toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-            navHeaderLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
-        } else {
-            navHeaderLayout.setBackgroundColor(getResources().getColor(R.color.nav_head_bg));
-        }
-
-        navigationView.setNavigationItemSelectedListener(this);
-
-
-        //----fetch array------------
-        String[] navItemName = getResources().getStringArray(R.array.nav_item_name);
-        navItemImage=getResources().getStringArray(R.array.nav_item_image);
-
-        navItemImage2=getResources().getStringArray(R.array.nav_item_image_2);
-        navItemName2=getResources().getStringArray(R.array.nav_item_name_2);
-
-        //----navigation view items---------------------
-        recyclerView = findViewById(R.id.recyclerView);
-        if (navMenuStyle == null){
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        }else if (navMenuStyle.equals("grid")) {
-            recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-            recyclerView.addItemDecoration(new SpacingItemDecoration(2, Tools.dpToPx(this, 15), true));
-        } else {
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            //recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        }
-        recyclerView.setHasFixedSize(true);
-
-        //status =  PreferenceUtils.isLoggedIn(this);
-        status =  true;
-        if (status){
-            PreferenceUtils.updateSubscriptionStatus(MainActivity.this);
-            for (int i = 0; i< navItemName.length; i++){
-                NavigationModel models =new NavigationModel(navItemImage[i], navItemName[i]);
-                list.add(models);
-            }
-        }else {
-            for (int i=0;i< navItemName2.length;i++){
-                NavigationModel models =new NavigationModel(navItemImage2[i],navItemName2[i]);
-                list.add(models);
-            }
-        }
-
-
-        //set data and list adapter
-        mAdapter = new NavigationAdapter(this, list, navMenuStyle);
-        recyclerView.setAdapter(mAdapter);
-
-        final NavigationAdapter.OriginalViewHolder[] viewHolder = {null};
-
-        mAdapter.setOnItemClickListener(new NavigationAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, NavigationModel obj, int position, NavigationAdapter.OriginalViewHolder holder) {
-
-                //----------------------action for click items nav---------------------
-
-                if (position==0){
-                    loadFragment(new MainHomeFragment());
-                }
-                else if (position==1){
-                    loadFragment(new MoviesFragment());
-                    Config.isOpenChildFragment = true;
-                }
-                else if (position==2){
-                    loadFragment(new TvSeriesFragment());
-                    Config.isOpenChildFragment = true;
-                }
-//                else if (position==3){
-//                    loadFragment(new LiveTvFragment());
-//                }
-                else if (position == 3){
-                    loadFragment(new GenreFragment());
-                    Config.isOpenChildFragment = true;
-                }
-                else if (position==4){
-                    loadFragment(new CountryFragment());
-                    Config.isOpenChildFragment = true;
-                }
-                else {
-                    if (status){
-
-                        if (position==5){
-                            Intent intent=new Intent(MainActivity.this,ProfileActivity.class);
-                            startActivity(intent);
-                        }
-                        else if (position==6){
-                            loadFragment(new FavoriteFragment());
-                            Config.isOpenChildFragment = true;
-                        }
-                        else if (position==7){
-                            Intent intent=new Intent(MainActivity.this, DownloadActivity.class);
-                            startActivity(intent);
-                        }
-                        else if (position==8){
-                            Intent intent=new Intent(MainActivity.this, SettingsActivity.class);
-                            startActivity(intent);
-                        }
-//                        else if (position==9){
-//                            Intent intent=new Intent(MainActivity.this,SettingsActivity.class);
-//                            startActivity(intent);
-//                        }
-                        else if (position==9){
-
-                            new AlertDialog.Builder(MainActivity.this).setMessage("Are you sure to logout ?")
-                                    .setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                            if (user != null){
-                                                FirebaseAuth.getInstance().signOut();
-                                            }
-
-                                            SharedPreferences.Editor editor = getSharedPreferences(Constants.USER_LOGIN_STATUS, MODE_PRIVATE).edit();
-                                            editor.putBoolean(Constants.USER_LOGIN_STATUS, false);
-                                            editor.apply();
-                                            editor.commit();
-
-                                            DatabaseHelper databaseHelper = new DatabaseHelper(MainActivity.this);
-                                            databaseHelper.deleteUserData();
-
-                                            PreferenceUtils.clearSubscriptionSavedData(MainActivity.this);
-
-                                            Intent intent = new Intent(MainActivity.this,FirebaseSignUpActivity.class);
-                                            startActivity(intent);
-                                            finish();
-                                        }
-                                    })
-                                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.cancel();
-                                        }
-                                    }).create().show();
-                        }
-
-                    }else {
-                        if (position==5){
-                            Intent intent = new Intent(MainActivity.this, FirebaseSignUpActivity.class);
-                            startActivity(intent);
-                            finish();
-                        } else if (position==6){
-                            Intent intent=new Intent(MainActivity.this,SettingsActivity.class);
-                            startActivity(intent);
-                        }
-
-                    }
-
-                }
-
-
-                //----behaviour of bg nav items-----------------
-                if (!obj.getTitle().equals("Settings") && !obj.getTitle().equals("Login") && !obj.getTitle().equals("Sign Out")){
-
-                    if (isDark){
-                        mAdapter.chanColor(viewHolder[0],position,R.color.nav_bg);
-                    }else {
-                        mAdapter.chanColor(viewHolder[0],position,R.color.white);
-                    }
-
-
-                    if (navMenuStyle.equals("grid")) {
-                        holder.cardView.setCardBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
-                        holder.name.setTextColor(getResources().getColor(R.color.white));
-                    } else {
-                        holder.selectedLayout.setBackground(getResources().getDrawable(R.drawable.round_grey_transparent));
-                        holder.name.setTextColor(getResources().getColor(R.color.colorPrimary));
-                    }
-
-                    viewHolder[0] =holder;
-                }
-
-
-                mDrawerLayout.closeDrawers();
-            }
-        });
-
+        checkStorePermission();
+        setupNavigation();
         //----external method call--------------
         loadFragment(new MainHomeFragment());
-
-        themeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    SharedPreferences.Editor editor = getSharedPreferences("push", MODE_PRIVATE).edit();
-                    editor.putBoolean("dark",true);
-                    editor.apply();
-
-                }else {
-                    SharedPreferences.Editor editor = getSharedPreferences("push", MODE_PRIVATE).edit();
-                    editor.putBoolean("dark",false);
-                    editor.apply();
-                }
-
-                mDrawerLayout.closeDrawers();
-                startActivity(new Intent(MainActivity.this, MainActivity.class));
-                finish();
-            }
-        });
-
     }
 
     @Override
@@ -392,8 +135,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         inflater.inflate(R.menu.menu_action, menu);
         return true;
     }
-
-
     private boolean loadFragment(Fragment fragment){
 
         if (fragment!=null){
@@ -408,7 +149,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return false;
 
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -536,8 +276,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
-    // ------------------ checking storage permission ------------
     private boolean checkStoragePermission() {
+        // checking storage permission
         int result = ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
         if (result == PackageManager.PERMISSION_GRANTED) {
             return true;
@@ -586,20 +326,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(new Intent(MainActivity.this, SearchActivity.class));
     }
 
-    public void rateApp()
-    {
-        try
-        {
-            Intent rateIntent = rateIntentForUrl("market://details");
-            startActivity(rateIntent);
-        }
-        catch (ActivityNotFoundException e)
-        {
-            Intent rateIntent = rateIntentForUrl("https://play.google.com/store/apps/details");
-            startActivity(rateIntent);
-        }
-    }
-
     private Intent rateIntentForUrl(String url)
     {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(String.format("%s?id=%s", url, getPackageName())));
@@ -617,6 +343,264 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return intent;
     }
 
+    public void animateSearchBar(final boolean hide) {
+        if (isSearchBarHide && hide || !isSearchBarHide && !hide) return;
+        isSearchBarHide = hide;
+        int moveY = hide ? -(2 * mSearchRootLayout.getHeight()) : 0;
+        mSearchRootLayout.animate().translationY(moveY).setStartDelay(100).setDuration(300).start();
+    }
+    public void setTitle(String title){
+        mPageTitle.setText(title);
+    }
+
+    @OnClick(R.id.bt_menu)
+    void onMenuIvClick(View view){
+        openDrawer();
+    }
+    @OnClick(R.id.search_iv)
+    void onSearchIvClick(View view){
+        goToSearchActivity();
+    }
+
+    @OnClick(R.id.group_facebook)
+    void onGroupFacebookClick(View view){
+        String urlString = "https://www.facebook.com/Korean-Drama-Engsub-112928027254307";
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlString));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+    @OnClick(R.id.rate_app)
+    void onRateApp(View view){
+        try
+        {
+            Intent rateIntent = rateIntentForUrl("market://details");
+            startActivity(rateIntent);
+        }
+        catch (ActivityNotFoundException e)
+        {
+            Intent rateIntent = rateIntentForUrl("https://play.google.com/store/apps/details");
+            startActivity(rateIntent);
+        }
+    }
+
+    @OnCheckedChanged(R.id.theme_switch)
+    void onThemeSwitchChange(boolean isChecked){
+        SharedPreferences.Editor editor = getSharedPreferences("push", MODE_PRIVATE).edit();
+        editor.putBoolean("dark",isChecked);
+        editor.apply();
+        if(isDark != isChecked){
+            mDrawerLayout.closeDrawers();
+            startActivity(new Intent(MainActivity.this, MainActivity.class));
+            finish();
+        }
+    }
+
+    public DatabaseHelper getDBHelper(){
+        return mDBHelper;
+    }
+    private void setupTheme(){
+        if (isDark) {
+            mPageTitle.setTextColor(getResources().getColor(R.color.white));
+            mSearchBar.setCardBackgroundColor(getResources().getColor(R.color.black_window_light));
+            mMenuIv.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu));
+            mSearchIv.setImageDrawable(getResources().getDrawable(R.drawable.ic_search_white));
+            mThemeSwitch.setChecked(true);
+            mNavHeaderLayout.setBackgroundColor(getResources().getColor(R.color.nav_head_bg));
+        } else {
+            mThemeSwitch.setChecked(false);
+            mNavHeaderLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+        }
+    }
+
+    private void setupFirebaseAnalytics(){
+        //---analytics-----------
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "id");
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "main_activity");
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "activity");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+    }
+    private void checkStorePermission(){
+        // checking storage permission
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkStoragePermission()) {
+                createDownloadDir();
+            } else {
+                requestPermission();
+            }
+        } else {
+            createDownloadDir();
+        }
+    }
+    private void setupNavigation(){
+        //----navDrawer------------------------
+        mNavigationView.setNavigationItemSelectedListener(this);
+        //----fetch array------------
+        String[] navItemName = getResources().getStringArray(R.array.nav_item_name);
+        String[] navItemImage = getResources().getStringArray(R.array.nav_item_image);
+        String[] navItemImage2 = getResources().getStringArray(R.array.nav_item_image_2);
+        String[] navItemName2 = getResources().getStringArray(R.array.nav_item_name_2);
+
+        //----navigation view items---------------------
+        if (navMenuStyle == null){
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        }else if (navMenuStyle.equals("grid")) {
+            recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+            recyclerView.addItemDecoration(new SpacingItemDecoration(2, Tools.dpToPx(this, 15), true));
+        } else {
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            //recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        }
+        recyclerView.setHasFixedSize(true);
+
+        //status =  PreferenceUtils.isLoggedIn(this);
+        mStatus =  true;
+        if (mStatus){
+            PreferenceUtils.updateSubscriptionStatus(MainActivity.this);
+            for (int i = 0; i< navItemName.length; i++){
+                NavigationModel models =new NavigationModel(navItemImage[i], navItemName[i]);
+                mListNavi.add(models);
+            }
+        }else {
+            for (int i = 0; i< navItemName2.length; i++){
+                NavigationModel models =new NavigationModel(navItemImage2[i], navItemName2[i]);
+                mListNavi.add(models);
+            }
+        }
 
 
+        //set data and list adapter
+        mAdapter = new NavigationAdapter(this, mListNavi, navMenuStyle);
+        recyclerView.setAdapter(mAdapter);
+
+        final NavigationAdapter.OriginalViewHolder[] viewHolder = {null};
+
+        mAdapter.setOnItemClickListener(new NavigationAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, NavigationModel obj, int position, NavigationAdapter.OriginalViewHolder holder) {
+                //----------------------action for click items nav---------------------
+                if (position==0){
+                    loadFragment(new MainHomeFragment());
+                }
+                else if (position==1){
+                    loadFragment(new MoviesFragment());
+                    Config.isOpenChildFragment = true;
+                }
+                else if (position==2){
+                    loadFragment(new TvSeriesFragment());
+                    Config.isOpenChildFragment = true;
+                }
+                else if (position == 3){
+                    loadFragment(new GenreFragment());
+                    Config.isOpenChildFragment = true;
+                }
+                else if (position==4){
+                    loadFragment(new CountryFragment());
+                    Config.isOpenChildFragment = true;
+                }
+                else {
+                    if (mStatus){
+
+                        if (position==5){
+                            Intent intent=new Intent(MainActivity.this,ProfileActivity.class);
+                            startActivity(intent);
+                        }
+                        else if (position==6){
+                            loadFragment(new FavoriteFragment());
+                            Config.isOpenChildFragment = true;
+                        }
+                        else if (position==7){
+                            Intent intent=new Intent(MainActivity.this, DownloadActivity.class);
+                            startActivity(intent);
+                        }
+                        else if (position==8){
+                            Intent intent=new Intent(MainActivity.this, SettingsActivity.class);
+                            startActivity(intent);
+                        }
+//                        else if (position==9){
+//                            Intent intent=new Intent(MainActivity.this,SettingsActivity.class);
+//                            startActivity(intent);
+//                        }
+                        else if (position==9){
+
+                            new AlertDialog.Builder(MainActivity.this).setMessage("Are you sure to logout ?")
+                                    .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                            if (user != null){
+                                                FirebaseAuth.getInstance().signOut();
+                                            }
+
+                                            SharedPreferences.Editor editor = getSharedPreferences(Constants.USER_LOGIN_STATUS, MODE_PRIVATE).edit();
+                                            editor.putBoolean(Constants.USER_LOGIN_STATUS, false);
+                                            editor.apply();
+                                            editor.commit();
+
+                                            DatabaseHelper databaseHelper = new DatabaseHelper(MainActivity.this);
+                                            databaseHelper.deleteUserData();
+
+                                            PreferenceUtils.clearSubscriptionSavedData(MainActivity.this);
+
+                                            Intent intent = new Intent(MainActivity.this,FirebaseSignUpActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    })
+                                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.cancel();
+                                        }
+                                    }).create().show();
+                        }
+
+                    }else {
+                        if (position==5){
+                            Intent intent = new Intent(MainActivity.this, FirebaseSignUpActivity.class);
+                            startActivity(intent);
+                            finish();
+                        } else if (position==6){
+                            Intent intent=new Intent(MainActivity.this,SettingsActivity.class);
+                            startActivity(intent);
+                        }
+
+                    }
+
+                }
+
+
+                //----behaviour of bg nav items-----------------
+                if (!obj.getTitle().equals("Settings") && !obj.getTitle().equals("Login") && !obj.getTitle().equals("Sign Out")){
+
+                    if (isDark){
+                        mAdapter.chanColor(viewHolder[0],position,R.color.nav_bg);
+                    }else {
+                        mAdapter.chanColor(viewHolder[0],position,R.color.white);
+                    }
+
+
+                    if (navMenuStyle.equals("grid")) {
+                        holder.cardView.setCardBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+                        holder.name.setTextColor(getResources().getColor(R.color.white));
+                    } else {
+                        holder.selectedLayout.setBackground(getResources().getDrawable(R.drawable.round_grey_transparent));
+                        holder.name.setTextColor(getResources().getColor(R.color.colorPrimary));
+                    }
+
+                    viewHolder[0] =holder;
+                }
+
+
+                mDrawerLayout.closeDrawers();
+            }
+        });
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mUnbinder.unbind();
+    }
 }

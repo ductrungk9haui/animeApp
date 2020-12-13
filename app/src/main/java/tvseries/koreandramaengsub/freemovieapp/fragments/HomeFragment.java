@@ -7,14 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
@@ -30,6 +27,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
 import tvseries.koreandramaengsub.freemovieapp.Config;
 import tvseries.koreandramaengsub.freemovieapp.ItemMovieActivity;
 import tvseries.koreandramaengsub.freemovieapp.ItemSeriesActivity;
@@ -39,7 +42,6 @@ import tvseries.koreandramaengsub.freemovieapp.adapters.CountryAdapter;
 import tvseries.koreandramaengsub.freemovieapp.adapters.GenreAdapter;
 import tvseries.koreandramaengsub.freemovieapp.adapters.GenreHomeAdapter;
 import tvseries.koreandramaengsub.freemovieapp.adapters.HomePageAdapter;
-import tvseries.koreandramaengsub.freemovieapp.adapters.LiveTvHomeAdapter;
 import tvseries.koreandramaengsub.freemovieapp.adapters.SliderAdapter;
 import tvseries.koreandramaengsub.freemovieapp.database.DatabaseHelper;
 import tvseries.koreandramaengsub.freemovieapp.models.CommonModels;
@@ -59,60 +61,55 @@ import tvseries.koreandramaengsub.freemovieapp.network.model.config.AdsConfig;
 import tvseries.koreandramaengsub.freemovieapp.utils.Constants;
 import tvseries.koreandramaengsub.freemovieapp.utils.NetworkInst;
 import tvseries.koreandramaengsub.freemovieapp.utils.ads.BannerAds;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Retrofit;
 
 
 public class HomeFragment extends Fragment {
+    @BindView(R.id.adView) RelativeLayout mAdView;
+    @BindView(R.id.adView1) RelativeLayout mAdView1;
+    @BindView(R.id.btn_more_series) Button mBtnMoreSeries;
+    @BindView(R.id.btn_more_series1) Button mBtnMoreSeries1;
+    @BindView(R.id.btn_more_movie) Button mBtnMoreMovie;
+    @BindView(R.id.shimmer_view_container) ShimmerFrameLayout mShimmerLayout;
+    @BindView(R.id.tv_noitem) TextView mTvNoItem;
+    @BindView(R.id.coordinator_lyt) CoordinatorLayout mCoordinatorLayout;
+    @BindView(R.id.swipe_layout) SwipeRefreshLayout mSwipeRefreshLayout;
+    @BindView(R.id.scrollView) NestedScrollView mScrollView;
+    @BindView(R.id.slider_layout) View mSliderLayout;
+    @BindView(R.id.genre_rv) RecyclerView mGenreRv;
+    @BindView(R.id.country_rv) RecyclerView mCountryRv;
+    @BindView(R.id.genre_layout) RelativeLayout mGenreLayout;
+    @BindView(R.id.country_layout) RelativeLayout mCountryLayout;
+    @BindView(R.id.c_viewPager) CardSliderViewPager mCViewPager;
+    @BindView(R.id.recyclerView) RecyclerView mRecyclerViewMovie;
+    @BindView(R.id.recyclerViewTvSeries) RecyclerView mRecyclerViewTvSeries;
+    @BindView(R.id.recyclerView_by_genre) RecyclerView mRecyclerViewGenre;
+    @BindView(R.id.recyclerViewTopviewTvSeries) RecyclerView mRecyclerViewTopviewTvSeries;
 
-    CardSliderViewPager cViewPager;
     private ArrayList<CommonModels> listSlider = new ArrayList<>();
     private Timer timer;
-
-    private ShimmerFrameLayout shimmerFrameLayout;
-    private RecyclerView recyclerViewMovie, recyclerViewTv, recyclerViewTvSeries, recyclerViewGenre, recyclerViewTopviewTvSeries;
-    private RecyclerView genreRv;
-    private RecyclerView countryRv;
     private GenreAdapter genreAdapter;
     private CountryAdapter countryAdapter;
-    private RelativeLayout genreLayout, countryLayout;
     private HomePageAdapter adapterMovie, adapterSeries, adapterTopviewSeries;
-    private LiveTvHomeAdapter adapterTv;
     private List<CommonModels> listMovie = new ArrayList<>();
     private List<CommonModels> listTv = new ArrayList<>();
     private List<CommonModels> listSeries = new ArrayList<>();
     private List<CommonModels> listTopViewSeries = new ArrayList<>();
     private List<CommonModels> genreList = new ArrayList<>();
     private List<CommonModels> countryList = new ArrayList<>();
-    private Button btnMoreMovie, btnMoreTv, btnMoreSeries, btnMoreSeries1;
-
-    private TextView tvNoItem;
-    private CoordinatorLayout coordinatorLayout;
-    private SwipeRefreshLayout swipeRefreshLayout;
-    private NestedScrollView scrollView;
-
-    private RelativeLayout adView, adView1;
     private List<GenreModel> listGenre = new ArrayList<>();
-
     private GenreHomeAdapter genreHomeAdapter;
-    private View sliderLayout;
-
     private MainActivity activity;
-    private LinearLayout searchRootLayout;
-
-    private CardView searchBar;
-    private ImageView menuIv, searchIv;
-    private TextView pageTitle;
     private DatabaseHelper db = new DatabaseHelper(getContext());
+    Unbinder mUnbinder;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
         activity = (MainActivity) getActivity();
-
-        return inflater.inflate(R.layout.fragment_home, null);
+        mUnbinder = ButterKnife.bind(this, view);
+        activity.setTitle(getResources().getString(R.string.home));
+        return view;
     }
 
     @Override
@@ -120,44 +117,11 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         db = new DatabaseHelper(getContext());
 
-        adView              = view.findViewById(R.id.adView);
-        adView1             = view.findViewById(R.id.adView1);
-        btnMoreSeries       = view.findViewById(R.id.btn_more_series);
-        btnMoreSeries1       = view.findViewById(R.id.btn_more_series1);
-        //btnMoreTv           = view.findViewById(R.id.btn_more_tv);
-        btnMoreMovie        = view.findViewById(R.id.btn_more_movie);
-        shimmerFrameLayout  = view.findViewById(R.id.shimmer_view_container);
-        tvNoItem            = view.findViewById(R.id.tv_noitem);
-        coordinatorLayout   = view.findViewById(R.id.coordinator_lyt);
-        swipeRefreshLayout  = view.findViewById(R.id.swipe_layout);
-        scrollView          = view.findViewById(R.id.scrollView);
-        sliderLayout        = view.findViewById(R.id.slider_layout);
-        genreRv             = view.findViewById(R.id.genre_rv);
-        countryRv           = view.findViewById(R.id.country_rv);
-        genreLayout         = view.findViewById(R.id.genre_layout);
-        countryLayout       = view.findViewById(R.id.country_layout);
-        cViewPager          = view.findViewById(R.id.c_viewPager);
-        searchRootLayout    = view.findViewById(R.id.search_root_layout);
-        searchBar           = view.findViewById(R.id.search_bar);
-        menuIv              = view.findViewById(R.id.bt_menu);
-        pageTitle           = view.findViewById(R.id.page_title_tv);
-        searchIv           = view.findViewById(R.id.search_iv);
-
-
         if (db.getConfigurationData().getAppConfig().getGenreVisible()) {
-            genreLayout.setVisibility(View.VISIBLE);
+            mGenreLayout.setVisibility(View.VISIBLE);
         }
         if (db.getConfigurationData().getAppConfig().getCountryVisible()) {
-            countryLayout.setVisibility(View.VISIBLE);
-        }
-
-        pageTitle.setText(getResources().getString(R.string.home));
-
-        if (activity.isDark) {
-            pageTitle.setTextColor(activity.getResources().getColor(R.color.white));
-            searchBar.setCardBackgroundColor(activity.getResources().getColor(R.color.black_window_light));
-            menuIv.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_menu));
-            searchIv.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_search_white));
+            mCountryLayout.setVisibility(View.VISIBLE);
         }
 
         //----init timer slider--------------------
@@ -167,18 +131,18 @@ public class HomeFragment extends Fragment {
         btnClick();
 
         // --- genre recycler view ---------
-        genreRv.setLayoutManager(new LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false));
-        genreRv.setHasFixedSize(true);
-        genreRv.setNestedScrollingEnabled(false);
+        mGenreRv.setLayoutManager(new LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false));
+        mGenreRv.setHasFixedSize(true);
+        mGenreRv.setNestedScrollingEnabled(false);
         genreAdapter = new GenreAdapter(getActivity(), genreList, "genre", "home");
-        genreRv.setAdapter(genreAdapter);
+        mGenreRv.setAdapter(genreAdapter);
 
         // --- country recycler view ---------
-        countryRv.setLayoutManager(new LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false));
-        countryRv.setHasFixedSize(true);
-        countryRv.setNestedScrollingEnabled(false);
+        mCountryRv.setLayoutManager(new LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false));
+        mCountryRv.setHasFixedSize(true);
+        mCountryRv.setNestedScrollingEnabled(false);
         countryAdapter = new CountryAdapter(getActivity(), countryList, "home");
-        countryRv.setAdapter(countryAdapter);
+        mCountryRv.setAdapter(countryAdapter);
 
         //----featured tv recycler view-----------------
 //        recyclerViewTv = view.findViewById(R.id.recyclerViewTv);
@@ -189,64 +153,60 @@ public class HomeFragment extends Fragment {
 //        recyclerViewTv.setAdapter(adapterTv);
 
         //----movie's recycler view-----------------
-        recyclerViewMovie = view.findViewById(R.id.recyclerView);
-        recyclerViewMovie.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false));
-        recyclerViewMovie.setHasFixedSize(true);
-        recyclerViewMovie.setNestedScrollingEnabled(false);
+        mRecyclerViewMovie.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false));
+        mRecyclerViewMovie.setHasFixedSize(true);
+        mRecyclerViewMovie.setNestedScrollingEnabled(false);
         adapterMovie = new HomePageAdapter(getContext(), listMovie);
-        recyclerViewMovie.setAdapter(adapterMovie);
+        mRecyclerViewMovie.setAdapter(adapterMovie);
 
         //----series's recycler view-----------------
-        recyclerViewTvSeries = view.findViewById(R.id.recyclerViewTvSeries);
-        recyclerViewTvSeries.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false));
-        recyclerViewTvSeries.setHasFixedSize(true);
-        recyclerViewTvSeries.setNestedScrollingEnabled(false);
+        mRecyclerViewTvSeries.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false));
+        mRecyclerViewTvSeries.setHasFixedSize(true);
+        mRecyclerViewTvSeries.setNestedScrollingEnabled(false);
         adapterSeries = new HomePageAdapter(getActivity(), listSeries);
-        recyclerViewTvSeries.setAdapter(adapterSeries);
+        mRecyclerViewTvSeries.setAdapter(adapterSeries);
 
         //----topview series's recycler view-----------------
-        recyclerViewTopviewTvSeries = view.findViewById(R.id.recyclerViewTopviewTvSeries);
-        recyclerViewTopviewTvSeries.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false));
-        recyclerViewTopviewTvSeries.setHasFixedSize(true);
-        recyclerViewTopviewTvSeries.setNestedScrollingEnabled(false);
+        mRecyclerViewTopviewTvSeries.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false));
+        mRecyclerViewTopviewTvSeries.setHasFixedSize(true);
+        mRecyclerViewTopviewTvSeries.setNestedScrollingEnabled(false);
         adapterTopviewSeries = new HomePageAdapter(getActivity(), listTopViewSeries);
-        recyclerViewTopviewTvSeries.setAdapter(adapterTopviewSeries);
+        mRecyclerViewTopviewTvSeries.setAdapter(adapterTopviewSeries);
 
 
 
         //----genre's recycler view--------------------
-        recyclerViewGenre = view.findViewById(R.id.recyclerView_by_genre);
-        recyclerViewGenre.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerViewGenre.setHasFixedSize(true);
-        recyclerViewGenre.setNestedScrollingEnabled(false);
+        mRecyclerViewGenre.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerViewGenre.setHasFixedSize(true);
+        mRecyclerViewGenre.setNestedScrollingEnabled(false);
         genreHomeAdapter = new GenreHomeAdapter(getContext(), listGenre);
-        recyclerViewGenre.setAdapter(genreHomeAdapter);
+        mRecyclerViewGenre.setAdapter(genreHomeAdapter);
 
-        shimmerFrameLayout.startShimmer();
+        mShimmerLayout.startShimmer();
 
         if (new NetworkInst(getContext()).isNetworkAvailable()) {
 
             getHomeContent();
 
         } else {
-            tvNoItem.setText(getString(R.string.no_internet));
-            shimmerFrameLayout.stopShimmer();
-            shimmerFrameLayout.setVisibility(View.GONE);
-            coordinatorLayout.setVisibility(View.VISIBLE);
-            scrollView.setVisibility(View.GONE);
+            mTvNoItem.setText(getString(R.string.no_internet));
+            mShimmerLayout.stopShimmer();
+            mShimmerLayout.setVisibility(View.GONE);
+            mCoordinatorLayout.setVisibility(View.VISIBLE);
+            mScrollView.setVisibility(View.GONE);
         }
 
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
 
-                recyclerViewMovie.removeAllViews();
+                mRecyclerViewMovie.removeAllViews();
 //                recyclerViewTv.removeAllViews();
-                recyclerViewTvSeries.removeAllViews();
-                recyclerViewTopviewTvSeries.removeAllViews();
-                recyclerViewGenre.removeAllViews();
-                genreRv.removeAllViews();
-                countryRv.removeAllViews();
+                mRecyclerViewTvSeries.removeAllViews();
+                mRecyclerViewTopviewTvSeries.removeAllViews();
+                mRecyclerViewGenre.removeAllViews();
+                mGenreRv.removeAllViews();
+                mCountryRv.removeAllViews();
 
                 genreList.clear();
                 countryList.clear();
@@ -263,25 +223,25 @@ public class HomeFragment extends Fragment {
                     getHomeContent();
 
                 } else {
-                    tvNoItem.setText(getString(R.string.no_internet));
-                    shimmerFrameLayout.stopShimmer();
-                    shimmerFrameLayout.setVisibility(View.GONE);
-                    swipeRefreshLayout.setRefreshing(false);
-                    coordinatorLayout.setVisibility(View.VISIBLE);
-                    scrollView.setVisibility(View.GONE);
+                    mTvNoItem.setText(getString(R.string.no_internet));
+                    mShimmerLayout.stopShimmer();
+                    mShimmerLayout.setVisibility(View.GONE);
+                    mSwipeRefreshLayout.setRefreshing(false);
+                    mCoordinatorLayout.setVisibility(View.VISIBLE);
+                    mScrollView.setVisibility(View.GONE);
                 }
             }
         });
 
 
-        scrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+        mScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
                 if (scrollY < oldScrollY) { // up
-                    animateSearchBar(false);
+                    activity.animateSearchBar(false);
                 }
                 if (scrollY > oldScrollY) { // down
-                    animateSearchBar(true);
+                    activity.animateSearchBar(true);
                 }
             }
         });
@@ -298,16 +258,19 @@ public class HomeFragment extends Fragment {
             @Override
             public void onResponse(Call<HomeContent> call, retrofit2.Response<HomeContent> response) {
                  if (response.code() == 200){
-                    swipeRefreshLayout.setRefreshing(false);
-                    shimmerFrameLayout.stopShimmer();
-                    shimmerFrameLayout.setVisibility(View.GONE);
-                    scrollView.setVisibility(View.VISIBLE);
-                    coordinatorLayout.setVisibility(View.GONE);
+                     if(mSwipeRefreshLayout ==null){
+                         return;
+                     }
+                    mSwipeRefreshLayout.setRefreshing(false);
+                    mShimmerLayout.stopShimmer();
+                    mShimmerLayout.setVisibility(View.GONE);
+                    mScrollView.setVisibility(View.VISIBLE);
+                    mCoordinatorLayout.setVisibility(View.GONE);
 
                     //slider data
                     Slider slider = response.body().getSlider();
                     if (slider.getSliderType().equalsIgnoreCase("disable")) {
-                        sliderLayout.setVisibility(View.GONE);
+                        mSliderLayout.setVisibility(View.GONE);
                     }else if (slider.getSliderType().equalsIgnoreCase("movie")){
 
                     }else if (slider.getSliderType().equalsIgnoreCase("image")){
@@ -315,7 +278,7 @@ public class HomeFragment extends Fragment {
                     }
 
                     SliderAdapter sliderAdapter = new SliderAdapter(slider.getSlide());
-                    cViewPager.setAdapter(sliderAdapter);
+                    mCViewPager.setAdapter(sliderAdapter);
                     sliderAdapter.notifyDataSetChanged();
 
                     //genre data
@@ -437,22 +400,22 @@ public class HomeFragment extends Fragment {
                      }
 
                 }else {
-                     swipeRefreshLayout.setRefreshing(false);
-                     shimmerFrameLayout.stopShimmer();
-                     shimmerFrameLayout.setVisibility(View.GONE);
-                     coordinatorLayout.setVisibility(View.VISIBLE);
-                     scrollView.setVisibility(View.GONE);
+                     mSwipeRefreshLayout.setRefreshing(false);
+                     mShimmerLayout.stopShimmer();
+                     mShimmerLayout.setVisibility(View.GONE);
+                     mCoordinatorLayout.setVisibility(View.VISIBLE);
+                     mScrollView.setVisibility(View.GONE);
                  }
 
             }
 
             @Override
             public void onFailure(Call<HomeContent> call, Throwable t) {
-                swipeRefreshLayout.setRefreshing(false);
-                shimmerFrameLayout.stopShimmer();
-                shimmerFrameLayout.setVisibility(View.GONE);
-                coordinatorLayout.setVisibility(View.VISIBLE);
-                scrollView.setVisibility(View.GONE);
+                mSwipeRefreshLayout.setRefreshing(false);
+                mShimmerLayout.stopShimmer();
+                mShimmerLayout.setVisibility(View.GONE);
+                mCoordinatorLayout.setVisibility(View.VISIBLE);
+                mScrollView.setVisibility(View.GONE);
 
             }
         });
@@ -463,22 +426,27 @@ public class HomeFragment extends Fragment {
         if (adsConfig.getAdsEnable().equals("1")) {
 
             if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                BannerAds.ShowAdmobBannerAds(getContext(), adView);
-                BannerAds.ShowAdmobBannerAds(getContext(), adView1);
+                BannerAds.ShowAdmobBannerAds(getContext(), mAdView);
+                BannerAds.ShowAdmobBannerAds(getContext(), mAdView1);
 
             } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
-                BannerAds.showStartAppBanner(getContext(), adView);
+                BannerAds.showStartAppBanner(getContext(), mAdView);
 
             } else if(adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.NETWORK_AUDIENCE)) {
-                BannerAds.showFANBanner(getContext(), adView);
-                BannerAds.showFANBanner(getContext(), adView1);
+                BannerAds.showFANBanner(getContext(), mAdView);
+                BannerAds.showFANBanner(getContext(), mAdView1);
             }
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mUnbinder.unbind();
+    }
     private void btnClick() {
 
-        btnMoreMovie.setOnClickListener(new View.OnClickListener() {
+        mBtnMoreMovie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), ItemMovieActivity.class);
@@ -495,7 +463,7 @@ public class HomeFragment extends Fragment {
 //            }
 //        });
 
-        btnMoreSeries.setOnClickListener(new View.OnClickListener() {
+        mBtnMoreSeries.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), ItemSeriesActivity.class);
@@ -504,7 +472,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        btnMoreSeries1.setOnClickListener(new View.OnClickListener() {
+        mBtnMoreSeries1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), ItemSeriesActivity.class);
@@ -533,28 +501,13 @@ public class HomeFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        menuIv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                activity.openDrawer();
-            }
-        });
-
-
-        searchIv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                activity.goToSearchActivity();
-            }
-        });
-
-        shimmerFrameLayout.startShimmer();
+        mShimmerLayout.startShimmer();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        shimmerFrameLayout.stopShimmer();
+        mShimmerLayout.stopShimmer();
         timer.cancel();
     }
 
@@ -562,15 +515,5 @@ public class HomeFragment extends Fragment {
     public void onResume() {
         super.onResume();
     }
-
-    boolean isSearchBarHide = false;
-
-    private void animateSearchBar(final boolean hide) {
-        if (isSearchBarHide && hide || !isSearchBarHide && !hide) return;
-        isSearchBarHide = hide;
-        int moveY = hide ? -(2 * searchRootLayout.getHeight()) : 0;
-        searchRootLayout.animate().translationY(moveY).setStartDelay(100).setDuration(300).start();
-    }
-
 
 }

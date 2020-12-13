@@ -4,15 +4,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -24,6 +21,9 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import tvseries.koreandramaengsub.freemovieapp.Config;
 import tvseries.koreandramaengsub.freemovieapp.MainActivity;
 import tvseries.koreandramaengsub.freemovieapp.R;
@@ -48,99 +48,68 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class FavoriteFragment extends Fragment {
-
-    private ShimmerFrameLayout shimmerFrameLayout;
-    private RecyclerView recyclerView;
+    @BindView(R.id.adView) RelativeLayout mAdView;
+    @BindView(R.id.item_progress_bar) ProgressBar mProgressBar;
+    @BindView(R.id.shimmer_view_container) ShimmerFrameLayout mShimmerLayout;
+    @BindView(R.id.swipe_layout) SwipeRefreshLayout mSwipeRefreshLayout;
+    @BindView(R.id.coordinator_lyt) CoordinatorLayout mCoordinatorLayout ;
+    @BindView(R.id.tv_noitem) TextView mTvNoItem;
+    @BindView(R.id.recyclerView) RecyclerView RecyclerView;
+    Unbinder mUnbinder;
     private CommonGridAdapter mAdapter;
-    private List<CommonModels> list =new ArrayList<>();
-
-    private ApiResources apiResources;
-
-    private boolean isLoading=false;
-    private ProgressBar progressBar;
-    private int pageCount=1,checkPass=0;
-    private CoordinatorLayout coordinatorLayout;
-    private SwipeRefreshLayout swipeRefreshLayout;
-    private TextView tvNoItem;
-
-    private MainActivity activity;
-    private LinearLayout searchRootLayout;
-
-    private CardView searchBar;
-    private ImageView menuIv, searchIv;
-    private TextView pageTitle;
-
+    private List<CommonModels> mListCommonModels =new ArrayList<>();
+    private ApiResources mApiResources;
+    private boolean mIsLoading =false;
+    private int mPageCount =1,checkPass=0;
+    private MainActivity mActivity;
     private static final int HIDE_THRESHOLD = 20;
-    private int scrolledDistance = 0;
-    private boolean controlsVisible = true;
-    private RelativeLayout adView;
+    private int mScrolledDistance = 0;
+    private boolean mControlsVisible = true;
     private String userId = "";
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        activity = (MainActivity) getActivity();
-
-        return inflater.inflate(R.layout.fragment_movies,null);
+        View view = inflater.inflate(R.layout.fragment_movies, container, false);
+        mActivity = (MainActivity) getActivity();
+        mUnbinder = ButterKnife.bind(this,view);
+        mActivity.setTitle(getResources().getString(R.string.favorite));
+        return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getActivity().setTitle(getResources().getString(R.string.favorite));
-
         initComponent(view);
-
-        pageTitle.setText(getResources().getString(R.string.favorite));
-
-        if (activity.isDark) {
-            pageTitle.setTextColor(activity.getResources().getColor(R.color.white));
-            searchBar.setCardBackgroundColor(activity.getResources().getColor(R.color.black_window_light));
-            menuIv.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_menu));
-            searchIv.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_search_white));
-        }
-
         loadAd();
 
     }
 
-
+    public void onDestroy() {
+        super.onDestroy();
+        mUnbinder.unbind();
+    }
     private void initComponent(View view) {
-        apiResources=new ApiResources();
-        swipeRefreshLayout=view.findViewById(R.id.swipe_layout);
-        coordinatorLayout=view.findViewById(R.id.coordinator_lyt);
-        progressBar=view.findViewById(R.id.item_progress_bar);
-        shimmerFrameLayout=view.findViewById(R.id.shimmer_view_container);
-        shimmerFrameLayout.startShimmer();
-        tvNoItem=view.findViewById(R.id.tv_noitem);
-        adView=view.findViewById(R.id.adView);
-
-        searchRootLayout    = view.findViewById(R.id.search_root_layout);
-        searchBar           = view.findViewById(R.id.search_bar);
-        menuIv              = view.findViewById(R.id.bt_menu);
-        pageTitle           = view.findViewById(R.id.page_title_tv);
-        searchIv            = view.findViewById(R.id.search_iv);
-
+        mApiResources =new ApiResources();
+        mShimmerLayout.startShimmer();
         userId = PreferenceUtils.getUserId(getContext());
 
         //----favorite's recycler view-----------------
-        recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
-        recyclerView.addItemDecoration(new SpacingItemDecoration(3, Tools.dpToPx(getActivity(), 0), true));
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setNestedScrollingEnabled(false);
-        mAdapter = new CommonGridAdapter(getContext(), list);
-        recyclerView.setAdapter(mAdapter);
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        RecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
+        RecyclerView.addItemDecoration(new SpacingItemDecoration(3, Tools.dpToPx(getActivity(), 0), true));
+        RecyclerView.setHasFixedSize(true);
+        RecyclerView.setNestedScrollingEnabled(false);
+        mAdapter = new CommonGridAdapter(getContext(), mListCommonModels);
+        RecyclerView.setAdapter(mAdapter);
+        RecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                if (!recyclerView.canScrollVertically(1) && !isLoading) {
-                    pageCount=pageCount+1;
-                    isLoading = true;
-                    progressBar.setVisibility(View.VISIBLE);
-                    getData(userId,pageCount);
+                if (!recyclerView.canScrollVertically(1) && !mIsLoading) {
+                    mPageCount = mPageCount +1;
+                    mIsLoading = true;
+                    mProgressBar.setVisibility(View.VISIBLE);
+                    getData(userId, mPageCount);
                 }
             }
 
@@ -148,38 +117,38 @@ public class FavoriteFragment extends Fragment {
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
-                if (scrolledDistance > HIDE_THRESHOLD && controlsVisible) {
-                    animateSearchBar(true);
-                    controlsVisible = false;
-                    scrolledDistance = 0;
-                } else if (scrolledDistance < -HIDE_THRESHOLD && !controlsVisible) {
-                    animateSearchBar(false);
-                    controlsVisible = true;
-                    scrolledDistance = 0;
+                if (mScrolledDistance > HIDE_THRESHOLD && mControlsVisible) {
+                    mActivity.animateSearchBar(true);
+                    mControlsVisible = false;
+                    mScrolledDistance = 0;
+                } else if (mScrolledDistance < -HIDE_THRESHOLD && !mControlsVisible) {
+                    mActivity.animateSearchBar(false);
+                    mControlsVisible = true;
+                    mScrolledDistance = 0;
                 }
 
-                if((controlsVisible && dy>0) || (!controlsVisible && dy<0)) {
-                    scrolledDistance += dy;
+                if((mControlsVisible && dy>0) || (!mControlsVisible && dy<0)) {
+                    mScrolledDistance += dy;
                 }
             }
         });
 
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                recyclerView.removeAllViews();
-                pageCount=1;
-                list.clear();
+                RecyclerView.removeAllViews();
+                mPageCount =1;
+                mListCommonModels.clear();
                 mAdapter.notifyDataSetChanged();
 
                 if (new NetworkInst(getContext()).isNetworkAvailable()){
-                    getData(userId,pageCount);
+                    getData(userId, mPageCount);
                 }else {
-                    tvNoItem.setText(getString(R.string.no_internet));
-                    shimmerFrameLayout.stopShimmer();
-                    shimmerFrameLayout.setVisibility(View.GONE);
-                    swipeRefreshLayout.setRefreshing(false);
-                    coordinatorLayout.setVisibility(View.VISIBLE);
+                    mTvNoItem.setText(getString(R.string.no_internet));
+                    mShimmerLayout.stopShimmer();
+                    mShimmerLayout.setVisibility(View.GONE);
+                    mSwipeRefreshLayout.setRefreshing(false);
+                    mCoordinatorLayout.setVisibility(View.VISIBLE);
                 }
 
             }
@@ -188,18 +157,18 @@ public class FavoriteFragment extends Fragment {
 
         if (new NetworkInst(getContext()).isNetworkAvailable()){
             if (userId == null){
-                tvNoItem.setText(getString(R.string.please_login_first_to_see_favorite_list));
-                shimmerFrameLayout.stopShimmer();
-                shimmerFrameLayout.setVisibility(View.GONE);
-                coordinatorLayout.setVisibility(View.VISIBLE);
+                mTvNoItem.setText(getString(R.string.please_login_first_to_see_favorite_list));
+                mShimmerLayout.stopShimmer();
+                mShimmerLayout.setVisibility(View.GONE);
+                mCoordinatorLayout.setVisibility(View.VISIBLE);
             }else {
-                getData(userId, pageCount);
+                getData(userId, mPageCount);
             }
         }else {
-            tvNoItem.setText(getString(R.string.no_internet));
-            shimmerFrameLayout.stopShimmer();
-            shimmerFrameLayout.setVisibility(View.GONE);
-            coordinatorLayout.setVisibility(View.VISIBLE);
+            mTvNoItem.setText(getString(R.string.no_internet));
+            mShimmerLayout.stopShimmer();
+            mShimmerLayout.setVisibility(View.GONE);
+            mCoordinatorLayout.setVisibility(View.VISIBLE);
         }
 
     }
@@ -207,20 +176,6 @@ public class FavoriteFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-
-        menuIv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                activity.openDrawer();
-            }
-        });
-        searchIv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                activity.goToSearchActivity();
-            }
-        });
-
     }
 
     private void loadAd() {
@@ -228,13 +183,13 @@ public class FavoriteFragment extends Fragment {
         if (adsConfig.getAdsEnable().equals("1")) {
 
             if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                BannerAds.ShowAdmobBannerAds(activity, adView);
+                BannerAds.ShowAdmobBannerAds(mActivity, mAdView);
 
             } else if (adsConfig.getMobileAdsNetwork().equals(Constants.START_APP)) {
-                BannerAds.showStartAppBanner(activity, adView);
+                BannerAds.showStartAppBanner(mActivity, mAdView);
 
             } else if(adsConfig.getMobileAdsNetwork().equals(Constants.NETWORK_AUDIENCE)) {
-                BannerAds.showFANBanner(getContext(), adView);
+                BannerAds.showFANBanner(getContext(), mAdView);
             }
         }
     }
@@ -247,18 +202,18 @@ public class FavoriteFragment extends Fragment {
             @Override
             public void onResponse(Call<List<Movie>> call, Response<List<Movie>> response) {
                 if (response.code() == 200){
-                    isLoading=false;
-                    swipeRefreshLayout.setRefreshing(false);
-                    progressBar.setVisibility(View.GONE);
-                    shimmerFrameLayout.stopShimmer();
-                    shimmerFrameLayout.setVisibility(View.GONE);
+                    mIsLoading =false;
+                    mSwipeRefreshLayout.setRefreshing(false);
+                    mProgressBar.setVisibility(View.GONE);
+                    mShimmerLayout.stopShimmer();
+                    mShimmerLayout.setVisibility(View.GONE);
 
-                    if (response.body().size() == 0 && pageCount==1){
-                        coordinatorLayout.setVisibility(View.VISIBLE);
-                        tvNoItem.setText("No items here");
-                        pageCount = 1;
+                    if (response.body().size() == 0 && mPageCount ==1){
+                        mCoordinatorLayout.setVisibility(View.VISIBLE);
+                        mTvNoItem.setText("No items here");
+                        mPageCount = 1;
                     }else {
-                        coordinatorLayout.setVisibility(View.GONE);
+                        mCoordinatorLayout.setVisibility(View.GONE);
                     }
 
                     for (int i = 0; i < response.body().size(); i++){
@@ -273,7 +228,7 @@ public class FavoriteFragment extends Fragment {
                             models.setVideoType("tvseries");
                         }
                         models.setId(response.body().get(i).getVideosId());
-                        list.add(models);
+                        mListCommonModels.add(models);
                     }
 
                     mAdapter.notifyDataSetChanged();
@@ -282,32 +237,23 @@ public class FavoriteFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Movie>> call, Throwable t) {
-                isLoading=false;
-                progressBar.setVisibility(View.GONE);
-                swipeRefreshLayout.setRefreshing(false);
-                shimmerFrameLayout.stopShimmer();
-                shimmerFrameLayout.setVisibility(View.GONE);
+                mIsLoading =false;
+                mProgressBar.setVisibility(View.GONE);
+                mSwipeRefreshLayout.setRefreshing(false);
+                mShimmerLayout.stopShimmer();
+                mShimmerLayout.setVisibility(View.GONE);
                 if (userId == null){
                     new ToastMsg(getActivity()).toastIconError(getString(R.string.please_login_first_to_see_favorite_list));
                 }else {
                     new ToastMsg(getActivity()).toastIconError(getString(R.string.fetch_error));
                 }
 
-                if (pageCount==1){
-                    coordinatorLayout.setVisibility(View.VISIBLE);
+                if (mPageCount ==1){
+                    mCoordinatorLayout.setVisibility(View.VISIBLE);
                 }
             }
         });
 
-    }
-
-    boolean isSearchBarHide = false;
-
-    private void animateSearchBar(final boolean hide) {
-        if (isSearchBarHide && hide || !isSearchBarHide && !hide) return;
-        isSearchBarHide = hide;
-        int moveY = hide ? -(2 * searchRootLayout.getHeight()) : 0;
-        searchRootLayout.animate().translationY(moveY).setStartDelay(100).setDuration(300).start();
     }
 
 }

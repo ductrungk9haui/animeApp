@@ -353,27 +353,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-
-            <LinearLayout
-                android:id="@+id/search_root_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:fitsSystemWindows="true"
-                >
-
-                <include
-                    android:id="@+id/search_bar"
-                    layout="@layout/toolbar" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
         <ProgressBar
             android:id="@+id/item_progress_bar"
             android:layout_width="50dp"

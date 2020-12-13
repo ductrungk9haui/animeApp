@@ -16,12 +16,44 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac142d87-5c2b-4e32-8948-daeba4b28bdb" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_jakewharton_butterknife_10_0_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_jakewharton_butterknife_annotations_10_0_0_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_jakewharton_butterknife_runtime_10_0_0_aar.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/jarAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/DownloadActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/DownloadActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/fragments/DownFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/fragments/DownFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/fragments/HomeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/fragments/HomeFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/fragments/MoviesFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/fragments/MoviesFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/fragments/TvSeriesFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/fragments/TvSeriesFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/nav_fragments/FavoriteFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/nav_fragments/FavoriteFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/nav_fragments/MainHomeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/nav_fragments/MainHomeFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_movies.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_movies.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_tvseries.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_tvseries.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +63,7 @@
   <component name="CodeInsightWorkspaceSettings">
     <option name="optimizeImportsOnTheFly" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Nexus_4_API_22" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="R58M61WTLQX" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -112,7 +144,7 @@
     <property name="SHOW_ALL_PROCESSES" value="false" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable-mdpi" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ANDROID SOURCE CODE" />
     <property name="project.structure.last.edited" value="Suggestions" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -386,42 +418,42 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="624" y="186" key="AndroidProcessChooserDialog/0.0.1536.824@0.0.1536.824" timestamp="1606021955949" />
-    <state x="499" y="110" key="FileChooserDialogImpl" timestamp="1606336368164">
+    <state x="499" y="110" key="FileChooserDialogImpl" timestamp="1607827506120">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="499" y="110" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1606336368164" />
-    <state width="1340" height="132" key="GridCell.Tab.0.bottom" timestamp="1607820841850">
+    <state x="499" y="110" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1607827506120" />
+    <state width="1491" height="133" key="GridCell.Tab.0.bottom" timestamp="1607834389466">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1340" height="132" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607820841850" />
-    <state width="1340" height="132" key="GridCell.Tab.0.center" timestamp="1607820841850">
+    <state width="1491" height="133" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607834389466" />
+    <state width="1491" height="133" key="GridCell.Tab.0.center" timestamp="1607834389466">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1340" height="132" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1607820841850" />
-    <state width="1340" height="132" key="GridCell.Tab.0.left" timestamp="1607820841850">
+    <state width="1491" height="133" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1607834389466" />
+    <state width="1491" height="133" key="GridCell.Tab.0.left" timestamp="1607834389466">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1340" height="132" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1607820841850" />
-    <state width="1340" height="132" key="GridCell.Tab.0.right" timestamp="1607820841850">
+    <state width="1491" height="133" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1607834389466" />
+    <state width="1491" height="133" key="GridCell.Tab.0.right" timestamp="1607834389466">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1340" height="132" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1607820841850" />
-    <state width="1340" height="260" key="GridCell.Tab.1.bottom" timestamp="1606571934335">
+    <state width="1491" height="133" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1607834389466" />
+    <state width="1491" height="257" key="GridCell.Tab.1.bottom" timestamp="1607831301982">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1340" height="260" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1606571934335" />
-    <state width="1340" height="260" key="GridCell.Tab.1.center" timestamp="1606571934335">
+    <state width="1491" height="257" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607831301982" />
+    <state width="1491" height="257" key="GridCell.Tab.1.center" timestamp="1607831301982">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1340" height="260" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1606571934335" />
-    <state width="1340" height="260" key="GridCell.Tab.1.left" timestamp="1606571934335">
+    <state width="1491" height="257" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1607831301982" />
+    <state width="1491" height="257" key="GridCell.Tab.1.left" timestamp="1607831301981">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1340" height="260" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1606571934335" />
-    <state width="1340" height="260" key="GridCell.Tab.1.right" timestamp="1606571934335">
+    <state width="1491" height="257" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1607831301981" />
+    <state width="1491" height="257" key="GridCell.Tab.1.right" timestamp="1607831301982">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1340" height="260" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1606571934335" />
+    <state width="1491" height="257" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1607831301982" />
     <state x="584" y="190" key="chooseDestDirectoryDialog" timestamp="1602230528048">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -434,10 +466,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="395" y="195" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1606569512199" />
-    <state x="411" y="104" width="1024" height="674" key="find.popup" timestamp="1606484534056">
+    <state x="290" y="81" width="1024" height="674" key="find.popup" timestamp="1607829738302">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="411" y="104" width="1024" height="674" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1606484534056" />
+    <state x="290" y="81" width="1024" height="674" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1607829738302" />
     <state x="426" y="189" key="run.anything.popup" timestamp="1600759173101">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -452,17 +484,17 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/DownloadActivity.java</url>
-          <line>363</line>
+          <line>364</line>
           <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/DownloadActivity.java</url>
-          <line>357</line>
+          <line>358</line>
           <option name="timeStamp" value="25" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/DownloadActivity.java</url>
-          <line>359</line>
+          <line>360</line>
           <option name="timeStamp" value="26" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
