@@ -298,6 +298,7 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
                                         progressBar.setProgress((int) downloadKb);
                                     }
                                 }
+                                
 
                             }
                         }
