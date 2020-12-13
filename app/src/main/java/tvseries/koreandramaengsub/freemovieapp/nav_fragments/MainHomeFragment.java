@@ -29,8 +29,8 @@ import tvseries.koreandramaengsub.freemovieapp.fragments.TvSeriesFragment;
 import static android.content.Context.MODE_PRIVATE;
 
 public class MainHomeFragment extends Fragment {
-    @BindView(R.id.bottomify_nav) BottomifyNavigationView bottomifyNavigationViewDark;
-    @BindView(R.id.bottomify_nav_light) BottomifyNavigationView bottomifyNavigationViewLight;
+    @BindView(R.id.bottomify_nav) BottomifyNavigationView mBottomNaviDark;
+    @BindView(R.id.bottomify_nav_light) BottomifyNavigationView mBottomNaviLight;
     private MainActivity mActivity;
     Unbinder mUnbinder;
 
@@ -51,74 +51,68 @@ public class MainHomeFragment extends Fragment {
 
         if (isDark) {
             //bottomifyNavigationView
-            bottomifyNavigationViewDark.setVisibility(View.VISIBLE);
-            bottomifyNavigationViewDark.setBackgroundColor(getResources().getColor(R.color.black_window_light));
+            mBottomNaviDark.setVisibility(View.VISIBLE);
+            mBottomNaviDark.setBackgroundColor(getResources().getColor(R.color.black_window_light));
+            //bottomifyNavigationView
+            mBottomNaviDark.setActiveNavigationIndex(0);
+            mBottomNaviDark.setOnNavigationItemChangedListener(new OnNavigationItemChangeListener() {
+                @Override
+                public void onNavigationItemChanged(@NotNull BottomifyNavigationView.NavigationItem navigationItem) {
+                    switch (navigationItem.getPosition()) {
+                        case 0:
+                            loadFragment(new HomeFragment());
+                            break;
+                        case 1:
+                            loadFragment(new MoviesFragment());
+                            Config.isOpenChildFragment = true;
+                            break;
+                        case 2:
+                            loadFragment(new TvSeriesFragment());
+                            Config.isOpenChildFragment = true;
+                            break;
+                        case 3:
+                            loadFragment(new DownFragment());
+                            Config.isOpenChildFragment = true;
+                            break;
+                        case 4:
+                            loadFragment(new FavoriteFragment());
+                            Config.isOpenChildFragment = true;
+                            break;
+                        //case 5:
+
+                        // case 4:
+                    }
+                }
+            });
         } else {
             //bottomifyNavigationView light
-            bottomifyNavigationViewLight.setVisibility(View.VISIBLE);
-            bottomifyNavigationViewLight.setBackgroundColor(getResources().getColor(R.color.white));
+            mBottomNaviLight.setVisibility(View.VISIBLE);
+            mBottomNaviLight.setBackgroundColor(getResources().getColor(R.color.white));
+            //bottomify light
+            mBottomNaviLight.setActiveNavigationIndex(0);
+            mBottomNaviLight.setOnNavigationItemChangedListener(new OnNavigationItemChangeListener() {
+                @Override
+                public void onNavigationItemChanged(@NotNull BottomifyNavigationView.NavigationItem navigationItem) {
+                    switch (navigationItem.getPosition()){
+                        case 0:
+                            loadFragment(new HomeFragment());
+                            break;
+                        case 1:
+                            loadFragment(new MoviesFragment());
+                            break;
+                        case 2:
+                            loadFragment(new TvSeriesFragment());
+                            break;
+                        case 3:
+                            loadFragment(new DownFragment());
+                            break;
+                        case 4:
+                            loadFragment(new FavoriteFragment());
+                            break;
+                    }
+                }
+            });
         }
-
-        //bottomifyNavigationView
-        bottomifyNavigationViewDark.setActiveNavigationIndex(0);
-        bottomifyNavigationViewDark.setOnNavigationItemChangedListener(new OnNavigationItemChangeListener() {
-            @Override
-            public void onNavigationItemChanged(@NotNull BottomifyNavigationView.NavigationItem navigationItem) {
-                switch (navigationItem.getPosition()) {
-                    case 0:
-                        loadFragment(new HomeFragment());
-                        break;
-                    case 1:
-                        loadFragment(new MoviesFragment());
-                        Config.isOpenChildFragment = true;
-                        break;
-                    case 2:
-                        loadFragment(new TvSeriesFragment());
-                        Config.isOpenChildFragment = true;
-                        break;
-                    case 3:
-                        loadFragment(new DownFragment());
-                        Config.isOpenChildFragment = true;
-                        break;
-                    case 4:
-                        loadFragment(new FavoriteFragment());
-                        Config.isOpenChildFragment = true;
-                        break;
-                    //case 5:
-
-                   // case 4:
-
-
-                }
-            }
-        });
-
-        //bottomify light
-        bottomifyNavigationViewLight.setActiveNavigationIndex(0);
-        bottomifyNavigationViewLight.setOnNavigationItemChangedListener(new OnNavigationItemChangeListener() {
-            @Override
-            public void onNavigationItemChanged(@NotNull BottomifyNavigationView.NavigationItem navigationItem) {
-                switch (navigationItem.getPosition()){
-                    case 0:
-                        loadFragment(new HomeFragment());
-                        break;
-                    case 1:
-                        loadFragment(new MoviesFragment());
-                        break;
-                    case 2:
-                        loadFragment(new TvSeriesFragment());
-                        break;
-                    case 3:
-                        loadFragment(new DownFragment());
-                        break;
-                    case 4:
-                        loadFragment(new FavoriteFragment());
-                        break;
-                }
-            }
-        });
-
-
         loadFragment(new HomeFragment());
 
     }
@@ -144,5 +138,7 @@ public class MainHomeFragment extends Fragment {
             mUnbinder.unbind();
         }
     }
+
+
 
 }
