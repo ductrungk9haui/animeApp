@@ -1,0 +1,183 @@
+buildscript {
+    repositories {
+        maven { url 'https://plugins.gradle.org/m2/' }
+    }
+    dependencies {
+        classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:[0.12.4, 0.99.99]'
+    }
+}
+apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven{ url 'https://maven.google.com'}
+    maven { url 'https://dl.bintray.com/ironsource-mobile/android-sdk' }
+    maven { url 'https://adcolony.bintray.com/AdColony' }
+
+}
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+android {
+
+
+    // this is for signed apk generate problem for lint
+    /*lintOptions {
+        checkReleaseBuilds false
+    }*/
+
+    compileSdkVersion 30
+    buildToolsVersion '30.0.2'
+    defaultConfig {
+        applicationId "tvseries.koreandramaengsub.freemovieapp"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 8
+        versionName "1.0.8"
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+        manifestPlaceholders = [
+                onesignal_app_id: '8f8f1416-8631-4856-809c-9a2dffbf1592',
+                // Project number pulled from dashboard, local value is ignored.
+                onesignal_google_project_number: 'REMOTE'
+        ]
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    implementation 'com.google.android.play:core:1.8.3'
+
+
+    //sdk mediation
+    //applovin
+    implementation 'com.google.ads.mediation:applovin:9.14.5.0'
+    //mopub
+    implementation 'com.google.ads.mediation:mopub:5.15.0.0'
+    //unity ads
+    implementation 'com.google.ads.mediation:unity:3.5.0.0'
+    //adcolony
+    implementation 'com.google.ads.mediation:adcolony:4.3.0.0'
+    //tapjoy
+    implementation 'com.google.ads.mediation:tapjoy:12.7.1.0'
+    //inmobi
+    implementation 'com.google.ads.mediation:inmobi:9.1.1.0'
+    //ironsource
+    implementation 'com.google.ads.mediation:ironsource:7.0.3.1.0'
+    //fyber
+   // implementation 'com.google.ads.mediation:fyber:7.7.3.0'
+    //facebook
+    implementation 'com.google.ads.mediation:facebook:6.2.0.0'
+
+
+
+    testImplementation 'junit:junit:4.13.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    //firebase
+    implementation 'com.google.firebase:firebase-analytics:18.0.0'
+    implementation 'com.google.firebase:firebase-messaging:21.0.0'
+    //firebase auth
+    implementation 'com.firebaseui:firebase-ui-auth:4.3.2'
+    implementation 'com.google.firebase:firebase-auth:20.0.1'
+    // Required only if Facebook login support is required
+    // Find the latest Facebook SDK releases here: https://goo.gl/Ce5L94
+    implementation 'com.facebook.android:facebook-android-sdk:8.1.0'
+
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'com.google.android:flexbox:0.3.2'                  // google flexible box
+    implementation 'com.crystal:crystalrangeseekbar:1.1.3'             // range seek bar
+    implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
+    implementation 'androidx.browser:browser:1.2.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha06'
+    implementation "android.arch.work:work-runtime:1.0.1"
+    //implementation 'com.crystal:crystalrangeseekbar:1.1.3'
+    //implementation 'com.github.Innovattic:range-seek-bar:v1.0.6'
+    //implementation 'com.github.Chrisvin:RubberPicker:v1.1'
+    //implementation 'com.github.stfalcon:StfalconPriceRangeBar:0.1.1'
+    //implementation 'com.github.Jay-Goo:RangeSeekBar:v3.0.0'
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+    implementation 'com.orhanobut:dialogplus:1.11@aar'
+    // shimmer layout
+    implementation 'com.facebook.shimmer:shimmer:0.4.0'
+    implementation 'com.balysv:material-ripple:1.0.2'
+    // ripple effect
+
+    implementation 'com.github.JakeWharton:ViewPagerIndicator:2.4.1'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'jp.wasabeef:picasso-transformations:2.2.1'
+    implementation 'com.android.volley:volley:1.1.1'
+
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    implementation 'jp.wasabeef:glide-transformations:4.0.0'
+    // retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
+    // stripe
+    implementation 'com.stripe:stripe-android:+'
+    implementation 'com.stripe:stripe-java:5.36.0'
+    implementation 'com.daimajia.easing:library:2.4@aar'
+    implementation 'com.daimajia.androidanimations:library:2.4@aar'
+    // download manager
+    implementation 'com.mindorks.android:prdownloader:0.6.0'
+    implementation 'com.mani:ThinDownloadManager:1.4.0'
+    // paypal
+    implementation 'com.paypal.sdk:paypal-android-sdk:2.16.0'
+    // razor pay
+    implementation 'com.razorpay:checkout:1.5.12'
+    // space bottom navigation view
+    implementation 'com.github.armcha:SpaceNavigationView:1.6.0'
+    // card slider
+    implementation 'com.github.IslamKhSh:CardSlider:0.4'
+    implementation 'com.google.android:flexbox:0.3.2'
+    //OneSignal
+    implementation 'com.onesignal:OneSignal:3.15.4'
+    implementation 'com.hootsuite.android:nachos:1.1.1'
+    implementation 'com.mikhaellopez:circularimageview:3.2.0'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'com.google.android.gms:play-services-ads:19.5.0'
+    // exo player
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.7.3'
+    implementation 'com.google.android.exoplayer:exoplayer-dash:2.7.3'
+    implementation 'com.google.android.exoplayer:exoplayer-ui:2.7.3'
+    implementation 'com.google.android.exoplayer:exoplayer-hls:2.7.3'
+    implementation 'com.google.android.exoplayer:extension-rtmp:2.7.3'
+    implementation 'com.google.android.exoplayer:extension-cast:2.7.3'
+    implementation 'com.github.HaarigerHarald:android-youtubeExtractor:master-SNAPSHOT'
+    implementation 'com.google.android.libraries.cast.companionlibrary:ccl:2.8.4'
+    // start app ad
+    implementation 'com.startapp:inapp-sdk:3.10.1'
+    implementation 'com.github.ixiDev:GDPRChecker:v0.2'
+    implementation 'com.google.android.ads.consent:consent-library:1.0.8'
+    //bottom navigation
+    implementation 'com.github.volsahin:bottomify-navigation-view:1.0.2'
+    //Facebook audiene network
+    implementation 'com.facebook.android:audience-network-sdk:6.2.0'
+
+
+    //app open ads
+    def lifecycle_version = '2.2.0'
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-runtime:$lifecycle_version"
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+}

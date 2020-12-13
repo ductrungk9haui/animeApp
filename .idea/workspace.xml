@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config>
+        <device id="pixel" />
+        <device id="pixel_3_xl" />
+        <device id="Nexus 6" />
+        <device id="Nexus 6P" />
+        <device id="pixel_3a" />
+        <device id="Nexus 5X" />
+        <device id="pixel_2" />
+        <device id="tv_1080p" />
+        <device id="wear_square" />
+      </config>
+    </shared>
+  </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="TRUN" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ac142d87-5c2b-4e32-8948-daeba4b28bdb" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="R58M61WTLQX" />
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="ANDROID SOURCE CODE" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="ANDROID SOURCE CODE" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="ANDROID SOURCE CODE" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="android" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="ANDROID SOURCE CODE" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="resourceFile" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="GenerateSignedApkSettings">
+    <option name="EXPORT_PRIVATE_KEY" value="false" />
+    <option name="KEY_STORE_PATH" value="E:\MovieStreamingAPP\key\keykoreandrama_final.jks" />
+    <option name="KEY_ALIAS" value="key0" />
+    <option name="REMEMBER_PASSWORDS" value="true" />
+  </component>
+  <component name="ProjectId" id="1dm6qBlsQir0btT8IaoElzXaB19" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="BundleExportedModule" value="app" />
+    <property name="DEBUGGABLE_DEVICE" value="xiaomi-redmi_note_8_pro-hijjuomvtggiqkx4" />
+    <property name="DEBUGGABLE_PROCESS" value="tvseries.koreandramaengsub.freemovieapp" />
+    <property name="DEBUGGER_ID" value="Auto" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Nexus_7_API_30" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-10-12T12:39:46.181Z" />
+    <property name="ExportApk.ApkPath" value="E:\MovieStreamingAPP\koreandrama\ANDROID SOURCE CODE\app" />
+    <property name="ExportApk.BuildVariants" value="debug&#10;release" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHOW_ALL_PROCESSES" value="false" />
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable-mdpi" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Suggestions" />
+    <property name="project.structure.proportion" value="0.17" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="reference.idesettings.quicklists" />
+  </component>
+  <component name="PsdUISettings">
+    <option name="LAST_EDITED_BUILD_TYPE" value="release" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\MovieStreamingAPP\koreandrama\ANDROID SOURCE CODE\app\src\main\res\drawable-xxxhdpi" />
+      <recent name="E:\MovieStreamingAPP\koreandrama\ANDROID SOURCE CODE\app\src\main\res\drawable-mdpi" />
+      <recent name="E:\MovieStreamingAPP\movie_done\ANDROID\ANDROID SOURCE CODE\app\src\main\res\drawable-xhdpi" />
+      <recent name="E:\MovieStreamingAPP\movie_done\ANDROID\ANDROID SOURCE CODE\app\src\main\res\drawable-mdpi" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\MovieStreamingAPP\koreandrama\ANDROID SOURCE CODE\app\src\main\res\drawable-mdpi" />
+      <recent name="E:\MovieStreamingAPP\movie_done\ANDROID\ANDROID SOURCE CODE\app\src\main\res\drawable-xhdpi" />
+      <recent name="E:\MovieStreamingAPP\movie_done\ANDROID\ANDROID SOURCE CODE\app\src\main\res\drawable-mdpi" />
+      <recent name="E:\MovieStreamingAPP\movie_done\ANDROID\ANDROID SOURCE CODE\app\src\main\res\drawable" />
+      <recent name="E:\MovieStreamingAPP\1 - Copy\ANDROID\ANDROID SOURCE CODE\app\src\main\res\drawable" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Android App.app">
+    <configuration name="&lt;template&gt;" type="Applet" default="true" selected="false">
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration name="&lt;template&gt;" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" default="true" selected="false">
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+    </configuration>
+    <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+      <module name="app" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Hybrid>
+      <Java />
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ANDROID SOURCE CODE [assembleAndroidTest]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="assembleAndroidTest" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="ANDROID SOURCE CODE [compileDebugUnitTestSources]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="compileDebugUnitTestSources" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="ANDROID SOURCE CODE [compileReleaseSources]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="compileReleaseSources" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="ANDROID SOURCE CODE [dependencies]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="dependencies" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="ANDROID SOURCE CODE [signingReport]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="signingReport" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.ANDROID SOURCE CODE [dependencies]" />
+        <item itemvalue="Gradle.ANDROID SOURCE CODE [signingReport]" />
+        <item itemvalue="Gradle.ANDROID SOURCE CODE [assembleAndroidTest]" />
+        <item itemvalue="Gradle.ANDROID SOURCE CODE [compileReleaseSources]" />
+        <item itemvalue="Gradle.ANDROID SOURCE CODE [compileDebugUnitTestSources]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ac142d87-5c2b-4e32-8948-daeba4b28bdb" name="Default Changelist" comment="" />
+      <created>1593018110052</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1593018110052</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="167" y="80" key="#PSD" timestamp="1606307090196">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="167" y="80" key="#PSD/0.0.1536.824@0.0.1536.824" timestamp="1606307090196" />
+    <state x="574" y="104" key="#com.intellij.ide.util.MemberChooser" timestamp="1606331487855">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="574" y="104" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1606331487855" />
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1602422331348">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1602422331348" />
+    <state x="349" y="167" key="AndroidCreateResourceDirectoryDialog" timestamp="1602433794381">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="349" y="167" key="AndroidCreateResourceDirectoryDialog/0.0.1536.824@0.0.1536.824" timestamp="1602433794381" />
+    <state x="349" y="167" key="AndroidCreateResourceFileDialog" timestamp="1600764513795">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="349" y="167" key="AndroidCreateResourceFileDialog/0.0.1536.824@0.0.1536.824" timestamp="1600764513795" />
+    <state x="624" y="186" key="AndroidProcessChooserDialog" timestamp="1606021955949">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="624" y="186" key="AndroidProcessChooserDialog/0.0.1536.824@0.0.1536.824" timestamp="1606021955949" />
+    <state x="499" y="110" key="FileChooserDialogImpl" timestamp="1606336368164">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="499" y="110" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1606336368164" />
+    <state width="1340" height="260" key="GridCell.Tab.0.bottom" timestamp="1606571934335">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1340" height="260" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1606571934335" />
+    <state width="1340" height="260" key="GridCell.Tab.0.center" timestamp="1606571934335">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1340" height="260" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1606571934335" />
+    <state width="1340" height="260" key="GridCell.Tab.0.left" timestamp="1606571934335">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1340" height="260" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1606571934335" />
+    <state width="1340" height="260" key="GridCell.Tab.0.right" timestamp="1606571934335">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1340" height="260" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1606571934335" />
+    <state width="1340" height="260" key="GridCell.Tab.1.bottom" timestamp="1606571934335">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1340" height="260" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1606571934335" />
+    <state width="1340" height="260" key="GridCell.Tab.1.center" timestamp="1606571934335">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1340" height="260" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1606571934335" />
+    <state width="1340" height="260" key="GridCell.Tab.1.left" timestamp="1606571934335">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1340" height="260" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1606571934335" />
+    <state width="1340" height="260" key="GridCell.Tab.1.right" timestamp="1606571934335">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1340" height="260" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1606571934335" />
+    <state x="584" y="190" key="chooseDestDirectoryDialog" timestamp="1602230528048">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="584" y="190" key="chooseDestDirectoryDialog/0.0.1536.824@0.0.1536.824" timestamp="1602230528048" />
+    <state x="100" y="108" width="1336" height="624" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1602506469359">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="100" y="108" width="1336" height="624" key="com.android.tools.idea.avdmanager.AvdListDialog/0.0.1536.824@0.0.1536.824" timestamp="1602506469359" />
+    <state x="395" y="195" key="com.intellij.ide.util.TipDialog" timestamp="1606569512199">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="395" y="195" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1606569512199" />
+    <state x="466" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1599065489314">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="466" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.824@0.0.1536.824" timestamp="1599065489314" />
+    <state x="411" y="104" width="1024" height="674" key="find.popup" timestamp="1606484534056">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="411" y="104" width="1024" height="674" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1606484534056" />
+    <state x="426" y="189" key="run.anything.popup" timestamp="1600759173101">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="426" y="189" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1600759173101" />
+    <state x="431" y="145" key="search.everywhere.popup" timestamp="1600483160443">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1600483160443" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/DownloadActivity.java</url>
+          <line>363</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/DownloadActivity.java</url>
+          <line>357</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/DownloadActivity.java</url>
+          <line>359</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/DetailsActivity.java</url>
+          <line>814</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/LoginActivity.java</url>
+          <line>42</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

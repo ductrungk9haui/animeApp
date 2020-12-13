@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: androidx.media2:media2-widget:1.0.1@aar">
+    <ANNOTATIONS>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a84837d1354bc66b33f1765321537d0c/jetified-media2-widget-1.0.1/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a84837d1354bc66b33f1765321537d0c/jetified-media2-widget-1.0.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a84837d1354bc66b33f1765321537d0c/jetified-media2-widget-1.0.1/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.media2/media2-widget/1.0.1/9c55f19397b92cde4bd3a80c6fd73116f4c7a35b/media2-widget-1.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

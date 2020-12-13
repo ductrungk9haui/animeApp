@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.mopub:mopub-sdk-fullscreen:5.15.0@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/187eb66f9f333820f23136b49fe6985d/jetified-mopub-sdk-fullscreen-5.15.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/187eb66f9f333820f23136b49fe6985d/jetified-mopub-sdk-fullscreen-5.15.0/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mopub/mopub-sdk-fullscreen/5.15.0/7faec60fbf890ba18fef7f1b95d662f3f476e6f0/mopub-sdk-fullscreen-5.15.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
