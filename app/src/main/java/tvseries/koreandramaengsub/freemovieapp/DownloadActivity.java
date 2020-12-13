@@ -284,7 +284,7 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
 
                                         }
                                     }
-
+//asdasdasd
 //                                // set download amount
 //                                if (amountTv != null) {
 //                                    amountTv.setText(parseDouble(String.format("%.1f", downloadMb)) + " MB / "
@@ -298,7 +298,7 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
                                         progressBar.setProgress((int) downloadKb);
                                     }
                                 }
-                                
+
 
                             }
                         }

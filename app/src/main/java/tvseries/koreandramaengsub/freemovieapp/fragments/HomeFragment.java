@@ -29,6 +29,7 @@ import java.util.Timer;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -123,13 +124,8 @@ public class HomeFragment extends Fragment {
         if (db.getConfigurationData().getAppConfig().getCountryVisible()) {
             mCountryLayout.setVisibility(View.VISIBLE);
         }
-
         //----init timer slider--------------------
         timer = new Timer();
-
-        //----btn click-------------
-        btnClick();
-
         // --- genre recycler view ---------
         mGenreRv.setLayoutManager(new LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false));
         mGenreRv.setHasFixedSize(true);
@@ -444,44 +440,6 @@ public class HomeFragment extends Fragment {
         super.onDestroy();
         mUnbinder.unbind();
     }
-    private void btnClick() {
-
-        mBtnMoreMovie.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), ItemMovieActivity.class);
-                intent.putExtra("title", "Movies");
-                getActivity().startActivity(intent);
-            }
-        });
-//        btnMoreTv.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getContext(), ItemTVActivity.class);
-//                intent.putExtra("title", "Live TV");
-//                getActivity().startActivity(intent);
-//            }
-//        });
-
-        mBtnMoreSeries.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), ItemSeriesActivity.class);
-                intent.putExtra("title", "TV Series");
-                getActivity().startActivity(intent);
-            }
-        });
-
-        mBtnMoreSeries1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), ItemSeriesActivity.class);
-                intent.putExtra("title", "TV Series");
-                getActivity().startActivity(intent);
-            }
-        });
-
-    }
 
     private void getAdDetails() {
         DatabaseHelper db = new DatabaseHelper(getContext());
@@ -515,5 +473,16 @@ public class HomeFragment extends Fragment {
     public void onResume() {
         super.onResume();
     }
-
+    @OnClick(R.id.btn_more_movie)
+    void onBtnMoreMovieClick(){
+        Intent intent = new Intent(getContext(), ItemMovieActivity.class);
+        intent.putExtra("title", "Movies");
+        getActivity().startActivity(intent);
+    }
+    @OnClick({R.id.btn_more_series,R.id.btn_more_series1})
+    void onBtnMoreSeriesClick(){
+        Intent intent = new Intent(getContext(), ItemSeriesActivity.class);
+        intent.putExtra("title", "TV Series");
+        getActivity().startActivity(intent);
+    }
 }
