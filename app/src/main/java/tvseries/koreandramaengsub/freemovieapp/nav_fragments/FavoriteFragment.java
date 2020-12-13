@@ -14,7 +14,6 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 
@@ -24,6 +23,10 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 import tvseries.koreandramaengsub.freemovieapp.Config;
 import tvseries.koreandramaengsub.freemovieapp.MainActivity;
 import tvseries.koreandramaengsub.freemovieapp.R;
@@ -42,10 +45,7 @@ import tvseries.koreandramaengsub.freemovieapp.utils.SpacingItemDecoration;
 import tvseries.koreandramaengsub.freemovieapp.utils.ToastMsg;
 import tvseries.koreandramaengsub.freemovieapp.utils.Tools;
 import tvseries.koreandramaengsub.freemovieapp.utils.ads.BannerAds;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
+import tvseries.koreandramaengsub.freemovieapp.view.SwipeRefreshLayout;
 
 public class FavoriteFragment extends Fragment {
     @BindView(R.id.adView) RelativeLayout mAdView;
@@ -74,6 +74,7 @@ public class FavoriteFragment extends Fragment {
         mActivity = (MainActivity) getActivity();
         mUnbinder = ButterKnife.bind(this,view);
         mActivity.setTitle(getResources().getString(R.string.favorite));
+        mSwipeRefreshLayout.setToolbar(mActivity.getToolbar());
         return view;
     }
 

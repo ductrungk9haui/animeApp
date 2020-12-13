@@ -271,10 +271,11 @@
     </com.facebook.shimmer.ShimmerFrameLayout>
 
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    <tvseries.koreandramaengsub.freemovieapp.view.SwipeRefreshLayout
         android:id="@+id/swipe_layout"
         android:layout_below="@+id/shimmer_view_container"
         android:layout_width="match_parent"
+        android:translationZ="12dp"
         android:layout_height="wrap_content">
 
         <RelativeLayout
@@ -597,7 +598,7 @@
         </RelativeLayout>
 
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </tvseries.koreandramaengsub.freemovieapp.view.SwipeRefreshLayout>
 
 
 

@@ -351,15 +351,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     public void setTitle(String title){
         mPageTitle.setText(title);
+        mSearchRootLayout.setTranslationY(0);
     }
-
+    public void onRefresh(boolean isStart){
+        if(isStart){
+           // mSearchRootLayout.setTranslationZ(-1);
+        }else{
+            //mSearchRootLayout.setTranslationZ(0);
+        }
+    }
     @OnClick(R.id.bt_menu)
     void onMenuIvClick(View view){
         openDrawer();
     }
     @OnClick(R.id.search_iv)
     void onSearchIvClick(View view){
-        goToSearchActivity();
+        startActivity(new Intent(MainActivity.this, SearchActivity.class));
     }
 
     @OnClick(R.id.group_facebook)
@@ -598,6 +605,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
     }
+
+    public View getToolbar(){
+        return mSearchRootLayout;
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();

@@ -17,7 +17,6 @@ import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.github.islamkhsh.CardSliderViewPager;
@@ -62,6 +61,7 @@ import tvseries.koreandramaengsub.freemovieapp.network.model.config.AdsConfig;
 import tvseries.koreandramaengsub.freemovieapp.utils.Constants;
 import tvseries.koreandramaengsub.freemovieapp.utils.NetworkInst;
 import tvseries.koreandramaengsub.freemovieapp.utils.ads.BannerAds;
+import tvseries.koreandramaengsub.freemovieapp.view.SwipeRefreshLayout;
 
 
 public class HomeFragment extends Fragment {
@@ -99,7 +99,7 @@ public class HomeFragment extends Fragment {
     private List<CommonModels> countryList = new ArrayList<>();
     private List<GenreModel> listGenre = new ArrayList<>();
     private GenreHomeAdapter genreHomeAdapter;
-    private MainActivity activity;
+    private MainActivity mActivity;
     private DatabaseHelper db = new DatabaseHelper(getContext());
     Unbinder mUnbinder;
 
@@ -107,9 +107,10 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        activity = (MainActivity) getActivity();
+        mActivity = (MainActivity) getActivity();
         mUnbinder = ButterKnife.bind(this, view);
-        activity.setTitle(getResources().getString(R.string.home));
+        mActivity.setTitle(getResources().getString(R.string.home));
+        mSwipeRefreshLayout.setToolbar(mActivity.getToolbar());
         return view;
     }
 
@@ -127,14 +128,14 @@ public class HomeFragment extends Fragment {
         //----init timer slider--------------------
         timer = new Timer();
         // --- genre recycler view ---------
-        mGenreRv.setLayoutManager(new LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false));
+        mGenreRv.setLayoutManager(new LinearLayoutManager(mActivity, RecyclerView.HORIZONTAL, false));
         mGenreRv.setHasFixedSize(true);
         mGenreRv.setNestedScrollingEnabled(false);
         genreAdapter = new GenreAdapter(getActivity(), genreList, "genre", "home");
         mGenreRv.setAdapter(genreAdapter);
 
         // --- country recycler view ---------
-        mCountryRv.setLayoutManager(new LinearLayoutManager(activity, RecyclerView.HORIZONTAL, false));
+        mCountryRv.setLayoutManager(new LinearLayoutManager(mActivity, RecyclerView.HORIZONTAL, false));
         mCountryRv.setHasFixedSize(true);
         mCountryRv.setNestedScrollingEnabled(false);
         countryAdapter = new CountryAdapter(getActivity(), countryList, "home");
@@ -149,21 +150,21 @@ public class HomeFragment extends Fragment {
 //        recyclerViewTv.setAdapter(adapterTv);
 
         //----movie's recycler view-----------------
-        mRecyclerViewMovie.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false));
+        mRecyclerViewMovie.setLayoutManager(new LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false));
         mRecyclerViewMovie.setHasFixedSize(true);
         mRecyclerViewMovie.setNestedScrollingEnabled(false);
         adapterMovie = new HomePageAdapter(getContext(), listMovie);
         mRecyclerViewMovie.setAdapter(adapterMovie);
 
         //----series's recycler view-----------------
-        mRecyclerViewTvSeries.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false));
+        mRecyclerViewTvSeries.setLayoutManager(new LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false));
         mRecyclerViewTvSeries.setHasFixedSize(true);
         mRecyclerViewTvSeries.setNestedScrollingEnabled(false);
         adapterSeries = new HomePageAdapter(getActivity(), listSeries);
         mRecyclerViewTvSeries.setAdapter(adapterSeries);
 
         //----topview series's recycler view-----------------
-        mRecyclerViewTopviewTvSeries.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false));
+        mRecyclerViewTopviewTvSeries.setLayoutManager(new LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false));
         mRecyclerViewTopviewTvSeries.setHasFixedSize(true);
         mRecyclerViewTopviewTvSeries.setNestedScrollingEnabled(false);
         adapterTopviewSeries = new HomePageAdapter(getActivity(), listTopViewSeries);
@@ -195,7 +196,7 @@ public class HomeFragment extends Fragment {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
+                mActivity.onRefresh(true);
                 mRecyclerViewMovie.removeAllViews();
 //                recyclerViewTv.removeAllViews();
                 mRecyclerViewTvSeries.removeAllViews();
@@ -234,10 +235,10 @@ public class HomeFragment extends Fragment {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
                 if (scrollY < oldScrollY) { // up
-                    activity.animateSearchBar(false);
+                    mActivity.animateSearchBar(false);
                 }
                 if (scrollY > oldScrollY) { // down
-                    activity.animateSearchBar(true);
+                    mActivity.animateSearchBar(true);
                 }
             }
         });
@@ -257,6 +258,7 @@ public class HomeFragment extends Fragment {
                      if(mSwipeRefreshLayout ==null){
                          return;
                      }
+                    mActivity.onRefresh(false);
                     mSwipeRefreshLayout.setRefreshing(false);
                     mShimmerLayout.stopShimmer();
                     mShimmerLayout.setVisibility(View.GONE);
@@ -446,7 +448,7 @@ public class HomeFragment extends Fragment {
         AdsConfig adsConfig = db.getConfigurationData().getAdsConfig();
 
         new GDPRChecker()
-                .withContext(activity)
+                .withContext(mActivity)
                 .withPrivacyUrl(Config.TERMS_URL) // your privacy url
                 .withPublisherIds(adsConfig.getAdmobAppId()) // your admob account Publisher id
                 //.withTestMode("9424DF76F06983D1392E609FC074596C") // remove this on real project
