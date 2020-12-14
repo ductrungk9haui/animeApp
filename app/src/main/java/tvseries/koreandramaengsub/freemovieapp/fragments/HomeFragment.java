@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
@@ -65,9 +64,6 @@ import tvseries.koreandramaengsub.freemovieapp.view.SwipeRefreshLayout;
 public class HomeFragment extends Fragment {
     @BindView(R.id.adView) RelativeLayout mAdView;
     @BindView(R.id.adView1) RelativeLayout mAdView1;
-    @BindView(R.id.btn_more_series) Button mBtnMoreSeries;
-    @BindView(R.id.btn_more_series1) Button mBtnMoreSeries1;
-    @BindView(R.id.btn_more_movie) Button mBtnMoreMovie;
     @BindView(R.id.shimmer_view_container) ShimmerFrameLayout mShimmerLayout;
     @BindView(R.id.swipe_layout) SwipeRefreshLayout mSwipeRefreshLayout;
     @BindView(R.id.scrollView) NestedScrollView mScrollView;
