@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -17,6 +18,8 @@ import androidx.work.Data;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
+import com.downloader.PRDownloader;
+import com.downloader.Status;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 
 import java.io.File;
@@ -26,17 +29,21 @@ import java.util.Random;
 
 import tvseries.koreandramaengsub.freemovieapp.DetailsActivity;
 import tvseries.koreandramaengsub.freemovieapp.R;
+import tvseries.koreandramaengsub.freemovieapp.database.DatabaseHelper;
 import tvseries.koreandramaengsub.freemovieapp.models.CommonModels;
+import tvseries.koreandramaengsub.freemovieapp.models.Work;
 import tvseries.koreandramaengsub.freemovieapp.service.DownloadWorkManager;
 import tvseries.koreandramaengsub.freemovieapp.utils.Constants;
 import tvseries.koreandramaengsub.freemovieapp.utils.ToastMsg;
 
 public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.OriginalViewHolder>{
 
-    private List<CommonModels> items = new ArrayList<>();
-    private Context ctx;
+    private List<CommonModels> mItems = new ArrayList<>();
+    private Context mContext;
     private boolean isDialog;
     private View v = null;
+    private DatabaseHelper mDBHelper;
+    private boolean mIsDownloading = false;
 
     private ServerAdapter.OnItemClickListener mOnItemClickListener;
 
@@ -50,9 +57,10 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.Origin
 
 
     public DownloadAdapter(Context ctx, List<CommonModels> items,  boolean isDialog) {
-        this.ctx = ctx;
-        this.items = items;
+        this.mContext = ctx;
+        this.mItems = items;
         this.isDialog = isDialog;
+        mDBHelper = new DatabaseHelper(ctx);
 
     }
 
@@ -71,7 +79,7 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.Origin
     @Override
     public void onBindViewHolder(final DownloadAdapter.OriginalViewHolder holder, final int position) {
 
-        final CommonModels obj = items.get(position);
+        final CommonModels obj = mItems.get(position);
         holder.name.setText(obj.getTitle());
         holder.resolution.setText(obj.getResulation());
         holder.size.setText(obj.getFileSize());
@@ -84,15 +92,14 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.Origin
                     //in app download enabled
                     //PopUpAds.ShowAdmobInterstitialAds(ctx);
                    // if(check==true){
-                        new ToastMsg(ctx).toastIconSuccess("Download will started after 3s...");
                         final Handler handler = new Handler(Looper.getMainLooper());
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                DetailsActivity.getInstance().showRewardedVideo();
+                               // DetailsActivity.getInstance().showRewardedVideo();
                                 downloadFileInsideApp(obj.getTitle(), obj.getStremURL());
                             }
-                        }, 5000);
+                        }, 0);
 //                    }
 //                    else{
 //
@@ -104,7 +111,7 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.Origin
                     String url = obj.getStremURL();
                     Intent i = new Intent(Intent.ACTION_VIEW);
                     i.setData(Uri.parse(url));
-                    ctx.startActivity(i);
+                    mContext.startActivity(i);
                 }
             }
         });
@@ -119,7 +126,7 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.Origin
         if (streamURL == null || streamURL.isEmpty()) {
             return;
         }
-        String path = Constants.getDownloadDir(ctx) + ctx.getResources().getString(R.string.app_name);
+        String path = Constants.getDownloadDir(mContext) + mContext.getResources().getString(R.string.app_name);
 
         String fileExt = ".mp4"; // output like .mkv
         fileName = fileName + fileExt;
@@ -129,13 +136,33 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.Origin
 
         File file = new File(path, fileName); // e_ for encode
         if(file.exists()) {
-            //new ToastMsg(ctx).toastIconError("File already exist.");
             DetailsActivity.getInstance().checkExist=true;
-            //DetailsActivity.getInstance().checkClose=false;
-            return;
         }
         else {
-            String dir = ctx.getExternalCacheDir().toString();
+            String dir = mContext.getExternalCacheDir().toString();
+            String workId;
+            workId = streamURL.replaceAll(" ", "_");
+            workId = workId.replaceAll(":", "_");
+            boolean isDuplicationFound = false;
+            List<Work> workList = mDBHelper.getAllWork();
+            for (Work w : workList) {
+                if (w.getUrl().equals(streamURL)) {
+                    isDuplicationFound = true;
+                }
+            }
+            if (!isDuplicationFound) {
+                Work work = new Work();
+                work.setUrl(streamURL);
+                work.setWorkId(workId);
+                work.setFileName(fileName);
+                work.setDir(dir);
+                work.setDownloadStatus(mContext.getResources().getString(R.string.download_waiting));
+                mDBHelper.insertWork(work);
+                new ToastMsg(mContext).toastIconSuccess("added " + fileName + " to download");
+                Log.d("TRUNG","insertWork download " + fileName + " id: " + work.getWorkId());
+            }
+            if(isDownloading() || mIsDownloading) return;
+            mIsDownloading = true;
             Data data = new Data.Builder()
                     .putString("url", streamURL)
                     .putString("dir", dir)
@@ -146,19 +173,30 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.Origin
                     .setInputData(data)
                     .build();
 
-            String workId = request.getId().toString();
-            Constants.workId = workId;
-            WorkManager.getInstance().enqueue(request);
-            Log.d("TRUNG","Request download " + fileName + " id: " + workId);
+            //String workId = request.getId().toString();
+           // Constants.workId = workId;
+            WorkManager.getInstance(mContext).enqueue(request);
+            new ToastMsg(mContext).toastIconSuccess("Download started");
+            Log.d("TRUNG","Request download " + fileName );
         }
-
     }
 
-
+    private boolean isDownloading(){
+        List<Work> works = mDBHelper.getAllWork();
+        for(Work work : works){
+            if(work.getDownloadId() == 0 && !work.getDownloadStatus().equals(mContext.getString(R.string.download_waiting))){
+               return true;
+            }
+            if(PRDownloader.getStatus(work.getDownloadId()) == Status.RUNNING){
+                return true;
+            }
+        }
+        return false;
+    }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return mItems.size();
     }
 
 
@@ -166,6 +204,7 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.Origin
 
         public TextView name, resolution, size;
         public LinearLayout itemLayout;
+        public ImageView icon;
 
         public OriginalViewHolder(View v) {
             super(v);
@@ -173,6 +212,7 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.Origin
             resolution = v.findViewById(R.id.resolution_tv);
             size = v.findViewById(R.id.size_tv);
             itemLayout=v.findViewById(R.id.item_layout);
+            icon=v.findViewById(R.id.icon);
         }
     }
 

@@ -208,8 +208,11 @@
     <string name="cvv">CVV</string>
     <string name="mm_yy">MM/YY</string>
     <string name="card_number">Card Number</string>
+    <string name="download_start">Started</string>
     <string name="downloading">Downloading</string>
     <string name="download_completed">Download Completed</string>
+    <string name="download_pause">Paused</string>
+    <string name="download_waiting">Waiting</string>
     <string name="watch_now">Watch Now</string>
     <string name="download">Download</string>
     <string name="select_server">Select Server</string>

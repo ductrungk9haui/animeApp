@@ -2,6 +2,7 @@ package tvseries.koreandramaengsub.freemovieapp.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,132 +16,154 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import tvseries.koreandramaengsub.freemovieapp.R;
 import tvseries.koreandramaengsub.freemovieapp.models.Work;
 
 public class FileDownloadAdapter extends RecyclerView.Adapter<FileDownloadAdapter.ViewHolder> {
 
     private final boolean isDark;
-    private List<Work> works;
-    private Context context;
-    private ArrayList<ViewHolder> viewHolders = new ArrayList<>();
+    private List<Work> mWorks;
+    private Context mContext;
+    private ArrayList<ViewHolder> mViewHolders = new ArrayList<>();
 
-    private OnProgressUpdateListener progressUpdateListener;
+    private OnProgressUpdateListener mProgressUpdateListener;
 
-    public FileDownloadAdapter(List<Work> works, Context context, boolean isDark) {
-        this.works = works;
-        this.context = context;
+    public FileDownloadAdapter(List<Work> mWorks, Context mContext, boolean isDark) {
+        this.mWorks = mWorks;
+        this.mContext = mContext;
         this.isDark = isDark;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        View v = LayoutInflater.from(context).inflate(R.layout.layout_file_download_item, parent,
+        View v = LayoutInflater.from(mContext).inflate(R.layout.layout_file_download_item, parent,
                 false);
-
         return new ViewHolder(v);
     }
 
-    @SuppressLint({"SetTextI18n", "DefaultLocale"})
+    @SuppressLint({"SetTextI18n", "DefaultLocale", "UseCompatLoadingForDrawables"})
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
-        Work work = works.get(position);
+        Work work = mWorks.get(position);
         holder.id = work.getDownloadId();
-        viewHolders.add(holder);
-
+        mViewHolders.add(holder);
         holder.fileNameTv.setText(work.getFileName());
+        Log.d("TRUNGX", "" + work.getFileName());
+        if (work.getDownloadSize() != null && work.getTotalSize() != null) {
+            double downloadedByte = Double.parseDouble(work.getDownloadSize());
+            double totalByte = Double.parseDouble(work.getTotalSize());
+            double totalKb = totalByte / 1024;
+            double downloadKb = downloadedByte / 1024;
+            double totalMb = totalKb / 1024;
+            double downloadMb = downloadKb / 1024;
 
-        if (work.getDownloadStatus() != null) {
-            if (work.getDownloadSize() != null && work.getTotalSize() != null) {
-                double downloadedByte = Double.valueOf(work.getDownloadSize());
-                double totalByte = Double.valueOf(work.getTotalSize());
-                double totalKb = totalByte / 1024;
-                double downloadKb = downloadedByte / 1024;
+            holder.progressBar.setMax((int) totalKb);
 
-                double totalMb = totalKb / 1024;
-                double downloadMb = downloadKb / 1024;
-
-                holder.progressBar.setMax((int) totalKb);
-
-                if(work.getDownloadStatus().equals("Waiting")){
-                    holder.progressBar.setProgress((int) 0);
-                }else{
-                    holder.progressBar.setProgress((int) downloadKb);
-                }
-                // holder.downloadAmountTv.setText(Double.parseDouble(String.format("%.1f", downloadMb)) + " MB / "
-                //       + Double.parseDouble(String.format("%.1f", totalMb)) + " MB");
-
-                holder.downloadStatusTv.setText(work.getDownloadStatus());
-                holder.startPauseIv.setImageDrawable(context.getResources()
-                        .getDrawable(R.drawable.ic_play_circle_tranparent));
-
+            if (work.getDownloadStatus().equals("Waiting")) {
+                holder.progressBar.setProgress((int) 0);
+            } else {
+                holder.progressBar.setProgress((int) downloadKb);
             }
+            holder.setProgress((int) totalKb, (int) downloadKb);
+            holder.setDownloadAmount(downloadMb, totalMb);
+        } else {
+            holder.setDownloadAmount(0, 0);
         }
-
-        if (progressUpdateListener != null) {
-            progressUpdateListener.updateProgress(position, work, viewHolders);
+        if (work.getDownloadStatus() != null) {
+            holder.setDownloadStatus(work.getDownloadStatus());
         }
-
     }
 
     @Override
     public int getItemCount() {
-        return works.size();
+        return mWorks.size();
+    }
+
+    public void setNotifyChanged(List<Work> works) {
+        mWorks = works;
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public int id;
-        public TextView fileNameTv, downloadAmountTv, downloadStatusTv;
-        public ImageView startPauseIv, closeIV;
-        public ProgressBar progressBar;
+        @BindView(R.id.file_name_tv)
+        TextView fileNameTv;
+        @BindView(R.id.play_pause_iv)
+        ImageView startPauseIv;
+        @BindView(R.id.close_iv)
+        ImageView closeIV;
+        @BindView(R.id.download_amount_tv)
+        TextView downloadAmountTv;
+        @BindView(R.id.progressBarOne)
+        ProgressBar progressBar;
+        @BindView(R.id.download_status_tv)
+        TextView downloadStatusTv;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            ButterKnife.bind(this, itemView);
+        }
 
-            fileNameTv = itemView.findViewById(R.id.file_name_tv);
-            startPauseIv = itemView.findViewById(R.id.play_pause_iv);
-            closeIV = itemView.findViewById(R.id.close_iv);
-            downloadAmountTv = itemView.findViewById(R.id.download_amount_tv);
-            progressBar = itemView.findViewById(R.id.progressBarOne);
-            downloadStatusTv = itemView.findViewById(R.id.download_status_tv);
+        @OnClick(R.id.play_pause_iv)
+        void onPauseClick() {
+            if (mProgressUpdateListener != null) {
+                mProgressUpdateListener.onItemClick(getAdapterPosition(), mWorks.get(getAdapterPosition()),
+                        this);
+            }
+        }
 
+        @OnClick(R.id.close_iv)
+        void onCloseClick() {
+            if (mProgressUpdateListener != null) {
+                mProgressUpdateListener.OnCancelClick(getAdapterPosition(), mWorks.get(getAdapterPosition()),
+                        this);
+            }
+        }
 
-            startPauseIv.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (progressUpdateListener != null) {
-                        progressUpdateListener.onItemClick(getAdapterPosition(), works.get(getAdapterPosition()),
-                                startPauseIv, viewHolders);
-                    }
+        @SuppressLint("UseCompatLoadingForDrawables")
+        public void setDownloadStatus(String status) {
+            if (status != downloadStatusTv.getText()) {
+                downloadStatusTv.setText(status);
+                Log.d("TRUNGX", "" + status);
+                if (status.equals(mContext.getResources().getString(R.string.download_pause)) || status.equals(mContext.getResources().getString(R.string.download_waiting))) {
+                    startPauseIv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_play_circle_tranparent));
+                } else {
+                    startPauseIv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_pause_circle_transparent));
                 }
-            });
+            }
+        }
 
-            closeIV.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (progressUpdateListener != null) {
-                        progressUpdateListener.OnCancelClick(getAdapterPosition(), works.get(getAdapterPosition()),
-                                startPauseIv, viewHolders);
-                    }
-                }
-            });
+        public void setProgress(int totalKb, int downloadKb) {
+            progressBar.setMax((int) totalKb);
+            progressBar.setProgress((int) downloadKb);
+        }
 
+        @SuppressLint({"DefaultLocale", "SetTextI18n"})
+        public void setDownloadAmount(double downloadMb, double totalMb) {
+            downloadAmountTv.setText(Double.parseDouble(String.format("%.1f", downloadMb)) + " MB / "
+                    + Double.parseDouble(String.format("%.1f", totalMb)) + " MB");
         }
     }
 
     public interface OnProgressUpdateListener {
-        void updateProgress(int adapterPos, Work work, List<ViewHolder> viewHolderList);
+        void onItemClick(int position, Work work, ViewHolder viewHolder);
 
-        void onItemClick(int position, Work work, ImageView startPauseIv, List<ViewHolder> viewHolderList);
-
-        void OnCancelClick(int position, Work work, ImageView cancelIV, List<ViewHolder> viewHolderList);
+        void OnCancelClick(int position, Work work, ViewHolder viewHolder);
     }
 
 
     public void setProgressUpdateListener(OnProgressUpdateListener progressUpdateListener) {
-        this.progressUpdateListener = progressUpdateListener;
+        this.mProgressUpdateListener = progressUpdateListener;
+    }
+
+    public ViewHolder getViewHolderFromId(int downloadId) {
+        for (ViewHolder viewHolder : mViewHolders) {
+            if (viewHolder.id == downloadId) return viewHolder;
+        }
+        return null;
     }
 }

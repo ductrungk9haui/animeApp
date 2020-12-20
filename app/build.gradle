@@ -184,4 +184,5 @@ dependencies {
     //renew
     implementation 'com.jakewharton:butterknife:10.0.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
+    implementation 'org.greenrobot:eventbus:3.0.0'
 }

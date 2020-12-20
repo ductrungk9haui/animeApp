@@ -21,7 +21,6 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:visibility="gone"
-        tools:visibility="visible"
         android:background="@color/black_transparent"
         android:layout_below="@id/appBar">
 

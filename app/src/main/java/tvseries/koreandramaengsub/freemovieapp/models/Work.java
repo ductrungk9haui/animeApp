@@ -3,13 +3,16 @@ package tvseries.koreandramaengsub.freemovieapp.models;
 public class Work {
     private int id;
     private String workId;
-    private int downloadId;
+    private int downloadId = 0;
     private String fileName;
     private String totalSize;
     private String downloadSize;
     private String downloadStatus = "";
     private String url;
     private String appCloseStatus;
+    private String dir;
+    public long currentBytes = 0;
+    public long totalBytes = 0;
 
     public String getAppCloseStatus() {
         return appCloseStatus;
@@ -25,6 +28,12 @@ public class Work {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+    public void setDir(String dir) {
+        this.dir = dir;
+    }
+    public String getDir() {
+        return dir;
     }
 
     public String getTotalSize() {
@@ -83,6 +92,13 @@ public class Work {
         this.workId = workId;
     }
 
+    public void setCurrentBytes(long currentBytes) {
+        this.currentBytes = currentBytes;
+    }
+
+    public void setTotalBytes(long totalBytes) {
+        this.totalBytes = totalBytes;
+    }
 
     @Override
     public String toString() {

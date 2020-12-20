@@ -3,12 +3,12 @@ package tvseries.koreandramaengsub.freemovieapp.utils;
 import android.content.Context;
 import android.os.Environment;
 
+import java.io.File;
+import java.util.List;
+
 import tvseries.koreandramaengsub.freemovieapp.models.single_details.Country;
 import tvseries.koreandramaengsub.freemovieapp.models.single_details.Genre;
 import tvseries.koreandramaengsub.freemovieapp.network.model.TvCategory;
-
-import java.io.File;
-import java.util.List;
 
 public class Constants {
 
@@ -29,5 +29,6 @@ public class Constants {
     public static List<Genre> genreList = null;
     public static List<Country> countryList = null;
     public static List<TvCategory> tvCategoryList = null;
+
 
 }

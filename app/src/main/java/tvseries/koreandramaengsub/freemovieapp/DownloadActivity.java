@@ -1,11 +1,9 @@
 package tvseries.koreandramaengsub.freemovieapp;
 
-import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,20 +12,14 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
-import androidx.lifecycle.Observer;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.work.Data;
@@ -37,18 +29,24 @@ import androidx.work.WorkManager;
 import com.downloader.PRDownloader;
 import com.downloader.Status;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import tvseries.koreandramaengsub.freemovieapp.adapters.DownloadHistoryAdapter;
 import tvseries.koreandramaengsub.freemovieapp.adapters.FileDownloadAdapter;
 import tvseries.koreandramaengsub.freemovieapp.database.DatabaseHelper;
 import tvseries.koreandramaengsub.freemovieapp.models.VideoFile;
 import tvseries.koreandramaengsub.freemovieapp.models.Work;
 import tvseries.koreandramaengsub.freemovieapp.service.DownloadWorkManager;
-import tvseries.koreandramaengsub.freemovieapp.service.LiveDataHelper;
 import tvseries.koreandramaengsub.freemovieapp.utils.Constants;
 import tvseries.koreandramaengsub.freemovieapp.utils.RtlUtils;
 import tvseries.koreandramaengsub.freemovieapp.utils.ToastMsg;
@@ -56,263 +54,176 @@ import tvseries.koreandramaengsub.freemovieapp.utils.ToastMsg;
 public class DownloadActivity extends AppCompatActivity implements FileDownloadAdapter.OnProgressUpdateListener, DownloadHistoryAdapter.OnDeleteDownloadFileListener {
     public static DownloadActivity instance;
     public static final String ACTION_PLAY_VIDEO = "play_video";
-    private RecyclerView downloadRv, downloadedFileRv;
-    private ProgressBar progressBar;
-    private TextView amountTv;
-    private LinearLayout progressLayout;
-
-    Toolbar toolbar;
-    CoordinatorLayout coordinatorLayout;
-
-    private List<Work> works = new ArrayList<>();
-    private TextView downloadStatusTv;
-    private TextView downloadedFileTV;
-    private Work work;
-    private ImageView startPauseIv, cancelIV;
-    private boolean isDownloading = true;
-    private List<FileDownloadAdapter.ViewHolder> progressViewHolderList;
-    private List<FileDownloadAdapter.ViewHolder> actionViewHolderList;
-    private int actionPosition;
-    private FileDownloadAdapter adapter;
-    private DownloadHistoryAdapter downloadHistoryAdapter;
-    private List<VideoFile> videoFiles = new ArrayList<>();
-    private boolean isDark;
-    DatabaseHelper dbHelper;
+    @BindView(R.id.download_rv)
+    RecyclerView mDownloadRv;
+    @BindView(R.id.downloaded_file_tv)
+    TextView mDownloadedFileTV;
+    @BindView(R.id.downloaded_file_rv)
+    RecyclerView mDownloadedFileRv;
+    @BindView(R.id.appBar)
+    Toolbar mToolbar;
+    @BindView(R.id.coordinator_lyt)
+    CoordinatorLayout mNoItemLayout;
+    @BindView(R.id.progress_layout)
+    LinearLayout mProgressLayout;
+    private Unbinder mUnbinder;
+    private List<Work> mWorks = new ArrayList<>();
+    private FileDownloadAdapter mFileDownloadAdapter;
+    private DownloadHistoryAdapter mDownloadHistoryAdapter;
+    private List<VideoFile> mVideoFiles = new ArrayList<>();
+    private boolean mIsDark;
+    DatabaseHelper mDBHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         RtlUtils.setScreenDirection(this);
         super.onCreate(savedInstanceState);
-
         SharedPreferences sharedPreferences = getSharedPreferences("push", MODE_PRIVATE);
-        isDark = sharedPreferences.getBoolean("dark", false);
-
-        if (isDark) {
+        mIsDark = sharedPreferences.getBoolean("dark", false);
+        if (mIsDark) {
             setTheme(R.style.AppThemeDark);
         } else {
             setTheme(R.style.AppThemeLight);
         }
-
         setContentView(R.layout.activity_download);
-
-        downloadRv = findViewById(R.id.download_rv);
-        downloadedFileTV = findViewById(R.id.downloaded_file_tv);
-        downloadedFileRv = findViewById(R.id.downloaded_file_rv);
-        toolbar = findViewById(R.id.appBar);
-        coordinatorLayout = findViewById(R.id.coordinator_lyt);
-        progressLayout = findViewById(R.id.progress_layout);
-
-        setSupportActionBar(toolbar);
+        mUnbinder = ButterKnife.bind(this);
+        setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("Downloads");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        if (isDark) {
-            toolbar.setBackgroundColor(getResources().getColor(R.color.dark));
+        if (mIsDark) {
+            mToolbar.setBackgroundColor(getResources().getColor(R.color.dark));
         } else {
-            toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+            mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         }
 
-        dbHelper = new DatabaseHelper(this);
-        works = dbHelper.getAllWork();
-        if (works.size() > 0) {
-            coordinatorLayout.setVisibility(View.GONE);
-           // downloadedFileRv.setVisibility(View.VISIBLE);
-        }
+        mDBHelper = new DatabaseHelper(this);
+        mFileDownloadAdapter = new FileDownloadAdapter(mWorks, this, mIsDark);
+        mFileDownloadAdapter.setProgressUpdateListener(this);
+        mDownloadRv.setLayoutManager(new LinearLayoutManager(this));
+        mDownloadRv.setAdapter(mFileDownloadAdapter);
+        mDownloadRv.setHasFixedSize(true);
 
-        downloadRv.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new FileDownloadAdapter(works, this, isDark);
-        adapter.setProgressUpdateListener(this);
-        downloadRv.setHasFixedSize(true);
-        downloadRv.setAdapter(adapter);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+        // mDownloadRv.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL));
+        mDownloadedFileRv.setLayoutManager(layoutManager);
+        mDownloadHistoryAdapter = new DownloadHistoryAdapter(this, mVideoFiles);
+        mDownloadHistoryAdapter.setListener(this);
+        mDownloadedFileRv.setAdapter(mDownloadHistoryAdapter);
+        mDownloadedFileRv.setHasFixedSize(true);
 
-        LocalBroadcastManager.getInstance(this).registerReceiver(
-                broadcastReceiver, new IntentFilter(DownloadWorkManager.PROGRESS_RECEIVER));
+        updateFiles();
 
-        LocalBroadcastManager.getInstance(this).registerReceiver(
-                startPauseFeedbackReceiver, new IntentFilter(DownloadWorkManager.START_PAUSE_FEEDBACK_STATUS));
-
-        registerReceiver(playVideoBroadcast, new IntentFilter(ACTION_PLAY_VIDEO));
-
-        getDownloadFiles();
-
-        LiveDataHelper.getInstance().observeIsCompleted()
-                .observe(this, new Observer<Boolean>() {
-                    @Override
-                    public void onChanged(@Nullable Boolean isCompleted) {
-                        // download completed
-                        if (isCompleted) {
-                            works = dbHelper.getAllWork();
-                            Log.e("Download", "complete: " + works.size());
-                            adapter.notifyDataSetChanged();
-                            videoFiles.clear();
-                            //item dang download
-                            downloadedFileRv.removeAllViews();
-                            getDownloadFiles();
-                            if(works.size() == 0){
-                                downloadRv.setVisibility(View.GONE);
-                            }
-
-                        }
-                    }
-                });
-
-        LiveDataHelper.getInstance().observePercentage()
-                .observe(this, new Observer<Integer>() {
-                    @Override
-                    public void onChanged(Integer integer) {
-                        if (integer != null) {
-                            coordinatorLayout.setVisibility(View.GONE);
-                        }
-                    }
-                });
-    }
-
-
-    @Override
-    public void updateProgress(int adapterPos, Work work, List<FileDownloadAdapter.ViewHolder> viewHolderList) {
-        this.work = work;
-        this.progressViewHolderList = viewHolderList;
     }
 
     @Override
-    public void onItemClick(int position, Work work, ImageView startPauseIv, List<FileDownloadAdapter.ViewHolder> viewHolderList) {
-        this.actionViewHolderList = viewHolderList;
-        this.startPauseIv = startPauseIv;
-        this.actionPosition = position;
-        if (work.getAppCloseStatus().equals("true")) {
-            resumeDownload(work.getUrl());
-            Work w = works.get(position);
-            w.setAppCloseStatus("false");
-            works.set(position, w);
-            adapter.notifyDataSetChanged();
-
+    public void onItemClick(int position, Work work, FileDownloadAdapter.ViewHolder viewHolder) {
+        if (PRDownloader.getStatus(work.getDownloadId()) == Status.RUNNING) {
+            PRDownloader.pause(work.getDownloadId());
+        } else if (PRDownloader.getStatus(work.getDownloadId()) == Status.PAUSED) {
+            if (PRDownloader.getStatus(DownloadWorkManager.isDownloadingID) == Status.RUNNING) {
+                PRDownloader.pause(DownloadWorkManager.isDownloadingID);
+            }
+            PRDownloader.resume(work.getDownloadId());
         } else {
-            if (PRDownloader.getStatus(work.getDownloadId()) == Status.RUNNING) {
-                DownloadWorkManager.isDownloading = false;
-                PRDownloader.pause(work.getDownloadId());
-            } else if (PRDownloader.getStatus(work.getDownloadId()) == Status.PAUSED) {
-                if (PRDownloader.getStatus(DownloadWorkManager.isDownloadingID) == Status.RUNNING) {
-                    PRDownloader.pause(DownloadWorkManager.isDownloadingID);
+            if (PRDownloader.getStatus(DownloadWorkManager.isDownloadingID) == Status.RUNNING) {
+                PRDownloader.pause(DownloadWorkManager.isDownloadingID);
+            }
+            startDownload(work);
+        }
+
+    }
+
+    @Override
+    public void OnCancelClick(int position, Work work, FileDownloadAdapter.ViewHolder viewHolder) {
+        Log.d("TRUNGX", "cancel " + work.getFileName());
+        if (PRDownloader.getStatus(work.getDownloadId()) == Status.RUNNING || PRDownloader.getStatus(work.getDownloadId()) == Status.PAUSED) {
+            PRDownloader.cancel(work.getDownloadId());
+        } else {
+            mDBHelper.deleteByDownloadId(work.getDownloadId());
+            updateFiles();
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onDownloadStartOrResume(DownloadWorkManager.onStartOrResume object) {
+        Work work = object.getWork();
+        final int downloadId = work.getDownloadId();
+        updateFiles();
+        Log.d("TRUNG", "start download " + " id: " + downloadId);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onUpdateDownloadProgress(DownloadWorkManager.onProgress object) {
+        Work work = object.getWork();
+        final int downloadId = work.getDownloadId();
+        final long downloadedByte = work.currentBytes;
+        final long totalByte = work.totalBytes;
+        final FileDownloadAdapter.ViewHolder viewHolder = mFileDownloadAdapter.getViewHolderFromId(downloadId);
+        if (viewHolder != null) {
+            Handler handler = new Handler();
+            Runnable runnable = new Runnable() {
+                public void run() {
+                    double totalKb = totalByte / 1024f;
+                    double downloadKb = downloadedByte / 1024f;
+                    double totalMb = totalKb / 1024;
+                    double downloadMb = downloadKb / 1024;
+                    // set download status
+                    viewHolder.setDownloadStatus(getResources().getString(R.string.downloading));
+                    viewHolder.setProgress((int) totalKb, (int) downloadKb);
+                    viewHolder.setDownloadAmount(downloadMb, totalMb);
                 }
-                PRDownloader.resume(work.getDownloadId());
-            }
+            };
+            handler.post(runnable);
         }
-    }
-
-    @Override
-    public void OnCancelClick(int position, Work work, ImageView cancelIV, List<FileDownloadAdapter.ViewHolder> viewHolderList) {
-        this.actionViewHolderList = viewHolderList;
-        this.cancelIV = cancelIV;
-        this.actionPosition = position;
-        PRDownloader.cancel(work.getDownloadId());
-        dbHelper.deleteByDownloadId(work.getDownloadId());
-        works.clear();
-        works.addAll(dbHelper.getAllWork());
-        adapter.notifyDataSetChanged();
-        getDownloadFiles();
-        if (works.size() == 0) {
-            downloadRv.setVisibility(View.GONE);
-        }
+        Log.d("TRUNG", "Update Byte: : " + downloadedByte + "/" + totalByte);
 
     }
 
-    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            int resultCode = intent.getIntExtra("result", 0);
-            final int downloadId = intent.getIntExtra("downloadId", 0);
-            final String workId = intent.getStringExtra("workId");
-            final long downloadedByte = intent.getLongExtra("currentByte", 0);
-            final long totalByte = intent.getLongExtra("totalByte", 0);
-            Log.e("download", "Byte: : " + resultCode + "");
-            if (resultCode == RESULT_OK) {
-                Log.e("download", "Byte: : " + totalByte + "");
-
-                Handler handler = new Handler();
-                Runnable runnable = new Runnable() {
-                    @SuppressLint({"SetTextI18n", "DefaultLocale"})
-                    public void run() {
-
-                        double totalKb = totalByte / 1024;
-                        double downloadKb = downloadedByte / 1024;
-
-                        double totalMb = totalKb / 1024;
-                        double downloadMb = downloadKb / 1024;
-
-                        // set download status
-                        if (work != null) {
-
-                            // getting current position
-                           /* for (Work work : works) {
-                                if (work.getDownloadId() == downloadId) {
-                                    break;
-                                }
-                                position++;
-                            }*/
-                            if (progressViewHolderList != null) {
-                                FileDownloadAdapter.ViewHolder viewHolder = null;
-                                for(int i = 0; i< progressViewHolderList.size();i++){
-                                    if(progressViewHolderList.get(i).id == downloadId){
-                                        viewHolder = progressViewHolderList.get(i);
-                                        break;
-                                    }
-                                }
-                                if(viewHolder!=null){
-                                    // getting current viewHolder by position
-
-                                    downloadStatusTv = viewHolder.downloadStatusTv;
-                                    //amountTv = viewHolder.downloadAmountTv;
-                                    progressBar = viewHolder.progressBar;
-
-                                    if (downloadStatusTv != null) {
-                                        if (downloadedByte == totalByte) {
-                                            Log.d("TRUNG","complete at " + " id: " + downloadId + " progress: " + downloadKb);
-                                            downloadStatusTv.setText(getResources().getString(R.string.download_completed));
-                                            dbHelper.deleteByDownloadId(downloadId);
-                                            works.clear();
-                                            works = dbHelper.getAllWork();
-                                            if(works.size() == 0){
-                                                downloadRv.setVisibility(View.GONE);
-                                            }
-                                            getDownloadFiles();
-                                        } else {
-                                            if(downloadStatusTv.getText() != getResources().getString(R.string.downloading)){
-                                                downloadStatusTv.setText(getResources().getString(R.string.downloading));
-                                            }
-
-                                        }
-                                    }
-//asdasdasd
-//                                // set download amount
-//                                if (amountTv != null) {
-//                                    amountTv.setText(parseDouble(String.format("%.1f", downloadMb)) + " MB / "
-//                                            + parseDouble(String.format("%.1f", totalMb)) + " MB");
-//                                }
-
-                                    // update progress bar
-                                    if (progressBar != null) {
-                                        Log.d("TRUN","updating at " + " id: " + downloadId + " progress: " + downloadKb);
-                                        progressBar.setMax((int) totalKb);
-                                        progressBar.setProgress((int) downloadKb);
-                                    }
-                                }
-
-
-                            }
-                        }
-                    }
-                };
-                handler.post(runnable);
-
-                //updateProgress(totalByte, downloadedByte, viewHolder, downloadId);
-//                progressTv.setText(downloadedByte+" / "+ totalByte);
-//                Toast.makeText(context, "icon changed"+downloadId, Toast.LENGTH_SHORT).show();
-            }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onDownloadCompleted(DownloadWorkManager.onDownloadCompleted object) {
+        Log.d("TRUNG", "download completed");
+        int downloadId = object.getWork().getDownloadId();
+        final FileDownloadAdapter.ViewHolder viewHolder = mFileDownloadAdapter.getViewHolderFromId(downloadId);
+        if (viewHolder != null) {
+            viewHolder.setDownloadStatus(getResources().getString(R.string.download_completed));
         }
-    };
+        updateFiles();
+    }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onDownloadPause(DownloadWorkManager.onPause object) {
+        int downloadId = object.getWork().getDownloadId();
+        Log.d("TRUNG", "pause " + downloadId);
+        final FileDownloadAdapter.ViewHolder viewHolder = mFileDownloadAdapter.getViewHolderFromId(downloadId);
+        if (viewHolder != null) {
+            viewHolder.setDownloadStatus(getResources().getString(R.string.download_pause));
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onCancelDownload(DownloadWorkManager.onCancel object) {
+        updateFiles();
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onDownloadError(DownloadWorkManager.onError object) {
+        updateFiles();
+        Log.d("TRUNG", "error " + " id: " + object.getDownloadID());
+    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -320,37 +231,6 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
         }
         return super.onOptionsItemSelected(item);
     }
-
-    private BroadcastReceiver startPauseFeedbackReceiver = new BroadcastReceiver() {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-
-            int resultCode = intent.getIntExtra("result", 0);
-            int workId = intent.getIntExtra("workId", 0);
-            int downloadId = intent.getIntExtra("downloadId", 0);
-            String status = intent.getStringExtra("status");
-            Log.d("id:", downloadId + " : " + workId);
-            if (resultCode == RESULT_OK) {
-                if (status.equals("pause")) {
-                    isDownloading = false;
-                    if (actionViewHolderList != null) {
-                        actionViewHolderList.get(actionPosition).downloadStatusTv.setText("Download Paused");
-                        actionViewHolderList.get(actionPosition).startPauseIv.setImageDrawable(getResources()
-                                .getDrawable(R.drawable.ic_play_circle_tranparent));
-                    }
-                } else {
-                    if (actionViewHolderList != null) {
-                        isDownloading = true;
-                        actionViewHolderList.get(actionPosition).downloadStatusTv.setText("Downloading...");
-                        actionViewHolderList.get(actionPosition).startPauseIv.setImageDrawable(getResources()
-                                .getDrawable(R.drawable.ic_pause_circle_transparent));
-                    }
-                }
-            }
-        }
-    };
-
 
     private BroadcastReceiver playVideoBroadcast = new BroadcastReceiver() {
         @Override
@@ -383,39 +263,42 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
         }
     };
 
-    public void resumeDownload(String url) {
-        String dir = getExternalCacheDir().toString();
-
+    public void startDownload(Work work) {
+        String dir = work.getDir();
+        String url = work.getUrl();
         String fileName = url.substring(url.lastIndexOf('/') + 1);
-
         File file = new File(dir + "/" + fileName);
         if (file.exists()) {
             Toast.makeText(this, getString(R.string.file_already_downloaded), Toast.LENGTH_SHORT).show();
             return;
         }
-        DownloadWorkManager.isDownloading = false;
+        String workId;
+        workId = url.replaceAll(" ", "_");
+        workId = workId.replaceAll(":", "_");
+        work.setWorkId(workId);
+        mDBHelper.updateWork(work);
         Data data = new Data.Builder()
-                .putString("url", url)
-                .putString("dir", dir)
-                .putString("fileName", fileName)
+                .putString("url", work.getUrl())
+                .putString("dir", work.getDir())
+                .putString("fileName", work.getFileName())
                 .build();
-
         OneTimeWorkRequest request = new OneTimeWorkRequest.Builder(DownloadWorkManager.class)
                 .setInputData(data)
                 .build();
-
-        String workId = request.getId().toString();
-        Constants.workId = workId;
-        WorkManager.getInstance().enqueue(request);
+        WorkManager.getInstance(getApplicationContext()).enqueue(request);
+        Log.d("TRUNG","next download " + work.getFileName());
     }
 
-    public void getDownloadFiles() {
-        videoFiles.clear();
+    public void updateFiles() {
+        mVideoFiles.clear();
+        mWorks.clear();
+        mWorks = mDBHelper.getAllWork();
+
         String path = Constants.getDownloadDir(DownloadActivity.this) + getResources().getString(R.string.app_name);
         File directory = new File(path);
         File[] files = directory.listFiles();
         assert files != null;
-
+        //get file from path
         for (File file : files) {
             String fileName = file.getName();
             String filePath = file.getPath();
@@ -428,42 +311,40 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
                 vf.setTotalSpace(file.length());
                 vf.setPath(filePath);
                 vf.setFileExtension(extension);
-                videoFiles.add(vf);
+                mVideoFiles.add(vf);
             }
         }
-
-
-        if (videoFiles.size() > 0) {
-            coordinatorLayout.setVisibility(View.GONE);
-            LinearLayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
-            downloadRv.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL));
-            downloadedFileRv.setLayoutManager(layoutManager);
-            downloadHistoryAdapter = new DownloadHistoryAdapter(this, videoFiles);
-            downloadedFileRv.setHasFixedSize(true);
-            downloadedFileRv.setAdapter(downloadHistoryAdapter);
-            downloadHistoryAdapter.setListener(this);
+        if (mDownloadHistoryAdapter != null) {
+            mDownloadHistoryAdapter.notifyDataSetChanged();
+        }
+        if (mVideoFiles.size() > 0) {
+            mDownloadedFileTV.setVisibility(View.VISIBLE);
+            mDownloadedFileRv.setVisibility(View.VISIBLE);
+            mNoItemLayout.setVisibility(View.GONE);
         } else {
-            downloadedFileTV.setVisibility(View.GONE);
-            if(downloadHistoryAdapter!=null){
-                downloadHistoryAdapter.notifyDataSetChanged();
+            mDownloadedFileTV.setVisibility(View.GONE);
+            mDownloadedFileRv.setVisibility(View.GONE);
+            if (mWorks.size() == 0) {
+                mNoItemLayout.setVisibility(View.VISIBLE);
+            } else {
+                mNoItemLayout.setVisibility(View.GONE);
             }
-            downloadedFileRv.setVisibility(View.GONE);
-            if (works.size() == 0) {
-                downloadRv.setVisibility(View.GONE);
-                downloadedFileTV.setVisibility(View.GONE);
-                //downloadedFileRv.setVisibility(View.GONE);
-                coordinatorLayout.setVisibility(View.VISIBLE);
-            }
+        }
+        if (mWorks.size() == 0) {
+            mDownloadRv.setVisibility(View.GONE);
+        } else {
+            mDownloadRv.setVisibility(View.VISIBLE);
+            mFileDownloadAdapter.setNotifyChanged(mWorks);
         }
 
 
     }
 
     public void progressHideShowControl() {
-        if (progressLayout.getVisibility() == View.VISIBLE) {
-            progressLayout.setVisibility(View.GONE);
+        if (mProgressLayout.getVisibility() == View.VISIBLE) {
+            mProgressLayout.setVisibility(View.GONE);
         } else {
-            progressLayout.setVisibility(View.VISIBLE);
+            mProgressLayout.setVisibility(View.VISIBLE);
         }
     }
 
@@ -475,7 +356,8 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unregisterReceiver(playVideoBroadcast);
+        // unregisterReceiver(playVideoBroadcast);
+        mUnbinder.unbind();
     }
 
 
@@ -488,7 +370,7 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
         dialog.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                videoFiles.remove(videoFile);
+                mVideoFiles.remove(videoFile);
                 deleteFile(videoFile);
             }
         });
@@ -498,27 +380,27 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
 
 
     private void deleteFile(VideoFile videoFile) {
-        File file = new File( videoFile.getPath());
-        if(file.exists()){
+        File file = new File(videoFile.getPath());
+        if (file.exists()) {
             try {
-               boolean isDeleted =  file.getCanonicalFile().delete();
-               if (isDeleted) {
-                   Toast.makeText(this, "File deleted successfully.", Toast.LENGTH_SHORT).show();
-               }else {
-                   Toast.makeText(this, getString(R.string.something_went_text), Toast.LENGTH_SHORT).show();
-               }
+                boolean isDeleted = file.getCanonicalFile().delete();
+                if (isDeleted) {
+                    Toast.makeText(this, "File deleted successfully.", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, getString(R.string.something_went_text), Toast.LENGTH_SHORT).show();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            if(file.exists()){
+            if (file.exists()) {
                 boolean isDeleted = getApplicationContext().deleteFile(file.getName());
                 if (isDeleted) {
                     Toast.makeText(this, "File deleted successfully.", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     Toast.makeText(this, getString(R.string.something_went_text), Toast.LENGTH_SHORT).show();
                 }
             }
         }
-        getDownloadFiles();
+        updateFiles();
     }
 }

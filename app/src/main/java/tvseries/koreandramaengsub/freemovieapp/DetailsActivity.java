@@ -625,7 +625,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                                 new ToastMsg(DetailsActivity.this).toastIconError("Oops! Please watch ads to start!");
                             }
                             // Preload the next video ad.
-                            DetailsActivity.this.loadRewardedAd();
+                           // DetailsActivity.this.loadRewardedAd();
                             checkFinish=false;
                         }
 
@@ -633,13 +633,13 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                         public void onUserEarnedReward(RewardItem rewardItem) {
                             // User earned reward.
                             //Toast.makeText(DetailsActivity.this, "onUserEarnedReward", Toast.LENGTH_SHORT).show();
-                            if(checkFailLink==true){
+                            if(checkFailLink){
                                 new ToastMsg(DetailsActivity.this).toastIconError("Fail Link, Plz tell us on facebook group to fix ASAP");
                             }
-                            else if(checkExist==true&&checkFailLink!=true){
+                            else if(checkExist&& !checkFailLink){
                                 new ToastMsg(DetailsActivity.this).toastIconError("File already exist.");
                             }
-                            else if(checkExist!=true&&checkFailLink!=true){
+                            else if(!checkExist && !checkFailLink){
                                 new ToastMsg(DetailsActivity.this).toastIconSuccess("Started.");
                             }
                             checkFinish=true;
@@ -813,7 +813,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                 if(true ||PreferenceUtils.isLoggedIn(DetailsActivity.this)){
                     //PopUpAds.ShowAdmobInterstitialAds(DetailsActivity.this);
 //                    DetailsActivity.getInstance().loadAdReward();
-                    loadRewardedAd();
+                    //loadRewardedAd();
                     if (!listInternalDownload.isEmpty() || !listExternalDownload.isEmpty()) {
                         if (Config.ENABLE_DOWNLOAD_TO_ALL) {
                             openDownloadServerDialog();

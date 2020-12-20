@@ -588,12 +588,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public int updateWork(Work work) {
         SQLiteDatabase db = this.getWritableDatabase();
-
         ContentValues values = new ContentValues();
+        values.put(WORK_ID, work.getWorkId());
+        values.put(DOWNLOAD_ID, work.getDownloadId());
         values.put(TOTAL_SIZE, work.getTotalSize());
         values.put(DOWNLOAD_SIZE, work.getDownloadSize());
-        values.put(DOWNLOAD_STATUS, work.getDownloadStatus());
+        values.put(URL, work.getUrl());
+        values.put(FILE_NAME, work.getFileName());
         values.put(APP_CLOSE_STATUS, work.getAppCloseStatus());
+        values.put(DOWNLOAD_STATUS, work.getDownloadStatus());
 
         Log.d("workId 2:", work.getWorkId());
 
@@ -604,7 +607,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void deleteByDownloadId(int downloadId) {
         String sql = "DELETE FROM " + DOWNLOAD_TABLE_NAME + " WHERE " + DOWNLOAD_ID + "=" + downloadId;
-
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL(sql);
     }
@@ -635,9 +637,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         return work;
-
     }
-
     public List<Work> getAllWork() {
         List<Work> works = new ArrayList<>();
         // Select All Query

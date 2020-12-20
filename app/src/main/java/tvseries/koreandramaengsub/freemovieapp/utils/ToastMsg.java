@@ -26,7 +26,7 @@ public class ToastMsg {
     public void toastIconError(String s) {
 
         Toast toast = new Toast(context);
-        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setDuration(Toast.LENGTH_SHORT);
         //inflate view
         View custom_view = inflater.inflate(R.layout.toast_icon_text, null);
         ((TextView) custom_view.findViewById(R.id.message)).setText(s);
@@ -39,7 +39,7 @@ public class ToastMsg {
 
     public void toastIconSuccess(String s) {
         Toast toast = new Toast(context);
-        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setDuration(Toast.LENGTH_SHORT);
 
         //inflate view
         View custom_view = inflater.inflate(R.layout.toast_icon_text, null);
