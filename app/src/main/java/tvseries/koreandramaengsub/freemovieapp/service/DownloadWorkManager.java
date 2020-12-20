@@ -102,6 +102,7 @@ public class DownloadWorkManager extends Worker {
                                 mDBHelper.deleteByDownloadId(mDownloadId);
                                 new ToastMsg(mContext).toastIconSuccess(fileName+" canceled");
                                 Log.d("TRUNG","onCancel download " + fileName);
+                                nextDownload();
                                 EventBus.getDefault().post(new onCancel());
                             }
                         })
