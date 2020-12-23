@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.work.Data;
 import androidx.work.OneTimeWorkRequest;
@@ -25,8 +26,9 @@ import com.google.android.gms.ads.reward.RewardedVideoAd;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import tvseries.koreandramaengsub.freemovieapp.DetailsActivity;
 import tvseries.koreandramaengsub.freemovieapp.R;
 import tvseries.koreandramaengsub.freemovieapp.database.DatabaseHelper;
@@ -41,6 +43,7 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.Origin
     private List<CommonModels> mItems = new ArrayList<>();
     private Context mContext;
     private boolean isDialog;
+    private List<Work> mWorks;
     private View v = null;
     private DatabaseHelper mDBHelper;
     private boolean mIsDownloading = false;
@@ -61,6 +64,7 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.Origin
         this.mItems = items;
         this.isDialog = isDialog;
         mDBHelper = new DatabaseHelper(ctx);
+        mWorks = mDBHelper.getAllWork();
 
     }
 
@@ -84,10 +88,21 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.Origin
         holder.resolution.setText(obj.getResulation());
         holder.size.setText(obj.getFileSize());
         //DetailsActivity.getInstance().loadAdReward();
-
+        if(mWorks.size() >0){
+            for(Work work :mWorks){
+                if(work.getUrl().equals(obj.getStremURL())){
+                    holder.icon.setColorFilter(ContextCompat.getColor(mContext, R.color.green_500));
+                    return;
+                }
+            }
+        }
+        if(isExistFile(obj.getTitle())) {
+            holder.icon.setColorFilter(ContextCompat.getColor(mContext, R.color.green_500));
+        }
         holder.itemLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                holder.icon.setColorFilter(ContextCompat.getColor(mContext, R.color.green_500));
                 if (obj.isInAppDownload()) {
                     //in app download enabled
                     //PopUpAds.ShowAdmobInterstitialAds(ctx);
@@ -117,26 +132,18 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.Origin
         });
     }
 
+
     public static DownloadAdapter getInstance() {
         return instance;
     }
     public void downloadFileInsideApp(String title, String streamURL) {
         String fileName = title.toString();
-        int notificationId = new Random().nextInt(100 - 1) - 1;
         if (streamURL == null || streamURL.isEmpty()) {
             return;
         }
-        String path = Constants.getDownloadDir(mContext) + mContext.getResources().getString(R.string.app_name);
-
-        String fileExt = ".mp4"; // output like .mkv
-        fileName = fileName + fileExt;
-
-        fileName = fileName.replaceAll(" ", "_");
-        fileName = fileName.replaceAll(":", "_");
-
-        File file = new File(path, fileName); // e_ for encode
-        if(file.exists()) {
+        if(isExistFile(fileName)) {
             DetailsActivity.getInstance().checkExist=true;
+            new ToastMsg(mContext).toastIconError("File already exist.");
         }
         else {
             String dir = mContext.getExternalCacheDir().toString();
@@ -148,6 +155,7 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.Origin
             for (Work w : workList) {
                 if (w.getUrl().equals(streamURL)) {
                     isDuplicationFound = true;
+                    new ToastMsg(mContext).toastIconError("File is added to download.");
                 }
             }
             if (!isDuplicationFound) {
@@ -180,6 +188,19 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.Origin
             Log.d("TRUNG","Request download " + fileName );
         }
     }
+    private boolean isExistFile(String title){
+        String fileName = title;
+        String path = Constants.getDownloadDir(mContext) + mContext.getResources().getString(R.string.app_name);
+
+        String fileExt = ".mp4"; // output like .mkv
+        fileName = fileName + fileExt;
+
+        fileName = fileName.replaceAll(" ", "_");
+        fileName = fileName.replaceAll(":", "_");
+
+        File file = new File(path, fileName); // e_ for encode
+        return file.exists();
+    }
 
     private boolean isDownloading(){
         List<Work> works = mDBHelper.getAllWork();
@@ -201,18 +222,15 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.Origin
 
 
     public class OriginalViewHolder extends RecyclerView.ViewHolder {
-
-        public TextView name, resolution, size;
-        public LinearLayout itemLayout;
-        public ImageView icon;
+        @BindView(R.id.name) TextView name;
+        @BindView(R.id.resolution_tv) TextView resolution;
+        @BindView(R.id.size_tv) TextView size;
+        @BindView(R.id.item_layout) LinearLayout itemLayout;
+        @BindView(R.id.icon) ImageView icon;
 
         public OriginalViewHolder(View v) {
             super(v);
-            name = v.findViewById(R.id.name);
-            resolution = v.findViewById(R.id.resolution_tv);
-            size = v.findViewById(R.id.size_tv);
-            itemLayout=v.findViewById(R.id.item_layout);
-            icon=v.findViewById(R.id.icon);
+            ButterKnife.bind(this,v);
         }
     }
 

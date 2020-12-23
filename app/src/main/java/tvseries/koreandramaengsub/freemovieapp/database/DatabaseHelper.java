@@ -635,7 +635,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             work.setUrl(cursor.getString(cursor.getColumnIndex(URL)));
             work.setAppCloseStatus(cursor.getString(cursor.getColumnIndex(APP_CLOSE_STATUS)));
         }
-
         return work;
     }
     public List<Work> getAllWork() {
