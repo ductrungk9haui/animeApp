@@ -140,7 +140,16 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.Origin
         if (streamURL == null || streamURL.isEmpty()) {
             return;
         }
-        if(isExistFile(fileName)) {
+        String path = Constants.getDownloadDir(mContext) + mContext.getResources().getString(R.string.app_name);
+
+        String fileExt = ".mp4"; // output like .mkv
+        fileName = fileName + fileExt;
+
+        fileName = fileName.replaceAll(" ", "_");
+        fileName = fileName.replaceAll(":", "_");
+
+        File file = new File(path, fileName); // e_ for encode
+        if(file.exists()){
             DetailsActivity.getInstance().checkExist=true;
             new ToastMsg(mContext).toastIconError("File already exist.");
         }
