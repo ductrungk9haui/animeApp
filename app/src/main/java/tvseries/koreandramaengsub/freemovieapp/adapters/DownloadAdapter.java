@@ -92,7 +92,6 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.Origin
             for(Work work :mWorks){
                 if(work.getUrl().equals(obj.getStremURL())){
                     holder.icon.setColorFilter(ContextCompat.getColor(mContext, R.color.green_500));
-                    return;
                 }
             }
         }
