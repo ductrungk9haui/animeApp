@@ -74,7 +74,6 @@ import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
 import com.google.android.exoplayer2.ui.PlaybackControlView;
 import com.google.android.exoplayer2.ui.PlayerControlView;
 import com.google.android.exoplayer2.ui.PlayerView;
-import com.google.android.exoplayer2.ui.SubtitleView;
 import com.google.android.exoplayer2.upstream.BandwidthMeter;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
@@ -119,6 +118,10 @@ import java.util.Random;
 import at.huber.youtubeExtractor.VideoMeta;
 import at.huber.youtubeExtractor.YouTubeExtractor;
 import at.huber.youtubeExtractor.YtFile;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
@@ -179,158 +182,155 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     private static final int PERMISSION_REQUEST_CODE = 1;
     private static final int PRELOAD_TIME_S = 20;
     public static final String TAG = DetailsActivity.class.getSimpleName();
-    private TextView tvName, tvDirector, tvRelease, tvCast, tvDes, tvGenre, tvRelated, tvImdb;
-    private RecyclerView rvDirector, rvServer, rvRelated, rvComment, castRv;
-    private Spinner seasonSpinner;
-    private LinearLayout seasonSpinnerContainer;
-    public static RelativeLayout lPlay;
-    private RelativeLayout contentDetails;
-    private LinearLayout subscriptionLayout, topbarLayout;
-    private Button subscribeBt;
-    private ImageView backIv, subBackIv;
 
-    private ServerAdapter serverAdapter;
-    private DownloadAdapter internalDownloadAdapter, externalDownloadAdapter;
-    private HomePageAdapter relatedAdapter;
-    private RelatedTvAdapter relatedTvAdapter;
-    private CastCrewAdapter castCrewAdapter;
+    @BindView(R.id.adView) RelativeLayout mAdView;
+    @BindView(R.id.llbottom) LinearLayout mLLBottom;
+    @BindView(R.id.tv_details) TextView mTvDes;
+    @BindView(R.id.tv_release_date) TextView mTvRelease;
+    @BindView(R.id.text_name) TextView mTvName;
+    @BindView(R.id.text_imdb) TextView mTvImdb;
+    @BindView(R.id.tv_director) TextView mTvDirector;
+    @BindView(R.id.tv_genre) TextView mTvGenre;
+    @BindView(R.id.swipe_layout) SwipeRefreshLayout mSwipeRefreshLayout;
+    @BindView(R.id.add_fav) ImageView mImgAddFav;
+    @BindView(R.id.img_back) ImageView mImgBack;
+    @BindView(R.id.webView) WebView mWebView;
+    @BindView(R.id.progressBar) ProgressBar mProgressBar;
+    @BindView(R.id.play) RelativeLayout mLPlay;
+    @BindView(R.id.rv_related) RecyclerView mRvRelated;
+    @BindView(R.id.tv_related) TextView mTvRelated;
+    @BindView(R.id.shimmer_view_container) ShimmerFrameLayout mShimmerLayout;
+    @BindView(R.id.btn_comment) Button mBtnComment;
+    @BindView(R.id.et_comment) EditText mEtComment;
+    @BindView(R.id.recyclerView_comment) RecyclerView mRvComment;
+    @BindView(R.id.llcomments) RelativeLayout mLLcomment;
+    @BindView(R.id.video_view) PlayerView mSimpleExoPlayerView;
+    @BindView(R.id.player_layout) View mPlayerLayout;
+    @BindView(R.id.img_full_scr) ImageView mImgFull;
+    @BindView(R.id.external_player_iv) ImageView mExternalPlayerIv;
+    @BindView(R.id.volumn_layout) LinearLayout mVolumnControlLayout;
+    @BindView(R.id.volumn_seekbar) SeekBar mVolumnSeekbar;
+    @BindView(R.id.rv_server_list) RecyclerView mRvServer;
+    @BindView(R.id.season_spinner) Spinner mSeasonSpinner;
+    @BindView(R.id.spinner_container) LinearLayout mSeasonSpinnerContainer;
+    @BindView(R.id.img_subtitle) ImageView mImgSubtitle;
+    @BindView(R.id.media_route_button) MediaRouteButton mMediaRouteButton;
+    @BindView(R.id.chrome_cast_tv) TextView mChromeCastTv;
+    @BindView(R.id.cast_control_view) PlayerControlView mCastControlView;
+    @BindView(R.id.tv_layout) LinearLayout mTvLayout;
+    @BindView(R.id.p_shedule_layout) LinearLayout mSheduleLayout;
+    @BindView(R.id.tv_title_tv) TextView mTvTitleTv;
+    @BindView(R.id.program_guide_rv) RecyclerView mProgramRv;
+    @BindView(R.id.tv_top_layout) LinearLayout mTvTopLayout;
+    @BindView(R.id.tv_thumb_iv) ImageView mTvThumbIv;
+    @BindView(R.id.watch_status_tv) TextView mWatchStatusTv;
+    @BindView(R.id.time_tv) TextView mTimeTv;
+    @BindView(R.id.program_type_tv) TextView mProgramTv;
+    @BindView(R.id.rewind_layout) LinearLayout mExoRewind;
+    @BindView(R.id.forward_layout) LinearLayout mExoForward;
+    @BindView(R.id.seekbar_layout) LinearLayout mSeekbarLayout;
+    @BindView(R.id.live_tv) TextView mLiveTv;
+    @BindView(R.id.cast_rv) RecyclerView mCastRv;
+    @BindView(R.id.pro_guide_tv) TextView mProGuideTv;
+    @BindView(R.id.watch_live_tv) TextView mWatchLiveTv;
+    @BindView(R.id.content_details) RelativeLayout mContentDetails;
+    @BindView(R.id.subscribe_layout) LinearLayout mSubscriptionLayout;
+    @BindView(R.id.subscribe_bt) Button mSubscribeBt;
+    @BindView(R.id.topbar) LinearLayout mTopBarLayout;
+    @BindView(R.id.description_layout) RelativeLayout mDescriptionLayout;
+    @BindView(R.id.lyt_parent) MaterialRippleLayout mDescriptionContainer;
+    @BindView(R.id.watch_now_bt) Button mWatchNowBt;
+    @BindView(R.id.download_bt) Button mDownloadBt;
+    @BindView(R.id.poster_iv) ImageView mPosterIv;
+    @BindView(R.id.image_thumb) ImageView mThumbIv;
+    @BindView(R.id.genre_tv) TextView mDGenryTv;
+    @BindView(R.id.img_server) ImageView mServerIv;
+    @BindView(R.id.series_layout) RelativeLayout mSeriesLayout;
+    @BindView(R.id.seriest_title_tv) TextView mSeriesTitleTv;
+    private Unbinder mUnbinder;
 
-    int start = 0;
-    private List<CommonModels> listServer = new ArrayList<>();
-    private List<CommonModels> listRelated = new ArrayList<>();
-    private List<GetCommentsModel> listComment = new ArrayList<>();
-    private List<CommonModels> listDownload = new ArrayList<>();
-    private List<CommonModels> listInternalDownload = new ArrayList<>();
-    private List<CommonModels> listExternalDownload = new ArrayList<>();
-    private List<CastCrew> castCrews = new ArrayList<>();
-    private HashMap<String,Integer> mapMovies = new HashMap<String, Integer>();
-    private String strDirector = "", strCast = "", strGenre = "";
-    public static LinearLayout llBottom, llBottomParent;
-    public static RelativeLayout llcomment;
-    private SwipeRefreshLayout swipeRefreshLayout;
-    private String type = "", id = "";
-    private ImageView imgAddFav, shareIv2;
-    public static ImageView imgBack, serverIv;
-    private Button watchNowBt, downloadBt;
-    private ImageView posterIv, thumbIv, descriptionBackIv;
+    private ServerAdapter mServerAdapter;
+    private HomePageAdapter mRelatedAdapter;
+    private RelatedTvAdapter mRelatedTvAdapter;
+    private CastCrewAdapter mCastCrewAdapter;
+    private List<CommonModels> mListServer = new ArrayList<>();
+    private List<CommonModels> mListRelated = new ArrayList<>();
+    private List<GetCommentsModel> mListComment = new ArrayList<>();
+    private List<CommonModels> mListDownload = new ArrayList<>();
+    private List<CommonModels> mListInternalDownload = new ArrayList<>();
+    private List<CommonModels> mListExternalDownload = new ArrayList<>();
+    private List<CastCrew> mCastCrews = new ArrayList<>();
+    private HashMap<String,Integer> mMapMovies = new HashMap<String, Integer>();
+    private String mStrDirector = "", strCast = "", mStrGenre = "";
+    private String mType = "", mId = "";
     private String V_URL = "";
-    public static WebView webView;
-    public static ProgressBar progressBar;
-    private boolean isFav = false;
-    private TextView chromeCastTv;
-    private ShimmerFrameLayout shimmerFrameLayout;
-    private Button btnComment;
-    private EditText etComment;
-    private CommentsAdapter commentsAdapter;
-    private RelativeLayout adView;
-
-    public static SimpleExoPlayer player;
-    public static PlayerView simpleExoPlayerView;
-    public PlayerControlView castControlView;
-    public static SubtitleView subtitleView;
-
-    public static ImageView imgFull;
-    public ImageView aspectRatioIv, externalPlayerIv, volumControlIv;
-    private LinearLayout volumnControlLayout;
-    private SeekBar volumnSeekbar;
-    private TextView volumnTv;
-    public MediaRouteButton mediaRouteButton;
-    private CastContext castContext;
-
-    public static boolean isPlaying, isFullScr;
-    public static View playerLayout;
-
-    private int playerHeight;
-    public static boolean isVideo = true;
+    private boolean mIsFav = false;
+    private CommentsAdapter mCommentsAdapter;
+    public static SimpleExoPlayer mPlayer;
+    private CastContext mCastContext;
+    public static boolean mIsPlaying, mIsFullScr;
+    private int mPlayerHeight;
+    public static boolean mIsVideo = true;
     private FirebaseAnalytics mFirebaseAnalytics;
-    private String strSubtitle = "Null";
-    public static MediaSource mediaSource = null;
-    public static ImageView imgSubtitle;
-    public ImageView radioPlayImage;
-    private List<SubtitleModel> listSub = new ArrayList<>();
-    private AlertDialog alertDialog;
-    private String mediaUrl;
+    private String mStrSubtitle = "Null";
+    public static MediaSource mMediaSource = null;
+    private List<SubtitleModel> mListSub = new ArrayList<>();
+    private AlertDialog mAlertDialog;
+    private String mMediaUrl;
     private boolean tv = false;
-    private String download_check = "";
-
-    private String season;
-    private String episod;
+    private String mDownload_check = "";
+    private String mSeason;
+    private String mEpisod;
     private String movieTitle;
-    private String seriesTitle;
-
-    private CastPlayer castPlayer;
-    private boolean castSession;
-    private String title,imdb_rating;
-    String castImageUrl;
-
-    private LinearLayout tvLayout, sheduleLayout, tvTopLayout;
-    private TextView tvTitleTv, watchStatusTv, timeTv, programTv, proGuideTv, watchLiveTv;
-    private ProgramAdapter programAdapter;
-    List<Program> programs = new ArrayList<>();
-    private RecyclerView programRv;
-    private ImageView tvThumbIv, shareIv;
-
-    private LinearLayout exoRewind, exoForward, seekbarLayout;
-    ImageView exoDownloadIv;
-    private TextView liveTv;
-
-
-    boolean isDark;
+    private String mSeriesTitle;
+    private CastPlayer mCastPlayer;
+    private boolean mCastSession;
+    private String mTitle, mImdb_rating;
+    String mCastImageUrl;
+    private ProgramAdapter mProgramAdapter;
+    List<Program> mPrograms = new ArrayList<>();
+    boolean mIsDark;
     private OrientationEventListener myOrientationEventListener;
-    private String serverType;
-
+    private String mServerType;
     private boolean fullScreenByClick;
-    private String currentProgramTime;
-    private String currentProgramTitle;
-    private String userId;
-
-    private String youtubeDownloadUr;
-    private String urlType = "";
-    private RelativeLayout descriptionLayout;
-    private MaterialRippleLayout descriptionContatainer;
-    private TextView dGenryTv;
-    private RecyclerView internalServerRv, externalServerRv, serverRv;
-    private LinearLayout internalDownloadLayout, externalDownloadLayout;
-    private boolean activeMovie;
-
-    private TextView sereisTitleTv;
-    private RelativeLayout seriestLayout;
-    private ImageView favIv;
-
+    private String mCurrentProgramTime;
+    private String mCurrentProgramTitle;
+    private String mUserId;
+    private String mYoutubeDownloadUr;
+    private String mUrlType = "";
+    private boolean mActiveMovie;
     private RelativeLayout mRlTouch;
-    private boolean intLeft, intRight;
+    private boolean mIntLeft, mIntRight;
     private int sWidth, sHeight;
     private long diffX, diffY;
     private Display display;
     private Point size;
     private float downX, downY;
     private AudioManager mAudioManager;
-    private int aspectClickCount = 1;
-    private DatabaseHelper db;
-
-
-
+    private int mAspectClickCount = 1;
+    private DatabaseHelper mDBHelper;
     public boolean check_download=false;
     private static DetailsActivity instance;
-    private RewardedAd rewardedAd;
-    public boolean checkExist=false;
-    public boolean checkFailLink=false;
-    public boolean checkFinish=false;
-    boolean isLoading;
+    private RewardedAd mRewardedAd;
+    public boolean mCheckExist =false;
+    public boolean mCheckFailLink =false;
+    public boolean mCheckFinish =false;
+    boolean mIsLoading;
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         RtlUtils.setScreenDirection(this);
         SharedPreferences sharedPreferences = getSharedPreferences("push", MODE_PRIVATE);
-        isDark = sharedPreferences.getBoolean("dark", false);
-        if (isDark) {
+        mIsDark = sharedPreferences.getBoolean("dark", false);
+        if (mIsDark) {
             setTheme(R.style.AppThemeDark);
         } else {
             setTheme(R.style.AppThemeLight);
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
-
+        mUnbinder = ButterKnife.bind(this);
         instance = this;
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -338,14 +338,9 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
             }
         });
-
        // loadAdReward();
-
-
-        db = new DatabaseHelper(DetailsActivity.this);
-
+        mDBHelper = new DatabaseHelper(DetailsActivity.this);
         mAudioManager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
-
         //---analytics-----------
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         Bundle bundle = new Bundle();
@@ -354,215 +349,61 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "activity");
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
 
-        if(!db.getMapMovie().equals("")){
-            setMapMovies(db.getMapMovie());
+        if(!mDBHelper.getMapMovie().equals("")){
+            setMapMovies(mDBHelper.getMapMovie());
         }
-
-        adView = findViewById(R.id.adView);
-        llBottom = findViewById(R.id.llbottom);
-        tvDes = findViewById(R.id.tv_details);
-        tvCast = findViewById(R.id.tv_cast);
-        tvRelease = findViewById(R.id.tv_release_date);
-        tvName = findViewById(R.id.text_name);
-        tvImdb = findViewById(R.id.text_imdb);
-        tvDirector = findViewById(R.id.tv_director);
-        tvGenre = findViewById(R.id.tv_genre);
-        swipeRefreshLayout = findViewById(R.id.swipe_layout);
-        imgAddFav = findViewById(R.id.add_fav);
-        imgBack = findViewById(R.id.img_back);
-        radioPlayImage = findViewById(R.id.radioPlayImage);
-        webView = findViewById(R.id.webView);
-        progressBar = findViewById(R.id.progressBar);
-        llBottomParent = findViewById(R.id.llbottomparent);
-        lPlay = findViewById(R.id.play);
-        rvRelated = findViewById(R.id.rv_related);
-        tvRelated = findViewById(R.id.tv_related);
-        shimmerFrameLayout = findViewById(R.id.shimmer_view_container);
-        btnComment = findViewById(R.id.btn_comment);
-        etComment = findViewById(R.id.et_comment);
-        rvComment = findViewById(R.id.recyclerView_comment);
-        llcomment = findViewById(R.id.llcomments);
-        simpleExoPlayerView = findViewById(R.id.video_view);
-        subtitleView = findViewById(R.id.subtitle);
-        playerLayout = findViewById(R.id.player_layout);
-        imgFull = findViewById(R.id.img_full_scr);
-        aspectRatioIv = findViewById(R.id.aspect_ratio_iv);
-        externalPlayerIv = findViewById(R.id.external_player_iv);
-        volumControlIv = findViewById(R.id.volumn_control_iv);
-        volumnControlLayout = findViewById(R.id.volumn_layout);
-        volumnSeekbar = findViewById(R.id.volumn_seekbar);
-        volumnTv = findViewById(R.id.volumn_tv);
-        rvServer = findViewById(R.id.rv_server_list);
-        seasonSpinner = findViewById(R.id.season_spinner);
-        seasonSpinnerContainer = findViewById(R.id.spinner_container);
-        imgSubtitle = findViewById(R.id.img_subtitle);
-        mediaRouteButton = findViewById(R.id.media_route_button);
-        chromeCastTv = findViewById(R.id.chrome_cast_tv);
-        castControlView = findViewById(R.id.cast_control_view);
-        tvLayout = findViewById(R.id.tv_layout);
-        sheduleLayout = findViewById(R.id.p_shedule_layout);
-        tvTitleTv = findViewById(R.id.tv_title_tv);
-        programRv = findViewById(R.id.program_guide_rv);
-        tvTopLayout = findViewById(R.id.tv_top_layout);
-        tvThumbIv = findViewById(R.id.tv_thumb_iv);
-        shareIv = findViewById(R.id.share_iv);
-        watchStatusTv = findViewById(R.id.watch_status_tv);
-        timeTv = findViewById(R.id.time_tv);
-        programTv = findViewById(R.id.program_type_tv);
-        exoRewind = findViewById(R.id.rewind_layout);
-        exoForward = findViewById(R.id.forward_layout);
-        seekbarLayout = findViewById(R.id.seekbar_layout);
-        liveTv = findViewById(R.id.live_tv);
-        castRv = findViewById(R.id.cast_rv);
-        proGuideTv = findViewById(R.id.pro_guide_tv);
-        watchLiveTv = findViewById(R.id.watch_live_tv);
-
-        contentDetails = findViewById(R.id.content_details);
-        subscriptionLayout = findViewById(R.id.subscribe_layout);
-        subscribeBt = findViewById(R.id.subscribe_bt);
-        backIv = findViewById(R.id.des_back_iv);
-        subBackIv = findViewById(R.id.back_iv);
-        topbarLayout = findViewById(R.id.topbar);
-
-        descriptionLayout = findViewById(R.id.description_layout);
-        descriptionContatainer = findViewById(R.id.lyt_parent);
-        watchNowBt = findViewById(R.id.watch_now_bt);
-        downloadBt = findViewById(R.id.download_bt);
-        posterIv = findViewById(R.id.poster_iv);
-        thumbIv = findViewById(R.id.image_thumb);
-        descriptionBackIv = findViewById(R.id.back_iv);
-        dGenryTv = findViewById(R.id.genre_tv);
-        serverIv = findViewById(R.id.img_server);
-
-        seriestLayout = findViewById(R.id.series_layout);
-        favIv = findViewById(R.id.add_fav2);
-        sereisTitleTv = findViewById(R.id.seriest_title_tv);
-        shareIv2 = findViewById(R.id.share_iv2);
-
-
-        if (isDark) {
-            tvTopLayout.setBackgroundColor(getResources().getColor(R.color.black_window_light));
-            sheduleLayout.setBackground(getResources().getDrawable(R.drawable.rounded_black_transparent));
-            etComment.setBackground(getResources().getDrawable(R.drawable.round_grey_transparent));
-            btnComment.setTextColor(getResources().getColor(R.color.grey_20));
-            topbarLayout.setBackgroundColor(getResources().getColor(R.color.dark));
-            subscribeBt.setBackground(getResources().getDrawable(R.drawable.btn_rounded_dark));
+        if (mIsDark) {
+            mTvTopLayout.setBackgroundColor(getResources().getColor(R.color.black_window_light));
+            mSheduleLayout.setBackground(getResources().getDrawable(R.drawable.rounded_black_transparent));
+            mEtComment.setBackground(getResources().getDrawable(R.drawable.round_grey_transparent));
+            mBtnComment.setTextColor(getResources().getColor(R.color.grey_20));
+            mTopBarLayout.setBackgroundColor(getResources().getColor(R.color.dark));
+            mSubscribeBt.setBackground(getResources().getDrawable(R.drawable.btn_rounded_dark));
             //tvName.setTextColor(getResources().getColor(R.color.black_window_light));
-            descriptionContatainer.setBackground(getResources().getDrawable(R.drawable.gradient_black_transparent));
+            mDescriptionContainer.setBackground(getResources().getDrawable(R.drawable.gradient_black_transparent));
         }
+
         // chrome cast
-        CastButtonFactory.setUpMediaRouteButton(getApplicationContext(), mediaRouteButton);
-        castContext = CastContext.getSharedInstance(this);
-        castPlayer = new CastPlayer(castContext);
-        castPlayer.setSessionAvailabilityListener(this);
+        CastButtonFactory.setUpMediaRouteButton(getApplicationContext(), mMediaRouteButton);
+        mCastContext = CastContext.getSharedInstance(this);
+        mCastPlayer = new CastPlayer(mCastContext);
+        mCastPlayer.setSessionAvailabilityListener(this);
 
         // cast button will show if the cast device will be available
-        if (castContext.getCastState() != CastState.NO_DEVICES_AVAILABLE)
-            mediaRouteButton.setVisibility(View.VISIBLE);
+        if (mCastContext.getCastState() != CastState.NO_DEVICES_AVAILABLE)
+            mMediaRouteButton.setVisibility(View.VISIBLE);
         // start the shimmer effect
-        shimmerFrameLayout.startShimmer();
-        playerHeight = lPlay.getLayoutParams().height;
-        progressBar.setMax(100); // 100 maximum value for the progress value
-        progressBar.setProgress(50);
+        mShimmerLayout.startShimmer();
+        mPlayerHeight = mLPlay.getLayoutParams().height;
+        mProgressBar.setMax(100); // 100 maximum value for the progress value
+        mProgressBar.setProgress(50);
 
-        WebSettings webSettings = webView.getSettings();
+        WebSettings webSettings = mWebView.getSettings();
         webSettings.setSupportMultipleWindows(true);
         webSettings.setJavaScriptEnabled(true);
-        webView.setWebChromeClient(new WebChromeClient());
+        mWebView.setWebChromeClient(new WebChromeClient());
 
-        imgBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (activeMovie) {
-                    setPlayerNormalScreen();
-                    if (player != null){
-                        player.setPlayWhenReady(false);
-                        player.stop();
-                    }
-                    showDescriptionLayout();
-                    activeMovie = false;
-                } else {
-                    finish();
-                }
-            }
-        });
-
-
-        type = getIntent().getStringExtra("vType");
-        id = getIntent().getStringExtra("id");
-        castSession = getIntent().getBooleanExtra("castSession", false);
+        mType = getIntent().getStringExtra("vType");
+        mId = getIntent().getStringExtra("id");
+        mCastSession = getIntent().getBooleanExtra("castSession", false);
 
         // getting user login info for favourite button visibility
-        userId = db.getUserData().getUserId();
+        mUserId = mDBHelper.getUserData().getUserId();
         if (PreferenceUtils.isLoggedIn(DetailsActivity.this)) {
-            imgAddFav.setVisibility(VISIBLE);
+            mImgAddFav.setVisibility(VISIBLE);
         } else {
-            imgAddFav.setVisibility(GONE);
+            mImgAddFav.setVisibility(GONE);
         }
-
-        commentsAdapter = new CommentsAdapter(this, listComment);
-        rvComment.setLayoutManager(new LinearLayoutManager(this));
-        rvComment.setHasFixedSize(true);
-        rvComment.setNestedScrollingEnabled(false);
-        rvComment.setAdapter(commentsAdapter);
+        mCommentsAdapter = new CommentsAdapter(this, mListComment);
+        mRvComment.setLayoutManager(new LinearLayoutManager(this));
+        mRvComment.setHasFixedSize(true);
+        mRvComment.setNestedScrollingEnabled(false);
+        mRvComment.setAdapter(mCommentsAdapter);
         getComments();
-        imgFull.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                controlFullScreenPlayer();
-
-            }
-        });
-        imgSubtitle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showSubtitleDialog(DetailsActivity.this, listSub);
-            }
-        });
-        btnComment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!PreferenceUtils.isLoggedIn(DetailsActivity.this)) {
-                    startActivity(new Intent(DetailsActivity.this, LoginActivity.class));
-                    new ToastMsg(DetailsActivity.this).toastIconError(getString(R.string.login_first));
-                } else if (etComment.getText().toString().equals("")) {
-                    new ToastMsg(DetailsActivity.this).toastIconError(getString(R.string.comment_empty));
-                } else {
-                    String comment = etComment.getText().toString();
-                    addComment( id, PreferenceUtils.getUserId(DetailsActivity.this), comment);
-                }
-            }
-        });
-
-        imgAddFav.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isFav) {
-                    removeFromFav();
-                } else {
-                    addToFav();
-                }
-            }
-        });
-
-        // its for tv series only when description layout visibility gone.
-        favIv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isFav) {
-                    removeFromFav();
-                } else {
-                    addToFav();
-                }
-            }
-        });
-
-
         if (!isNetworkAvailable()) {
             new ToastMsg(DetailsActivity.this).toastIconError(getString(R.string.no_internet));
         }
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 clear_previous();
@@ -573,30 +414,29 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         loadAd();
     }
 
-
     public static DetailsActivity getInstance() {
         return instance;
     }
 
     private void loadRewardedAd() {
-        if (rewardedAd == null || !rewardedAd.isLoaded()) {
+        if (mRewardedAd == null || !mRewardedAd.isLoaded()) {
             AdsConfig adsConfig = new DatabaseHelper(DetailsActivity.this).getConfigurationData().getAdsConfig();
-            rewardedAd = new RewardedAd(this, adsConfig.getAdmobRewardedVideoAdsId());
-            isLoading = true;
-            rewardedAd.loadAd(
+            mRewardedAd = new RewardedAd(this, adsConfig.getAdmobRewardedVideoAdsId());
+            mIsLoading = true;
+            mRewardedAd.loadAd(
                     new AdRequest.Builder().build(),
                     new RewardedAdLoadCallback() {
                         @Override
                         public void onRewardedAdLoaded() {
                             // Ad successfully loaded.
-                            DetailsActivity.this.isLoading = false;
+                            DetailsActivity.this.mIsLoading = false;
                             //Toast.makeText(DetailsActivity.this, "onRewardedAdLoaded", Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
                         public void onRewardedAdFailedToLoad(LoadAdError loadAdError) {
                             // Ad failed to load.
-                            DetailsActivity.this.isLoading = false;
+                            DetailsActivity.this.mIsLoading = false;
 //                            Toast.makeText(DetailsActivity.this, "onRewardedAdFailedToLoad", Toast.LENGTH_SHORT)
 //                                    .show();
                         }
@@ -606,7 +446,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
     public void showRewardedVideo() {
         //showVideoButton.setVisibility(View.INVISIBLE);
-        if (rewardedAd.isLoaded()) {
+        if (mRewardedAd.isLoaded()) {
             RewardedAdCallback adCallback =
                     new RewardedAdCallback() {
                         @Override
@@ -620,30 +460,30 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                         public void onRewardedAdClosed() {
                             // Ad closed.
                             //Toast.makeText(DetailsActivity.this, "onRewardedAdClosed", Toast.LENGTH_SHORT).show();
-                            if(checkFinish!=true)
+                            if(mCheckFinish !=true)
                             {
                                 new ToastMsg(DetailsActivity.this).toastIconError("Oops! Please watch ads to start!");
                             }
                             // Preload the next video ad.
                            // DetailsActivity.this.loadRewardedAd();
-                            checkFinish=false;
+                            mCheckFinish =false;
                         }
 
                         @Override
                         public void onUserEarnedReward(RewardItem rewardItem) {
                             // User earned reward.
                             //Toast.makeText(DetailsActivity.this, "onUserEarnedReward", Toast.LENGTH_SHORT).show();
-                            if(checkFailLink){
+                            if(mCheckFailLink){
                                 new ToastMsg(DetailsActivity.this).toastIconError("Fail Link, Plz tell us on facebook group to fix ASAP");
                             }
-                            else if(checkExist&& !checkFailLink){
+                            else if(mCheckExist && !mCheckFailLink){
                                 new ToastMsg(DetailsActivity.this).toastIconError("File already exist.");
                             }
-                            else if(!checkExist && !checkFailLink){
+                            else if(!mCheckExist && !mCheckFailLink){
                                 new ToastMsg(DetailsActivity.this).toastIconSuccess("Started.");
                             }
-                            checkFinish=true;
-                            checkFailLink=false;
+                            mCheckFinish =true;
+                            mCheckFailLink =false;
                         }
 
                         @Override
@@ -653,7 +493,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 //                                    .show();
                         }
                     };
-            rewardedAd.show(this, adCallback);
+            mRewardedAd.show(this, adCallback);
         }
     }
 
@@ -661,17 +501,17 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
     @SuppressLint("SourceLockedOrientationActivity")
     public void controlFullScreenPlayer() {
-        if (isFullScr) {
+        if (mIsFullScr) {
             fullScreenByClick = false;
-            isFullScr = false;
-            swipeRefreshLayout.setVisibility(VISIBLE);
+            mIsFullScr = false;
+            mSwipeRefreshLayout.setVisibility(VISIBLE);
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-            if (isVideo) {
-                lPlay.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, playerHeight));
+            if (mIsVideo) {
+                mLPlay.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, mPlayerHeight));
             } else {
-                lPlay.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, playerHeight));
+                mLPlay.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, mPlayerHeight));
             }
 
             // reset the orientation
@@ -680,16 +520,16 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         } else {
 
             fullScreenByClick = true;
-            isFullScr = true;
-            swipeRefreshLayout.setVisibility(GONE);
+            mIsFullScr = true;
+            mSwipeRefreshLayout.setVisibility(GONE);
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
-            if (isVideo) {
-                lPlay.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
+            if (mIsVideo) {
+                mLPlay.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
 
             } else {
-                lPlay.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
+                mLPlay.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
 
             }
 
@@ -706,23 +546,23 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         super.onStart();
 
         if (!Config.ENABLE_EXTERNAL_PLAYER){
-            externalPlayerIv.setVisibility(GONE);
+            mExternalPlayerIv.setVisibility(GONE);
         }
 
         initGetData();
 
         if (mAudioManager != null) {
-            volumnSeekbar.setMax(mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
+            mVolumnSeekbar.setMax(mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
             int currentVolumn = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-            volumnSeekbar.setProgress(currentVolumn);
+            mVolumnSeekbar.setProgress(currentVolumn);
         }
 
-        volumnSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        mVolumnSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 if (b) {
                     //volumnTv.setText(i+"");
-                    mAudioManager.setStreamVolume(player.getAudioStreamType(), i, 0);
+                    mAudioManager.setStreamVolume(mPlayer.getAudioStreamType(), i, 0);
                 }
             }
 
@@ -736,293 +576,125 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
             }
         });
-
-        volumControlIv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                volumnControlLayout.setVisibility(VISIBLE);
-
-            }
-        });
-
-        aspectRatioIv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (aspectClickCount == 1) {
-                    //Toast.makeText(DetailsActivity.this, "Fill", Toast.LENGTH_SHORT).show();
-                    simpleExoPlayerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FILL);
-                    player.setVideoScalingMode(C.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING);
-                    aspectClickCount = 2;
-                } else if (aspectClickCount == 2) {
-                    //Toast.makeText(DetailsActivity.this, "Fit", Toast.LENGTH_SHORT).show();
-                    simpleExoPlayerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIT);
-                    player.setVideoScalingMode(C.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING);
-                    aspectClickCount = 3;
-                } else if (aspectClickCount == 3) {
-                    //Toast.makeText(DetailsActivity.this, "Zoom", Toast.LENGTH_SHORT).show();
-                    simpleExoPlayerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIT);
-                    player.setVideoScalingMode(C.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING);
-                    aspectClickCount = 1;
-                }
-
-            }
-        });
-
-        externalPlayerIv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (mediaUrl != null) {
-                    if (!tv) {
-                        // set player normal/ potrait screen if not tv
-                        descriptionLayout.setVisibility(VISIBLE);
-                        setPlayerNormalScreen();
-                    }
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setDataAndType(Uri.parse(mediaUrl), "video/*");
-                    startActivity(Intent.createChooser(intent, "Complete action using"));
-                }
-
-            }
-        });
-
-        watchNowBt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PopUpAds.ShowAdmobInterstitialAds(DetailsActivity.this);
-                if (!listServer.isEmpty()) {
-                    if (listServer.size() == 1) {
-                        releasePlayer();
-                        resetCastPlayer();
-                        preparePlayer(listServer.get(0));
-                        descriptionLayout.setVisibility(GONE);
-                        lPlay.setVisibility(VISIBLE);
-                    }else {
-                        openServerDialog();
-                    }
-                }else{
-                    Toast.makeText(DetailsActivity.this, R.string.no_video_found, Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        downloadBt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(true ||PreferenceUtils.isLoggedIn(DetailsActivity.this)){
-                    //PopUpAds.ShowAdmobInterstitialAds(DetailsActivity.this);
-//                    DetailsActivity.getInstance().loadAdReward();
-                    //loadRewardedAd();
-                    if (!listInternalDownload.isEmpty() || !listExternalDownload.isEmpty()) {
-                        if (Config.ENABLE_DOWNLOAD_TO_ALL) {
-                            openDownloadServerDialog();
-
-                        } else {
-                            if (true || PreferenceUtils.isLoggedIn(DetailsActivity.this) && PreferenceUtils.isActivePlan(DetailsActivity.this)) {
-                                openDownloadServerDialog();
-                            } else {
-                                Toast.makeText(DetailsActivity.this, R.string.download_not_permitted, Toast.LENGTH_SHORT).show();
-                                Log.e("Download", "not permitted");
-                            }
-                        }
-                    } else {
-                        Toast.makeText(DetailsActivity.this, R.string.no_download_server_found, Toast.LENGTH_SHORT).show();
-                    }
-                }
-                else{
-                    Intent intent = new Intent(DetailsActivity.this,FirebaseSignUpActivity.class);
-                    startActivity(intent);
-                }
-
-            }
-        });
-
-        watchLiveTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideExoControlForTv();
-                initMoviePlayer(mediaUrl, serverType, DetailsActivity.this);
-
-                watchStatusTv.setText(getString(R.string.watching_on) + " " + getString(R.string.app_name));
-                watchLiveTv.setVisibility(GONE);
-
-                timeTv.setText(currentProgramTime);
-                programTv.setText(currentProgramTitle);
-            }
-        });
-
-        shareIv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Tools.share(DetailsActivity.this, title);
-            }
-        });
-
-        shareIv2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (title == null) {
-                    new ToastMsg(DetailsActivity.this).toastIconError("Title should not be empty.");
-                    return;
-                }
-                Tools.share(DetailsActivity.this, title);
-            }
-        });
-
-        castPlayer.addListener(new Player.DefaultEventListener() {
+        mCastPlayer.addListener(new Player.DefaultEventListener() {
             @Override
             public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
 
                 if (playWhenReady && playbackState == CastPlayer.STATE_READY) {
-                    progressBar.setVisibility(View.GONE);
+                    mProgressBar.setVisibility(View.GONE);
 
-                    Log.e("STATE PLAYER:::", String.valueOf(isPlaying));
+                    Log.e("STATE PLAYER:::", String.valueOf(mIsPlaying));
 
                 } else if (playbackState == CastPlayer.STATE_READY) {
-                    progressBar.setVisibility(View.GONE);
-                    Log.e("STATE PLAYER:::", String.valueOf(isPlaying));
+                    mProgressBar.setVisibility(View.GONE);
+                    Log.e("STATE PLAYER:::", String.valueOf(mIsPlaying));
                 } else if (playbackState == CastPlayer.STATE_BUFFERING) {
-                    progressBar.setVisibility(VISIBLE);
+                    mProgressBar.setVisibility(VISIBLE);
 
-                    Log.e("STATE PLAYER:::", String.valueOf(isPlaying));
+                    Log.e("STATE PLAYER:::", String.valueOf(mIsPlaying));
                 } else {
-                    Log.e("STATE PLAYER:::", String.valueOf(isPlaying));
+                    Log.e("STATE PLAYER:::", String.valueOf(mIsPlaying));
                 }
 
             }
         });
 
-        serverIv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openServerDialog();
-            }
-        });
-
-        simpleExoPlayerView.setControllerVisibilityListener(new PlayerControlView.VisibilityListener() {
+        mSimpleExoPlayerView.setControllerVisibilityListener(new PlayerControlView.VisibilityListener() {
             @Override
             public void onVisibilityChange(int visibility) {
                 if (visibility == 0) {
-                    imgBack.setVisibility(VISIBLE);
+                    mImgBack.setVisibility(VISIBLE);
 
-                    if (type.equals("tv") || type.equals("tvseries")) {
-                        imgFull.setVisibility(VISIBLE);
+                    if (mType.equals("tv") || mType.equals("tvseries")) {
+                        mImgFull.setVisibility(VISIBLE);
                     } else {
-                        imgFull.setVisibility(GONE);
+                        mImgFull.setVisibility(GONE);
                     }
 
                     // invisible download icon for live tv
-                    if (download_check.equals("1")) {
+                    if (mDownload_check.equals("1")) {
                         if (!tv) {
-                            if (activeMovie) {
-                                serverIv.setVisibility(VISIBLE);
+                            if (mActiveMovie) {
+                                mServerIv.setVisibility(VISIBLE);
                             }
                         } else {
                         }
                     } else {
                     }
 
-                    if (listSub.size() != 0) {
-                        imgSubtitle.setVisibility(VISIBLE);
+                    if (mListSub.size() != 0) {
+                        mImgSubtitle.setVisibility(VISIBLE);
                     }
                     //imgSubtitle.setVisibility(VISIBLE);
                 } else {
-                    imgBack.setVisibility(GONE);
-                    imgFull.setVisibility(GONE);
-                    imgSubtitle.setVisibility(GONE);
-                    volumnControlLayout.setVisibility(GONE);
+                    mImgBack.setVisibility(GONE);
+                    mImgFull.setVisibility(GONE);
+                    mImgSubtitle.setVisibility(GONE);
+                    mVolumnControlLayout.setVisibility(GONE);
                 }
             }
         });
 
-        subscribeBt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (userId == null) {
-                    new ToastMsg(DetailsActivity.this).toastIconError(getResources().getString(R.string.subscribe_error));
-                    startActivity(new Intent(DetailsActivity.this, LoginActivity.class));
-                    finish();
-                } else {
-                    startActivity(new Intent(DetailsActivity.this, PurchasePlanActivity.class));
-                }
-
-            }
-        });
-        backIv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
-        subBackIv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
 
     }
 
     @SuppressLint("SourceLockedOrientationActivity")
     public void setPlayerNormalScreen() {
-        swipeRefreshLayout.setVisibility(VISIBLE);
-        lPlay.setVisibility(GONE);
+        mSwipeRefreshLayout.setVisibility(VISIBLE);
+        mLPlay.setVisibility(GONE);
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         //close embed link playing
-        if (webView.getVisibility() == VISIBLE){
-            if (webView != null){
+        if (mWebView.getVisibility() == VISIBLE){
+            if (mWebView != null){
                 Intent intent = new Intent(DetailsActivity.this, DetailsActivity.class);
-                intent.putExtra("vType",type);
-                intent.putExtra("id",id);
+                intent.putExtra("vType", mType);
+                intent.putExtra("id", mId);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         }
 
-        if (isVideo) {
-            lPlay.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, playerHeight));
+        if (mIsVideo) {
+            mLPlay.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, mPlayerHeight));
 
         } else {
-            lPlay.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, playerHeight));
+            mLPlay.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, mPlayerHeight));
         }
     }
 
     @SuppressLint("SourceLockedOrientationActivity")
     public void setPlayerFullScreen() {
-        swipeRefreshLayout.setVisibility(GONE);
+        mSwipeRefreshLayout.setVisibility(GONE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
-        if (isVideo) {
-            lPlay.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
+        if (mIsVideo) {
+            mLPlay.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
         } else {
-            lPlay.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
+            mLPlay.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
         }
     }
 
     private void openDownloadServerDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = LayoutInflater.from(this).inflate(R.layout.layout_download_server_dialog, null);
-        internalDownloadLayout = view.findViewById(R.id.internal_download_layout);
-        externalDownloadLayout = view.findViewById(R.id.external_download_layout);
-        if (listExternalDownload.isEmpty()) {
+        LinearLayout internalDownloadLayout = view.findViewById(R.id.internal_download_layout);
+        LinearLayout externalDownloadLayout = view.findViewById(R.id.external_download_layout);
+        if (mListExternalDownload.isEmpty()) {
             externalDownloadLayout.setVisibility(GONE);
         }
-        if (listInternalDownload.isEmpty()) {
+        if (mListInternalDownload.isEmpty()) {
             internalDownloadLayout.setVisibility(GONE);
         }
-        internalServerRv = view.findViewById(R.id.internal_download_rv);
-        externalServerRv = view.findViewById(R.id.external_download_rv);
-        internalDownloadAdapter = new DownloadAdapter(this, listInternalDownload, true);
+        RecyclerView internalServerRv = view.findViewById(R.id.internal_download_rv);
+        RecyclerView externalServerRv = view.findViewById(R.id.external_download_rv);
+        DownloadAdapter internalDownloadAdapter = new DownloadAdapter(this, mListInternalDownload, true);
         internalServerRv.setLayoutManager(new LinearLayoutManager(this));
         internalServerRv.setHasFixedSize(true);
         internalServerRv.setAdapter(internalDownloadAdapter);
 
-        externalDownloadAdapter = new DownloadAdapter(this, listExternalDownload, true);
+        DownloadAdapter externalDownloadAdapter = new DownloadAdapter(this, mListExternalDownload, true);
         externalServerRv.setLayoutManager(new LinearLayoutManager(this));
         externalServerRv.setHasFixedSize(true);
         externalServerRv.setAdapter(externalDownloadAdapter);
@@ -1037,11 +709,11 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     private void openServerDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = LayoutInflater.from(this).inflate(R.layout.layout_server_dialog, null);
-        serverRv = view.findViewById(R.id.serverRv);
-        serverAdapter = new ServerAdapter(this, listServer, "movie");
+        RecyclerView serverRv = view.findViewById(R.id.serverRv);
+        mServerAdapter = new ServerAdapter(this, mListServer, "movie");
         serverRv.setLayoutManager(new LinearLayoutManager(this));
         serverRv.setHasFixedSize(true);
-        serverRv.setAdapter(serverAdapter);
+        serverRv.setAdapter(mServerAdapter);
 
         ImageView closeIv = view.findViewById(R.id.close_iv);
         builder.setView(view);
@@ -1057,7 +729,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         });
 
         final ServerAdapter.OriginalViewHolder[] viewHolder = {null};
-        serverAdapter.setOnItemClickListener(new ServerAdapter.OnItemClickListener() {
+        mServerAdapter.setOnItemClickListener(new ServerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, CommonModels obj, int position, ServerAdapter.OriginalViewHolder holder) {
                 releasePlayer();
@@ -1071,13 +743,13 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
             @Override
             public void getFirstUrl(String url) {
-                mediaUrl = url;
+                mMediaUrl = url;
             }
 
             @Override
             public void hideDescriptionLayout() {
-                descriptionLayout.setVisibility(GONE);
-                lPlay.setVisibility(VISIBLE);
+                mDescriptionLayout.setVisibility(GONE);
+                mLPlay.setVisibility(VISIBLE);
                 dialog.dismiss();
 
             }
@@ -1086,37 +758,37 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     }
 
     public void preparePlayer(CommonModels obj){
-        activeMovie = true;
+        mActiveMovie = true;
         setPlayerFullScreen();
-        mediaUrl = obj.getStremURL();
-        if (!castSession) {
+        mMediaUrl = obj.getStremURL();
+        if (!mCastSession) {
             initMoviePlayer(obj.getStremURL(), obj.getServerType(), DetailsActivity.this);
 
-            listSub.clear();
+            mListSub.clear();
             if (obj.getListSub() != null) {
-                listSub.addAll(obj.getListSub());
+                mListSub.addAll(obj.getListSub());
             }
 
-            if (listSub.size() != 0) {
-                imgSubtitle.setVisibility(VISIBLE);
+            if (mListSub.size() != 0) {
+                mImgSubtitle.setVisibility(VISIBLE);
             }else {
-                imgSubtitle.setVisibility(GONE);
+                mImgSubtitle.setVisibility(GONE);
             }
 
         } else {
             if (obj.getServerType().toLowerCase().equals("embed")) {
 
-                castSession = false;
-                castPlayer.setSessionAvailabilityListener(null);
-                castPlayer.release();
+                mCastSession = false;
+                mCastPlayer.setSessionAvailabilityListener(null);
+                mCastPlayer.release();
 
                 // invisible control ui of exoplayer
-                player.setPlayWhenReady(true);
-                simpleExoPlayerView.setUseController(true);
+                mPlayer.setPlayWhenReady(true);
+                mSimpleExoPlayerView.setUseController(true);
 
                 // invisible control ui of casting
-                castControlView.setVisibility(GONE);
-                chromeCastTv.setVisibility(GONE);
+                mCastControlView.setVisibility(GONE);
+                mChromeCastTv.setVisibility(GONE);
 
 
             } else {
@@ -1128,13 +800,13 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     void clear_previous() {
 
         strCast = "";
-        strDirector = "";
-        strGenre = "";
-        listDownload.clear();
-        listInternalDownload.clear();
-        listExternalDownload.clear();
-        programs.clear();
-        castCrews.clear();
+        mStrDirector = "";
+        mStrGenre = "";
+        mListDownload.clear();
+        mListInternalDownload.clear();
+        mListExternalDownload.clear();
+        mPrograms.clear();
+        mCastCrews.clear();
     }
 
     private void prepareSubtitleList(Context context, List<SubtitleModel> list){
@@ -1155,13 +827,13 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(dialogView);
 
-        alertDialog = builder.create();
-        alertDialog.show();
+        mAlertDialog = builder.create();
+        mAlertDialog.show();
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                alertDialog.cancel();
+                mAlertDialog.cancel();
             }
         });
 
@@ -1169,13 +841,13 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
     @Override
     public void onCastSessionAvailable() {
-        castSession = true;
+        mCastSession = true;
 
         MediaMetadata movieMetadata = new MediaMetadata(MediaMetadata.MEDIA_TYPE_MOVIE);
-        movieMetadata.putString(MediaMetadata.KEY_TITLE, title);
+        movieMetadata.putString(MediaMetadata.KEY_TITLE, mTitle);
         //movieMetadata.putString(MediaMetadata.KEY_ALBUM_ARTIST, "Test Artist");
-        movieMetadata.addImage(new WebImage(Uri.parse(castImageUrl)));
-        MediaInfo mediaInfo = new MediaInfo.Builder(mediaUrl)
+        movieMetadata.addImage(new WebImage(Uri.parse(mCastImageUrl)));
+        MediaInfo mediaInfo = new MediaInfo.Builder(mMediaUrl)
                 .setStreamType(MediaInfo.STREAM_TYPE_BUFFERED)
                 .setContentType(MimeTypes.VIDEO_UNKNOWN)
                 .setMetadata(movieMetadata).build();
@@ -1183,41 +855,41 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         //array of media sources
         final MediaQueueItem[] mediaItems = {new MediaQueueItem.Builder(mediaInfo).build()};
 
-        castPlayer.loadItems(mediaItems, 0, 3000, Player.REPEAT_MODE_OFF);
+        mCastPlayer.loadItems(mediaItems, 0, 3000, Player.REPEAT_MODE_OFF);
 
         // visible control ui of casting
-        castControlView.setVisibility(VISIBLE);
-        castControlView.setPlayer(castPlayer);
-        castControlView.setVisibilityListener(new PlaybackControlView.VisibilityListener() {
+        mCastControlView.setVisibility(VISIBLE);
+        mCastControlView.setPlayer(mCastPlayer);
+        mCastControlView.setVisibilityListener(new PlaybackControlView.VisibilityListener() {
             @Override
             public void onVisibilityChange(int visibility) {
                 if (visibility == GONE) {
-                    castControlView.setVisibility(VISIBLE);
-                    chromeCastTv.setVisibility(VISIBLE);
+                    mCastControlView.setVisibility(VISIBLE);
+                    mChromeCastTv.setVisibility(VISIBLE);
                 }
             }
         });
 
         // invisible control ui of exoplayer
-        player.setPlayWhenReady(false);
-        simpleExoPlayerView.setUseController(false);
+        mPlayer.setPlayWhenReady(false);
+        mSimpleExoPlayerView.setUseController(false);
     }
 
     @Override
     public void onCastSessionUnavailable() {
         // make cast session false
-        castSession = false;
+        mCastSession = false;
         // invisible control ui of exoplayer
-        player.setPlayWhenReady(true);
-        simpleExoPlayerView.setUseController(true);
+        mPlayer.setPlayWhenReady(true);
+        mSimpleExoPlayerView.setUseController(true);
 
         // invisible control ui of casting
-        castControlView.setVisibility(GONE);
-        chromeCastTv.setVisibility(GONE);
+        mCastControlView.setVisibility(GONE);
+        mChromeCastTv.setVisibility(GONE);
     }
 
     public void initServerTypeForTv(String serverType) {
-        this.serverType = serverType;
+        this.mServerType = serverType;
     }
 
     @Override
@@ -1225,8 +897,8 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         if (program.getProgramStatus().equals("onaired")) {
             showExoControlForTv();
             initMoviePlayer(program.getVideoUrl(), "tv", this);
-            timeTv.setText(program.getTime());
-            programTv.setText(program.getTitle());
+            mTimeTv.setText(program.getTime());
+            mProgramTv.setText(program.getTitle());
         } else {
             new ToastMsg(DetailsActivity.this).toastIconError("Not Yet");
         }
@@ -1236,8 +908,8 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     //this method will be called when related tv channel is clicked
     @Override
     public void onRelatedTvClicked(CommonModels obj) {
-        type = obj.getVideoType();
-        id = obj.getId();
+        mType = obj.getVideoType();
+        mId = obj.getId();
         initGetData();
     }
 
@@ -1253,30 +925,30 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             model.setListSub(null);
             releasePlayer();
             resetCastPlayer();
-            mapMovies.put(id,position);
-            db.deleteAllMapMovie();
-            db.insertMapMovie(getMapMovies());
-            if (mapMovies.containsKey(id) && mapMovies.get(id)!=null) {
-                rvServer.scrollToPosition(mapMovies.get(id)-1);
+            mMapMovies.put(mId,position);
+            mDBHelper.deleteAllMapMovie();
+            mDBHelper.insertMapMovie(getmMapMovies());
+            if (mMapMovies.containsKey(mId) && mMapMovies.get(mId)!=null) {
+                mRvServer.scrollToPosition(mMapMovies.get(mId)-1);
             }
-            activeMovie = true;
+            mActiveMovie = true;
             preparePlayer(model);
         }else {
-            mapMovies.put(id,position);
-            db.deleteAllMapMovie();
-            db.insertMapMovie(getMapMovies());
-            activeMovie = true;
-            if (mapMovies.containsKey(id) && mapMovies.get(id)!=null) {
-                rvServer.scrollToPosition(mapMovies.get(id));
+            mMapMovies.put(mId,position);
+            mDBHelper.deleteAllMapMovie();
+            mDBHelper.insertMapMovie(getmMapMovies());
+            mActiveMovie = true;
+            if (mMapMovies.containsKey(mId) && mMapMovies.get(mId)!=null) {
+                mRvServer.scrollToPosition(mMapMovies.get(mId));
             }
             if (obj != null){
                 if (obj.getSubtitleList().size() != 0){
-                    listSub.clear();
-                    listSub.addAll(obj.getSubtitleList());
-                    imgSubtitle.setVisibility(VISIBLE);
+                    mListSub.clear();
+                    mListSub.addAll(obj.getSubtitleList());
+                    mImgSubtitle.setVisibility(VISIBLE);
                 }else {
-                    listSub.clear();
-                    imgSubtitle.setVisibility(GONE);
+                    mListSub.clear();
+                    mImgSubtitle.setVisibility(GONE);
                 }
 
                 initMoviePlayer(obj.getStreamURL(), obj.getServerType(), DetailsActivity.this);
@@ -1309,8 +981,8 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             holder.lyt_parent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    setSelectedSubtitle(mediaSource, obj.getUrl(), ctx);
-                    alertDialog.cancel();
+                    setSelectedSubtitle(mMediaSource, obj.getUrl(), ctx);
+                    mAlertDialog.cancel();
                 }
             });
 
@@ -1335,19 +1007,19 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     }
 
     private void loadAd() {
-        AdsConfig adsConfig = db.getConfigurationData().getAdsConfig();
+        AdsConfig adsConfig = mDBHelper.getConfigurationData().getAdsConfig();
         if (adsConfig.getAdsEnable().equals("1")) {
 
             if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                BannerAds.ShowAdmobBannerAds(this, adView);
+                BannerAds.ShowAdmobBannerAds(this, mAdView);
                 //PopUpAds.ShowAdmobInterstitialAds(this);
 
             } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
-                BannerAds.showStartAppBanner(DetailsActivity.this, adView);
+                BannerAds.showStartAppBanner(DetailsActivity.this, mAdView);
                 PopUpAds.showStartappInterstitialAds(DetailsActivity.this);
 
             } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.NETWORK_AUDIENCE)) {
-                BannerAds.showFANBanner(this, adView);
+                BannerAds.showFANBanner(this, mAdView);
                 PopUpAds.showFANInterstitialAds(DetailsActivity.this);
             }
 
@@ -1356,59 +1028,59 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     }
 
     private void initGetData() {
-        if (!type.equals("tv")) {
+        if (!mType.equals("tv")) {
 
             //----related rv----------
-            relatedAdapter = new HomePageAdapter(this, listRelated);
-            rvRelated.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,
+            mRelatedAdapter = new HomePageAdapter(this, mListRelated);
+            mRvRelated.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,
                     false));
-            rvRelated.setHasFixedSize(true);
-            rvRelated.setAdapter(relatedAdapter);
+            mRvRelated.setHasFixedSize(true);
+            mRvRelated.setAdapter(mRelatedAdapter);
 
-            if (type.equals("tvseries")) {
+            if (mType.equals("tvseries")) {
 
-                seasonSpinnerContainer.setVisibility(VISIBLE);
+                mSeasonSpinnerContainer.setVisibility(VISIBLE);
 
-                rvServer.setVisibility(VISIBLE);
-                serverIv.setVisibility(GONE);
+                mRvServer.setVisibility(VISIBLE);
+                mServerIv.setVisibility(GONE);
 
-                rvRelated.removeAllViews();
-                listRelated.clear();
-                rvServer.removeAllViews();
-                listServer.clear();
-                listServer.clear();
+                mRvRelated.removeAllViews();
+                mListRelated.clear();
+                mRvServer.removeAllViews();
+                mListServer.clear();
+                mListServer.clear();
 
-                downloadBt.setVisibility(GONE);
-                watchNowBt.setVisibility(GONE);
+                mDownloadBt.setVisibility(GONE);
+                mWatchNowBt.setVisibility(GONE);
 
                 // cast & crew adapter
-                castCrewAdapter = new CastCrewAdapter(this, castCrews);
-                castRv.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
-                castRv.setHasFixedSize(true);
-                castRv.setAdapter(castCrewAdapter);
+                mCastCrewAdapter = new CastCrewAdapter(this, mCastCrews);
+                mCastRv.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+                mCastRv.setHasFixedSize(true);
+                mCastRv.setAdapter(mCastCrewAdapter);
 
-                getSeriesData(type, id);
+                getSeriesData(mType, mId);
 
-                if (listSub.size() == 0) {
-                    imgSubtitle.setVisibility(GONE);
+                if (mListSub.size() == 0) {
+                    mImgSubtitle.setVisibility(GONE);
                 }
 
             } else {
-                imgFull.setVisibility(GONE);
-                listServer.clear();
-                rvRelated.removeAllViews();
-                listRelated.clear();
-                if (listSub.size() == 0) {
-                    imgSubtitle.setVisibility(GONE);
+                mImgFull.setVisibility(GONE);
+                mListServer.clear();
+                mRvRelated.removeAllViews();
+                mListRelated.clear();
+                if (mListSub.size() == 0) {
+                    mImgSubtitle.setVisibility(GONE);
                 }
 
                 // cast & crew adapter
-                castCrewAdapter = new CastCrewAdapter(this, castCrews);
-                castRv.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
-                castRv.setHasFixedSize(true);
-                castRv.setAdapter(castCrewAdapter);
+                mCastCrewAdapter = new CastCrewAdapter(this, mCastCrews);
+                mCastRv.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+                mCastRv.setHasFixedSize(true);
+                mCastRv.setAdapter(mCastCrewAdapter);
 
-                getMovieData(type, id);
+                getMovieData(mType, mId);
 
                 final ServerAdapter.OriginalViewHolder[] viewHolder = {null};
             }
@@ -1419,95 +1091,95 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
         } else {
             tv = true;
-            imgSubtitle.setVisibility(GONE);
-            llcomment.setVisibility(GONE);
-            serverIv.setVisibility(GONE);
+            mImgSubtitle.setVisibility(GONE);
+            mLLcomment.setVisibility(GONE);
+            mServerIv.setVisibility(GONE);
 
-            rvServer.setVisibility(VISIBLE);
-            descriptionLayout.setVisibility(GONE);
-            lPlay.setVisibility(VISIBLE);
+            mRvServer.setVisibility(VISIBLE);
+            mDescriptionLayout.setVisibility(GONE);
+            mLPlay.setVisibility(VISIBLE);
 
             // hide exo player some control
             hideExoControlForTv();
 
-            tvLayout.setVisibility(VISIBLE);
+            mTvLayout.setVisibility(VISIBLE);
 
             // hide program guide if its disable from api
             if (!PreferenceUtils.isProgramGuideEnabled(DetailsActivity.this)) {
-                proGuideTv.setVisibility(GONE);
-                programRv.setVisibility(GONE);
+                mProGuideTv.setVisibility(GONE);
+                mProgramRv.setVisibility(GONE);
 
             }
 
-            watchStatusTv.setText(getString(R.string.watching_on) + " " + getString(R.string.app_name));
+            mWatchStatusTv.setText(getString(R.string.watching_on) + " " + getString(R.string.app_name));
 
-            tvRelated.setText(getString(R.string.all_tv_channel));
+            mTvRelated.setText(getString(R.string.all_tv_channel));
 
-            rvServer.removeAllViews();
-            listServer.clear();
-            rvRelated.removeAllViews();
-            listRelated.clear();
+            mRvServer.removeAllViews();
+            mListServer.clear();
+            mRvRelated.removeAllViews();
+            mListRelated.clear();
 
-            programAdapter = new ProgramAdapter(programs, this);
-            programAdapter.setOnProgramClickListener(this);
-            programRv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-            programRv.setHasFixedSize(true);
-            programRv.setAdapter(programAdapter);
+            mProgramAdapter = new ProgramAdapter(mPrograms, this);
+            mProgramAdapter.setOnProgramClickListener(this);
+            mProgramRv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+            mProgramRv.setHasFixedSize(true);
+            mProgramRv.setAdapter(mProgramAdapter);
 
             //----related rv----------
             //relatedTvAdapter = new LiveTvHomeAdapter(this, listRelated, TAG);
-            relatedTvAdapter = new RelatedTvAdapter(listRelated, DetailsActivity.this);
-            rvRelated.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-            rvRelated.setHasFixedSize(true);
-            rvRelated.setAdapter(relatedTvAdapter);
-            relatedTvAdapter.setListener(DetailsActivity.this);
+            mRelatedTvAdapter = new RelatedTvAdapter(mListRelated, DetailsActivity.this);
+            mRvRelated.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+            mRvRelated.setHasFixedSize(true);
+            mRvRelated.setAdapter(mRelatedTvAdapter);
+            mRelatedTvAdapter.setListener(DetailsActivity.this);
 
-            imgAddFav.setVisibility(GONE);
+            mImgAddFav.setVisibility(GONE);
 
-            serverAdapter = new ServerAdapter(this, listServer, "tv");
-            rvServer.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-            rvServer.setHasFixedSize(true);
-            rvServer.setAdapter(serverAdapter);
-            getTvData(type, id);
-            llBottom.setVisibility(GONE);
+            mServerAdapter = new ServerAdapter(this, mListServer, "tv");
+            mRvServer.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+            mRvServer.setHasFixedSize(true);
+            mRvServer.setAdapter(mServerAdapter);
+            getTvData(mType, mId);
+            mLLBottom.setVisibility(GONE);
 
             final ServerAdapter.OriginalViewHolder[] viewHolder = {null};
-            serverAdapter.setOnItemClickListener(new ServerAdapter.OnItemClickListener() {
+            mServerAdapter.setOnItemClickListener(new ServerAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, CommonModels obj, int position, ServerAdapter.OriginalViewHolder holder) {
-                    mediaUrl = obj.getStremURL();
+                    mMediaUrl = obj.getStremURL();
 
-                    if (!castSession) {
+                    if (!mCastSession) {
                         initMoviePlayer(obj.getStremURL(), obj.getServerType(), DetailsActivity.this);
 
                     } else {
 
                         if (obj.getServerType().toLowerCase().equals("embed")) {
 
-                            castSession = false;
-                            castPlayer.setSessionAvailabilityListener(null);
-                            castPlayer.release();
+                            mCastSession = false;
+                            mCastPlayer.setSessionAvailabilityListener(null);
+                            mCastPlayer.release();
 
                             // invisible control ui of exoplayer
-                            player.setPlayWhenReady(true);
-                            simpleExoPlayerView.setUseController(true);
+                            mPlayer.setPlayWhenReady(true);
+                            mSimpleExoPlayerView.setUseController(true);
 
                             // invisible control ui of casting
-                            castControlView.setVisibility(GONE);
-                            chromeCastTv.setVisibility(GONE);
+                            mCastControlView.setVisibility(GONE);
+                            mChromeCastTv.setVisibility(GONE);
                         } else {
                             showQueuePopup(DetailsActivity.this, null, getMediaInfo());
                         }
                     }
 
-                    serverAdapter.chanColor(viewHolder[0], position);
+                    mServerAdapter.chanColor(viewHolder[0], position);
                     holder.name.setTextColor(getResources().getColor(R.color.colorPrimary));
                     viewHolder[0] = holder;
                 }
 
                 @Override
                 public void getFirstUrl(String url) {
-                    mediaUrl = url;
+                    mMediaUrl = url;
                 }
 
                 @Override
@@ -1522,44 +1194,41 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
     private void openWebActivity(String s, Context context, String videoType) {
 
-        if (isPlaying) {
-            player.release();
+        if (mIsPlaying) {
+            mPlayer.release();
         }
-        progressBar.setVisibility(GONE);
-        playerLayout.setVisibility(GONE);
+        mProgressBar.setVisibility(GONE);
+        mPlayerLayout.setVisibility(GONE);
 
-        webView.loadUrl(s);
-        webView.setWebChromeClient(new WebChromeClient());
-        WebSettings webSettings = webView.getSettings();
+        mWebView.loadUrl(s);
+        mWebView.setWebChromeClient(new WebChromeClient());
+        WebSettings webSettings = mWebView.getSettings();
         webSettings.setSupportMultipleWindows(true);
         webSettings.setJavaScriptEnabled(true);
-        webView.setVisibility(VISIBLE);
+        mWebView.setVisibility(VISIBLE);
 
     }
 
     public void initMoviePlayer(String url, String type, Context context) {
         Log.e("vTYpe :: ", type);
-        urlType = type;
+        mUrlType = type;
         if (type.equals("embed") || type.equals("vimeo") || type.equals("gdrive") || type.equals("youtube-live")) {
-            isVideo = false;
-
+            mIsVideo = false;
             openWebActivity(url, context, type);
         } else {
-            isVideo = true;
+            mIsVideo = true;
             initVideoPlayer(url, context, type);
         }
     }
 
     public void initVideoPlayer(String url, Context context, String type) {
-        progressBar.setVisibility(VISIBLE);
-
-        if (player != null){
-            player.stop();
-            player.release();
+        mProgressBar.setVisibility(VISIBLE);
+        if (mPlayer != null){
+            mPlayer.stop();
+            mPlayer.release();
         }
-
-        webView.setVisibility(GONE);
-        playerLayout.setVisibility(VISIBLE);
+        mWebView.setVisibility(GONE);
+        mPlayerLayout.setVisibility(VISIBLE);
 
         BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
         TrackSelection.Factory videoTrackSelectionFactory = new
@@ -1567,14 +1236,14 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
         DefaultTrackSelector trackSelector = new
                 DefaultTrackSelector(videoTrackSelectionFactory);
-        player = ExoPlayerFactory.newSimpleInstance(context, trackSelector);
+        mPlayer = ExoPlayerFactory.newSimpleInstance(context, trackSelector);
         // player.setPlayWhenReady(true);
         //simpleExoPlayerView.setPlayer(player);
 
         Uri uri = Uri.parse(url);
 
         if (type.equals("hls")) {
-            mediaSource = hlsMediaSource(uri, context);
+            mMediaSource = hlsMediaSource(uri, context);
         } else if (type.equals("youtube")) {
             Log.e("youtube url  :: ", url);
             extractYoutubeUrl(url, context, 18);
@@ -1582,32 +1251,32 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             Log.e("youtube url  :: ", url);
             extractYoutubeUrl(url, context, 133);
         } else if (type.equals("rtmp")) {
-            mediaSource = rtmpMediaSource(uri);
+            mMediaSource = rtmpMediaSource(uri);
         } else {
-            mediaSource = mediaSource(uri, context);
+            mMediaSource = mediaSource(uri, context);
         }
 
         //Toast.makeText(context, "castSession:"+getCastSessionObj()+"", Toast.LENGTH_SHORT).show();
-        player.prepare(mediaSource, true, false);
-        simpleExoPlayerView.setPlayer(player);
-        player.setPlayWhenReady(true);
+        mPlayer.prepare(mMediaSource, true, false);
+        mSimpleExoPlayerView.setPlayer(mPlayer);
+        mPlayer.setPlayWhenReady(true);
 
-        player.addListener(new Player.DefaultEventListener() {
+        mPlayer.addListener(new Player.DefaultEventListener() {
             @Override
             public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
                 if (playWhenReady && playbackState == Player.STATE_READY) {
 
-                    isPlaying = true;
-                    progressBar.setVisibility(View.GONE);
+                    mIsPlaying = true;
+                    mProgressBar.setVisibility(View.GONE);
                 } else if (playbackState == Player.STATE_READY) {
-                    progressBar.setVisibility(View.GONE);
-                    isPlaying = false;
+                    mProgressBar.setVisibility(View.GONE);
+                    mIsPlaying = false;
                 } else if (playbackState == Player.STATE_BUFFERING) {
-                    isPlaying = false;
-                    progressBar.setVisibility(VISIBLE);
+                    mIsPlaying = false;
+                    mProgressBar.setVisibility(VISIBLE);
                 } else {
                     // player paused in any state
-                    isPlaying = false;
+                    mIsPlaying = false;
                 }
             }
         });
@@ -1621,16 +1290,16 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                 if (ytFiles != null) {
                     int itag = tag;
                     String downloadUrl = ytFiles.get(itag).getUrl();
-                    youtubeDownloadUr = downloadUrl;
+                    mYoutubeDownloadUr = downloadUrl;
                     Log.e("YOUTUBE::", String.valueOf(downloadUrl));
                     try {
 
                         MediaSource mediaSource = mediaSource(Uri.parse(downloadUrl), context);
-                        player.prepare(mediaSource, true, false);
+                        mPlayer.prepare(mediaSource, true, false);
                         if (Config.YOUTUBE_VIDEO_AUTO_PLAY) {
-                            player.setPlayWhenReady(true);
+                            mPlayer.setPlayWhenReady(true);
                         } else {
-                            player.setPlayWhenReady(false);
+                            mPlayer.setPlayWhenReady(false);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -1690,8 +1359,8 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
 
             mergedSource = new MergingMediaSource(mediaSource, subtitleSource);
-            player.prepare(mergedSource, false, false);
-            player.setPlayWhenReady(true);
+            mPlayer.prepare(mergedSource, false, false);
+            mPlayer.setPlayWhenReady(true);
             //resumePlayer();
 
         } else {
@@ -1702,15 +1371,15 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     private void addToFav() {
         Retrofit retrofit = RetrofitClient.getRetrofitInstance();
         FavouriteApi api = retrofit.create(FavouriteApi.class);
-        Call<FavoriteModel> call = api.addToFavorite(Config.API_KEY, userId, id);
+        Call<FavoriteModel> call = api.addToFavorite(Config.API_KEY, mUserId, mId);
         call.enqueue(new Callback<FavoriteModel>() {
             @Override
             public void onResponse(Call<FavoriteModel> call, retrofit2.Response<FavoriteModel> response) {
                 if (response.code() == 200){
                     if (response.body().getStatus().equalsIgnoreCase("success")){
                         new ToastMsg(DetailsActivity.this).toastIconSuccess(response.body().getMessage());
-                        isFav = true;
-                        imgAddFav.setBackgroundResource(R.drawable.ic_favorite_white);
+                        mIsFav = true;
+                        mImgAddFav.setBackgroundResource(R.drawable.ic_favorite_white);
                     } else {
                         new ToastMsg(DetailsActivity.this).toastIconError(response.body().getMessage());
                     }
@@ -1733,8 +1402,8 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             if (PreferenceUtils.isLoggedIn(DetailsActivity.this)) {
                 if (PreferenceUtils.isActivePlan(DetailsActivity.this)) {
                     if (PreferenceUtils.isValid(DetailsActivity.this)) {
-                        contentDetails.setVisibility(VISIBLE);
-                        subscriptionLayout.setVisibility(GONE);
+                        mContentDetails.setVisibility(VISIBLE);
+                        mSubscriptionLayout.setVisibility(GONE);
                         Log.e("SUBCHECK", "validity: " + PreferenceUtils.isValid(DetailsActivity.this));
 
                     } else {
@@ -1746,8 +1415,8 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                     }
                 } else {
                     Log.e("SUBCHECK", "not active plan");
-                    contentDetails.setVisibility(GONE);
-                    subscriptionLayout.setVisibility(VISIBLE);
+                    mContentDetails.setVisibility(GONE);
+                    mSubscriptionLayout.setVisibility(VISIBLE);
                 }
             }else {
                 startActivity(new Intent(DetailsActivity.this, FirebaseSignUpActivity.class));
@@ -1756,8 +1425,8 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
         } else {
             //free content
-            contentDetails.setVisibility(VISIBLE);
-            subscriptionLayout.setVisibility(GONE);
+            mContentDetails.setVisibility(VISIBLE);
+            mSubscriptionLayout.setVisibility(GONE);
         }
     }
 
@@ -1771,11 +1440,11 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             public void onResponse(Call<ActiveStatus> call, retrofit2.Response<ActiveStatus> response) {
                 ActiveStatus activeStatus = response.body();
                 if (!activeStatus.getStatus().equals("active")) {
-                    contentDetails.setVisibility(GONE);
-                    subscriptionLayout.setVisibility(VISIBLE);
+                    mContentDetails.setVisibility(GONE);
+                    mSubscriptionLayout.setVisibility(VISIBLE);
                 } else {
-                    contentDetails.setVisibility(VISIBLE);
-                    subscriptionLayout.setVisibility(GONE);
+                    mContentDetails.setVisibility(VISIBLE);
+                    mSubscriptionLayout.setVisibility(GONE);
                 }
 
                 PreferenceUtils.updateSubscriptionStatus(DetailsActivity.this);
@@ -1798,41 +1467,41 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             public void onResponse(Call<SingleDetailsTV> call, retrofit2.Response<SingleDetailsTV> response) {
                 if (response.code() == 200){
                     if (response.body() != null){
-                        swipeRefreshLayout.setRefreshing(false);
-                        shimmerFrameLayout.stopShimmer();
-                        shimmerFrameLayout.setVisibility(GONE);
+                        mSwipeRefreshLayout.setRefreshing(false);
+                        mShimmerLayout.stopShimmer();
+                        mShimmerLayout.setVisibility(GONE);
                         paidControl(response.body().getIsPaid());
 
                         SingleDetailsTV detailsModel = response.body();
 
-                        title = detailsModel.getTvName();
-                        tvName.setText(title);
-                        tvName.setVisibility(GONE);
-                        tvTitleTv.setText(title);
+                        mTitle = detailsModel.getTvName();
+                        mTvName.setText(mTitle);
+                        mTvName.setVisibility(GONE);
+                        mTvTitleTv.setText(mTitle);
 
-                        imdb_rating = detailsModel.getTvImdb();
-                        tvImdb.setText(imdb_rating);
-                        tvImdb.setVisibility(GONE);
+                        mImdb_rating = detailsModel.getTvImdb();
+                        mTvImdb.setText(mImdb_rating);
+                        mTvImdb.setVisibility(GONE);
 
 
-                        tvDes.setText(detailsModel.getDescription());
+                        mTvDes.setText(detailsModel.getDescription());
                         V_URL = detailsModel.getStreamUrl();
-                        castImageUrl = detailsModel.getThumbnailUrl();
+                        mCastImageUrl = detailsModel.getThumbnailUrl();
 
                         Picasso.get().load(detailsModel.getThumbnailUrl()).placeholder(R.drawable.album_art_placeholder)
-                                .into(tvThumbIv);
+                                .into(mTvThumbIv);
 
                         CommonModels model = new CommonModels();
                         model.setTitle("HD");
                         model.setStremURL(V_URL);
                         model.setServerType(detailsModel.getStreamFrom());
-                        listServer.add(model);
+                        mListServer.add(model);
 
-                        currentProgramTime = detailsModel.getCurrentProgramTime();
-                        currentProgramTitle = detailsModel.getCurrentProgramTitle();
+                        mCurrentProgramTime = detailsModel.getCurrentProgramTime();
+                        mCurrentProgramTitle = detailsModel.getCurrentProgramTitle();
 
-                        timeTv.setText(currentProgramTime);
-                        programTv.setText(currentProgramTitle);
+                        mTimeTv.setText(mCurrentProgramTime);
+                        mProgramTv.setText(mCurrentProgramTitle);
                         if (PreferenceUtils.isProgramGuideEnabled(DetailsActivity.this)) {
                             List<ProgramGuide> programGuideList = response.body().getProgramGuide();
                             for (int i = 0; i < programGuideList.size(); i++) {
@@ -1844,16 +1513,16 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                                 program.setTime(programGuide.getTime());
                                 program.setVideoUrl(programGuide.getVideoUrl());
 
-                                programs.add(program);
+                                mPrograms.add(program);
                             }
 
-                            if (programs.size() <= 0) {
-                                proGuideTv.setVisibility(GONE);
-                                programRv.setVisibility(GONE);
+                            if (mPrograms.size() <= 0) {
+                                mProGuideTv.setVisibility(GONE);
+                                mProgramRv.setVisibility(GONE);
                             } else {
-                                proGuideTv.setVisibility(VISIBLE);
-                                programRv.setVisibility(VISIBLE);
-                                programAdapter.notifyDataSetChanged();
+                                mProGuideTv.setVisibility(VISIBLE);
+                                mProgramRv.setVisibility(VISIBLE);
+                                mProgramAdapter.notifyDataSetChanged();
                             }
                         }
                         //all tv channel data
@@ -1867,12 +1536,12 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                             models.setVideoType("tv");
                             models.setIsPaid(allTvChannel.getIsPaid());
                             models.setId(allTvChannel.getLiveTvId());
-                            listRelated.add(models);
+                            mListRelated.add(models);
                         }
-                        if (listRelated.size() == 0) {
-                            tvRelated.setVisibility(GONE);
+                        if (mListRelated.size() == 0) {
+                            mTvRelated.setVisibility(GONE);
                         }
-                        relatedTvAdapter.notifyDataSetChanged();
+                        mRelatedTvAdapter.notifyDataSetChanged();
 
                         //additional media source data
                         List<AdditionalMediaSource> serverArray = response.body().getAdditionalMediaSource();
@@ -1883,16 +1552,16 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                             models.setStremURL(jsonObject.getUrl());
                             models.setServerType(jsonObject.getSource());
 
-                            listServer.add(models);
+                            mListServer.add(models);
                         }
-                        serverAdapter.notifyDataSetChanged();
+                        mServerAdapter.notifyDataSetChanged();
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<SingleDetailsTV> call, Throwable t) {
-                swipeRefreshLayout.setRefreshing(false);
+                mSwipeRefreshLayout.setRefreshing(false);
             }
         });
 
@@ -1907,41 +1576,41 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             @Override
             public void onResponse(Call<SingleDetails> call, retrofit2.Response<SingleDetails> response) {
                 if (response.code() == 200){
-                    swipeRefreshLayout.setRefreshing(false);
-                    shimmerFrameLayout.stopShimmer();
-                    shimmerFrameLayout.setVisibility(GONE);
+                    mSwipeRefreshLayout.setRefreshing(false);
+                    mShimmerLayout.stopShimmer();
+                    mShimmerLayout.setVisibility(GONE);
 
                     SingleDetails singleDetails = response.body();
                     String isPaid = singleDetails.getIsPaid();
                     paidControl(isPaid);
 
-                    title = singleDetails.getTitle();
-                    imdb_rating=singleDetails.getImdb_rating();
-                    sereisTitleTv.setText(title);
-                    castImageUrl = singleDetails.getThumbnailUrl();
-                    seriesTitle = title;
-                    tvName.setText(title);
-                    tvImdb.setText(imdb_rating);
-                    tvRelease.setText("Release On " + singleDetails.getRelease());
-                    tvDes.setText(singleDetails.getDescription());
+                    mTitle = singleDetails.getTitle();
+                    mImdb_rating =singleDetails.getImdb_rating();
+                    mSeriesTitleTv.setText(mTitle);
+                    mCastImageUrl = singleDetails.getThumbnailUrl();
+                    mSeriesTitle = mTitle;
+                    mTvName.setText(mTitle);
+                    mTvImdb.setText(mImdb_rating);
+                    mTvRelease.setText("Release On " + singleDetails.getRelease());
+                    mTvDes.setText(singleDetails.getDescription());
 
                     Picasso.get().load(singleDetails.getPosterUrl()).placeholder(R.drawable.album_art_placeholder_large)
-                            .into(posterIv);
+                            .into(mPosterIv);
                     Picasso.get().load(singleDetails.getThumbnailUrl()).placeholder(R.drawable.poster_placeholder)
-                            .into(thumbIv);
+                            .into(mThumbIv);
 
-                    download_check = singleDetails.getEnableDownload();
+                    mDownload_check = singleDetails.getEnableDownload();
 
                     //----director---------------
                     for (int i = 0; i < singleDetails.getDirector().size(); i++) {
                         Director director = singleDetails.getDirector().get(i);
                         if (i == singleDetails.getDirector().size() - 1) {
-                            strDirector = strDirector + director.getName();
+                            mStrDirector = mStrDirector + director.getName();
                         } else {
-                            strDirector = strDirector + director.getName() + ", ";
+                            mStrDirector = mStrDirector + director.getName() + ", ";
                         }
                     }
-                    tvDirector.setText(strDirector);
+                    mTvDirector.setText(mStrDirector);
 
                     //----cast---------------
                     for (int i = 0; i < singleDetails.getCast().size(); i++) {
@@ -1952,19 +1621,19 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                         castCrew.setName(cast.getName());
                         castCrew.setUrl(cast.getUrl());
                         castCrew.setImageUrl(cast.getImageUrl());
-                        castCrews.add(castCrew);
+                        mCastCrews.add(castCrew);
                     }
-                    castCrewAdapter.notifyDataSetChanged();
+                    mCastCrewAdapter.notifyDataSetChanged();
                     //---genre---------------
                     for (int i = 0; i < singleDetails.getGenre().size(); i++) {
                         Genre genre = singleDetails.getGenre().get(i);
                         if (i == singleDetails.getCast().size() - 1) {
-                            strGenre = strGenre + genre.getName();
+                            mStrGenre = mStrGenre + genre.getName();
                         } else {
                             if (i == singleDetails.getGenre().size() - 1) {
-                                strGenre = strGenre + genre.getName();
+                                mStrGenre = mStrGenre + genre.getName();
                             } else {
-                                strGenre = strGenre + genre.getName() + ", ";
+                                mStrGenre = mStrGenre + genre.getName() + ", ";
                             }
                         }
                     }
@@ -1980,12 +1649,12 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                         models.setId(relatedTvSeries.getVideosId());
                         models.setVideoType("tvseries");
                         models.setIsPaid(relatedTvSeries.getIsPaid());
-                        listRelated.add(models);
+                        mListRelated.add(models);
                     }
-                    if (listRelated.size() == 0) {
-                        tvRelated.setVisibility(GONE);
+                    if (mListRelated.size() == 0) {
+                        mTvRelated.setVisibility(GONE);
                     }
-                    relatedAdapter.notifyDataSetChanged();
+                    mRelatedAdapter.notifyDataSetChanged();
 
                     //----seasson------------
                     for (int i = 0; i <singleDetails.getSeason().size(); i++) {
@@ -2012,7 +1681,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                             epList.add(model);
                         }
                         models.setListEpi(epList);
-                        listServer.add(models);
+                        mListServer.add(models);
 
                         setSeasonData(seasonList);
 
@@ -2032,24 +1701,23 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, seasonData);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
-        seasonSpinner.setAdapter(aa);
+        mSeasonSpinner.setAdapter(aa);
 
-        seasonSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
+        mSeasonSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view,final int i, long l) {
-                rvServer.removeAllViewsInLayout();
-                rvServer.setLayoutManager(new LinearLayoutManager(DetailsActivity.this,
+                mRvServer.removeAllViewsInLayout();
+                mRvServer.setLayoutManager(new LinearLayoutManager(DetailsActivity.this,
                         RecyclerView.HORIZONTAL, false));
                 EpisodeAdapter episodeAdapter = new EpisodeAdapter(DetailsActivity.this,
-                        listServer.get(i).getListEpi());
-                if (mapMovies.containsKey(id) && mapMovies.get(id)!=null) {
-                    episodeAdapter.setNowPlaying(mapMovies.get(id));
+                        mListServer.get(i).getListEpi());
+                if (mMapMovies.containsKey(mId) && mMapMovies.get(mId)!=null) {
+                    episodeAdapter.setNowPlaying(mMapMovies.get(mId));
                 }
-                rvServer.setAdapter(episodeAdapter);
+                mRvServer.setAdapter(episodeAdapter);
 
-                if (mapMovies.containsKey(id) && mapMovies.get(id)!=null) {
-                    rvServer.scrollToPosition(mapMovies.get(id)-1);
+                if (mMapMovies.containsKey(mId) && mMapMovies.get(mId)!=null) {
+                    mRvServer.scrollToPosition(mMapMovies.get(mId)-1);
                 }
                 episodeAdapter.setOnEmbedItemClickListener(DetailsActivity.this);
 
@@ -2062,30 +1730,30 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         });
 
     }
-    public String getMapMovies(){
+    public String getmMapMovies(){
         Gson gson = new Gson();
-        return gson.toJson(mapMovies);
+        return gson.toJson(mMapMovies);
     }
 
     public void setMapMovies(String json){
         Gson gson = new Gson();
         Type type = new TypeToken<HashMap<String,Integer>>() {
         }.getType();
-        mapMovies = gson.fromJson(json, type);
+        mMapMovies = gson.fromJson(json, type);
     }
 
     private void setGenreText() {
 
-        tvGenre.setText(strGenre);
+        mTvGenre.setText(mStrGenre);
 
-        dGenryTv.setText(strGenre);
+        mDGenryTv.setText(mStrGenre);
 
     }
 
     private void getMovieData(String vtype, String vId) {
         strCast = "";
-        strDirector = "";
-        strGenre = "";
+        mStrDirector = "";
+        mStrGenre = "";
         Retrofit retrofit = RetrofitClient.getRetrofitInstance();
         SingleDetailsApi api = retrofit.create(SingleDetailsApi.class);
         Call<SingleDetails> call = api.getSingleDetails(Config.API_KEY, vtype, vId);
@@ -2093,44 +1761,44 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             @Override
             public void onResponse(Call<SingleDetails> call, retrofit2.Response<SingleDetails> response) {
                 if (response.code() == 200){
-                    shimmerFrameLayout.stopShimmer();
-                    shimmerFrameLayout.setVisibility(GONE);
-                    swipeRefreshLayout.setRefreshing(false);
+                    mShimmerLayout.stopShimmer();
+                    mShimmerLayout.setVisibility(GONE);
+                    mSwipeRefreshLayout.setRefreshing(false);
 
                     SingleDetails singleDetails = response.body();
                     paidControl(singleDetails.getIsPaid());
-                    download_check = singleDetails.getEnableDownload();
-                    castImageUrl = singleDetails.getThumbnailUrl();
-                    if (download_check.equals("1")) {
-                        downloadBt.setVisibility(VISIBLE);
+                    mDownload_check = singleDetails.getEnableDownload();
+                    mCastImageUrl = singleDetails.getThumbnailUrl();
+                    if (mDownload_check.equals("1")) {
+                        mDownloadBt.setVisibility(VISIBLE);
                     } else {
-                        downloadBt.setVisibility(GONE);
+                        mDownloadBt.setVisibility(GONE);
                     }
-                    title = singleDetails.getTitle();
-                    imdb_rating=singleDetails.getImdb_rating();
-                    movieTitle = title;
+                    mTitle = singleDetails.getTitle();
+                    mImdb_rating =singleDetails.getImdb_rating();
+                    movieTitle = mTitle;
 
-                    tvName.setText(title);
-                    tvImdb.setText(imdb_rating);
-                    tvRelease.setText("Release On " + singleDetails.getRelease());
-                    tvDes.setText(singleDetails.getDescription());
+                    mTvName.setText(mTitle);
+                    mTvImdb.setText(mImdb_rating);
+                    mTvRelease.setText("Release On " + singleDetails.getRelease());
+                    mTvDes.setText(singleDetails.getDescription());
 
 
                     Picasso.get().load(singleDetails.getPosterUrl()).placeholder(R.drawable.album_art_placeholder_large)
-                            .into(posterIv);
+                            .into(mPosterIv);
                     Picasso.get().load(singleDetails.getThumbnailUrl()).placeholder(R.drawable.poster_placeholder)
-                            .into(thumbIv);
+                            .into(mThumbIv);
 
                     //----director---------------
                     for (int i = 0; i < singleDetails.getDirector().size(); i++) {
                         Director director = response.body().getDirector().get(i);
                         if (i == singleDetails.getDirector().size() - 1) {
-                            strDirector = strDirector + director.getName();
+                            mStrDirector = mStrDirector + director.getName();
                         } else {
-                            strDirector = strDirector + director.getName() + ", ";
+                            mStrDirector = mStrDirector + director.getName() + ", ";
                         }
                     }
-                    tvDirector.setText(strDirector);
+                    mTvDirector.setText(mStrDirector);
 
                     //----cast---------------
                     for (int i = 0; i < singleDetails.getCast().size(); i++) {
@@ -2142,26 +1810,26 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                         castCrew.setUrl(cast.getUrl());
                         castCrew.setImageUrl(cast.getImageUrl());
 
-                        castCrews.add(castCrew);
+                        mCastCrews.add(castCrew);
 
                     }
-                    castCrewAdapter.notifyDataSetChanged();
+                    mCastCrewAdapter.notifyDataSetChanged();
 
                     //---genre---------------
                     for (int i = 0; i < singleDetails.getGenre().size(); i++) {
                         Genre genre = singleDetails.getGenre().get(i);
                         if (i == singleDetails.getCast().size() - 1) {
-                            strGenre = strGenre + genre.getName();
+                            mStrGenre = mStrGenre + genre.getName();
                         } else {
                             if (i == singleDetails.getGenre().size() - 1) {
-                                strGenre = strGenre + genre.getName();
+                                mStrGenre = mStrGenre + genre.getName();
                             } else {
-                                strGenre = strGenre + genre.getName() + ", ";
+                                mStrGenre = mStrGenre + genre.getName() + ", ";
                             }
                         }
                     }
-                    tvGenre.setText(strGenre);
-                    dGenryTv.setText(strGenre);
+                    mTvGenre.setText(mStrGenre);
+                    mDGenryTv.setText(mStrGenre);
 
                     //-----server----------
                     List<Video> serverList = new ArrayList<>();
@@ -2192,17 +1860,17 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                                 list.add(subtitleModel);
                             }
                             if (i == 0) {
-                                listSub.addAll(list);
+                                mListSub.addAll(list);
                             }
                             models.setListSub(list);
                         } else {
-                            models.setSubtitleURL(strSubtitle);
+                            models.setSubtitleURL(mStrSubtitle);
                         }
-                        listServer.add(models);
+                        mListServer.add(models);
                     }
 
-                    if (serverAdapter != null) {
-                        serverAdapter.notifyDataSetChanged();
+                    if (mServerAdapter != null) {
+                        mServerAdapter.notifyDataSetChanged();
                     }
 
                     //----related post---------------
@@ -2215,17 +1883,17 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                         models.setVideoType("movie");
                         models.setIsPaid(relatedMovie.getIsPaid());
                         models.setIsPaid(relatedMovie.getIsPaid());
-                        listRelated.add(models);
+                        mListRelated.add(models);
                     }
 
-                    if (listRelated.size() == 0) {
-                        tvRelated.setVisibility(GONE);
+                    if (mListRelated.size() == 0) {
+                        mTvRelated.setVisibility(GONE);
                     }
-                    relatedAdapter.notifyDataSetChanged();
+                    mRelatedAdapter.notifyDataSetChanged();
 
                     //----download list---------
-                    listExternalDownload.clear();
-                    listInternalDownload.clear();
+                    mListExternalDownload.clear();
+                    mListInternalDownload.clear();
                     for (int i = 0; i < singleDetails.getDownloadLinks().size(); i++) {
                         DownloadLink downloadLink = singleDetails.getDownloadLinks().get(i);
 
@@ -2236,20 +1904,20 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                         models.setResulation(downloadLink.getResolution());
                         models.setInAppDownload(downloadLink.isInAppDownload());
                         if (downloadLink.isInAppDownload()) {
-                            listInternalDownload.add(models);
+                            mListInternalDownload.add(models);
                         } else {
-                            listExternalDownload.add(models);
+                            mListExternalDownload.add(models);
                         }
                     }
 
                 }else {
-                    swipeRefreshLayout.setRefreshing(false);
+                    mSwipeRefreshLayout.setRefreshing(false);
                 }
             }
 
             @Override
             public void onFailure(Call<SingleDetails> call, Throwable t) {
-                swipeRefreshLayout.setRefreshing(false);
+                mSwipeRefreshLayout.setRefreshing(false);
             }
         });
     }
@@ -2257,19 +1925,19 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     private void getFavStatus() {
         Retrofit retrofit = RetrofitClient.getRetrofitInstance();
         FavouriteApi api = retrofit.create(FavouriteApi.class);
-        Call<FavoriteModel> call = api.verifyFavoriteList(Config.API_KEY, userId, id);
+        Call<FavoriteModel> call = api.verifyFavoriteList(Config.API_KEY, mUserId, mId);
         call.enqueue(new Callback<FavoriteModel>() {
             @Override
             public void onResponse(Call<FavoriteModel> call, retrofit2.Response<FavoriteModel> response) {
                 if (response.code() == 200){
                     if (response.body().getStatus().equalsIgnoreCase("success")){
-                        isFav = true;
-                        imgAddFav.setBackgroundResource(R.drawable.ic_favorite_white);
-                        imgAddFav.setVisibility(VISIBLE);
+                        mIsFav = true;
+                        mImgAddFav.setBackgroundResource(R.drawable.ic_favorite_white);
+                        mImgAddFav.setVisibility(VISIBLE);
                     } else {
-                        isFav = false;
-                        imgAddFav.setBackgroundResource(R.drawable.ic_favorite_border_white);
-                        imgAddFav.setVisibility(VISIBLE);
+                        mIsFav = false;
+                        mImgAddFav.setBackgroundResource(R.drawable.ic_favorite_border_white);
+                        mImgAddFav.setVisibility(VISIBLE);
                     }
                 }
             }
@@ -2285,19 +1953,19 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     private void removeFromFav() {
         Retrofit retrofit = RetrofitClient.getRetrofitInstance();
         FavouriteApi api = retrofit.create(FavouriteApi.class);
-        Call<FavoriteModel> call = api.removeFromFavorite(Config.API_KEY, userId, id);
+        Call<FavoriteModel> call = api.removeFromFavorite(Config.API_KEY, mUserId, mId);
         call.enqueue(new Callback<FavoriteModel>() {
             @Override
             public void onResponse(Call<FavoriteModel> call, retrofit2.Response<FavoriteModel> response) {
                 if (response.code() == 200){
                     if (response.body().getStatus().equalsIgnoreCase("success")){
-                        isFav = false;
+                        mIsFav = false;
                         new ToastMsg(DetailsActivity.this).toastIconSuccess(response.body().getMessage());
-                        imgAddFav.setBackgroundResource(R.drawable.ic_favorite_border_white);
+                        mImgAddFav.setBackgroundResource(R.drawable.ic_favorite_border_white);
                     } else {
-                        isFav = true;
+                        mIsFav = true;
                         new ToastMsg(DetailsActivity.this).toastIconError(response.body().getMessage());
-                        imgAddFav.setBackgroundResource(R.drawable.ic_favorite_white);
+                        mImgAddFav.setBackgroundResource(R.drawable.ic_favorite_white);
                     }
                 }
             }
@@ -2325,10 +1993,10 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             @Override
             public void onResponse(Call<PostCommentModel> call, retrofit2.Response<PostCommentModel> response) {
                 if (response.body().getStatus().equals("success")){
-                    rvComment.removeAllViews();
-                    listComment.clear();
+                    mRvComment.removeAllViews();
+                    mListComment.clear();
                     getComments();
-                    etComment.setText("");
+                    mEtComment.setText("");
                     new ToastMsg(DetailsActivity.this).toastIconSuccess(response.body().getMessage());
                 }else {
                     new ToastMsg(DetailsActivity.this).toastIconError(response.body().getMessage());
@@ -2346,14 +2014,14 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
         Retrofit retrofit = RetrofitClient.getRetrofitInstance();
         CommentApi api = retrofit.create(CommentApi.class);
-        Call<List<GetCommentsModel>> call = api.getAllComments(Config.API_KEY, id);
+        Call<List<GetCommentsModel>> call = api.getAllComments(Config.API_KEY, mId);
         call.enqueue(new Callback<List<GetCommentsModel>>() {
             @Override
             public void onResponse(Call<List<GetCommentsModel>> call, retrofit2.Response<List<GetCommentsModel>> response) {
                 if (response.code() == 200) {
-                    listComment.addAll(response.body());
+                    mListComment.addAll(response.body());
 
-                    commentsAdapter.notifyDataSetChanged();
+                    mCommentsAdapter.notifyDataSetChanged();
                 }
             }
 
@@ -2366,26 +2034,26 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     }
 
     public void hideDescriptionLayout() {
-        descriptionLayout.setVisibility(GONE);
-        lPlay.setVisibility(VISIBLE);
+        mDescriptionLayout.setVisibility(GONE);
+        mLPlay.setVisibility(VISIBLE);
     }
 
     public void showSeriesLayout() {
-        seriestLayout.setVisibility(VISIBLE);
+        mSeriesLayout.setVisibility(VISIBLE);
     }
 
     public void showDescriptionLayout() {
-        descriptionLayout.setVisibility(VISIBLE);
-        lPlay.setVisibility(GONE);
+        mDescriptionLayout.setVisibility(VISIBLE);
+        mLPlay.setVisibility(GONE);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.e("OnPause", "isPlaying: " + isPlaying);
-        if (isPlaying && player != null) {
+        Log.e("OnPause", "isPlaying: " + mIsPlaying);
+        if (mIsPlaying && mPlayer != null) {
             //Log.e("PLAY:::","PAUSE");
-            player.setPlayWhenReady(false);
+            mPlayer.setPlayWhenReady(false);
         }
     }
 
@@ -2394,7 +2062,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         super.onStop();
         //castManager.removeProgressWatcher(this);
 
-        Log.e("onStop", "isPlaying: " + isPlaying);
+        Log.e("onStop", "isPlaying: " + mIsPlaying);
 
     }
 
@@ -2403,20 +2071,19 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         super.onDestroy();
         resetCastPlayer();
         releasePlayer();
-
-
+        mUnbinder.unbind();
     }
 
     @Override
     public void onBackPressed() {
-        if (activeMovie) {
+        if (mActiveMovie) {
             setPlayerNormalScreen();
-            if (player != null){
-                player.setPlayWhenReady(false);
-                player.stop();
+            if (mPlayer != null){
+                mPlayer.setPlayWhenReady(false);
+                mPlayer.stop();
             }
             showDescriptionLayout();
-            activeMovie = false;
+            mActiveMovie = false;
         } else {
             releasePlayer();
             super.onBackPressed();
@@ -2427,44 +2094,44 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     protected void onResume() {
         super.onResume();
         //startPlayer();
-        if (player != null) {
-            if (type.equals("youtube") || type.equals("youtube-live")) {
+        if (mPlayer != null) {
+            if (mType.equals("youtube") || mType.equals("youtube-live")) {
                 if (Config.YOUTUBE_VIDEO_AUTO_PLAY) {
-                    player.setPlayWhenReady(true);
+                    mPlayer.setPlayWhenReady(true);
                 } else {
-                    player.setPlayWhenReady(false);
+                    mPlayer.setPlayWhenReady(false);
                 }
             } else {
-                player.setPlayWhenReady(true);
+                mPlayer.setPlayWhenReady(true);
             }
         }
     }
 
     public void releasePlayer() {
-        if (player != null) {
-            player.setPlayWhenReady(true);
-            player.stop();
-            player.release();
-            player = null;
-            simpleExoPlayerView.setPlayer(null);
+        if (mPlayer != null) {
+            mPlayer.setPlayWhenReady(true);
+            mPlayer.stop();
+            mPlayer.release();
+            mPlayer = null;
+            mSimpleExoPlayerView.setPlayer(null);
             //simpleExoPlayerView = null;
         }
     }
 
     public void setMediaUrlForTvSeries(String url, String season, String episod) {
-        mediaUrl = url;
-        this.season = season;
-        this.episod = episod;
+        mMediaUrl = url;
+        this.mSeason = season;
+        this.mEpisod = episod;
     }
 
     public boolean getCastSession() {
-        return castSession;
+        return mCastSession;
     }
 
     public void resetCastPlayer() {
-        if (castPlayer != null) {
-            castPlayer.setPlayWhenReady(false);
-            castPlayer.release();
+        if (mCastPlayer != null) {
+            mCastPlayer.setPlayWhenReady(false);
+            mCastPlayer.release();
         }
     }
 
@@ -2491,16 +2158,16 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     public void playNextCast(MediaInfo mediaInfo) {
 
         //simpleExoPlayerView.setPlayer(castPlayer);
-        simpleExoPlayerView.setUseController(false);
-        castControlView.setVisibility(VISIBLE);
-        castControlView.setPlayer(castPlayer);
+        mSimpleExoPlayerView.setUseController(false);
+        mCastControlView.setVisibility(VISIBLE);
+        mCastControlView.setPlayer(mCastPlayer);
         //simpleExoPlayerView.setDefaultArtwork();
-        castControlView.setVisibilityListener(new PlaybackControlView.VisibilityListener() {
+        mCastControlView.setVisibilityListener(new PlaybackControlView.VisibilityListener() {
             @Override
             public void onVisibilityChange(int visibility) {
                 if (visibility == GONE) {
-                    castControlView.setVisibility(VISIBLE);
-                    chromeCastTv.setVisibility(VISIBLE);
+                    mCastControlView.setVisibility(VISIBLE);
+                    mChromeCastTv.setVisibility(VISIBLE);
                 }
             }
         });
@@ -2524,16 +2191,16 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
         remoteMediaClient.queueLoad(newItemArray, 0,
                 MediaStatus.REPEAT_MODE_REPEAT_OFF, null);
-        castPlayer.setPlayWhenReady(true);
+        mCastPlayer.setPlayWhenReady(true);
 
     }
 
     public MediaInfo getMediaInfo() {
         MediaMetadata movieMetadata = new MediaMetadata(MediaMetadata.MEDIA_TYPE_MOVIE);
-        movieMetadata.putString(MediaMetadata.KEY_TITLE, title);
+        movieMetadata.putString(MediaMetadata.KEY_TITLE, mTitle);
         //movieMetadata.putString(MediaMetadata.KEY_ALBUM_ARTIST, "Test Artist");
-        movieMetadata.addImage(new WebImage(Uri.parse(castImageUrl)));
-        MediaInfo mediaInfo = new MediaInfo.Builder(mediaUrl)
+        movieMetadata.addImage(new WebImage(Uri.parse(mCastImageUrl)));
+        MediaInfo mediaInfo = new MediaInfo.Builder(mMediaUrl)
                 .setStreamType(MediaInfo.STREAM_TYPE_BUFFERED)
                 .setContentType(MimeTypes.VIDEO_UNKNOWN)
                 .setMetadata(movieMetadata).build();
@@ -2615,10 +2282,10 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             return;
         }
 
-        if (type.equals("movie")) {
-            fileName = tvName.getText().toString();
+        if (mType.equals("movie")) {
+            fileName = mTvName.getText().toString();
         } else {
-            fileName = seriesTitle + "_" + season + "_" + episod;
+            fileName = mSeriesTitle + "_" + mSeason + "_" + mEpisod;
         }
 
         String path = Constants.getDownloadDir(DetailsActivity.this);
@@ -2653,20 +2320,20 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     }
 
     public void hideExoControlForTv() {
-        exoRewind.setVisibility(GONE);
-        exoForward.setVisibility(GONE);
-        liveTv.setVisibility(VISIBLE);
-        seekbarLayout.setVisibility(GONE);
+        mExoRewind.setVisibility(GONE);
+        mExoForward.setVisibility(GONE);
+        mLiveTv.setVisibility(VISIBLE);
+        mSeekbarLayout.setVisibility(GONE);
     }
 
     public void showExoControlForTv() {
-        exoRewind.setVisibility(VISIBLE);
-        exoForward.setVisibility(VISIBLE);
-        liveTv.setVisibility(GONE);
-        seekbarLayout.setVisibility(VISIBLE);
-        watchLiveTv.setVisibility(VISIBLE);
-        liveTv.setVisibility(GONE);
-        watchStatusTv.setText(getResources().getString(R.string.watching_catch_up_tv));
+        mExoRewind.setVisibility(VISIBLE);
+        mExoForward.setVisibility(VISIBLE);
+        mLiveTv.setVisibility(GONE);
+        mSeekbarLayout.setVisibility(VISIBLE);
+        mWatchLiveTv.setVisibility(VISIBLE);
+        mLiveTv.setVisibility(GONE);
+        mWatchStatusTv.setText(getResources().getString(R.string.watching_catch_up_tv));
     }
 
     private void getScreenSize() {
@@ -2690,14 +2357,14 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                     if (event.getX() < (sWidth / 2)) {
 
                         //here check touch is screen left or right side
-                        intLeft = true;
-                        intRight = false;
+                        mIntLeft = true;
+                        mIntRight = false;
 
                     } else if (event.getX() > (sWidth / 2)) {
 
                         //here check touch is screen left or right side
-                        intLeft = false;
-                        intRight = true;
+                        mIntLeft = false;
+                        mIntRight = true;
                     }
                     break;
 
@@ -2713,7 +2380,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                     diffY = (long) (Math.ceil(event.getY() - downY));
 
                     if (Math.abs(diffY) > Math.abs(diffX)) {
-                        if (intLeft) {
+                        if (mIntLeft) {
                             //if left its for brightness
 
                             if (downY < y2) {
@@ -2722,7 +2389,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                                 //up  swipe brightness increase
                             }
 
-                        } else if (intRight) {
+                        } else if (mIntRight) {
 
                             //if right its for audio
                             if (downY < y2) {
@@ -2751,7 +2418,174 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
+    }
 
+
+    @OnClick(R.id.img_back)
+    void onBackClick(){
+        if (mActiveMovie) {
+            setPlayerNormalScreen();
+            if (mPlayer != null){
+                mPlayer.setPlayWhenReady(false);
+                mPlayer.stop();
+            }
+            showDescriptionLayout();
+            mActiveMovie = false;
+        } else {
+            finish();
+        }
+    }
+    @OnClick(R.id.img_subtitle)
+    void onSubtitleClick(){
+        showSubtitleDialog(DetailsActivity.this, mListSub);
+    }
+    @OnClick(R.id.btn_comment)
+    void onCommentBtnClick(){
+        if (!PreferenceUtils.isLoggedIn(DetailsActivity.this)) {
+            startActivity(new Intent(DetailsActivity.this, LoginActivity.class));
+            new ToastMsg(DetailsActivity.this).toastIconError(getString(R.string.login_first));
+        } else if (mEtComment.getText().toString().equals("")) {
+            new ToastMsg(DetailsActivity.this).toastIconError(getString(R.string.comment_empty));
+        } else {
+            String comment = mEtComment.getText().toString();
+            addComment(mId, PreferenceUtils.getUserId(DetailsActivity.this), comment);
+        }
+    }
+    @OnClick({R.id.add_fav,R.id.add_fav2})
+    void onFavClick(){
+        if (mIsFav) {
+            removeFromFav();
+        } else {
+            addToFav();
+        }
+    }
+    @OnClick(R.id.img_full_scr)
+    void onFullScrClick(){
+        controlFullScreenPlayer();
+    }
+
+    @OnClick(R.id.volumn_control_iv)
+    void onVolumnControlClick(){
+        mVolumnControlLayout.setVisibility(VISIBLE);
+    }
+
+    @OnClick(R.id.aspect_ratio_iv)
+    void onAspectRatioClick(){
+        if (mAspectClickCount == 1) {
+            //Toast.makeText(DetailsActivity.this, "Fill", Toast.LENGTH_SHORT).show();
+            mSimpleExoPlayerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FILL);
+            mPlayer.setVideoScalingMode(C.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING);
+            mAspectClickCount = 2;
+        } else if (mAspectClickCount == 2) {
+            //Toast.makeText(DetailsActivity.this, "Fit", Toast.LENGTH_SHORT).show();
+            mSimpleExoPlayerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIT);
+            mPlayer.setVideoScalingMode(C.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING);
+            mAspectClickCount = 3;
+        } else if (mAspectClickCount == 3) {
+            //Toast.makeText(DetailsActivity.this, "Zoom", Toast.LENGTH_SHORT).show();
+            mSimpleExoPlayerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIT);
+            mPlayer.setVideoScalingMode(C.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING);
+            mAspectClickCount = 1;
+        }
+    }
+
+    @OnClick(R.id.external_player_iv)
+    void onExternalPlayerClick(){
+        if (mMediaUrl != null) {
+            if (!tv) {
+                // set player normal/ potrait screen if not tv
+                mDescriptionLayout.setVisibility(VISIBLE);
+                setPlayerNormalScreen();
+            }
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setDataAndType(Uri.parse(mMediaUrl), "video/*");
+            startActivity(Intent.createChooser(intent, "Complete action using"));
+        }
+    }
+
+    @OnClick(R.id.watch_now_bt)
+    void onWatchNowClick(){
+        PopUpAds.ShowAdmobInterstitialAds(DetailsActivity.this);
+        if (!mListServer.isEmpty()) {
+            if (mListServer.size() == 1) {
+                releasePlayer();
+                resetCastPlayer();
+                preparePlayer(mListServer.get(0));
+                mDescriptionLayout.setVisibility(GONE);
+                mLPlay.setVisibility(VISIBLE);
+            }else {
+                openServerDialog();
+            }
+        }else{
+            Toast.makeText(DetailsActivity.this, R.string.no_video_found, Toast.LENGTH_SHORT).show();
+        }
+    }
+    @OnClick(R.id.download_bt)
+    void onDownloadClick(){
+        if(PreferenceUtils.isLoggedIn(DetailsActivity.this)){
+            //PopUpAds.ShowAdmobInterstitialAds(DetailsActivity.this);
+//                    DetailsActivity.getInstance().loadAdReward();
+            //loadRewardedAd();
+            if (!mListInternalDownload.isEmpty() || !mListExternalDownload.isEmpty()) {
+                if (Config.ENABLE_DOWNLOAD_TO_ALL) {
+                    openDownloadServerDialog();
+                } else {
+                    if (PreferenceUtils.isLoggedIn(DetailsActivity.this) && PreferenceUtils.isActivePlan(DetailsActivity.this)) {
+                        openDownloadServerDialog();
+                    } else {
+                        Toast.makeText(DetailsActivity.this, R.string.download_not_permitted, Toast.LENGTH_SHORT).show();
+                        Log.e("Download", "not permitted");
+                    }
+                }
+            } else {
+                Toast.makeText(DetailsActivity.this, R.string.no_download_server_found, Toast.LENGTH_SHORT).show();
+            }
+        }
+        else{
+            Intent intent = new Intent(DetailsActivity.this,FirebaseSignUpActivity.class);
+            startActivity(intent);
+        }
+    }
+    @OnClick(R.id.watch_live_tv)
+    void onWatchLiveClick(){
+        hideExoControlForTv();
+        initMoviePlayer(mMediaUrl, mServerType, DetailsActivity.this);
+
+        mWatchStatusTv.setText(getString(R.string.watching_on) + " " + getString(R.string.app_name));
+        mWatchLiveTv.setVisibility(GONE);
+
+        mTimeTv.setText(mCurrentProgramTime);
+        mProgramTv.setText(mCurrentProgramTitle);
+    }
+
+    @OnClick({R.id.share_iv2,R.id.share_iv})
+    void onShare2Click(){
+        if (mTitle == null) {
+            new ToastMsg(DetailsActivity.this).toastIconError("Title should not be empty.");
+            return;
+        }
+        Tools.share(DetailsActivity.this, mTitle);
+    }
+
+    @OnClick(R.id.img_server)
+    void onSeverClick(){
+        openServerDialog();
+    }
+
+    @OnClick(R.id.subscribe_bt)
+    void onSubscribeClick(){
+        if (mUserId == null) {
+            new ToastMsg(DetailsActivity.this).toastIconError(getResources().getString(R.string.subscribe_error));
+            startActivity(new Intent(DetailsActivity.this, LoginActivity.class));
+            finish();
+        } else {
+            startActivity(new Intent(DetailsActivity.this, PurchasePlanActivity.class));
+        }
+    }
+
+    @OnClick({R.id.des_back_iv,R.id.back_iv})
+    void onDesBackClick(){
+        finish();
     }
 }
 

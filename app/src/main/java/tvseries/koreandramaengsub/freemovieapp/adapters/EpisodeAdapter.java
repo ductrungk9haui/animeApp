@@ -28,6 +28,7 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.Original
     EpisodeAdapter.OriginalViewHolder viewHolder;
     int i=0;
     private int lastPosition = -1;
+    private DetailsActivity activity;
     ArrayList<OriginalViewHolder> allViewHolder = new ArrayList<>();
     private int seasonNo;
 
@@ -41,6 +42,7 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.Original
 
     public EpisodeAdapter(Context context, List<EpiModel> items) {
         this.items = items;
+        activity = (DetailsActivity) context;
         ctx = context;
     }
 
@@ -92,7 +94,7 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.Original
                             mOnTVSeriesEpisodeItemClickListener.onEpisodeItemClickTvSeries("embed", v, obj, position, viewHolder);
                         }
                     }else {
-                        new DetailsActivity().initMoviePlayer(obj.getStreamURL(), obj.getServerType(), ctx);
+                        activity.initMoviePlayer(obj.getStreamURL(), obj.getServerType(), ctx);
                         if (mOnTVSeriesEpisodeItemClickListener != null){
                             mOnTVSeriesEpisodeItemClickListener.onEpisodeItemClickTvSeries("normal", v, obj, position, viewHolder);
                         }

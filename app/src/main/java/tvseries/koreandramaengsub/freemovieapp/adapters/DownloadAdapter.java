@@ -150,7 +150,7 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.Origin
 
         File file = new File(path, fileName); // e_ for encode
         if(file.exists()){
-            DetailsActivity.getInstance().checkExist=true;
+            DetailsActivity.getInstance().mCheckExist =true;
             new ToastMsg(mContext).toastIconError("File already exist.");
         }
         else {

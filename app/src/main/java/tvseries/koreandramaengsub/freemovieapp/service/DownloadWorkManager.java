@@ -132,7 +132,7 @@ public class DownloadWorkManager extends Worker {
 
                             @Override
                             public void onError(Error error) {
-                                DetailsActivity.getInstance().checkFailLink=true;
+                                DetailsActivity.getInstance().mCheckFailLink =true;
                                 mDBHelper.deleteByDownloadId(mDownloadId);
                                 new ToastMsg(mContext).toastIconError(fileName+" Error");
                                 Log.d("TRUNG","onError download " + fileName);

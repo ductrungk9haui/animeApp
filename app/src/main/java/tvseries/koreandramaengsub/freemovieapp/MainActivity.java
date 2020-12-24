@@ -533,8 +533,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         recyclerView.setHasFixedSize(true);
 
-        //status =  PreferenceUtils.isLoggedIn(this);
-        mStatus =  true;
+        mStatus =  PreferenceUtils.isLoggedIn(this);
         if (mStatus){
             PreferenceUtils.updateSubscriptionStatus(MainActivity.this);
             for (int i = 0; i< navItemName.length; i++){
