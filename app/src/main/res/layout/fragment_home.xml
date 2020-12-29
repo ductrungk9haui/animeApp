@@ -1,282 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:orientation="vertical">
 
-    <com.facebook.shimmer.ShimmerFrameLayout
+    <include
         android:id="@+id/shimmer_view_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        shimmer:shimmer_duration="2000"
-        android:orientation="vertical"
-        tools:visibility="gone">
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/grey_400"
-                android:layout_margin="10dp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <View
-                    android:background="@color/grey_400"
-                    android:layout_width="40dp"
-                    android:layout_height="160dp"
-                    android:layout_margin="8dp"/>
-
-                <View
-                    android:background="@color/grey_400"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:layout_height="160dp"
-                    android:layout_margin="8dp"/>
-
-                <View
-                    android:background="@color/grey_400"
-                    android:layout_width="40dp"
-                    android:layout_height="160dp"
-                    android:layout_margin="8dp"/>
-
-            </LinearLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:paddingLeft="10dp">
-
-                <View
-                    android:layout_width="140dp"
-                    android:layout_height="25dp"
-                    android:background="@color/grey_400"/>
-
-                <View
-                    android:layout_width="100dp"
-                    android:layout_height="25dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginRight="10dp"
-                    android:background="@color/grey_400"/>
-
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <View
-                    android:background="@color/grey_400"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="10dp"
-                    />
-
-                <View
-                    android:background="@color/grey_400"
-                    android:layout_marginLeft="10dp"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="10dp" />
-                <View
-                    android:background="@color/grey_400"
-                    android:layout_marginLeft="10dp"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="10dp" />
-
-                <View
-                    android:background="@color/grey_400"
-                    android:layout_marginLeft="10dp"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="10dp" />
-
-
-            </LinearLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:paddingLeft="10dp">
-
-                <View
-                    android:layout_width="140dp"
-                    android:layout_height="25dp"
-                    android:background="@color/grey_400"/>
-
-                <View
-                    android:layout_width="100dp"
-                    android:layout_height="25dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginRight="10dp"
-                    android:background="@color/grey_400"/>
-
-            </RelativeLayout>
-            <LinearLayout
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <View
-                    android:background="@color/grey_400"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="10dp"
-                    />
-
-                <View
-                    android:background="@color/grey_400"
-                    android:layout_marginLeft="10dp"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="10dp" />
-                <View
-                    android:background="@color/grey_400"
-                    android:layout_marginLeft="10dp"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="10dp" />
-
-                <View
-                    android:background="@color/grey_400"
-                    android:layout_marginLeft="10dp"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="10dp" />
-
-
-            </LinearLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:paddingLeft="10dp">
-
-                <View
-                    android:layout_width="140dp"
-                    android:layout_height="25dp"
-                    android:background="@color/grey_400"/>
-
-                <View
-                    android:layout_width="100dp"
-                    android:layout_height="25dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginRight="10dp"
-                    android:background="@color/grey_400"/>
-
-            </RelativeLayout>
-
-
-            <LinearLayout
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-
-                <View
-                    android:background="@color/grey_400"
-                    android:layout_marginLeft="10dp"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="200dp"
-                    android:layout_marginStart="10dp" />
-                <View
-                    android:background="@color/grey_400"
-                    android:layout_marginLeft="10dp"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="200dp"
-                    android:layout_marginStart="10dp" />
-                <View
-                    android:background="@color/grey_400"
-                    android:layout_marginLeft="10dp"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="200dp"
-                    android:layout_marginStart="10dp" />
-
-
-
-            </LinearLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:paddingLeft="10dp">
-
-                <View
-                    android:layout_width="140dp"
-                    android:layout_height="25dp"
-                    android:background="@color/grey_400"/>
-
-                <View
-                    android:layout_width="100dp"
-                    android:layout_height="25dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginRight="10dp"
-                    android:background="@color/grey_400"/>
-
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-
-                <View
-                    android:background="@color/grey_400"
-                    android:layout_marginLeft="10dp"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="200dp"
-                    android:layout_marginStart="10dp" />
-                <View
-                    android:background="@color/grey_400"
-                    android:layout_marginLeft="10dp"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="200dp"
-                    android:layout_marginStart="10dp" />
-                <View
-                    android:background="@color/grey_400"
-                    android:layout_marginLeft="10dp"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="200dp"
-                    android:layout_marginStart="10dp" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </com.facebook.shimmer.ShimmerFrameLayout>
-
+        layout="@layout/layout_dimmer_home"
+        tools:visibility="gone" />
 
     <tvseries.koreandramaengsub.freemovieapp.view.SwipeRefreshLayout
         android:id="@+id/swipe_layout"
-        android:layout_below="@+id/shimmer_view_container"
         android:layout_width="match_parent"
-        android:translationZ="12dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/shimmer_view_container"
+        android:translationZ="12dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -294,10 +34,10 @@
                     android:focusable="true">
 
                     <LinearLayout
-                        android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:descendantFocusability="blocksDescendants">
+                        android:descendantFocusability="blocksDescendants"
+                        android:orientation="vertical">
 
 
                         <View
@@ -306,29 +46,26 @@
                             android:layout_marginBottom="@dimen/spacing_middle" />
 
 
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:focusable="true">
+                            android:focusable="true"
+                            android:orientation="vertical">
 
                             <RelativeLayout
                                 android:id="@+id/slider_layout"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                >
+                                android:layout_height="wrap_content">
 
                                 <com.github.islamkhsh.CardSliderViewPager
+                                    android:id="@+id/c_viewPager"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/c_viewPager"
                                     android:layout_marginTop="24dp"
-                                    app:cardSlider_otherPagesWidth="24dp"
-                                    app:cardSlider_pageMargin="12dp"
-                                    app:cardSlider_cardCornerRadius="5dp"
                                     app:auto_slide_time="2"
-                                    />
+                                    app:cardSlider_cardCornerRadius="5dp"
+                                    app:cardSlider_otherPagesWidth="24dp"
+                                    app:cardSlider_pageMargin="12dp" />
 
                                 <!--<com.github.islamkhsh.CardSliderIndicator
                                     android:layout_width="wrap_content"
@@ -337,20 +74,18 @@
                                     android:layout_below="@id/c_viewPager"
                                     android:layout_marginTop="8dp"
                                     android:layout_centerHorizontal="true"/>-->
-
-
                             </RelativeLayout>
 
                             <RelativeLayout
                                 android:id="@+id/adView1"
-                                android:layout_gravity="center"
-                                android:gravity="center"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_gravity="center"
                                 android:layout_marginTop="5dp"
                                 android:focusable="true"
-                                android:nextFocusRight="@id/genre_layout"
-                                android:nextFocusLeft="@id/slider_layout"/>
+                                android:gravity="center"
+                                android:nextFocusLeft="@id/slider_layout"
+                                android:nextFocusRight="@id/genre_layout" />
 
 
                             <RelativeLayout
@@ -368,12 +103,11 @@
                                     android:id="@+id/tv_genre"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@string/explore_by_genre"
                                     android:layout_marginStart="15dp"
                                     android:paddingTop="8dp"
                                     android:paddingBottom="8dp"
-                                    android:textAppearance="@style/TextAppearance.Medium.Bold"
-                                    />
+                                    android:text="@string/explore_by_genre"
+                                    android:textAppearance="@style/TextAppearance.Medium.Bold" />
 
                                 <androidx.recyclerview.widget.RecyclerView
                                     android:id="@+id/genre_rv"
@@ -383,9 +117,6 @@
                                     android:layout_marginTop="8dp">
 
                                 </androidx.recyclerview.widget.RecyclerView>
-
-
-
                             </RelativeLayout>
 
                             <RelativeLayout
@@ -400,12 +131,11 @@
                                     android:id="@+id/tv_country"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@string/explore_by_country"
                                     android:layout_marginStart="15dp"
                                     android:paddingTop="8dp"
                                     android:paddingBottom="8dp"
-                                    android:textAppearance="@style/TextAppearance.Medium.Bold"
-                                    />
+                                    android:text="@string/explore_by_country"
+                                    android:textAppearance="@style/TextAppearance.Medium.Bold" />
 
                                 <androidx.recyclerview.widget.RecyclerView
                                     android:id="@+id/country_rv"
@@ -413,47 +143,43 @@
                                     android:layout_height="wrap_content"
                                     android:layout_below="@id/tv_country"
                                     android:layout_marginTop="8dp">
-
                                 </androidx.recyclerview.widget.RecyclerView>
-
-
-
                             </RelativeLayout>
 
 
-<!--                            <LinearLayout-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:gravity="center_vertical"-->
-<!--                                android:orientation="horizontal"-->
-<!--                                android:paddingLeft="@dimen/spacing_large"-->
-<!--                                android:paddingRight="@dimen/spacing_large">-->
+                            <!--                            <LinearLayout-->
+                            <!--                                android:layout_width="match_parent"-->
+                            <!--                                android:layout_height="wrap_content"-->
+                            <!--                                android:gravity="center_vertical"-->
+                            <!--                                android:orientation="horizontal"-->
+                            <!--                                android:paddingLeft="@dimen/spacing_large"-->
+                            <!--                                android:paddingRight="@dimen/spacing_large">-->
 
-<!--                                <TextView-->
-<!--                                    android:layout_width="0dp"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:layout_weight="1"-->
-<!--                                    android:text="@string/featured_tv_channels"-->
-<!--                                    android:textAppearance="@style/TextAppearance.Medium.Bold"-->
-<!--                                    />-->
+                            <!--                                <TextView-->
+                            <!--                                    android:layout_width="0dp"-->
+                            <!--                                    android:layout_height="wrap_content"-->
+                            <!--                                    android:layout_weight="1"-->
+                            <!--                                    android:text="@string/featured_tv_channels"-->
+                            <!--                                    android:textAppearance="@style/TextAppearance.Medium.Bold"-->
+                            <!--                                    />-->
 
-<!--                                <Button-->
-<!--                                    android:id="@+id/btn_more_tv"-->
-<!--                                    style="@style/Widget.AppCompat.Button.Borderless"-->
-<!--                                    android:layout_width="wrap_content"-->
-<!--                                    android:layout_height="wrap_content"-->
-<!--                                    android:gravity="center"-->
-<!--                                    android:minWidth="0dp"-->
-<!--                                    android:text="@string/more"-->
-<!--                                    android:textSize="12sp"-->
-<!--                                    android:textColor="@color/grey_60" />-->
+                            <!--                                <Button-->
+                            <!--                                    android:id="@+id/btn_more_tv"-->
+                            <!--                                    style="@style/Widget.AppCompat.Button.Borderless"-->
+                            <!--                                    android:layout_width="wrap_content"-->
+                            <!--                                    android:layout_height="wrap_content"-->
+                            <!--                                    android:gravity="center"-->
+                            <!--                                    android:minWidth="0dp"-->
+                            <!--                                    android:text="@string/more"-->
+                            <!--                                    android:textSize="12sp"-->
+                            <!--                                    android:textColor="@color/grey_60" />-->
 
-<!--                            </LinearLayout>-->
+                            <!--                            </LinearLayout>-->
 
-<!--                            <androidx.recyclerview.widget.RecyclerView-->
-<!--                                android:id="@+id/recyclerViewTv"-->
-<!--                                android:layout_width="match_parent"-->
-<!--                                android:layout_height="wrap_content" />-->
+                            <!--                            <androidx.recyclerview.widget.RecyclerView-->
+                            <!--                                android:id="@+id/recyclerViewTv"-->
+                            <!--                                android:layout_width="match_parent"-->
+                            <!--                                android:layout_height="wrap_content" />-->
 
 
                             <LinearLayout
@@ -480,16 +206,17 @@
                                     android:gravity="center"
                                     android:minWidth="0dp"
                                     android:text="@string/more"
-                                    android:textSize="12sp"
-                                    android:textColor="@color/grey_60" />
+                                    android:textColor="@color/grey_60"
+                                    android:textSize="12sp" />
 
                             </LinearLayout>
+
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/recyclerViewTvSeries"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:scrollbars="vertical"
                                 android:layout_marginBottom="10dp"
+                                android:scrollbars="vertical"
                                 android:scrollingCache="true" />
 
                             <LinearLayout
@@ -516,33 +243,33 @@
                                     android:gravity="center"
                                     android:minWidth="0dp"
                                     android:text="@string/more"
-                                    android:textSize="12sp"
-                                    android:textColor="@color/grey_60" />
+                                    android:textColor="@color/grey_60"
+                                    android:textSize="12sp" />
 
                             </LinearLayout>
+
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/recyclerViewTopviewTvSeries"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:scrollbars="vertical"
                                 android:layout_marginBottom="10dp"
+                                android:scrollbars="vertical"
                                 android:scrollingCache="true" />
 
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/recyclerView_by_genre"
-                                android:scrollbars="vertical"
-                                android:layout_marginBottom="10dp"
-                                android:scrollingCache="true"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-                            </androidx.recyclerview.widget.RecyclerView>
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
+                                android:scrollbars="vertical"
+                                android:scrollingCache="true"></androidx.recyclerview.widget.RecyclerView>
 
                             <RelativeLayout
                                 android:id="@+id/adView"
-                                android:layout_gravity="center"
-                                android:gravity="center"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -567,10 +294,11 @@
                                     android:gravity="center"
                                     android:minWidth="0dp"
                                     android:text="@string/more"
-                                    android:textSize="12sp"
-                                    android:textColor="@color/grey_60" />
+                                    android:textColor="@color/grey_60"
+                                    android:textSize="12sp" />
 
                             </LinearLayout>
+
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/recyclerView"
                                 android:layout_width="match_parent"
@@ -592,13 +320,7 @@
 
                     </LinearLayout>
                 </androidx.core.widget.NestedScrollView>
-
             </LinearLayout>
-
         </RelativeLayout>
-
-
     </tvseries.koreandramaengsub.freemovieapp.view.SwipeRefreshLayout>
-
-
 </RelativeLayout>

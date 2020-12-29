@@ -23,8 +23,8 @@
     <color name="nav_bg">#424242</color>
     <color name="nav_head_bg">#202020</color>
 
-    <color name="dark">#424242</color>
-    <color name="black_1_transarent">#ED111111</color>
+    <color name="dark">#424242</color>#
+    <color name="black_1_transarent">#BDBDBD</color>
     <color name="black_transparent">#2D000000</color>
     <color name="grey_transparent">#417C7C7C</color>
     <color name="grey_transparent2">#E97C7C7C</color>

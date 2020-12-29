@@ -10,152 +10,10 @@
     tools:ctx=".DetailsActivity"
     tools:showIn="@layout/activity_details">
 
-
-    <com.facebook.shimmer.ShimmerFrameLayout
+    <include
         android:id="@+id/shimmer_view_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:visibility="gone">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="350dp"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp">
-
-
-                <com.makeramen.roundedimageview.RoundedImageView
-                    android:id="@+id/image_thumby"
-                    android:layout_width="140dp"
-                    android:layout_height="210dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="25dp"
-                    android:background="@color/black_1_transarent"
-                    android:scaleType="fitXY"
-                    app:riv_corner_radius="5dip"
-                    app:riv_mutate_background="true" />
-
-                <!--<ImageView
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/ic_outline_play_circle_filled_24px"
-                    android:layout_width="38dp"
-                    android:layout_height="38dp" />-->
-
-
-                <LinearLayout
-                    android:id="@+id/l1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginBottom="30dp"
-                    android:layout_toEndOf="@id/image_thumby"
-                    android:orientation="vertical"
-                    android:padding="3dp">
-
-                    <TextView
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:background="@color/black_1_transarent"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                    <View
-                        android:layout_width="@dimen/spacing_medium"
-                        android:layout_height="0dp" />
-
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:background="@color/black_1_transarent" />
-
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="55dp"
-                        android:layout_marginTop="8dp"
-                        android:backgroundTint="@color/black_1_transarent" />
-
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="55dp"
-                        android:layout_marginTop="5dp"
-                        android:backgroundTint="@color/white"
-                        android:text="@string/download"
-                        android:textColor="@color/black"
-                        android:visibility="gone" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/l1"
-                    android:orientation="vertical">
-
-
-                    <View
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:background="@color/black_1_transarent" />
-
-                </LinearLayout>
-
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginTop="20dp"
-                android:background="@color/black_1_transarent" />
-
-            <View
-                android:layout_width="200dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="20dp"
-                android:background="@color/black_1_transarent" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginTop="20dp"
-                android:background="@color/black_1_transarent" />
-
-            <View
-                android:layout_width="200dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="20dp"
-                android:background="@color/black_1_transarent" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginTop="20dp"
-                android:background="@color/black_1_transarent" />
-
-            <View
-                android:layout_width="200dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="20dp"
-                android:background="@color/black_1_transarent" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginTop="20dp"
-                android:background="@color/black_1_transarent" />
-
-        </LinearLayout>
-
-    </com.facebook.shimmer.ShimmerFrameLayout>
-
+        layout="@layout/layout_dimmer_detail"
+        tools:visibility="gone" />
 
     <RelativeLayout
         android:id="@+id/play"
@@ -236,7 +94,7 @@
             android:layout_alignParentEnd="true"
             android:mediaRouteTypes="user"
             android:padding="5dp"
-            android:visibility="gone"
+            android:visibility="visible"
             app:mediaRouteButtonTint="@color/white" />
 
         <TextView

@@ -927,7 +927,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             resetCastPlayer();
             mMapMovies.put(mId,position);
             mDBHelper.deleteAllMapMovie();
-            mDBHelper.insertMapMovie(getmMapMovies());
+            mDBHelper.insertMapMovie(getMapMovies());
             if (mMapMovies.containsKey(mId) && mMapMovies.get(mId)!=null) {
                 mRvServer.scrollToPosition(mMapMovies.get(mId)-1);
             }
@@ -936,7 +936,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         }else {
             mMapMovies.put(mId,position);
             mDBHelper.deleteAllMapMovie();
-            mDBHelper.insertMapMovie(getmMapMovies());
+            mDBHelper.insertMapMovie(getMapMovies());
             mActiveMovie = true;
             if (mMapMovies.containsKey(mId) && mMapMovies.get(mId)!=null) {
                 mRvServer.scrollToPosition(mMapMovies.get(mId));
@@ -1730,7 +1730,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         });
 
     }
-    public String getmMapMovies(){
+    public String getMapMovies(){
         Gson gson = new Gson();
         return gson.toJson(mMapMovies);
     }

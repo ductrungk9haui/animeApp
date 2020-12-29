@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/91fb6f235bdb4a296489481dbf3cdbba/jetified-android-sdk-5.5.1/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/91fb6f235bdb4a296489481dbf3cdbba/jetified-android-sdk-5.5.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/91fb6f235bdb4a296489481dbf3cdbba/jetified-android-sdk-5.5.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.card/android-sdk/5.5.1/36b64abd31ed163886c93b1c86e31038e82b265b/android-sdk-5.5.1-javadoc.jar!/" />

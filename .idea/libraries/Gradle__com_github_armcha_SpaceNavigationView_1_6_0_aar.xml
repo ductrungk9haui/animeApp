@@ -1,8 +1,11 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.armcha:SpaceNavigationView:1.6.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/924b81ffa231440cf3fec08b05149194/jetified-SpaceNavigationView-1.6.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/924b81ffa231440cf3fec08b05149194/jetified-SpaceNavigationView-1.6.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5298568cf908aac54646a264a3b27817/jetified-SpaceNavigationView-1.6.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5298568cf908aac54646a264a3b27817/jetified-SpaceNavigationView-1.6.0/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0cc982fac89248b63169ca8436ea3a32/jetified-SpaceNavigationView-1.6.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0cc982fac89248b63169ca8436ea3a32/jetified-SpaceNavigationView-1.6.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0cc982fac89248b63169ca8436ea3a32/jetified-SpaceNavigationView-1.6.0/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.armcha/SpaceNavigationView/1.6.0/f3e0325da97b14552fdd10cf50ab5b3fea567/SpaceNavigationView-1.6.0-javadoc.jar!/" />

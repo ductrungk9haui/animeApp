@@ -1,8 +1,11 @@
 <component name="libraryTable">
   <library name="Gradle: com.tapjoy:tapjoy-android-sdk:12.7.1@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e516252498bc57adee0395d88a1ce2df/jetified-tapjoy-android-sdk-12.7.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e516252498bc57adee0395d88a1ce2df/jetified-tapjoy-android-sdk-12.7.1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5d5bd4cc9d7f7f9d7580949dcc9ba40b/jetified-tapjoy-android-sdk-12.7.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5d5bd4cc9d7f7f9d7580949dcc9ba40b/jetified-tapjoy-android-sdk-12.7.1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/dbca9a6aaa6fa9a29a2495768c970f81/jetified-tapjoy-android-sdk-12.7.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/dbca9a6aaa6fa9a29a2495768c970f81/jetified-tapjoy-android-sdk-12.7.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/dbca9a6aaa6fa9a29a2495768c970f81/jetified-tapjoy-android-sdk-12.7.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

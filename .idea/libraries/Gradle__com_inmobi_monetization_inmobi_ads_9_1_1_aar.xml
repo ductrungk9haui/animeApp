@@ -1,11 +1,15 @@
 <component name="libraryTable">
   <library name="Gradle: com.inmobi.monetization:inmobi-ads:9.1.1@aar">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/06d548d6b8668a972cf4bab79d2de315/jetified-inmobi-ads-9.1.1/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/04f61d10f76362513410a25d9b7e3b6f/jetified-inmobi-ads-9.1.1/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9f8919e2257720740e1b1ccf3a58bb3b/jetified-inmobi-ads-9.1.1/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/06d548d6b8668a972cf4bab79d2de315/jetified-inmobi-ads-9.1.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/06d548d6b8668a972cf4bab79d2de315/jetified-inmobi-ads-9.1.1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/04f61d10f76362513410a25d9b7e3b6f/jetified-inmobi-ads-9.1.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/04f61d10f76362513410a25d9b7e3b6f/jetified-inmobi-ads-9.1.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9f8919e2257720740e1b1ccf3a58bb3b/jetified-inmobi-ads-9.1.1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9f8919e2257720740e1b1ccf3a58bb3b/jetified-inmobi-ads-9.1.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9f8919e2257720740e1b1ccf3a58bb3b/jetified-inmobi-ads-9.1.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
