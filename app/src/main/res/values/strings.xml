@@ -6,12 +6,12 @@
     //admob
     <string name="admob_application_id">ca-app-pub-5660469579209926~1005189865</string>
 
-    <string name="app_name">KDrama EngSub</string>
+    <string name="app_name">Anime Sub Film</string>
     <!--app_title for main navigation & home title-->
-    <string name="app_title">KDrama EngSub</string>
+    <string name="app_title">Anime Sub Film</string>
     <string name="app_version">1.0.8</string>
-    <string name="contact_email">lnkh174@gmail.com</string>
-    <string name="copyright_text">Copyright @lnk174 \nAll right reserved</string>
+    <string name="contact_email">ductrungk9haui@gmail.com</string>
+    <string name="copyright_text">Copyright @Anime Team \nAll right reserved</string>
     <!-- App -->
     <string name="featured_tv_channels">Featured Tv Channel</string>
     <string name="latest_movie">Latest Movies</string>

@@ -15,7 +15,13 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.OvershootInterpolator;
+import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +30,13 @@ import androidx.core.app.ActivityCompat;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 import tvseries.koreandramaengsub.freemovieapp.database.DatabaseHelper;
 import tvseries.koreandramaengsub.freemovieapp.network.RetrofitClient;
 import tvseries.koreandramaengsub.freemovieapp.network.apis.ConfigurationApi;
@@ -33,20 +46,20 @@ import tvseries.koreandramaengsub.freemovieapp.utils.ApiResources;
 import tvseries.koreandramaengsub.freemovieapp.utils.Constants;
 import tvseries.koreandramaengsub.freemovieapp.utils.PreferenceUtils;
 import tvseries.koreandramaengsub.freemovieapp.utils.ToastMsg;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
 
 
 public class SplashScreenActivity extends AppCompatActivity {
     private static final String TAG = "SplashScreen";
     private final int PERMISSION_REQUEST_CODE = 100;
-    private int SPLASH_TIME = 1500;
+    private int SPLASH_TIME = 2700;
     private Thread timer;
     private DatabaseHelper db;
     AnimationDrawable anim;
-    ImageView imageView;
+    @BindView(R.id.logo) ImageView mLogo;
+    @BindView(R.id.logo_back) ImageView mLogoBack;
+    @BindView(R.id.icon) ImageView mIcon;
+    @BindView(R.id.content) TextView mContent;
+    Unbinder mUnBinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,15 +67,16 @@ public class SplashScreenActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_splashscreen);
+        setContentView(R.layout.launch_screen);
+        mUnBinder  = ButterKnife.bind(this);
         db = new DatabaseHelper(SplashScreenActivity.this);
-
-        imageView=(ImageView)findViewById(R.id.splash);
+        startWelcomeAnimation();
+        /*imageView=(ImageView)findViewById(R.id.splash);
         if(imageView==null)throw new AssertionError();
         imageView.setBackgroundResource(R.drawable.loading);
 
         anim=(AnimationDrawable)imageView.getBackground();
-        anim.start();
+        anim.start();*/
 
         //print keyHash for facebook login
        // createKeyHash(SplashScreenActivity.this, BuildConfig.APPLICATION_ID);
@@ -88,25 +102,25 @@ public class SplashScreenActivity extends AppCompatActivity {
 
                     if (PreferenceUtils.isLoggedIn(SplashScreenActivity.this)) {
                         Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                         startActivity(intent);
                         finish();
                     } else {
 
                         if (isLoginMandatory()) {
                             Intent intent = new Intent(SplashScreenActivity.this, FirebaseSignUpActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                             startActivity(intent);
                             finish();
                         } else {
                             Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                             startActivity(intent);
                             finish();
                         }
@@ -116,6 +130,33 @@ public class SplashScreenActivity extends AppCompatActivity {
             }
         };
 
+    }
+
+    private void startWelcomeAnimation() {
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0f,1f);
+        alphaAnimation.setDuration(2500);
+        alphaAnimation.setFillAfter(true);
+        mLogo.startAnimation(alphaAnimation);
+        mIcon.startAnimation(alphaAnimation);
+        mContent.startAnimation(alphaAnimation);
+
+        RotateAnimation rotateAnimation = new RotateAnimation(0.0f, 360.0f,
+                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
+                0.5f);
+        AlphaAnimation alphaAnimation2 = new AlphaAnimation(0f,1f);
+        AnimationSet set = new AnimationSet(true);
+        set.addAnimation(alphaAnimation2);
+        set.addAnimation(rotateAnimation);
+        set.setInterpolator(new OvershootInterpolator(1f));
+        set.setDuration(2000);
+        set.setStartOffset(500);
+        mLogoBack.startAnimation(set);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mUnBinder.unbind();
     }
 
     public boolean isLoginMandatory() {
@@ -147,7 +188,8 @@ public class SplashScreenActivity extends AppCompatActivity {
                         db.deleteAllAppConfig();
                         db.insertConfigurationData(configuration);
                         //apk update check
-                        if (isNeedUpdate(configuration.getApkUpdateInfo().getVersionCode())) {
+                        //T: added ! to test
+                        if (!isNeedUpdate(configuration.getApkUpdateInfo().getVersionCode())) {
                             showAppUpdateDialog(configuration.getApkUpdateInfo());
                             return;
                         }
