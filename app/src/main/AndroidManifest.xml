@@ -111,6 +111,7 @@
             android:theme="@style/AppTheme.Nobar" />
         <activity
             android:name="tvseries.koreandramaengsub.freemovieapp.SplashScreenActivity"
+            android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
