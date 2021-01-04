@@ -32,8 +32,8 @@ android {
         applicationId "tvseries.koreandramaengsub.freemovieapp"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 8
-        versionName "1.0.8"
+        versionCode 1
+        versionName "1.0.1"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true

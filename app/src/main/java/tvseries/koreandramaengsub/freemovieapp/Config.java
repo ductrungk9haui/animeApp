@@ -3,13 +3,13 @@ package tvseries.koreandramaengsub.freemovieapp;
 public class Config {
 
     // copy your api url from php admin dashboard & paste below
-    public static final String API_SERVER_URL = "https://koreandrama.cdramacollections.com/rest-api/";
+    public static final String API_SERVER_URL = "https://admin.animesubfilm.com/rest-api/";
 
     //copy your api key from php admin dashboard & paste below
-    public static final String API_KEY = "avbze8bhmfod3zxy973be4ob";
+    public static final String API_KEY = "y59z8crcp90by3enym2ewfvk";
 
     //copy your terms url from php admin dashboard & paste below
-    public static final String TERMS_URL = "https://koreandrama.cdramacollections.com/terms/";
+    public static final String TERMS_URL = "https://admin.animesubfilm.com/terms/";
 
     // download option for non subscribed user
     public static final boolean ENABLE_DOWNLOAD_TO_ALL = true;
