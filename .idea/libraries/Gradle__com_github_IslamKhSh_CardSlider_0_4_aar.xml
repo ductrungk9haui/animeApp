@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.IslamKhSh:CardSlider:0.4@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/894dae360dd5ff2102ba45a340df8e87/jetified-CardSlider-0.4/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/894dae360dd5ff2102ba45a340df8e87/jetified-CardSlider-0.4/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/894dae360dd5ff2102ba45a340df8e87/jetified-CardSlider-0.4/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/eab21ebe38dc1608e0b201109942063f/jetified-CardSlider-0.4/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/eab21ebe38dc1608e0b201109942063f/jetified-CardSlider-0.4/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/eab21ebe38dc1608e0b201109942063f/jetified-CardSlider-0.4/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
