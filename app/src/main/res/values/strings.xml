@@ -55,7 +55,7 @@
         <item>Country</item>
         <item>Profile</item>
         <item>Favorite</item>
-<!--        <item>Subscription</item>-->
+        <item>Subscription</item>
         <item>Downloads</item>
         <item>Settings</item>
         <item>Sign Out</item>
@@ -71,7 +71,7 @@
         <item>outline_outlined_flag_24</item>
         <item>outline_person_24</item>
         <item>outline_favorite_border_24</item>
-<!--        <item>ic_subscriptions_black_24dp</item>-->
+        <item>ic_subscriptions_black_24dp</item>
         <item>ic_file_download_black_24dp</item>
         <item>outline_settings_24</item>
         <item>outline_lock_24</item>

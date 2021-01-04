@@ -1,11 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.ironsource.sdk:mediationsdk:7.0.3.1@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/91b707bc2025f055bbc34e0f851ca716/jetified-mediationsdk-7.0.3.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/91b707bc2025f055bbc34e0f851ca716/jetified-mediationsdk-7.0.3.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c7c008a4958eeac86a4373a0cb2928a1/jetified-mediationsdk-7.0.3.1/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c7c008a4958eeac86a4373a0cb2928a1/jetified-mediationsdk-7.0.3.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c7c008a4958eeac86a4373a0cb2928a1/jetified-mediationsdk-7.0.3.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e7b0cfb267b584f795c2a80f90c570d5/jetified-mediationsdk-7.0.3.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e7b0cfb267b584f795c2a80f90c570d5/jetified-mediationsdk-7.0.3.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e7b0cfb267b584f795c2a80f90c570d5/jetified-mediationsdk-7.0.3.1/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

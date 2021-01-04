@@ -1,11 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.volsahin:bottomify-navigation-view:1.0.2@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/477403d1f143e597aeff0df9f505d3be/jetified-bottomify-navigation-view-1.0.2/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/477403d1f143e597aeff0df9f505d3be/jetified-bottomify-navigation-view-1.0.2/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2ea301888556353abd1eee0a08dee1f1/jetified-bottomify-navigation-view-1.0.2/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2ea301888556353abd1eee0a08dee1f1/jetified-bottomify-navigation-view-1.0.2/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2ea301888556353abd1eee0a08dee1f1/jetified-bottomify-navigation-view-1.0.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d86a54e2bbc4756e32e5d7181c902cb4/jetified-bottomify-navigation-view-1.0.2/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d86a54e2bbc4756e32e5d7181c902cb4/jetified-bottomify-navigation-view-1.0.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d86a54e2bbc4756e32e5d7181c902cb4/jetified-bottomify-navigation-view-1.0.2/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

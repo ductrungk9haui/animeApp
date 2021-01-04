@@ -57,6 +57,7 @@ import tvseries.koreandramaengsub.freemovieapp.network.apis.HomeContentApi;
 import tvseries.koreandramaengsub.freemovieapp.network.model.config.AdsConfig;
 import tvseries.koreandramaengsub.freemovieapp.utils.Constants;
 import tvseries.koreandramaengsub.freemovieapp.utils.NetworkInst;
+import tvseries.koreandramaengsub.freemovieapp.utils.PreferenceUtils;
 import tvseries.koreandramaengsub.freemovieapp.utils.ads.BannerAds;
 import tvseries.koreandramaengsub.freemovieapp.view.SwipeRefreshLayout;
 
@@ -412,9 +413,14 @@ public class HomeFragment extends Fragment {
         if (adsConfig.getAdsEnable().equals("1")) {
 
             if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                BannerAds.ShowAdmobBannerAds(getContext(), mAdView);
-                BannerAds.ShowAdmobBannerAds(getContext(), mAdView1);
-
+                //BannerAds.ShowAdmobBannerAds(getContext(), mAdView);
+                //BannerAds.ShowAdmobBannerAds(getContext(), mAdView1);
+                if (PreferenceUtils.isLoggedIn(mActivity)) {
+                    if (!PreferenceUtils.isActivePlan(mActivity)) {
+                        BannerAds.ShowAdmobBannerAds(getContext(), mAdView);
+                        BannerAds.ShowAdmobBannerAds(getContext(), mAdView1);
+                    }
+                }
             } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
                 BannerAds.showStartAppBanner(getContext(), mAdView);
 

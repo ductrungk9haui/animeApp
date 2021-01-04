@@ -1,15 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.android.exoplayer:exoplayer-dash:2.7.3@aar">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/06601d0b49f79ec0a7051076fc81fef3/jetified-exoplayer-dash-2.7.3/annotations.zip!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/70dc2ce01b834017be1b1af2b3a81a4a/jetified-exoplayer-dash-2.7.3/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1af6128ab26c16f1e036e4d7847652a7/jetified-exoplayer-dash-2.7.3/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/06601d0b49f79ec0a7051076fc81fef3/jetified-exoplayer-dash-2.7.3/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/06601d0b49f79ec0a7051076fc81fef3/jetified-exoplayer-dash-2.7.3/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/70dc2ce01b834017be1b1af2b3a81a4a/jetified-exoplayer-dash-2.7.3/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/70dc2ce01b834017be1b1af2b3a81a4a/jetified-exoplayer-dash-2.7.3/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/70dc2ce01b834017be1b1af2b3a81a4a/jetified-exoplayer-dash-2.7.3/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1af6128ab26c16f1e036e4d7847652a7/jetified-exoplayer-dash-2.7.3/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1af6128ab26c16f1e036e4d7847652a7/jetified-exoplayer-dash-2.7.3/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1af6128ab26c16f1e036e4d7847652a7/jetified-exoplayer-dash-2.7.3/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.exoplayer/exoplayer-dash/2.7.3/4cd1aa7744d13b79548713a0e8daae0e50f96ac1/exoplayer-dash-2.7.3-javadoc.jar!/" />

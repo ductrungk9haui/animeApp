@@ -71,7 +71,7 @@ public class FileDownloadAdapter extends RecyclerView.Adapter<FileDownloadAdapte
             holder.setProgress((int) totalKb, (int) downloadKb);
             holder.setDownloadAmount(downloadMb, totalMb);
         } else {
-            holder.setDownloadAmount(0, 0);
+//            holder.setDownloadAmount(0, 0);
         }
         if (work.getDownloadStatus() != null) {
             holder.setDownloadStatus(work.getDownloadStatus());
@@ -144,8 +144,8 @@ public class FileDownloadAdapter extends RecyclerView.Adapter<FileDownloadAdapte
 
         @SuppressLint({"DefaultLocale", "SetTextI18n"})
         public void setDownloadAmount(double downloadMb, double totalMb) {
-            downloadAmountTv.setText(Double.parseDouble(String.format("%.1f", downloadMb)) + " MB / "
-                    + Double.parseDouble(String.format("%.1f", totalMb)) + " MB");
+//            downloadAmountTv.setText(Double.parseDouble(String.format("%.1f", downloadMb)) + " MB / "
+ //                   + Double.parseDouble(String.format("%.1f", totalMb)) + " MB");
         }
     }
 

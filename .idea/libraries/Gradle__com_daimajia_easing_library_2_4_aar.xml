@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.daimajia.easing:library:2.4@aar">
     <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5779b59ea0a1092418777b13ce0f8aca/jetified-library-2.4/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5779b59ea0a1092418777b13ce0f8aca/jetified-library-2.4/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5779b59ea0a1092418777b13ce0f8aca/jetified-library-2.4/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5779b59ea0a1092418777b13ce0f8aca/jetified-library-2.4/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.daimajia.easing/library/2.4/a344bf18448152d814ba2eb0fb55d70addb04b2d/library-2.4-javadoc.jar!/" />

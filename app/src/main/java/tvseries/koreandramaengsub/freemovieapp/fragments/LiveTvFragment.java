@@ -36,6 +36,7 @@ import tvseries.koreandramaengsub.freemovieapp.network.model.config.AdsConfig;
 import tvseries.koreandramaengsub.freemovieapp.utils.ApiResources;
 import tvseries.koreandramaengsub.freemovieapp.utils.Constants;
 import tvseries.koreandramaengsub.freemovieapp.utils.NetworkInst;
+import tvseries.koreandramaengsub.freemovieapp.utils.PreferenceUtils;
 import tvseries.koreandramaengsub.freemovieapp.utils.ToastMsg;
 import tvseries.koreandramaengsub.freemovieapp.utils.ads.BannerAds;
 import retrofit2.Call;
@@ -199,8 +200,12 @@ public class LiveTvFragment extends Fragment {
         if (adsConfig.getAdsEnable().equals("1")) {
 
             if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                BannerAds.ShowAdmobBannerAds(activity, adView);
-
+                //BannerAds.ShowAdmobBannerAds(activity, adView);
+                if (PreferenceUtils.isLoggedIn(activity)) {
+                    if (!PreferenceUtils.isActivePlan(activity)) {
+                        BannerAds.ShowAdmobBannerAds(activity, adView);
+                    }
+                }
             } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
                 BannerAds.showStartAppBanner(activity, adView);
 

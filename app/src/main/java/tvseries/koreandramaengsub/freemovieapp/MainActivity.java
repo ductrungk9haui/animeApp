@@ -126,7 +126,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         mUnbinder = ButterKnife.bind(this);
         setupTheme();
-        PopUpAds.ShowAdmobInterstitialAds(MainActivity.this);
+        if (PreferenceUtils.isLoggedIn(MainActivity.this)) {
+            if (!PreferenceUtils.isActivePlan(MainActivity.this)) {
+                PopUpAds.ShowAdmobInterstitialAds(MainActivity.this);
+            }
+        }
+        //PopUpAds.ShowAdmobInterstitialAds(MainActivity.this);
         // To resolve cast button visibility problem. Check Cast State when app is open.
         CastContext castContext = CastContext.getSharedInstance(this);
         castContext.getCastState();
@@ -589,17 +594,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             Config.isOpenChildFragment = true;
                         }
                         else if (position==7){
-                            Intent intent=new Intent(MainActivity.this, DownloadActivity.class);
+                            Intent intent=new Intent(MainActivity.this, SubscriptionActivity.class);
                             startActivity(intent);
                         }
                         else if (position==8){
-                            Intent intent=new Intent(MainActivity.this, SettingsActivity.class);
+                            Intent intent=new Intent(MainActivity.this, DownloadActivity.class);
                             startActivity(intent);
                         }
-//                        else if (position==9){
-//                            Intent intent=new Intent(MainActivity.this,SettingsActivity.class);
-//                            startActivity(intent);
-//                        }
+                        else if (position==9){
+                            Intent intent=new Intent(MainActivity.this,SettingsActivity.class);
+                            startActivity(intent);
+                        }
                         else if (position==9){
 
                             new AlertDialog.Builder(MainActivity.this).setMessage("Are you sure to logout ?")

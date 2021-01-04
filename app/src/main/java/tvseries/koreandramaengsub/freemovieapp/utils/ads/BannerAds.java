@@ -2,8 +2,6 @@ package tvseries.koreandramaengsub.freemovieapp.utils.ads;
 
 import android.content.Context;
 import android.os.Bundle;
-
-
 import android.widget.RelativeLayout;
 
 import com.google.ads.mediation.admob.AdMobAdapter;
@@ -11,9 +9,10 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.ixidev.gdpr.GDPRChecker;
+import com.startapp.android.publish.ads.banner.Banner;
+
 import tvseries.koreandramaengsub.freemovieapp.database.DatabaseHelper;
 import tvseries.koreandramaengsub.freemovieapp.network.model.config.AdsConfig;
-import com.startapp.android.publish.ads.banner.Banner;
 
 
 public class BannerAds {
@@ -23,7 +22,7 @@ public class BannerAds {
 
         AdView mAdView = new AdView(context);
         mAdView.setAdSize(AdSize.BANNER);
-        mAdView.setAdUnitId(adsConfig.getAdmobBannerAdsId());
+        mAdView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
         AdRequest.Builder builder = new AdRequest.Builder();
         GDPRChecker.Request request = GDPRChecker.getRequest();
 

@@ -31,6 +31,7 @@ import tvseries.koreandramaengsub.freemovieapp.network.apis.TvSeriesApi;
 import tvseries.koreandramaengsub.freemovieapp.network.model.config.AdsConfig;
 import tvseries.koreandramaengsub.freemovieapp.utils.Constants;
 import tvseries.koreandramaengsub.freemovieapp.utils.NetworkInst;
+import tvseries.koreandramaengsub.freemovieapp.utils.PreferenceUtils;
 import tvseries.koreandramaengsub.freemovieapp.utils.RtlUtils;
 import tvseries.koreandramaengsub.freemovieapp.utils.SpacingItemDecoration;
 import tvseries.koreandramaengsub.freemovieapp.utils.Tools;
@@ -160,8 +161,12 @@ public class ItemSeriesActivity extends AppCompatActivity {
         if (adsConfig.getAdsEnable().equals("1")) {
 
             if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                BannerAds.ShowAdmobBannerAds(ItemSeriesActivity.this, adView);
-
+                //BannerAds.ShowAdmobBannerAds(ItemSeriesActivity.this, adView);
+                if (PreferenceUtils.isLoggedIn(ItemSeriesActivity.this)) {
+                    if (!PreferenceUtils.isActivePlan(ItemSeriesActivity.this)) {
+                        BannerAds.ShowAdmobBannerAds(ItemSeriesActivity.this, adView);
+                    }
+                }
             } else if (adsConfig.getMobileAdsNetwork().equals(Constants.START_APP)) {
                 BannerAds.showStartAppBanner(ItemSeriesActivity.this, adView);
 

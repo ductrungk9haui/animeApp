@@ -1,11 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.startapp:inapp-sdk:3.10.1@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/993900c114021050d636209090ff646d/jetified-inapp-sdk-3.10.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/993900c114021050d636209090ff646d/jetified-inapp-sdk-3.10.1/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9e8b4f2ddbd58a838772c2a1660ec679/jetified-inapp-sdk-3.10.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9e8b4f2ddbd58a838772c2a1660ec679/jetified-inapp-sdk-3.10.1/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9e8b4f2ddbd58a838772c2a1660ec679/jetified-inapp-sdk-3.10.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2d20720661c440eea0b4bd0ade121b8a/jetified-inapp-sdk-3.10.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2d20720661c440eea0b4bd0ade121b8a/jetified-inapp-sdk-3.10.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2d20720661c440eea0b4bd0ade121b8a/jetified-inapp-sdk-3.10.1/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

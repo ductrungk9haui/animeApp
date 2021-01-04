@@ -177,8 +177,12 @@ public class FavoriteFragment extends Fragment {
         if (adsConfig.getAdsEnable().equals("1")) {
 
             if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                BannerAds.ShowAdmobBannerAds(mActivity, mAdView);
-
+                //BannerAds.ShowAdmobBannerAds(mActivity, mAdView);
+                if (PreferenceUtils.isLoggedIn(mActivity)) {
+                    if (!PreferenceUtils.isActivePlan(mActivity)) {
+                        BannerAds.ShowAdmobBannerAds(mActivity, mAdView);
+                    }
+                }
             } else if (adsConfig.getMobileAdsNetwork().equals(Constants.START_APP)) {
                 BannerAds.showStartAppBanner(mActivity, mAdView);
 

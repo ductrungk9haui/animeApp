@@ -36,6 +36,7 @@ import tvseries.koreandramaengsub.freemovieapp.network.model.config.AdsConfig;
 import tvseries.koreandramaengsub.freemovieapp.utils.ApiResources;
 import tvseries.koreandramaengsub.freemovieapp.utils.Constants;
 import tvseries.koreandramaengsub.freemovieapp.utils.NetworkInst;
+import tvseries.koreandramaengsub.freemovieapp.utils.PreferenceUtils;
 import tvseries.koreandramaengsub.freemovieapp.utils.SpacingItemDecoration;
 import tvseries.koreandramaengsub.freemovieapp.utils.ToastMsg;
 import tvseries.koreandramaengsub.freemovieapp.utils.Tools;
@@ -149,8 +150,12 @@ public class GenreFragment extends Fragment {
         if (adsConfig.getAdsEnable().equals("1")) {
 
             if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                BannerAds.ShowAdmobBannerAds(mActivity, mAdView);
-
+                //BannerAds.ShowAdmobBannerAds(mActivity, mAdView);
+                if (PreferenceUtils.isLoggedIn(mActivity)) {
+                    if (!PreferenceUtils.isActivePlan(mActivity)) {
+                        BannerAds.ShowAdmobBannerAds(mActivity, mAdView);
+                    }
+                }
             } else if (adsConfig.getMobileAdsNetwork().equals(Constants.START_APP)) {
                 BannerAds.showStartAppBanner(mActivity, mAdView);
 

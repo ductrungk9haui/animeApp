@@ -421,7 +421,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     private void loadRewardedAd() {
         if (mRewardedAd == null || !mRewardedAd.isLoaded()) {
             AdsConfig adsConfig = new DatabaseHelper(DetailsActivity.this).getConfigurationData().getAdsConfig();
-            mRewardedAd = new RewardedAd(this, adsConfig.getAdmobRewardedVideoAdsId());
+            mRewardedAd = new RewardedAd(this, "ca-app-pub-3940256099942544/5224354917");
             mIsLoading = true;
             mRewardedAd.loadAd(
                     new AdRequest.Builder().build(),
@@ -917,7 +917,12 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     //if it is embed player will go full screen
     @Override
     public void onEpisodeItemClickTvSeries(String type, View view, EpiModel obj, int position, EpisodeAdapter.OriginalViewHolder holder) {
-        PopUpAds.ShowAdmobInterstitialAds(this);
+        //PopUpAds.ShowAdmobInterstitialAds(this);
+        if (PreferenceUtils.isLoggedIn(DetailsActivity.this)) {
+            if (!PreferenceUtils.isActivePlan(DetailsActivity.this)) {
+                PopUpAds.ShowAdmobInterstitialAds(DetailsActivity.this);
+            }
+        }
         if (type.equalsIgnoreCase("embed")){
             CommonModels model = new CommonModels();
             model.setStremURL(obj.getStreamURL());
@@ -952,6 +957,9 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                 }
 
                 initMoviePlayer(obj.getStreamURL(), obj.getServerType(), DetailsActivity.this);
+            }
+            if(mListSub.size()>0){
+                setSelectedSubtitle(mMediaSource,mListSub.get(0).getUrl(),DetailsActivity.this);
             }
         }
     }
@@ -1011,9 +1019,13 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         if (adsConfig.getAdsEnable().equals("1")) {
 
             if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                BannerAds.ShowAdmobBannerAds(this, mAdView);
+                //BannerAds.ShowAdmobBannerAds(this, mAdView);
                 //PopUpAds.ShowAdmobInterstitialAds(this);
-
+                if (PreferenceUtils.isLoggedIn(this)) {
+                    if (!PreferenceUtils.isActivePlan(this)) {
+                        BannerAds.ShowAdmobBannerAds(this, mAdView);
+                    }
+                }
             } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
                 BannerAds.showStartAppBanner(DetailsActivity.this, mAdView);
                 PopUpAds.showStartappInterstitialAds(DetailsActivity.this);
@@ -2505,7 +2517,12 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
     @OnClick(R.id.watch_now_bt)
     void onWatchNowClick(){
-        PopUpAds.ShowAdmobInterstitialAds(DetailsActivity.this);
+        //PopUpAds.ShowAdmobInterstitialAds(DetailsActivity.this);
+        if (PreferenceUtils.isLoggedIn(DetailsActivity.this)) {
+            if (!PreferenceUtils.isActivePlan(DetailsActivity.this)) {
+                PopUpAds.ShowAdmobInterstitialAds(DetailsActivity.this);
+            }
+        }
         if (!mListServer.isEmpty()) {
             if (mListServer.size() == 1) {
                 releasePlayer();
