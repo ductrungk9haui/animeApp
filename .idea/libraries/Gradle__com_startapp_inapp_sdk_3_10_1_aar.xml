@@ -4,6 +4,10 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2d20720661c440eea0b4bd0ade121b8a/jetified-inapp-sdk-3.10.1/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2d20720661c440eea0b4bd0ade121b8a/jetified-inapp-sdk-3.10.1/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2d20720661c440eea0b4bd0ade121b8a/jetified-inapp-sdk-3.10.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b0391efc51c52787769589c3eed5684e/jetified-inapp-sdk-3.10.1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5995ccb0a25bc22f61bbbd8eb267a6d5/jetified-inapp-sdk-3.10.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5995ccb0a25bc22f61bbbd8eb267a6d5/jetified-inapp-sdk-3.10.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5995ccb0a25bc22f61bbbd8eb267a6d5/jetified-inapp-sdk-3.10.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
