@@ -1,2 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+
+    <style name="AppThemeLight" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:fontFamily">@font/amazon</item>
+        <item name="fontFamily">@font/amazon</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:statusBarColor">@color/material_grey_50</item>
+        <item name="colorAccent">@color/colorPrimaryDark</item>
+        <item name="genre_background">@color/material_gray_80</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
+        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogLightTheme</item>
+    </style>
+</resources>

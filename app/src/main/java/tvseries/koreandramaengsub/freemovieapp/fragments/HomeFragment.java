@@ -188,13 +188,13 @@ public class HomeFragment extends Fragment {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mRecyclerViewMovie.removeAllViews();
+               /* mRecyclerViewMovie.removeAllViews();
 //                recyclerViewTv.removeAllViews();
                 mRecyclerViewTvSeries.removeAllViews();
                 mRecyclerViewTopviewTvSeries.removeAllViews();
                 mRecyclerViewGenre.removeAllViews();
                 mGenreRv.removeAllViews();
-                mCountryRv.removeAllViews();
+                mCountryRv.removeAllViews();*/
 
                 genreList.clear();
                 countryList.clear();
@@ -469,13 +469,13 @@ public class HomeFragment extends Fragment {
     public void onResume() {
         super.onResume();
     }
-    @OnClick(R.id.btn_more_movie)
+    @OnClick({R.id.btn_more_movie,R.id.movie_layout})
     void onBtnMoreMovieClick(){
         Intent intent = new Intent(getContext(), ItemMovieActivity.class);
         intent.putExtra("title", "Movies");
         getActivity().startActivity(intent);
     }
-    @OnClick({R.id.btn_more_series,R.id.btn_more_series1})
+    @OnClick({R.id.btn_more_series,R.id.btn_more_series1,R.id.last_anime_layout,R.id.top_anime_layout})
     void onBtnMoreSeriesClick(){
         Intent intent = new Intent(getContext(), ItemSeriesActivity.class);
         intent.putExtra("title", "TV Series");

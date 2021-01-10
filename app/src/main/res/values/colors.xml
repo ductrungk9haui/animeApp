@@ -19,15 +19,18 @@
     <color name="default_text">#8B8B8B</color>
     <color name="black">#000000</color>
     <color name="black_window">#111111</color>
+    <color name="black_window_80">#CC111111</color>
     <color name="black_window_light">#131313</color>
     <color name="nav_bg">#424242</color>
     <color name="nav_head_bg">#202020</color>
 
     <color name="dark">#424242</color>#
     <color name="black_1_transarent">#BDBDBD</color>
+
     <color name="black_transparent">#2D000000</color>
     <color name="grey_transparent">#417C7C7C</color>
     <color name="grey_transparent2">#E97C7C7C</color>
+    <color name="material_gray_80">#CCFAFAFA</color>
 
 
     <color name="overlay_dark_10">#1A000000</color>

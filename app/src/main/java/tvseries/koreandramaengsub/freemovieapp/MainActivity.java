@@ -428,7 +428,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (isSearchBarHide && hide || !isSearchBarHide && !hide) return;
         isSearchBarHide = hide;
         int moveY = hide ? -(2 * mSearchRootLayout.getHeight()) : 0;
-        mSearchRootLayout.animate().translationY(moveY).setStartDelay(100).setDuration(300).start();
+        mSearchRootLayout.animate().translationY(moveY).translationZ(2).setStartDelay(100).setDuration(300).start();
     }
     public void setTitle(String title){
         mPageTitle.setText(title);
@@ -483,7 +483,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void setupTheme(){
         if (isDark) {
             mPageTitle.setTextColor(getResources().getColor(R.color.white));
-            mSearchBar.setCardBackgroundColor(getResources().getColor(R.color.black_window_light));
+            mSearchBar.setCardBackgroundColor(getResources().getColor(R.color.nav_head_bg));
             mMenuIv.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu));
             mSearchIv.setImageDrawable(getResources().getDrawable(R.drawable.ic_search_white));
             mThemeSwitch.setChecked(true);

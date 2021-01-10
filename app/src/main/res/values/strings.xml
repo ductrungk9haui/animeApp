@@ -15,9 +15,9 @@
     <!-- App -->
     <string name="featured_tv_channels">Featured Tv Channel</string>
     <string name="latest_movie">Latest Movies</string>
-    <string name="latest_tv_series">Latest Tv Series</string>
-    <string name="topview_tv_series">Topview Tv Series</string>
-    <string name="more">More</string>
+    <string name="latest_tv_series">Latest Anime Series</string>
+    <string name="topview_tv_series">Top Anime Series</string>
+    <string name="more"> ≫</string>
     <string name="movie">Movies</string>
     <string name="live_tv">Live TV</string>
     <string name="tv_series">Series</string>
