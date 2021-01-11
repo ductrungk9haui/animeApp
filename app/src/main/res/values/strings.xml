@@ -22,11 +22,11 @@
     <string name="live_tv">Live TV</string>
     <string name="tv_series">Series</string>
     <string name="country">Country</string>
-    <string name="genre">Genre</string>
+    <string name="genre">Genre : </string>
     <string name="favorite">Favorite</string>
     <string name="search">Search</string>
     <string name="no_item_found">No item found</string>
-    <string name="cast_n_crew">Cast and Crew</string>
+    <string name="cast_n_crew">Cast and Crew :</string>
     <string name="signin">Signin</string>
     <string name="reset">Reset Password</string>
     <string name="register">Register</string>
@@ -149,7 +149,7 @@
     <string name="live">Live</string>
     <string name="watching_on">Watching live on</string>
     <string name="all_tv_channel">All TV Channels</string>
-    <string name="you_may_also_like">You may also like</string>
+    <string name="you_may_also_like">👍 You may also like</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="tv_channels">Tv Channels</string>
     <string name="watching_catch_up_tv">Watching Catch-up TV</string>

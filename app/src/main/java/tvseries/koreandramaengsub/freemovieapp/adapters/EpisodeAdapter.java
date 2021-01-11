@@ -46,7 +46,6 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.Original
         ctx = context;
     }
 
-
     @Override
     public EpisodeAdapter.OriginalViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         EpisodeAdapter.OriginalViewHolder vh;
@@ -73,7 +72,7 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.Original
             //((DetailsActivity)ctx).setMediaUrlForTvSeries(obj.getStreamURL(), obj.getSeson(), obj.getEpi());
             //new DetailsActivity().initMoviePlayer(obj.getStreamURL(),obj.getServerType(),ctx);
             holder.name.setTextColor(ctx.getResources().getColor(R.color.colorPrimary));
-            holder.playStatusTv.setText("Playing");
+            holder.playStatusTv.setText("Last Played");
             holder.playStatusTv.setVisibility(View.VISIBLE);
             viewHolderArray[0] =holder;
         }else{
@@ -103,7 +102,7 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.Original
                     ((DetailsActivity)ctx).showQueuePopup(ctx, holder.cardView, ((DetailsActivity)ctx).getMediaInfo());
 
                 }
-
+                setNowPlaying(position);
                 chanColor(viewHolderArray[0],position);
                 holder.name.setTextColor(ctx.getResources().getColor(R.color.colorPrimary));
                 holder.playStatusTv.setText("Playing");

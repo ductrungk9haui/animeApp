@@ -31,7 +31,7 @@
     <color name="grey_transparent">#417C7C7C</color>
     <color name="grey_transparent2">#E97C7C7C</color>
     <color name="material_gray_80">#CCFAFAFA</color>
-
+    <color name="material_gray_30">#F4F4F4</color>
 
     <color name="overlay_dark_10">#1A000000</color>
     <color name="overlay_dark_20">#33000000</color>

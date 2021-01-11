@@ -605,7 +605,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             Intent intent=new Intent(MainActivity.this,SettingsActivity.class);
                             startActivity(intent);
                         }
-                        else if (position==9){
+                        else if (position==10){
 
                             new AlertDialog.Builder(MainActivity.this).setMessage("Are you sure to logout ?")
                                     .setPositiveButton("YES", new DialogInterface.OnClickListener() {

@@ -113,6 +113,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 import at.huber.youtubeExtractor.VideoMeta;
@@ -212,7 +213,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     @BindView(R.id.volumn_seekbar) SeekBar mVolumnSeekbar;
     @BindView(R.id.rv_server_list) RecyclerView mRvServer;
     @BindView(R.id.season_spinner) Spinner mSeasonSpinner;
-    @BindView(R.id.spinner_container) LinearLayout mSeasonSpinnerContainer;
+    @BindView(R.id.spinner_container) RelativeLayout mSeasonSpinnerContainer;
     @BindView(R.id.img_subtitle) ImageView mImgSubtitle;
     @BindView(R.id.media_route_button) MediaRouteButton mMediaRouteButton;
     @BindView(R.id.chrome_cast_tv) TextView mChromeCastTv;
@@ -1062,8 +1063,8 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                 mListServer.clear();
                 mListServer.clear();
 
-                mDownloadBt.setVisibility(GONE);
-                mWatchNowBt.setVisibility(GONE);
+               /* mDownloadBt.setVisibility(GONE);
+                mWatchNowBt.setVisibility(GONE);*/
 
                 // cast & crew adapter
                 mCastCrewAdapter = new CastCrewAdapter(this, mCastCrews);
@@ -1495,8 +1496,9 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                         mTvImdb.setText(mImdb_rating);
                         mTvImdb.setVisibility(GONE);
 
-
-                        mTvDes.setText(detailsModel.getDescription());
+                        if(!detailsModel.getDescription().equals("")){
+                            mTvDes.setText(detailsModel.getDescription());
+                        }
                         V_URL = detailsModel.getStreamUrl();
                         mCastImageUrl = detailsModel.getThumbnailUrl();
 
@@ -1603,8 +1605,10 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                     mSeriesTitle = mTitle;
                     mTvName.setText(mTitle);
                     mTvImdb.setText(mImdb_rating);
-                    mTvRelease.setText("Release On " + singleDetails.getRelease());
-                    mTvDes.setText(singleDetails.getDescription());
+                    mTvRelease.setText("Release On : " + singleDetails.getRelease());
+                    if(!singleDetails.getDescription().equals("")){
+                        mTvDes.setText(singleDetails.getDescription());
+                    }
 
                     Picasso.get().load(singleDetails.getPosterUrl()).placeholder(R.drawable.album_art_placeholder_large)
                             .into(mPosterIv);
@@ -1784,7 +1788,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                     if (mDownload_check.equals("1")) {
                         mDownloadBt.setVisibility(VISIBLE);
                     } else {
-                        mDownloadBt.setVisibility(GONE);
+                        //mDownloadBt.setVisibility(GONE);
                     }
                     mTitle = singleDetails.getTitle();
                     mImdb_rating =singleDetails.getImdb_rating();
@@ -1792,9 +1796,10 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
                     mTvName.setText(mTitle);
                     mTvImdb.setText(mImdb_rating);
-                    mTvRelease.setText("Release On " + singleDetails.getRelease());
-                    mTvDes.setText(singleDetails.getDescription());
-
+                    mTvRelease.setText("Release On : " + singleDetails.getRelease());
+                    if(!singleDetails.getDescription().equals("")){
+                        mTvDes.setText(singleDetails.getDescription());
+                    }
 
                     Picasso.get().load(singleDetails.getPosterUrl()).placeholder(R.drawable.album_art_placeholder_large)
                             .into(mPosterIv);
@@ -2044,7 +2049,6 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         });
 
     }
-
     public void hideDescriptionLayout() {
         mDescriptionLayout.setVisibility(GONE);
         mLPlay.setVisibility(VISIBLE);
@@ -2057,6 +2061,8 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     public void showDescriptionLayout() {
         mDescriptionLayout.setVisibility(VISIBLE);
         mLPlay.setVisibility(GONE);
+        mSeriesLayout.setVisibility(GONE);
+        Objects.requireNonNull(mRvServer.getAdapter()).notifyDataSetChanged();
     }
 
     @Override
@@ -2517,6 +2523,10 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
     @OnClick(R.id.watch_now_bt)
     void onWatchNowClick(){
+        if(mType.equals("tvseries")){
+            Toast.makeText(DetailsActivity.this, "Please select an episode", Toast.LENGTH_SHORT).show();
+            return;
+        }
         //PopUpAds.ShowAdmobInterstitialAds(DetailsActivity.this);
         if (PreferenceUtils.isLoggedIn(DetailsActivity.this)) {
             if (!PreferenceUtils.isActivePlan(DetailsActivity.this)) {
