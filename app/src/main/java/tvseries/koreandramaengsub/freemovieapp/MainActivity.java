@@ -80,29 +80,44 @@ import tvseries.koreandramaengsub.freemovieapp.utils.Tools;
 import tvseries.koreandramaengsub.freemovieapp.utils.ads.PopUpAds;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, Serializable {
-    @BindView(R.id.search_root_layout) LinearLayout mSearchRootLayout;
-    @BindView(R.id.search_bar) CardView mSearchBar;
-    @BindView(R.id.bt_menu) ImageView mMenuIv;
-    @BindView(R.id.page_title_tv) TextView mPageTitle;
-    @BindView(R.id.search_iv) ImageView mSearchIv;
-    @BindView(R.id.nav_view) NavigationView mNavigationView;
-    @BindView(R.id.drawer_layout) DrawerLayout mDrawerLayout;
-    @BindView(R.id.nav_head_layout) LinearLayout mNavHeaderLayout;
-    @BindView(R.id.theme_switch) SwitchCompat mThemeSwitch;
-    @BindView(R.id.group_facebook) RelativeLayout mGroupFBLayout;
-    @BindView(R.id.rate_app) RelativeLayout mRateApp;
-    @BindView(R.id.recyclerView) RecyclerView recyclerView;
-    @BindView(R.id.coordinator_lyt) CoordinatorLayout mCoordinatorLayout;
-    @BindView(R.id.tv_noitem) TextView mTvNoItem;
+    @BindView(R.id.search_root_layout)
+    LinearLayout mSearchRootLayout;
+    @BindView(R.id.search_bar)
+    CardView mSearchBar;
+    @BindView(R.id.bt_menu)
+    ImageView mMenuIv;
+    @BindView(R.id.page_title_tv)
+    TextView mPageTitle;
+    @BindView(R.id.search_iv)
+    ImageView mSearchIv;
+    @BindView(R.id.nav_view)
+    NavigationView mNavigationView;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout mDrawerLayout;
+    @BindView(R.id.nav_head_layout)
+    LinearLayout mNavHeaderLayout;
+    @BindView(R.id.theme_switch)
+    SwitchCompat mThemeSwitch;
+    @BindView(R.id.group_facebook)
+    RelativeLayout mGroupFBLayout;
+    @BindView(R.id.rate_app)
+    RelativeLayout mRateApp;
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
+    @BindView(R.id.coordinator_lyt)
+    CoordinatorLayout mCoordinatorLayout;
+    @BindView(R.id.tv_noitem)
+    TextView mTvNoItem;
     @BindView(R.id.bottomify_nav)
     BottomifyNavigationView mBottomNaviDark;
-    @BindView(R.id.bottomify_nav_light) BottomifyNavigationView mBottomNaviLight;
+    @BindView(R.id.bottomify_nav_light)
+    BottomifyNavigationView mBottomNaviLight;
 
     Unbinder mUnbinder;
     boolean isSearchBarHide = false;
     private NavigationAdapter mAdapter;
-    private List<NavigationModel> mListNavi =new ArrayList<>();
-    private boolean mStatus =false;
+    private List<NavigationModel> mListNavi = new ArrayList<>();
+    private boolean mStatus = false;
     private FirebaseAnalytics mFirebaseAnalytics;
     public boolean isDark;
     private String navMenuStyle;
@@ -152,14 +167,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         inflater.inflate(R.menu.menu_action, menu);
         return true;
     }
-    private boolean loadFragment(Fragment fragment){
+
+    private boolean loadFragment(Fragment fragment) {
         setFailure(false);
-        if (fragment!=null){
+        if (fragment != null) {
+            if (fragment instanceof HomeFragment) {
+                NaviSelected(mAdapter.getViewHolder(0),0);
+            }else if(fragment instanceof MoviesFragment){
+                NaviSelected(mAdapter.getViewHolder(1),1);
+            }else if(fragment instanceof  TvSeriesFragment){
+                NaviSelected(mAdapter.getViewHolder(2),2);
+            }else if(fragment instanceof  FavoriteFragment){
+                NaviSelected(mAdapter.getViewHolder(6),6);
+            }else{
+               mBottomNaviDark.clearSelection();
+               mBottomNaviLight.clearSelection();
+            }
 
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.fragment_container,fragment)
+                    .replace(R.id.fragment_container, fragment)
                     .commit();
+
 
             return true;
         }
@@ -178,8 +207,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     @Override
                     public boolean onQueryTextSubmit(String s) {
 
-                        Intent intent=new Intent(MainActivity.this, SearchResultActivity.class);
-                        intent.putExtra("q",s);
+                        Intent intent = new Intent(MainActivity.this, SearchResultActivity.class);
+                        intent.putExtra("q", s);
                         startActivity(intent);
 
                         return false;
@@ -204,14 +233,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onBackPressed() {
 
-        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)){
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawers();
-        }
-        else if(Config.isOpenChildFragment){
+        } else if (Config.isOpenChildFragment) {
             loadFragment(new HomeFragment());
             Config.isOpenChildFragment = false;
-        }
-        else {
+        } else {
             new AlertDialog.Builder(MainActivity.this).setMessage("Do you want to exit ?")
                     .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                         @Override
@@ -273,7 +300,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
                 SharedPreferences.Editor editor = getSharedPreferences("push", MODE_PRIVATE).edit();
-                editor.putBoolean("firstTime",false);
+                editor.putBoolean("firstTime", false);
                 editor.apply();
                 dialog.dismiss();
             }
@@ -292,7 +319,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-
     private boolean checkStoragePermission() {
         // checking storage permission
         int result = ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -305,7 +331,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void requestPermission() {
         String[] permissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
-        Manifest.permission.READ_EXTERNAL_STORAGE};
+                Manifest.permission.READ_EXTERNAL_STORAGE};
 
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
             Toast.makeText(this, "Write External Storage permission allows us to do store images. Please allow this permission in App Settings.", Toast.LENGTH_LONG).show();
@@ -343,23 +369,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(new Intent(MainActivity.this, SearchActivity.class));
     }
 
-    private Intent rateIntentForUrl(String url)
-    {
+    private Intent rateIntentForUrl(String url) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(String.format("%s?id=%s", url, getPackageName())));
         int flags = Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_MULTIPLE_TASK;
-        if (Build.VERSION.SDK_INT >= 21)
-        {
+        if (Build.VERSION.SDK_INT >= 21) {
             flags |= Intent.FLAG_ACTIVITY_NEW_DOCUMENT;
-        }
-        else
-        {
+        } else {
             //noinspection deprecation
             flags |= Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET;
         }
         intent.addFlags(flags);
         return intent;
     }
-    private void setupBottomNaviBar(){
+
+    private void setupBottomNaviBar() {
         if (isDark) {
             mBottomNaviDark.setVisibility(View.VISIBLE);
             mBottomNaviDark.setBackgroundColor(getResources().getColor(R.color.black_window_light));
@@ -424,66 +447,66 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             });
         }
     }
+
     public void animateSearchBar(final boolean hide) {
         if (isSearchBarHide && hide || !isSearchBarHide && !hide) return;
         isSearchBarHide = hide;
         int moveY = hide ? -(2 * mSearchRootLayout.getHeight()) : 0;
         mSearchRootLayout.animate().translationY(moveY).translationZ(2).setStartDelay(100).setDuration(300).start();
     }
-    public void setTitle(String title){
+
+    public void setTitle(String title) {
         mPageTitle.setText(title);
         mSearchRootLayout.setTranslationY(0);
     }
 
     @OnClick(R.id.bt_menu)
-    void onMenuIvClick(View view){
+    void onMenuIvClick(View view) {
         openDrawer();
     }
+
     @OnClick(R.id.search_iv)
-    void onSearchIvClick(View view){
+    void onSearchIvClick(View view) {
         startActivity(new Intent(MainActivity.this, SearchActivity.class));
     }
 
     @OnClick(R.id.group_facebook)
-    void onGroupFacebookClick(View view){
+    void onGroupFacebookClick(View view) {
         String urlString = "https://www.facebook.com/Korean-Drama-Engsub-112928027254307";
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlString));
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
+
     @OnClick(R.id.rate_app)
-    void onRateApp(View view){
-        try
-        {
+    void onRateApp(View view) {
+        try {
             Intent rateIntent = rateIntentForUrl("market://details");
             startActivity(rateIntent);
-        }
-        catch (ActivityNotFoundException e)
-        {
+        } catch (ActivityNotFoundException e) {
             Intent rateIntent = rateIntentForUrl("https://play.google.com/store/apps/details");
             startActivity(rateIntent);
         }
     }
 
     @OnCheckedChanged(R.id.theme_switch)
-    void onThemeSwitchChange(boolean isChecked){
+    void onThemeSwitchChange(boolean isChecked) {
         SharedPreferences.Editor editor = getSharedPreferences("push", MODE_PRIVATE).edit();
-        editor.putBoolean("dark",isChecked);
+        editor.putBoolean("dark", isChecked);
         editor.apply();
-        if(isDark != isChecked){
+        if (isDark != isChecked) {
             mDrawerLayout.closeDrawers();
             startActivity(new Intent(MainActivity.this, MainActivity.class));
             finish();
         }
     }
 
-    public DatabaseHelper getDBHelper(){
+    public DatabaseHelper getDBHelper() {
         return mDBHelper;
     }
-    private void setupTheme(){
+
+    private void setupTheme() {
         if (isDark) {
-            mPageTitle.setTextColor(getResources().getColor(R.color.white));
-            mSearchBar.setCardBackgroundColor(getResources().getColor(R.color.nav_head_bg));
             mMenuIv.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu));
             mSearchIv.setImageDrawable(getResources().getDrawable(R.drawable.ic_search_white));
             mThemeSwitch.setChecked(true);
@@ -495,7 +518,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setupBottomNaviBar();
     }
 
-    private void setupFirebaseAnalytics(){
+    private void setupFirebaseAnalytics() {
         //---analytics-----------
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         Bundle bundle = new Bundle();
@@ -504,7 +527,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "activity");
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
     }
-    private void checkStorePermission(){
+
+    private void checkStorePermission() {
         // checking storage permission
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkStoragePermission()) {
@@ -516,7 +540,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             createDownloadDir();
         }
     }
-    private void setupNavigation(){
+
+    final NavigationAdapter.OriginalViewHolder[] viewHolder = {null};
+
+    private void setupNavigation() {
         //----navDrawer------------------------
         mNavigationView.setNavigationItemSelectedListener(this);
         //----fetch array------------
@@ -526,10 +553,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String[] navItemName2 = getResources().getStringArray(R.array.nav_item_name_2);
 
         //----navigation view items---------------------
-        if (navMenuStyle == null){
+        if (navMenuStyle == null) {
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        }else if (navMenuStyle.equals("grid")) {
+        } else if (navMenuStyle.equals("grid")) {
             recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
             recyclerView.addItemDecoration(new SpacingItemDecoration(2, Tools.dpToPx(this, 15), true));
         } else {
@@ -538,16 +565,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         recyclerView.setHasFixedSize(true);
 
-        mStatus =  PreferenceUtils.isLoggedIn(this);
-        if (mStatus){
+        mStatus = PreferenceUtils.isLoggedIn(this);
+        if (mStatus) {
             PreferenceUtils.updateSubscriptionStatus(MainActivity.this);
-            for (int i = 0; i< navItemName.length; i++){
-                NavigationModel models =new NavigationModel(navItemImage[i], navItemName[i]);
+            for (int i = 0; i < navItemName.length; i++) {
+                NavigationModel models = new NavigationModel(navItemImage[i], navItemName[i]);
                 mListNavi.add(models);
             }
-        }else {
-            for (int i = 0; i< navItemName2.length; i++){
-                NavigationModel models =new NavigationModel(navItemImage2[i], navItemName2[i]);
+        } else {
+            for (int i = 0; i < navItemName2.length; i++) {
+                NavigationModel models = new NavigationModel(navItemImage2[i], navItemName2[i]);
                 mListNavi.add(models);
             }
         }
@@ -557,62 +584,67 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mAdapter = new NavigationAdapter(this, mListNavi, navMenuStyle);
         recyclerView.setAdapter(mAdapter);
 
-        final NavigationAdapter.OriginalViewHolder[] viewHolder = {null};
-
         mAdapter.setOnItemClickListener(new NavigationAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, NavigationModel obj, int position, NavigationAdapter.OriginalViewHolder holder) {
                 //----------------------action for click items nav---------------------
-                if (position==0){
-                    loadFragment(new HomeFragment());
-                }
-                else if (position==1){
-                    loadFragment(new MoviesFragment());
+                if (position == 0) {
+                    if (isDark) {
+                        mBottomNaviDark.setActiveNavigationIndex(0);
+                    } else {
+                        mBottomNaviLight.setActiveNavigationIndex(0);
+                    }
+
+                } else if (position == 1) {
+                    if (isDark) {
+                        mBottomNaviDark.setActiveNavigationIndex(1);
+                    } else {
+                        mBottomNaviLight.setActiveNavigationIndex(1);
+                    }
                     Config.isOpenChildFragment = true;
-                }
-                else if (position==2){
-                    loadFragment(new TvSeriesFragment());
+                } else if (position == 2) {
+                    if (isDark) {
+                        mBottomNaviDark.setActiveNavigationIndex(2);
+                    } else {
+                        mBottomNaviLight.setActiveNavigationIndex(2);
+                    }
                     Config.isOpenChildFragment = true;
-                }
-                else if (position == 3){
+                } else if (position == 3) {
                     loadFragment(new GenreFragment());
                     Config.isOpenChildFragment = true;
-                }
-                else if (position==4){
+                } else if (position == 4) {
                     loadFragment(new CountryFragment());
                     Config.isOpenChildFragment = true;
-                }
-                else {
-                    if (mStatus){
+                } else {
+                    if (mStatus) {
 
-                        if (position==5){
-                            Intent intent=new Intent(MainActivity.this,ProfileActivity.class);
+                        if (position == 5) {
+                            Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                             startActivity(intent);
-                        }
-                        else if (position==6){
-                            loadFragment(new FavoriteFragment());
+                        } else if (position == 6) {
+                            if (isDark) {
+                                mBottomNaviDark.setActiveNavigationIndex(4);
+                            } else {
+                                mBottomNaviLight.setActiveNavigationIndex(4);
+                            }
                             Config.isOpenChildFragment = true;
-                        }
-                        else if (position==7){
-                            Intent intent=new Intent(MainActivity.this, SubscriptionActivity.class);
+                        } else if (position == 7) {
+                            Intent intent = new Intent(MainActivity.this, SubscriptionActivity.class);
                             startActivity(intent);
-                        }
-                        else if (position==8){
-                            Intent intent=new Intent(MainActivity.this, DownloadActivity.class);
+                        } else if (position == 8) {
+                            Intent intent = new Intent(MainActivity.this, DownloadActivity.class);
                             startActivity(intent);
-                        }
-                        else if (position==9){
-                            Intent intent=new Intent(MainActivity.this,SettingsActivity.class);
+                        } else if (position == 9) {
+                            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
                             startActivity(intent);
-                        }
-                        else if (position==10){
+                        } else if (position == 10) {
 
                             new AlertDialog.Builder(MainActivity.this).setMessage("Are you sure to logout ?")
                                     .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
                                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                            if (user != null){
+                                            if (user != null) {
                                                 FirebaseAuth.getInstance().signOut();
                                             }
 
@@ -626,7 +658,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                                             PreferenceUtils.clearSubscriptionSavedData(MainActivity.this);
 
-                                            Intent intent = new Intent(MainActivity.this,FirebaseSignUpActivity.class);
+                                            Intent intent = new Intent(MainActivity.this, FirebaseSignUpActivity.class);
                                             startActivity(intent);
                                             finish();
                                         }
@@ -639,13 +671,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                     }).create().show();
                         }
 
-                    }else {
-                        if (position==5){
+                    } else {
+                        if (position == 5) {
                             Intent intent = new Intent(MainActivity.this, FirebaseSignUpActivity.class);
                             startActivity(intent);
                             finish();
-                        } else if (position==6){
-                            Intent intent=new Intent(MainActivity.this,SettingsActivity.class);
+                        } else if (position == 6) {
+                            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
                             startActivity(intent);
                         }
 
@@ -655,43 +687,46 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
                 //----behaviour of bg nav items-----------------
-                if (!obj.getTitle().equals("Settings") && !obj.getTitle().equals("Login") && !obj.getTitle().equals("Sign Out")){
-
-                    if (isDark){
-                        mAdapter.chanColor(viewHolder[0],position,R.color.nav_bg);
-                    }else {
-                        mAdapter.chanColor(viewHolder[0],position,R.color.white);
-                    }
-
-
-                    if (navMenuStyle.equals("grid")) {
-                        holder.cardView.setCardBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
-                        holder.name.setTextColor(getResources().getColor(R.color.white));
-                    } else {
-                        holder.selectedLayout.setBackground(getResources().getDrawable(R.drawable.round_grey_transparent));
-                        holder.name.setTextColor(getResources().getColor(R.color.colorPrimary));
-                    }
-
-                    viewHolder[0] =holder;
+                if (!obj.getTitle().equals("Settings") && !obj.getTitle().equals("Login") && !obj.getTitle().equals("Sign Out")) {
+                    NaviSelected(holder, position);
                 }
-
 
                 mDrawerLayout.closeDrawers();
             }
         });
     }
 
-    public View getToolbar(){
+    private void NaviSelected(NavigationAdapter.OriginalViewHolder holder, int position) {
+        if(holder==null)return;
+        if (isDark) {
+            mAdapter.chanColor(viewHolder[0], position, R.color.nav_bg);
+        } else {
+            mAdapter.chanColor(viewHolder[0], position, R.color.white);
+        }
+
+        if (navMenuStyle.equals("grid")) {
+            holder.cardView.setCardBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+            holder.name.setTextColor(getResources().getColor(R.color.white));
+        } else {
+            holder.selectedLayout.setBackground(getResources().getDrawable(R.drawable.round_grey_transparent));
+            holder.name.setTextColor(getResources().getColor(R.color.colorPrimary));
+        }
+        viewHolder[0] = holder;
+    }
+
+    public View getToolbar() {
         return mSearchRootLayout;
     }
 
-    public void setFailure(boolean isFailed, String failText){
-        mCoordinatorLayout.setVisibility(isFailed?View.VISIBLE:View.GONE);
+    public void setFailure(boolean isFailed, String failText) {
+        mCoordinatorLayout.setVisibility(isFailed ? View.VISIBLE : View.GONE);
         mTvNoItem.setText(failText);
     }
-    public void setFailure(boolean isFailed){
-        mCoordinatorLayout.setVisibility(isFailed?View.VISIBLE:View.GONE);
+
+    public void setFailure(boolean isFailed) {
+        mCoordinatorLayout.setVisibility(isFailed ? View.VISIBLE : View.GONE);
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();

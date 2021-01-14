@@ -23,6 +23,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Or
     private Context ctx;
     private OnItemClickListener mOnItemClickListener;
     NavigationAdapter.OriginalViewHolder viewHolder;
+    private ArrayList<NavigationAdapter.OriginalViewHolder> viewHolderList;
     private String menuStyle;
 
     public interface OnItemClickListener {
@@ -38,6 +39,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Or
         this.items = items;
         ctx = context;
         this.menuStyle = menuStyle;
+        viewHolderList = new ArrayList<>();
     }
 
 
@@ -58,7 +60,7 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Or
     public void onBindViewHolder(final NavigationAdapter.OriginalViewHolder holder, final int position) {
 
         NavigationModel obj = items.get(position);
-
+        viewHolderList.add(holder);
         if (position==0){
             viewHolder=holder;
             if (menuStyle.equals("grid")) {
@@ -94,8 +96,10 @@ public class NavigationAdapter extends RecyclerView.Adapter<NavigationAdapter.Or
             });
         }
 
+    }
 
-
+    public OriginalViewHolder getViewHolder(int pos){
+        return viewHolderList.size()>0?viewHolderList.get(pos):null;
     }
 
     @Override

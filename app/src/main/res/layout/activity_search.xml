@@ -114,8 +114,7 @@
                     android:focusable="false"
                     android:paddingLeft="@dimen/spacing_middle"
                     android:paddingRight="@dimen/spacing_middle"
-                    android:text="@string/all_genres"
-                    android:textColor="@android:color/white" />
+                    android:text="@string/all_genres" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -146,8 +145,7 @@
                     android:focusable="false"
                     android:paddingLeft="@dimen/spacing_middle"
                     android:paddingRight="@dimen/spacing_middle"
-                    android:text="@string/all_countries"
-                    android:textColor="@android:color/white" />
+                    android:text="@string/all_countries" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -178,8 +176,7 @@
                     android:focusable="false"
                     android:paddingLeft="@dimen/spacing_middle"
                     android:paddingRight="@dimen/spacing_middle"
-                    android:text="@string/all_categories"
-                    android:textColor="@android:color/white" />
+                    android:text="@string/all_categories" />
             </RelativeLayout>
 
             <LinearLayout

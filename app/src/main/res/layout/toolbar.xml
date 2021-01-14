@@ -9,15 +9,15 @@
     android:layout_marginBottom="@dimen/spacing_middle"
     android:layout_marginLeft="@dimen/spacing_middle"
     android:layout_marginRight="@dimen/spacing_middle"
-    android:layout_marginTop="5dp"
     android:clipToPadding="false"
-    app:cardBackgroundColor="@android:color/white"
+    app:cardBackgroundColor="?attr/title_background"
     app:cardCornerRadius="3dp"
     app:cardElevation="3dp"
     app:cardUseCompatPadding="false"
     app:layout_collapseMode="pin"
     android:fitsSystemWindows="true"
    >
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -37,7 +37,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Home"
-            android:textColor="@color/black"
             android:textSize="18sp"
             android:layout_toEndOf="@id/bt_menu"
             android:layout_centerVertical="true"

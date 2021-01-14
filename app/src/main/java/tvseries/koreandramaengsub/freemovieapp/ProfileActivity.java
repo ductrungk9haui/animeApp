@@ -79,10 +79,6 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         Toolbar toolbar = findViewById(R.id.toolbar);
 
-        if (!isDark) {
-            toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        }
-
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("My Profile");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

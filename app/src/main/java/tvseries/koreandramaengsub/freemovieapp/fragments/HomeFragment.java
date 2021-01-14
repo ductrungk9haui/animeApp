@@ -18,6 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.github.islamkhsh.CardSliderViewPager;
 import com.ixidev.gdpr.GDPRChecker;
+import com.viewpagerindicator.CirclePageIndicator;
+import com.viewpagerindicator.LinePageIndicator;
+import com.viewpagerindicator.TabPageIndicator;
+import com.viewpagerindicator.TitlePageIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,6 +82,7 @@ public class HomeFragment extends Fragment {
     @BindView(R.id.recyclerViewTvSeries) RecyclerView mRecyclerViewTvSeries;
     @BindView(R.id.recyclerView_by_genre) RecyclerView mRecyclerViewGenre;
     @BindView(R.id.recyclerViewTopviewTvSeries) RecyclerView mRecyclerViewTopviewTvSeries;
+    @BindView(R.id.title_pager_indicator) LinePageIndicator mPagerIndicator;
 
     private ArrayList<CommonModels> listSlider = new ArrayList<>();
     private Timer timer;
@@ -266,6 +271,7 @@ public class HomeFragment extends Fragment {
 
                     SliderAdapter sliderAdapter = new SliderAdapter(slider.getSlide());
                     mCViewPager.setAdapter(sliderAdapter);
+                    mPagerIndicator.setViewPager(mCViewPager);
                     sliderAdapter.notifyDataSetChanged();
 
                     //genre data

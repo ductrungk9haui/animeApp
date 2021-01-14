@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -93,12 +94,6 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        if (mIsDark) {
-            mToolbar.setBackgroundColor(getResources().getColor(R.color.dark));
-        } else {
-            mToolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        }
-
         mDBHelper = new DatabaseHelper(this);
         mFileDownloadAdapter = new FileDownloadAdapter(mWorks, this, mIsDark);
         mFileDownloadAdapter.setProgressUpdateListener(this);
@@ -115,6 +110,8 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
         mDownloadedFileRv.setHasFixedSize(true);
 
         updateFiles();
+
+        registerReceiver(playVideoBroadcast, new IntentFilter(ACTION_PLAY_VIDEO));
 
     }
 
@@ -356,7 +353,7 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // unregisterReceiver(playVideoBroadcast);
+        unregisterReceiver(playVideoBroadcast);
         mUnbinder.unbind();
     }
 

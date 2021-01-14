@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#EB93BB</color>
-    <color name="colorPrimaryDark">#C997C6</color>
-    <color name="colorAccent">#C997C6</color>
+    <color name="colorPrimary">#1F82D1</color>
+    <color name="colorPrimaryDark">#68A1CD</color>
+    <color name="colorAccent">#5494C8</color>
 
     <!--for tv-->
     <color name="colorPrimaryTV">#2B2A2A</color>
@@ -62,7 +62,7 @@
     <color name="blue_400">#42A5F5</color>
     <color name="orange_400">#FFA726</color>
     <color name="blue_grey_400">#78909C</color>
-
+    <color name="blue_0">#0042A5F5</color>
     <color name="grey_400">#BDBDBD</color>
     <color name="black_overlay">#66000000</color>
     <color name="light_theme_color">#d6e0f0</color>

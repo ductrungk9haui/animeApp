@@ -52,11 +52,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Toolbar toolbar = findViewById(R.id.toolbar);
-
-        if (!isDark) {
-            toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        }
-
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Back to login with phone");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

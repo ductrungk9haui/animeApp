@@ -249,7 +249,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     @BindView(R.id.series_layout) RelativeLayout mSeriesLayout;
     @BindView(R.id.seriest_title_tv) TextView mSeriesTitleTv;
     private Unbinder mUnbinder;
-
+    private EpisodeAdapter mEpisodeAdapter;
     private ServerAdapter mServerAdapter;
     private HomePageAdapter mRelatedAdapter;
     private RelatedTvAdapter mRelatedTvAdapter;
@@ -1725,17 +1725,17 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                 mRvServer.removeAllViewsInLayout();
                 mRvServer.setLayoutManager(new LinearLayoutManager(DetailsActivity.this,
                         RecyclerView.HORIZONTAL, false));
-                EpisodeAdapter episodeAdapter = new EpisodeAdapter(DetailsActivity.this,
+                mEpisodeAdapter = new EpisodeAdapter(DetailsActivity.this,
                         mListServer.get(i).getListEpi());
                 if (mMapMovies.containsKey(mId) && mMapMovies.get(mId)!=null) {
-                    episodeAdapter.setNowPlaying(mMapMovies.get(mId));
+                    mEpisodeAdapter.setNowPlaying(mMapMovies.get(mId));
                 }
-                mRvServer.setAdapter(episodeAdapter);
+                mRvServer.setAdapter(mEpisodeAdapter);
 
                 if (mMapMovies.containsKey(mId) && mMapMovies.get(mId)!=null) {
                     mRvServer.scrollToPosition(mMapMovies.get(mId)-1);
                 }
-                episodeAdapter.setOnEmbedItemClickListener(DetailsActivity.this);
+                mEpisodeAdapter.setOnEmbedItemClickListener(DetailsActivity.this);
 
             }
 
@@ -2524,6 +2524,10 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     @OnClick(R.id.watch_now_bt)
     void onWatchNowClick(){
         if(mType.equals("tvseries")){
+            if(mEpisodeAdapter!=null){
+                mEpisodeAdapter.getWatchEpisode();
+                return;
+            }
             Toast.makeText(DetailsActivity.this, "Please select an episode", Toast.LENGTH_SHORT).show();
             return;
         }

@@ -63,18 +63,27 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     app:auto_slide_time="5"
-                                    app:cardSlider_indicator="@id/c_indicator"
                                     app:cardSlider_cardCornerRadius="5dp"
                                     app:cardSlider_otherPagesWidth="-1dp"
                                     app:cardSlider_pageMargin="0dp" />
 
-                                <com.github.islamkhsh.CardSliderIndicator
+                                <com.viewpagerindicator.LinePageIndicator
+                                    android:id="@+id/title_pager_indicator"
+                                    app:unselectedColor="@color/blue_grey_400"
+                                    app:selectedColor="@color/blue_400"
+                                    app:strokeWidth="2dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_width="fill_parent"
+                                    android:layout_below="@id/c_viewPager"
+                                    android:layout_marginTop="6dp"
+                                    android:layout_centerHorizontal="true"/>
+                             <!--   <com.github.islamkhsh.CardSliderIndicator
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/c_indicator"
                                     android:layout_below="@id/c_viewPager"
                                     android:layout_marginTop="5dp"
-                                    android:layout_centerHorizontal="true"/>
+                                    android:layout_centerHorizontal="true"/>-->
                             </RelativeLayout>
 
                             <RelativeLayout

@@ -10,8 +10,9 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="android:statusBarColor">@color/material_grey_50</item>
         <item name="colorAccent">@color/colorPrimaryDark</item>
-        <item name="genre_background">@color/material_gray_80</item>
+        <item name="title_background">@color/white</item>
         <item name="title_backgroundColor">@color/material_gray_30</item>
+        <item name="selectable_backgroundColor">#A7D8FF</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogLightTheme</item>

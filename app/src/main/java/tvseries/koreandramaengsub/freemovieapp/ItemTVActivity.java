@@ -70,9 +70,6 @@ public class ItemTVActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_tv);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        if (!isDark) {
-            toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        }
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setTitle(getIntent().getStringExtra("title"));

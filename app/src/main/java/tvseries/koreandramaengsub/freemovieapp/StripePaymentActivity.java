@@ -102,7 +102,6 @@ public class StripePaymentActivity extends AppCompatActivity {
         publisherKey = paymentConfig.getStripePublishableKey();
 
         if (isDark) {
-            mToolbar.setBackgroundColor(getResources().getColor(R.color.dark));
             mSubmitBt.setBackground(getResources().getDrawable(R.drawable.btn_rounded_dark));
             cardInputWidget.setBackground(getResources().getDrawable(R.drawable.rounded_black_transparent));
         }

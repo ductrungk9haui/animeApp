@@ -7,9 +7,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:ctx=".SearchActivity">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/app_bar_layout"
+            android:id="@+id/toolbar"/>
+        <ProgressBar
+            android:id="@+id/item_progress_bar"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:elevation="5dp"
+            android:layout_marginRight="10dp"
+            android:visibility="visible"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <include layout="@layout/app_bar_layout"
-        android:id="@+id/toolbar"/>
 
 
     <ScrollView
@@ -293,6 +307,15 @@
                 android:layout_height="wrap_content"
                 />
 
+            <TextView
+                android:id="@+id/result_count"
+                android:padding="10dp"
+                android:background="@color/green_500"
+                android:textAppearance="@style/TextAppearance.smallNormal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
             <LinearLayout
                 android:id="@+id/movie_layout"
                 android:layout_width="match_parent"
@@ -361,15 +384,6 @@
                     android:nestedScrollingEnabled="false" />
 
             </LinearLayout>
-
-
-            <ProgressBar
-                android:id="@+id/item_progress_bar"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:elevation="5dp"
-                android:padding="5dp"
-                android:visibility="gone" />
 
             <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:id="@+id/coordinator_lyt"

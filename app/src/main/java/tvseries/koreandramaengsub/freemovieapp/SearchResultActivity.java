@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -21,6 +22,7 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import tvseries.koreandramaengsub.freemovieapp.adapters.LiveTvAdapter2;
@@ -38,27 +40,30 @@ import retrofit2.Callback;
 import retrofit2.Retrofit;
 
 public class SearchResultActivity extends AppCompatActivity implements SearchAdapter.OnItemClickListener {
-    private TextView tvTitle, movieTitle, tvSeriesTv, searchQueryTv;
+    private TextView tvTitle, movieTitle, tvSeriesTv, searchQueryTv, countTv;
     private ShimmerFrameLayout shimmerFrameLayout;
     private RecyclerView movieRv, tvRv, tvSeriesRv;
     private SearchAdapter movieAdapter, tvSeriesAdapter;
     private LiveTvAdapter2 tvAdapter;
-    private List<CommonModel> movieList =new ArrayList<>();
-    private List<TvModel> tvList =new ArrayList<>();
-    private List<CommonModel> tvSeriesList =new ArrayList<>();
+    private List<CommonModel> movieList = new ArrayList<>();
+    private List<TvModel> tvList = new ArrayList<>();
+    private List<CommonModel> tvSeriesList = new ArrayList<>();
 
     private ApiResources apiResources;
 
-    private String URL=null;
-    private boolean isLoading=false;
+    private String URL = null;
+    private boolean isLoading = false;
     private ProgressBar progressBar;
-    private int pageCount=1;
+    private int pageCount = 1;
     private LinearLayout movieLayout, tvSeriesLayout, tvLayout;
     private CoordinatorLayout coordinatorLayout;
     private Toolbar toolbar;
 
     private String type;
-    private String query="";
+    private String query = "";
+    private boolean isSplitQuery;
+    private int indexKey;
+    private ArrayList<String> mKeywordList = new ArrayList<>();
     private int range_to, range_from, tvCategoryId, genreId, countryId;
 
     @SuppressLint("SetTextI18n")
@@ -84,7 +89,9 @@ public class SearchResultActivity extends AppCompatActivity implements SearchAda
         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "search_activity");
         bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "activity");
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
-
+        indexKey = 0;
+        isSplitQuery = false;
+        mKeywordList.clear();
         query = getIntent().getStringExtra("q");
         type = getIntent().getStringExtra("type");
         range_to = getIntent().getIntExtra("range_to", 0);
@@ -93,37 +100,32 @@ public class SearchResultActivity extends AppCompatActivity implements SearchAda
         genreId = getIntent().getIntExtra("genre_id", 0);
         countryId = getIntent().getIntExtra("country_id", 0);
 
-        tvTitle=findViewById(R.id.title);
-        tvLayout=findViewById(R.id.tv_layout);
-        movieLayout=findViewById(R.id.movie_layout);
-        tvSeriesLayout=findViewById(R.id.tv_series_layout);
+        tvTitle = findViewById(R.id.title);
+        tvLayout = findViewById(R.id.tv_layout);
+        movieLayout = findViewById(R.id.movie_layout);
+        tvSeriesLayout = findViewById(R.id.tv_series_layout);
         tvTitle = findViewById(R.id.tv_title);
-        movieTitle= findViewById(R.id.movie_title);
+        movieTitle = findViewById(R.id.movie_title);
         tvSeriesTv = findViewById(R.id.tv_series_title);
         movieRv = findViewById(R.id.movie_rv);
         tvRv = findViewById(R.id.tv_rv);
         tvSeriesRv = findViewById(R.id.tv_series_rv);
         searchQueryTv = findViewById(R.id.title_tv);
         toolbar = findViewById(R.id.toolbar);
+        countTv = findViewById(R.id.result_count);
+        searchQueryTv.setText("Showing Result for : " + query);
 
-        searchQueryTv.setText("Showing Result for : "+query );
-
-        progressBar=findViewById(R.id.item_progress_bar);
-        shimmerFrameLayout=findViewById(R.id.shimmer_view_container);
+        progressBar = findViewById(R.id.item_progress_bar);
+        shimmerFrameLayout = findViewById(R.id.shimmer_view_container);
         shimmerFrameLayout.startShimmer();
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Search Result");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        if (isDark) {
-            toolbar.setBackgroundColor(getResources().getColor(R.color.black_window_light));
-            toolbar.setTitleTextColor(Color.WHITE);
-        }
+        URL = new ApiResources().getSearchUrl() + "&&q=" + query + "&&page=";
 
-        URL=new ApiResources().getSearchUrl()+"&&q="+query+"&&page=";
-
-        coordinatorLayout=findViewById(R.id.coordinator_lyt);
+        coordinatorLayout = findViewById(R.id.coordinator_lyt);
         movieRv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         //movieRv.addItemDecoration(new SpacingItemDecoration(3, Tools.dpToPx(this, 4), true));
         movieRv.setHasFixedSize(true);
@@ -152,47 +154,72 @@ public class SearchResultActivity extends AppCompatActivity implements SearchAda
 
 
     public void getSearchData() {
+        Log.d("TRUNG: ", "search key " + query);
         Retrofit retrofit = RetrofitClient.getRetrofitInstance();
         SearchApi searchApi = retrofit.create(SearchApi.class);
-        Call<SearchModel> call = searchApi.getSearchData(Config.API_KEY, query, type, range_to,range_from,tvCategoryId,genreId,countryId);
+        Call<SearchModel> call = searchApi.getSearchData(Config.API_KEY, query, type, range_to, range_from, tvCategoryId, genreId, countryId);
         call.enqueue(new Callback<SearchModel>() {
             @Override
             public void onResponse(Call<SearchModel> call, retrofit2.Response<SearchModel> response) {
-                progressBar.setVisibility(View.GONE);
-                shimmerFrameLayout.stopShimmer();
-                shimmerFrameLayout.setVisibility(View.GONE);
-
                 if (response.code() == 200) {
-
+                    String result = "Founded: ";
                     SearchModel searchModel = response.body();
-
                     movieList.addAll(searchModel.getMovie());
                     tvList.addAll(searchModel.getTvChannels());
                     tvSeriesList.addAll(searchModel.getTvseries());
-
+                    if (tvList.size() == 0 && movieList.size() == 0 && tvSeriesList.size() == 0) {
+                        if (!isSplitQuery) {
+                            isSplitQuery = true;
+                            getKeyword(query);
+                        }
+                        if (mKeywordList.size() > 0) {
+                            if (indexKey < mKeywordList.size() -1 && isSplitQuery) {
+                                query = mKeywordList.get(indexKey);
+                                indexKey++;
+                                getSearchData();
+                                return;
+                            }
+                        }
+                        indexKey = 0;
+                        isSplitQuery = false;
+                        shimmerFrameLayout.stopShimmer();
+                        shimmerFrameLayout.setVisibility(View.GONE);
+                        progressBar.setVisibility(View.GONE);
+                        coordinatorLayout.setVisibility(View.VISIBLE);
+                        countTv.setVisibility(View.INVISIBLE);
+                    } else {
+                        indexKey = -1;
+                        isSplitQuery = false;
+                        shimmerFrameLayout.stopShimmer();
+                        shimmerFrameLayout.setVisibility(View.GONE);
+                        progressBar.setVisibility(View.GONE);
+                        countTv.setVisibility(View.VISIBLE);
+                    }
                     if (movieList.size() > 0) {
+                        result = "Movie : " + movieList.size();
                         movieAdapter.notifyDataSetChanged();
+                        movieLayout.setVisibility(View.VISIBLE);
                     } else {
                         movieLayout.setVisibility(View.GONE);
                     }
 
                     if (tvList.size() > 0) {
+                        result = result + "  TV : " + tvList.size();
                         tvAdapter.notifyDataSetChanged();
+                        tvLayout.setVisibility(View.VISIBLE);
                     } else {
                         tvLayout.setVisibility(View.GONE);
                     }
 
                     if (tvSeriesList.size() > 0) {
+                        result = result + "  Series : " + tvSeriesList.size();
                         tvSeriesAdapter.notifyDataSetChanged();
+                        tvSeriesLayout.setVisibility(View.VISIBLE);
                     } else {
                         tvSeriesLayout.setVisibility(View.GONE);
                     }
 
-                    if (tvList.size() == 0 && movieList.size() == 0 && tvSeriesList.size() == 0) {
-                        coordinatorLayout.setVisibility(View.VISIBLE);
-                    }
-
-
+                    countTv.setText(result);
                 } else {
                     new ToastMsg(SearchResultActivity.this).toastIconSuccess("Something went wrong.");
                     coordinatorLayout.setVisibility(View.VISIBLE);
@@ -212,9 +239,48 @@ public class SearchResultActivity extends AppCompatActivity implements SearchAda
             }
         });
 
+
     }
 
+    private void getKeyword(String query) {
+        splitQuery(query);
+        /*for (int i = 1; i < query.length() - 3; i++) {
+            String key = query.substring(0, query.length() - i);
+            String keyReverse = query.substring(i);
+            mKeywordList.add(key);
+            mKeywordList.add(keyReverse);
+        }*/
+       // Collections.sort(mKeywordList,new MyComparator("0"));
+    }
 
+    private void splitQuery(String query) {
+        query = query.replaceAll(" ","");
+        int index1 = 0;
+        for(int i=0;i<query.length()-4;i++){
+            if(index1 > query.length()-4 - index1)return;
+            String sub1 = query.substring(index1, 4 + index1);
+            String sub2 = query.substring(query.length()- 4 - index1, query.length() - index1);
+            if(!mKeywordList.contains(sub1)){
+                mKeywordList.add(sub1);
+            }
+            if(!mKeywordList.contains(sub2)){
+                mKeywordList.add(sub2);
+            }
+            index1++;
+        }
+        /*String sub1 = query.substring(0, query.length() / 2);
+        String sub2 = query.substring(query.length() / 2);
+
+        if (sub1.length() >= 3) {
+            mKeywordList.add(sub1);
+            splitQuery(sub1);
+        }
+        if (sub2.length() >= 3) {
+            mKeywordList.add(sub2);
+            splitQuery(sub2);
+        }*/
+
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -230,19 +296,34 @@ public class SearchResultActivity extends AppCompatActivity implements SearchAda
     @Override
     public void onItemClick(CommonModel commonModel) {
 
-        String type="";
+        String type = "";
         if (commonModel.getIsTvseries().equals("1")) {
             type = "tvseries";
         } else {
             type = "movie";
         }
 
-        Intent intent=new Intent(this,DetailsActivity.class);
-        intent.putExtra("vType",type);
-        intent.putExtra("id",commonModel.getVideosId());
+        Intent intent = new Intent(this, DetailsActivity.class);
+        intent.putExtra("vType", type);
+        intent.putExtra("id", commonModel.getVideosId());
         startActivity(intent);
 
     }
 
+    public class MyComparator implements java.util.Comparator<String> {
 
+        private int referenceLength;
+
+        public MyComparator(String reference) {
+            super();
+            this.referenceLength = reference.length();
+        }
+
+        public int compare(String s1, String s2) {
+            int dist1 = Math.abs(s1.length() - referenceLength);
+            int dist2 = Math.abs(s2.length() - referenceLength);
+
+            return dist1 - dist2;
+        }
+    }
 }
