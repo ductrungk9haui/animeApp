@@ -1,6 +1,7 @@
 package tvseries.koreandramaengsub.freemovieapp;
 
 import android.Manifest;
+import android.animation.Animator;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
@@ -452,13 +453,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (isSearchBarHide && hide || !isSearchBarHide && !hide) return;
         isSearchBarHide = hide;
         int moveY = hide ? -(2 * mSearchRootLayout.getHeight()) : 0;
-        mSearchRootLayout.animate().translationY(moveY).translationZ(2).setStartDelay(100).setDuration(300).start();
+        mSearchRootLayout.animate().translationY(moveY).setStartDelay(100).setDuration(300).start();
     }
 
     public void setTitle(String title) {
         mPageTitle.setText(title);
         mSearchRootLayout.setTranslationY(0);
-        mSearchRootLayout.setTranslationZ(2);
     }
 
     @OnClick(R.id.bt_menu)
