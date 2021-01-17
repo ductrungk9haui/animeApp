@@ -16,6 +16,12 @@ public class Season {
     @SerializedName("episodes")
     @Expose
     private List<Episode> episodes = null;
+    @SerializedName("download_links")
+    @Expose
+    private List<DownloadLink> downloadLinks;
+    @SerializedName("enable_download")
+    @Expose
+    private String enableDownload;
 
     public String getSeasonsId() {
         return seasonsId;
@@ -39,5 +45,11 @@ public class Season {
 
     public void setEpisodes(List<Episode> episodes) {
         this.episodes = episodes;
+    }
+    public List<DownloadLink> getDownloadLinks() {
+        return downloadLinks;
+    }
+    public String getEnableDownload() {
+        return enableDownload;
     }
 }

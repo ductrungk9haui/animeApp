@@ -237,8 +237,8 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
-
-        getAdDetails();
+//TRUNG
+        //getAdDetails();
     }
 
 
@@ -344,7 +344,7 @@ public class HomeFragment extends Fragment {
                      adapterSeries.notifyDataSetChanged();
 
                      //topview
-                     for (int i = 0; i < response.body().getTopviewTvseries().size(); i++){
+                  /*   for (int i = 0; i < response.body().getTopviewTvseries().size(); i++){
                          TopviewTvseries topviewtvSeries = response.body().getTopviewTvseries().get(i);
                          CommonModels models = new CommonModels();
                          models.setImageUrl(topviewtvSeries.getThumbnailUrl());
@@ -356,7 +356,7 @@ public class HomeFragment extends Fragment {
                          models.setIsPaid(topviewtvSeries.getIsPaid());
                          listTopViewSeries.add(models);
                      }
-                     adapterTopviewSeries.notifyDataSetChanged();
+                     adapterTopviewSeries.notifyDataSetChanged();*/
 
                      //get data by genre
                      for (int i = 0; i < response.body().getFeaturesGenreAndMovie().size(); i++){

@@ -458,6 +458,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void setTitle(String title) {
         mPageTitle.setText(title);
         mSearchRootLayout.setTranslationY(0);
+        mSearchRootLayout.setTranslationZ(2);
     }
 
     @OnClick(R.id.bt_menu)
