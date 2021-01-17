@@ -192,13 +192,13 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
     };
 
     void reset() {
-        if(mToolbar!=null){
-            mToolbar.setTranslationZ(0);
-        }
         mCircleView.clearAnimation();
         mProgress.stop();
         mCircleView.setVisibility(View.GONE);
         setColorViewAlpha(MAX_ALPHA);
+        if(mToolbar!=null){
+            mToolbar.setTranslationZ(0);
+        }
         // Return the circle to its start position
         if (mScale) {
             setAnimationProgress(0 /* animation complete and view is hidden */);
@@ -981,6 +981,9 @@ public class SwipeRefreshLayout extends ViewGroup implements NestedScrollingPare
                     public void onAnimationEnd(Animation animation) {
                         if (!mScale) {
                             startScaleDownAnimation(null);
+                        }
+                        if(mToolbar!=null){
+                            mToolbar.setTranslationZ(0);
                         }
                     }
 

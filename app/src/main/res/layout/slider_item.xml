@@ -2,7 +2,7 @@
 <RelativeLayout android:id="@+id/lyt_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="200dp"
     app:cardCornerRadius="5dp"
     app:cardElevation="3dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,7 +11,7 @@
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/imageview"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="200dp"
         android:scaleType="centerCrop"
         android:src="@drawable/image_1"
         app:riv_corner_radius="5dp"/>

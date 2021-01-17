@@ -19,6 +19,10 @@ import com.appodeal.ads.Appodeal;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.github.islamkhsh.CardSliderViewPager;
 import com.ixidev.gdpr.GDPRChecker;
+import com.viewpagerindicator.CirclePageIndicator;
+import com.viewpagerindicator.LinePageIndicator;
+import com.viewpagerindicator.TabPageIndicator;
+import com.viewpagerindicator.TitlePageIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,6 +83,7 @@ public class HomeFragment extends Fragment {
     @BindView(R.id.recyclerViewTvSeries) RecyclerView mRecyclerViewTvSeries;
     @BindView(R.id.recyclerView_by_genre) RecyclerView mRecyclerViewGenre;
     @BindView(R.id.recyclerViewTopviewTvSeries) RecyclerView mRecyclerViewTopviewTvSeries;
+    @BindView(R.id.title_pager_indicator) LinePageIndicator mPagerIndicator;
 
     private ArrayList<CommonModels> listSlider = new ArrayList<>();
     private Timer timer;
@@ -189,13 +194,13 @@ public class HomeFragment extends Fragment {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mRecyclerViewMovie.removeAllViews();
+               /* mRecyclerViewMovie.removeAllViews();
 //                recyclerViewTv.removeAllViews();
                 mRecyclerViewTvSeries.removeAllViews();
                 mRecyclerViewTopviewTvSeries.removeAllViews();
                 mRecyclerViewGenre.removeAllViews();
                 mGenreRv.removeAllViews();
-                mCountryRv.removeAllViews();
+                mCountryRv.removeAllViews();*/
 
                 genreList.clear();
                 countryList.clear();
@@ -233,8 +238,8 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
-
-        getAdDetails();
+//TRUNG
+        //getAdDetails();
     }
 
 
@@ -267,6 +272,7 @@ public class HomeFragment extends Fragment {
 
                     SliderAdapter sliderAdapter = new SliderAdapter(slider.getSlide());
                     mCViewPager.setAdapter(sliderAdapter);
+                    mPagerIndicator.setViewPager(mCViewPager);
                     sliderAdapter.notifyDataSetChanged();
 
                     //genre data
@@ -339,7 +345,7 @@ public class HomeFragment extends Fragment {
                      adapterSeries.notifyDataSetChanged();
 
                      //topview
-                     for (int i = 0; i < response.body().getTopviewTvseries().size(); i++){
+                  /*   for (int i = 0; i < response.body().getTopviewTvseries().size(); i++){
                          TopviewTvseries topviewtvSeries = response.body().getTopviewTvseries().get(i);
                          CommonModels models = new CommonModels();
                          models.setImageUrl(topviewtvSeries.getThumbnailUrl());
@@ -351,7 +357,7 @@ public class HomeFragment extends Fragment {
                          models.setIsPaid(topviewtvSeries.getIsPaid());
                          listTopViewSeries.add(models);
                      }
-                     adapterTopviewSeries.notifyDataSetChanged();
+                     adapterTopviewSeries.notifyDataSetChanged();*/
 
                      //get data by genre
                      for (int i = 0; i < response.body().getFeaturesGenreAndMovie().size(); i++){
@@ -487,13 +493,13 @@ public class HomeFragment extends Fragment {
     public void onResume() {
         super.onResume();
     }
-    @OnClick(R.id.btn_more_movie)
+    @OnClick({R.id.btn_more_movie,R.id.movie_layout})
     void onBtnMoreMovieClick(){
         Intent intent = new Intent(getContext(), ItemMovieActivity.class);
         intent.putExtra("title", "Movies");
         getActivity().startActivity(intent);
     }
-    @OnClick({R.id.btn_more_series,R.id.btn_more_series1})
+    @OnClick({R.id.btn_more_series,R.id.btn_more_series1,R.id.last_anime_layout,R.id.top_anime_layout})
     void onBtnMoreSeriesClick(){
         Intent intent = new Intent(getContext(), ItemSeriesActivity.class);
         intent.putExtra("title", "TV Series");

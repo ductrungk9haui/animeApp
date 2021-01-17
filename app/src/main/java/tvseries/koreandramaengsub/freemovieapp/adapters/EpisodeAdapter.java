@@ -29,7 +29,6 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.Original
     int i=0;
     private int lastPosition = -1;
     private DetailsActivity activity;
-    ArrayList<OriginalViewHolder> allViewHolder = new ArrayList<>();
     private int seasonNo;
 
     public interface OnTVSeriesEpisodeItemClickListener {
@@ -44,8 +43,8 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.Original
         this.items = items;
         activity = (DetailsActivity) context;
         ctx = context;
+        viewHolderArray[0] = null;
     }
-
 
     @Override
     public EpisodeAdapter.OriginalViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -59,7 +58,6 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.Original
     }
     @Override
     public void onBindViewHolder(final EpisodeAdapter.OriginalViewHolder holder, final int position) {
-
         final EpiModel obj = items.get(position);
         holder.name.setText(obj.getEpi());
         holder.position = position;
@@ -67,15 +65,13 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.Original
         Picasso.get().load(obj.getImageUrl()).placeholder(R.drawable.poster_placeholder)
                 .into(holder.episodIv);
 
-
-// code chỗ này còn sai ạ, dùng để check tập phim đang xem dở = cách đổi màu chữ
         if (holder.position == lastPosition){
             //((DetailsActivity)ctx).setMediaUrlForTvSeries(obj.getStreamURL(), obj.getSeson(), obj.getEpi());
             //new DetailsActivity().initMoviePlayer(obj.getStreamURL(),obj.getServerType(),ctx);
             holder.name.setTextColor(ctx.getResources().getColor(R.color.colorPrimary));
-            holder.playStatusTv.setText("Playing");
+            holder.playStatusTv.setText("Last Played");
             holder.playStatusTv.setVisibility(View.VISIBLE);
-            viewHolderArray[0] =holder;
+            viewHolderArray[0]=holder;
         }else{
             chanColor(holder,position);
         }
@@ -83,39 +79,45 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.Original
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((DetailsActivity)ctx).hideDescriptionLayout();
-                ((DetailsActivity)ctx).showSeriesLayout();
-                ((DetailsActivity)ctx).setMediaUrlForTvSeries(obj.getStreamURL(), obj.getSeson(), obj.getEpi());
-                boolean castSession = ((DetailsActivity)ctx).getCastSession();
-                //Toast.makeText(ctx, "cast:"+castSession, Toast.LENGTH_SHORT).show();
-                if (!castSession) {
-                    if (obj.getServerType().equalsIgnoreCase("embed")){
-                        if (mOnTVSeriesEpisodeItemClickListener != null){
-                            mOnTVSeriesEpisodeItemClickListener.onEpisodeItemClickTvSeries("embed", v, obj, position, viewHolder);
-                        }
-                    }else {
-                        activity.initMoviePlayer(obj.getStreamURL(), obj.getServerType(), ctx);
-                        if (mOnTVSeriesEpisodeItemClickListener != null){
-                            mOnTVSeriesEpisodeItemClickListener.onEpisodeItemClickTvSeries("normal", v, obj, position, viewHolder);
-                        }
-                    }
-                } else {
-                    ((DetailsActivity)ctx).showQueuePopup(ctx, holder.cardView, ((DetailsActivity)ctx).getMediaInfo());
-
-                }
-
-                chanColor(viewHolderArray[0],position);
-                holder.name.setTextColor(ctx.getResources().getColor(R.color.colorPrimary));
-                holder.playStatusTv.setText("Playing");
-                holder.playStatusTv.setVisibility(View.VISIBLE);
-
-
-                viewHolderArray[0] =holder;
+                onClickEpisode(v,holder,position,obj);
             }
         });
+        if(position == 0 && viewHolderArray[0]==null){
+            viewHolderArray[0] = holder;
+        }
 
     }
+    private void onClickEpisode(View v,OriginalViewHolder holder,int position,EpiModel obj ){
+        ((DetailsActivity)ctx).hideDescriptionLayout();
+        ((DetailsActivity)ctx).showSeriesLayout();
+        ((DetailsActivity)ctx).setMediaUrlForTvSeries(obj.getStreamURL(), obj.getSeson(), obj.getEpi());
+        boolean castSession = ((DetailsActivity)ctx).getCastSession();
+        //Toast.makeText(ctx, "cast:"+castSession, Toast.LENGTH_SHORT).show();
+        if (!castSession) {
+            if (obj.getServerType().equalsIgnoreCase("embed")){
+                if (mOnTVSeriesEpisodeItemClickListener != null){
+                    mOnTVSeriesEpisodeItemClickListener.onEpisodeItemClickTvSeries("embed", v, obj, position, viewHolder);
+                }
+            }else {
+                activity.initMoviePlayer(obj.getStreamURL(), obj.getServerType(), ctx);
+                if (mOnTVSeriesEpisodeItemClickListener != null){
+                    mOnTVSeriesEpisodeItemClickListener.onEpisodeItemClickTvSeries("normal", v, obj, position, viewHolder);
+                }
+            }
+        } else {
+            ((DetailsActivity)ctx).showQueuePopup(ctx, holder.cardView, ((DetailsActivity)ctx).getMediaInfo());
 
+        }
+        setNowPlaying(position);
+        chanColor(viewHolderArray[0],position);
+        holder.name.setTextColor(ctx.getResources().getColor(R.color.colorPrimary));
+        holder.playStatusTv.setText("Playing");
+        holder.playStatusTv.setVisibility(View.VISIBLE);
+        viewHolderArray[0] =holder;
+    }
+    public void getWatchEpisode(){
+        onClickEpisode(viewHolderArray[0].cardView,viewHolderArray[0],  viewHolderArray[0].position, items.get(viewHolderArray[0].position));
+    }
     @Override
     public int getItemCount() {
         return items.size();

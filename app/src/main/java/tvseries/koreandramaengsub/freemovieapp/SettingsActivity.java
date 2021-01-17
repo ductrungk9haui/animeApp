@@ -43,10 +43,6 @@ public class SettingsActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        if (!isDark) {
-            toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        }
-
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Settings");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

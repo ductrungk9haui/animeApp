@@ -51,11 +51,6 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         Toolbar toolbar = findViewById(R.id.toolbar);
-
-        if (!isDark) {
-            toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        }
-
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("SignUp");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

@@ -73,9 +73,6 @@ public class ItemSeriesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_item_series);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        if (!isDark) {
-            toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        }
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(getIntent().getStringExtra("title"));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

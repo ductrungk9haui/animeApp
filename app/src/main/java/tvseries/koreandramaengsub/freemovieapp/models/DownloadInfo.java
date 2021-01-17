@@ -1,15 +1,35 @@
 package tvseries.koreandramaengsub.freemovieapp.models;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "download_table")
 public class DownloadInfo {
+    @PrimaryKey
+    @ColumnInfo(name = "download_id")
+    @NonNull
+    private long downloadId;
 
-    int downloadId;
-    int notificationId;
-    String fileName;
+    @ColumnInfo(name = "file_name")
+    private String fileName;
 
-    public DownloadInfo(int downloadId, int notificationId, String fileName) {
+    @ColumnInfo(name = "percentage")
+    private int percentage;
+
+    public DownloadInfo(long downloadId, String fileName, int percentage) {
         this.downloadId = downloadId;
-        this.notificationId = notificationId;
         this.fileName = fileName;
+        this.percentage = percentage;
+    }
+
+    public long getDownloadId() {
+        return downloadId;
+    }
+
+    public void setDownloadId(long downloadId) {
+        this.downloadId = downloadId;
     }
 
     public String getFileName() {
@@ -20,19 +40,11 @@ public class DownloadInfo {
         this.fileName = fileName;
     }
 
-    public int getDownloadId() {
-        return downloadId;
+    public int getPercentage() {
+        return percentage;
     }
 
-    public void setDownloadId(int downloadId) {
-        this.downloadId = downloadId;
-    }
-
-    public int getNotificationId() {
-        return notificationId;
-    }
-
-    public void setNotificationId(int notificationId) {
-        this.notificationId = notificationId;
+    public void setPercentage(int percentage) {
+        this.percentage = percentage;
     }
 }

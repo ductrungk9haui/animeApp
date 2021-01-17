@@ -55,24 +55,34 @@
                             <RelativeLayout
                                 android:id="@+id/slider_layout"
                                 android:layout_width="match_parent"
+                                android:layout_marginHorizontal="10dp"
                                 android:layout_height="wrap_content">
 
                                 <com.github.islamkhsh.CardSliderViewPager
                                     android:id="@+id/c_viewPager"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="24dp"
-                                    app:auto_slide_time="2"
+                                    app:auto_slide_time="5"
                                     app:cardSlider_cardCornerRadius="5dp"
-                                    app:cardSlider_otherPagesWidth="24dp"
-                                    app:cardSlider_pageMargin="12dp" />
+                                    app:cardSlider_otherPagesWidth="-1dp"
+                                    app:cardSlider_pageMargin="0dp" />
 
-                                <!--<com.github.islamkhsh.CardSliderIndicator
+                                <com.viewpagerindicator.LinePageIndicator
+                                    android:id="@+id/title_pager_indicator"
+                                    app:unselectedColor="@color/blue_grey_400"
+                                    app:selectedColor="@color/blue_400"
+                                    app:strokeWidth="2dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_width="fill_parent"
+                                    android:layout_below="@id/c_viewPager"
+                                    android:layout_marginTop="6dp"
+                                    android:layout_centerHorizontal="true"/>
+                             <!--   <com.github.islamkhsh.CardSliderIndicator
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/c_indicator"
                                     android:layout_below="@id/c_viewPager"
-                                    android:layout_marginTop="8dp"
+                                    android:layout_marginTop="5dp"
                                     android:layout_centerHorizontal="true"/>-->
                             </RelativeLayout>
 
@@ -110,22 +120,21 @@
                                 android:visibility="gone"
                                 tools:visibility="visible">
 
-                                <TextView
+                               <!-- <TextView
                                     android:id="@+id/tv_genre"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginStart="15dp"
+                                    android:layout_marginStart="10dp"
                                     android:paddingTop="8dp"
                                     android:paddingBottom="8dp"
                                     android:text="@string/explore_by_genre"
-                                    android:textAppearance="@style/TextAppearance.Medium.Bold" />
+                                    android:textAppearance="@style/TextAppearance.Medium.Bold" />-->
 
                                 <androidx.recyclerview.widget.RecyclerView
                                     android:id="@+id/genre_rv"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_below="@id/tv_genre"
-                                    android:layout_marginTop="8dp">
+                                    android:layout_marginVertical="8dp">
 
                                 </androidx.recyclerview.widget.RecyclerView>
                             </RelativeLayout>
@@ -142,7 +151,7 @@
                                     android:id="@+id/tv_country"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginStart="15dp"
+                                    android:layout_marginStart="10dp"
                                     android:paddingTop="8dp"
                                     android:paddingBottom="8dp"
                                     android:text="@string/explore_by_country"
@@ -156,56 +165,24 @@
                                     android:layout_marginTop="8dp">
                                 </androidx.recyclerview.widget.RecyclerView>
                             </RelativeLayout>
-
-
-                            <!--                            <LinearLayout-->
-                            <!--                                android:layout_width="match_parent"-->
-                            <!--                                android:layout_height="wrap_content"-->
-                            <!--                                android:gravity="center_vertical"-->
-                            <!--                                android:orientation="horizontal"-->
-                            <!--                                android:paddingLeft="@dimen/spacing_large"-->
-                            <!--                                android:paddingRight="@dimen/spacing_large">-->
-
-                            <!--                                <TextView-->
-                            <!--                                    android:layout_width="0dp"-->
-                            <!--                                    android:layout_height="wrap_content"-->
-                            <!--                                    android:layout_weight="1"-->
-                            <!--                                    android:text="@string/featured_tv_channels"-->
-                            <!--                                    android:textAppearance="@style/TextAppearance.Medium.Bold"-->
-                            <!--                                    />-->
-
-                            <!--                                <Button-->
-                            <!--                                    android:id="@+id/btn_more_tv"-->
-                            <!--                                    style="@style/Widget.AppCompat.Button.Borderless"-->
-                            <!--                                    android:layout_width="wrap_content"-->
-                            <!--                                    android:layout_height="wrap_content"-->
-                            <!--                                    android:gravity="center"-->
-                            <!--                                    android:minWidth="0dp"-->
-                            <!--                                    android:text="@string/more"-->
-                            <!--                                    android:textSize="12sp"-->
-                            <!--                                    android:textColor="@color/grey_60" />-->
-
-                            <!--                            </LinearLayout>-->
-
-                            <!--                            <androidx.recyclerview.widget.RecyclerView-->
-                            <!--                                android:id="@+id/recyclerViewTv"-->
-                            <!--                                android:layout_width="match_parent"-->
-                            <!--                                android:layout_height="wrap_content" />-->
-
-
                             <LinearLayout
+                                android:id="@+id/last_anime_layout"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/spacing_medium"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:background="?android:attr/selectableItemBackground"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal"
-                                android:paddingLeft="@dimen/spacing_large"
-                                android:paddingRight="@dimen/spacing_large">
+                                android:paddingLeft="10dp"
+                                android:paddingRight="5dp">
 
                                 <TextView
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
+                                    android:gravity="center_vertical"
                                     android:text="@string/latest_tv_series"
                                     android:textAppearance="@style/TextAppearance.Medium.Bold" />
 
@@ -214,11 +191,11 @@
                                     style="@style/Widget.AppCompat.Button.Borderless"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:gravity="center"
+                                    android:gravity="right|center_vertical"
                                     android:minWidth="0dp"
                                     android:text="@string/more"
-                                    android:textColor="@color/grey_60"
-                                    android:textSize="12sp" />
+                                    android:textAppearance="@style/TextAppearance.Medium.Bold"
+                                    android:textSize="15sp" />
 
                             </LinearLayout>
 
@@ -231,13 +208,17 @@
                                 android:scrollingCache="true" />
 
                             <LinearLayout
+                                android:id="@+id/top_anime_layout"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/spacing_medium"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:background="?android:attr/selectableItemBackground"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal"
-                                android:paddingLeft="@dimen/spacing_large"
-                                android:paddingRight="@dimen/spacing_large">
+                                android:paddingLeft="10dp"
+                                android:paddingRight="5dp">
 
                                 <TextView
                                     android:layout_width="0dp"
@@ -251,11 +232,11 @@
                                     style="@style/Widget.AppCompat.Button.Borderless"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:gravity="center"
+                                    android:gravity="right|center_vertical"
                                     android:minWidth="0dp"
                                     android:text="@string/more"
-                                    android:textColor="@color/grey_60"
-                                    android:textSize="12sp" />
+                                    android:textAppearance="@style/TextAppearance.Medium.Bold"
+                                    android:textSize="15sp" />
 
                             </LinearLayout>
 
@@ -273,7 +254,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="10dp"
                                 android:scrollbars="vertical"
-                                android:scrollingCache="true"></androidx.recyclerview.widget.RecyclerView>
+                                android:scrollingCache="true" />
 
                             <RelativeLayout
                                 android:id="@+id/adView"
@@ -291,12 +272,16 @@
                                 android:visibility="gone"/>
 
                             <LinearLayout
+                                android:id="@+id/movie_layout"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:background="?android:attr/selectableItemBackground"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal"
-                                android:paddingLeft="@dimen/spacing_large"
-                                android:paddingRight="@dimen/spacing_large">
+                                android:paddingLeft="10dp"
+                                android:paddingRight="5dp">
 
                                 <TextView
                                     android:layout_width="0dp"
@@ -310,12 +295,11 @@
                                     style="@style/Widget.AppCompat.Button.Borderless"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:gravity="center"
+                                    android:gravity="right|center_vertical"
                                     android:minWidth="0dp"
                                     android:text="@string/more"
-                                    android:textColor="@color/grey_60"
-                                    android:textSize="12sp" />
-
+                                    android:textAppearance="@style/TextAppearance.Medium.Bold"
+                                    android:textSize="15sp" />
                             </LinearLayout>
 
                             <androidx.recyclerview.widget.RecyclerView

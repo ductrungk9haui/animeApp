@@ -4,7 +4,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginTop="10dp"
+    android:layout_marginTop="5dp"
     android:id="@+id/card_view_home"
     app:cardCornerRadius="0dp"
     android:layout_marginBottom="5dp"
@@ -32,11 +32,11 @@
                     android:scaleType="centerCrop"
                     android:src="@drawable/poster_placeholder"/>
 
-                <!--<ImageView
+                <ImageView
                     android:layout_centerInParent="true"
                     android:src="@drawable/ic_outline_play_circle_filled_24px"
                     android:layout_width="38dp"
-                    android:layout_height="38dp" />-->
+                    android:layout_height="38dp" />
 
                 <TextView
                     android:id="@+id/play_status_tv"

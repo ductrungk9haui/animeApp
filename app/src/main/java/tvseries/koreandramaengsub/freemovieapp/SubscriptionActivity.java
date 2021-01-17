@@ -84,7 +84,6 @@ public class SubscriptionActivity extends AppCompatActivity implements ActiveSub
 
         // change toolbar color as theme color
         if (isDark) {
-            mToolbar.setBackgroundColor(getResources().getColor(R.color.black_window_light));
 
             historyView.setBackgroundColor(getResources().getColor(R.color.black_1_transarent));
             activeView.setBackgroundColor(getResources().getColor(R.color.black_1_transarent));

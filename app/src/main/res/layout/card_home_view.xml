@@ -20,7 +20,7 @@
         <com.balysv.materialripple.MaterialRippleLayout
             android:id="@+id/lyt_parent"
             style="@style/RippleStyleBlack"
-            android:layout_width="116dp"
+            android:layout_width="130dp"
             android:layout_height="wrap_content">
 
             <RelativeLayout

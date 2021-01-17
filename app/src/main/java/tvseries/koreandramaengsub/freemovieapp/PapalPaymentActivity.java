@@ -47,7 +47,6 @@ public class PapalPaymentActivity extends AppCompatActivity {
         String state = intent.getStringExtra("state");
         initView();
         if (isDark) {
-            mToolbar.setBackgroundColor(getResources().getColor(R.color.dark));
             finishBt.setBackground(getResources().getDrawable(R.drawable.btn_rounded_dark));
         }
 

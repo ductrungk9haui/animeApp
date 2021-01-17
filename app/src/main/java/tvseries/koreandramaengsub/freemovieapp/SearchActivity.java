@@ -65,7 +65,6 @@ public class SearchActivity extends AppCompatActivity {
         initComponent();
 
         if (!isDark) {
-            toolbar.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             search_btn.setBackgroundResource(R.drawable.btn_rect_primary);
             search_btn.setTextColor(getResources().getColor(R.color.white));
             genreSpinner.setBackground(getResources().getDrawable(R.drawable.edit_text_round_bg_overlay_light));

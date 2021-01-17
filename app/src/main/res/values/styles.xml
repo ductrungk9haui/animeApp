@@ -15,7 +15,10 @@
         <item name="android:textColor">@color/black</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="title_background">@color/white</item>
+        <item name="title_backgroundColor">@color/material_gray_30</item>
         <item name="colorAccent">@color/colorPrimaryDark</item>
+        <item name="selectable_backgroundColor">#A7D8FF</item>
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogLightTheme</item>
     </style>
@@ -27,6 +30,9 @@
         <item name="colorAccent">@color/colorPrimaryDark</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:windowBackground">@color/black_window</item>
+        <item name="title_backgroundColor">@color/nav_head_bg</item>
+        <item name="title_background">@color/nav_head_bg</item>
+        <item name="selectable_backgroundColor">@color/nav_head_bg</item>
         <item name="cardViewStyle">@style/DarkCardView</item>
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogDarkTheme</item>
@@ -77,7 +83,10 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">12sp</item>
     </style>
-
+    <style name="TextAppearance.smallNormal" parent="@style/TextAppearance.AppCompat.Medium">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">12sp</item>
+    </style>
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

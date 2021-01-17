@@ -3,6 +3,7 @@ package tvseries.koreandramaengsub.freemovieapp;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -54,6 +55,8 @@ import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
 import com.balysv.materialripple.MaterialRippleLayout;
+import com.downloader.PRDownloader;
+import com.downloader.Status;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -113,6 +116,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 import at.huber.youtubeExtractor.VideoMeta;
@@ -141,6 +145,7 @@ import tvseries.koreandramaengsub.freemovieapp.models.GetCommentsModel;
 import tvseries.koreandramaengsub.freemovieapp.models.PostCommentModel;
 import tvseries.koreandramaengsub.freemovieapp.models.Program;
 import tvseries.koreandramaengsub.freemovieapp.models.SubtitleModel;
+import tvseries.koreandramaengsub.freemovieapp.models.Work;
 import tvseries.koreandramaengsub.freemovieapp.models.single_details.Cast;
 import tvseries.koreandramaengsub.freemovieapp.models.single_details.Director;
 import tvseries.koreandramaengsub.freemovieapp.models.single_details.DownloadLink;
@@ -193,6 +198,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     @BindView(R.id.tv_genre) TextView mTvGenre;
     @BindView(R.id.swipe_layout) SwipeRefreshLayout mSwipeRefreshLayout;
     @BindView(R.id.add_fav) ImageView mImgAddFav;
+    @BindView(R.id.add_fav2) ImageView mImgAddFav2;
     @BindView(R.id.img_back) ImageView mImgBack;
     @BindView(R.id.webView) WebView mWebView;
     @BindView(R.id.progressBar) ProgressBar mProgressBar;
@@ -212,7 +218,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     @BindView(R.id.volumn_seekbar) SeekBar mVolumnSeekbar;
     @BindView(R.id.rv_server_list) RecyclerView mRvServer;
     @BindView(R.id.season_spinner) Spinner mSeasonSpinner;
-    @BindView(R.id.spinner_container) LinearLayout mSeasonSpinnerContainer;
+    @BindView(R.id.spinner_container) RelativeLayout mSeasonSpinnerContainer;
     @BindView(R.id.img_subtitle) ImageView mImgSubtitle;
     @BindView(R.id.media_route_button) MediaRouteButton mMediaRouteButton;
     @BindView(R.id.chrome_cast_tv) TextView mChromeCastTv;
@@ -247,8 +253,9 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     @BindView(R.id.img_server) ImageView mServerIv;
     @BindView(R.id.series_layout) RelativeLayout mSeriesLayout;
     @BindView(R.id.seriest_title_tv) TextView mSeriesTitleTv;
+    @BindView(R.id.linear_share) View mTopShareLayout;
     private Unbinder mUnbinder;
-
+    private EpisodeAdapter mEpisodeAdapter;
     private ServerAdapter mServerAdapter;
     private HomePageAdapter mRelatedAdapter;
     private RelatedTvAdapter mRelatedTvAdapter;
@@ -391,8 +398,10 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         mUserId = mDBHelper.getUserData().getUserId();
         if (PreferenceUtils.isLoggedIn(DetailsActivity.this)) {
             mImgAddFav.setVisibility(VISIBLE);
+            mImgAddFav2.setVisibility(VISIBLE);
         } else {
             mImgAddFav.setVisibility(GONE);
+            mImgAddFav2.setVisibility(GONE);
         }
         mCommentsAdapter = new CommentsAdapter(this, mListComment);
         mRvComment.setLayoutManager(new LinearLayoutManager(this));
@@ -410,8 +419,8 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                 initGetData();
             }
         });
-
-        loadAd();
+        //TRUNG
+        //loadAd();
     }
 
     public static DetailsActivity getInstance() {
@@ -702,8 +711,28 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         builder.setView(view);
 
         final AlertDialog dialog = builder.create();
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                if(isDownloading()){
+                    Toast.makeText(DetailsActivity.this, "Go to Downloads to follow download progress ", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         dialog.show();
 
+    }
+    private boolean isDownloading(){
+        List<Work> works = mDBHelper.getAllWork();
+        for(Work work : works){
+            if(work.getDownloadId() == 0 && !work.getDownloadStatus().equals(getApplicationContext().getString(R.string.download_waiting))){
+                return true;
+            }
+            if(PRDownloader.getStatus(work.getDownloadId()) == Status.RUNNING){
+                return true;
+            }
+        }
+        return false;
     }
 
     private void openServerDialog() {
@@ -1082,8 +1111,8 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                 mListServer.clear();
                 mListServer.clear();
 
-                mDownloadBt.setVisibility(GONE);
-                mWatchNowBt.setVisibility(GONE);
+               /* mDownloadBt.setVisibility(GONE);
+                mWatchNowBt.setVisibility(GONE);*/
 
                 // cast & crew adapter
                 mCastCrewAdapter = new CastCrewAdapter(this, mCastCrews);
@@ -1167,6 +1196,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             mRelatedTvAdapter.setListener(DetailsActivity.this);
 
             mImgAddFav.setVisibility(GONE);
+            mImgAddFav2.setVisibility(GONE);
 
             mServerAdapter = new ServerAdapter(this, mListServer, "tv");
             mRvServer.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
@@ -1412,6 +1442,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                         new ToastMsg(DetailsActivity.this).toastIconSuccess(response.body().getMessage());
                         mIsFav = true;
                         mImgAddFav.setBackgroundResource(R.drawable.ic_favorite_white);
+                        mImgAddFav2.setBackgroundResource(R.drawable.ic_favorite_white);
                     } else {
                         new ToastMsg(DetailsActivity.this).toastIconError(response.body().getMessage());
                     }
@@ -1498,6 +1529,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             @Override
             public void onResponse(Call<SingleDetailsTV> call, retrofit2.Response<SingleDetailsTV> response) {
                 if (response.code() == 200){
+                    if(mSwipeRefreshLayout==null) return;
                     if (response.body() != null){
                         mSwipeRefreshLayout.setRefreshing(false);
                         mShimmerLayout.stopShimmer();
@@ -1515,8 +1547,9 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                         mTvImdb.setText(mImdb_rating);
                         mTvImdb.setVisibility(GONE);
 
-
-                        mTvDes.setText(detailsModel.getDescription());
+                        if(!detailsModel.getDescription().equals("")){
+                            mTvDes.setText(detailsModel.getDescription());
+                        }
                         V_URL = detailsModel.getStreamUrl();
                         mCastImageUrl = detailsModel.getThumbnailUrl();
 
@@ -1601,6 +1634,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
     private void getSeriesData(String vtype, String vId) {
         final List<String> seasonList = new ArrayList<>();
+        final List<String> seasonListForDownload = new ArrayList<>();
         Retrofit retrofit = RetrofitClient.getRetrofitInstance();
         SingleDetailsApi api = retrofit.create(SingleDetailsApi.class);
         Call<SingleDetails> call = api.getSingleDetails(Config.API_KEY, vtype, vId);
@@ -1608,6 +1642,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             @Override
             public void onResponse(Call<SingleDetails> call, retrofit2.Response<SingleDetails> response) {
                 if (response.code() == 200){
+                    if(mSwipeRefreshLayout==null)return;
                     mSwipeRefreshLayout.setRefreshing(false);
                     mShimmerLayout.stopShimmer();
                     mShimmerLayout.setVisibility(GONE);
@@ -1623,8 +1658,10 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                     mSeriesTitle = mTitle;
                     mTvName.setText(mTitle);
                     mTvImdb.setText(mImdb_rating);
-                    mTvRelease.setText("Release On " + singleDetails.getRelease());
-                    mTvDes.setText(singleDetails.getDescription());
+                    mTvRelease.setText("Release On : " + singleDetails.getRelease());
+                    if(!singleDetails.getDescription().equals("")){
+                        mTvDes.setText(singleDetails.getDescription());
+                    }
 
                     Picasso.get().load(singleDetails.getPosterUrl()).placeholder(R.drawable.album_art_placeholder_large)
                             .into(mPosterIv);
@@ -1696,6 +1733,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                         String season_name = season.getSeasonsName();
                         models.setTitle(season.getSeasonsName());
                         seasonList.add("#SV: " + season.getSeasonsName());
+                        seasonListForDownload.add(season.getSeasonsName());
 
                         //----episode------
                         List<EpiModel> epList = new ArrayList<>();
@@ -1714,8 +1752,9 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                         }
                         models.setListEpi(epList);
                         mListServer.add(models);
-
-                        setSeasonData(seasonList);
+                        if (seasonList.size() > 0){
+                            setSeasonData(seasonList,singleDetails.getSeason());
+                        }
 
                     }
                 }
@@ -1728,7 +1767,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         });
     }
 
-    public void setSeasonData(List<String> seasonData) {
+    private void setSeasonData(List<String> seasonData, List<Season> seasonList) {
 
         ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, seasonData);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -1737,22 +1776,38 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
         mSeasonSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view,final int i, long l) {
+            public void onItemSelected(AdapterView<?> adapterView, View view,final int position, long l) {
                 mRvServer.removeAllViewsInLayout();
                 mRvServer.setLayoutManager(new LinearLayoutManager(DetailsActivity.this,
                         RecyclerView.HORIZONTAL, false));
-                EpisodeAdapter episodeAdapter = new EpisodeAdapter(DetailsActivity.this,
-                        mListServer.get(i).getListEpi());
+                mEpisodeAdapter = new EpisodeAdapter(DetailsActivity.this,
+                        mListServer.get(position).getListEpi());
                 if (mMapMovies.containsKey(mId) && mMapMovies.get(mId)!=null) {
-                    episodeAdapter.setNowPlaying(mMapMovies.get(mId));
+                    mEpisodeAdapter.setNowPlaying(mMapMovies.get(mId));
                 }
-                mRvServer.setAdapter(episodeAdapter);
+                mRvServer.setAdapter(mEpisodeAdapter);
 
                 if (mMapMovies.containsKey(mId) && mMapMovies.get(mId)!=null) {
                     mRvServer.scrollToPosition(mMapMovies.get(mId)-1);
                 }
-                episodeAdapter.setOnEmbedItemClickListener(DetailsActivity.this);
-
+                mEpisodeAdapter.setOnEmbedItemClickListener(DetailsActivity.this);
+                //get download link
+                mListExternalDownload.clear();
+                mListInternalDownload.clear();
+                for (int i = 0; i < seasonList.get(position).getDownloadLinks().size(); i++) {
+                    DownloadLink downloadLink = seasonList.get(position).getDownloadLinks().get(i);
+                    CommonModels models = new CommonModels();
+                    models.setTitle(downloadLink.getLabel());
+                    models.setStremURL(downloadLink.getDownloadUrl());
+                    models.setFileSize(downloadLink.getFileSize());
+                    models.setResulation(downloadLink.getResolution());
+                    models.setInAppDownload(downloadLink.isInAppDownload());
+                    if (downloadLink.isInAppDownload()) {
+                        mListInternalDownload.add(models);
+                    } else {
+                        mListExternalDownload.add(models);
+                    }
+                }
             }
 
             @Override
@@ -1762,6 +1817,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         });
 
     }
+
     public String getMapMovies(){
         Gson gson = new Gson();
         return gson.toJson(mMapMovies);
@@ -1793,6 +1849,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             @Override
             public void onResponse(Call<SingleDetails> call, retrofit2.Response<SingleDetails> response) {
                 if (response.code() == 200){
+                    if(mShimmerLayout==null) return;
                     mShimmerLayout.stopShimmer();
                     mShimmerLayout.setVisibility(GONE);
                     mSwipeRefreshLayout.setRefreshing(false);
@@ -1804,7 +1861,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                     if (mDownload_check.equals("1")) {
                         mDownloadBt.setVisibility(VISIBLE);
                     } else {
-                        mDownloadBt.setVisibility(GONE);
+                        //mDownloadBt.setVisibility(GONE);
                     }
                     mTitle = singleDetails.getTitle();
                     mImdb_rating =singleDetails.getImdb_rating();
@@ -1812,9 +1869,10 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
                     mTvName.setText(mTitle);
                     mTvImdb.setText(mImdb_rating);
-                    mTvRelease.setText("Release On " + singleDetails.getRelease());
-                    mTvDes.setText(singleDetails.getDescription());
-
+                    mTvRelease.setText("Release On : " + singleDetails.getRelease());
+                    if(!singleDetails.getDescription().equals("")){
+                        mTvDes.setText(singleDetails.getDescription());
+                    }
 
                     Picasso.get().load(singleDetails.getPosterUrl()).placeholder(R.drawable.album_art_placeholder_large)
                             .into(mPosterIv);
@@ -1962,14 +2020,19 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             @Override
             public void onResponse(Call<FavoriteModel> call, retrofit2.Response<FavoriteModel> response) {
                 if (response.code() == 200){
+                    if(mImgAddFav==null)return;
                     if (response.body().getStatus().equalsIgnoreCase("success")){
                         mIsFav = true;
                         mImgAddFav.setBackgroundResource(R.drawable.ic_favorite_white);
                         mImgAddFav.setVisibility(VISIBLE);
+                        mImgAddFav2.setBackgroundResource(R.drawable.ic_favorite_white);
+                        mImgAddFav2.setVisibility(VISIBLE);
                     } else {
                         mIsFav = false;
                         mImgAddFav.setBackgroundResource(R.drawable.ic_favorite_border_white);
                         mImgAddFav.setVisibility(VISIBLE);
+                        mImgAddFav2.setBackgroundResource(R.drawable.ic_favorite_border_white);
+                        mImgAddFav2.setVisibility(VISIBLE);
                     }
                 }
             }
@@ -1994,10 +2057,12 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                         mIsFav = false;
                         new ToastMsg(DetailsActivity.this).toastIconSuccess(response.body().getMessage());
                         mImgAddFav.setBackgroundResource(R.drawable.ic_favorite_border_white);
+                        mImgAddFav2.setBackgroundResource(R.drawable.ic_favorite_border_white);
                     } else {
                         mIsFav = true;
                         new ToastMsg(DetailsActivity.this).toastIconError(response.body().getMessage());
                         mImgAddFav.setBackgroundResource(R.drawable.ic_favorite_white);
+                        mImgAddFav2.setBackgroundResource(R.drawable.ic_favorite_white);
                     }
                 }
             }
@@ -2064,7 +2129,6 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         });
 
     }
-
     public void hideDescriptionLayout() {
         mDescriptionLayout.setVisibility(GONE);
         mLPlay.setVisibility(VISIBLE);
@@ -2072,11 +2136,15 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
     public void showSeriesLayout() {
         mSeriesLayout.setVisibility(VISIBLE);
+        mTopShareLayout.setVisibility(GONE);
     }
 
     public void showDescriptionLayout() {
         mDescriptionLayout.setVisibility(VISIBLE);
         mLPlay.setVisibility(GONE);
+        mSeriesLayout.setVisibility(GONE);
+        mTopShareLayout.setVisibility(VISIBLE);
+        Objects.requireNonNull(mRvServer.getAdapter()).notifyDataSetChanged();
     }
 
     @Override
@@ -2537,6 +2605,14 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
     @OnClick(R.id.watch_now_bt)
     void onWatchNowClick(){
+        if(mType.equals("tvseries")){
+            if(mEpisodeAdapter!=null){
+                mEpisodeAdapter.getWatchEpisode();
+                return;
+            }
+            Toast.makeText(DetailsActivity.this, "Please select an episode", Toast.LENGTH_SHORT).show();
+            return;
+        }
         //PopUpAds.ShowAdmobInterstitialAds(DetailsActivity.this);
         if (PreferenceUtils.isLoggedIn(DetailsActivity.this)) {
             if (!PreferenceUtils.isActivePlan(DetailsActivity.this)) {
@@ -2601,7 +2677,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         mProgramTv.setText(mCurrentProgramTitle);
     }
 
-    @OnClick({R.id.share_iv2,R.id.share_iv})
+    @OnClick({R.id.share_iv2,R.id.share_iv,R.id.share_iv3})
     void onShare2Click(){
         if (mTitle == null) {
             new ToastMsg(DetailsActivity.this).toastIconError("Title should not be empty.");
@@ -2628,7 +2704,19 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
     @OnClick({R.id.des_back_iv,R.id.back_iv})
     void onDesBackClick(){
-        finish();
+        if (mActiveMovie) {
+            setPlayerNormalScreen();
+            if (mPlayer != null){
+                mPlayer.setPlayWhenReady(false);
+                mPlayer.stop();
+            }
+            showDescriptionLayout();
+            mActiveMovie = false;
+        } else {
+            releasePlayer();
+            finish();
+        }
+
     }
 }
 

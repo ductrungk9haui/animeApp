@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
 
-    public static final String API_URL_EXTENSION = "/v100/";
+    public static final String API_URL_EXTENSION = "/v130/";
     //copy your api username and password from php admin dashboard & paste below
     public static final String API_USER_NAME = "admin";
     public static final String API_PASSWORD = "1234";
