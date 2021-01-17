@@ -1,11 +1,12 @@
 package tvseries.koreandramaengsub.freemovieapp.utils.ads;
 
+import android.app.Activity;
 import android.content.Context;
 
+import com.appodeal.ads.Appodeal;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
-import com.startapp.android.publish.adsCommon.StartAppAd;
 
 import tvseries.koreandramaengsub.freemovieapp.database.DatabaseHelper;
 import tvseries.koreandramaengsub.freemovieapp.network.model.config.AdsConfig;
@@ -85,8 +86,13 @@ public class PopUpAds {
 
     public static void showStartappInterstitialAds(Context context){
         //startapp
-        StartAppAd startAppAd = new StartAppAd(context);
-        startAppAd.showAd(); // show the ad
+       // StartAppAd startAppAd = new StartAppAd(context);
+        //startAppAd.showAd(); // show the ad
+    }
+
+    public static void showAppodealInterstitialAds(Activity activity){
+        //startapp
+        Appodeal.show(activity,Appodeal.INTERSTITIAL); // show the ad
     }
 
 }

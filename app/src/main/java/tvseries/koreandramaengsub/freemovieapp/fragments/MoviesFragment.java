@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.appodeal.ads.Appodeal;
 import com.facebook.shimmer.ShimmerFrameLayout;
 
 import java.util.ArrayList;
@@ -164,22 +165,42 @@ public class MoviesFragment extends Fragment {
 
     private void loadAd() {
         AdsConfig adsConfig = new DatabaseHelper(getContext()).getConfigurationData().getAdsConfig();
-        if (adsConfig.getAdsEnable().equals("1")) {
+        if (PreferenceUtils.isLoggedIn(mActivity)) {
+            if (!PreferenceUtils.isActivePlan(mActivity)) {
+                if (adsConfig.getAdsEnable().equals("1")) {
 
-            if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                //BannerAds.ShowAdmobBannerAds(mActivity, mAdView);
-                if (PreferenceUtils.isLoggedIn(mActivity)) {
-                    if (!PreferenceUtils.isActivePlan(mActivity)) {
-                        BannerAds.ShowAdmobBannerAds(mActivity, mAdView);
+                    if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
+                        BannerAds.ShowAdmobBannerAds(getContext(), mAdView);
+                        //BannerAds.ShowAdmobBannerAds(getContext(), adView1);
+
+                    } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
+                        // BannerAds.showStartAppBanner(getContext(), adView);
+                        Appodeal.setBannerViewId(R.id.appodealBannerView_fragment_movies);
+                        Appodeal.show(mActivity,Appodeal.BANNER_VIEW);
+                    } else if(adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.NETWORK_AUDIENCE)) {
+                        BannerAds.showFANBanner(getContext(), mAdView);
+                        //BannerAds.showFANBanner(getContext(), adView1);
                     }
                 }
-            } else if (adsConfig.getMobileAdsNetwork().equals(Constants.START_APP)) {
-                BannerAds.showStartAppBanner(mActivity, mAdView);
+            }
+        }else {
+            if (adsConfig.getAdsEnable().equals("1")) {
 
-            } else if(adsConfig.getMobileAdsNetwork().equals(Constants.NETWORK_AUDIENCE)) {
-                BannerAds.showFANBanner(getContext(), mAdView);
+                if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
+                    BannerAds.ShowAdmobBannerAds(getContext(), mAdView);
+                    //BannerAds.ShowAdmobBannerAds(getContext(), adView1);
+
+                } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
+                    // BannerAds.showStartAppBanner(getContext(), adView);
+                    Appodeal.setBannerViewId(R.id.appodealBannerView_fragment_movies);
+                    Appodeal.show(mActivity,Appodeal.BANNER_VIEW);
+                } else if(adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.NETWORK_AUDIENCE)) {
+                    BannerAds.showFANBanner(getContext(), mAdView);
+                    //BannerAds.showFANBanner(getContext(), adView1);
+                }
             }
         }
+
     }
 
     private void getData(int pageNum) {

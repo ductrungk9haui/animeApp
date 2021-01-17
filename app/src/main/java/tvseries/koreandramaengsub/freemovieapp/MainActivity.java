@@ -42,6 +42,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.appodeal.ads.Appodeal;
 import com.google.android.gms.cast.framework.CastContext;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -72,6 +73,7 @@ import tvseries.koreandramaengsub.freemovieapp.models.NavigationModel;
 import tvseries.koreandramaengsub.freemovieapp.nav_fragments.CountryFragment;
 import tvseries.koreandramaengsub.freemovieapp.nav_fragments.FavoriteFragment;
 import tvseries.koreandramaengsub.freemovieapp.nav_fragments.GenreFragment;
+import tvseries.koreandramaengsub.freemovieapp.network.model.config.AdsConfig;
 import tvseries.koreandramaengsub.freemovieapp.utils.Constants;
 import tvseries.koreandramaengsub.freemovieapp.utils.PreferenceUtils;
 import tvseries.koreandramaengsub.freemovieapp.utils.RtlUtils;
@@ -114,6 +116,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         RtlUtils.setScreenDirection(this);
         mDBHelper = new DatabaseHelper(MainActivity.this);
         navMenuStyle = mDBHelper.getConfigurationData().getAppConfig().getMenu();
+
+        AdsConfig adsConfig = new DatabaseHelper(MainActivity.this).getConfigurationData().getAdsConfig();
+        if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
+            Appodeal.disableLocationPermissionCheck();
+            Appodeal.initialize(MainActivity.this,adsConfig.getStartappAppId(),Appodeal.BANNER | Appodeal.INTERSTITIAL);
+        }
 
         SharedPreferences sharedPreferences = getSharedPreferences("push", MODE_PRIVATE);
         isDark = sharedPreferences.getBoolean("dark", true);
@@ -605,7 +613,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             Intent intent=new Intent(MainActivity.this,SettingsActivity.class);
                             startActivity(intent);
                         }
-                        else if (position==9){
+                        else if (position==10){
 
                             new AlertDialog.Builder(MainActivity.this).setMessage("Are you sure to logout ?")
                                     .setPositiveButton("YES", new DialogInterface.OnClickListener() {

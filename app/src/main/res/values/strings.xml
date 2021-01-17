@@ -19,6 +19,7 @@
     <string name="topview_tv_series">Topview Tv Series</string>
     <string name="more">More</string>
     <string name="movie">Movies</string>
+    <string name="today_sub">Today Subtitles</string>
     <string name="live_tv">Live TV</string>
     <string name="tv_series">Series</string>
     <string name="country">Country</string>
@@ -148,10 +149,10 @@
     <string name="program_guide">Program Guide</string>
     <string name="live">Live</string>
     <string name="watching_on">Watching live on</string>
-    <string name="all_tv_channel">All TV Channels</string>
+    <string name="all_tv_channel">All Animes</string>
     <string name="you_may_also_like">You may also like</string>
     <string name="dark_mode">Dark Mode</string>
-    <string name="tv_channels">Tv Channels</string>
+    <string name="tv_channels">Skip Ads</string>
     <string name="watching_catch_up_tv">Watching Catch-up TV</string>
     <string name="deactive_account_text">If you do not want to use this account you can de-active easily.</string>
     <string name="reason_to_deactivate_account">Reason to deactivate account</string>
@@ -217,11 +218,11 @@
     <string name="download">Download</string>
     <string name="select_server">Select Server</string>
     <string name="home">Home</string>
-    <string name="buy_any_subscription_below_and_enjoy_oxoo_prime">Buy any subscription below and enjoy OXOO prime features.</string>
+    <string name="buy_any_subscription_below_and_enjoy_oxoo_prime">Buy any subscription below and enjoy linkh174 prime features.</string>
     <string name="all_tv_channels">TV Channels</string>
     <string name="all_kids_videos">All Kids Videos</string>
-    <string name="all_tv_series">All TV Series</string>
-    <string name="unlimited_movies">Unlimited Movies</string>
+    <string name="all_tv_series">All Rare Anime</string>
+    <string name="unlimited_movies">Unlimited Anime</string>
     <string name="please_select_your_payment_method">Please select your payment method</string>
     <string name="download_appear_text">Your download item will be appear here.  Download item not found.</string>
     <string name="send">Send</string>

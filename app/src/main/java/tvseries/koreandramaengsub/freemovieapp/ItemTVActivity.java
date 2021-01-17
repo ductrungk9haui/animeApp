@@ -16,12 +16,16 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.appodeal.ads.Appodeal;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
 import tvseries.koreandramaengsub.freemovieapp.adapters.LiveTVAdapter;
 import tvseries.koreandramaengsub.freemovieapp.database.DatabaseHelper;
 import tvseries.koreandramaengsub.freemovieapp.models.CommonModels;
@@ -31,14 +35,10 @@ import tvseries.koreandramaengsub.freemovieapp.network.model.Channel;
 import tvseries.koreandramaengsub.freemovieapp.network.model.config.AdsConfig;
 import tvseries.koreandramaengsub.freemovieapp.utils.Constants;
 import tvseries.koreandramaengsub.freemovieapp.utils.NetworkInst;
-import tvseries.koreandramaengsub.freemovieapp.utils.PreferenceUtils;
 import tvseries.koreandramaengsub.freemovieapp.utils.RtlUtils;
 import tvseries.koreandramaengsub.freemovieapp.utils.SpacingItemDecoration;
 import tvseries.koreandramaengsub.freemovieapp.utils.Tools;
 import tvseries.koreandramaengsub.freemovieapp.utils.ads.BannerAds;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Retrofit;
 
 public class ItemTVActivity extends AppCompatActivity {
 
@@ -159,15 +159,23 @@ public class ItemTVActivity extends AppCompatActivity {
         if (adsConfig.getAdsEnable().equals("1")) {
 
             if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                //BannerAds.ShowAdmobBannerAds(ItemTVActivity.this, adView);
-                if (PreferenceUtils.isLoggedIn(ItemTVActivity.this)) {
-                    if (!PreferenceUtils.isActivePlan(ItemTVActivity.this)) {
-                        BannerAds.ShowAdmobBannerAds(ItemTVActivity.this, adView);
-                    }
-                }
-            } else if (adsConfig.getMobileAdsNetwork().equals(Constants.START_APP)) {
-                BannerAds.showStartAppBanner(ItemTVActivity.this, adView);
+                BannerAds.ShowAdmobBannerAds(ItemTVActivity.this, adView);
+                //Appodeal.show(this,Appodeal.BANNER);
 
+            } else if (adsConfig.getMobileAdsNetwork().equals(Constants.START_APP)) {
+                //BannerAds.showStartAppBanner(ItemTVActivity.this, adView);
+                Appodeal.setBannerViewId(R.id.appodealBannerView_item_tv);
+                Appodeal.show(this,Appodeal.BANNER_VIEW);
+            } else if(adsConfig.getMobileAdsNetwork().equals(Constants.NETWORK_AUDIENCE)) {
+                BannerAds.showFANBanner(this, adView);
+            }
+        }else {
+            if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
+                BannerAds.ShowAdmobBannerAds(ItemTVActivity.this, adView);
+            } else if (adsConfig.getMobileAdsNetwork().equals(Constants.START_APP)) {
+                //BannerAds.showStartAppBanner(ItemTVActivity.this, adView);
+                Appodeal.setBannerViewId(R.id.appodealBannerView_item_tv);
+                Appodeal.show(this,Appodeal.BANNER_VIEW);
             } else if(adsConfig.getMobileAdsNetwork().equals(Constants.NETWORK_AUDIENCE)) {
                 BannerAds.showFANBanner(this, adView);
             }

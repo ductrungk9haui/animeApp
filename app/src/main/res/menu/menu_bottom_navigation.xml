@@ -15,8 +15,8 @@
         android:title="Series"
         android:icon="@drawable/icon_tv_series"/>
     <item
-        android:title="Downloads"
-        android:icon="@drawable/icon_dow"/>
+        android:title="Recently Sub"
+        android:icon="@drawable/ic_subtitle"/>
     <item
         android:title="@string/favorite"
         android:icon="@drawable/icon_favorite"/>

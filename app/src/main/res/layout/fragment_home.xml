@@ -87,6 +87,17 @@
                                 android:nextFocusLeft="@id/slider_layout"
                                 android:nextFocusRight="@id/genre_layout" />
 
+                            <com.appodeal.ads.BannerView
+                                android:id="@+id/appodealBannerView1_home"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:focusable="true"
+                                android:nextFocusRight="@id/genre_layout"
+                                android:nextFocusLeft="@id/slider_layout"/>
+
 
                             <RelativeLayout
                                 android:id="@+id/genre_layout"
@@ -270,6 +281,14 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:gravity="center" />
+
+                            <com.appodeal.ads.BannerView
+                                android:id="@+id/appodealBannerView_home"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:visibility="gone"/>
 
                             <LinearLayout
                                 android:layout_width="match_parent"

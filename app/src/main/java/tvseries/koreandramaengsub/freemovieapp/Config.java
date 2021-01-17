@@ -6,7 +6,7 @@ public class Config {
     public static final String API_SERVER_URL = "https://admin.animesubfilm.com/rest-api/";
 
     //copy your api key from php admin dashboard & paste below
-    public static final String API_KEY = "y59z8crcp90by3enym2ewfvk";
+    public static final String API_KEY = "mcrfb92s0y3bwe8mm82yej0a";
 
     //copy your terms url from php admin dashboard & paste below
     public static final String TERMS_URL = "https://admin.animesubfilm.com/terms/";
