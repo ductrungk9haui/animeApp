@@ -16,7 +16,7 @@ public class PopUpAds {
     public static void ShowAdmobInterstitialAds(Context context) {
         AdsConfig adsConfig = new DatabaseHelper(context).getConfigurationData().getAdsConfig();
         final InterstitialAd mInterstitialAd = new InterstitialAd(context);
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.setAdUnitId(adsConfig.getAdmobInterstitialAdsId());
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
         mInterstitialAd.setAdListener(new AdListener(){

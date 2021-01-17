@@ -23,7 +23,7 @@ public class BannerAds {
 
         AdView mAdView = new AdView(context);
         mAdView.setAdSize(AdSize.BANNER);
-        mAdView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+        mAdView.setAdUnitId(adsConfig.getAdmobBannerAdsId());
         AdRequest.Builder builder = new AdRequest.Builder();
         GDPRChecker.Request request = GDPRChecker.getRequest();
 

@@ -137,7 +137,6 @@ public class CountryFragment extends Fragment {
         if (PreferenceUtils.isLoggedIn(mActivity)){
             if (!PreferenceUtils.isActivePlan(mActivity)) {
                 if (adsConfig.getAdsEnable().equals("1")) {
-
                     if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
                         BannerAds.ShowAdmobBannerAds(getContext(), mAdView);
 

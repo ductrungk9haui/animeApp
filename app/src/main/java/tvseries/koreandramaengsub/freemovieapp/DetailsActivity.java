@@ -420,7 +420,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             }
         });
         //TRUNG
-        //loadAd();
+        loadAd();
     }
 
     public static DetailsActivity getInstance() {
@@ -429,7 +429,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
     private void loadRewardedAd() {
         if (mRewardedAd == null || !mRewardedAd.isLoaded()) {
-            AdsConfig adsConfig = new DatabaseHelper(DetailsActivity.this).getConfigurationData().getAdsConfig();
+            adsConfig = new DatabaseHelper(DetailsActivity.this).getConfigurationData().getAdsConfig();
             mRewardedAd = new RewardedAd(this, "ca-app-pub-3940256099942544/5224354917");
             mIsLoading = true;
             mRewardedAd.loadAd(
@@ -1049,7 +1049,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     }
 
     private void loadAd() {
-        AdsConfig adsConfig = mDBHelper.getConfigurationData().getAdsConfig();
+       adsConfig = mDBHelper.getConfigurationData().getAdsConfig();
         if (PreferenceUtils.isLoggedIn(this)) {
             if (!PreferenceUtils.isActivePlan(this)) {
                 if (adsConfig.getAdsEnable().equals("1")) {

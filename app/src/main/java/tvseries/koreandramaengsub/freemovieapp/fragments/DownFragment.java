@@ -68,7 +68,7 @@ public class DownFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_recentlysub, container, false);
         mActivity = (MainActivity) getActivity();
         mUnbinder = ButterKnife.bind(this,view);
-        mActivity.setTitle(getResources().getString(R.string.today_sub));
+        mActivity.setTitle("Today Subtitles");
         mSwipeRefreshLayout.setToolbar(mActivity.getToolbar());
         return view;
     }
