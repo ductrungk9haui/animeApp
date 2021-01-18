@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.appodeal.ads.Appodeal;
 import com.facebook.shimmer.ShimmerFrameLayout;
 
 import java.util.ArrayList;
@@ -197,22 +198,38 @@ public class LiveTvFragment extends Fragment {
 
     private void loadAd(){
         AdsConfig adsConfig = new DatabaseHelper(getContext()).getConfigurationData().getAdsConfig();
-        if (adsConfig.getAdsEnable().equals("1")) {
+        if (PreferenceUtils.isLoggedIn(activity)) {
+            if (!PreferenceUtils.isActivePlan(activity)) {
+                if (adsConfig.getAdsEnable().equals("1")) {
 
-            if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                //BannerAds.ShowAdmobBannerAds(activity, adView);
-                if (PreferenceUtils.isLoggedIn(activity)) {
-                    if (!PreferenceUtils.isActivePlan(activity)) {
+                    if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
                         BannerAds.ShowAdmobBannerAds(activity, adView);
+
+                    } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
+                        // BannerAds.showStartAppBanner(activity, adView);
+                        Appodeal.setBannerViewId(R.id.appodealBannerView_fragment_livetv);
+                        Appodeal.show(getActivity(),Appodeal.BANNER_VIEW);
+                    } else if(adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.NETWORK_AUDIENCE)) {
+                        BannerAds.showFANBanner(activity, adView);
                     }
                 }
-            } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
-                BannerAds.showStartAppBanner(activity, adView);
+            }
+        }else {
+            if (adsConfig.getAdsEnable().equals("1")) {
 
-            } else if(adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.NETWORK_AUDIENCE)) {
-                BannerAds.showFANBanner(activity, adView);
+                if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
+                    BannerAds.ShowAdmobBannerAds(activity, adView);
+
+                } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
+                    // BannerAds.showStartAppBanner(activity, adView);
+                    Appodeal.setBannerViewId(R.id.appodealBannerView_fragment_livetv);
+                    Appodeal.show(getActivity(),Appodeal.BANNER_VIEW);
+                } else if(adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.NETWORK_AUDIENCE)) {
+                    BannerAds.showFANBanner(activity, adView);
+                }
             }
         }
+
     }
 
 

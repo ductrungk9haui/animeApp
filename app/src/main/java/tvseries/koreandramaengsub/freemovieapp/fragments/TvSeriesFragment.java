@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.appodeal.ads.Appodeal;
 import com.facebook.shimmer.ShimmerFrameLayout;
 
 import java.util.ArrayList;
@@ -168,22 +169,34 @@ public class TvSeriesFragment extends Fragment {
 
     private void loadAd(){
         AdsConfig adsConfig = new DatabaseHelper(getContext()).getConfigurationData().getAdsConfig();
-        if (adsConfig.getAdsEnable().equals("1")) {
-
-            if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                //BannerAds.ShowAdmobBannerAds(mActivity, mAdView);
-                if (PreferenceUtils.isLoggedIn(mActivity)) {
-                    if (!PreferenceUtils.isActivePlan(mActivity)) {
+        if (PreferenceUtils.isLoggedIn(mActivity)) {
+            if (!PreferenceUtils.isActivePlan(mActivity)) {
+                if (adsConfig.getAdsEnable().equals("1")) {
+                    if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
                         BannerAds.ShowAdmobBannerAds(mActivity, mAdView);
+                    } else if (adsConfig.getMobileAdsNetwork().equals(Constants.START_APP)) {
+                        // BannerAds.showStartAppBanner(activity, adView);
+                        Appodeal.setBannerViewId(R.id.appodealBannerView_fragment_tvseries);
+                        Appodeal.show(mActivity,Appodeal.BANNER_VIEW);
+                    } else if(adsConfig.getMobileAdsNetwork().equals(Constants.NETWORK_AUDIENCE)) {
+                        BannerAds.showFANBanner(getContext(), mAdView);
                     }
                 }
-            } else if (adsConfig.getMobileAdsNetwork().equals(Constants.START_APP)) {
-                BannerAds.showStartAppBanner(mActivity, mAdView);
-
-            } else if(adsConfig.getMobileAdsNetwork().equals(Constants.NETWORK_AUDIENCE)) {
-                BannerAds.showFANBanner(getContext(), mAdView);
+            }
+        }else{
+            if (adsConfig.getAdsEnable().equals("1")) {
+                if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
+                    BannerAds.ShowAdmobBannerAds(mActivity, mAdView);
+                } else if (adsConfig.getMobileAdsNetwork().equals(Constants.START_APP)) {
+                    // BannerAds.showStartAppBanner(activity, adView);
+                    Appodeal.setBannerViewId(R.id.appodealBannerView_fragment_tvseries);
+                    Appodeal.show(mActivity,Appodeal.BANNER_VIEW);
+                } else if(adsConfig.getMobileAdsNetwork().equals(Constants.NETWORK_AUDIENCE)) {
+                    BannerAds.showFANBanner(getContext(), mAdView);
+                }
             }
         }
+
     }
 
     private void getTvSeriesData(int pageNum){

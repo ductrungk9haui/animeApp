@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.appodeal.ads.Appodeal;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.github.islamkhsh.CardSliderViewPager;
 import com.ixidev.gdpr.GDPRChecker;
@@ -238,7 +239,7 @@ public class HomeFragment extends Fragment {
             }
         });
 //TRUNG
-        //getAdDetails();
+        getAdDetails();
     }
 
 
@@ -344,7 +345,7 @@ public class HomeFragment extends Fragment {
                      adapterSeries.notifyDataSetChanged();
 
                      //topview
-                  /*   for (int i = 0; i < response.body().getTopviewTvseries().size(); i++){
+                    for (int i = 0; i < response.body().getTopviewTvseries().size(); i++){
                          TopviewTvseries topviewtvSeries = response.body().getTopviewTvseries().get(i);
                          CommonModels models = new CommonModels();
                          models.setImageUrl(topviewtvSeries.getThumbnailUrl());
@@ -356,7 +357,7 @@ public class HomeFragment extends Fragment {
                          models.setIsPaid(topviewtvSeries.getIsPaid());
                          listTopViewSeries.add(models);
                      }
-                     adapterTopviewSeries.notifyDataSetChanged();*/
+                     adapterTopviewSeries.notifyDataSetChanged();
 
                      //get data by genre
                      for (int i = 0; i < response.body().getFeaturesGenreAndMovie().size(); i++){
@@ -416,25 +417,42 @@ public class HomeFragment extends Fragment {
 
     private void loadAd() {
         AdsConfig adsConfig = new DatabaseHelper(getContext()).getConfigurationData().getAdsConfig();
-        if (adsConfig.getAdsEnable().equals("1")) {
+        if (PreferenceUtils.isLoggedIn(mActivity)) {
+            if (!PreferenceUtils.isActivePlan(mActivity)) {
+                if (adsConfig.getAdsEnable().equals("1")) {
 
-            if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                //BannerAds.ShowAdmobBannerAds(getContext(), mAdView);
-                //BannerAds.ShowAdmobBannerAds(getContext(), mAdView1);
-                if (PreferenceUtils.isLoggedIn(mActivity)) {
-                    if (!PreferenceUtils.isActivePlan(mActivity)) {
+                    if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
                         BannerAds.ShowAdmobBannerAds(getContext(), mAdView);
                         BannerAds.ShowAdmobBannerAds(getContext(), mAdView1);
+
+                    } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
+                        // BannerAds.showStartAppBanner(getContext(), adView);
+                        Appodeal.setBannerViewId(R.id.appodealBannerView1_home);
+                        Appodeal.show(mActivity, Appodeal.BANNER_VIEW);
+                    } else if(adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.NETWORK_AUDIENCE)) {
+                        BannerAds.showFANBanner(getContext(), mAdView);
+                        BannerAds.showFANBanner(getContext(), mAdView1);
                     }
                 }
-            } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
-                BannerAds.showStartAppBanner(getContext(), mAdView);
+            }
+        }else{
+            if (adsConfig.getAdsEnable().equals("1")) {
 
-            } else if(adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.NETWORK_AUDIENCE)) {
-                BannerAds.showFANBanner(getContext(), mAdView);
-                BannerAds.showFANBanner(getContext(), mAdView1);
+                if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
+                    BannerAds.ShowAdmobBannerAds(getContext(), mAdView);
+                    BannerAds.ShowAdmobBannerAds(getContext(), mAdView1);
+
+                } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
+                    // BannerAds.showStartAppBanner(getContext(), adView);
+                    Appodeal.setBannerViewId(R.id.appodealBannerView1_home);
+                    Appodeal.show(mActivity, Appodeal.BANNER_VIEW);
+                } else if(adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.NETWORK_AUDIENCE)) {
+                    BannerAds.showFANBanner(getContext(), mAdView);
+                    BannerAds.showFANBanner(getContext(), mAdView1);
+                }
             }
         }
+
     }
 
     @Override
@@ -481,7 +499,7 @@ public class HomeFragment extends Fragment {
         intent.putExtra("title", "Movies");
         getActivity().startActivity(intent);
     }
-    @OnClick({R.id.btn_more_series,R.id.btn_more_series1,R.id.last_anime_layout,R.id.top_anime_layout})
+    @OnClick({R.id.btn_more_series,R.id.btn_more_series1})
     void onBtnMoreSeriesClick(){
         Intent intent = new Intent(getContext(), ItemSeriesActivity.class);
         intent.putExtra("title", "TV Series");

@@ -367,6 +367,14 @@
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+        <com.appodeal.ads.BannerView
+            android:id="@+id/appodealBannerView_item_tvseries"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
     </RelativeLayout>
 
 

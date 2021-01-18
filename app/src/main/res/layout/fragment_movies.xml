@@ -59,6 +59,15 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="center"
         android:gravity="center"
+        android:focusable="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <com.appodeal.ads.BannerView
+        android:id="@+id/appodealBannerView_fragment_movies"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:focusable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 </RelativeLayout>

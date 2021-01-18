@@ -311,20 +311,29 @@ public class ItemMovieActivity extends AppCompatActivity {
 
     private void loadAd(){
         AdsConfig adsConfig = new DatabaseHelper(ItemMovieActivity.this).getConfigurationData().getAdsConfig();
-        if (adsConfig.getAdsEnable().equals("1")) {
-
-            if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                //BannerAds.ShowAdmobBannerAds(ItemMovieActivity.this, adView);
-                if (PreferenceUtils.isLoggedIn(ItemMovieActivity.this)) {
-                    if (!PreferenceUtils.isActivePlan(ItemMovieActivity.this)) {
+        if (PreferenceUtils.isLoggedIn(this)) {
+            if (!PreferenceUtils.isActivePlan(this)) {
+                if (adsConfig.getAdsEnable().equals("1")) {
+                    if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
                         BannerAds.ShowAdmobBannerAds(ItemMovieActivity.this, adView);
+                    } else if (adsConfig.getMobileAdsNetwork().equals(Constants.START_APP)) {
+                        //BannerAds.showStartAppBanner(ItemMovieActivity.this, adView);
+                        BannerAds.showAppodealBanner(ItemMovieActivity.this,R.id.appodealBannerView_movie);
+                    } else if(adsConfig.getMobileAdsNetwork().equals(Constants.NETWORK_AUDIENCE)) {
+                        BannerAds.showFANBanner(ItemMovieActivity.this, adView);
                     }
                 }
-            } else if (adsConfig.getMobileAdsNetwork().equals(Constants.START_APP)) {
-                BannerAds.showStartAppBanner(ItemMovieActivity.this, adView);
-
-            } else if(adsConfig.getMobileAdsNetwork().equals(Constants.NETWORK_AUDIENCE)) {
-                BannerAds.showFANBanner(ItemMovieActivity.this, adView);
+            }
+        }else{
+            if (adsConfig.getAdsEnable().equals("1")) {
+                if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
+                    BannerAds.ShowAdmobBannerAds(ItemMovieActivity.this, adView);
+                } else if (adsConfig.getMobileAdsNetwork().equals(Constants.START_APP)) {
+                    //BannerAds.showStartAppBanner(ItemMovieActivity.this, adView);
+                    BannerAds.showAppodealBanner(ItemMovieActivity.this,R.id.appodealBannerView_movie);
+                } else if(adsConfig.getMobileAdsNetwork().equals(Constants.NETWORK_AUDIENCE)) {
+                    BannerAds.showFANBanner(ItemMovieActivity.this, adView);
+                }
             }
         }
     }

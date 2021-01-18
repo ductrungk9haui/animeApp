@@ -323,7 +323,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     public boolean mCheckFailLink =false;
     public boolean mCheckFinish =false;
     boolean mIsLoading;
-
+    private AdsConfig adsConfig;
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -420,7 +420,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             }
         });
         //TRUNG
-        //loadAd();
+        loadAd();
     }
 
     public static DetailsActivity getInstance() {
@@ -429,7 +429,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
     private void loadRewardedAd() {
         if (mRewardedAd == null || !mRewardedAd.isLoaded()) {
-            AdsConfig adsConfig = new DatabaseHelper(DetailsActivity.this).getConfigurationData().getAdsConfig();
+            adsConfig = new DatabaseHelper(DetailsActivity.this).getConfigurationData().getAdsConfig();
             mRewardedAd = new RewardedAd(this, "ca-app-pub-3940256099942544/5224354917");
             mIsLoading = true;
             mRewardedAd.loadAd(
@@ -949,7 +949,12 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         //PopUpAds.ShowAdmobInterstitialAds(this);
         if (PreferenceUtils.isLoggedIn(DetailsActivity.this)) {
             if (!PreferenceUtils.isActivePlan(DetailsActivity.this)) {
-                PopUpAds.ShowAdmobInterstitialAds(DetailsActivity.this);
+                if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
+                    PopUpAds.showAppodealInterstitialAds(DetailsActivity.this);
+                }
+                else if(adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)){
+                    PopUpAds.ShowAdmobInterstitialAds(DetailsActivity.this);
+                }
             }
         }
         if (type.equalsIgnoreCase("embed")){
@@ -1044,26 +1049,41 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     }
 
     private void loadAd() {
-        AdsConfig adsConfig = mDBHelper.getConfigurationData().getAdsConfig();
-        if (adsConfig.getAdsEnable().equals("1")) {
+       adsConfig = mDBHelper.getConfigurationData().getAdsConfig();
+        if (PreferenceUtils.isLoggedIn(this)) {
+            if (!PreferenceUtils.isActivePlan(this)) {
+                if (adsConfig.getAdsEnable().equals("1")) {
 
-            if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                //BannerAds.ShowAdmobBannerAds(this, mAdView);
-                //PopUpAds.ShowAdmobInterstitialAds(this);
-                if (PreferenceUtils.isLoggedIn(this)) {
-                    if (!PreferenceUtils.isActivePlan(this)) {
+                    if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
                         BannerAds.ShowAdmobBannerAds(this, mAdView);
+                        //PopUpAds.ShowAdmobInterstitialAds(this);
+
+                    } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
+
+                        //   PopUpAds.showStartappInterstitialAds(DetailsActivity.this);
+                        BannerAds.showAppodealBanner(DetailsActivity.this,R.id.appodealBannerView);
+                    } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.NETWORK_AUDIENCE)) {
+                        BannerAds.showFANBanner(this, mAdView);
+                        PopUpAds.showFANInterstitialAds(DetailsActivity.this);
                     }
+
                 }
-            } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
-                BannerAds.showStartAppBanner(DetailsActivity.this, mAdView);
-                PopUpAds.showStartappInterstitialAds(DetailsActivity.this);
-
-            } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.NETWORK_AUDIENCE)) {
-                BannerAds.showFANBanner(this, mAdView);
-                PopUpAds.showFANInterstitialAds(DetailsActivity.this);
             }
+        }else{
+            if (adsConfig.getAdsEnable().equals("1")) {
+                if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
+                    BannerAds.ShowAdmobBannerAds(this, mAdView);
+                    //PopUpAds.ShowAdmobInterstitialAds(this);
 
+                } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
+
+                    //   PopUpAds.showStartappInterstitialAds(DetailsActivity.this);
+                    BannerAds.showAppodealBanner(DetailsActivity.this,R.id.appodealBannerView);
+                } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.NETWORK_AUDIENCE)) {
+                    BannerAds.showFANBanner(this, mAdView);
+                    PopUpAds.showFANInterstitialAds(DetailsActivity.this);
+                }
+            }
         }
 
     }
@@ -2596,7 +2616,12 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         //PopUpAds.ShowAdmobInterstitialAds(DetailsActivity.this);
         if (PreferenceUtils.isLoggedIn(DetailsActivity.this)) {
             if (!PreferenceUtils.isActivePlan(DetailsActivity.this)) {
-                PopUpAds.ShowAdmobInterstitialAds(DetailsActivity.this);
+                if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
+                    PopUpAds.showAppodealInterstitialAds(DetailsActivity.this);
+                }
+                else if(adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)){
+                    PopUpAds.ShowAdmobInterstitialAds(DetailsActivity.this);
+                }
             }
         }
         if (!mListServer.isEmpty()) {
@@ -2619,6 +2644,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             //PopUpAds.ShowAdmobInterstitialAds(DetailsActivity.this);
 //                    DetailsActivity.getInstance().loadAdReward();
             //loadRewardedAd();
+
             if (!mListInternalDownload.isEmpty() || !mListExternalDownload.isEmpty()) {
                 if (Config.ENABLE_DOWNLOAD_TO_ALL) {
                     openDownloadServerDialog();
