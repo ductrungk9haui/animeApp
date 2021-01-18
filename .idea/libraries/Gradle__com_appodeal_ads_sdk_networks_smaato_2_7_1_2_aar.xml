@@ -4,6 +4,9 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/92c821f19ad213ae69d6f378233392ec/jetified-smaato-2.7.1.2/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/92c821f19ad213ae69d6f378233392ec/jetified-smaato-2.7.1.2/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/92c821f19ad213ae69d6f378233392ec/jetified-smaato-2.7.1.2/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/43a168a476b410f0b7a71df6bd190022/jetified-smaato-2.7.1.2/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/43a168a476b410f0b7a71df6bd190022/jetified-smaato-2.7.1.2/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/43a168a476b410f0b7a71df6bd190022/jetified-smaato-2.7.1.2/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
