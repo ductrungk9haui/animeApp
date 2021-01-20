@@ -30,5 +30,20 @@ public class Constants {
     public static List<Country> countryList = null;
     public static List<TvCategory> tvCategoryList = null;
 
+    //room related constants
+    public static final String ROOM_DB_NAME = "continue_watching_db";
+
+    public static final String CONTENT_ID = "content_id";
+    public static final String CONTENT_TITLE = "title";
+    public static final String IMAGE_URL = "image_url";
+    public static final String PROGRESS = "progress";
+    public static final String POSITION ="position";
+    public static final String STREAM_URL = "stream_url";
+    public static final String CATEGORY_TYPE = "category_type";
+    public static final String SERVER_TYPE = "server_type";
+    public static final String IS_FROM_CONTINUE_WATCHING = "continue_watching_bool";
+    public static final String YOUTUBE = "youtube";
+    public static final String YOUTUBE_LIVE = "youtube_live";
+
 
 }

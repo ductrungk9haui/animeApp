@@ -696,7 +696,7 @@
                     android:gravity="center_vertical"
                     android:textSize="16sp"
                     android:includeFontPadding="false"
-                    android:text=" Comment"
+                    android:text=" Comments"
                     android:textAppearance="@style/TextAppearance.Small" />
                 </LinearLayout>
 

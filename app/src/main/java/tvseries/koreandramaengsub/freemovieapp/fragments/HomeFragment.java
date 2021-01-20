@@ -6,12 +6,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,6 +28,7 @@ import com.viewpagerindicator.TabPageIndicator;
 import com.viewpagerindicator.TitlePageIndicator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Timer;
 
@@ -40,12 +44,15 @@ import tvseries.koreandramaengsub.freemovieapp.ItemMovieActivity;
 import tvseries.koreandramaengsub.freemovieapp.ItemSeriesActivity;
 import tvseries.koreandramaengsub.freemovieapp.MainActivity;
 import tvseries.koreandramaengsub.freemovieapp.R;
+import tvseries.koreandramaengsub.freemovieapp.adapters.ContinueWatchingAdapter;
 import tvseries.koreandramaengsub.freemovieapp.adapters.CountryAdapter;
 import tvseries.koreandramaengsub.freemovieapp.adapters.GenreAdapter;
 import tvseries.koreandramaengsub.freemovieapp.adapters.GenreHomeAdapter;
 import tvseries.koreandramaengsub.freemovieapp.adapters.HomePageAdapter;
 import tvseries.koreandramaengsub.freemovieapp.adapters.SliderAdapter;
 import tvseries.koreandramaengsub.freemovieapp.database.DatabaseHelper;
+import tvseries.koreandramaengsub.freemovieapp.database.continueWatching.ContinueWatchingModel;
+import tvseries.koreandramaengsub.freemovieapp.database.continueWatching.ContinueWatchingViewModel;
 import tvseries.koreandramaengsub.freemovieapp.models.CommonModels;
 import tvseries.koreandramaengsub.freemovieapp.models.GenreModel;
 import tvseries.koreandramaengsub.freemovieapp.models.home_content.AllCountry;
@@ -84,6 +91,8 @@ public class HomeFragment extends Fragment {
     @BindView(R.id.recyclerView_by_genre) RecyclerView mRecyclerViewGenre;
     @BindView(R.id.recyclerViewTopviewTvSeries) RecyclerView mRecyclerViewTopviewTvSeries;
     @BindView(R.id.title_pager_indicator) LinePageIndicator mPagerIndicator;
+    @BindView(R.id.continueWatchingLayout) View continueWatchingLayout;
+    @BindView(R.id.recyclerViewContinueWatching) RecyclerView recyclerViewContinueWatching;
 
     private ArrayList<CommonModels> listSlider = new ArrayList<>();
     private Timer timer;
@@ -100,6 +109,7 @@ public class HomeFragment extends Fragment {
     private GenreHomeAdapter genreHomeAdapter;
     private MainActivity mActivity;
     private DatabaseHelper db = new DatabaseHelper(getContext());
+    private ContinueWatchingViewModel continueWatchingViewModel;
     Unbinder mUnbinder;
 
     @Nullable
@@ -238,7 +248,27 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
-//TRUNG
+        /*----continue Watching view----*/
+        continueWatchingViewModel = ViewModelProviders.of(getActivity()).get(ContinueWatchingViewModel.class);
+        continueWatchingViewModel.getAllContents().observe(getActivity(), new Observer<List<ContinueWatchingModel>>() {
+            @Override
+            public void onChanged(List<ContinueWatchingModel> items) {
+                if (items.size() > 0) {
+                    Collections.reverse(items);
+                    continueWatchingLayout.setVisibility(View.VISIBLE);
+                    ContinueWatchingAdapter adapter = new ContinueWatchingAdapter(getContext(), items);
+                    recyclerViewContinueWatching.setLayoutManager(new LinearLayoutManager(mActivity, RecyclerView.HORIZONTAL, false));
+                    recyclerViewContinueWatching.setHasFixedSize(true);
+                    recyclerViewContinueWatching.setNestedScrollingEnabled(false);
+                    recyclerViewContinueWatching.setAdapter(adapter);
+
+                } else {
+                    recyclerViewContinueWatching.removeAllViews();
+                    continueWatchingLayout.setVisibility(View.GONE);
+                }
+            }
+        });
+
         getAdDetails();
     }
 
@@ -505,4 +535,10 @@ public class HomeFragment extends Fragment {
         intent.putExtra("title", "TV Series");
         getActivity().startActivity(intent);
     }
+
+    @OnClick(R.id.continue_watching_clear_btn)
+    void onClearContinue(){
+        continueWatchingViewModel.deleteAllContent();
+    }
+
 }

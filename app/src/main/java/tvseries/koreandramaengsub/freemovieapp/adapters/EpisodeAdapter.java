@@ -32,7 +32,7 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.Original
     private int seasonNo;
 
     public interface OnTVSeriesEpisodeItemClickListener {
-        void onEpisodeItemClickTvSeries(String type, View view, EpiModel obj, int position, OriginalViewHolder holder);
+        void onEpisodeItemClickTvSeries(String type, EpiModel obj, int position);
     }
 
     public void setOnEmbedItemClickListener(OnTVSeriesEpisodeItemClickListener mItemClickListener) {
@@ -43,7 +43,7 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.Original
         this.items = items;
         activity = (DetailsActivity) context;
         ctx = context;
-        viewHolderArray[0] = null;
+        viewHolder = null;
     }
 
     @Override
@@ -71,7 +71,7 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.Original
             holder.name.setTextColor(ctx.getResources().getColor(R.color.colorPrimary));
             holder.playStatusTv.setText("Last Played");
             holder.playStatusTv.setVisibility(View.VISIBLE);
-            viewHolderArray[0]=holder;
+            viewHolder = holder;
         }else{
             chanColor(holder,position);
         }
@@ -79,15 +79,15 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.Original
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickEpisode(v,holder,position,obj);
+                onClickEpisode(holder,position,obj);
             }
         });
-        if(position == 0 && viewHolderArray[0]==null){
-            viewHolderArray[0] = holder;
+        if(position == 0 && viewHolder==null){
+            viewHolder = holder;
         }
 
     }
-    private void onClickEpisode(View v,OriginalViewHolder holder,int position,EpiModel obj ){
+    private void onClickEpisode(OriginalViewHolder holder,int position,EpiModel obj ){
         ((DetailsActivity)ctx).hideDescriptionLayout();
         ((DetailsActivity)ctx).showSeriesLayout();
         ((DetailsActivity)ctx).setMediaUrlForTvSeries(obj.getStreamURL(), obj.getSeson(), obj.getEpi());
@@ -96,27 +96,36 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.Original
         if (!castSession) {
             if (obj.getServerType().equalsIgnoreCase("embed")){
                 if (mOnTVSeriesEpisodeItemClickListener != null){
-                    mOnTVSeriesEpisodeItemClickListener.onEpisodeItemClickTvSeries("embed", v, obj, position, viewHolder);
+                    mOnTVSeriesEpisodeItemClickListener.onEpisodeItemClickTvSeries("embed", obj, position);
                 }
             }else {
                 activity.initMoviePlayer(obj.getStreamURL(), obj.getServerType(), ctx);
                 if (mOnTVSeriesEpisodeItemClickListener != null){
-                    mOnTVSeriesEpisodeItemClickListener.onEpisodeItemClickTvSeries("normal", v, obj, position, viewHolder);
+                    mOnTVSeriesEpisodeItemClickListener.onEpisodeItemClickTvSeries("normal", obj, position);
                 }
             }
         } else {
-            ((DetailsActivity)ctx).showQueuePopup(ctx, holder.cardView, ((DetailsActivity)ctx).getMediaInfo());
+            ((DetailsActivity)ctx).showQueuePopup(ctx, ((DetailsActivity)ctx).getMediaInfo());
 
         }
         setNowPlaying(position);
-        chanColor(viewHolderArray[0],position);
-        holder.name.setTextColor(ctx.getResources().getColor(R.color.colorPrimary));
-        holder.playStatusTv.setText("Playing");
-        holder.playStatusTv.setVisibility(View.VISIBLE);
-        viewHolderArray[0] =holder;
+        if(holder!=null){
+            holder.name.setTextColor(ctx.getResources().getColor(R.color.colorPrimary));
+            holder.playStatusTv.setText("Playing");
+            holder.playStatusTv.setVisibility(View.VISIBLE);
+            if(viewHolder!=holder){
+                chanColor(viewHolder ,position);
+                viewHolder = holder;
+            }
+        }
     }
     public void getWatchEpisode(){
-        onClickEpisode(viewHolderArray[0].cardView,viewHolderArray[0],  viewHolderArray[0].position, items.get(viewHolderArray[0].position));
+        if(viewHolder!=null){
+            onClickEpisode(viewHolder, lastPosition, items.get(lastPosition));
+            //notifyDataSetChanged();
+        }else{
+            onClickEpisode(null,  lastPosition, items.get(lastPosition));
+        }
     }
     @Override
     public int getItemCount() {

@@ -312,7 +312,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/star/baseline_star_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/party_mode/baseline_party_mode_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -322,8 +322,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="img_rating_button" />
+                            <entry key="color" value="bf201e" />
+                            <entry key="outputName" value="ic_edit" />
                             <entry key="sourceFile" value="C:\Users\khaih\Downloads\star-of-favorites-outline.svg" />
                           </map>
                         </option>

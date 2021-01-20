@@ -15,7 +15,9 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:layout_margin="10dp"
+            android:layout_marginBottom="@dimen/spacing_middle"
+            android:layout_marginLeft="@dimen/spacing_middle"
+            android:layout_marginRight="@dimen/spacing_middle"
             android:background="@color/grey_400" />
 
         <LinearLayout
@@ -23,31 +25,75 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <View
-                android:layout_width="40dp"
-                android:layout_height="160dp"
-                android:layout_margin="8dp"
-                android:background="@color/grey_400" />
 
-            <View
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
-                android:layout_margin="8dp"
+                android:layout_height="200dp"
+                android:layout_marginHorizontal="10dp"
+                shimmer:cardCornerRadius="5dp"
                 android:layout_weight="1"
-                android:background="@color/grey_400" />
+                android:backgroundTint="@color/grey_400" />
 
-            <View
-                android:layout_width="40dp"
-                android:layout_height="160dp"
-                android:layout_margin="8dp"
-                android:background="@color/grey_400" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="50dp"
+            android:layout_height="10dp"
+            android:layout_gravity="center"
+            android:visibility="visible"
+            android:layout_marginVertical="10dp"
+            android:background="@color/grey_400" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:layout_marginHorizontal="3dp"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_marginStart="10dp"
+                shimmer:cardCornerRadius="50dp"
+                android:backgroundTint="@color/grey_400" />
+            <androidx.cardview.widget.CardView
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_marginStart="10dp"
+                shimmer:cardCornerRadius="50dp"
+                android:backgroundTint="@color/grey_400" />
+            <androidx.cardview.widget.CardView
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_marginStart="10dp"
+                shimmer:cardCornerRadius="50dp"
+                android:backgroundTint="@color/grey_400" />
+            <androidx.cardview.widget.CardView
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_marginStart="10dp"
+                shimmer:cardCornerRadius="50dp"
+                android:backgroundTint="@color/grey_400" />
+            <androidx.cardview.widget.CardView
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_marginStart="10dp"
+                shimmer:cardCornerRadius="50dp"
+                android:backgroundTint="@color/grey_400"/>
+            <androidx.cardview.widget.CardView
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_marginStart="10dp"
+                shimmer:cardCornerRadius="50dp"
+                android:backgroundTint="@color/grey_400"/>
 
         </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             android:paddingLeft="10dp">
 
             <View
@@ -56,10 +102,10 @@
                 android:background="@color/grey_400" />
 
             <View
-                android:layout_width="100dp"
+                android:layout_width="50dp"
                 android:layout_height="25dp"
                 android:layout_alignParentEnd="true"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="5dp"
                 android:background="@color/grey_400" />
 
         </RelativeLayout>
@@ -71,30 +117,29 @@
             android:orientation="horizontal">
 
             <View
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="130dp"
+                android:layout_height="162dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/grey_400" />
+
+            <View
+                android:layout_width="130dp"
+                android:layout_height="162dp"
+                android:layout_marginStart="10dp"
+
+                android:background="@color/grey_400" />
+
+            <View
+                android:layout_width="130dp"
+                android:layout_height="162dp"
                 android:layout_marginStart="10dp"
                 android:background="@color/grey_400" />
 
             <View
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="130dp"
+                android:layout_height="162dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:background="@color/grey_400" />
-
-            <View
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:background="@color/grey_400" />
-
-            <View
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
                 android:background="@color/grey_400" />
 
 
@@ -112,66 +157,10 @@
                 android:background="@color/grey_400" />
 
             <View
-                android:layout_width="100dp"
+                android:layout_width="50dp"
                 android:layout_height="25dp"
                 android:layout_alignParentEnd="true"
-                android:layout_marginRight="10dp"
-                android:background="@color/grey_400" />
-
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:orientation="horizontal">
-
-            <View
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="10dp"
-                android:background="@color/grey_400" />
-
-            <View
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:background="@color/grey_400" />
-
-            <View
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:background="@color/grey_400" />
-
-            <View
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:background="@color/grey_400" />
-
-
-        </LinearLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:paddingLeft="10dp">
-
-            <View
-                android:layout_width="140dp"
-                android:layout_height="25dp"
-                android:background="@color/grey_400" />
-
-            <View
-                android:layout_width="100dp"
-                android:layout_height="25dp"
-                android:layout_alignParentEnd="true"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="5dp"
                 android:background="@color/grey_400" />
 
         </RelativeLayout>

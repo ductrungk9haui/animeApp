@@ -36,6 +36,9 @@ public class User {
     @SerializedName("image_url")
     @Expose
     private String imageUrl;
+    @SerializedName("password_available")
+    @Expose
+    private boolean isPasswordAvailable;
 
 
 
@@ -122,6 +125,13 @@ public class User {
         this.imageUrl = imageUrl;
     }
 
+    public boolean isPasswordAvailable() {
+        return isPasswordAvailable;
+    }
+    public void setPasswordAvailable(boolean passwordAvailable) {
+        isPasswordAvailable = passwordAvailable;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -134,7 +144,7 @@ public class User {
                 ", lastLogin='" + lastLogin + '\'' +
                 ", data='" + data + '\'' +
                 ", image_url='" + imageUrl + '\'' +
-
+                ", password_available='" + isPasswordAvailable + '\'' +
                 '}';
     }
 }

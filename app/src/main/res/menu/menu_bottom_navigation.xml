@@ -15,7 +15,7 @@
         android:title="Series"
         android:icon="@drawable/icon_tv_series"/>
     <item
-        android:title="Recently Sub"
+        android:title="Daily Sub"
         android:icon="@drawable/ic_subtitle"/>
     <item
         android:title="@string/favorite"

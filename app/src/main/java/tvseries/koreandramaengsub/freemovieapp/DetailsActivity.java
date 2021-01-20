@@ -46,6 +46,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.mediarouter.app.MediaRouteButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -138,6 +139,8 @@ import tvseries.koreandramaengsub.freemovieapp.adapters.ProgramAdapter;
 import tvseries.koreandramaengsub.freemovieapp.adapters.RelatedTvAdapter;
 import tvseries.koreandramaengsub.freemovieapp.adapters.ServerAdapter;
 import tvseries.koreandramaengsub.freemovieapp.database.DatabaseHelper;
+import tvseries.koreandramaengsub.freemovieapp.database.continueWatching.ContinueWatchingModel;
+import tvseries.koreandramaengsub.freemovieapp.database.continueWatching.ContinueWatchingViewModel;
 import tvseries.koreandramaengsub.freemovieapp.models.CastCrew;
 import tvseries.koreandramaengsub.freemovieapp.models.CommonModels;
 import tvseries.koreandramaengsub.freemovieapp.models.EpiModel;
@@ -181,6 +184,14 @@ import tvseries.koreandramaengsub.freemovieapp.utils.ads.PopUpAds;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static com.google.android.gms.ads.AdActivity.CLASS_NAME;
+import static tvseries.koreandramaengsub.freemovieapp.utils.Constants.CATEGORY_TYPE;
+import static tvseries.koreandramaengsub.freemovieapp.utils.Constants.CONTENT_ID;
+import static tvseries.koreandramaengsub.freemovieapp.utils.Constants.CONTENT_TITLE;
+import static tvseries.koreandramaengsub.freemovieapp.utils.Constants.IMAGE_URL;
+import static tvseries.koreandramaengsub.freemovieapp.utils.Constants.IS_FROM_CONTINUE_WATCHING;
+import static tvseries.koreandramaengsub.freemovieapp.utils.Constants.POSITION;
+import static tvseries.koreandramaengsub.freemovieapp.utils.Constants.SERVER_TYPE;
+import static tvseries.koreandramaengsub.freemovieapp.utils.Constants.STREAM_URL;
 
 public class DetailsActivity extends AppCompatActivity implements CastPlayer.SessionAvailabilityListener, ProgramAdapter.OnProgramClickListener, EpisodeAdapter.OnTVSeriesEpisodeItemClickListener,
         RelatedTvAdapter.RelatedTvClickListener {
@@ -188,73 +199,145 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     private static final int PRELOAD_TIME_S = 20;
     public static final String TAG = DetailsActivity.class.getSimpleName();
 
-    @BindView(R.id.adView) RelativeLayout mAdView;
-    @BindView(R.id.llbottom) LinearLayout mLLBottom;
-    @BindView(R.id.tv_details) TextView mTvDes;
-    @BindView(R.id.tv_release_date) TextView mTvRelease;
-    @BindView(R.id.text_name) TextView mTvName;
-    @BindView(R.id.text_imdb) TextView mTvImdb;
-    @BindView(R.id.tv_director) TextView mTvDirector;
-    @BindView(R.id.tv_genre) TextView mTvGenre;
-    @BindView(R.id.swipe_layout) SwipeRefreshLayout mSwipeRefreshLayout;
-    @BindView(R.id.add_fav) ImageView mImgAddFav;
-    @BindView(R.id.add_fav2) ImageView mImgAddFav2;
-    @BindView(R.id.img_back) ImageView mImgBack;
-    @BindView(R.id.webView) WebView mWebView;
-    @BindView(R.id.progressBar) ProgressBar mProgressBar;
-    @BindView(R.id.play) RelativeLayout mLPlay;
-    @BindView(R.id.rv_related) RecyclerView mRvRelated;
-    @BindView(R.id.tv_related) TextView mTvRelated;
-    @BindView(R.id.shimmer_view_container) ShimmerFrameLayout mShimmerLayout;
-    @BindView(R.id.btn_comment) Button mBtnComment;
-    @BindView(R.id.et_comment) EditText mEtComment;
-    @BindView(R.id.recyclerView_comment) RecyclerView mRvComment;
-    @BindView(R.id.llcomments) RelativeLayout mLLcomment;
-    @BindView(R.id.video_view) PlayerView mSimpleExoPlayerView;
-    @BindView(R.id.player_layout) View mPlayerLayout;
-    @BindView(R.id.img_full_scr) ImageView mImgFull;
-    @BindView(R.id.external_player_iv) ImageView mExternalPlayerIv;
-    @BindView(R.id.volumn_layout) LinearLayout mVolumnControlLayout;
-    @BindView(R.id.volumn_seekbar) SeekBar mVolumnSeekbar;
-    @BindView(R.id.rv_server_list) RecyclerView mRvServer;
-    @BindView(R.id.season_spinner) Spinner mSeasonSpinner;
-    @BindView(R.id.spinner_container) RelativeLayout mSeasonSpinnerContainer;
-    @BindView(R.id.img_subtitle) ImageView mImgSubtitle;
-    @BindView(R.id.media_route_button) MediaRouteButton mMediaRouteButton;
-    @BindView(R.id.chrome_cast_tv) TextView mChromeCastTv;
-    @BindView(R.id.cast_control_view) PlayerControlView mCastControlView;
-    @BindView(R.id.tv_layout) LinearLayout mTvLayout;
-    @BindView(R.id.p_shedule_layout) LinearLayout mSheduleLayout;
-    @BindView(R.id.tv_title_tv) TextView mTvTitleTv;
-    @BindView(R.id.program_guide_rv) RecyclerView mProgramRv;
-    @BindView(R.id.tv_top_layout) LinearLayout mTvTopLayout;
-    @BindView(R.id.tv_thumb_iv) ImageView mTvThumbIv;
-    @BindView(R.id.watch_status_tv) TextView mWatchStatusTv;
-    @BindView(R.id.time_tv) TextView mTimeTv;
-    @BindView(R.id.program_type_tv) TextView mProgramTv;
-    @BindView(R.id.rewind_layout) LinearLayout mExoRewind;
-    @BindView(R.id.forward_layout) LinearLayout mExoForward;
-    @BindView(R.id.seekbar_layout) LinearLayout mSeekbarLayout;
-    @BindView(R.id.live_tv) TextView mLiveTv;
-    @BindView(R.id.cast_rv) RecyclerView mCastRv;
-    @BindView(R.id.pro_guide_tv) TextView mProGuideTv;
-    @BindView(R.id.watch_live_tv) TextView mWatchLiveTv;
-    @BindView(R.id.content_details) RelativeLayout mContentDetails;
-    @BindView(R.id.subscribe_layout) LinearLayout mSubscriptionLayout;
-    @BindView(R.id.subscribe_bt) Button mSubscribeBt;
-    @BindView(R.id.topbar) LinearLayout mTopBarLayout;
-    @BindView(R.id.description_layout) RelativeLayout mDescriptionLayout;
-    @BindView(R.id.lyt_parent) MaterialRippleLayout mDescriptionContainer;
-    @BindView(R.id.watch_now_bt) Button mWatchNowBt;
-    @BindView(R.id.download_bt) Button mDownloadBt;
-    @BindView(R.id.poster_iv) ImageView mPosterIv;
-    @BindView(R.id.image_thumb) ImageView mThumbIv;
-    @BindView(R.id.genre_tv) TextView mDGenryTv;
-    @BindView(R.id.img_server) ImageView mServerIv;
-    @BindView(R.id.series_layout) RelativeLayout mSeriesLayout;
-    @BindView(R.id.seriest_title_tv) TextView mSeriesTitleTv;
-    @BindView(R.id.linear_share) View mTopShareLayout;
+    @BindView(R.id.adView)
+    RelativeLayout mAdView;
+    @BindView(R.id.llbottom)
+    LinearLayout mLLBottom;
+    @BindView(R.id.tv_details)
+    TextView mTvDes;
+    @BindView(R.id.tv_release_date)
+    TextView mTvRelease;
+    @BindView(R.id.text_name)
+    TextView mTvName;
+    @BindView(R.id.text_imdb)
+    TextView mTvImdb;
+    @BindView(R.id.tv_director)
+    TextView mTvDirector;
+    @BindView(R.id.tv_genre)
+    TextView mTvGenre;
+    @BindView(R.id.swipe_layout)
+    SwipeRefreshLayout mSwipeRefreshLayout;
+    @BindView(R.id.add_fav)
+    ImageView mImgAddFav;
+    @BindView(R.id.add_fav2)
+    ImageView mImgAddFav2;
+    @BindView(R.id.img_back)
+    ImageView mImgBack;
+    @BindView(R.id.webView)
+    WebView mWebView;
+    @BindView(R.id.progressBar)
+    ProgressBar mProgressBar;
+    @BindView(R.id.play)
+    RelativeLayout mLPlay;
+    @BindView(R.id.rv_related)
+    RecyclerView mRvRelated;
+    @BindView(R.id.tv_related)
+    TextView mTvRelated;
+    @BindView(R.id.shimmer_view_container)
+    ShimmerFrameLayout mShimmerLayout;
+    @BindView(R.id.btn_comment)
+    Button mBtnComment;
+    @BindView(R.id.et_comment)
+    EditText mEtComment;
+    @BindView(R.id.recyclerView_comment)
+    RecyclerView mRvComment;
+    @BindView(R.id.llcomments)
+    RelativeLayout mLLcomment;
+    @BindView(R.id.video_view)
+    PlayerView mSimpleExoPlayerView;
+    @BindView(R.id.player_layout)
+    View mPlayerLayout;
+    @BindView(R.id.img_full_scr)
+    ImageView mImgFull;
+    @BindView(R.id.external_player_iv)
+    ImageView mExternalPlayerIv;
+    @BindView(R.id.volumn_layout)
+    LinearLayout mVolumnControlLayout;
+    @BindView(R.id.volumn_seekbar)
+    SeekBar mVolumnSeekbar;
+    @BindView(R.id.rv_server_list)
+    RecyclerView mRvServer;
+    @BindView(R.id.season_spinner)
+    Spinner mSeasonSpinner;
+    @BindView(R.id.spinner_container)
+    RelativeLayout mSeasonSpinnerContainer;
+    @BindView(R.id.img_subtitle)
+    ImageView mImgSubtitle;
+    @BindView(R.id.media_route_button)
+    MediaRouteButton mMediaRouteButton;
+    @BindView(R.id.chrome_cast_tv)
+    TextView mChromeCastTv;
+    @BindView(R.id.cast_control_view)
+    PlayerControlView mCastControlView;
+    @BindView(R.id.tv_layout)
+    LinearLayout mTvLayout;
+    @BindView(R.id.p_shedule_layout)
+    LinearLayout mSheduleLayout;
+    @BindView(R.id.tv_title_tv)
+    TextView mTvTitleTv;
+    @BindView(R.id.program_guide_rv)
+    RecyclerView mProgramRv;
+    @BindView(R.id.tv_top_layout)
+    LinearLayout mTvTopLayout;
+    @BindView(R.id.tv_thumb_iv)
+    ImageView mTvThumbIv;
+    @BindView(R.id.watch_status_tv)
+    TextView mWatchStatusTv;
+    @BindView(R.id.time_tv)
+    TextView mTimeTv;
+    @BindView(R.id.program_type_tv)
+    TextView mProgramTv;
+    @BindView(R.id.rewind_layout)
+    LinearLayout mExoRewind;
+    @BindView(R.id.forward_layout)
+    LinearLayout mExoForward;
+    @BindView(R.id.seekbar_layout)
+    LinearLayout mSeekbarLayout;
+    @BindView(R.id.live_tv)
+    TextView mLiveTv;
+    @BindView(R.id.cast_rv)
+    RecyclerView mCastRv;
+    @BindView(R.id.pro_guide_tv)
+    TextView mProGuideTv;
+    @BindView(R.id.watch_live_tv)
+    TextView mWatchLiveTv;
+    @BindView(R.id.content_details)
+    RelativeLayout mContentDetails;
+    @BindView(R.id.subscribe_layout)
+    LinearLayout mSubscriptionLayout;
+    @BindView(R.id.subscribe_bt)
+    Button mSubscribeBt;
+    @BindView(R.id.topbar)
+    LinearLayout mTopBarLayout;
+    @BindView(R.id.description_layout)
+    RelativeLayout mDescriptionLayout;
+    @BindView(R.id.lyt_parent)
+    MaterialRippleLayout mDescriptionContainer;
+    @BindView(R.id.watch_now_bt)
+    Button mWatchNowBt;
+    @BindView(R.id.download_bt)
+    Button mDownloadBt;
+    @BindView(R.id.poster_iv)
+    ImageView mPosterIv;
+    @BindView(R.id.image_thumb)
+    ImageView mThumbIv;
+    @BindView(R.id.genre_tv)
+    TextView mDGenryTv;
+    @BindView(R.id.img_server)
+    ImageView mServerIv;
+    @BindView(R.id.series_layout)
+    RelativeLayout mSeriesLayout;
+    @BindView(R.id.seriest_title_tv)
+    TextView mSeriesTitleTv;
+    @BindView(R.id.linear_share)
+    View mTopShareLayout;
     private Unbinder mUnbinder;
+    private ContinueWatchingViewModel mContinueViewModel;
+    private boolean isFromContinueWatching = false;
+    private long resumePosition = 0L;
+    private static long playerCurrentPosition = 0L;
+    private static long mediaDuration = 0L;
+
     private EpisodeAdapter mEpisodeAdapter;
     private ServerAdapter mServerAdapter;
     private HomePageAdapter mRelatedAdapter;
@@ -267,7 +350,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     private List<CommonModels> mListInternalDownload = new ArrayList<>();
     private List<CommonModels> mListExternalDownload = new ArrayList<>();
     private List<CastCrew> mCastCrews = new ArrayList<>();
-    private HashMap<String,Integer> mMapMovies = new HashMap<String, Integer>();
+    private HashMap<String, Integer> mMapMovies = new HashMap<String, Integer>();
     private String mStrDirector = "", strCast = "", mStrGenre = "";
     private String mType = "", mId = "";
     private String V_URL = "";
@@ -316,14 +399,15 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     private AudioManager mAudioManager;
     private int mAspectClickCount = 1;
     private DatabaseHelper mDBHelper;
-    public boolean check_download=false;
+    public boolean check_download = false;
     private static DetailsActivity instance;
     private RewardedAd mRewardedAd;
-    public boolean mCheckExist =false;
-    public boolean mCheckFailLink =false;
-    public boolean mCheckFinish =false;
+    public boolean mCheckExist = false;
+    public boolean mCheckFailLink = false;
+    public boolean mCheckFinish = false;
     boolean mIsLoading;
     private AdsConfig adsConfig;
+
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -345,7 +429,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
             }
         });
-       // loadAdReward();
+        // loadAdReward();
         mDBHelper = new DatabaseHelper(DetailsActivity.this);
         mAudioManager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
         //---analytics-----------
@@ -356,7 +440,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "activity");
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
 
-        if(!mDBHelper.getMapMovie().equals("")){
+        if (!mDBHelper.getMapMovie().equals("")) {
             setMapMovies(mDBHelper.getMapMovie());
         }
         if (mIsDark) {
@@ -419,7 +503,27 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                 initGetData();
             }
         });
-        //TRUNG
+        //handle Continue watching task
+        isFromContinueWatching = getIntent().getBooleanExtra(IS_FROM_CONTINUE_WATCHING, false);
+        try {
+            if (isFromContinueWatching) {
+                //get info
+                mId = getIntent().getStringExtra(CONTENT_ID);
+                mType = getIntent().getStringExtra(CATEGORY_TYPE);
+                mServerType = getIntent().getStringExtra(SERVER_TYPE);
+                playerCurrentPosition = getIntent().getLongExtra(POSITION, 0);
+                resumePosition = playerCurrentPosition;
+                mTitle = getIntent().getStringExtra(CONTENT_TITLE);
+                mCastImageUrl = getIntent().getStringExtra(IMAGE_URL);
+                mMediaUrl = getIntent().getStringExtra(STREAM_URL);
+                hideDescriptionLayout();
+                showSeriesLayout();
+
+            }
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+        mContinueViewModel = new ViewModelProvider(this).get(ContinueWatchingViewModel.class);
         loadAd();
     }
 
@@ -469,30 +573,27 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                         public void onRewardedAdClosed() {
                             // Ad closed.
                             //Toast.makeText(DetailsActivity.this, "onRewardedAdClosed", Toast.LENGTH_SHORT).show();
-                            if(mCheckFinish !=true)
-                            {
+                            if (mCheckFinish != true) {
                                 new ToastMsg(DetailsActivity.this).toastIconError("Oops! Please watch ads to start!");
                             }
                             // Preload the next video ad.
-                           // DetailsActivity.this.loadRewardedAd();
-                            mCheckFinish =false;
+                            // DetailsActivity.this.loadRewardedAd();
+                            mCheckFinish = false;
                         }
 
                         @Override
                         public void onUserEarnedReward(RewardItem rewardItem) {
                             // User earned reward.
                             //Toast.makeText(DetailsActivity.this, "onUserEarnedReward", Toast.LENGTH_SHORT).show();
-                            if(mCheckFailLink){
+                            if (mCheckFailLink) {
                                 new ToastMsg(DetailsActivity.this).toastIconError("Fail Link, Plz tell us on facebook group to fix ASAP");
-                            }
-                            else if(mCheckExist && !mCheckFailLink){
+                            } else if (mCheckExist && !mCheckFailLink) {
                                 new ToastMsg(DetailsActivity.this).toastIconError("File already exist.");
-                            }
-                            else if(!mCheckExist && !mCheckFailLink){
+                            } else if (!mCheckExist && !mCheckFailLink) {
                                 new ToastMsg(DetailsActivity.this).toastIconSuccess("Started.");
                             }
-                            mCheckFinish =true;
-                            mCheckFailLink =false;
+                            mCheckFinish = true;
+                            mCheckFailLink = false;
                         }
 
                         @Override
@@ -507,6 +608,30 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     }
 
 
+    private void updateContinueWatchingData() {
+        if (!mType.equals("tv")) {
+            try {
+                long position = playerCurrentPosition;
+                long duration = mediaDuration;
+                float progress = 0;
+                if (position != 0 && duration != 0) {
+                    progress = calculateProgress(position, duration);
+                }
+
+                //---update into continueWatching------
+                ContinueWatchingModel model = new ContinueWatchingModel(mId, mTitle + " " + mEpisod,
+                        mCastImageUrl, progress, position, mMediaUrl,
+                        mType, mServerType);
+                mContinueViewModel.update(model);
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private long calculateProgress(long position, long duration) {
+        return (position * 100 / duration);
+    }
 
     @SuppressLint("SourceLockedOrientationActivity")
     public void controlFullScreenPlayer() {
@@ -554,12 +679,10 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     protected void onStart() {
         super.onStart();
 
-        if (!Config.ENABLE_EXTERNAL_PLAYER){
+        if (!Config.ENABLE_EXTERNAL_PLAYER) {
             mExternalPlayerIv.setVisibility(GONE);
         }
-
         initGetData();
-
         if (mAudioManager != null) {
             mVolumnSeekbar.setMax(mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
             int currentVolumn = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
@@ -654,8 +777,8 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         //close embed link playing
-        if (mWebView.getVisibility() == VISIBLE){
-            if (mWebView != null){
+        if (mWebView.getVisibility() == VISIBLE) {
+            if (mWebView != null) {
                 Intent intent = new Intent(DetailsActivity.this, DetailsActivity.class);
                 intent.putExtra("vType", mType);
                 intent.putExtra("id", mId);
@@ -714,7 +837,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
-                if(isDownloading()){
+                if (isDownloading()) {
                     Toast.makeText(DetailsActivity.this, "Go to Downloads to follow download progress ", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -722,13 +845,14 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         dialog.show();
 
     }
-    private boolean isDownloading(){
+
+    private boolean isDownloading() {
         List<Work> works = mDBHelper.getAllWork();
-        for(Work work : works){
-            if(work.getDownloadId() == 0 && !work.getDownloadStatus().equals(getApplicationContext().getString(R.string.download_waiting))){
+        for (Work work : works) {
+            if (work.getDownloadId() == 0 && !work.getDownloadStatus().equals(getApplicationContext().getString(R.string.download_waiting))) {
                 return true;
             }
-            if(PRDownloader.getStatus(work.getDownloadId()) == Status.RUNNING){
+            if (PRDownloader.getStatus(work.getDownloadId()) == Status.RUNNING) {
                 return true;
             }
         }
@@ -786,7 +910,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
     }
 
-    public void preparePlayer(CommonModels obj){
+    public void preparePlayer(CommonModels obj) {
         mActiveMovie = true;
         setPlayerFullScreen();
         mMediaUrl = obj.getStremURL();
@@ -800,7 +924,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
             if (mListSub.size() != 0) {
                 mImgSubtitle.setVisibility(VISIBLE);
-            }else {
+            } else {
                 mImgSubtitle.setVisibility(GONE);
             }
 
@@ -821,7 +945,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
 
             } else {
-                showQueuePopup(DetailsActivity.this, null, getMediaInfo());
+                showQueuePopup(DetailsActivity.this, getMediaInfo());
             }
         }
     }
@@ -838,7 +962,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         mCastCrews.clear();
     }
 
-    private void prepareSubtitleList(Context context, List<SubtitleModel> list){
+    private void prepareSubtitleList(Context context, List<SubtitleModel> list) {
 
     }
 
@@ -945,55 +1069,54 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     // this will call when any episode is clicked
     //if it is embed player will go full screen
     @Override
-    public void onEpisodeItemClickTvSeries(String type, View view, EpiModel obj, int position, EpisodeAdapter.OriginalViewHolder holder) {
+    public void onEpisodeItemClickTvSeries(String type,EpiModel obj, int position) {
         //PopUpAds.ShowAdmobInterstitialAds(this);
         if (PreferenceUtils.isLoggedIn(DetailsActivity.this)) {
             if (!PreferenceUtils.isActivePlan(DetailsActivity.this)) {
                 if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
                     PopUpAds.showAppodealInterstitialAds(DetailsActivity.this);
-                }
-                else if(adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)){
+                } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
                     PopUpAds.ShowAdmobInterstitialAds(DetailsActivity.this);
                 }
             }
         }
-        if (type.equalsIgnoreCase("embed")){
+        if (type.equalsIgnoreCase("embed")) {
             CommonModels model = new CommonModels();
             model.setStremURL(obj.getStreamURL());
             model.setServerType(obj.getServerType());
             model.setListSub(null);
             releasePlayer();
             resetCastPlayer();
-            mMapMovies.put(mId,position);
+            mMapMovies.put(mId, position);
             mDBHelper.deleteAllMapMovie();
             mDBHelper.insertMapMovie(getMapMovies());
-            if (mMapMovies.containsKey(mId) && mMapMovies.get(mId)!=null) {
-                mRvServer.scrollToPosition(mMapMovies.get(mId)-1);
+            if (mMapMovies.containsKey(mId) && mMapMovies.get(mId) != null) {
+                mRvServer.scrollToPosition(mMapMovies.get(mId) - 1);
             }
             mActiveMovie = true;
             preparePlayer(model);
-        }else {
-            mMapMovies.put(mId,position);
+        } else {
+            mMapMovies.put(mId, position);
             mDBHelper.deleteAllMapMovie();
             mDBHelper.insertMapMovie(getMapMovies());
             mActiveMovie = true;
-            if (mMapMovies.containsKey(mId) && mMapMovies.get(mId)!=null) {
+            if (mMapMovies.containsKey(mId) && mMapMovies.get(mId) != null) {
                 mRvServer.scrollToPosition(mMapMovies.get(mId));
             }
-            if (obj != null){
-                if (obj.getSubtitleList().size() != 0){
+            if (obj != null) {
+                if (obj.getSubtitleList().size() != 0) {
                     mListSub.clear();
                     mListSub.addAll(obj.getSubtitleList());
                     mImgSubtitle.setVisibility(VISIBLE);
-                }else {
+                } else {
                     mListSub.clear();
                     mImgSubtitle.setVisibility(GONE);
                 }
 
                 initMoviePlayer(obj.getStreamURL(), obj.getServerType(), DetailsActivity.this);
             }
-            if(mListSub.size()>0){
-                setSelectedSubtitle(mMediaSource,mListSub.get(0).getUrl(),DetailsActivity.this);
+            if (mListSub.size() > 0) {
+                setSelectedSubtitle(mMediaSource, mListSub.get(0).getUrl(), DetailsActivity.this);
             }
         }
     }
@@ -1049,7 +1172,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     }
 
     private void loadAd() {
-       adsConfig = mDBHelper.getConfigurationData().getAdsConfig();
+        adsConfig = mDBHelper.getConfigurationData().getAdsConfig();
         if (PreferenceUtils.isLoggedIn(this)) {
             if (!PreferenceUtils.isActivePlan(this)) {
                 if (adsConfig.getAdsEnable().equals("1")) {
@@ -1061,7 +1184,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                     } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
 
                         //   PopUpAds.showStartappInterstitialAds(DetailsActivity.this);
-                        BannerAds.showAppodealBanner(DetailsActivity.this,R.id.appodealBannerView);
+                        BannerAds.showAppodealBanner(DetailsActivity.this, R.id.appodealBannerView);
                     } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.NETWORK_AUDIENCE)) {
                         BannerAds.showFANBanner(this, mAdView);
                         PopUpAds.showFANInterstitialAds(DetailsActivity.this);
@@ -1069,7 +1192,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
                 }
             }
-        }else{
+        } else {
             if (adsConfig.getAdsEnable().equals("1")) {
                 if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
                     BannerAds.ShowAdmobBannerAds(this, mAdView);
@@ -1078,7 +1201,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                 } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
 
                     //   PopUpAds.showStartappInterstitialAds(DetailsActivity.this);
-                    BannerAds.showAppodealBanner(DetailsActivity.this,R.id.appodealBannerView);
+                    BannerAds.showAppodealBanner(DetailsActivity.this, R.id.appodealBannerView);
                 } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.NETWORK_AUDIENCE)) {
                     BannerAds.showFANBanner(this, mAdView);
                     PopUpAds.showFANInterstitialAds(DetailsActivity.this);
@@ -1230,7 +1353,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                             mCastControlView.setVisibility(GONE);
                             mChromeCastTv.setVisibility(GONE);
                         } else {
-                            showQueuePopup(DetailsActivity.this, null, getMediaInfo());
+                            showQueuePopup(DetailsActivity.this, getMediaInfo());
                         }
                     }
 
@@ -1284,8 +1407,13 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     }
 
     public void initVideoPlayer(String url, Context context, String type) {
+        mServerType = type;
         mProgressBar.setVisibility(VISIBLE);
-        if (mPlayer != null){
+        if (!mType.equals("tv")) {
+            ContinueWatchingModel model = new ContinueWatchingModel(mId, mTitle + " " + mEpisod, mCastImageUrl, 0, 0, url, mType, type);
+            mContinueViewModel.insert(model);
+        }
+        if (mPlayer != null) {
             mPlayer.stop();
             mPlayer.release();
         }
@@ -1322,6 +1450,10 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         mPlayer.prepare(mMediaSource, true, false);
         mSimpleExoPlayerView.setPlayer(mPlayer);
         mPlayer.setPlayWhenReady(true);
+        if (resumePosition > 0) {
+            mPlayer.seekTo(resumePosition);
+            mPlayer.setPlayWhenReady(true);
+        }
 
         mPlayer.addListener(new Player.DefaultEventListener() {
             @Override
@@ -1336,9 +1468,17 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                 } else if (playbackState == Player.STATE_BUFFERING) {
                     mIsPlaying = false;
                     mProgressBar.setVisibility(VISIBLE);
+                } else if (playbackState == Player.STATE_ENDED) {
+                    //---delete into continueWatching------
+                    ContinueWatchingModel model = new ContinueWatchingModel(mId, mTitle + " " + mEpisod,
+                            mCastImageUrl, 0, 0, mMediaUrl,
+                            mType, mServerType);
+                    mContinueViewModel.delete(model);
                 } else {
                     // player paused in any state
                     mIsPlaying = false;
+                    playerCurrentPosition = mPlayer.getCurrentPosition();
+                    mediaDuration = mPlayer.getDuration();
                 }
             }
         });
@@ -1362,6 +1502,10 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                             mPlayer.setPlayWhenReady(true);
                         } else {
                             mPlayer.setPlayWhenReady(false);
+                        }
+                        if (resumePosition > 0) {
+                            mPlayer.seekTo(resumePosition);
+                            mPlayer.setPlayWhenReady(true);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -1437,8 +1581,8 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         call.enqueue(new Callback<FavoriteModel>() {
             @Override
             public void onResponse(Call<FavoriteModel> call, retrofit2.Response<FavoriteModel> response) {
-                if (response.code() == 200){
-                    if (response.body().getStatus().equalsIgnoreCase("success")){
+                if (response.code() == 200) {
+                    if (response.body().getStatus().equalsIgnoreCase("success")) {
                         new ToastMsg(DetailsActivity.this).toastIconSuccess(response.body().getMessage());
                         mIsFav = true;
                         mImgAddFav.setBackgroundResource(R.drawable.ic_favorite_white);
@@ -1446,7 +1590,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                     } else {
                         new ToastMsg(DetailsActivity.this).toastIconError(response.body().getMessage());
                     }
-                }else {
+                } else {
                     new ToastMsg(DetailsActivity.this).toastIconError(getString(R.string.error_toast));
                 }
             }
@@ -1481,7 +1625,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                     mContentDetails.setVisibility(GONE);
                     mSubscriptionLayout.setVisibility(VISIBLE);
                 }
-            }else {
+            } else {
                 startActivity(new Intent(DetailsActivity.this, FirebaseSignUpActivity.class));
                 finish();
             }
@@ -1528,9 +1672,9 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         call.enqueue(new Callback<SingleDetailsTV>() {
             @Override
             public void onResponse(Call<SingleDetailsTV> call, retrofit2.Response<SingleDetailsTV> response) {
-                if (response.code() == 200){
-                    if(mSwipeRefreshLayout==null) return;
-                    if (response.body() != null){
+                if (response.code() == 200) {
+                    if (mSwipeRefreshLayout == null) return;
+                    if (response.body() != null) {
                         mSwipeRefreshLayout.setRefreshing(false);
                         mShimmerLayout.stopShimmer();
                         mShimmerLayout.setVisibility(GONE);
@@ -1547,7 +1691,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                         mTvImdb.setText(mImdb_rating);
                         mTvImdb.setVisibility(GONE);
 
-                        if(!detailsModel.getDescription().equals("")){
+                        if (!detailsModel.getDescription().equals("")) {
                             mTvDes.setText(detailsModel.getDescription());
                         }
                         V_URL = detailsModel.getStreamUrl();
@@ -1622,6 +1766,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                         mServerAdapter.notifyDataSetChanged();
                     }
                 }
+
             }
 
             @Override
@@ -1641,8 +1786,8 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         call.enqueue(new Callback<SingleDetails>() {
             @Override
             public void onResponse(Call<SingleDetails> call, retrofit2.Response<SingleDetails> response) {
-                if (response.code() == 200){
-                    if(mSwipeRefreshLayout==null)return;
+                if (response.code() == 200) {
+                    if (mSwipeRefreshLayout == null) return;
                     mSwipeRefreshLayout.setRefreshing(false);
                     mShimmerLayout.stopShimmer();
                     mShimmerLayout.setVisibility(GONE);
@@ -1652,14 +1797,14 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                     paidControl(isPaid);
 
                     mTitle = singleDetails.getTitle();
-                    mImdb_rating =singleDetails.getImdb_rating();
+                    mImdb_rating = singleDetails.getImdb_rating();
                     mSeriesTitleTv.setText(mTitle);
                     mCastImageUrl = singleDetails.getThumbnailUrl();
                     mSeriesTitle = mTitle;
                     mTvName.setText(mTitle);
                     mTvImdb.setText(mImdb_rating);
                     mTvRelease.setText("Release On : " + singleDetails.getRelease());
-                    if(!singleDetails.getDescription().equals("")){
+                    if (!singleDetails.getDescription().equals("")) {
                         mTvDes.setText(singleDetails.getDescription());
                     }
 
@@ -1726,7 +1871,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                     mRelatedAdapter.notifyDataSetChanged();
 
                     //----seasson------------
-                    for (int i = 0; i <singleDetails.getSeason().size(); i++) {
+                    for (int i = 0; i < singleDetails.getSeason().size(); i++) {
                         Season season = singleDetails.getSeason().get(i);
 
                         CommonModels models = new CommonModels();
@@ -1738,7 +1883,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                         //----episode------
                         List<EpiModel> epList = new ArrayList<>();
                         epList.clear();
-                        for (int j = 0; j <singleDetails.getSeason().get(i).getEpisodes().size(); j++) {
+                        for (int j = 0; j < singleDetails.getSeason().get(i).getEpisodes().size(); j++) {
                             Episode episode = singleDetails.getSeason().get(i).getEpisodes().get(j);
 
                             EpiModel model = new EpiModel();
@@ -1752,8 +1897,8 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                         }
                         models.setListEpi(epList);
                         mListServer.add(models);
-                        if (seasonList.size() > 0){
-                            setSeasonData(seasonList,singleDetails.getSeason());
+                        if (seasonList.size() > 0) {
+                            setSeasonData(seasonList, singleDetails.getSeason());
                         }
 
                     }
@@ -1767,6 +1912,16 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         });
     }
 
+    private void onLoadDataFinish() {
+        if (isFromContinueWatching) {
+            onWatchNowClick();
+            playerCurrentPosition = 0L;
+            resumePosition = 0;
+            isFromContinueWatching = false;
+        }
+    }
+
+
     private void setSeasonData(List<String> seasonData, List<Season> seasonList) {
 
         ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, seasonData);
@@ -1776,19 +1931,19 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
         mSeasonSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view,final int position, long l) {
+            public void onItemSelected(AdapterView<?> adapterView, View view, final int position, long l) {
                 mRvServer.removeAllViewsInLayout();
                 mRvServer.setLayoutManager(new LinearLayoutManager(DetailsActivity.this,
                         RecyclerView.HORIZONTAL, false));
                 mEpisodeAdapter = new EpisodeAdapter(DetailsActivity.this,
                         mListServer.get(position).getListEpi());
-                if (mMapMovies.containsKey(mId) && mMapMovies.get(mId)!=null) {
+                if (mMapMovies.containsKey(mId) && mMapMovies.get(mId) != null) {
                     mEpisodeAdapter.setNowPlaying(mMapMovies.get(mId));
                 }
                 mRvServer.setAdapter(mEpisodeAdapter);
 
-                if (mMapMovies.containsKey(mId) && mMapMovies.get(mId)!=null) {
-                    mRvServer.scrollToPosition(mMapMovies.get(mId)-1);
+                if (mMapMovies.containsKey(mId) && mMapMovies.get(mId) != null) {
+                    mRvServer.scrollToPosition(mMapMovies.get(mId) - 1);
                 }
                 mEpisodeAdapter.setOnEmbedItemClickListener(DetailsActivity.this);
                 //get download link
@@ -1808,6 +1963,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                         mListExternalDownload.add(models);
                     }
                 }
+                onLoadDataFinish();
             }
 
             @Override
@@ -1818,14 +1974,14 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
     }
 
-    public String getMapMovies(){
+    public String getMapMovies() {
         Gson gson = new Gson();
         return gson.toJson(mMapMovies);
     }
 
-    public void setMapMovies(String json){
+    public void setMapMovies(String json) {
         Gson gson = new Gson();
-        Type type = new TypeToken<HashMap<String,Integer>>() {
+        Type type = new TypeToken<HashMap<String, Integer>>() {
         }.getType();
         mMapMovies = gson.fromJson(json, type);
     }
@@ -1848,8 +2004,8 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         call.enqueue(new Callback<SingleDetails>() {
             @Override
             public void onResponse(Call<SingleDetails> call, retrofit2.Response<SingleDetails> response) {
-                if (response.code() == 200){
-                    if(mShimmerLayout==null) return;
+                if (response.code() == 200) {
+                    if (mShimmerLayout == null) return;
                     mShimmerLayout.stopShimmer();
                     mShimmerLayout.setVisibility(GONE);
                     mSwipeRefreshLayout.setRefreshing(false);
@@ -1864,13 +2020,13 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                         //mDownloadBt.setVisibility(GONE);
                     }
                     mTitle = singleDetails.getTitle();
-                    mImdb_rating =singleDetails.getImdb_rating();
+                    mImdb_rating = singleDetails.getImdb_rating();
                     movieTitle = mTitle;
 
                     mTvName.setText(mTitle);
                     mTvImdb.setText(mImdb_rating);
                     mTvRelease.setText("Release On : " + singleDetails.getRelease());
-                    if(!singleDetails.getDescription().equals("")){
+                    if (!singleDetails.getDescription().equals("")) {
                         mTvDes.setText(singleDetails.getDescription());
                     }
 
@@ -1924,7 +2080,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                     //-----server----------
                     List<Video> serverList = new ArrayList<>();
                     serverList.addAll(singleDetails.getVideos());
-                    for (int i = 0; i < serverList.size(); i++){
+                    for (int i = 0; i < serverList.size(); i++) {
                         Video video = serverList.get(i);
 
                         CommonModels models = new CommonModels();
@@ -1999,10 +2155,11 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                             mListExternalDownload.add(models);
                         }
                     }
-
-                }else {
+                    onLoadDataFinish();
+                } else {
                     mSwipeRefreshLayout.setRefreshing(false);
                 }
+
             }
 
             @Override
@@ -2019,9 +2176,9 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         call.enqueue(new Callback<FavoriteModel>() {
             @Override
             public void onResponse(Call<FavoriteModel> call, retrofit2.Response<FavoriteModel> response) {
-                if (response.code() == 200){
-                    if(mImgAddFav==null)return;
-                    if (response.body().getStatus().equalsIgnoreCase("success")){
+                if (response.code() == 200) {
+                    if (mImgAddFav == null) return;
+                    if (response.body().getStatus().equalsIgnoreCase("success")) {
                         mIsFav = true;
                         mImgAddFav.setBackgroundResource(R.drawable.ic_favorite_white);
                         mImgAddFav.setVisibility(VISIBLE);
@@ -2052,8 +2209,8 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         call.enqueue(new Callback<FavoriteModel>() {
             @Override
             public void onResponse(Call<FavoriteModel> call, retrofit2.Response<FavoriteModel> response) {
-                if (response.code() == 200){
-                    if (response.body().getStatus().equalsIgnoreCase("success")){
+                if (response.code() == 200) {
+                    if (response.body().getStatus().equalsIgnoreCase("success")) {
                         mIsFav = false;
                         new ToastMsg(DetailsActivity.this).toastIconSuccess(response.body().getMessage());
                         mImgAddFav.setBackgroundResource(R.drawable.ic_favorite_border_white);
@@ -2089,13 +2246,13 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         call.enqueue(new Callback<PostCommentModel>() {
             @Override
             public void onResponse(Call<PostCommentModel> call, retrofit2.Response<PostCommentModel> response) {
-                if (response.body().getStatus().equals("success")){
+                if (response.body().getStatus().equals("success")) {
                     mRvComment.removeAllViews();
                     mListComment.clear();
                     getComments();
                     mEtComment.setText("");
                     new ToastMsg(DetailsActivity.this).toastIconSuccess(response.body().getMessage());
-                }else {
+                } else {
                     new ToastMsg(DetailsActivity.this).toastIconError(response.body().getMessage());
                 }
             }
@@ -2129,6 +2286,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         });
 
     }
+
     public void hideDescriptionLayout() {
         mDescriptionLayout.setVisibility(GONE);
         mLPlay.setVisibility(VISIBLE);
@@ -2169,6 +2327,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        updateContinueWatchingData();
         resetCastPlayer();
         releasePlayer();
         mUnbinder.unbind();
@@ -2178,7 +2337,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     public void onBackPressed() {
         if (mActiveMovie) {
             setPlayerNormalScreen();
-            if (mPlayer != null){
+            if (mPlayer != null) {
                 mPlayer.setPlayWhenReady(false);
                 mPlayer.stop();
             }
@@ -2235,7 +2394,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         }
     }
 
-    public void showQueuePopup(final Context context, View view, final MediaInfo mediaInfo) {
+    public void showQueuePopup(final Context context, final MediaInfo mediaInfo) {
         CastSession castSession =
                 CastContext.getSharedInstance(context).getSessionManager().getCurrentCastSession();
         if (castSession == null || !castSession.isConnected()) {
@@ -2522,10 +2681,10 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
 
     @OnClick(R.id.img_back)
-    void onBackClick(){
+    void onBackClick() {
         if (mActiveMovie) {
             setPlayerNormalScreen();
-            if (mPlayer != null){
+            if (mPlayer != null) {
                 mPlayer.setPlayWhenReady(false);
                 mPlayer.stop();
             }
@@ -2535,12 +2694,14 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             finish();
         }
     }
+
     @OnClick(R.id.img_subtitle)
-    void onSubtitleClick(){
+    void onSubtitleClick() {
         showSubtitleDialog(DetailsActivity.this, mListSub);
     }
+
     @OnClick(R.id.btn_comment)
-    void onCommentBtnClick(){
+    void onCommentBtnClick() {
         if (!PreferenceUtils.isLoggedIn(DetailsActivity.this)) {
             startActivity(new Intent(DetailsActivity.this, LoginActivity.class));
             new ToastMsg(DetailsActivity.this).toastIconError(getString(R.string.login_first));
@@ -2551,26 +2712,28 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             addComment(mId, PreferenceUtils.getUserId(DetailsActivity.this), comment);
         }
     }
-    @OnClick({R.id.add_fav,R.id.add_fav2})
-    void onFavClick(){
+
+    @OnClick({R.id.add_fav, R.id.add_fav2})
+    void onFavClick() {
         if (mIsFav) {
             removeFromFav();
         } else {
             addToFav();
         }
     }
+
     @OnClick(R.id.img_full_scr)
-    void onFullScrClick(){
+    void onFullScrClick() {
         controlFullScreenPlayer();
     }
 
     @OnClick(R.id.volumn_control_iv)
-    void onVolumnControlClick(){
+    void onVolumnControlClick() {
         mVolumnControlLayout.setVisibility(VISIBLE);
     }
 
     @OnClick(R.id.aspect_ratio_iv)
-    void onAspectRatioClick(){
+    void onAspectRatioClick() {
         if (mAspectClickCount == 1) {
             //Toast.makeText(DetailsActivity.this, "Fill", Toast.LENGTH_SHORT).show();
             mSimpleExoPlayerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FILL);
@@ -2590,7 +2753,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     }
 
     @OnClick(R.id.external_player_iv)
-    void onExternalPlayerClick(){
+    void onExternalPlayerClick() {
         if (mMediaUrl != null) {
             if (!tv) {
                 // set player normal/ potrait screen if not tv
@@ -2604,9 +2767,9 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     }
 
     @OnClick(R.id.watch_now_bt)
-    void onWatchNowClick(){
-        if(mType.equals("tvseries")){
-            if(mEpisodeAdapter!=null){
+    void onWatchNowClick() {
+        if (mType.equals("tvseries")) {
+            if (mEpisodeAdapter != null) {
                 mEpisodeAdapter.getWatchEpisode();
                 return;
             }
@@ -2618,8 +2781,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             if (!PreferenceUtils.isActivePlan(DetailsActivity.this)) {
                 if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
                     PopUpAds.showAppodealInterstitialAds(DetailsActivity.this);
-                }
-                else if(adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)){
+                } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
                     PopUpAds.ShowAdmobInterstitialAds(DetailsActivity.this);
                 }
             }
@@ -2631,16 +2793,17 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                 preparePlayer(mListServer.get(0));
                 mDescriptionLayout.setVisibility(GONE);
                 mLPlay.setVisibility(VISIBLE);
-            }else {
+            } else {
                 openServerDialog();
             }
-        }else{
+        } else {
             Toast.makeText(DetailsActivity.this, R.string.no_video_found, Toast.LENGTH_SHORT).show();
         }
     }
+
     @OnClick(R.id.download_bt)
-    void onDownloadClick(){
-        if(PreferenceUtils.isLoggedIn(DetailsActivity.this)){
+    void onDownloadClick() {
+        if (PreferenceUtils.isLoggedIn(DetailsActivity.this)) {
             //PopUpAds.ShowAdmobInterstitialAds(DetailsActivity.this);
 //                    DetailsActivity.getInstance().loadAdReward();
             //loadRewardedAd();
@@ -2659,14 +2822,14 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             } else {
                 Toast.makeText(DetailsActivity.this, R.string.no_download_server_found, Toast.LENGTH_SHORT).show();
             }
-        }
-        else{
-            Intent intent = new Intent(DetailsActivity.this,FirebaseSignUpActivity.class);
+        } else {
+            Intent intent = new Intent(DetailsActivity.this, FirebaseSignUpActivity.class);
             startActivity(intent);
         }
     }
+
     @OnClick(R.id.watch_live_tv)
-    void onWatchLiveClick(){
+    void onWatchLiveClick() {
         hideExoControlForTv();
         initMoviePlayer(mMediaUrl, mServerType, DetailsActivity.this);
 
@@ -2677,8 +2840,8 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         mProgramTv.setText(mCurrentProgramTitle);
     }
 
-    @OnClick({R.id.share_iv2,R.id.share_iv,R.id.share_iv3})
-    void onShare2Click(){
+    @OnClick({R.id.share_iv2, R.id.share_iv, R.id.share_iv3})
+    void onShare2Click() {
         if (mTitle == null) {
             new ToastMsg(DetailsActivity.this).toastIconError("Title should not be empty.");
             return;
@@ -2687,12 +2850,12 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     }
 
     @OnClick(R.id.img_server)
-    void onSeverClick(){
+    void onSeverClick() {
         openServerDialog();
     }
 
     @OnClick(R.id.subscribe_bt)
-    void onSubscribeClick(){
+    void onSubscribeClick() {
         if (mUserId == null) {
             new ToastMsg(DetailsActivity.this).toastIconError(getResources().getString(R.string.subscribe_error));
             startActivity(new Intent(DetailsActivity.this, LoginActivity.class));
@@ -2702,11 +2865,11 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         }
     }
 
-    @OnClick({R.id.des_back_iv,R.id.back_iv})
-    void onDesBackClick(){
+    @OnClick({R.id.des_back_iv, R.id.back_iv})
+    void onDesBackClick() {
         if (mActiveMovie) {
             setPlayerNormalScreen();
-            if (mPlayer != null){
+            if (mPlayer != null) {
                 mPlayer.setPlayWhenReady(false);
                 mPlayer.stop();
             }

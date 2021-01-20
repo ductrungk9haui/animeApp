@@ -8,9 +8,11 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -23,8 +25,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -33,12 +38,16 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import retrofit2.Response;
 import tvseries.koreandramaengsub.freemovieapp.database.DatabaseHelper;
 import tvseries.koreandramaengsub.freemovieapp.network.RetrofitClient;
 import tvseries.koreandramaengsub.freemovieapp.network.apis.DeactivateAccountApi;
 import tvseries.koreandramaengsub.freemovieapp.network.apis.ProfileApi;
+import tvseries.koreandramaengsub.freemovieapp.network.apis.SetPasswordApi;
+import tvseries.koreandramaengsub.freemovieapp.network.apis.UserDataApi;
 import tvseries.koreandramaengsub.freemovieapp.network.model.ResponseStatus;
 import tvseries.koreandramaengsub.freemovieapp.network.model.User;
+import tvseries.koreandramaengsub.freemovieapp.network.model.config.AppConfig;
 import tvseries.koreandramaengsub.freemovieapp.utils.ApiResources;
 import tvseries.koreandramaengsub.freemovieapp.utils.Constants;
 import tvseries.koreandramaengsub.freemovieapp.utils.FileUtil;
@@ -50,12 +59,14 @@ import retrofit2.Callback;
 import retrofit2.Retrofit;
 
 public class ProfileActivity extends AppCompatActivity {
-    private EditText etName, etEmail, etPhone, genderSpinner;
-    private TextInputEditText etPass;
-    private Button btnUpdate, deactivateBt;
+    private static final String TAG = ProfileActivity.class.getSimpleName();
+    private TextInputEditText etName, etEmail, etPhone, etPass, etCurrentPassword;;
+    private AutoCompleteTextView genderSpinner;
+    private Button btnUpdate, deactivateBt, setPasswordBtn;
     private ProgressDialog dialog;
     private String URL = "", strGender;
     private CircleImageView userIv;
+    private ImageView editProfilePicture;
     private static final int GALLERY_REQUEST_CODE = 1;
     private Uri imageUri;
     private ProgressBar progressBar;
@@ -68,17 +79,14 @@ public class ProfileActivity extends AppCompatActivity {
         RtlUtils.setScreenDirection(this);
         SharedPreferences sharedPreferences = getSharedPreferences("push", MODE_PRIVATE);
         isDark = sharedPreferences.getBoolean("dark", false);
-
         if (isDark) {
             setTheme(R.style.AppThemeDark);
         } else {
             setTheme(R.style.AppThemeLight);
         }
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         Toolbar toolbar = findViewById(R.id.toolbar);
-
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("My Profile");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -95,15 +103,18 @@ public class ProfileActivity extends AppCompatActivity {
         dialog.setMessage("Please wait");
         dialog.setCancelable(false);
 
-        etName = findViewById(R.id.name);
-        etEmail = findViewById(R.id.email);
-        etPhone = findViewById(R.id.phone);
-        etPass = findViewById(R.id.password);
-        btnUpdate = findViewById(R.id.signup);
-        userIv = findViewById(R.id.user_iv);
-        progressBar = findViewById(R.id.progress_bar);
-        deactivateBt = findViewById(R.id.deactive_bt);
-        genderSpinner = findViewById(R.id.gender_spinner);
+        etName              = findViewById(R.id.name);
+        etEmail             = findViewById(R.id.email);
+        etPhone             = findViewById(R.id.phone);
+        etPass              = findViewById(R.id.password);
+        etCurrentPassword   = findViewById(R.id.currentPassword);
+        btnUpdate           = findViewById(R.id.saveButton);
+        userIv              = findViewById(R.id.user_iv);
+        editProfilePicture  = findViewById(R.id.pro_pic_edit_image_view);
+        progressBar         = findViewById(R.id.progress_bar);
+        deactivateBt        = findViewById(R.id.deactive_bt);
+        genderSpinner       = findViewById(R.id.genderSpinnerField);
+        setPasswordBtn      = findViewById(R.id.setPasswordBtn);
 
         id = PreferenceUtils.getUserId(ProfileActivity.this);
 
@@ -111,10 +122,13 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (etEmail.getText().toString().equals("")) {
-                    Toast.makeText(ProfileActivity.this, "Please enter valid email", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ProfileActivity.this, "Please enter valid email.", Toast.LENGTH_LONG).show();
                     return;
                 } else if (etName.getText().toString().equals("")) {
-                    Toast.makeText(ProfileActivity.this, "Please enter name", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ProfileActivity.this, "Please enter name.", Toast.LENGTH_LONG).show();
+                    return;
+                } else if (etCurrentPassword.getText().toString().equals("")) {
+                    new ToastMsg(ProfileActivity.this).toastIconError("Current password must not be empty.");
                     return;
                 }
                 progressBar.setVisibility(View.VISIBLE);
@@ -122,10 +136,18 @@ public class ProfileActivity extends AppCompatActivity {
                 String email = etEmail.getText().toString();
                 String phone = etPhone.getText().toString();
                 String pass = etPass.getText().toString();
+                String currentPass = etCurrentPassword.getText().toString();
                 String name = etName.getText().toString();
 
-                updateProfile(id, email, phone, name, pass);
+                updateProfile(id, email, phone, name, pass, currentPass);
 
+            }
+        });
+
+        setPasswordBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showSetPasswordDialog();
             }
         });
 
@@ -153,11 +175,11 @@ public class ProfileActivity extends AppCompatActivity {
         getProfile();
     }
 
+
     @Override
     protected void onStart() {
         super.onStart();
-
-        userIv.setOnClickListener(new View.OnClickListener() {
+        editProfilePicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openGallery();
@@ -235,7 +257,7 @@ public class ProfileActivity extends AppCompatActivity {
                     ResponseStatus resStatus = response.body();
                     if (resStatus.getStatus().equalsIgnoreCase("success")) {
                         logoutUser();
-                       
+
                         new ToastMsg(ProfileActivity.this).toastIconSuccess(resStatus.getData());
 
                         if (PreferenceUtils.isMandatoryLogin(ProfileActivity.this)) {
@@ -303,39 +325,70 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void getProfile() {
-        User user = new DatabaseHelper(ProfileActivity.this).getUserData();
-        String userName = user.getName();
-        String userEmail = user.getEmail();
-        String userProfileImage = user.getImageUrl();
-        String gender = user.getGender();
-        Picasso.get()
-                .load(Uri.parse(userProfileImage))
-                .placeholder(R.drawable.ic_account_circle_black)
-                .error(R.drawable.ic_account_circle_black)
-                .into(userIv);
+        progressBar.setVisibility(View.VISIBLE);
+        Retrofit retrofit = RetrofitClient.getRetrofitInstance();
+        UserDataApi api = retrofit.create(UserDataApi.class);
+        Call<User> call = api.getUserData(Config.API_KEY, id);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.code() == 200) {
+                    if (response.body() != null) {
+                        progressBar.setVisibility(View.GONE);
+                        User user = response.body();
+                       /* Picasso.get()
+                                .load(user.getImageUrl())
+                                .placeholder(R.drawable.ic_account_circle_black)
+                                .error(R.drawable.ic_account_circle_black)
+                                .into(userIv);*/
 
-        etName.setText(userName);
-        etEmail.setText(userEmail);
-        etPhone.setText(ApiResources.USER_PHONE);
-        if (gender == null) {
-            genderSpinner.setText(R.string.male);
-        } else {
-            genderSpinner.setText(gender);
-            selectedGender = gender;
-        }
+                        Glide.with(ProfileActivity.this)
+                                .load(user.getImageUrl())
+                                .into(userIv);
+
+
+                        etName.setText(user.getName());
+                        etEmail.setText(user.getEmail());
+                        etPhone.setText(user.getPhone());
+                        if (user.getGender() != null) {
+                            genderSpinner.setText(R.string.male);
+                        } else {
+                            genderSpinner.setText(user.getGender());
+                            selectedGender = user.getGender();
+                        }
+
+                        if (!user.isPasswordAvailable()) {
+                            btnUpdate.setVisibility(View.GONE);
+                            etCurrentPassword.setVisibility(View.GONE);
+                            etPass.setVisibility(View.GONE);
+                            setPasswordBtn.setVisibility(View.VISIBLE);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
+            }
+        });
+
+
     }
 
-    private void updateProfile(String idString, String emailString, String phoneString, String nameString, String passString) {
+    private void updateProfile(String idString, String emailString, String phoneString, String nameString, String passString, String currentPassString) {
         File file = null;
         RequestBody requestFile = null;
         MultipartBody.Part multipartBody = null;
         try {
-            file = FileUtil.from(ProfileActivity.this, imageUri);
-            requestFile = RequestBody.create(MediaType.parse("multipart/form-data"),
-                    file);
+            if (imageUri != null) {
+                file = FileUtil.from(ProfileActivity.this, imageUri);
+                requestFile = RequestBody.create(MediaType.parse("multipart/form-data"),
+                        file);
 
-            multipartBody = MultipartBody.Part.createFormData("photo",
-                    file.getName(), requestFile);
+                multipartBody = MultipartBody.Part.createFormData("photo",
+                        file.getName(), requestFile);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -345,33 +398,35 @@ public class ProfileActivity extends AppCompatActivity {
         RequestBody id = RequestBody.create(MediaType.parse("text/plain"), idString);
         RequestBody name = RequestBody.create(MediaType.parse("text/plain"), nameString);
         RequestBody password = RequestBody.create(MediaType.parse("text/plain"), passString);
+        RequestBody phone = RequestBody.create(MediaType.parse("text/plain"), phoneString);
+        RequestBody currentPass = RequestBody.create(MediaType.parse("text/plain"), currentPassString);
+        RequestBody gender = RequestBody.create(MediaType.parse("text/plain"), selectedGender);
         RequestBody key = RequestBody.create(MediaType.parse("text/plain"), Config.API_KEY);
 
         Retrofit retrofit = RetrofitClient.getRetrofitInstance();
         ProfileApi api = retrofit.create(ProfileApi.class);
-        Call<ResponseStatus> call = api.updateProfile(Config.API_KEY, idString, nameString, emailString, phoneString, passString, imageUri, selectedGender);
+        Call<ResponseStatus> call = api.updateProfile(Config.API_KEY, id, name, email, phone, password, currentPass, multipartBody, gender);
         call.enqueue(new Callback<ResponseStatus>() {
             @Override
             public void onResponse(Call<ResponseStatus> call, retrofit2.Response<ResponseStatus> response) {
                 if (response.code() == 200) {
                     if (response.body().getStatus().equalsIgnoreCase("success")) {
                         new ToastMsg(ProfileActivity.this).toastIconSuccess(response.body().getData());
-                        progressBar.setVisibility(View.GONE);
+                        getProfile();
                     } else {
                         new ToastMsg(ProfileActivity.this).toastIconError(response.body().getData());
-                        progressBar.setVisibility(View.GONE);
                     }
                 } else {
                     new ToastMsg(ProfileActivity.this).toastIconError(getString(R.string.something_went_wrong));
-                    progressBar.setVisibility(View.GONE);
                 }
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<ResponseStatus> call, Throwable t) {
                 new ToastMsg(ProfileActivity.this).toastIconError(getString(R.string.something_went_wrong));
                 progressBar.setVisibility(View.GONE);
-                t.printStackTrace();
+                Log.e(TAG, t.getLocalizedMessage());
             }
         });
     }
@@ -385,5 +440,102 @@ public class ProfileActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void showSetPasswordDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
+        // Get the layout inflater
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.password_entry_layout, null);
+        builder.setView(view);
+        builder.setCancelable(false);
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+        EditText passEt = view.findViewById(R.id.passwordEt);
+        EditText confirmPassEt = view.findViewById(R.id.confirmPasswordEt);
+        Button setButton = view.findViewById(R.id.setButton);
+        Button cancelButton = view.findViewById(R.id.cancelButton);
+        setButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String password = passEt.getText().toString();
+                String confirmPass = confirmPassEt.getText().toString();
+                if (!password.isEmpty() && !confirmPass.isEmpty()) {
+                    if (password.equals(confirmPass)) {
+                        // send password to server
+                        alertDialog.dismiss();
+                        setPassword(password);
+                    } else {
+                        confirmPassEt.setError("Password mismatch.");
+                        new ToastMsg(view.getContext()).toastIconError("Password mismatch.");
+                    }
+                }
+            }
+        });
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+            }
+        });
+    }
+
+    private void setPassword(String password) {
+        ProgressDialog dialog = new ProgressDialog(ProfileActivity.this);
+        dialog.setMessage("Please wait..");
+        dialog.setCancelable(false);
+        dialog.show();
+        //get UID from firebase auth
+        String uid = "";
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null)
+            uid = user.getUid();
+        else {
+            dialog.dismiss();
+            new ToastMsg(ProfileActivity.this).toastIconError(getString(R.string.something_went_text));
+            return;
+        }
+
+        Retrofit retrofit = RetrofitClient.getRetrofitInstance();
+        SetPasswordApi api = retrofit.create(SetPasswordApi.class);
+        Call<ResponseStatus> call = api.setPassword(Config.API_KEY, id, password, uid);
+        call.enqueue(new Callback<ResponseStatus>() {
+            @Override
+            public void onResponse(Call<ResponseStatus> call, Response<ResponseStatus> response) {
+                if (response.code() == 200) {
+                    if (response.body() != null) {
+                        ResponseStatus status = response.body();
+                        if (status.getStatus().equalsIgnoreCase("success")) {
+                            new ToastMsg(ProfileActivity.this).toastIconSuccess("Password set successfully.");
+                            //password set successfully.
+                            //visible hidden buttons
+                            setPasswordBtn.setVisibility(View.GONE);
+                            btnUpdate.setVisibility(View.VISIBLE);
+                            etCurrentPassword.setVisibility(View.VISIBLE);
+                            etPass.setVisibility(View.VISIBLE);
+                            getProfile();
+
+                        } else {
+                            new ToastMsg(ProfileActivity.this).toastIconError(getString(R.string.something_went_text));
+                        }
+                    } else {
+                        new ToastMsg(ProfileActivity.this).toastIconError(getString(R.string.something_went_text));
+                    }
+                } else {
+                    new ToastMsg(ProfileActivity.this).toastIconError(getString(R.string.something_went_text));
+                }
+
+                dialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseStatus> call, Throwable t) {
+                new ToastMsg(ProfileActivity.this).toastIconError(getString(R.string.something_went_text));
+                Log.e("ProfileActivity", t.getLocalizedMessage());
+                dialog.dismiss();
+            }
+        });
     }
 }

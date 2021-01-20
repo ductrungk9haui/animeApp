@@ -47,34 +47,47 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/spacing_xlarge">
+                android:padding="@dimen/spacing_smlarge">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/user_iv"
-                    android:layout_width="130dp"
-                    android:layout_height="130dp"
-                    android:layout_centerHorizontal="true"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/ic_account_circle_black" />
+                <RelativeLayout
+                    android:id="@+id/profile_pic_container"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_centerHorizontal="true">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/user_iv"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_account_circle_black" />
+
+                    <ImageView
+                        android:id="@+id/pro_pic_edit_image_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_edit"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginBottom="@dimen/spacing_medium"
+                        android:layout_marginEnd="@dimen/spacing_medium"/>
+
+                </RelativeLayout>
 
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/nameField"
-                    android:layout_marginTop="15dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/user_iv"
-                    android:layout_alignParentStart="true">
+                    android:layout_below="@id/profile_pic_container"
+                    android:layout_marginTop="@dimen/spacing_medium">
 
-                    <AutoCompleteTextView
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/full_name"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:singleLine="true" />
+                        android:inputType="textPersonName" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -82,16 +95,15 @@
                     android:id="@+id/emailField"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
                     android:layout_below="@id/nameField">
 
-                    <AutoCompleteTextView
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/email"
-                        android:inputType="textEmailAddress"
-                        android:maxLines="1"
-                        android:singleLine="true" />
+                        android:inputType="textEmailAddress"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -99,43 +111,61 @@
                     android:id="@+id/phoneField"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
                     android:layout_below="@id/emailField">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/phone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/phone_number_with_country_code"
-                        android:inputType="textEmailAddress"
+                        android:hint="Phone Number"
+                        android:inputType="phone"
                         android:maxLines="1"
                         android:singleLine="true" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <EditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/gender_spinner"
-                    android:layout_width="160dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/gender_spinner_outline"
-                    android:drawableEnd="@drawable/ic_arrow_drop_down_white_24dp"
-                    android:focusable="false"
-                    android:paddingStart="@dimen/spacing_middle"
-                    android:paddingEnd="@dimen/spacing_middle"
-                    android:text="@string/male"
-                    android:layout_below="@id/phoneField" />
+                    android:layout_marginTop="2dp"
+                    android:layout_below="@id/phoneField">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/genderSpinnerField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/gender"
+                        android:inputType="none" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- <EditText
+                     android:layout_width="160dp"
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="10dp"
+                     android:background="@drawable/gender_spinner_outline"
+                     android:drawableEnd="@drawable/ic_arrow_drop_down_white_24dp"
+                     android:focusable="false"
+                     android:paddingStart="@dimen/spacing_middle"
+                     android:paddingEnd="@dimen/spacing_middle"
+                     android:text="@string/male"
+                     android:layout_below="@id/phoneField" />-->
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/passwordField"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/gender_spinner">
+                    android:layout_marginTop="15dp"
+                    android:layout_below="@id/gender_spinner"
+                    app:endIconMode="password_toggle">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/password"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/password"
+                        android:hint="New Password (Optional)"
                         android:inputType="textPassword"
                         android:maxLines="1"
                         android:singleLine="true"
@@ -143,8 +173,41 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/currentPasswordField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:layout_below="@id/passwordField"
+                    app:endIconMode="password_toggle">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/currentPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Current Password"
+                        android:inputType="textPassword"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textAlignment="viewStart" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
                 <Button
-                    android:id="@+id/signup"
+                    android:id="@+id/setPasswordBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:text="Set Password"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/white"
+                    android:layout_below="@id/gender_spinner"
+                    android:visibility="gone"
+                    tools:visibility="visible"/>
+
+                <Button
+                    android:id="@+id/saveButton"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_marginTop="@dimen/spacing_large"
@@ -152,7 +215,8 @@
                     android:text="@string/save"
                     android:textAllCaps="true"
                     android:textColor="@android:color/white"
-                    android:layout_below="@id/passwordField"/>
+                    android:layout_below="@id/currentPasswordField"
+                    tools:visibility="visible"/>
 
                 <TextView
                     android:id="@+id/textField"
@@ -160,16 +224,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="60dp"
                     android:gravity="center"
-
                     android:text="@string/deactive_account_text"
                     android:textSize="12sp"
                     android:visibility="visible"
-                    android:layout_below="@id/signup"/>
+                    android:layout_below="@id/saveButton"/>
 
                 <Button
                     android:id="@+id/deactive_bt"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
                     android:layout_marginTop="5dp"
                     android:backgroundTint="@color/red_600"
                     android:text="@string/deactivate_account"
