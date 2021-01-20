@@ -253,6 +253,7 @@ public class HomeFragment extends Fragment {
         continueWatchingViewModel.getAllContents().observe(getActivity(), new Observer<List<ContinueWatchingModel>>() {
             @Override
             public void onChanged(List<ContinueWatchingModel> items) {
+                if(continueWatchingLayout == null)return;
                 if (items.size() > 0) {
                     Collections.reverse(items);
                     continueWatchingLayout.setVisibility(View.VISIBLE);
