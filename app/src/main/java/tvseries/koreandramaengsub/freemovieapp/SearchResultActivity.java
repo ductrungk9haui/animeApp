@@ -150,6 +150,12 @@ public class SearchResultActivity extends AppCompatActivity implements SearchAda
         tvSeriesRv.setAdapter(tvSeriesAdapter);
 
         if (query != null) {
+            mKeywordList.clear();
+            titleList.clear();
+            idList.clear();
+            movieList.clear();
+            tvList.clear();
+            tvSeriesList.clear();
             getSearchData();
         }
     }
@@ -178,9 +184,8 @@ public class SearchResultActivity extends AppCompatActivity implements SearchAda
                         isSplitQuery = false;*/
                         shimmerFrameLayout.stopShimmer();
                         shimmerFrameLayout.setVisibility(View.GONE);
-                        progressBar.setVisibility(View.GONE);
                         countTv.setVisibility(View.VISIBLE);
-                    }else{
+
                         if (movieList.size() > 0) {
                             result = "Movie : " + movieList.size();
                             movieAdapter.notifyDataSetChanged();
@@ -207,6 +212,7 @@ public class SearchResultActivity extends AppCompatActivity implements SearchAda
                     }
 
 
+
                     if (mKeywordList.size() > 0) {
                         if (indexKey < mKeywordList.size() -1 && isSplitQuery) {
                             query = mKeywordList.get(indexKey);
@@ -216,16 +222,13 @@ public class SearchResultActivity extends AppCompatActivity implements SearchAda
                         }else{
                             indexKey = -1;
                             isSplitQuery = false;
-                            mKeywordList.clear();
-                            titleList.clear();
-                            idList.clear();
                             if(shimmerFrameLayout.getVisibility() != View.GONE){
                                 result = "Not found with your keyword. Please try another keyword";
                                 shimmerFrameLayout.stopShimmer();
                                 shimmerFrameLayout.setVisibility(View.GONE);
-                                progressBar.setVisibility(View.GONE);
                                 coordinatorLayout.setVisibility(View.VISIBLE);
                             }
+                            progressBar.setVisibility(View.GONE);
                         }
                     }
                     countTv.setText(result);
