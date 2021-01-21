@@ -133,6 +133,7 @@
                     android:layout_below="@id/phoneField">
 
                     <AutoCompleteTextView
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:id="@+id/genderSpinnerField"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

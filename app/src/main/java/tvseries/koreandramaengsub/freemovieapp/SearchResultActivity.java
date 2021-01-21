@@ -48,6 +48,8 @@ public class SearchResultActivity extends AppCompatActivity implements SearchAda
     private List<CommonModel> movieList = new ArrayList<>();
     private List<TvModel> tvList = new ArrayList<>();
     private List<CommonModel> tvSeriesList = new ArrayList<>();
+    private List<String> titleList = new ArrayList<>();
+    private List<String> idList = new ArrayList<>();
 
     private ApiResources apiResources;
 
@@ -164,61 +166,68 @@ public class SearchResultActivity extends AppCompatActivity implements SearchAda
                 if (response.code() == 200) {
                     String result = "Founded: ";
                     SearchModel searchModel = response.body();
-                    movieList.addAll(searchModel.getMovie());
-                    tvList.addAll(searchModel.getTvChannels());
-                    tvSeriesList.addAll(searchModel.getTvseries());
-                    if (tvList.size() == 0 && movieList.size() == 0 && tvSeriesList.size() == 0) {
-                        if (!isSplitQuery) {
-                            isSplitQuery = true;
-                            getKeyword(query);
-                        }
-                        if (mKeywordList.size() > 0) {
-                            if (indexKey < mKeywordList.size() -1 && isSplitQuery) {
-                                query = mKeywordList.get(indexKey);
-                                indexKey++;
-                                getSearchData();
-                                return;
-                            }
-                        }
-                        indexKey = 0;
-                        isSplitQuery = false;
-                        shimmerFrameLayout.stopShimmer();
-                        shimmerFrameLayout.setVisibility(View.GONE);
-                        progressBar.setVisibility(View.GONE);
-                        coordinatorLayout.setVisibility(View.VISIBLE);
-                        countTv.setVisibility(View.INVISIBLE);
-                    } else {
-                        indexKey = -1;
-                        isSplitQuery = false;
+                    addItemCommonModel(movieList,searchModel.getMovie());
+                    addItemTvModel(tvList,searchModel.getTvChannels());
+                    addItemCommonModel(tvSeriesList,searchModel.getTvseries());
+                    if (!isSplitQuery) {
+                        isSplitQuery = true;
+                        getKeyword(query);
+                    }
+                    if (!(tvList.size() == 0 && movieList.size() == 0 && tvSeriesList.size() == 0)){
+                       /* indexKey = -1;
+                        isSplitQuery = false;*/
                         shimmerFrameLayout.stopShimmer();
                         shimmerFrameLayout.setVisibility(View.GONE);
                         progressBar.setVisibility(View.GONE);
                         countTv.setVisibility(View.VISIBLE);
-                    }
-                    if (movieList.size() > 0) {
-                        result = "Movie : " + movieList.size();
-                        movieAdapter.notifyDataSetChanged();
-                        movieLayout.setVisibility(View.VISIBLE);
-                    } else {
-                        movieLayout.setVisibility(View.GONE);
+                    }else{
+                        if (movieList.size() > 0) {
+                            result = "Movie : " + movieList.size();
+                            movieAdapter.notifyDataSetChanged();
+                            movieLayout.setVisibility(View.VISIBLE);
+                        } else {
+                            movieLayout.setVisibility(View.GONE);
+                        }
+
+                        if (tvList.size() > 0) {
+                            result = result + "  TV : " + tvList.size();
+                            tvAdapter.notifyDataSetChanged();
+                            tvLayout.setVisibility(View.VISIBLE);
+                        } else {
+                            tvLayout.setVisibility(View.GONE);
+                        }
+
+                        if (tvSeriesList.size() > 0) {
+                            result = result + "  Series : " + tvSeriesList.size();
+                            tvSeriesAdapter.notifyDataSetChanged();
+                            tvSeriesLayout.setVisibility(View.VISIBLE);
+                        } else {
+                            tvSeriesLayout.setVisibility(View.GONE);
+                        }
                     }
 
-                    if (tvList.size() > 0) {
-                        result = result + "  TV : " + tvList.size();
-                        tvAdapter.notifyDataSetChanged();
-                        tvLayout.setVisibility(View.VISIBLE);
-                    } else {
-                        tvLayout.setVisibility(View.GONE);
-                    }
 
-                    if (tvSeriesList.size() > 0) {
-                        result = result + "  Series : " + tvSeriesList.size();
-                        tvSeriesAdapter.notifyDataSetChanged();
-                        tvSeriesLayout.setVisibility(View.VISIBLE);
-                    } else {
-                        tvSeriesLayout.setVisibility(View.GONE);
+                    if (mKeywordList.size() > 0) {
+                        if (indexKey < mKeywordList.size() -1 && isSplitQuery) {
+                            query = mKeywordList.get(indexKey);
+                            indexKey++;
+                            getSearchData();
+                            return;
+                        }else{
+                            indexKey = -1;
+                            isSplitQuery = false;
+                            mKeywordList.clear();
+                            titleList.clear();
+                            idList.clear();
+                            if(shimmerFrameLayout.getVisibility() != View.GONE){
+                                result = "Not found with your keyword. Please try another keyword";
+                                shimmerFrameLayout.stopShimmer();
+                                shimmerFrameLayout.setVisibility(View.GONE);
+                                progressBar.setVisibility(View.GONE);
+                                coordinatorLayout.setVisibility(View.VISIBLE);
+                            }
+                        }
                     }
-
                     countTv.setText(result);
                 } else {
                     new ToastMsg(SearchResultActivity.this).toastIconSuccess("Something went wrong.");
@@ -240,6 +249,29 @@ public class SearchResultActivity extends AppCompatActivity implements SearchAda
         });
 
 
+    }
+
+    private void addItemCommonModel(List<CommonModel> mainList, List<CommonModel> addList){
+        if(addList.isEmpty())return;
+        for(int i = 0; i< addList.size(); i++){
+            CommonModel object = addList.get(i);
+            if(!(titleList.contains(object.getTitle()) && idList.contains(object.getVideosId()))){
+                titleList.add(object.getTitle());
+                idList.add(object.getVideosId());
+                mainList.add(addList.get(i));
+            }
+        }
+    }
+    private void addItemTvModel(List<TvModel> mainList, List<TvModel> addList){
+        if(addList.isEmpty())return;
+        for(int i = 0; i< addList.size(); i++){
+            TvModel object = addList.get(i);
+            if(!(titleList.contains(object.getTvName()) && idList.contains(object.getLiveTvId()))){
+                titleList.add(object.getTvName());
+                idList.add(object.getLiveTvId());
+                mainList.add(addList.get(i));
+            }
+        }
     }
 
     private void getKeyword(String query) {

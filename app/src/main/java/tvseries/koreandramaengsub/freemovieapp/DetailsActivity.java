@@ -492,7 +492,6 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         mRvComment.setHasFixedSize(true);
         mRvComment.setNestedScrollingEnabled(false);
         mRvComment.setAdapter(mCommentsAdapter);
-        getComments();
         if (!isNetworkAvailable()) {
             new ToastMsg(DetailsActivity.this).toastIconError(getString(R.string.no_internet));
         }
@@ -1372,9 +1371,8 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
                 }
             });
-
-
         }
+        getComments();
     }
 
     private void openWebActivity(String s, Context context, String videoType) {

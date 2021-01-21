@@ -241,6 +241,7 @@
                                     android:gravity="right|center_vertical"
                                     android:minWidth="0dp"
                                     android:text="@string/more"
+                                    android:textColor="?android:textColor"
                                     android:textAppearance="@style/TextAppearance.Medium.Bold"
                                     android:textSize="15sp" />
 
@@ -282,6 +283,7 @@
                                     android:gravity="right|center_vertical"
                                     android:minWidth="0dp"
                                     android:text="@string/more"
+                                    android:textColor="?android:textColor"
                                     android:textAppearance="@style/TextAppearance.Medium.Bold"
                                     android:textSize="15sp" />
 
@@ -345,6 +347,7 @@
                                     android:gravity="right|center_vertical"
                                     android:minWidth="0dp"
                                     android:text="@string/more"
+                                    android:textColor="?android:textColor"
                                     android:textAppearance="@style/TextAppearance.Medium.Bold"
                                     android:textSize="15sp" />
                             </LinearLayout>

@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppThemeLight" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppThemeLight" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="android:fontFamily">@font/amazon</item>
         <item name="fontFamily">@font/amazon</item>
@@ -21,9 +21,10 @@
         <item name="selectable_backgroundColor">#A7D8FF</item>
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogLightTheme</item>
+        <item name="textInputStyle">@style/MyTextInputLayoutLight</item>
     </style>
 
-    <style name="AppThemeDark" parent="Theme.AppCompat.NoActionBar">
+    <style name="AppThemeDark" parent="Theme.MaterialComponents.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="android:fontFamily">@font/amazon</item>
         <item name="fontFamily">@font/amazon</item>
@@ -36,6 +37,7 @@
         <item name="cardViewStyle">@style/DarkCardView</item>
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogDarkTheme</item>
+        <item name="textInputStyle">@style/MyTextInputLayoutDark</item>
     </style>
 
     <style name="DarkCardView" parent="CardView.Dark">
@@ -182,4 +184,14 @@
         <item name="android:background">@drawable/btn_rounded_corner</item>
     </style>
 
+    <style name="MyTextInputLayoutLight" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">@color/text_field_border_color_light</item>
+        <item name="android:strokeWidth">2</item>
+        <item name="hintTextColor">@color/black</item>
+    </style>
+    <style name="MyTextInputLayoutDark" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">@color/text_field_border_color_dark</item>
+        <item name="android:strokeWidth">2</item>
+        <item name="hintTextColor">@color/white</item>
+    </style>
 </resources>

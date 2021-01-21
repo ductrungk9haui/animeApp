@@ -313,9 +313,9 @@
                 android:background="@color/green_500"
                 android:textAppearance="@style/TextAppearance.smallNormal"
                 android:layout_width="wrap_content"
+                android:text="Searching..."
                 android:layout_height="wrap_content"
                 />
-
             <LinearLayout
                 android:id="@+id/movie_layout"
                 android:layout_width="match_parent"
@@ -323,13 +323,36 @@
                 android:orientation="vertical"
                 >
 
-                <TextView
-                    android:id="@+id/movie_title"
-                    android:padding="10dp"
-                    android:textAppearance="@style/TextAppearance.Medium.Bold"
+                <LinearLayout
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:attr/selectableItemBackground"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/movie"/>
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="5dp">
+
+                    <TextView
+                        android:id="@+id/movie_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/movie"
+                        android:textAppearance="@style/TextAppearance.Medium.Bold" />
+
+                    <Button
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right|center_vertical"
+                        android:minWidth="0dp"
+                        android:text="@string/more"
+                        android:textColor="?android:textColor"
+                        android:textAppearance="@style/TextAppearance.Medium.Bold"
+                        android:textSize="15sp" />
+                </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/movie_rv"
@@ -345,15 +368,36 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 >
-
-                <TextView
-                    android:id="@+id/tv_series_title"
-                    android:padding="10dp"
-                    android:textAppearance="@style/TextAppearance.Medium.Bold"
+                <LinearLayout
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:attr/selectableItemBackground"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/tv_series"/>
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="5dp">
 
+                    <TextView
+                        android:id="@+id/tv_series_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/tv_series"
+                        android:textAppearance="@style/TextAppearance.Medium.Bold" />
+
+                    <Button
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right|center_vertical"
+                        android:minWidth="0dp"
+                        android:text="@string/more"
+                        android:textColor="?android:textColor"
+                        android:textAppearance="@style/TextAppearance.Medium.Bold"
+                        android:textSize="15sp" />
+                </LinearLayout>
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/tv_series_rv"
                     android:layout_width="match_parent"
@@ -368,14 +412,36 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 >
-
-                <TextView
-                    android:id="@+id/tv_title"
-                    android:padding="10dp"
-                    android:textAppearance="@style/TextAppearance.Medium.Bold"
+                <LinearLayout
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:attr/selectableItemBackground"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/tv_channels"/>
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="5dp">
+
+                    <TextView
+                        android:id="@+id/tv_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/tv_channels"
+                        android:textAppearance="@style/TextAppearance.Medium.Bold" />
+
+                    <Button
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right|center_vertical"
+                        android:minWidth="0dp"
+                        android:text="@string/more"
+                        android:textColor="?android:textColor"
+                        android:textAppearance="@style/TextAppearance.Medium.Bold"
+                        android:textSize="15sp" />
+                </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/tv_rv"

@@ -500,7 +500,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            <tvseries.koreandramaengsub.freemovieapp.view.SwipeRefreshLayout
                 android:id="@+id/swipe_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -516,7 +516,7 @@
                     android:paddingTop="70dp"
                     android:clipToPadding="false"/>
 
-            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            </tvseries.koreandramaengsub.freemovieapp.view.SwipeRefreshLayout>
 
         </LinearLayout>
 
