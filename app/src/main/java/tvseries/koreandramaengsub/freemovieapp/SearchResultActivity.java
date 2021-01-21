@@ -210,9 +210,6 @@ public class SearchResultActivity extends AppCompatActivity implements SearchAda
                             tvSeriesLayout.setVisibility(View.GONE);
                         }
                     }
-
-
-
                     if (mKeywordList.size() > 0) {
                         if (indexKey < mKeywordList.size() -1 && isSplitQuery) {
                             query = mKeywordList.get(indexKey);
@@ -225,6 +222,9 @@ public class SearchResultActivity extends AppCompatActivity implements SearchAda
                             if(shimmerFrameLayout.getVisibility() != View.GONE){
                                 result = "Not found with your keyword. Please try another keyword";
                                 shimmerFrameLayout.stopShimmer();
+                                tvSeriesLayout.setVisibility(View.GONE);
+                                tvLayout.setVisibility(View.GONE);
+                                movieLayout.setVisibility(View.GONE);
                                 shimmerFrameLayout.setVisibility(View.GONE);
                                 coordinatorLayout.setVisibility(View.VISIBLE);
                             }

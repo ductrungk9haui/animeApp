@@ -879,6 +879,15 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                 dialog.dismiss();
             }
         });
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                //reset
+                if(resumePosition>0){
+                    showDescriptionLayout();
+                }
+            }
+        });
 
         final ServerAdapter.OriginalViewHolder[] viewHolder = {null};
         mServerAdapter.setOnItemClickListener(new ServerAdapter.OnItemClickListener() {
@@ -887,7 +896,8 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                 releasePlayer();
                 resetCastPlayer();
                 preparePlayer(obj);
-
+                resumePosition = 0;
+                playerCurrentPosition = 0;
                 //serverAdapter.chanColor(viewHolder[0], position);
                 //holder.name.setTextColor(getResources().getColor(R.color.colorPrimary));
                 //viewHolder[0] = holder;
@@ -1117,6 +1127,9 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             if (mListSub.size() > 0) {
                 setSelectedSubtitle(mMediaSource, mListSub.get(0).getUrl(), DetailsActivity.this);
             }
+            //reset
+            playerCurrentPosition = 0L;
+            resumePosition = 0;
         }
     }
 
@@ -1249,6 +1262,8 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                 }
 
             } else {
+                mSeasonSpinnerContainer.setVisibility(GONE);
+                mSeriesLayout.setVisibility(GONE);
                 mImgFull.setVisibility(GONE);
                 mListServer.clear();
                 mRvRelated.removeAllViews();
@@ -1277,10 +1292,11 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             mImgSubtitle.setVisibility(GONE);
             mLLcomment.setVisibility(GONE);
             mServerIv.setVisibility(GONE);
-
+            mSeasonSpinnerContainer.setVisibility(VISIBLE);
             mRvServer.setVisibility(VISIBLE);
             mDescriptionLayout.setVisibility(GONE);
             mLPlay.setVisibility(VISIBLE);
+
 
             // hide exo player some control
             hideExoControlForTv();
@@ -1477,6 +1493,9 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                     mIsPlaying = false;
                     playerCurrentPosition = mPlayer.getCurrentPosition();
                     mediaDuration = mPlayer.getDuration();
+                    if(mType.equals("movie")){
+                        resumePosition = playerCurrentPosition;
+                    }
                 }
             }
         });
@@ -1913,8 +1932,6 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     private void onLoadDataFinish() {
         if (isFromContinueWatching) {
             onWatchNowClick();
-            playerCurrentPosition = 0L;
-            resumePosition = 0;
             isFromContinueWatching = false;
         }
     }
@@ -2300,7 +2317,11 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         mLPlay.setVisibility(GONE);
         mSeriesLayout.setVisibility(GONE);
         mTopShareLayout.setVisibility(VISIBLE);
-        Objects.requireNonNull(mRvServer.getAdapter()).notifyDataSetChanged();
+        if(mRvServer!=null){
+            if(mRvServer.getAdapter()!=null){
+                mRvServer.getAdapter().notifyDataSetChanged();
+            }
+        }
     }
 
     @Override
