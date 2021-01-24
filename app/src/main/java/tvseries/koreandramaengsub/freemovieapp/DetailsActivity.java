@@ -138,6 +138,7 @@ import tvseries.koreandramaengsub.freemovieapp.adapters.HomePageAdapter;
 import tvseries.koreandramaengsub.freemovieapp.adapters.ProgramAdapter;
 import tvseries.koreandramaengsub.freemovieapp.adapters.RelatedTvAdapter;
 import tvseries.koreandramaengsub.freemovieapp.adapters.ServerAdapter;
+import tvseries.koreandramaengsub.freemovieapp.adapters.SubtitleAdapter;
 import tvseries.koreandramaengsub.freemovieapp.database.DatabaseHelper;
 import tvseries.koreandramaengsub.freemovieapp.database.continueWatching.ContinueWatchingModel;
 import tvseries.koreandramaengsub.freemovieapp.database.continueWatching.ContinueWatchingViewModel;
@@ -194,7 +195,7 @@ import static tvseries.koreandramaengsub.freemovieapp.utils.Constants.SERVER_TYP
 import static tvseries.koreandramaengsub.freemovieapp.utils.Constants.STREAM_URL;
 
 public class DetailsActivity extends AppCompatActivity implements CastPlayer.SessionAvailabilityListener, ProgramAdapter.OnProgramClickListener, EpisodeAdapter.OnTVSeriesEpisodeItemClickListener,
-        RelatedTvAdapter.RelatedTvClickListener {
+        RelatedTvAdapter.RelatedTvClickListener,SubtitleAdapter.Listener {
     private static final int PERMISSION_REQUEST_CODE = 1;
     private static final int PRELOAD_TIME_S = 20;
     public static final String TAG = DetailsActivity.class.getSimpleName();
@@ -820,12 +821,12 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         }
         RecyclerView internalServerRv = view.findViewById(R.id.internal_download_rv);
         RecyclerView externalServerRv = view.findViewById(R.id.external_download_rv);
-        DownloadAdapter internalDownloadAdapter = new DownloadAdapter(this, mListInternalDownload, true);
+        DownloadAdapter internalDownloadAdapter = new DownloadAdapter(this, mTitle,mListInternalDownload, true);
         internalServerRv.setLayoutManager(new LinearLayoutManager(this));
         internalServerRv.setHasFixedSize(true);
         internalServerRv.setAdapter(internalDownloadAdapter);
 
-        DownloadAdapter externalDownloadAdapter = new DownloadAdapter(this, mListExternalDownload, true);
+        DownloadAdapter externalDownloadAdapter = new DownloadAdapter(this, mTitle,mListExternalDownload, true);
         externalServerRv.setLayoutManager(new LinearLayoutManager(this));
         externalServerRv.setHasFixedSize(true);
         externalServerRv.setAdapter(externalDownloadAdapter);
@@ -960,7 +961,6 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     }
 
     void clear_previous() {
-
         strCast = "";
         mStrDirector = "";
         mStrGenre = "";
@@ -971,11 +971,6 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         mCastCrews.clear();
     }
 
-    private void prepareSubtitleList(Context context, List<SubtitleModel> list) {
-
-    }
-
-
     public void showSubtitleDialog(Context context, List<SubtitleModel> list) {
         ViewGroup viewGroup = findViewById(android.R.id.content);
         View dialogView = LayoutInflater.from(this).inflate(R.layout.custom_dialog_subtitle, viewGroup, false);
@@ -983,6 +978,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
         RecyclerView recyclerView = dialogView.findViewById(R.id.recyclerView);
         SubtitleAdapter adapter = new SubtitleAdapter(context, list);
+        adapter.setListener(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
@@ -999,6 +995,11 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             }
         });
 
+    }
+    @Override
+    public void onClickSubtitles(int position) {
+        setSelectedSubtitle(mMediaSource, mListSub.get(position).getUrl(), this);
+        mAlertDialog.cancel();
     }
 
     @Override
@@ -1133,55 +1134,6 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         }
     }
 
-    private class SubtitleAdapter extends RecyclerView.Adapter<SubtitleAdapter.OriginalViewHolder> {
-        private List<SubtitleModel> items = new ArrayList<>();
-        private Context ctx;
-
-        public SubtitleAdapter(Context context, List<SubtitleModel> items) {
-            this.items = items;
-            ctx = context;
-        }
-
-        @Override
-        public SubtitleAdapter.OriginalViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            SubtitleAdapter.OriginalViewHolder vh;
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_subtitle, parent, false);
-            vh = new SubtitleAdapter.OriginalViewHolder(v);
-            return vh;
-        }
-
-        @Override
-        public void onBindViewHolder(SubtitleAdapter.OriginalViewHolder holder, final int position) {
-            final SubtitleModel obj = items.get(position);
-            holder.name.setText(obj.getLanguage());
-
-            holder.lyt_parent.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    setSelectedSubtitle(mMediaSource, obj.getUrl(), ctx);
-                    mAlertDialog.cancel();
-                }
-            });
-
-        }
-
-        @Override
-        public int getItemCount() {
-            return items.size();
-        }
-
-        public class OriginalViewHolder extends RecyclerView.ViewHolder {
-            public TextView name;
-            private View lyt_parent;
-
-            public OriginalViewHolder(View v) {
-                super(v);
-                name = v.findViewById(R.id.name);
-                lyt_parent = v.findViewById(R.id.lyt_parent);
-            }
-        }
-
-    }
 
     private void loadAd() {
         adsConfig = mDBHelper.getConfigurationData().getAdsConfig();
@@ -1243,7 +1195,6 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                 mRvRelated.removeAllViews();
                 mListRelated.clear();
                 mRvServer.removeAllViews();
-                mListServer.clear();
                 mListServer.clear();
 
                /* mDownloadBt.setVisibility(GONE);
@@ -1952,6 +1903,9 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                         RecyclerView.HORIZONTAL, false));
                 mEpisodeAdapter = new EpisodeAdapter(DetailsActivity.this,
                         mListServer.get(position).getListEpi());
+                if( mListServer.get(position).getListEpi().size() == 0 ){
+                    mSeasonSpinnerContainer.setVisibility(View.GONE);
+                }
                 if (mMapMovies.containsKey(mId) && mMapMovies.get(mId) != null) {
                     mEpisodeAdapter.setNowPlaying(mMapMovies.get(mId));
                 }
@@ -1972,6 +1926,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                     models.setFileSize(downloadLink.getFileSize());
                     models.setResulation(downloadLink.getResolution());
                     models.setInAppDownload(downloadLink.isInAppDownload());
+                    models.setListSub(mListServer.get(position).getListEpi().get(i).getSubtitleList());
                     if (downloadLink.isInAppDownload()) {
                         mListInternalDownload.add(models);
                     } else {
@@ -2622,6 +2577,8 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         sHeight = size.y;
         //Toast.makeText(this, "fjiaf", Toast.LENGTH_SHORT).show();
     }
+
+
 
     public class RelativeLayoutTouchListener implements View.OnTouchListener {
         @Override

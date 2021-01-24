@@ -1,6 +1,8 @@
 package tvseries.koreandramaengsub.freemovieapp.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class VideoFile implements Serializable {
 
@@ -9,6 +11,7 @@ public class VideoFile implements Serializable {
     private long totalSpace;
     private String path;
     private String fileExtension;
+    private List<String> subList = new ArrayList<>();
 
     public String getFileName() {
         return fileName;
@@ -48,5 +51,13 @@ public class VideoFile implements Serializable {
 
     public void setFileExtension(String fileExtension) {
         this.fileExtension = fileExtension;
+    }
+
+    public List<String> getSubList() {
+        return subList;
+    }
+
+    public void setSubList(List<String> subList) {
+        this.subList = subList;
     }
 }

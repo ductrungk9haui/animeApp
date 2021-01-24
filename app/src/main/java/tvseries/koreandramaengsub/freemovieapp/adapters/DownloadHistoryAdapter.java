@@ -19,7 +19,7 @@ import tvseries.koreandramaengsub.freemovieapp.models.VideoFile;
 import tvseries.koreandramaengsub.freemovieapp.utils.Tools;
 
 public class DownloadHistoryAdapter extends RecyclerView.Adapter<DownloadHistoryAdapter.ViewHolder> {
-    private OnDeleteDownloadFileListener listener;
+    private HistoryDownloadedListener listener;
     private Context context;
     private List<VideoFile> videoFiles;
 
@@ -58,9 +58,10 @@ public class DownloadHistoryAdapter extends RecyclerView.Adapter<DownloadHistory
         holder.item_holder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(videoFile.getPath()));
+          /*      Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(videoFile.getPath()));
                 intent.setDataAndType(Uri.parse(videoFile.getPath()), "video/*");
-                context.startActivity(intent);
+                context.startActivity(intent);*/
+                listener.onPlayVideo(videoFile);
             }
         });
 
@@ -85,13 +86,15 @@ public class DownloadHistoryAdapter extends RecyclerView.Adapter<DownloadHistory
             item_holder = itemView.findViewById(R.id.item_view);
 
         }
+
     }
 
-    public interface OnDeleteDownloadFileListener{
+    public interface HistoryDownloadedListener {
         void onDeleteDownloadFile(VideoFile videoFile);
+        void onPlayVideo(VideoFile videoFile);
     }
 
-    public void setListener(OnDeleteDownloadFileListener listener) {
+    public void setListener(HistoryDownloadedListener listener) {
         this.listener = listener;
     }
 }

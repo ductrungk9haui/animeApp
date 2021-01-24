@@ -87,6 +87,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DOWNLOAD_SIZE = "download_size";
     public static final String DOWNLOAD_STATUS = "download_status";
     public static final String URL = "url";
+    public static final String URL_SUB_LIST = "url_sub_list";
     public static final String APP_CLOSE_STATUS = "app_close_statuss";
 
     public static final String MAP_MOVIE_TABLE_NAME = "movie_table";
@@ -547,6 +548,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 TOTAL_SIZE + " TEXT," +
                 DOWNLOAD_SIZE + " TEXT," +
                 URL + " TEXT," +
+                URL_SUB_LIST + " TEXT," +
                 FILE_NAME + " TEXT," +
                 APP_CLOSE_STATUS + " TEXT," +
                 DOWNLOAD_STATUS + " TEXT" + ")";
@@ -575,6 +577,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(TOTAL_SIZE, work.getTotalSize());
         values.put(DOWNLOAD_SIZE, work.getDownloadSize());
         values.put(URL, work.getUrl());
+        values.put(URL_SUB_LIST, work.getSubListJson());
         values.put(FILE_NAME, work.getFileName());
         values.put(APP_CLOSE_STATUS, work.getAppCloseStatus());
         values.put(DOWNLOAD_STATUS, work.getDownloadStatus());
@@ -594,6 +597,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(TOTAL_SIZE, work.getTotalSize());
         values.put(DOWNLOAD_SIZE, work.getDownloadSize());
         values.put(URL, work.getUrl());
+        values.put(URL_SUB_LIST, work.getSubListJson());
         values.put(FILE_NAME, work.getFileName());
         values.put(APP_CLOSE_STATUS, work.getAppCloseStatus());
         values.put(DOWNLOAD_STATUS, work.getDownloadStatus());
@@ -633,6 +637,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             work.setDownloadSize(cursor.getString(cursor.getColumnIndex(DOWNLOAD_SIZE)));
             work.setDownloadStatus(cursor.getString(cursor.getColumnIndex(DOWNLOAD_STATUS)));
             work.setUrl(cursor.getString(cursor.getColumnIndex(URL)));
+            work.setSubListJon(cursor.getString(cursor.getColumnIndex(URL_SUB_LIST)));
             work.setAppCloseStatus(cursor.getString(cursor.getColumnIndex(APP_CLOSE_STATUS)));
         }
         return work;
@@ -658,6 +663,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     work.setDownloadSize(cursor.getString(cursor.getColumnIndex(DOWNLOAD_SIZE)));
                     work.setDownloadStatus(cursor.getString(cursor.getColumnIndex(DOWNLOAD_STATUS)));
                     work.setUrl(cursor.getString(cursor.getColumnIndex(URL)));
+                    work.setSubListJon(cursor.getString(cursor.getColumnIndex(URL_SUB_LIST)));
                     work.setAppCloseStatus(cursor.getString(cursor.getColumnIndex(APP_CLOSE_STATUS)));
                     works.add(work);
                 } while (cursor.moveToNext());

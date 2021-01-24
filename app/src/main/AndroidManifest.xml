@@ -140,6 +140,7 @@
             android:theme="@style/AppTheme.Nobar" />
         <activity
             android:name="tvseries.koreandramaengsub.freemovieapp.DownloadActivity"
+            android:configChanges="screenLayout|screenSize|orientation"
             android:theme="@style/AppTheme.Nobar" /> <!-- StartApp activities integration -->
         <activity
             android:name="com.startapp.android.publish.ads.list3d.List3DActivity"

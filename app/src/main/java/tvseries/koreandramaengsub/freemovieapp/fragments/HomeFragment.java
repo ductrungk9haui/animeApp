@@ -305,6 +305,7 @@ public class HomeFragment extends Fragment {
                     mCViewPager.setAdapter(sliderAdapter);
                     mPagerIndicator.setViewPager(mCViewPager);
                     sliderAdapter.notifyDataSetChanged();
+                     mPagerIndicator.notifyDataSetChanged();
 
                     //genre data
                      if (db.getConfigurationData().getAppConfig().getGenreVisible()) {

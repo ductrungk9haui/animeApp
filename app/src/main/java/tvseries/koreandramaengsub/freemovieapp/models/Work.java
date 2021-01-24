@@ -1,9 +1,17 @@
 package tvseries.koreandramaengsub.freemovieapp.models;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Work {
     private int id;
     private String workId;
     private int downloadId = 0;
+    private List<Integer> downloadSubIdList = new ArrayList<>();
     private String fileName;
     private String totalSize;
     private String downloadSize;
@@ -11,8 +19,11 @@ public class Work {
     private String url;
     private String appCloseStatus;
     private String dir;
+    private String subListJson;
+    private String path;
     public long currentBytes = 0;
     public long totalBytes = 0;
+    List<SubtitleModel> listSubs = new ArrayList<>();
 
     public String getAppCloseStatus() {
         return appCloseStatus;
@@ -108,5 +119,46 @@ public class Work {
                 ", downloadId=" + downloadId +
                 ", fileName='" + fileName + '\'' +
                 '}';
+    }
+
+    public String getSubListJson() {
+        return subListJson;
+    }
+
+    public void setSubList(List<SubtitleModel> subLists) {
+        Gson gson = new Gson();
+        listSubs = subLists;
+        this.subListJson = gson.toJson(subLists);
+    }
+    public void setSubListJon(String jsonSubtitles) {
+        subListJson = jsonSubtitles;
+        Gson gson = new Gson();
+        Type type = new TypeToken<List<SubtitleModel>>() {
+        }.getType();
+        this.listSubs = gson.fromJson(jsonSubtitles, type);
+    }
+
+    public List<SubtitleModel> getListSubs() {
+        return listSubs;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public List<Integer> getDownloadSubIdList() {
+        return downloadSubIdList;
+    }
+
+    public void setDownloadSubIdList(List<Integer> downloadSubIdList) {
+        this.downloadSubIdList = downloadSubIdList;
+    }
+
+    public void addDownloadSubId(int downloadSubId) {
+        downloadSubIdList.add(downloadSubId);
     }
 }

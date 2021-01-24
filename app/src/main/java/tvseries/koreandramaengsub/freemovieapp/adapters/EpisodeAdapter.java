@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,7 +28,7 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.Original
     private OnTVSeriesEpisodeItemClickListener mOnTVSeriesEpisodeItemClickListener;
     EpisodeAdapter.OriginalViewHolder viewHolder;
     int i=0;
-    private int lastPosition = -1;
+    private int lastPosition = 0;
     private DetailsActivity activity;
     private int seasonNo;
 
@@ -120,11 +121,10 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.Original
         }
     }
     public void getWatchEpisode(){
-        if(viewHolder!=null){
+        if(items.size()>0){
             onClickEpisode(viewHolder, lastPosition, items.get(lastPosition));
-            //notifyDataSetChanged();
         }else{
-            onClickEpisode(null,  lastPosition, items.get(lastPosition));
+            Toast.makeText(ctx, "Wait for Episode updating, please try later", Toast.LENGTH_SHORT).show();
         }
     }
     @Override
