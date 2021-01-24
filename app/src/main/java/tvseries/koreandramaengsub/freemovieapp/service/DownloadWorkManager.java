@@ -19,7 +19,6 @@ import com.downloader.OnStartOrResumeListener;
 import com.downloader.PRDownloader;
 import com.downloader.PRDownloaderConfig;
 import com.downloader.Progress;
-import com.downloader.Status;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -31,7 +30,6 @@ import tvseries.koreandramaengsub.freemovieapp.R;
 import tvseries.koreandramaengsub.freemovieapp.database.DatabaseHelper;
 import tvseries.koreandramaengsub.freemovieapp.models.SubtitleModel;
 import tvseries.koreandramaengsub.freemovieapp.models.Work;
-import tvseries.koreandramaengsub.freemovieapp.models.single_details_tv.DownloadedFilm;
 import tvseries.koreandramaengsub.freemovieapp.utils.Constants;
 import tvseries.koreandramaengsub.freemovieapp.utils.ToastMsg;
 

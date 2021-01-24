@@ -83,8 +83,6 @@ import tvseries.koreandramaengsub.freemovieapp.database.DatabaseHelper;
 import tvseries.koreandramaengsub.freemovieapp.models.SubtitleModel;
 import tvseries.koreandramaengsub.freemovieapp.models.VideoFile;
 import tvseries.koreandramaengsub.freemovieapp.models.Work;
-import tvseries.koreandramaengsub.freemovieapp.models.single_details_tv.DownloadedFilm;
-import tvseries.koreandramaengsub.freemovieapp.network.model.CommonModel;
 import tvseries.koreandramaengsub.freemovieapp.service.DownloadWorkManager;
 import tvseries.koreandramaengsub.freemovieapp.utils.Constants;
 import tvseries.koreandramaengsub.freemovieapp.utils.RtlUtils;
@@ -92,7 +90,6 @@ import tvseries.koreandramaengsub.freemovieapp.utils.ToastMsg;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
-import static com.google.android.gms.ads.AdActivity.CLASS_NAME;
 
 public class DownloadActivity extends AppCompatActivity implements FileDownloadAdapter.OnProgressUpdateListener, DownloadHistoryAdapter.HistoryDownloadedListener, SubtitleAdapter.Listener {
     public static DownloadActivity instance;
@@ -140,12 +137,11 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
     private FileDownloadAdapter mFileDownloadAdapter;
     private DownloadHistoryAdapter mDownloadHistoryAdapter;
     private List<VideoFile> mVideoFiles = new ArrayList<>();
-    private List<DownloadedFilm> mDownloadedFilms = new ArrayList<>();
     private boolean mIsDark;
     DatabaseHelper mDBHelper;
     public static SimpleExoPlayer mDownloadPlayer;
     private int mAspectClickCount = 1;
-    private  boolean mIsFullScr;
+    private boolean mIsFullScr;
     private int mPlayerHeight;
     private AudioManager mAudioManager;
     private MediaSource mMediaSource;
@@ -274,10 +270,10 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
 
     @Override
     public void onBackPressed() {
-        if(mLPlay.getVisibility()==View.VISIBLE){
+        if (mLPlay.getVisibility() == View.VISIBLE) {
             mLPlay.setVisibility(View.GONE);
             mMainLayout.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             releasePlayer();
             super.onBackPressed();
         }
@@ -365,21 +361,23 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
     public void onCancelDownload(DownloadWorkManager.onCancel object) {
         updateFiles();
         Work work = object.getWork();
-        for(SubtitleModel sublist : work.getListSubs()){
-            String fileName = work.getFileName().substring(0,work.getFileName().lastIndexOf("."));
-            String subtitleName = fileName +"_" + sublist.getLanguage() + ".vtt";
+        for (SubtitleModel sublist : work.getListSubs()) {
+            String fileName = work.getFileName().substring(0, work.getFileName().lastIndexOf("."));
+            String subtitleName = fileName + "_" + sublist.getLanguage() + ".vtt";
             String path = Constants.getDownloadDir(getApplicationContext()) + getApplicationContext().getResources().getString(R.string.app_name);
             File file = new File(path, subtitleName); // e_ for encode
-            if(file.exists()){
-              deleteFile(file,true);
+            if (file.exists()) {
+                deleteFile(file, true);
             }
         }
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onDownloadError(DownloadWorkManager.onError object) {
         updateFiles();
         Log.d("TRUNG", "error " + " id: " + object.getDownloadID());
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -444,7 +442,7 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
                 .setInputData(data)
                 .build();
         WorkManager.getInstance(getApplicationContext()).enqueue(request);
-        Log.d("TRUNG","next download " + work.getFileName());
+        Log.d("TRUNG", "next download " + work.getFileName());
     }
 
     public void updateFiles() {
@@ -462,7 +460,7 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
             String filePath = file.getPath();
             String extension = fileName.substring(fileName.lastIndexOf("."));
             if (!extension.equals(".temp")) {
-                if(extension.equals(".mp4")){
+                if (extension.equals(".mp4")) {
                     VideoFile vf = new VideoFile();
                     List<String> subPath = new ArrayList<>();
                     vf.setFileName(fileName);
@@ -474,7 +472,7 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
                         String fileSubName = fileSub.getName();
                         String fileSubPath = fileSub.getPath();
                         String SubExtension = fileSubName.substring(fileSubName.lastIndexOf("."));
-                        if (SubExtension.equals(".vtt") && fileSubName.contains(fileName.substring(0,fileName.lastIndexOf(".")))) {
+                        if (SubExtension.equals(".vtt") && fileSubName.contains(fileName.substring(0, fileName.lastIndexOf(".")))) {
                             subPath.add(fileSubPath);
                         }
                     }
@@ -525,7 +523,7 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(playVideoBroadcast);
-        if(!mActiveMovie){
+        if (!mActiveMovie) {
             releasePlayer();
         }
         mUnbinder.unbind();
@@ -542,11 +540,11 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mVideoFiles.remove(videoFile);
-                deleteFile(new File(videoFile.getPath()),false);
-                for(String subLink : videoFile.getSubList()){
-                    deleteFile(new File(subLink),true);
+                deleteFile(new File(videoFile.getPath()), false);
+                for (String subLink : videoFile.getSubList()) {
+                    deleteFile(new File(subLink), true);
                 }
-                if(mVideoFiles.size() == 0 || videoFile.getPath().equals(mPlayingVideoFile.getPath())) {
+                if (mVideoFiles.size() == 0 || videoFile.getPath().equals(mPlayingVideoFile.getPath())) {
                     releasePlayer();
                     mMainLayout.setVisibility(VISIBLE);
                     mLPlay.setVisibility(GONE);
@@ -567,8 +565,8 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
         mListSub.addAll(videoFile.getSubList());
 
         String filePath = videoFile.getPath();
-        Uri videoUrl =  Uri.fromFile(new File(filePath));
-        Log.d("filePathLocation",filePath);
+        Uri videoUrl = Uri.fromFile(new File(filePath));
+        Log.d("filePathLocation", filePath);
         //simpleExoPlayer = new SimpleExoPlayer.Builder(this).build();
         BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
         TrackSelection.Factory videoTrackSelectionFactory = new
@@ -611,7 +609,7 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
         MergingMediaSource mergedSource;
         if (subtitle != null) {
             //Uri subtitleUri = Uri.parse(subtitle);
-            Uri subtitleUri =  Uri.fromFile(new File(subtitle));
+            Uri subtitleUri = Uri.fromFile(new File(subtitle));
             Format subtitleFormat = Format.createTextSampleFormat(
                     null, // An identifier for the track. May be null.
                     MimeTypes.TEXT_VTT, // The mime type. Must be set correctly.
@@ -619,13 +617,13 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
                     "en"); // The subtitle language. May be null.
 
             DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(context,
-                    Util.getUserAgent(context,  getResources().getString(R.string.app_name)), new DefaultBandwidthMeter());
+                    Util.getUserAgent(context, getResources().getString(R.string.app_name)), new DefaultBandwidthMeter());
 
             MediaSource subtitleSource = new SingleSampleMediaSource
                     .Factory(dataSourceFactory)
                     .createMediaSource(subtitleUri, subtitleFormat, C.TIME_UNSET);
 
-           // MediaSource subtitleSource = buildMediaSourceNew(subtitleUri);
+            // MediaSource subtitleSource = buildMediaSourceNew(subtitleUri);
             mergedSource = new MergingMediaSource(mediaSource, subtitleSource);
             mDownloadPlayer.prepare(mergedSource, false, false);
             mDownloadPlayer.setPlayWhenReady(true);
@@ -635,13 +633,14 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
             Toast.makeText(context, "there is no subtitle", Toast.LENGTH_SHORT).show();
         }
     }
+
     private void deleteFile(File file, boolean isSub) {
         if (file.exists()) {
             try {
                 boolean isDeleted = file.getCanonicalFile().delete();
                 if (isDeleted) {
-                    Log.d("TRUNG",file.getName() + "was deleted");
-                    if(!isSub){
+                    Log.d("TRUNG", file.getName() + "was deleted");
+                    if (!isSub) {
                         Toast.makeText(this, "File deleted successfully.", Toast.LENGTH_SHORT).show();
                     }
                 } else {
@@ -653,8 +652,8 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
             if (file.exists()) {
                 boolean isDeleted = getApplicationContext().deleteFile(file.getName());
                 if (isDeleted) {
-                    Log.d("TRUNG",file.getName() + "was deleted");
-                    if(!isSub){
+                    Log.d("TRUNG", file.getName() + "was deleted");
+                    if (!isSub) {
                         Toast.makeText(this, "File deleted successfully.", Toast.LENGTH_SHORT).show();
                     }
                 } else {
@@ -693,6 +692,7 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
             //simpleExoPlayerView = null;
         }
     }
+
     public void showSubtitleDialog(Context context, List<String> list) {
         ViewGroup viewGroup = findViewById(android.R.id.content);
         View dialogView = LayoutInflater.from(this).inflate(R.layout.custom_dialog_subtitle, viewGroup, false);
@@ -748,7 +748,7 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             mLPlay.setLayoutParams(new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT, mPlayerHeight));
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-        }else{
+        } else {
             mIsFullScr = true;
             mMainLayout.setVisibility(GONE);
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -761,9 +761,9 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
     @OnClick(R.id.img_back)
     void onBackClick() {
         if (mActiveMovie) {
-            if(mIsFullScr){
+            if (mIsFullScr) {
                 controlFullScreenPlayer();
-            }else{
+            } else {
                 releasePlayer();
                 mLPlay.setVisibility(GONE);
                 mMainLayout.setVisibility(VISIBLE);
@@ -771,9 +771,10 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
         }
 
     }
+
     @Override
     public void onClickSubtitles(int position) {
-           setSelectedSubtitle(mMediaSource, mListSub.get(position), getApplicationContext());
-           mAlertDialog.cancel();
+        setSelectedSubtitle(mMediaSource, mListSub.get(position), getApplicationContext());
+        mAlertDialog.cancel();
     }
 }
