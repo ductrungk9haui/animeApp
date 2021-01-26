@@ -292,5 +292,16 @@
     <string name="no_configuration_data_found">No configuration data found.</string>
     <string name="please_login_first_to_see_favorite_list">Please login to see favorite list.</string>
 
-
+    <string name="report_intro">Please describe your issue so that we can fix it asap. Note: This feature used to report for current movie, not using for requesting new subtitle/audio in another languages.</string>
+    <string name="broken">Broken</string>
+    <string name="others_small">Others</string>
+    <string name="wrong_movie">Wrong Movie</string>
+    <string name="not_synced">Not Synced</string>
+    <string name="audio">Audio</string>
+    <string name="wrong_subtitle">Wrong Subtitle</string>
+    <string name="missing_subtitle">Missing Subtitle</string>
+    <string name="message">Message</string>
+    <string name="your_name">Your Name</string>
+    <string name="movie_name">Movie Name</string>
+    <string name="request">Request</string>
 </resources>

@@ -37,6 +37,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.Spinner;
@@ -105,6 +107,7 @@ import com.google.android.gms.cast.framework.CastSession;
 import com.google.android.gms.cast.framework.CastState;
 import com.google.android.gms.cast.framework.media.RemoteMediaClient;
 import com.google.android.gms.common.images.WebImage;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -117,7 +120,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 
 import at.huber.youtubeExtractor.VideoMeta;
@@ -127,8 +129,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import tvseries.koreandramaengsub.freemovieapp.adapters.CastCrewAdapter;
 import tvseries.koreandramaengsub.freemovieapp.adapters.CommentsAdapter;
@@ -167,12 +171,14 @@ import tvseries.koreandramaengsub.freemovieapp.models.single_details_tv.SingleDe
 import tvseries.koreandramaengsub.freemovieapp.network.RetrofitClient;
 import tvseries.koreandramaengsub.freemovieapp.network.apis.CommentApi;
 import tvseries.koreandramaengsub.freemovieapp.network.apis.FavouriteApi;
+import tvseries.koreandramaengsub.freemovieapp.network.apis.ReportApi;
 import tvseries.koreandramaengsub.freemovieapp.network.apis.SingleDetailsApi;
 import tvseries.koreandramaengsub.freemovieapp.network.apis.SingleDetailsTVApi;
 import tvseries.koreandramaengsub.freemovieapp.network.apis.SubscriptionApi;
 import tvseries.koreandramaengsub.freemovieapp.network.model.ActiveStatus;
 import tvseries.koreandramaengsub.freemovieapp.network.model.FavoriteModel;
 import tvseries.koreandramaengsub.freemovieapp.network.model.config.AdsConfig;
+import tvseries.koreandramaengsub.freemovieapp.network.model.config.AppConfig;
 import tvseries.koreandramaengsub.freemovieapp.service.DownloadWorkManager;
 import tvseries.koreandramaengsub.freemovieapp.utils.Constants;
 import tvseries.koreandramaengsub.freemovieapp.utils.PreferenceUtils;
@@ -371,7 +377,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     private boolean tv = false;
     private String mDownload_check = "";
     private String mSeason;
-    private String mEpisod;
+    private String mEpisode = "";
     private String movieTitle;
     private String mSeriesTitle;
     private CastPlayer mCastPlayer;
@@ -408,7 +414,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     public boolean mCheckFinish = false;
     boolean mIsLoading;
     private AdsConfig adsConfig;
-
+    String videoReport = "", audioReport = "", subtitleReport = "", messageReport = "";
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -619,7 +625,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                 }
 
                 //---update into continueWatching------
-                ContinueWatchingModel model = new ContinueWatchingModel(mId, mTitle + " " + mEpisod,
+                ContinueWatchingModel model = new ContinueWatchingModel(mId, mTitle + " " + mEpisode,
                         mCastImageUrl, progress, position, mMediaUrl,
                         mType, mServerType);
                 mContinueViewModel.update(model);
@@ -1375,7 +1381,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         mServerType = type;
         mProgressBar.setVisibility(VISIBLE);
         if (!mType.equals("tv")) {
-            ContinueWatchingModel model = new ContinueWatchingModel(mId, mTitle + " " + mEpisod, mCastImageUrl, 0, 0, url, mType, type);
+            ContinueWatchingModel model = new ContinueWatchingModel(mId, mTitle + " " + mEpisode, mCastImageUrl, 0, 0, url, mType, type);
             mContinueViewModel.insert(model);
         }
         if (mPlayer != null) {
@@ -1435,7 +1441,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                     mProgressBar.setVisibility(VISIBLE);
                 } else if (playbackState == Player.STATE_ENDED) {
                     //---delete into continueWatching------
-                    ContinueWatchingModel model = new ContinueWatchingModel(mId, mTitle + " " + mEpisod,
+                    ContinueWatchingModel model = new ContinueWatchingModel(mId, mTitle + " " + mEpisode,
                             mCastImageUrl, 0, 0, mMediaUrl,
                             mType, mServerType);
                     mContinueViewModel.delete(model);
@@ -2354,7 +2360,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     public void setMediaUrlForTvSeries(String url, String season, String episod) {
         mMediaUrl = url;
         this.mSeason = season;
-        this.mEpisod = episod;
+        this.mEpisode = episod;
     }
 
     public boolean getCastSession() {
@@ -2518,7 +2524,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         if (mType.equals("movie")) {
             fileName = mTvName.getText().toString();
         } else {
-            fileName = mSeriesTitle + "_" + mSeason + "_" + mEpisod;
+            fileName = mSeriesTitle + "_" + mSeason + "_" + mEpisode;
         }
 
         String path = Constants.getDownloadDir(DetailsActivity.this);
@@ -2855,6 +2861,96 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             releasePlayer();
             finish();
         }
+
+    }
+
+    @OnClick({R.id.report_iv,R.id.report_iv2})
+    void onReportClick(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = LayoutInflater.from(this).inflate(R.layout.movie_report_dialog, null);
+        builder.setView(view);
+        final AlertDialog dialog = builder.create();
+        dialog.setCancelable(false);
+
+        TextView movieTitle = view.findViewById(R.id.movie_title);
+        RadioGroup videoGroup = view.findViewById(R.id.radio_group_video);
+        RadioGroup audioGroup = view.findViewById(R.id.radio_group_audio);
+        RadioGroup subtitleGroup = view.findViewById(R.id.radio_group_subtitle);
+        //EditText message = view.findViewById(R.id.report_message_et);
+        TextInputEditText message = view.findViewById(R.id.report_message_et);
+        Button submitButton = view.findViewById(R.id.submit_button);
+        Button cancelButton = view.findViewById(R.id.cancel_button);
+        LinearLayout subtitleLayout = view.findViewById(R.id.subtitleLayout);
+        if (mType.equalsIgnoreCase("tv")){
+            subtitleLayout.setVisibility(GONE);
+        }
+
+        movieTitle.setText("Report for: " + mTitle);
+        if (!mIsDark) {
+            movieTitle.setTextColor(getResources().getColor(R.color.colorPrimary));
+        }
+
+        videoGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // find the radiobutton by returned id
+                RadioButton radioButton = (RadioButton) view.findViewById(checkedId);
+                videoReport = radioButton.getText().toString();
+            }
+        });
+
+        audioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // find the radiobutton by returned id
+                RadioButton radioButton = (RadioButton) view.findViewById(checkedId);
+                audioReport = radioButton.getText().toString();
+            }
+        });
+
+        subtitleGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // find the radiobutton by returned id
+                RadioButton radioButton = (RadioButton) view.findViewById(checkedId);
+                subtitleReport = radioButton.getText().toString();
+            }
+        });
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                messageReport = message.getText().toString().trim();
+                Retrofit retrofit = RetrofitClient.getRetrofitInstance();
+                ReportApi api = retrofit.create(ReportApi.class);
+                Call<ResponseBody> call = api.submitReport(Config.API_KEY, mType, mId, videoReport, audioReport, subtitleReport, messageReport);
+                call.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if (response.code() == 200) {
+                            new ToastMsg(getApplicationContext()).toastIconSuccess("Report submitted");
+                        } else {
+                            new ToastMsg(getApplicationContext()).toastIconError(getResources().getString(R.string.something_went_text));
+                        }
+                        dialog.dismiss();
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        new ToastMsg(getApplicationContext()).toastIconError(getResources().getString(R.string.something_went_text));
+                        dialog.dismiss();
+                    }
+                });
+            }
+        });
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
 
     }
 }
