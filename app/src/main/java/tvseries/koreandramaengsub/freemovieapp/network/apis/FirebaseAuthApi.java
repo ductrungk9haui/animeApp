@@ -24,9 +24,16 @@ public interface FirebaseAuthApi {
                                    @Field("uid") String uid,
                                    @Field("email") String email,
                                    @Field("name") String name,
+                                   @Field("image_url") Uri image,
+                                   @Field("phone") String phone);
+
+    @FormUrlEncoded
+    @POST("firebase_auth")
+    Call<User> getGoogleAuthStatus(@Header("API-KEY") String apiKey,
+                                   @Field("uid") String uid,
+                                   @Field("email") String email,
+                                   @Field("name") String name,
                                    @Field("image_url") Uri image);
-
-
     @FormUrlEncoded
     @POST("firebase_auth")
     Call<User> getFacebookAuthStatus(@Header("API-KEY") String apiKey,

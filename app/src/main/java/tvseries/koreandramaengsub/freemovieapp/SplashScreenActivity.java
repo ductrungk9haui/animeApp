@@ -51,7 +51,7 @@ import tvseries.koreandramaengsub.freemovieapp.utils.ToastMsg;
 public class SplashScreenActivity extends AppCompatActivity {
     private static final String TAG = "SplashScreen";
     private final int PERMISSION_REQUEST_CODE = 100;
-    private int SPLASH_TIME = 2700;
+    private int SPLASH_TIME = 2200;
     private Thread timer;
     private DatabaseHelper db;
     AnimationDrawable anim;
@@ -110,7 +110,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                     } else {
 
                         if (isLoginMandatory()) {
-                            Intent intent = new Intent(SplashScreenActivity.this, FirebaseSignUpActivity.class);
+                            Intent intent = new Intent(SplashScreenActivity.this, LoginActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -134,7 +134,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     private void startWelcomeAnimation() {
         AlphaAnimation alphaAnimation = new AlphaAnimation(0f,1f);
-        alphaAnimation.setDuration(2500);
+        alphaAnimation.setDuration(2000);
         alphaAnimation.setFillAfter(true);
         mLogo.startAnimation(alphaAnimation);
         mIcon.startAnimation(alphaAnimation);
@@ -188,8 +188,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                         db.deleteAllAppConfig();
                         db.insertConfigurationData(configuration);
                         //apk update check
-                        //T: added ! to test
-                        if (!isNeedUpdate(configuration.getApkUpdateInfo().getVersionCode())) {
+                        if (isNeedUpdate(configuration.getApkUpdateInfo().getVersionCode())) {
                             showAppUpdateDialog(configuration.getApkUpdateInfo());
                             return;
                         }

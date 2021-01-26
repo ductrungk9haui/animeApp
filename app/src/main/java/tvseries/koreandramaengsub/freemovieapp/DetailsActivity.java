@@ -1594,7 +1594,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                     mSubscriptionLayout.setVisibility(VISIBLE);
                 }
             } else {
-                startActivity(new Intent(DetailsActivity.this, FirebaseSignUpActivity.class));
+                startActivity(new Intent(DetailsActivity.this, LoginActivity.class));
                 finish();
             }
 
@@ -2799,7 +2799,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                 Toast.makeText(DetailsActivity.this, R.string.no_download_server_found, Toast.LENGTH_SHORT).show();
             }
         } else {
-            Intent intent = new Intent(DetailsActivity.this, FirebaseSignUpActivity.class);
+            Intent intent = new Intent(DetailsActivity.this, LoginActivity.class);
             startActivity(intent);
         }
     }

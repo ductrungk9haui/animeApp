@@ -654,7 +654,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                                             PreferenceUtils.clearSubscriptionSavedData(MainActivity.this);
 
-                                            Intent intent = new Intent(MainActivity.this, FirebaseSignUpActivity.class);
+                                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                                             startActivity(intent);
                                             finish();
                                         }
@@ -669,7 +669,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     } else {
                         if (position == 5) {
-                            Intent intent = new Intent(MainActivity.this, FirebaseSignUpActivity.class);
+                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                             startActivity(intent);
                             finish();
                         } else if (position == 6) {
