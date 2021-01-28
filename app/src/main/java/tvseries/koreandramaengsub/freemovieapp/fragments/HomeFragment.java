@@ -531,10 +531,10 @@ public class HomeFragment extends Fragment {
         intent.putExtra("title", "Movies");
         getActivity().startActivity(intent);
     }
-    @OnClick({R.id.btn_more_series,R.id.btn_more_series1})
+    @OnClick({R.id.btn_more_series,R.id.btn_more_series1,R.id.last_anime_layout,R.id.top_anime_layout})
     void onBtnMoreSeriesClick(){
         Intent intent = new Intent(getContext(), ItemSeriesActivity.class);
-        intent.putExtra("title", "TV Series");
+        intent.putExtra("title", "Last Anime Series");
         getActivity().startActivity(intent);
     }
 

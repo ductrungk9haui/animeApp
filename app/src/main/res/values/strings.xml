@@ -24,6 +24,7 @@
     <string name="country">Country</string>
     <string name="genre">Genre : </string>
     <string name="favorite">Favorite</string>
+    <string name="explore">Explore</string>
     <string name="search">Search</string>
     <string name="no_item_found">No item found</string>
     <string name="cast_n_crew">Cast and Crew :</string>
@@ -50,7 +51,7 @@
         <item>Home</item>
         <item>Movies</item>
         <item>Series</item>
-<!--        <item>Live TV</item>-->
+        <!--        <item>Live TV</item>-->
         <item>Genre</item>
         <item>Country</item>
         <item>Profile</item>
@@ -66,7 +67,7 @@
         <item>outline_home_24</item>
         <item>outline_movie_24</item>
         <item>outline_local_movies_24</item>
-<!--        <item>outline_live_tv_24</item>-->
+        <!--        <item>outline_live_tv_24</item>-->
         <item>outline_folder_24</item>
         <item>outline_outlined_flag_24</item>
         <item>outline_person_24</item>
@@ -82,7 +83,7 @@
         <item>Home</item>
         <item>Movies</item>
         <item>Series</item>
-<!--        <item>Live TV</item>-->
+        <!--        <item>Live TV</item>-->
         <item>Genre</item>
         <item>Country</item>
         <item>Login</item>
@@ -93,7 +94,7 @@
         <item>outline_home_24</item>
         <item>outline_movie_24</item>
         <item>outline_local_movies_24</item>
-<!--        <item>outline_live_tv_24</item>-->
+        <!--        <item>outline_live_tv_24</item>-->
         <item>outline_folder_24</item>
         <item>outline_outlined_flag_24</item>
         <item>outline_lock_24</item>
@@ -221,6 +222,7 @@
     <string name="all_tv_channels">TV Channels</string>
     <string name="all_kids_videos">All Kids Videos</string>
     <string name="all_tv_series">All TV Series</string>
+    <string name="no_ad">No Advertisement</string>
     <string name="unlimited_movies">Unlimited Movies</string>
     <string name="please_select_your_payment_method">Please select your payment method</string>
     <string name="download_appear_text">Your download item will be appear here.  Download item not found.</string>
@@ -304,4 +306,6 @@
     <string name="your_name">Your Name</string>
     <string name="movie_name">Movie Name</string>
     <string name="request">Request</string>
+
+    <string name="admin_talk">  We highly recommend that you should use our <b><u>Subcriptions</u></b> service to get a best experience without the ad, unlimited series and more.It\'s also the way to help us to have a fee to maintain our sever and keep a good work to serve you.\n\n  Try the <b><u>Request Movie</u></b> or <b><u>Feedback</u></b> to let me know what do you want.\nThank You</string>
 </resources>

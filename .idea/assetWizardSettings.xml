@@ -312,7 +312,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/flag/baseline_flag_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/send/baseline_send_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -322,8 +322,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="bf211d" />
-                            <entry key="outputName" value="ic_report" />
+                            <entry key="color" value="3b38bf" />
+                            <entry key="outputName" value="ic_baseline_send_24" />
                             <entry key="sourceFile" value="C:\Users\khaih\Downloads\star-of-favorites-outline.svg" />
                           </map>
                         </option>

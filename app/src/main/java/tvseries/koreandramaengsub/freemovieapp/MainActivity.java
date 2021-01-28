@@ -65,6 +65,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import tvseries.koreandramaengsub.freemovieapp.adapters.NavigationAdapter;
 import tvseries.koreandramaengsub.freemovieapp.database.DatabaseHelper;
+import tvseries.koreandramaengsub.freemovieapp.fragments.AdvancedFragment;
 import tvseries.koreandramaengsub.freemovieapp.fragments.DownFragment;
 import tvseries.koreandramaengsub.freemovieapp.fragments.HomeFragment;
 import tvseries.koreandramaengsub.freemovieapp.fragments.MoviesFragment;
@@ -404,7 +405,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             Config.isOpenChildFragment = true;
                             break;
                         case 4:
-                            loadFragment(new FavoriteFragment());
+                            loadFragment(new AdvancedFragment());
                             Config.isOpenChildFragment = true;
                             break;
                     }
@@ -435,7 +436,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             Config.isOpenChildFragment = true;
                             break;
                         case 4:
-                            loadFragment(new FavoriteFragment());
+                            loadFragment(new AdvancedFragment());
                             Config.isOpenChildFragment = true;
                             break;
                     }
@@ -468,7 +469,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @OnClick(R.id.group_facebook)
     void onGroupFacebookClick(View view) {
-        String urlString = "https://www.facebook.com/Korean-Drama-Engsub-112928027254307";
+        String urlString = "https://www.facebook.com/groups/251155293295096";
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlString));
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
@@ -618,11 +619,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                             startActivity(intent);
                         } else if (position == 6) {
-                            if (isDark) {
-                                mBottomNaviDark.setActiveNavigationIndex(4);
-                            } else {
-                                mBottomNaviLight.setActiveNavigationIndex(4);
-                            }
+                            loadFragment(new FavoriteFragment());
                             Config.isOpenChildFragment = true;
                         } else if (position == 7) {
                             Intent intent = new Intent(MainActivity.this, SubscriptionActivity.class);

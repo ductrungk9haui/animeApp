@@ -18,7 +18,7 @@
         android:title="Daily Sub"
         android:icon="@drawable/ic_subtitle"/>
     <item
-        android:title="@string/favorite"
-        android:icon="@drawable/icon_favorite"/>
+        android:title="@string/explore"
+        android:icon="@drawable/ic_explore"/>
 
 </menu>
