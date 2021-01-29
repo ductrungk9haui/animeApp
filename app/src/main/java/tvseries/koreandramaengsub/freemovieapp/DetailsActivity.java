@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.PersistableBundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.Display;
@@ -187,6 +188,7 @@ import tvseries.koreandramaengsub.freemovieapp.utils.ToastMsg;
 import tvseries.koreandramaengsub.freemovieapp.utils.Tools;
 import tvseries.koreandramaengsub.freemovieapp.utils.ads.BannerAds;
 import tvseries.koreandramaengsub.freemovieapp.utils.ads.PopUpAds;
+import tvseries.koreandramaengsub.freemovieapp.utils.ads.VideoRewardAds;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -201,7 +203,7 @@ import static tvseries.koreandramaengsub.freemovieapp.utils.Constants.SERVER_TYP
 import static tvseries.koreandramaengsub.freemovieapp.utils.Constants.STREAM_URL;
 
 public class DetailsActivity extends AppCompatActivity implements CastPlayer.SessionAvailabilityListener, ProgramAdapter.OnProgramClickListener, EpisodeAdapter.OnTVSeriesEpisodeItemClickListener,
-        RelatedTvAdapter.RelatedTvClickListener,SubtitleAdapter.Listener {
+        RelatedTvAdapter.RelatedTvClickListener, SubtitleAdapter.Listener {
     private static final int PERMISSION_REQUEST_CODE = 1;
     private static final int PRELOAD_TIME_S = 20;
     public static final String TAG = DetailsActivity.class.getSimpleName();
@@ -396,7 +398,6 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     private String mYoutubeDownloadUr;
     private String mUrlType = "";
     private boolean mActiveMovie;
-    private RelativeLayout mRlTouch;
     private boolean mIntLeft, mIntRight;
     private int sWidth, sHeight;
     private long diffX, diffY;
@@ -406,15 +407,11 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     private AudioManager mAudioManager;
     private int mAspectClickCount = 1;
     private DatabaseHelper mDBHelper;
-    public boolean check_download = false;
     private static DetailsActivity instance;
     private RewardedAd mRewardedAd;
-    public boolean mCheckExist = false;
-    public boolean mCheckFailLink = false;
-    public boolean mCheckFinish = false;
-    boolean mIsLoading;
     private AdsConfig adsConfig;
     String videoReport = "", audioReport = "", subtitleReport = "", messageReport = "";
+
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -536,83 +533,6 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     public static DetailsActivity getInstance() {
         return instance;
     }
-
-    private void loadRewardedAd() {
-        if (mRewardedAd == null || !mRewardedAd.isLoaded()) {
-            adsConfig = new DatabaseHelper(DetailsActivity.this).getConfigurationData().getAdsConfig();
-            mRewardedAd = new RewardedAd(this, "ca-app-pub-3940256099942544/5224354917");
-            mIsLoading = true;
-            mRewardedAd.loadAd(
-                    new AdRequest.Builder().build(),
-                    new RewardedAdLoadCallback() {
-                        @Override
-                        public void onRewardedAdLoaded() {
-                            // Ad successfully loaded.
-                            DetailsActivity.this.mIsLoading = false;
-                            //Toast.makeText(DetailsActivity.this, "onRewardedAdLoaded", Toast.LENGTH_SHORT).show();
-                        }
-
-                        @Override
-                        public void onRewardedAdFailedToLoad(LoadAdError loadAdError) {
-                            // Ad failed to load.
-                            DetailsActivity.this.mIsLoading = false;
-//                            Toast.makeText(DetailsActivity.this, "onRewardedAdFailedToLoad", Toast.LENGTH_SHORT)
-//                                    .show();
-                        }
-                    });
-        }
-    }
-
-    public void showRewardedVideo() {
-        //showVideoButton.setVisibility(View.INVISIBLE);
-        if (mRewardedAd.isLoaded()) {
-            RewardedAdCallback adCallback =
-                    new RewardedAdCallback() {
-                        @Override
-                        public void onRewardedAdOpened() {
-                            // Ad opened.
-                            Toast.makeText(DetailsActivity.this, "Watch ads to download video", Toast.LENGTH_SHORT).show();
-
-                        }
-
-                        @Override
-                        public void onRewardedAdClosed() {
-                            // Ad closed.
-                            //Toast.makeText(DetailsActivity.this, "onRewardedAdClosed", Toast.LENGTH_SHORT).show();
-                            if (mCheckFinish != true) {
-                                new ToastMsg(DetailsActivity.this).toastIconError("Oops! Please watch ads to start!");
-                            }
-                            // Preload the next video ad.
-                            // DetailsActivity.this.loadRewardedAd();
-                            mCheckFinish = false;
-                        }
-
-                        @Override
-                        public void onUserEarnedReward(RewardItem rewardItem) {
-                            // User earned reward.
-                            //Toast.makeText(DetailsActivity.this, "onUserEarnedReward", Toast.LENGTH_SHORT).show();
-                            if (mCheckFailLink) {
-                                new ToastMsg(DetailsActivity.this).toastIconError("Fail Link, Plz tell us on facebook group to fix ASAP");
-                            } else if (mCheckExist && !mCheckFailLink) {
-                                new ToastMsg(DetailsActivity.this).toastIconError("File already exist.");
-                            } else if (!mCheckExist && !mCheckFailLink) {
-                                new ToastMsg(DetailsActivity.this).toastIconSuccess("Started.");
-                            }
-                            mCheckFinish = true;
-                            mCheckFailLink = false;
-                        }
-
-                        @Override
-                        public void onRewardedAdFailedToShow(AdError adError) {
-                            // Ad failed to display
-//                            Toast.makeText(DetailsActivity.this, "onRewardedAdFailedToShow", Toast.LENGTH_SHORT)
-//                                    .show();
-                        }
-                    };
-            mRewardedAd.show(this, adCallback);
-        }
-    }
-
 
     private void updateContinueWatchingData() {
         if (!mType.equals("tv")) {
@@ -827,12 +747,12 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         }
         RecyclerView internalServerRv = view.findViewById(R.id.internal_download_rv);
         RecyclerView externalServerRv = view.findViewById(R.id.external_download_rv);
-        DownloadAdapter internalDownloadAdapter = new DownloadAdapter(this, mTitle,mListInternalDownload, true);
+        DownloadAdapter internalDownloadAdapter = new DownloadAdapter(this, mTitle, mListInternalDownload, true);
         internalServerRv.setLayoutManager(new LinearLayoutManager(this));
         internalServerRv.setHasFixedSize(true);
         internalServerRv.setAdapter(internalDownloadAdapter);
 
-        DownloadAdapter externalDownloadAdapter = new DownloadAdapter(this, mTitle,mListExternalDownload, true);
+        DownloadAdapter externalDownloadAdapter = new DownloadAdapter(this, mTitle, mListExternalDownload, true);
         externalServerRv.setLayoutManager(new LinearLayoutManager(this));
         externalServerRv.setHasFixedSize(true);
         externalServerRv.setAdapter(externalDownloadAdapter);
@@ -890,7 +810,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             @Override
             public void onDismiss(DialogInterface dialog) {
                 //reset
-                if(resumePosition>0){
+                if (resumePosition > 0) {
                     showDescriptionLayout();
                 }
             }
@@ -1002,6 +922,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         });
 
     }
+
     @Override
     public void onClickSubtitles(int position) {
         setSelectedSubtitle(mMediaSource, mListSub.get(position).getUrl(), this);
@@ -1085,7 +1006,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     // this will call when any episode is clicked
     //if it is embed player will go full screen
     @Override
-    public void onEpisodeItemClickTvSeries(String type,EpiModel obj, int position) {
+    public void onEpisodeItemClickTvSeries(String type, EpiModel obj, int position) {
         //PopUpAds.ShowAdmobInterstitialAds(this);
         if (PreferenceUtils.isLoggedIn(DetailsActivity.this)) {
             if (!PreferenceUtils.isActivePlan(DetailsActivity.this)) {
@@ -1143,42 +1064,21 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
     private void loadAd() {
         adsConfig = mDBHelper.getConfigurationData().getAdsConfig();
-        if (PreferenceUtils.isLoggedIn(this)) {
-            if (!PreferenceUtils.isActivePlan(this)) {
-                if (adsConfig.getAdsEnable().equals("1")) {
-
-                    if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                        BannerAds.ShowAdmobBannerAds(this, mAdView);
-                        //PopUpAds.ShowAdmobInterstitialAds(this);
-
-                    } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
-
-                        //   PopUpAds.showStartappInterstitialAds(DetailsActivity.this);
-                        BannerAds.showAppodealBanner(DetailsActivity.this, R.id.appodealBannerView);
-                    } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.NETWORK_AUDIENCE)) {
-                        BannerAds.showFANBanner(this, mAdView);
-                        PopUpAds.showFANInterstitialAds(DetailsActivity.this);
-                    }
-
-                }
+        if (PreferenceUtils.isLoggedIn(this) && PreferenceUtils.isActivePlan(this)) return;
+        if (adsConfig.getAdsEnable().equals("1")) {
+            if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
+                BannerAds.ShowAdmobBannerAds(this, mAdView);
+                VideoRewardAds.prepareAd(this);
+                //PopUpAds.ShowAdmobInterstitialAds(this);
+            } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
+                //   PopUpAds.showStartappInterstitialAds(DetailsActivity.this);
+                BannerAds.showAppodealBanner(DetailsActivity.this, R.id.appodealBannerView);
+            } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.NETWORK_AUDIENCE)) {
+                BannerAds.showFANBanner(this, mAdView);
+                PopUpAds.showFANInterstitialAds(DetailsActivity.this);
             }
-        } else {
-            if (adsConfig.getAdsEnable().equals("1")) {
-                if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                    BannerAds.ShowAdmobBannerAds(this, mAdView);
-                    //PopUpAds.ShowAdmobInterstitialAds(this);
 
-                } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
-
-                    //   PopUpAds.showStartappInterstitialAds(DetailsActivity.this);
-                    BannerAds.showAppodealBanner(DetailsActivity.this, R.id.appodealBannerView);
-                } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.NETWORK_AUDIENCE)) {
-                    BannerAds.showFANBanner(this, mAdView);
-                    PopUpAds.showFANInterstitialAds(DetailsActivity.this);
-                }
-            }
         }
-
     }
 
     private void initGetData() {
@@ -1450,7 +1350,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                     mIsPlaying = false;
                     playerCurrentPosition = mPlayer.getCurrentPosition();
                     mediaDuration = mPlayer.getDuration();
-                    if(mType.equals("movie")){
+                    if (mType.equals("movie")) {
                         resumePosition = playerCurrentPosition;
                     }
                 }
@@ -1909,7 +1809,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                         RecyclerView.HORIZONTAL, false));
                 mEpisodeAdapter = new EpisodeAdapter(DetailsActivity.this,
                         mListServer.get(position).getListEpi());
-                if( mListServer.get(position).getListEpi().size() == 0 ){
+                if (mListServer.get(position).getListEpi().size() == 0) {
                     mSeasonSpinnerContainer.setVisibility(View.GONE);
                 }
                 if (mMapMovies.containsKey(mId) && mMapMovies.get(mId) != null) {
@@ -2278,8 +2178,8 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         mLPlay.setVisibility(GONE);
         mSeriesLayout.setVisibility(GONE);
         mTopShareLayout.setVisibility(VISIBLE);
-        if(mRvServer!=null){
-            if(mRvServer.getAdapter()!=null){
+        if (mRvServer != null) {
+            if (mRvServer.getAdapter() != null) {
                 mRvServer.getAdapter().notifyDataSetChanged();
             }
         }
@@ -2585,70 +2485,69 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     }
 
 
+public class RelativeLayoutTouchListener implements View.OnTouchListener {
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
 
-    public class RelativeLayoutTouchListener implements View.OnTouchListener {
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
+                //touch is start
+                downX = event.getX();
+                downY = event.getY();
+                if (event.getX() < (sWidth / 2)) {
 
-                    //touch is start
-                    downX = event.getX();
-                    downY = event.getY();
-                    if (event.getX() < (sWidth / 2)) {
+                    //here check touch is screen left or right side
+                    mIntLeft = true;
+                    mIntRight = false;
 
-                        //here check touch is screen left or right side
-                        mIntLeft = true;
-                        mIntRight = false;
+                } else if (event.getX() > (sWidth / 2)) {
 
-                    } else if (event.getX() > (sWidth / 2)) {
+                    //here check touch is screen left or right side
+                    mIntLeft = false;
+                    mIntRight = true;
+                }
+                break;
 
-                        //here check touch is screen left or right side
-                        mIntLeft = false;
-                        mIntRight = true;
-                    }
-                    break;
+            case MotionEvent.ACTION_UP:
 
-                case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_MOVE:
 
-                case MotionEvent.ACTION_MOVE:
+                //finger move to screen
+                float x2 = event.getX();
+                float y2 = event.getY();
 
-                    //finger move to screen
-                    float x2 = event.getX();
-                    float y2 = event.getY();
+                diffX = (long) (Math.ceil(event.getX() - downX));
+                diffY = (long) (Math.ceil(event.getY() - downY));
 
-                    diffX = (long) (Math.ceil(event.getX() - downX));
-                    diffY = (long) (Math.ceil(event.getY() - downY));
+                if (Math.abs(diffY) > Math.abs(diffX)) {
+                    if (mIntLeft) {
+                        //if left its for brightness
 
-                    if (Math.abs(diffY) > Math.abs(diffX)) {
-                        if (mIntLeft) {
-                            //if left its for brightness
+                        if (downY < y2) {
+                            //down swipe brightness decrease
+                        } else if (downY > y2) {
+                            //up  swipe brightness increase
+                        }
 
-                            if (downY < y2) {
-                                //down swipe brightness decrease
-                            } else if (downY > y2) {
-                                //up  swipe brightness increase
-                            }
+                    } else if (mIntRight) {
 
-                        } else if (mIntRight) {
+                        //if right its for audio
+                        if (downY < y2) {
+                            //down swipe volume decrease
+                            mAudioManager.adjustVolume(AudioManager.ADJUST_LOWER, AudioManager.FLAG_PLAY_SOUND);
 
-                            //if right its for audio
-                            if (downY < y2) {
-                                //down swipe volume decrease
-                                mAudioManager.adjustVolume(AudioManager.ADJUST_LOWER, AudioManager.FLAG_PLAY_SOUND);
-
-                            } else if (downY > y2) {
-                                //up  swipe volume increase
-                                mAudioManager.adjustVolume(AudioManager.ADJUST_RAISE, AudioManager.FLAG_PLAY_SOUND);
-                            }
+                        } else if (downY > y2) {
+                            //up  swipe volume increase
+                            mAudioManager.adjustVolume(AudioManager.ADJUST_RAISE, AudioManager.FLAG_PLAY_SOUND);
                         }
                     }
-            }
-            return true;
+                }
         }
-
-
+        return true;
     }
+
+
+}
 
     @Override
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
@@ -2788,8 +2687,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         if (PreferenceUtils.isLoggedIn(DetailsActivity.this)) {
             //PopUpAds.ShowAdmobInterstitialAds(DetailsActivity.this);
 //                    DetailsActivity.getInstance().loadAdReward();
-            //loadRewardedAd();
-
+            VideoRewardAds.showRewardedVideo(DetailsActivity.getInstance());
             if (!mListInternalDownload.isEmpty() || !mListExternalDownload.isEmpty()) {
                 if (Config.ENABLE_DOWNLOAD_TO_ALL) {
                     openDownloadServerDialog();
@@ -2864,8 +2762,8 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
     }
 
-    @OnClick({R.id.report_iv,R.id.report_iv2})
-    void onReportClick(){
+    @OnClick({R.id.report_iv, R.id.report_iv2})
+    void onReportClick() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = LayoutInflater.from(this).inflate(R.layout.movie_report_dialog, null);
         builder.setView(view);
@@ -2881,7 +2779,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         Button submitButton = view.findViewById(R.id.submit_button);
         Button cancelButton = view.findViewById(R.id.cancel_button);
         LinearLayout subtitleLayout = view.findViewById(R.id.subtitleLayout);
-        if (mType.equalsIgnoreCase("tv")){
+        if (mType.equalsIgnoreCase("tv")) {
             subtitleLayout.setVisibility(GONE);
         }
 

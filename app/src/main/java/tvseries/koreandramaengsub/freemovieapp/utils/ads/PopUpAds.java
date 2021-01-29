@@ -8,23 +8,30 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 
+import tvseries.koreandramaengsub.freemovieapp.DetailsActivity;
 import tvseries.koreandramaengsub.freemovieapp.database.DatabaseHelper;
 import tvseries.koreandramaengsub.freemovieapp.network.model.config.AdsConfig;
 
 public class PopUpAds {
+    public static int count = 0;
 
-    public static void ShowAdmobInterstitialAds(Context context) {
-        AdsConfig adsConfig = new DatabaseHelper(context).getConfigurationData().getAdsConfig();
-        final InterstitialAd mInterstitialAd = new InterstitialAd(context);
-        mInterstitialAd.setAdUnitId(adsConfig.getAdmobInterstitialAdsId());
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+    public static void ShowAdmobInterstitialAds(Activity activity) {
+        if(count == 3){
+            count = 0;
+            VideoRewardAds.showRewardedVideo(activity);
+        }else{
+            count++;
+            AdsConfig adsConfig = new DatabaseHelper(activity.getApplicationContext()).getConfigurationData().getAdsConfig();
+            final InterstitialAd mInterstitialAd = new InterstitialAd(activity.getApplicationContext());
+            mInterstitialAd.setAdUnitId(adsConfig.getAdmobInterstitialAdsId());
+            mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
-        mInterstitialAd.setAdListener(new AdListener(){
-            @Override
-            public void onAdLoaded() {
-                super.onAdLoaded();
+            mInterstitialAd.setAdListener(new AdListener(){
+                @Override
+                public void onAdLoaded() {
+                    super.onAdLoaded();
 
-                mInterstitialAd.show();
+                    mInterstitialAd.show();
 
                 /*Random rand = new Random();
                 int i = rand.nextInt(10)+1;
@@ -34,14 +41,16 @@ public class PopUpAds {
                 if (i%2==0){
                     mInterstitialAd.show();
                 }*/
-            }
+                }
 
-            @Override
-            public void onAdFailedToLoad(int i) {
-                super.onAdFailedToLoad(i);
+                @Override
+                public void onAdFailedToLoad(int i) {
+                    super.onAdFailedToLoad(i);
 
-            }
-        });
+                }
+            });
+        }
+
     }
 
     public static void showFANInterstitialAds(Context context){

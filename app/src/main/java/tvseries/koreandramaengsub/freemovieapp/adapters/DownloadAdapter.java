@@ -1,5 +1,6 @@
 package tvseries.koreandramaengsub.freemovieapp.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,6 +39,8 @@ import tvseries.koreandramaengsub.freemovieapp.models.Work;
 import tvseries.koreandramaengsub.freemovieapp.service.DownloadWorkManager;
 import tvseries.koreandramaengsub.freemovieapp.utils.Constants;
 import tvseries.koreandramaengsub.freemovieapp.utils.ToastMsg;
+import tvseries.koreandramaengsub.freemovieapp.utils.ads.PopUpAds;
+import tvseries.koreandramaengsub.freemovieapp.utils.ads.VideoRewardAds;
 
 public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.OriginalViewHolder> {
 
@@ -104,24 +108,14 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.Origin
             public void onClick(View v) {
                 holder.icon.setColorFilter(ContextCompat.getColor(mContext, R.color.green_500));
                 if (obj.isInAppDownload()) {
-                    //in app download enabled
-                    //PopUpAds.ShowAdmobInterstitialAds(ctx);
-                    // if(check==true){
+                    //Toast.makeText(mContext, "Download after ad finish (5s)", Toast.LENGTH_SHORT).show();
                     final Handler handler = new Handler(Looper.getMainLooper());
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            // DetailsActivity.getInstance().showRewardedVideo();
                             downloadFileInsideApp(obj);
                         }
                     }, 0);
-//                    }
-//                    else{
-//
-//                        DetailsActivity.getInstance().showRewardedVideo();
-//                       downloadFileInsideApp(obj.getTitle(), obj.getStremURL());
-//                        check=true;
-//                    }
                 } else {
                     String url = obj.getStremURL();
                     Intent i = new Intent(Intent.ACTION_VIEW);
@@ -154,7 +148,6 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.Origin
 
         File file = new File(path, fileName); // e_ for encode
         if (file.exists()) {
-            DetailsActivity.getInstance().mCheckExist = true;
             new ToastMsg(mContext).toastIconError("File already exist.");
         } else {
             String dir = mContext.getExternalCacheDir().toString();
@@ -176,7 +169,7 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.Origin
             work.setSubList(obj.getListSub());
             work.setDownloadStatus(mContext.getResources().getString(R.string.download_waiting));
             mDBHelper.insertWork(work);
-            new ToastMsg(mContext).toastIconSuccess("added " + fileName + " to download");
+            new ToastMsg(mContext).toastIconSuccess("Added " + fileName + " to download");
             Log.d("TRUNG", "insertWork download " + fileName + " id: " + work.getWorkId());
             if (isDownloading() || mIsDownloading) return;
 

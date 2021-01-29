@@ -161,7 +161,6 @@ public class DownloadWorkManager extends Worker {
                             @Override
                             public void onError(Error error) {
                                 if(type.equals(".mp4")) {
-                                    DetailsActivity.getInstance().mCheckFailLink = true;
                                     Work work = mDBHelper.getWorkByDownloadId(mDownloadId);
                                     for(int subId : work.getDownloadSubIdList()){
                                         PRDownloader.cancel(subId);
