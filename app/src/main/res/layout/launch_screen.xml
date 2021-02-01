@@ -5,23 +5,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/black">
 
-    <ImageView
-        android:id="@+id/logo_back"
-        android:layout_width="279dp"
-        android:layout_height="269dp"
-        android:src="@drawable/logo_compo"
-        app:layout_constraintTop_toTopOf="@id/logo"
-        app:layout_constraintBottom_toBottomOf="@id/logo"
-        app:layout_constraintLeft_toLeftOf="@id/logo"
-        app:layout_constraintRight_toRightOf="@id/logo"/>
-
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="223dp"
-        android:layout_height="98dp"
+        android:layout_width="0dp"
+        android:layout_height="170dp"
         android:src="@drawable/logo"
         app:layout_constraintVertical_bias="0.25"
+        app:layout_constraintWidth_percent="0.85"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -31,7 +22,7 @@
         android:id="@+id/icon"
         android:layout_width="117dp"
         android:layout_height="100dp"
-        android:src="@drawable/icon_l"
+        android:src="@drawable/icon"
         android:layout_marginBottom="5dp"
         app:layout_constraintBottom_toTopOf="@id/content"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -47,7 +38,7 @@
         android:textSize="20dp"
         android:gravity="center"
         android:textColor="@color/space_white"
-        android:text="Developed by \n @Anime Sub Film Team"
+        android:text="Developed by \n @Anime S Team"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

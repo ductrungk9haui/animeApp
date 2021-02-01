@@ -16,9 +16,9 @@
         android:icon="@drawable/icon_tv_series"/>
     <item
         android:title="Daily Sub"
-        android:icon="@drawable/ic_subtitle"/>
+        android:icon="@drawable/icon_daily"/>
     <item
         android:title="@string/explore"
-        android:icon="@drawable/ic_explore"/>
+        android:icon="@drawable/icon_explore"/>
 
 </menu>

@@ -6,10 +6,10 @@
     //admob
     <string name="admob_application_id">ca-app-pub-5660469579209926~1005189865</string>
 
-    <string name="app_name">Anime Sub Film</string>
+    <string name="app_name">Anime S</string>
     <!--app_title for main navigation & home title-->
-    <string name="app_title">Anime Sub Film</string>
-    <string name="app_version">1.0.8</string>
+    <string name="app_title">Anime S</string>
+    <string name="app_version">1.0.0</string>
     <string name="contact_email">ductrungk9haui@gmail.com</string>
     <string name="copyright_text">Copyright @Anime Team \nAll right reserved</string>
     <!-- App -->
@@ -64,18 +64,18 @@
     </string-array>
 
     <string-array name="nav_item_image">
-        <item>outline_home_24</item>
-        <item>outline_movie_24</item>
-        <item>outline_local_movies_24</item>
+        <item>icon_home</item>
+        <item>icon_movie</item>
+        <item>icon_tv_series</item>
         <!--        <item>outline_live_tv_24</item>-->
-        <item>outline_folder_24</item>
-        <item>outline_outlined_flag_24</item>
-        <item>outline_person_24</item>
-        <item>outline_favorite_border_24</item>
+        <item>icon_genre</item>
+        <item>icon_country</item>
+        <item>icon_profile</item>
+        <item>icon_favorite</item>
         <item>ic_subscriptions_black_24dp</item>
-        <item>ic_file_download_black_24dp</item>
-        <item>outline_settings_24</item>
-        <item>outline_lock_24</item>
+        <item>icon_download</item>
+        <item>icon_setting</item>
+        <item>icon_login</item>
     </string-array>
 
 
@@ -91,14 +91,14 @@
     </string-array>
 
     <string-array name="nav_item_image_2">
-        <item>outline_home_24</item>
-        <item>outline_movie_24</item>
-        <item>outline_local_movies_24</item>
+        <item>icon_home</item>
+        <item>icon_movie</item>
+        <item>icon_tv_series</item>
         <!--        <item>outline_live_tv_24</item>-->
-        <item>outline_folder_24</item>
-        <item>outline_outlined_flag_24</item>
-        <item>outline_lock_24</item>
-        <item>outline_settings_24</item>
+        <item>icon_genre</item>
+        <item>icon_country</item>
+        <item>icon_login</item>
+        <item>icon_setting</item>
     </string-array>
 
 

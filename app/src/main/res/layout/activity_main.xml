@@ -141,9 +141,10 @@
 
                     <ImageView
                         android:id="@+id/img_rate_app"
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
-                        app:srcCompat="@drawable/img_rating_button"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        app:tint="?android:textColor"
+                        app:srcCompat="@drawable/icon_rate"
                         android:gravity="center_horizontal"
                         android:layout_marginStart="15dp"
                         />
@@ -154,7 +155,7 @@
                         android:layout_height="20dp"
                         android:layout_marginStart="20dp"
                         android:textStyle="bold"
-                        android:textSize="12sp"
+                        android:textSize="13sp"
                         android:textColor="@color/default_text"
                         android:layout_toEndOf="@+id/img_rate_app"
                         android:gravity="center_horizontal"
@@ -171,11 +172,12 @@
 
                     <ImageView
                         android:id="@+id/image"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        app:srcCompat="@drawable/ic_brightness_3_black_24dp"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        app:srcCompat="@drawable/icon_dark_mode"
                         android:gravity="center_vertical"
-                        android:layout_marginStart="15dp"/>
+                        android:layout_marginStart="15dp"
+                        app:tint="?android:textColor" />
 
                     <TextView
                         android:id="@+id/name"
@@ -184,7 +186,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:textStyle="bold"
-                        android:textSize="12sp"
+                        android:textSize="13sp"
                         android:textColor="@color/default_text"
                         android:layout_toEndOf="@+id/image"
                         android:gravity="start"/>
@@ -194,6 +196,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
+                        android:layout_alignTop="@id/name"
                         android:gravity="center_vertical"/>
 
 
@@ -210,8 +213,8 @@
 
                 <ImageView
                     android:id="@+id/image_facebook"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
                     android:background="@drawable/com_facebook_favicon_blue"
                     android:gravity="center_horizontal"
                     android:layout_marginStart="15dp"

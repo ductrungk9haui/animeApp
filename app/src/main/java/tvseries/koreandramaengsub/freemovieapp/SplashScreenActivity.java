@@ -51,12 +51,11 @@ import tvseries.koreandramaengsub.freemovieapp.utils.ToastMsg;
 public class SplashScreenActivity extends AppCompatActivity {
     private static final String TAG = "SplashScreen";
     private final int PERMISSION_REQUEST_CODE = 100;
-    private int SPLASH_TIME = 2200;
+    private int SPLASH_TIME = 2000;
     private Thread timer;
     private DatabaseHelper db;
     AnimationDrawable anim;
     @BindView(R.id.logo) ImageView mLogo;
-    @BindView(R.id.logo_back) ImageView mLogoBack;
     @BindView(R.id.icon) ImageView mIcon;
     @BindView(R.id.content) TextView mContent;
     Unbinder mUnBinder;
@@ -71,16 +70,8 @@ public class SplashScreenActivity extends AppCompatActivity {
         mUnBinder  = ButterKnife.bind(this);
         db = new DatabaseHelper(SplashScreenActivity.this);
         startWelcomeAnimation();
-        /*imageView=(ImageView)findViewById(R.id.splash);
-        if(imageView==null)throw new AssertionError();
-        imageView.setBackgroundResource(R.drawable.loading);
-
-        anim=(AnimationDrawable)imageView.getBackground();
-        anim.start();*/
-
         //print keyHash for facebook login
        // createKeyHash(SplashScreenActivity.this, BuildConfig.APPLICATION_ID);
-
 
         // checking storage permission
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -137,20 +128,8 @@ public class SplashScreenActivity extends AppCompatActivity {
         alphaAnimation.setDuration(2000);
         alphaAnimation.setFillAfter(true);
         mLogo.startAnimation(alphaAnimation);
-        mIcon.startAnimation(alphaAnimation);
-        mContent.startAnimation(alphaAnimation);
-
-        RotateAnimation rotateAnimation = new RotateAnimation(0.0f, 360.0f,
-                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
-                0.5f);
-        AlphaAnimation alphaAnimation2 = new AlphaAnimation(0f,1f);
-        AnimationSet set = new AnimationSet(true);
-        set.addAnimation(alphaAnimation2);
-        set.addAnimation(rotateAnimation);
-        set.setInterpolator(new OvershootInterpolator(1f));
-        set.setDuration(2000);
-        set.setStartOffset(500);
-        mLogoBack.startAnimation(set);
+        //mIcon.startAnimation(alphaAnimation);
+        //mContent.startAnimation(alphaAnimation);
     }
 
     @Override
