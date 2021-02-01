@@ -11,8 +11,12 @@
         android:focusable="true">
 
         <LinearLayout
+            android:id="@+id/title_layout"
             android:orientation="horizontal"
             android:layout_width="match_parent"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?android:attr/selectableItemBackground"
             android:layout_height="wrap_content">
 
             <TextView
@@ -28,11 +32,12 @@
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:gravity="right|center_vertical"
                 android:minWidth="0dp"
                 android:text="@string/more"
-                android:textSize="12sp"
-                android:textColor="@color/grey_60" />
+                android:textColor="?android:textColor"
+                android:textAppearance="@style/TextAppearance.Medium.Bold"
+                android:textSize="15sp"/>
 
         </LinearLayout>
 

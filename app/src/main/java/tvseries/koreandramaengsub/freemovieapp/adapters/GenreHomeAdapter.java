@@ -65,6 +65,16 @@ public class GenreHomeAdapter extends RecyclerView.Adapter<GenreHomeAdapter.Orig
                 ctx.startActivity(intent);
             }
         });
+        holder.titleLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(ctx, ItemMovieActivity.class);
+                intent.putExtra("id",obj.getId());
+                intent.putExtra("title",obj.getName());
+                intent.putExtra("type","genre");
+                ctx.startActivity(intent);
+            }
+        });
 
         setAnimation(holder.itemView, position);
 
@@ -80,12 +90,14 @@ public class GenreHomeAdapter extends RecyclerView.Adapter<GenreHomeAdapter.Orig
         public TextView name;
         RecyclerView recyclerView;
         Button btnMore;
+        View titleLayout;
 
         public OriginalViewHolder(View v) {
             super(v);
             name = v.findViewById(R.id.tv_name);
             recyclerView=v.findViewById(R.id.recyclerView);
             btnMore=v.findViewById(R.id.btn_more);
+            titleLayout= v.findViewById(R.id.title_layout);
         }
     }
 

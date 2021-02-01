@@ -48,7 +48,8 @@
             android:layout_width="?attr/actionBarSize"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/selectableItemBackgroundBorderless"
-            app:srcCompat="@drawable/ic_search_grey"
+            app:srcCompat="@drawable/ic_action_search"
+            android:tint="?android:textColor"
             android:layout_alignParentEnd="true"/>
 
     </RelativeLayout>
