@@ -1,6 +1,8 @@
 package tvseries.koreandramaengsub.freemovieapp;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,12 +11,23 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.paymentwall.mycardadapter.PsMyCard;
+import com.paymentwall.pwunifiedsdk.brick.core.Brick;
+import com.paymentwall.pwunifiedsdk.core.PaymentSelectionActivity;
+import com.paymentwall.pwunifiedsdk.core.UnifiedRequest;
+import com.paymentwall.pwunifiedsdk.mobiamo.core.MobiamoPayment;
+import com.paymentwall.pwunifiedsdk.mobiamo.core.MobiamoResponse;
+import com.paymentwall.pwunifiedsdk.mobiamo.utils.Const;
+import com.paymentwall.pwunifiedsdk.object.ExternalPs;
+import com.paymentwall.pwunifiedsdk.util.Key;
+import com.paymentwall.pwunifiedsdk.util.ResponseCode;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.paypal.android.sdk.payments.PayPalPayment;
 import com.paypal.android.sdk.payments.PayPalService;
@@ -50,6 +63,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
+import static com.paymentwall.pwunifiedsdk.mobiamo.core.MobiamoDialogActivity.MOBIAMO_REQUEST_CODE;
+
 public class PurchasePlanActivity extends AppCompatActivity implements PackageAdapter.OnItemClickListener, PaymentBottomShitDialog.OnBottomShitClickListener {
 
     private static final String TAG = PurchasePlanActivity.class.getSimpleName();
@@ -65,10 +80,12 @@ public class PurchasePlanActivity extends AppCompatActivity implements PackageAd
     private boolean isDark;
 
     private static PayPalConfiguration config = new PayPalConfiguration()
-            .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
+            .environment(PayPalConfiguration.ENVIRONMENT_PRODUCTION)
             .clientId(ApiResources.PAYPAL_CLIENT_ID);
     private Package packageItem;
     private PaymentBottomShitDialog paymentBottomShitDialog;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,6 +176,22 @@ public class PurchasePlanActivity extends AppCompatActivity implements PackageAd
                 }
             }
 
+        }else if(requestCode==PaymentSelectionActivity.REQUEST_CODE){
+            if (resultCode == ResponseCode.ERROR) {
+                Toast.makeText(this, "ERROR", Toast.LENGTH_LONG).show();
+            } else if (resultCode == ResponseCode.FAILED) {
+                Toast.makeText(this, "FAILED", Toast.LENGTH_LONG).show();
+            } else if (resultCode == ResponseCode.CANCEL) {
+                Toast.makeText(this, "CANCEL", Toast.LENGTH_LONG).show();
+            } else if (resultCode == ResponseCode.SUCCESSFUL) {
+                Toast.makeText(this, "SUCCESSFUL", Toast.LENGTH_LONG).show();
+                if(data!=null) {
+                    MobiamoResponse response = (MobiamoResponse) data.getSerializableExtra(Const.KEY.RESPONSE_MESSAGE);
+                    if (response != null && response.isCompleted()) {
+                        // Do something with the response
+                    }
+                }
+            }
         }else if (resultCode == PaymentActivity.RESULT_EXTRAS_INVALID) {
             new ToastMsg(this).toastIconError("Invalid");
         }
@@ -294,6 +327,55 @@ public class PurchasePlanActivity extends AppCompatActivity implements PackageAd
         }
     }
 
+    private void processMobiamoPayment(Package packageItem) {
+        PaymentConfig paymentConfig = new DatabaseHelper(PurchasePlanActivity.this).getConfigurationData().getPaymentConfig();
+        double exchangeRate = Double.parseDouble(paymentConfig.getExchangeRate());
+        double price = Double.parseDouble(packageItem.getPrice());
+        double priceInUSD = (double) price / exchangeRate;
+        final String userId = PreferenceUtils.getUserId(PurchasePlanActivity.this);
+
+        UnifiedRequest request = new UnifiedRequest();
+        request.setPwProjectKey("35b78a1fae7fcf4117b9dd5712d85cf9");//project key
+        request.setPwSecretKey("f2156268111a290b38b18eb9656e89b2");//PW_SECRET_KEY
+        request.setAmount(priceInUSD);
+        request.setCurrency("USD");
+        request.setItemName(packageItem.getName());
+        request.setItemId(packageItem.getPlanId());
+        request.setUserId(userId);
+        request.setSignVersion(3);
+        request.setItemResID(1);
+        request.setTimeout(30000);
+
+        PsMyCard myCard = new PsMyCard();
+        ExternalPs myCardPs = new ExternalPs("myCard", "MyCard", R.drawable.ic_subscriptions_black_24dp, myCard);
+
+        request.addPwLocal();
+        request.addMint();
+        request.addMobiamo();
+        request.add(myCardPs);
+
+        request.addBrick();
+        request.enableFooter();
+        BroadcastReceiver receiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                if (intent.getAction().equalsIgnoreCase(getPackageName() + Brick.BROADCAST_FILTER_MERCHANT)) {
+                    String brickToken = intent.getStringExtra(Brick.KEY_BRICK_TOKEN);
+                    String userEmail = intent.getStringExtra(Brick.KEY_BRICK_EMAIL);
+                    String cardHolderName = intent.getStringExtra(Brick.KEY_BRICK_CARDHOLDER);
+                    //process your business logic
+
+                }
+            }
+        };
+
+
+        Intent intent = new Intent(getApplicationContext(), PaymentSelectionActivity.class);
+        intent.putExtra(Key.REQUEST_MESSAGE, request);
+        startActivityForResult(intent, PaymentSelectionActivity.REQUEST_CODE);
+
+    }
+
     private void initView() {
 
         noTv = findViewById(R.id.no_tv);
@@ -313,19 +395,20 @@ public class PurchasePlanActivity extends AppCompatActivity implements PackageAd
     @Override
     public void onBottomShitClick(String paymentMethodName) {
         if (paymentMethodName.equals(PaymentBottomShitDialog.PAYPAL)) {
-           processPaypalPayment(packageItem);
-
+            processPaypalPayment(packageItem);
+            //processMobiamoPayment(packageItem);
         } else if (paymentMethodName.equals(PaymentBottomShitDialog.STRIP)) {
             Intent intent = new Intent(PurchasePlanActivity.this, StripePaymentActivity.class);
             intent.putExtra("package", packageItem);
             intent.putExtra("currency", currency);
             startActivity(intent);
-
         }else if (paymentMethodName.equalsIgnoreCase(PaymentBottomShitDialog.RAZOR_PAY)){
             Intent intent = new Intent(PurchasePlanActivity.this, RazorPayActivity.class);
             intent.putExtra("package", packageItem);
             intent.putExtra("currency", currency);
             startActivity(intent);
+        }else if (paymentMethodName.equalsIgnoreCase(PaymentBottomShitDialog.MOBIAMO_PAY)){
+            processMobiamoPayment(packageItem);
         }
     }
 

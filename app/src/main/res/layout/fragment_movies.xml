@@ -70,4 +70,20 @@
         android:focusable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+    <RelativeLayout
+        android:id="@+id/admob_native_ad_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:gravity="center">
+
+        <com.google.android.ads.nativetemplates.TemplateView
+            android:id="@+id/admob_nativead_template"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:gnt_template_type="@layout/gnt_small_template_view"
+            android:visibility="gone"/>
+    </RelativeLayout>
 </RelativeLayout>

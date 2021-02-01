@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.ads.nativetemplates.TemplateView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,10 +42,12 @@ import tvseries.koreandramaengsub.freemovieapp.utils.PreferenceUtils;
 import tvseries.koreandramaengsub.freemovieapp.utils.SpacingItemDecoration;
 import tvseries.koreandramaengsub.freemovieapp.utils.Tools;
 import tvseries.koreandramaengsub.freemovieapp.utils.ads.BannerAds;
+import tvseries.koreandramaengsub.freemovieapp.utils.ads.NativeAds;
 import tvseries.koreandramaengsub.freemovieapp.view.SwipeRefreshLayout;
 
 public class DownFragment extends Fragment {
     @BindView(R.id.adView) RelativeLayout mAdView;
+    @BindView(R.id.admob_nativead_template) TemplateView admobNativeAdView;
     @BindView(R.id.item_progress_bar) ProgressBar mProgressBar;
     @BindView(R.id.shimmer_view_container) ShimmerFrameLayout mShimmerLayout;
     @BindView(R.id.swipe_layout) SwipeRefreshLayout mSwipeRefreshLayout;
@@ -179,8 +182,10 @@ public class DownFragment extends Fragment {
                 if (adsConfig.getAdsEnable().equals("1")) {
 
                     if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                        BannerAds.ShowAdmobBannerAds(mActivity, mAdView);
+                       // BannerAds.ShowAdmobBannerAds(mActivity, mAdView);
 
+                        admobNativeAdView.setVisibility(View.VISIBLE);
+                        NativeAds.showAdmobNativeAds(getActivity(), admobNativeAdView);
                     } else if (adsConfig.getMobileAdsNetwork().equals(Constants.START_APP)) {
                         BannerAds.showAppodealBanner(mActivity, R.id.appodealBannerView_fragment_recentlysub);
 

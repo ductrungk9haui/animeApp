@@ -43,7 +43,7 @@
             android:layout_height="35dp"
             android:layout_marginLeft="10dp"
             android:layout_marginVertical="5dp"
-            android:src="@drawable/ic_baseline_subscriptions_24"
+            android:src="@drawable/ic_subtitle"
             app:tint="@color/blue_400" />
         <TextView
             android:layout_width="match_parent"

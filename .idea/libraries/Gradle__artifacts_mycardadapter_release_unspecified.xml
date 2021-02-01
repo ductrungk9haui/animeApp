@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: artifacts:mycardadapter-release:unspecified">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/mycardadapter-release/build/.transforms/810d535344a31bbb04ff92b0868fa260/jetified-mycardadapter-release/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/mycardadapter-release/build/.transforms/810d535344a31bbb04ff92b0868fa260/jetified-mycardadapter-release/res" />
+      <root url="file://$PROJECT_DIR$/mycardadapter-release/build/.transforms/810d535344a31bbb04ff92b0868fa260/jetified-mycardadapter-release/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

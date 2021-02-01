@@ -87,6 +87,30 @@
                             </RelativeLayout>
 
                             <RelativeLayout
+                                android:id="@+id/admob_native_ad_container_1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp">
+
+                                <com.google.android.ads.nativetemplates.TemplateView
+                                    android:id="@+id/admob_nativead_template_1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:gnt_template_type="@layout/gnt_small_template_view"
+                                    android:visibility="gone"/>
+
+                            </RelativeLayout>
+
+                            <com.appodeal.ads.native_ad.views.NativeAdViewContentStream
+                                android:id="@+id/native_ad_view_content_stream"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
+                                app:gnt_template_type="@layout/gnt_small_template_view"
+                                android:visibility="gone">
+                            </com.appodeal.ads.native_ad.views.NativeAdViewContentStream>
+
+                            <RelativeLayout
                                 android:id="@+id/adView1"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -312,6 +336,20 @@
                                 android:layout_gravity="center"
                                 android:gravity="center" />
 
+                            <RelativeLayout
+                                android:id="@+id/admob_native_ad_container"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp">
+
+                                <com.google.android.ads.nativetemplates.TemplateView
+                                    android:id="@+id/admob_nativead_template"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:gnt_template_type="@layout/gnt_small_template_view"
+                                    android:visibility="gone"/>
+
+                            </RelativeLayout>
                             <com.appodeal.ads.BannerView
                                 android:id="@+id/appodealBannerView_home"
                                 android:layout_gravity="center"

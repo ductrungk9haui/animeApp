@@ -3,6 +3,8 @@ package tvseries.koreandramaengsub.freemovieapp.network.model.config;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+
+
 public class AdsConfig {
 
     @SerializedName("ads_enable")
@@ -20,12 +22,9 @@ public class AdsConfig {
     @SerializedName("admob_interstitial_ads_id")
     @Expose
     private String admobInterstitialAdsId;
-    @SerializedName("admob_reawardedvideo_ads_id")
+    @SerializedName("admob_native_ads_id")
     @Expose
-    private String admobRewardedVideoAdsId;
-    @SerializedName("admob_appopen_ads_id")
-    @Expose
-    private String admobAppOpenAdsId;
+    private String admobNativeAdsId;
     @SerializedName("fan_native_ads_placement_id")
     @Expose
     private String fanNativeAdsPlacementId;
@@ -38,22 +37,9 @@ public class AdsConfig {
     @SerializedName("startapp_app_id")
     @Expose
     private String startappAppId;
-
-    public String getAdmobAppOpenAdsId() {
-        return admobAppOpenAdsId;
-    }
-
-    public void setAdmobAppOpenAdsId(String admobAppOpenAdsId) {
-        this.admobAppOpenAdsId = admobAppOpenAdsId;
-    }
-
-    public String getAdmobRewardedVideoAdsId() {
-        return admobRewardedVideoAdsId;
-    }
-
-    public void setAdmobRewardedVideoAdsId(String admobRewardedVideoAdsId) {
-        this.admobRewardedVideoAdsId = admobRewardedVideoAdsId;
-    }
+    @SerializedName("startapp_developer_id")
+    @Expose
+    private String startappDeveloperId;
 
     public AdsConfig() {
     }
@@ -114,6 +100,14 @@ public class AdsConfig {
         this.fanBannerAdsPlacementId = fanBannerAdsPlacementId;
     }
 
+    public String getAdmobNativeAdsId() {
+        return admobNativeAdsId;
+    }
+
+    public void setAdmobNativeAdsId(String admobNativeAdsId) {
+        this.admobNativeAdsId = admobNativeAdsId;
+    }
+
     public String getFanInterstitialAdsPlacementId() {
         return fanInterstitialAdsPlacementId;
     }
@@ -130,4 +124,11 @@ public class AdsConfig {
         this.startappAppId = startappAppId;
     }
 
+    public String getStartappDeveloperId() {
+        return startappDeveloperId;
+    }
+
+    public void setStartappDeveloperId(String startappDeveloperId) {
+        this.startappDeveloperId = startappDeveloperId;
+    }
 }

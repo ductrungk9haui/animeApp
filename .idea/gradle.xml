@@ -12,6 +12,10 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/mobiamosdk" />
+            <option value="$PROJECT_DIR$/mycardadapter-release" />
+            <option value="$PROJECT_DIR$/nativetemplates" />
+            <option value="$PROJECT_DIR$/paymentwall-android-sdk" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

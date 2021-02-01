@@ -43,6 +43,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.appodeal.ads.Appodeal;
 import com.google.android.gms.cast.framework.CastContext;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -74,6 +75,7 @@ import tvseries.koreandramaengsub.freemovieapp.models.NavigationModel;
 import tvseries.koreandramaengsub.freemovieapp.nav_fragments.CountryFragment;
 import tvseries.koreandramaengsub.freemovieapp.nav_fragments.FavoriteFragment;
 import tvseries.koreandramaengsub.freemovieapp.nav_fragments.GenreFragment;
+import tvseries.koreandramaengsub.freemovieapp.network.model.config.AdsConfig;
 import tvseries.koreandramaengsub.freemovieapp.utils.Constants;
 import tvseries.koreandramaengsub.freemovieapp.utils.PreferenceUtils;
 import tvseries.koreandramaengsub.freemovieapp.utils.RtlUtils;
@@ -130,6 +132,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         RtlUtils.setScreenDirection(this);
         mDBHelper = new DatabaseHelper(MainActivity.this);
+        AdsConfig adsConfig = new DatabaseHelper(MainActivity.this).getConfigurationData().getAdsConfig();
+        if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
+            Appodeal.setTesting(true);
+            Appodeal.disableLocationPermissionCheck();
+            Appodeal.initialize(MainActivity.this,adsConfig.getStartappAppId(),Appodeal.BANNER | Appodeal.INTERSTITIAL| Appodeal.NATIVE);
+            Appodeal.cache(MainActivity.this, Appodeal.NATIVE);
+        }
         navMenuStyle = mDBHelper.getConfigurationData().getAppConfig().getMenu();
 
         SharedPreferences sharedPreferences = getSharedPreferences("push", MODE_PRIVATE);

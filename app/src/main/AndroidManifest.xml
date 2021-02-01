@@ -19,6 +19,17 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <permission
+        android:name="${applicationId}.mobiamo.PAYMENT_BROADCAST_PERMISSION"
+        android:label="Request for sending mobiamobroadcast to Mobiamo"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="${applicationId}.mobiamo.PAYMENT_BROADCAST_PERMISSION" />
+
+    <uses-permission android:name="org.simalliance.openmobileapi.SMARTCARD" />
+
     <application
         android:name="tvseries.koreandramaengsub.freemovieapp.utils.MyAppClass"
         android:allowBackup="true"
@@ -44,6 +55,37 @@
         <activity android:name="tvseries.koreandramaengsub.freemovieapp.SearchActivity" />
         <activity android:name="tvseries.koreandramaengsub.freemovieapp.FirebaseSignUpActivity" />
         <activity android:name="tvseries.koreandramaengsub.freemovieapp.EventPaymentStripeActivity" />
+
+
+        <uses-library
+            android:name="org.simalliance.openmobileapi"
+            android:required="false" />
+
+        <activity
+            android:name="com.paymentwall.pwunifiedsdk.core.PaymentSelectionActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:theme="@style/PaymentwallSDKTheme"
+            android:windowSoftInputMode="stateVisible|adjustResize|adjustPan" />
+
+        <!-- Mobiamo -->
+        <receiver
+            android:name="com.paymentwall.pwunifiedsdk.mobiamo.core.MobiamoBroadcastReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.paymentwall.mobiamosdk.SENT_SMS_ACTION"></action>
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="com.paymentwall.pwunifiedsdk.mobiamo.core.MobiamoDialogActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <activity
+            android:name="com.paymentwall.sdk.pwlocal.ui.PwLocalActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Translucent" />
+
         <activity
             android:name="tvseries.koreandramaengsub.freemovieapp.PapalPaymentActivity"
             android:theme="@style/AppTheme.Nobar" />
@@ -143,29 +185,6 @@
             android:name="tvseries.koreandramaengsub.freemovieapp.DownloadActivity"
             android:configChanges="screenLayout|screenSize|orientation"
             android:theme="@style/AppTheme.Nobar" /> <!-- StartApp activities integration -->
-        <activity
-            android:name="com.startapp.android.publish.ads.list3d.List3DActivity"
-            android:theme="@android:style/Theme" />
-        <activity
-            android:name="com.startapp.android.publish.adsCommon.activities.OverlayActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@android:style/Theme.Translucent" />
-        <activity
-            android:name="com.startapp.android.publish.adsCommon.activities.FullScreenActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@android:style/Theme" />
-
-        <service android:name="com.startapp.android.publish.common.metaData.PeriodicMetaDataService" />
-        <service android:name="com.startapp.android.publish.common.metaData.InfoEventService" />
-        <service
-            android:name="com.startapp.android.publish.common.metaData.PeriodicJobService"
-            android:permission="android.permission.BIND_JOB_SERVICE" />
-
-        <receiver android:name="com.startapp.android.publish.common.metaData.BootCompleteListener">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
     </application>
 
 </manifest>

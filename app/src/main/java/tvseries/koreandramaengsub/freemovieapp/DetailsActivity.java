@@ -58,10 +58,18 @@ import androidx.work.Data;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
+import com.appodeal.ads.Appodeal;
+import com.appodeal.ads.Native;
+import com.appodeal.ads.NativeAd;
+import com.appodeal.ads.NativeAdView;
+import com.appodeal.ads.NativeCallbacks;
+import com.appodeal.ads.NativeMediaView;
+import com.appodeal.ads.native_ad.views.NativeAdViewContentStream;
 import com.balysv.materialripple.MaterialRippleLayout;
 import com.downloader.PRDownloader;
 import com.downloader.Status;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.ads.nativetemplates.TemplateView;
 import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.Format;
@@ -187,6 +195,7 @@ import tvseries.koreandramaengsub.freemovieapp.utils.RtlUtils;
 import tvseries.koreandramaengsub.freemovieapp.utils.ToastMsg;
 import tvseries.koreandramaengsub.freemovieapp.utils.Tools;
 import tvseries.koreandramaengsub.freemovieapp.utils.ads.BannerAds;
+import tvseries.koreandramaengsub.freemovieapp.utils.ads.NativeAds;
 import tvseries.koreandramaengsub.freemovieapp.utils.ads.PopUpAds;
 import tvseries.koreandramaengsub.freemovieapp.utils.ads.VideoRewardAds;
 
@@ -340,6 +349,8 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     TextView mSeriesTitleTv;
     @BindView(R.id.linear_share)
     View mTopShareLayout;
+    @BindView(R.id.admob_nativead_template)
+    TemplateView admobNativeAdView;
     private Unbinder mUnbinder;
     private ContinueWatchingViewModel mContinueViewModel;
     private boolean isFromContinueWatching = false;
@@ -1067,12 +1078,22 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         if (PreferenceUtils.isLoggedIn(this) && PreferenceUtils.isActivePlan(this)) return;
         if (adsConfig.getAdsEnable().equals("1")) {
             if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                BannerAds.ShowAdmobBannerAds(this, mAdView);
+                //BannerAds.ShowAdmobBannerAds(this, mAdView);
                 VideoRewardAds.prepareAd(this);
                 //PopUpAds.ShowAdmobInterstitialAds(this);
+
+                admobNativeAdView.setVisibility(View.VISIBLE);
+                NativeAds.showAdmobNativeAds(DetailsActivity.this, admobNativeAdView);
             } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
                 //   PopUpAds.showStartappInterstitialAds(DetailsActivity.this);
                 BannerAds.showAppodealBanner(DetailsActivity.this, R.id.appodealBannerView);
+
+                Appodeal.cache(DetailsActivity.this, Appodeal.NATIVE);
+               // List<NativeAd> loadedNativeAds = Appodeal.getNativeAds(1)[0];
+
+                //NativeAd nativeAd = Appodeal.getNativeAds(1)[0];
+               // NativeAdViewContentStream nativeAdView = (NativeAdViewContentStream) findViewById(R.id.native_ad_view_content_stream);
+                //nativeAdView.setNativeAd(loadedNativeAds);
             } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.NETWORK_AUDIENCE)) {
                 BannerAds.showFANBanner(this, mAdView);
                 PopUpAds.showFANInterstitialAds(DetailsActivity.this);
@@ -1080,6 +1101,41 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
         }
     }
+
+    public void loadNativeAds() {
+        Appodeal.setRequiredNativeMediaAssetType(Native.MediaAssetType.ICON);
+        Appodeal.setNativeCallbacks(new NativeCallbacks() {
+            @Override
+            public void onNativeLoaded() {
+                Toast.makeText(DetailsActivity.this, "onNativeLoaded", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNativeFailedToLoad() {
+                Toast.makeText(DetailsActivity.this, "onNativeFailedToLoad", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNativeShown(NativeAd nativeAd) {
+                Toast.makeText(DetailsActivity.this, "onNativeShown", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNativeShowFailed(NativeAd nativeAd) {
+
+            }
+
+            @Override
+            public void onNativeClicked(NativeAd nativeAd) {
+                Toast.makeText(DetailsActivity.this, "onNativeClicked", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNativeExpired() {
+                Toast.makeText(DetailsActivity.this, "onNativeExpired", Toast.LENGTH_SHORT).show();
+            }
+        });
+    };
 
     private void initGetData() {
         if (!mType.equals("tv")) {

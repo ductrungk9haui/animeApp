@@ -22,8 +22,9 @@ public class PaymentBottomShitDialog extends BottomSheetDialogFragment {
     public static final String PAYPAL = "paypal";
     public static final String STRIP = "strip";
     public static final String RAZOR_PAY = "razorpay";
+    public static final String MOBIAMO_PAY = "mobiamo";
     private DatabaseHelper databaseHelper;
-
+    private boolean checkmobiamo=true;
     private OnBottomShitClickListener bottomShitClickListener;
 
     @Nullable
@@ -33,11 +34,13 @@ public class PaymentBottomShitDialog extends BottomSheetDialogFragment {
                 false);
         databaseHelper = new DatabaseHelper(getContext());
         PaymentConfig config = databaseHelper.getConfigurationData().getPaymentConfig();
-        CardView paypalBt, stripBt, razorpayBt;
+        CardView paypalBt, stripBt, razorpayBt, mobiamoBt;
         paypalBt = view.findViewById(R.id.paypal_btn);
         stripBt = view.findViewById(R.id.stripe_btn);
         razorpayBt = view.findViewById(R.id.razorpay_btn);
+        mobiamoBt=view.findViewById(R.id.mobiamobtn);
         Space space = view.findViewById(R.id.space2);
+        Space space3 = view.findViewById(R.id.space3);
 
         if (!config.getPaypalEnable()) {
             paypalBt.setVisibility(View.GONE);
@@ -48,8 +51,15 @@ public class PaymentBottomShitDialog extends BottomSheetDialogFragment {
             stripBt.setVisibility(View.GONE);
             space.setVisibility(View.GONE);
         }
-        if (!config.getRazorpayEnable())
+        if (!config.getRazorpayEnable()){
             razorpayBt.setVisibility(View.GONE);
+            space3.setVisibility(View.GONE);
+        }
+        if (!checkmobiamo){
+            mobiamoBt.setVisibility(View.GONE);
+            space3.setVisibility(View.GONE);
+        }
+
 
         paypalBt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +82,12 @@ public class PaymentBottomShitDialog extends BottomSheetDialogFragment {
             }
         });
 
+        mobiamoBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bottomShitClickListener.onBottomShitClick(MOBIAMO_PAY);
+            }
+        });
 
         return view;
 

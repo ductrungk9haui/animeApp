@@ -1,5 +1,6 @@
 package tvseries.koreandramaengsub.freemovieapp.database;
 
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -37,6 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String CONFIG_COLUMN_ADMOB_APP_ID = "admob_app_id";
     private static final String CONFIG_COLUMN_ADMOB_BANNER_ID = "admob_banner_id";
     private static final String CONFIG_COLUMN_ADMOB_INTERSTITIAL_ID = "admob_interstitial_id";
+    private static final String CONFIG_COLUMN_ADMOB_NATIVE_ID = "admob_native_id";
     private static final String CONFIG_COLUMN_ADMOB_REWARDEDVIDEO_ID = "admob_rewardedvideo_id";
     private static final String CONFIG_COLUMN_ADMOB_APPOPEN_ID = "admob_appopen_ads_id";
     private static final String CONFIG_COLUMN_FAN_BANNER_ID = "fan_banner_id";
@@ -189,6 +191,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 CONFIG_COLUMN_ADMOB_APP_ID + " TEXT," +
                 CONFIG_COLUMN_ADMOB_BANNER_ID + " TEXT," +
                 CONFIG_COLUMN_ADMOB_INTERSTITIAL_ID + " TEXT," +
+                CONFIG_COLUMN_ADMOB_NATIVE_ID + " TEXT," +
                 CONFIG_COLUMN_ADMOB_REWARDEDVIDEO_ID + " TEXT," +
                 CONFIG_COLUMN_ADMOB_APPOPEN_ID + " TEXT," +
                 CONFIG_COLUMN_FAN_BANNER_ID + " TEXT," +
@@ -226,8 +229,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(CONFIG_COLUMN_ADMOB_APP_ID, configuration.getAdsConfig().getAdmobAppId());
         contentValues.put(CONFIG_COLUMN_ADMOB_BANNER_ID, configuration.getAdsConfig().getAdmobBannerAdsId());
         contentValues.put(CONFIG_COLUMN_ADMOB_INTERSTITIAL_ID, configuration.getAdsConfig().getAdmobInterstitialAdsId());
-        contentValues.put(CONFIG_COLUMN_ADMOB_REWARDEDVIDEO_ID, configuration.getAdsConfig().getAdmobRewardedVideoAdsId());
-        contentValues.put(CONFIG_COLUMN_ADMOB_APPOPEN_ID, configuration.getAdsConfig().getAdmobAppOpenAdsId());
+        contentValues.put(CONFIG_COLUMN_ADMOB_INTERSTITIAL_ID, configuration.getAdsConfig().getAdmobNativeAdsId());
+        //contentValues.put(CONFIG_COLUMN_ADMOB_REWARDEDVIDEO_ID, configuration.getAdsConfig().getAdmobRewardedVideoAdsId());
+        //contentValues.put(CONFIG_COLUMN_ADMOB_APPOPEN_ID, configuration.getAdsConfig().getAdmobAppOpenAdsId());
         contentValues.put(CONFIG_COLUMN_FAN_BANNER_ID, configuration.getAdsConfig().getFanBannerAdsPlacementId());
         contentValues.put(CONFIG_COLUMN_FAN_NATIVE_ID, configuration.getAdsConfig().getFanNativeAdsPlacementId());
         contentValues.put(CONFIG_COLUMN_FAN_INTERSTITIAL_ID, configuration.getAdsConfig().getFanInterstitialAdsPlacementId());
@@ -277,8 +281,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     adsConfig.setAdmobAppId(cursor.getString(cursor.getColumnIndex(CONFIG_COLUMN_ADMOB_APP_ID)));
                     adsConfig.setAdmobBannerAdsId(cursor.getString(cursor.getColumnIndex(CONFIG_COLUMN_ADMOB_BANNER_ID)));
                     adsConfig.setAdmobInterstitialAdsId(cursor.getString(cursor.getColumnIndex(CONFIG_COLUMN_ADMOB_INTERSTITIAL_ID)));
-                    adsConfig.setAdmobRewardedVideoAdsId(cursor.getString(cursor.getColumnIndex(CONFIG_COLUMN_ADMOB_REWARDEDVIDEO_ID)));
-                    adsConfig.setAdmobAppOpenAdsId(cursor.getString(cursor.getColumnIndex(CONFIG_COLUMN_ADMOB_APPOPEN_ID)));
+                    adsConfig.setAdmobNativeAdsId(cursor.getString(cursor.getColumnIndex(CONFIG_COLUMN_ADMOB_INTERSTITIAL_ID)));
+                    //adsConfig.setAdmobRewardedVideoAdsId(cursor.getString(cursor.getColumnIndex(CONFIG_COLUMN_ADMOB_REWARDEDVIDEO_ID)));
+                    //adsConfig.setAdmobAppOpenAdsId(cursor.getString(cursor.getColumnIndex(CONFIG_COLUMN_ADMOB_APPOPEN_ID)));
                     adsConfig.setFanNativeAdsPlacementId(cursor.getString(cursor.getColumnIndex(CONFIG_COLUMN_FAN_NATIVE_ID)));
                     adsConfig.setFanBannerAdsPlacementId(cursor.getString(cursor.getColumnIndex(CONFIG_COLUMN_FAN_BANNER_ID)));
                     adsConfig.setFanInterstitialAdsPlacementId(cursor.getString(cursor.getColumnIndex(CONFIG_COLUMN_FAN_INTERSTITIAL_ID)));
@@ -344,8 +349,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(CONFIG_COLUMN_ADMOB_APP_ID, configuration.getAdsConfig().getAdmobAppId());
         contentValues.put(CONFIG_COLUMN_ADMOB_BANNER_ID, configuration.getAdsConfig().getAdmobBannerAdsId());
         contentValues.put(CONFIG_COLUMN_ADMOB_INTERSTITIAL_ID, configuration.getAdsConfig().getAdmobInterstitialAdsId());
-        contentValues.put(CONFIG_COLUMN_ADMOB_REWARDEDVIDEO_ID, configuration.getAdsConfig().getAdmobRewardedVideoAdsId());
-        contentValues.put(CONFIG_COLUMN_ADMOB_APPOPEN_ID, configuration.getAdsConfig().getAdmobAppOpenAdsId());
+        contentValues.put(CONFIG_COLUMN_ADMOB_INTERSTITIAL_ID, configuration.getAdsConfig().getAdmobInterstitialAdsId());
+       // contentValues.put(CONFIG_COLUMN_ADMOB_REWARDEDVIDEO_ID, configuration.getAdsConfig().getAdmobRewardedVideoAdsId());
+       // contentValues.put(CONFIG_COLUMN_ADMOB_APPOPEN_ID, configuration.getAdsConfig().getAdmobAppOpenAdsId());
         contentValues.put(CONFIG_COLUMN_FAN_BANNER_ID, configuration.getAdsConfig().getFanBannerAdsPlacementId());
         contentValues.put(CONFIG_COLUMN_FAN_NATIVE_ID, configuration.getAdsConfig().getFanNativeAdsPlacementId());
         contentValues.put(CONFIG_COLUMN_FAN_INTERSTITIAL_ID, configuration.getAdsConfig().getFanInterstitialAdsPlacementId());
