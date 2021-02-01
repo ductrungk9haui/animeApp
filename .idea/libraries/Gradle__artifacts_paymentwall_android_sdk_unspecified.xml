@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Gradle: artifacts:paymentwall-android-sdk:unspecified">
     <ANNOTATIONS>
-      <root url="jar://$PROJECT_DIR$/paymentwall-android-sdk/build/.transforms/b1900f7a77121145bba2f6d3aa82fb3f/jetified-paymentwall-android-sdk/annotations.zip!/" />
+      <root url="jar://$PROJECT_DIR$/paymentwall-android-sdk/build/.transforms/e92291047b9e5cf92d2104e1a001d5eb/jetified-paymentwall-android-sdk/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/paymentwall-android-sdk/build/.transforms/b1900f7a77121145bba2f6d3aa82fb3f/jetified-paymentwall-android-sdk/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/paymentwall-android-sdk/build/.transforms/b1900f7a77121145bba2f6d3aa82fb3f/jetified-paymentwall-android-sdk/res" />
-      <root url="file://$PROJECT_DIR$/paymentwall-android-sdk/build/.transforms/b1900f7a77121145bba2f6d3aa82fb3f/jetified-paymentwall-android-sdk/AndroidManifest.xml" />
-      <root url="jar://$PROJECT_DIR$/paymentwall-android-sdk/build/.transforms/b1900f7a77121145bba2f6d3aa82fb3f/jetified-paymentwall-android-sdk/jars/libs/jsoup-1.10.3.jar!/" />
+      <root url="file://$PROJECT_DIR$/paymentwall-android-sdk/build/.transforms/e92291047b9e5cf92d2104e1a001d5eb/jetified-paymentwall-android-sdk/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/paymentwall-android-sdk/build/.transforms/e92291047b9e5cf92d2104e1a001d5eb/jetified-paymentwall-android-sdk/jars/classes.jar!/" />
+      <root url="jar://$PROJECT_DIR$/paymentwall-android-sdk/build/.transforms/e92291047b9e5cf92d2104e1a001d5eb/jetified-paymentwall-android-sdk/jars/libs/jsoup-1.10.3.jar!/" />
+      <root url="file://$PROJECT_DIR$/paymentwall-android-sdk/build/.transforms/e92291047b9e5cf92d2104e1a001d5eb/jetified-paymentwall-android-sdk/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

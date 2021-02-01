@@ -5,9 +5,9 @@
     "environmentVariables": []
   },
   "cmake": {
-    "cmakeArtifactsBaseFolder": "C:\\Users\\khaih\\StudioProjects\\animeApp\\app\\.cxx\\cmake\\release\\x86",
-    "cmakeServerLogFile": "C:\\Users\\khaih\\StudioProjects\\animeApp\\app\\.cxx\\cmake\\release\\x86\\cmake_server_log.txt",
-    "cmakeWrappingBaseFolder": "C:\\Users\\khaih\\StudioProjects\\animeApp\\app\\.cxx\\cxx\\release\\x86",
+    "cmakeArtifactsBaseFolder": "D:\\Android\\animeApp\\app\\.cxx\\cmake\\release\\x86",
+    "cmakeServerLogFile": "D:\\Android\\animeApp\\app\\.cxx\\cmake\\release\\x86\\cmake_server_log.txt",
+    "cmakeWrappingBaseFolder": "D:\\Android\\animeApp\\app\\.cxx\\cxx\\release\\x86",
     "effectiveConfiguration": {
       "name": "traditional-android-studio-cmake-environment",
       "description": "Composite reified CMakeSettings configuration",
@@ -15,13 +15,13 @@
       "inheritEnvironments": [
         "ndk"
       ],
-      "buildRoot": "C:\\Users\\khaih\\StudioProjects\\animeApp\\app\\.cxx\\cmake\\release\\x86",
-      "cmakeToolchain": "C:\\Users\\khaih\\AppData\\Local\\Android\\Sdk\\ndk-bundle\\build\\cmake\\android.toolchain.cmake",
-      "cmakeExecutable": "C:\\Users\\khaih\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\cmake.exe",
+      "buildRoot": "D:\\Android\\animeApp\\app\\.cxx\\cmake\\release\\x86",
+      "cmakeToolchain": "C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\ndk\\21.3.6528147\\build\\cmake\\android.toolchain.cmake",
+      "cmakeExecutable": "C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\cmake.exe",
       "variables": [
         {
           "name": "CMAKE_FIND_ROOT_PATH",
-          "value": "C:\\Users\\khaih\\StudioProjects\\animeApp\\app\\.cxx\\cmake\\release\\prefab\\x86\\prefab"
+          "value": "D:\\Android\\animeApp\\app\\.cxx\\cmake\\release\\prefab\\x86\\prefab"
         },
         {
           "name": "CMAKE_BUILD_TYPE",
@@ -29,7 +29,7 @@
         },
         {
           "name": "CMAKE_TOOLCHAIN_FILE",
-          "value": "C:\\Users\\khaih\\AppData\\Local\\Android\\Sdk\\ndk-bundle\\build\\cmake\\android.toolchain.cmake"
+          "value": "C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\ndk\\21.3.6528147\\build\\cmake\\android.toolchain.cmake"
         },
         {
           "name": "ANDROID_ABI",
@@ -37,7 +37,7 @@
         },
         {
           "name": "ANDROID_NDK",
-          "value": "C:\\Users\\khaih\\AppData\\Local\\Android\\Sdk\\ndk-bundle"
+          "value": "C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\ndk\\21.3.6528147"
         },
         {
           "name": "ANDROID_PLATFORM",
@@ -49,7 +49,7 @@
         },
         {
           "name": "CMAKE_ANDROID_NDK",
-          "value": "C:\\Users\\khaih\\AppData\\Local\\Android\\Sdk\\ndk-bundle"
+          "value": "C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\ndk\\21.3.6528147"
         },
         {
           "name": "CMAKE_EXPORT_COMPILE_COMMANDS",
@@ -57,11 +57,11 @@
         },
         {
           "name": "CMAKE_LIBRARY_OUTPUT_DIRECTORY",
-          "value": "C:\\Users\\khaih\\StudioProjects\\animeApp\\app\\build\\intermediates\\cmake\\release\\obj\\x86"
+          "value": "D:\\Android\\animeApp\\app\\build\\intermediates\\cmake\\release\\obj\\x86"
         },
         {
           "name": "CMAKE_MAKE_PROGRAM",
-          "value": "C:\\Users\\khaih\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe"
+          "value": "C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe"
         },
         {
           "name": "CMAKE_SYSTEM_NAME",
@@ -74,14 +74,14 @@
       ]
     }
   },
-  "cxxBuildFolder": "C:\\Users\\khaih\\StudioProjects\\animeApp\\app\\.cxx\\cmake\\release\\x86",
+  "cxxBuildFolder": "D:\\Android\\animeApp\\app\\.cxx\\cmake\\release\\x86",
   "info": {
     "abi": "X86",
     "bitness": 32,
     "deprecated": false,
     "default": true
   },
-  "originalCxxBuildFolder": "C:\\Users\\khaih\\StudioProjects\\animeApp\\app\\.cxx\\cmake\\release\\x86",
+  "originalCxxBuildFolder": "D:\\Android\\animeApp\\app\\.cxx\\cmake\\release\\x86",
   "variant": {
     "buildSystemArgumentList": [],
     "buildTargetSet": [],
@@ -95,24 +95,24 @@
     "module": {
       "buildSystem": "CMAKE",
       "cmake": {
-        "cmakeExe": "C:\\Users\\khaih\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\cmake.exe",
+        "cmakeExe": "C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\cmake.exe",
         "minimumCmakeVersion": "3.10.2",
-        "ninjaExe": "C:\\Users\\khaih\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe"
+        "ninjaExe": "C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe"
       },
-      "cmakeToolchainFile": "C:\\Users\\khaih\\AppData\\Local\\Android\\Sdk\\ndk-bundle\\build\\cmake\\android.toolchain.cmake",
-      "cxxFolder": "C:\\Users\\khaih\\StudioProjects\\animeApp\\app\\.cxx",
+      "cmakeToolchainFile": "C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\ndk\\21.3.6528147\\build\\cmake\\android.toolchain.cmake",
+      "cxxFolder": "D:\\Android\\animeApp\\app\\.cxx",
       "gradleModulePathName": ":app",
-      "intermediatesFolder": "C:\\Users\\khaih\\StudioProjects\\animeApp\\app\\build\\intermediates",
-      "makeFile": "C:\\Users\\khaih\\StudioProjects\\animeApp\\app\\src\\main\\jni\\CMakeLists.txt",
-      "moduleBuildFile": "C:\\Users\\khaih\\StudioProjects\\animeApp\\app\\build.gradle",
-      "moduleRootFolder": "C:\\Users\\khaih\\StudioProjects\\animeApp\\app",
+      "intermediatesFolder": "D:\\Android\\animeApp\\app\\build\\intermediates",
+      "makeFile": "D:\\Android\\animeApp\\app\\src\\main\\jni\\CMakeLists.txt",
+      "moduleBuildFile": "D:\\Android\\animeApp\\app\\build.gradle",
+      "moduleRootFolder": "D:\\Android\\animeApp\\app",
       "ndkDefaultAbiList": [
         "ARMEABI_V7A",
         "ARM64_V8A",
         "X86",
         "X86_64"
       ],
-      "ndkFolder": "C:\\Users\\khaih\\AppData\\Local\\Android\\Sdk\\ndk-bundle",
+      "ndkFolder": "C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\ndk\\21.3.6528147",
       "ndkMetaAbiList": [
         {
           "abi": "ARMEABI_V7A",
@@ -170,29 +170,29 @@
       "ndkDefaultStl": "LIBCXX_STATIC",
       "ndkVersion": "21.3.6528147",
       "project": {
-        "compilerSettingsCacheFolder": "C:\\Users\\khaih\\StudioProjects\\animeApp\\.cxx",
-        "cxxFolder": "C:\\Users\\khaih\\StudioProjects\\animeApp\\.cxx",
+        "compilerSettingsCacheFolder": "D:\\Android\\animeApp\\.cxx",
+        "cxxFolder": "D:\\Android\\animeApp\\.cxx",
         "isBuildOnlyTargetAbiEnabled": true,
         "isCmakeBuildCohabitationEnabled": false,
         "isNativeCompilerSettingsCacheEnabled": false,
-        "rootBuildGradleFolder": "C:\\Users\\khaih\\StudioProjects\\animeApp",
-        "sdkFolder": "C:\\Users\\khaih\\AppData\\Local\\Android\\Sdk",
+        "rootBuildGradleFolder": "D:\\Android\\animeApp",
+        "sdkFolder": "C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk",
         "isPrefabEnabled": false
       },
       "splitsAbiFilterSet": [],
       "stlSharedObjectMap": {
         "LIBCXX_SHARED": {
-          "ARMEABI_V7A": "C:\\Users\\khaih\\AppData\\Local\\Android\\Sdk\\ndk-bundle\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\arm-linux-androideabi\\libc++_shared.so",
-          "ARM64_V8A": "C:\\Users\\khaih\\AppData\\Local\\Android\\Sdk\\ndk-bundle\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\aarch64-linux-android\\libc++_shared.so",
-          "X86": "C:\\Users\\khaih\\AppData\\Local\\Android\\Sdk\\ndk-bundle\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\i686-linux-android\\libc++_shared.so",
-          "X86_64": "C:\\Users\\khaih\\AppData\\Local\\Android\\Sdk\\ndk-bundle\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\x86_64-linux-android\\libc++_shared.so"
+          "ARMEABI_V7A": "C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\ndk\\21.3.6528147\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\arm-linux-androideabi\\libc++_shared.so",
+          "ARM64_V8A": "C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\ndk\\21.3.6528147\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\aarch64-linux-android\\libc++_shared.so",
+          "X86": "C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\ndk\\21.3.6528147\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\i686-linux-android\\libc++_shared.so",
+          "X86_64": "C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\ndk\\21.3.6528147\\toolchains\\llvm\\prebuilt\\windows-x86_64\\sysroot\\usr\\lib\\x86_64-linux-android\\libc++_shared.so"
         },
         "LIBCXX_STATIC": {},
         "NONE": {},
         "SYSTEM": {}
       }
     },
-    "objFolder": "C:\\Users\\khaih\\StudioProjects\\animeApp\\app\\build\\intermediates\\cmake\\release\\obj",
+    "objFolder": "D:\\Android\\animeApp\\app\\build\\intermediates\\cmake\\release\\obj",
     "variantName": "release",
     "validAbiList": [
       "ARMEABI_V7A",
@@ -200,8 +200,8 @@
       "X86",
       "X86_64"
     ],
-    "prefabDirectory": "C:\\Users\\khaih\\StudioProjects\\animeApp\\app\\.cxx\\cmake\\release\\prefab",
+    "prefabDirectory": "D:\\Android\\animeApp\\app\\.cxx\\cmake\\release\\prefab",
     "prefabPackageDirectoryList": []
   },
-  "prefabFolder": "C:\\Users\\khaih\\StudioProjects\\animeApp\\app\\.cxx\\cmake\\release\\prefab\\x86"
+  "prefabFolder": "D:\\Android\\animeApp\\app\\.cxx\\cmake\\release\\prefab\\x86"
 }
