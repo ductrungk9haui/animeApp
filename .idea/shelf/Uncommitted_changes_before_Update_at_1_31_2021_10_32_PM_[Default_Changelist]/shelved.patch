@@ -1,0 +1,1457 @@
+Index: app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/model/config/AdsConfig.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package tvseries.koreandramaengsub.freemovieapp.network.model.config;\r\n\r\nimport com.google.gson.annotations.Expose;\r\nimport com.google.gson.annotations.SerializedName;\r\n\r\npublic class AdsConfig {\r\n\r\n    @SerializedName(\"ads_enable\")\r\n    @Expose\r\n    private String adsEnable;\r\n    @SerializedName(\"mobile_ads_network\")\r\n    @Expose\r\n    private String mobileAdsNetwork;\r\n    @SerializedName(\"admob_app_id\")\r\n    @Expose\r\n    private String admobAppId;\r\n    @SerializedName(\"admob_banner_ads_id\")\r\n    @Expose\r\n    private String admobBannerAdsId;\r\n    @SerializedName(\"admob_interstitial_ads_id\")\r\n    @Expose\r\n    private String admobInterstitialAdsId;\r\n    @SerializedName(\"admob_reawardedvideo_ads_id\")\r\n    @Expose\r\n    private String admobRewardedVideoAdsId;\r\n    @SerializedName(\"admob_appopen_ads_id\")\r\n    @Expose\r\n    private String admobAppOpenAdsId;\r\n    @SerializedName(\"fan_native_ads_placement_id\")\r\n    @Expose\r\n    private String fanNativeAdsPlacementId;\r\n    @SerializedName(\"fan_banner_ads_placement_id\")\r\n    @Expose\r\n    private String fanBannerAdsPlacementId;\r\n    @SerializedName(\"fan_interstitial_ads_placement_id\")\r\n    @Expose\r\n    private String fanInterstitialAdsPlacementId;\r\n    @SerializedName(\"startapp_app_id\")\r\n    @Expose\r\n    private String startappAppId;\r\n\r\n    public String getAdmobAppOpenAdsId() {\r\n        return admobAppOpenAdsId;\r\n    }\r\n\r\n    public void setAdmobAppOpenAdsId(String admobAppOpenAdsId) {\r\n        this.admobAppOpenAdsId = admobAppOpenAdsId;\r\n    }\r\n\r\n    public String getAdmobRewardedVideoAdsId() {\r\n        return admobRewardedVideoAdsId;\r\n    }\r\n\r\n    public void setAdmobRewardedVideoAdsId(String admobRewardedVideoAdsId) {\r\n        this.admobRewardedVideoAdsId = admobRewardedVideoAdsId;\r\n    }\r\n\r\n    public AdsConfig() {\r\n    }\r\n\r\n    public String getAdsEnable() {\r\n        return adsEnable;\r\n    }\r\n\r\n    public void setAdsEnable(String adsEnable) {\r\n        this.adsEnable = adsEnable;\r\n    }\r\n\r\n    public String getMobileAdsNetwork() {\r\n        return mobileAdsNetwork;\r\n    }\r\n\r\n    public void setMobileAdsNetwork(String mobileAdsNetwork) {\r\n        this.mobileAdsNetwork = mobileAdsNetwork;\r\n    }\r\n\r\n    public String getAdmobAppId() {\r\n        return admobAppId;\r\n    }\r\n\r\n    public void setAdmobAppId(String admobAppId) {\r\n        this.admobAppId = admobAppId;\r\n    }\r\n\r\n    public String getAdmobBannerAdsId() {\r\n        return admobBannerAdsId;\r\n    }\r\n\r\n    public void setAdmobBannerAdsId(String admobBannerAdsId) {\r\n        this.admobBannerAdsId = admobBannerAdsId;\r\n    }\r\n\r\n    public String getAdmobInterstitialAdsId() {\r\n        return admobInterstitialAdsId;\r\n    }\r\n\r\n    public void setAdmobInterstitialAdsId(String admobInterstitialAdsId) {\r\n        this.admobInterstitialAdsId = admobInterstitialAdsId;\r\n    }\r\n\r\n    public String getFanNativeAdsPlacementId() {\r\n        return fanNativeAdsPlacementId;\r\n    }\r\n\r\n    public void setFanNativeAdsPlacementId(String fanNativeAdsPlacementId) {\r\n        this.fanNativeAdsPlacementId = fanNativeAdsPlacementId;\r\n    }\r\n\r\n    public String getFanBannerAdsPlacementId() {\r\n        return fanBannerAdsPlacementId;\r\n    }\r\n\r\n    public void setFanBannerAdsPlacementId(String fanBannerAdsPlacementId) {\r\n        this.fanBannerAdsPlacementId = fanBannerAdsPlacementId;\r\n    }\r\n\r\n    public String getFanInterstitialAdsPlacementId() {\r\n        return fanInterstitialAdsPlacementId;\r\n    }\r\n\r\n    public void setFanInterstitialAdsPlacementId(String fanInterstitialAdsPlacementId) {\r\n        this.fanInterstitialAdsPlacementId = fanInterstitialAdsPlacementId;\r\n    }\r\n\r\n    public String getStartappAppId() {\r\n        return startappAppId;\r\n    }\r\n\r\n    public void setStartappAppId(String startappAppId) {\r\n        this.startappAppId = startappAppId;\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/model/config/AdsConfig.java	(revision 03868c21a5a38d43e5a5983a55931ced756f0658)
++++ app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/model/config/AdsConfig.java	(date 1612104698276)
+@@ -20,6 +20,9 @@
+     @SerializedName("admob_interstitial_ads_id")
+     @Expose
+     private String admobInterstitialAdsId;
++    @SerializedName("admob_native_ads_id")
++    @Expose
++    private String admobNativeAdsId;
+     @SerializedName("admob_reawardedvideo_ads_id")
+     @Expose
+     private String admobRewardedVideoAdsId;
+@@ -47,6 +50,14 @@
+         this.admobAppOpenAdsId = admobAppOpenAdsId;
+     }
+ 
++    public String getAdmobNativeAdsId() {
++        return admobNativeAdsId;
++    }
++
++    public void setAdmobNativeAdsId(String admobNativeAdsId) {
++        this.admobNativeAdsId = admobNativeAdsId;
++    }
++
+     public String getAdmobRewardedVideoAdsId() {
+         return admobRewardedVideoAdsId;
+     }
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>buildscript {\r\n    repositories {\r\n        maven { url 'https://plugins.gradle.org/m2/' }\r\n    }\r\n    dependencies {\r\n        classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:[0.12.4, 0.99.99]'\r\n    }\r\n}\r\napply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'\r\n\r\nrepositories {\r\n    mavenCentral()\r\n    jcenter()\r\n    maven{ url 'https://maven.google.com'}\r\n    maven { url 'https://dl.bintray.com/ironsource-mobile/android-sdk' }\r\n    maven { url 'https://adcolony.bintray.com/AdColony' }\r\n\r\n}\r\napply plugin: 'com.android.application'\r\napply plugin: 'com.google.gms.google-services'\r\nandroid {\r\n\r\n\r\n    // this is for signed apk generate problem for lint\r\n    /*lintOptions {\r\n        checkReleaseBuilds false\r\n    }*/\r\n\r\n    compileSdkVersion 30\r\n    buildToolsVersion '30.0.2'\r\n    defaultConfig {\r\n        applicationId \"tvseries.koreandramaengsub.freemovieapp\"\r\n        minSdkVersion 21\r\n        targetSdkVersion 30\r\n        versionCode 1\r\n        versionName \"1.0.1\"\r\n        multiDexEnabled true\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n        vectorDrawables.useSupportLibrary = true\r\n        manifestPlaceholders = [\r\n                onesignal_app_id: '8f8f1416-8631-4856-809c-9a2dffbf1592',\r\n                // Project number pulled from dashboard, local value is ignored.\r\n                onesignal_google_project_number: 'REMOTE'\r\n        ]\r\n    }\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'\r\n        }\r\n\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility JavaVersion.VERSION_1_8\r\n        targetCompatibility JavaVersion.VERSION_1_8\r\n    }\r\n\r\n}\r\n\r\ndependencies {\r\n    def room_version = \"2.2.5\"\r\n    def lifecycle_version = '2.2.0'\r\n    implementation fileTree(dir: 'libs', include: ['*.jar'])\r\n    implementation 'androidx.appcompat:appcompat:1.2.0'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'\r\n    implementation 'androidx.legacy:legacy-support-v4:1.0.0'\r\n\r\n    implementation 'com.google.android.play:core:1.8.3'\r\n\r\n//appodeal\r\n    implementation 'com.appodeal.ads:sdk:2.7.1.+'\r\n\r\n    //sdk mediation\r\n    //applovin\r\n    implementation 'com.google.ads.mediation:applovin:9.14.5.0'\r\n    //mopub\r\n    implementation 'com.google.ads.mediation:mopub:5.15.0.0'\r\n    //unity ads\r\n    implementation 'com.google.ads.mediation:unity:3.5.0.0'\r\n    //adcolony\r\n    implementation 'com.google.ads.mediation:adcolony:4.3.0.0'\r\n    //tapjoy\r\n    implementation 'com.google.ads.mediation:tapjoy:12.7.1.0'\r\n    //inmobi\r\n    implementation 'com.google.ads.mediation:inmobi:9.1.1.0'\r\n    //ironsource\r\n    implementation 'com.google.ads.mediation:ironsource:7.0.3.1.0'\r\n    //fyber\r\n   // implementation 'com.google.ads.mediation:fyber:7.7.3.0'\r\n    //facebook\r\n    implementation 'com.google.ads.mediation:facebook:6.2.0.0'\r\n    //Room\r\n    implementation \"androidx.room:room-runtime:$room_version\"\r\n    annotationProcessor \"androidx.room:room-compiler:$room_version\"\r\n\r\n    implementation \"androidx.room:room-rxjava2:$room_version\"\r\n    implementation \"io.reactivex.rxjava2:rxandroid:2.1.1\"\r\n    //Auto Download and Update\r\n    implementation 'com.github.Piashsarker:AndroidAppUpdateLibrary:1.0.3'\r\n    // ViewModel\r\n    implementation \"androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version\"\r\n\r\n\r\n\r\n    testImplementation 'junit:junit:4.13.1'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.2'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'\r\n    //firebase\r\n    implementation 'com.google.firebase:firebase-analytics:18.0.0'\r\n    implementation 'com.google.firebase:firebase-messaging:21.0.0'\r\n    //firebase auth\r\n    implementation 'com.firebaseui:firebase-ui-auth:7.1.1'\r\n    implementation 'com.google.firebase:firebase-auth:20.0.1'\r\n    // Required only if Facebook login support is required\r\n    // Find the latest Facebook SDK releases here: https://goo.gl/Ce5L94\r\n    implementation 'com.facebook.android:facebook-android-sdk:8.1.0'\r\n\r\n    implementation 'com.google.android.material:material:1.2.1'\r\n    implementation 'com.google.android:flexbox:0.3.2'                  // google flexible box\r\n    implementation 'com.crystal:crystalrangeseekbar:1.1.3'             // range seek bar\r\n    implementation 'androidx.vectordrawable:vectordrawable:1.1.0'\r\n    implementation 'androidx.browser:browser:1.2.0'\r\n    implementation 'androidx.cardview:cardview:1.0.0'\r\n    implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha06'\r\n    implementation \"android.arch.work:work-runtime:1.0.1\"\r\n    //implementation 'com.crystal:crystalrangeseekbar:1.1.3'\r\n    //implementation 'com.github.Innovattic:range-seek-bar:v1.0.6'\r\n    //implementation 'com.github.Chrisvin:RubberPicker:v1.1'\r\n    //implementation 'com.github.stfalcon:StfalconPriceRangeBar:0.1.1'\r\n    //implementation 'com.github.Jay-Goo:RangeSeekBar:v3.0.0'\r\n    implementation 'com.makeramen:roundedimageview:2.3.0'\r\n    implementation 'com.orhanobut:dialogplus:1.11@aar'\r\n    // shimmer layout\r\n    implementation 'com.facebook.shimmer:shimmer:0.4.0'\r\n    implementation 'com.balysv:material-ripple:1.0.2'\r\n    // ripple effect\r\n\r\n    implementation 'com.github.JakeWharton:ViewPagerIndicator:2.4.1'\r\n    implementation 'com.squareup.picasso:picasso:2.71828'\r\n    implementation 'jp.wasabeef:picasso-transformations:2.2.1'\r\n    implementation 'com.android.volley:volley:1.1.1'\r\n\r\n    implementation 'com.github.bumptech.glide:glide:4.11.0'\r\n    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'\r\n    implementation 'jp.wasabeef:glide-transformations:4.0.0'\r\n    // retrofit\r\n    implementation 'com.squareup.retrofit2:retrofit:2.9.0'\r\n    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'\r\n    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'\r\n    // stripe\r\n    implementation 'com.stripe:stripe-android:+'\r\n    implementation 'com.stripe:stripe-java:5.36.0'\r\n    implementation 'com.daimajia.easing:library:2.4@aar'\r\n    implementation 'com.daimajia.androidanimations:library:2.4@aar'\r\n    // download manager\r\n    implementation 'com.mindorks.android:prdownloader:0.6.0'\r\n    implementation 'com.mani:ThinDownloadManager:1.4.0'\r\n    // paypal\r\n    implementation 'com.paypal.sdk:paypal-android-sdk:2.16.0'\r\n    // razor pay\r\n    implementation 'com.razorpay:checkout:1.5.12'\r\n    // space bottom navigation view\r\n    implementation 'com.github.armcha:SpaceNavigationView:1.6.0'\r\n    // card slider\r\n    implementation 'com.github.IslamKhSh:CardSlider:0.4'\r\n    implementation 'com.google.android:flexbox:0.3.2'\r\n    //OneSignal\r\n    implementation 'com.onesignal:OneSignal:3.15.4'\r\n    implementation 'com.hootsuite.android:nachos:1.1.1'\r\n    implementation 'com.mikhaellopez:circularimageview:3.2.0'\r\n    implementation 'de.hdodenhof:circleimageview:3.1.0'\r\n    implementation 'com.google.android.gms:play-services-ads:19.5.0'\r\n    // exo player\r\n    implementation 'com.google.android.exoplayer:exoplayer-core:2.7.3'\r\n    implementation 'com.google.android.exoplayer:exoplayer-dash:2.7.3'\r\n    implementation 'com.google.android.exoplayer:exoplayer-ui:2.7.3'\r\n    implementation 'com.google.android.exoplayer:exoplayer-hls:2.7.3'\r\n    implementation 'com.google.android.exoplayer:extension-rtmp:2.7.3'\r\n    implementation 'com.google.android.exoplayer:extension-cast:2.7.3'\r\n    implementation 'com.github.HaarigerHarald:android-youtubeExtractor:master-SNAPSHOT'\r\n    implementation 'com.google.android.libraries.cast.companionlibrary:ccl:2.8.4'\r\n    // start app ad\r\n    implementation 'com.startapp:inapp-sdk:3.10.1'\r\n    implementation 'com.github.ixiDev:GDPRChecker:v0.2'\r\n    implementation 'com.google.android.ads.consent:consent-library:1.0.8'\r\n    //bottom navigation\r\n    implementation 'com.github.volsahin:bottomify-navigation-view:1.0.2'\r\n    //Facebook audiene network\r\n    implementation 'com.facebook.android:audience-network-sdk:6.2.0'\r\n\r\n\r\n    //app open ads\r\n    implementation \"androidx.lifecycle:lifecycle-extensions:$lifecycle_version\"\r\n    implementation \"androidx.lifecycle:lifecycle-runtime:$lifecycle_version\"\r\n    annotationProcessor \"androidx.lifecycle:lifecycle-compiler:$lifecycle_version\"\r\n\r\n    //renew\r\n    implementation 'com.jakewharton:butterknife:10.0.0'\r\n    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'\r\n    implementation 'org.greenrobot:eventbus:3.0.0'\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/build.gradle	(revision 03868c21a5a38d43e5a5983a55931ced756f0658)
++++ app/build.gradle	(date 1612104104605)
+@@ -198,4 +198,6 @@
+     implementation 'com.jakewharton:butterknife:10.0.0'
+     annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
+     implementation 'org.greenrobot:eventbus:3.0.0'
++
++    implementation project(path: ':nativetemplates')
+ }
+Index: app/src/main/java/tvseries/koreandramaengsub/freemovieapp/fragments/HomeFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package tvseries.koreandramaengsub.freemovieapp.fragments;\r\n\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.RelativeLayout;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.Nullable;\r\nimport androidx.core.widget.NestedScrollView;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport com.appodeal.ads.Appodeal;\r\nimport com.facebook.shimmer.ShimmerFrameLayout;\r\nimport com.github.islamkhsh.CardSliderViewPager;\r\nimport com.ixidev.gdpr.GDPRChecker;\r\nimport com.viewpagerindicator.CirclePageIndicator;\r\nimport com.viewpagerindicator.LinePageIndicator;\r\nimport com.viewpagerindicator.TabPageIndicator;\r\nimport com.viewpagerindicator.TitlePageIndicator;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\nimport java.util.Timer;\r\n\r\nimport butterknife.BindView;\r\nimport butterknife.ButterKnife;\r\nimport butterknife.OnClick;\r\nimport butterknife.Unbinder;\r\nimport retrofit2.Call;\r\nimport retrofit2.Callback;\r\nimport retrofit2.Retrofit;\r\nimport tvseries.koreandramaengsub.freemovieapp.Config;\r\nimport tvseries.koreandramaengsub.freemovieapp.ItemMovieActivity;\r\nimport tvseries.koreandramaengsub.freemovieapp.ItemSeriesActivity;\r\nimport tvseries.koreandramaengsub.freemovieapp.MainActivity;\r\nimport tvseries.koreandramaengsub.freemovieapp.R;\r\nimport tvseries.koreandramaengsub.freemovieapp.adapters.CountryAdapter;\r\nimport tvseries.koreandramaengsub.freemovieapp.adapters.GenreAdapter;\r\nimport tvseries.koreandramaengsub.freemovieapp.adapters.GenreHomeAdapter;\r\nimport tvseries.koreandramaengsub.freemovieapp.adapters.HomePageAdapter;\r\nimport tvseries.koreandramaengsub.freemovieapp.adapters.SliderAdapter;\r\nimport tvseries.koreandramaengsub.freemovieapp.database.DatabaseHelper;\r\nimport tvseries.koreandramaengsub.freemovieapp.models.CommonModels;\r\nimport tvseries.koreandramaengsub.freemovieapp.models.GenreModel;\r\nimport tvseries.koreandramaengsub.freemovieapp.models.home_content.AllCountry;\r\nimport tvseries.koreandramaengsub.freemovieapp.models.home_content.AllGenre;\r\nimport tvseries.koreandramaengsub.freemovieapp.models.home_content.FeaturesGenreAndMovie;\r\nimport tvseries.koreandramaengsub.freemovieapp.models.home_content.HomeContent;\r\nimport tvseries.koreandramaengsub.freemovieapp.models.home_content.LatestMovie;\r\nimport tvseries.koreandramaengsub.freemovieapp.models.home_content.LatestTvseries;\r\nimport tvseries.koreandramaengsub.freemovieapp.models.home_content.Slider;\r\nimport tvseries.koreandramaengsub.freemovieapp.models.home_content.TopviewTvseries;\r\nimport tvseries.koreandramaengsub.freemovieapp.models.home_content.Video;\r\nimport tvseries.koreandramaengsub.freemovieapp.network.RetrofitClient;\r\nimport tvseries.koreandramaengsub.freemovieapp.network.apis.HomeContentApi;\r\nimport tvseries.koreandramaengsub.freemovieapp.network.model.config.AdsConfig;\r\nimport tvseries.koreandramaengsub.freemovieapp.utils.Constants;\r\nimport tvseries.koreandramaengsub.freemovieapp.utils.NetworkInst;\r\nimport tvseries.koreandramaengsub.freemovieapp.utils.PreferenceUtils;\r\nimport tvseries.koreandramaengsub.freemovieapp.utils.ads.BannerAds;\r\nimport tvseries.koreandramaengsub.freemovieapp.view.SwipeRefreshLayout;\r\n\r\n\r\npublic class HomeFragment extends Fragment {\r\n    @BindView(R.id.adView) RelativeLayout mAdView;\r\n    @BindView(R.id.adView1) RelativeLayout mAdView1;\r\n    @BindView(R.id.shimmer_view_container) ShimmerFrameLayout mShimmerLayout;\r\n    @BindView(R.id.swipe_layout) SwipeRefreshLayout mSwipeRefreshLayout;\r\n    @BindView(R.id.scrollView) NestedScrollView mScrollView;\r\n    @BindView(R.id.slider_layout) View mSliderLayout;\r\n    @BindView(R.id.genre_rv) RecyclerView mGenreRv;\r\n    @BindView(R.id.country_rv) RecyclerView mCountryRv;\r\n    @BindView(R.id.genre_layout) RelativeLayout mGenreLayout;\r\n    @BindView(R.id.country_layout) RelativeLayout mCountryLayout;\r\n    @BindView(R.id.c_viewPager) CardSliderViewPager mCViewPager;\r\n    @BindView(R.id.recyclerView) RecyclerView mRecyclerViewMovie;\r\n    @BindView(R.id.recyclerViewTvSeries) RecyclerView mRecyclerViewTvSeries;\r\n    @BindView(R.id.recyclerView_by_genre) RecyclerView mRecyclerViewGenre;\r\n    @BindView(R.id.recyclerViewTopviewTvSeries) RecyclerView mRecyclerViewTopviewTvSeries;\r\n    @BindView(R.id.title_pager_indicator) LinePageIndicator mPagerIndicator;\r\n\r\n    private ArrayList<CommonModels> listSlider = new ArrayList<>();\r\n    private Timer timer;\r\n    private GenreAdapter genreAdapter;\r\n    private CountryAdapter countryAdapter;\r\n    private HomePageAdapter adapterMovie, adapterSeries, adapterTopviewSeries;\r\n    private List<CommonModels> listMovie = new ArrayList<>();\r\n    private List<CommonModels> listTv = new ArrayList<>();\r\n    private List<CommonModels> listSeries = new ArrayList<>();\r\n    private List<CommonModels> listTopViewSeries = new ArrayList<>();\r\n    private List<CommonModels> genreList = new ArrayList<>();\r\n    private List<CommonModels> countryList = new ArrayList<>();\r\n    private List<GenreModel> listGenre = new ArrayList<>();\r\n    private GenreHomeAdapter genreHomeAdapter;\r\n    private MainActivity mActivity;\r\n    private DatabaseHelper db = new DatabaseHelper(getContext());\r\n    Unbinder mUnbinder;\r\n\r\n    @Nullable\r\n    @Override\r\n    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {\r\n        View view = inflater.inflate(R.layout.fragment_home, container, false);\r\n        mActivity = (MainActivity) getActivity();\r\n        mUnbinder = ButterKnife.bind(this, view);\r\n        mActivity.setTitle(getResources().getString(R.string.home));\r\n        mSwipeRefreshLayout.setToolbar(mActivity.getToolbar());\r\n        return view;\r\n    }\r\n\r\n    @Override\r\n    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {\r\n        super.onViewCreated(view, savedInstanceState);\r\n        db = new DatabaseHelper(getContext());\r\n\r\n        if (db.getConfigurationData().getAppConfig().getGenreVisible()) {\r\n            mGenreLayout.setVisibility(View.VISIBLE);\r\n        }\r\n        if (db.getConfigurationData().getAppConfig().getCountryVisible()) {\r\n            mCountryLayout.setVisibility(View.VISIBLE);\r\n        }\r\n        //----init timer slider--------------------\r\n        timer = new Timer();\r\n        // --- genre recycler view ---------\r\n        mGenreRv.setLayoutManager(new LinearLayoutManager(mActivity, RecyclerView.HORIZONTAL, false));\r\n        mGenreRv.setHasFixedSize(true);\r\n        mGenreRv.setNestedScrollingEnabled(false);\r\n        genreAdapter = new GenreAdapter(getActivity(), genreList, \"genre\", \"home\");\r\n        mGenreRv.setAdapter(genreAdapter);\r\n\r\n        // --- country recycler view ---------\r\n        mCountryRv.setLayoutManager(new LinearLayoutManager(mActivity, RecyclerView.HORIZONTAL, false));\r\n        mCountryRv.setHasFixedSize(true);\r\n        mCountryRv.setNestedScrollingEnabled(false);\r\n        countryAdapter = new CountryAdapter(getActivity(), countryList, \"home\");\r\n        mCountryRv.setAdapter(countryAdapter);\r\n\r\n        //----featured tv recycler view-----------------\r\n//        recyclerViewTv = view.findViewById(R.id.recyclerViewTv);\r\n//        recyclerViewTv.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false));\r\n//        recyclerViewTv.setHasFixedSize(true);\r\n//        recyclerViewTv.setNestedScrollingEnabled(false);\r\n//        adapterTv = new LiveTvHomeAdapter(getContext(), listTv, \"MainActivity\");\r\n//        recyclerViewTv.setAdapter(adapterTv);\r\n\r\n        //----movie's recycler view-----------------\r\n        mRecyclerViewMovie.setLayoutManager(new LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false));\r\n        mRecyclerViewMovie.setHasFixedSize(true);\r\n        mRecyclerViewMovie.setNestedScrollingEnabled(false);\r\n        adapterMovie = new HomePageAdapter(getContext(), listMovie);\r\n        mRecyclerViewMovie.setAdapter(adapterMovie);\r\n\r\n        //----series's recycler view-----------------\r\n        mRecyclerViewTvSeries.setLayoutManager(new LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false));\r\n        mRecyclerViewTvSeries.setHasFixedSize(true);\r\n        mRecyclerViewTvSeries.setNestedScrollingEnabled(false);\r\n        adapterSeries = new HomePageAdapter(getActivity(), listSeries);\r\n        mRecyclerViewTvSeries.setAdapter(adapterSeries);\r\n\r\n        //----topview series's recycler view-----------------\r\n        mRecyclerViewTopviewTvSeries.setLayoutManager(new LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL, false));\r\n        mRecyclerViewTopviewTvSeries.setHasFixedSize(true);\r\n        mRecyclerViewTopviewTvSeries.setNestedScrollingEnabled(false);\r\n        adapterTopviewSeries = new HomePageAdapter(getActivity(), listTopViewSeries);\r\n        mRecyclerViewTopviewTvSeries.setAdapter(adapterTopviewSeries);\r\n\r\n\r\n\r\n        //----genre's recycler view--------------------\r\n        mRecyclerViewGenre.setLayoutManager(new LinearLayoutManager(getContext()));\r\n        mRecyclerViewGenre.setHasFixedSize(true);\r\n        mRecyclerViewGenre.setNestedScrollingEnabled(false);\r\n        genreHomeAdapter = new GenreHomeAdapter(getContext(), listGenre);\r\n        mRecyclerViewGenre.setAdapter(genreHomeAdapter);\r\n\r\n        mShimmerLayout.startShimmer();\r\n\r\n        if (new NetworkInst(getContext()).isNetworkAvailable()) {\r\n\r\n            getHomeContent();\r\n\r\n        } else {\r\n            mShimmerLayout.stopShimmer();\r\n            mShimmerLayout.setVisibility(View.GONE);\r\n            mActivity.setFailure(true,getString(R.string.no_internet));\r\n            mScrollView.setVisibility(View.GONE);\r\n        }\r\n\r\n        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {\r\n            @Override\r\n            public void onRefresh() {\r\n               /* mRecyclerViewMovie.removeAllViews();\r\n//                recyclerViewTv.removeAllViews();\r\n                mRecyclerViewTvSeries.removeAllViews();\r\n                mRecyclerViewTopviewTvSeries.removeAllViews();\r\n                mRecyclerViewGenre.removeAllViews();\r\n                mGenreRv.removeAllViews();\r\n                mCountryRv.removeAllViews();*/\r\n\r\n                genreList.clear();\r\n                countryList.clear();\r\n                listMovie.clear();\r\n                listSeries.clear();\r\n                listTopViewSeries.clear();\r\n                listSlider.clear();\r\n                listTv.clear();\r\n                listGenre.clear();\r\n\r\n\r\n                if (new NetworkInst(getContext()).isNetworkAvailable()) {\r\n\r\n                    getHomeContent();\r\n\r\n                } else {\r\n                    mShimmerLayout.stopShimmer();\r\n                    mShimmerLayout.setVisibility(View.GONE);\r\n                    mSwipeRefreshLayout.setRefreshing(false);\r\n                    mActivity.setFailure(true,getString(R.string.no_internet));\r\n                    mScrollView.setVisibility(View.GONE);\r\n                }\r\n            }\r\n        });\r\n\r\n\r\n        mScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {\r\n            @Override\r\n            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {\r\n                if (scrollY < oldScrollY) { // up\r\n                    mActivity.animateSearchBar(false);\r\n                }\r\n                if (scrollY > oldScrollY) { // down\r\n                    mActivity.animateSearchBar(true);\r\n                }\r\n            }\r\n        });\r\n//TRUNG\r\n        getAdDetails();\r\n    }\r\n\r\n\r\n    private void getHomeContent() {\r\n        Retrofit retrofit = RetrofitClient.getRetrofitInstance();\r\n        HomeContentApi api = retrofit.create(HomeContentApi.class);\r\n        Call<HomeContent> call = api.getHomeContent(Config.API_KEY);\r\n        call.enqueue(new Callback<HomeContent>() {\r\n            @Override\r\n            public void onResponse(Call<HomeContent> call, retrofit2.Response<HomeContent> response) {\r\n                 if (response.code() == 200){\r\n                     if(mSwipeRefreshLayout ==null){\r\n                         return;\r\n                     }\r\n                    mSwipeRefreshLayout.setRefreshing(false);\r\n                    mShimmerLayout.stopShimmer();\r\n                    mShimmerLayout.setVisibility(View.GONE);\r\n                    mScrollView.setVisibility(View.VISIBLE);\r\n                    mActivity.setFailure(false);\r\n\r\n                    //slider data\r\n                    Slider slider = response.body().getSlider();\r\n                    if (slider.getSliderType().equalsIgnoreCase(\"disable\")) {\r\n                        mSliderLayout.setVisibility(View.GONE);\r\n                    }else if (slider.getSliderType().equalsIgnoreCase(\"movie\")){\r\n\r\n                    }else if (slider.getSliderType().equalsIgnoreCase(\"image\")){\r\n\r\n                    }\r\n\r\n                    SliderAdapter sliderAdapter = new SliderAdapter(slider.getSlide());\r\n                    mCViewPager.setAdapter(sliderAdapter);\r\n                    mPagerIndicator.setViewPager(mCViewPager);\r\n                    sliderAdapter.notifyDataSetChanged();\r\n\r\n                    //genre data\r\n                     if (db.getConfigurationData().getAppConfig().getGenreVisible()) {\r\n                         for (int i = 0; i < response.body().getAllGenre().size(); i++) {\r\n                             AllGenre genre = response.body().getAllGenre().get(i);\r\n                             CommonModels models = new CommonModels();\r\n                             models.setId(genre.getGenreId());\r\n                             models.setTitle(genre.getName());\r\n                             models.setImageUrl(genre.getImageUrl());\r\n                             genreList.add(models);\r\n                         }\r\n                         genreAdapter.notifyDataSetChanged();\r\n                     }\r\n\r\n                     //country data\r\n                     if (db.getConfigurationData().getAppConfig().getCountryVisible()) {\r\n                         for (int i = 0; i < response.body().getAllCountry().size(); i++) {\r\n                             AllCountry country = response.body().getAllCountry().get(i);\r\n                             CommonModels models = new CommonModels();\r\n                             models.setId(country.getCountryId());\r\n                             models.setTitle(country.getName());\r\n                             models.setImageUrl(country.getImageUrl());\r\n                             countryList.add(models);\r\n                         }\r\n                         countryAdapter.notifyDataSetChanged();\r\n                     }\r\n\r\n                     //tv channel data\r\n//                     for (int i = 0; i < response.body().getFeaturedTvChannel().size(); i++){\r\n//                         FeaturedTvChannel tvChannel = response.body().getFeaturedTvChannel().get(i);\r\n//                         CommonModels models = new CommonModels();\r\n//                         models.setImageUrl(tvChannel.getPosterUrl());\r\n//                         models.setTitle(tvChannel.getTvName());\r\n//                         models.setVideoType(\"tv\");\r\n//                         models.setId(tvChannel.getLiveTvId());\r\n//                         models.setIsPaid(tvChannel.getIsPaid());\r\n//                         listTv.add(models);\r\n//                     }\r\n//                     adapterTv.notifyDataSetChanged();\r\n\r\n                     //latest movies data\r\n                     for (int i = 0; i < response.body().getLatestMovies().size(); i++){\r\n                         LatestMovie movie = response.body().getLatestMovies().get(i);\r\n                         CommonModels models = new CommonModels();\r\n                         models.setImageUrl(movie.getThumbnailUrl());\r\n                         models.setTitle(movie.getTitle());\r\n                         models.setVideoType(\"movie\");\r\n                         models.setReleaseDate(movie.getRelease());\r\n                         models.setQuality(movie.getVideoQuality());\r\n                         models.setId(movie.getVideosId());\r\n                         models.setIsPaid(movie.getIsPaid());\r\n                         listMovie.add(models);\r\n                     }\r\n                     adapterMovie.notifyDataSetChanged();\r\n\r\n                     //latest tv series\r\n                     for (int i = 0; i < response.body().getLatestTvseries().size(); i++){\r\n                         LatestTvseries tvSeries = response.body().getLatestTvseries().get(i);\r\n                         CommonModels models = new CommonModels();\r\n                         models.setImageUrl(tvSeries.getThumbnailUrl());\r\n                         models.setTitle(tvSeries.getTitle());\r\n                         models.setVideoType(\"tvseries\");\r\n                         models.setReleaseDate(tvSeries.getRelease());\r\n                         models.setQuality(tvSeries.getVideoQuality());\r\n                         models.setId(tvSeries.getVideosId());\r\n                         models.setIsPaid(tvSeries.getIsPaid());\r\n                         listSeries.add(models);\r\n                     }\r\n                     adapterSeries.notifyDataSetChanged();\r\n\r\n                     //topview\r\n                    for (int i = 0; i < response.body().getTopviewTvseries().size(); i++){\r\n                         TopviewTvseries topviewtvSeries = response.body().getTopviewTvseries().get(i);\r\n                         CommonModels models = new CommonModels();\r\n                         models.setImageUrl(topviewtvSeries.getThumbnailUrl());\r\n                         models.setTitle(topviewtvSeries.getTitle());\r\n                         models.setVideoType(\"tvseries\");\r\n                         models.setReleaseDate(topviewtvSeries.getRelease());\r\n                         models.setQuality(topviewtvSeries.getVideoQuality());\r\n                         models.setId(topviewtvSeries.getVideosId());\r\n                         models.setIsPaid(topviewtvSeries.getIsPaid());\r\n                         listTopViewSeries.add(models);\r\n                     }\r\n                     adapterTopviewSeries.notifyDataSetChanged();\r\n\r\n                     //get data by genre\r\n                     for (int i = 0; i < response.body().getFeaturesGenreAndMovie().size(); i++){\r\n                         FeaturesGenreAndMovie genreAndMovie = response.body().getFeaturesGenreAndMovie().get(i);\r\n                         GenreModel models = new GenreModel();\r\n\r\n                         models.setName(genreAndMovie.getName());\r\n                         models.setId(genreAndMovie.getGenreId());\r\n                         List<CommonModels> listGenreMovie = new ArrayList<>();\r\n                         for (int j = 0; j < genreAndMovie.getVideos().size(); j++){\r\n                             Video video = genreAndMovie.getVideos().get(j);\r\n                             CommonModels commonModels = new CommonModels();\r\n\r\n                             commonModels.setId(video.getVideosId());\r\n                             commonModels.setTitle(video.getTitle());\r\n                             commonModels.setIsPaid(video.getIsPaid());\r\n\r\n                             if (video.getIsTvseries().equals(\"0\")) {\r\n                                 commonModels.setVideoType(\"movie\");\r\n                             } else {\r\n                                 commonModels.setVideoType(\"tvseries\");\r\n                             }\r\n\r\n                             commonModels.setReleaseDate(video.getRelease());\r\n                             commonModels.setQuality(video.getVideoQuality());\r\n                             commonModels.setImageUrl(video.getThumbnailUrl());\r\n\r\n                             listGenreMovie.add(commonModels);\r\n                         }\r\n                         models.setList(listGenreMovie);\r\n\r\n                         listGenre.add(models);\r\n                         genreHomeAdapter.notifyDataSetChanged();\r\n                     }\r\n\r\n                }else {\r\n                     mSwipeRefreshLayout.setRefreshing(false);\r\n                     mShimmerLayout.stopShimmer();\r\n                     mShimmerLayout.setVisibility(View.GONE);\r\n                     mActivity.setFailure(false);\r\n                     mScrollView.setVisibility(View.GONE);\r\n                 }\r\n\r\n            }\r\n\r\n            @Override\r\n            public void onFailure(Call<HomeContent> call, Throwable t) {\r\n                mSwipeRefreshLayout.setRefreshing(false);\r\n                mShimmerLayout.stopShimmer();\r\n                mShimmerLayout.setVisibility(View.GONE);\r\n                mActivity.setFailure(false);\r\n                mScrollView.setVisibility(View.GONE);\r\n\r\n            }\r\n        });\r\n    }\r\n\r\n    private void loadAd() {\r\n        AdsConfig adsConfig = new DatabaseHelper(getContext()).getConfigurationData().getAdsConfig();\r\n        if (PreferenceUtils.isLoggedIn(mActivity)) {\r\n            if (!PreferenceUtils.isActivePlan(mActivity)) {\r\n                if (adsConfig.getAdsEnable().equals(\"1\")) {\r\n\r\n                    if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {\r\n                        BannerAds.ShowAdmobBannerAds(getContext(), mAdView);\r\n                        BannerAds.ShowAdmobBannerAds(getContext(), mAdView1);\r\n\r\n                    } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {\r\n                        // BannerAds.showStartAppBanner(getContext(), adView);\r\n                        Appodeal.setBannerViewId(R.id.appodealBannerView1_home);\r\n                        Appodeal.show(mActivity, Appodeal.BANNER_VIEW);\r\n                    } else if(adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.NETWORK_AUDIENCE)) {\r\n                        BannerAds.showFANBanner(getContext(), mAdView);\r\n                        BannerAds.showFANBanner(getContext(), mAdView1);\r\n                    }\r\n                }\r\n            }\r\n        }else{\r\n            if (adsConfig.getAdsEnable().equals(\"1\")) {\r\n\r\n                if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {\r\n                    BannerAds.ShowAdmobBannerAds(getContext(), mAdView);\r\n                    BannerAds.ShowAdmobBannerAds(getContext(), mAdView1);\r\n\r\n                } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {\r\n                    // BannerAds.showStartAppBanner(getContext(), adView);\r\n                    Appodeal.setBannerViewId(R.id.appodealBannerView1_home);\r\n                    Appodeal.show(mActivity, Appodeal.BANNER_VIEW);\r\n                } else if(adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.NETWORK_AUDIENCE)) {\r\n                    BannerAds.showFANBanner(getContext(), mAdView);\r\n                    BannerAds.showFANBanner(getContext(), mAdView1);\r\n                }\r\n            }\r\n        }\r\n\r\n    }\r\n\r\n    @Override\r\n    public void onDestroy() {\r\n        super.onDestroy();\r\n        mUnbinder.unbind();\r\n    }\r\n\r\n    private void getAdDetails() {\r\n        DatabaseHelper db = new DatabaseHelper(getContext());\r\n        AdsConfig adsConfig = db.getConfigurationData().getAdsConfig();\r\n\r\n        new GDPRChecker()\r\n                .withContext(mActivity)\r\n                .withPrivacyUrl(Config.TERMS_URL) // your privacy url\r\n                .withPublisherIds(adsConfig.getAdmobAppId()) // your admob account Publisher id\r\n                //.withTestMode(\"9424DF76F06983D1392E609FC074596C\") // remove this on real project\r\n                .check();\r\n\r\n        loadAd();\r\n    }\r\n\r\n    @Override\r\n    public void onStart() {\r\n        super.onStart();\r\n\r\n        mShimmerLayout.startShimmer();\r\n    }\r\n\r\n    @Override\r\n    public void onPause() {\r\n        super.onPause();\r\n        mShimmerLayout.stopShimmer();\r\n        timer.cancel();\r\n    }\r\n\r\n    @Override\r\n    public void onResume() {\r\n        super.onResume();\r\n    }\r\n    @OnClick({R.id.btn_more_movie,R.id.movie_layout})\r\n    void onBtnMoreMovieClick(){\r\n        Intent intent = new Intent(getContext(), ItemMovieActivity.class);\r\n        intent.putExtra(\"title\", \"Movies\");\r\n        getActivity().startActivity(intent);\r\n    }\r\n    @OnClick({R.id.btn_more_series,R.id.btn_more_series1})\r\n    void onBtnMoreSeriesClick(){\r\n        Intent intent = new Intent(getContext(), ItemSeriesActivity.class);\r\n        intent.putExtra(\"title\", \"TV Series\");\r\n        getActivity().startActivity(intent);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/tvseries/koreandramaengsub/freemovieapp/fragments/HomeFragment.java	(revision 03868c21a5a38d43e5a5983a55931ced756f0658)
++++ app/src/main/java/tvseries/koreandramaengsub/freemovieapp/fragments/HomeFragment.java	(date 1612106795489)
+@@ -18,6 +18,7 @@
+ import com.appodeal.ads.Appodeal;
+ import com.facebook.shimmer.ShimmerFrameLayout;
+ import com.github.islamkhsh.CardSliderViewPager;
++import com.google.android.ads.nativetemplates.TemplateView;
+ import com.ixidev.gdpr.GDPRChecker;
+ import com.viewpagerindicator.CirclePageIndicator;
+ import com.viewpagerindicator.LinePageIndicator;
+@@ -64,6 +65,7 @@
+ import tvseries.koreandramaengsub.freemovieapp.utils.NetworkInst;
+ import tvseries.koreandramaengsub.freemovieapp.utils.PreferenceUtils;
+ import tvseries.koreandramaengsub.freemovieapp.utils.ads.BannerAds;
++import tvseries.koreandramaengsub.freemovieapp.utils.ads.NativeAds;
+ import tvseries.koreandramaengsub.freemovieapp.view.SwipeRefreshLayout;
+ 
+ 
+@@ -78,6 +80,7 @@
+     @BindView(R.id.country_rv) RecyclerView mCountryRv;
+     @BindView(R.id.genre_layout) RelativeLayout mGenreLayout;
+     @BindView(R.id.country_layout) RelativeLayout mCountryLayout;
++   // @BindView(R.id.admob_nativead_template) TemplateView admobNativeAdView;
+     @BindView(R.id.c_viewPager) CardSliderViewPager mCViewPager;
+     @BindView(R.id.recyclerView) RecyclerView mRecyclerViewMovie;
+     @BindView(R.id.recyclerViewTvSeries) RecyclerView mRecyclerViewTvSeries;
+@@ -425,6 +428,9 @@
+                         BannerAds.ShowAdmobBannerAds(getContext(), mAdView);
+                         BannerAds.ShowAdmobBannerAds(getContext(), mAdView1);
+ 
++//                        admobNativeAdView.setVisibility(View.VISIBLE);
++//                        NativeAds.showAdmobNativeAds(getActivity(), admobNativeAdView);
++
+                     } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
+                         // BannerAds.showStartAppBanner(getContext(), adView);
+                         Appodeal.setBannerViewId(R.id.appodealBannerView1_home);
+@@ -432,6 +438,9 @@
+                     } else if(adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.NETWORK_AUDIENCE)) {
+                         BannerAds.showFANBanner(getContext(), mAdView);
+                         BannerAds.showFANBanner(getContext(), mAdView1);
++
++                        //admobNativeAdView.setVisibility(View.GONE);
++                        //NativeAds.showFANNativeBannerAd(getActivity(), mAdView1);
+                     }
+                 }
+             }
+@@ -459,6 +468,7 @@
+     public void onDestroy() {
+         super.onDestroy();
+         mUnbinder.unbind();
++        NativeAds.releaseAdmobNativeAd();
+     }
+ 
+     private void getAdDetails() {
+Index: .idea/libraries/Gradle__androidx_databinding_viewbinding_4_1_1_aar.xml
+===================================================================
+--- .idea/libraries/Gradle__androidx_databinding_viewbinding_4_1_1_aar.xml	(revision 03868c21a5a38d43e5a5983a55931ced756f0658)
++++ .idea/libraries/Gradle__androidx_databinding_viewbinding_4_1_1_aar.xml	(revision 03868c21a5a38d43e5a5983a55931ced756f0658)
+@@ -1,14 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: androidx.databinding:viewbinding:4.1.1@aar">
+-    <CLASSES>
+-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c49c38e0c85dce2dc4dec79ca369fc2f/jetified-viewbinding-4.1.1/res" />
+-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1300f842c93cedee01f70a2715439583/jetified-viewbinding-4.1.1/jars/classes.jar!/" />
+-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1300f842c93cedee01f70a2715439583/jetified-viewbinding-4.1.1/res" />
+-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1300f842c93cedee01f70a2715439583/jetified-viewbinding-4.1.1/AndroidManifest.xml" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.databinding/viewbinding/4.1.1/4779a8ac3390acdaaaccc59f8528af9ff5f778b0/viewbinding-4.1.1-sources.jar!/" />
+-    </SOURCES>
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__com_nimbusds_nimbus_jose_jwt_9_4.xml
+===================================================================
+--- .idea/libraries/Gradle__com_nimbusds_nimbus_jose_jwt_9_4.xml	(revision 03868c21a5a38d43e5a5983a55931ced756f0658)
++++ .idea/libraries/Gradle__com_nimbusds_nimbus_jose_jwt_9_4.xml	(revision 03868c21a5a38d43e5a5983a55931ced756f0658)
+@@ -1,13 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: com.nimbusds:nimbus-jose-jwt:9.4">
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.nimbusds/nimbus-jose-jwt/9.4/40204ef76d2a99d378eb1ce95246a9e87e279ddf/nimbus-jose-jwt-9.4.jar!/" />
+-    </CLASSES>
+-    <JAVADOC>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.nimbusds/nimbus-jose-jwt/9.4/149c5308d6bd3c46f43cda8c0555d5a0c658d745/nimbus-jose-jwt-9.4-javadoc.jar!/" />
+-    </JAVADOC>
+-    <SOURCES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.nimbusds/nimbus-jose-jwt/9.4/f4106f0369b52aad6733670127a4294dd4669b07/nimbus-jose-jwt-9.4-sources.jar!/" />
+-    </SOURCES>
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__com_stripe_stripe_3ds2_android_5_0_1_aar.xml
+===================================================================
+--- .idea/libraries/Gradle__com_stripe_stripe_3ds2_android_5_0_1_aar.xml	(revision 03868c21a5a38d43e5a5983a55931ced756f0658)
++++ .idea/libraries/Gradle__com_stripe_stripe_3ds2_android_5_0_1_aar.xml	(revision 03868c21a5a38d43e5a5983a55931ced756f0658)
+@@ -1,14 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: com.stripe:stripe-3ds2-android:5.0.1@aar">
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d80c2467d580d9f5e459929ccf81943d/jetified-stripe-3ds2-android-5.0.1/jars/classes.jar!/" />
+-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d80c2467d580d9f5e459929ccf81943d/jetified-stripe-3ds2-android-5.0.1/res" />
+-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d80c2467d580d9f5e459929ccf81943d/jetified-stripe-3ds2-android-5.0.1/AndroidManifest.xml" />
+-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d80c2467d580d9f5e459929ccf81943d/jetified-stripe-3ds2-android-5.0.1/jars/libs/sdk_listeners_android.jar!/" />
+-    </CLASSES>
+-    <JAVADOC />
+-    <SOURCES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.stripe/stripe-3ds2-android/5.0.1/a98767967740a1033827416656d25c43e02c4564/stripe-3ds2-android-5.0.1-sources.jar!/" />
+-    </SOURCES>
+-  </library>
+-</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__com_stripe_stripe_android_16_2_0_aar.xml
+===================================================================
+--- .idea/libraries/Gradle__com_stripe_stripe_android_16_2_0_aar.xml	(revision 03868c21a5a38d43e5a5983a55931ced756f0658)
++++ .idea/libraries/Gradle__com_stripe_stripe_android_16_2_0_aar.xml	(revision 03868c21a5a38d43e5a5983a55931ced756f0658)
+@@ -1,15 +0,0 @@
+-<component name="libraryTable">
+-  <library name="Gradle: com.stripe:stripe-android:16.2.0@aar">
+-    <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2e7509fc3631f0e757b16523fc7cf1b3/jetified-stripe-android-16.2.0/jars/classes.jar!/" />
+-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2e7509fc3631f0e757b16523fc7cf1b3/jetified-stripe-android-16.2.0/res" />
+-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2e7509fc3631f0e757b16523fc7cf1b3/jetified-stripe-android-16.2.0/AndroidManifest.xml" />
+-    </CLASSES>
+-    <JAVADOC>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.stripe/stripe-android/16.2.0/baf04ae55f77e4a6badd839eba8850dd42f04938/stripe-android-16.2.0-javadoc.jar!/" />
+-    </JAVADOC>
+-    <SOURCES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.stripe/stripe-android/16.2.0/94d74dd3d57b08529cc6dde799c251c97612e63e/stripe-android-16.2.0-sources.jar!/" />
+-    </SOURCES>
+-  </library>
+-</component>
+\ No newline at end of file
+Index: local.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>## This file must *NOT* be checked into Version Control Systems,\r\n# as it contains information specific to your local configuration.\r\n#\r\n# Location of the SDK. This is only used by Gradle.\r\n# For customization when using a Version Control System, please read the\r\n# header note.\r\n#Mon Jan 18 22:54:15 JST 2021\r\nsdk.dir=C\\:\\\\Users\\\\XFACTOR\\\\AppData\\\\Local\\\\Android\\\\Sdk\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>windows-1252
+===================================================================
+--- local.properties	(revision 03868c21a5a38d43e5a5983a55931ced756f0658)
++++ local.properties	(date 1612104106824)
+@@ -4,5 +4,5 @@
+ # Location of the SDK. This is only used by Gradle.
+ # For customization when using a Version Control System, please read the
+ # header note.
+-#Mon Jan 18 22:54:15 JST 2021
+-sdk.dir=C\:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk
++#Sun Jan 31 21:41:46 ICT 2021
++sdk.dir=C\:\\Users\\khaih\\AppData\\Local\\Android\\Sdk
+Index: settings.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>include ':app'\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- settings.gradle	(revision 03868c21a5a38d43e5a5983a55931ced756f0658)
++++ settings.gradle	(date 1612104281453)
+@@ -1,1 +1,2 @@
++include ':nativetemplates'
+ include ':app'
+Index: .idea/libraries/Gradle__androidx_coordinatorlayout_coordinatorlayout_1_0_0_aar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/Gradle__androidx_coordinatorlayout_coordinatorlayout_1_0_0_aar.xml	(date 1612104364182)
++++ .idea/libraries/Gradle__androidx_coordinatorlayout_coordinatorlayout_1_0_0_aar.xml	(date 1612104364182)
+@@ -0,0 +1,16 @@
++<component name="libraryTable">
++  <library name="Gradle: androidx.coordinatorlayout:coordinatorlayout:1.0.0@aar">
++    <ANNOTATIONS>
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/fda3d71ee2fedb604f7b377b984c8f7a/coordinatorlayout-1.0.0/annotations.zip!/" />
++    </ANNOTATIONS>
++    <CLASSES>
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/fda3d71ee2fedb604f7b377b984c8f7a/coordinatorlayout-1.0.0/jars/classes.jar!/" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/fda3d71ee2fedb604f7b377b984c8f7a/coordinatorlayout-1.0.0/res" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/fda3d71ee2fedb604f7b377b984c8f7a/coordinatorlayout-1.0.0/AndroidManifest.xml" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.coordinatorlayout/coordinatorlayout/1.0.0/4325b3c4422ad58201ed8dc15ae56bda9accedf2/coordinatorlayout-1.0.0-sources.jar!/" />
++    </SOURCES>
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"GradleMigrationSettings\" migrationVersion=\"1\" />\r\n  <component name=\"GradleSettings\">\r\n    <option name=\"linkedExternalProjectsSettings\">\r\n      <GradleProjectSettings>\r\n        <option name=\"testRunner\" value=\"PLATFORM\" />\r\n        <option name=\"distributionType\" value=\"DEFAULT_WRAPPED\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"gradleJvm\" value=\"1.8\" />\r\n        <option name=\"modules\">\r\n          <set>\r\n            <option value=\"$PROJECT_DIR$\" />\r\n            <option value=\"$PROJECT_DIR$/app\" />\r\n          </set>\r\n        </option>\r\n        <option name=\"resolveModulePerSourceSet\" value=\"false\" />\r\n        <option name=\"useQualifiedModuleNames\" value=\"true\" />\r\n      </GradleProjectSettings>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/gradle.xml	(revision 03868c21a5a38d43e5a5983a55931ced756f0658)
++++ .idea/gradle.xml	(date 1612104308535)
+@@ -12,6 +12,7 @@
+           <set>
+             <option value="$PROJECT_DIR$" />
+             <option value="$PROJECT_DIR$/app" />
++            <option value="$PROJECT_DIR$/nativetemplates" />
+           </set>
+         </option>
+         <option name="resolveModulePerSourceSet" value="false" />
+Index: .idea/libraries/Gradle__androidx_core_core_1_1_0_aar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/Gradle__androidx_core_core_1_1_0_aar.xml	(date 1612104364191)
++++ .idea/libraries/Gradle__androidx_core_core_1_1_0_aar.xml	(date 1612104364191)
+@@ -0,0 +1,16 @@
++<component name="libraryTable">
++  <library name="Gradle: androidx.core:core:1.1.0@aar">
++    <ANNOTATIONS>
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/06ac751085e7e70957e1a774a38a2693/core-1.1.0/annotations.zip!/" />
++    </ANNOTATIONS>
++    <CLASSES>
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/06ac751085e7e70957e1a774a38a2693/core-1.1.0/jars/classes.jar!/" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/06ac751085e7e70957e1a774a38a2693/core-1.1.0/res" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/06ac751085e7e70957e1a774a38a2693/core-1.1.0/AndroidManifest.xml" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.core/core/1.1.0/4ae37fad1fe95b42aa47a720908df37ba5d3c85e/core-1.1.0-sources.jar!/" />
++    </SOURCES>
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__androidx_databinding_viewbinding_4_1_2_aar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/Gradle__androidx_databinding_viewbinding_4_1_2_aar.xml	(date 1612104364201)
++++ .idea/libraries/Gradle__androidx_databinding_viewbinding_4_1_2_aar.xml	(date 1612104364201)
+@@ -0,0 +1,13 @@
++<component name="libraryTable">
++  <library name="Gradle: androidx.databinding:viewbinding:4.1.2@aar">
++    <CLASSES>
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/021ea2a1cc5e6a3e313220a4c45ad06d/jetified-viewbinding-4.1.2/jars/classes.jar!/" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/021ea2a1cc5e6a3e313220a4c45ad06d/jetified-viewbinding-4.1.2/res" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/021ea2a1cc5e6a3e313220a4c45ad06d/jetified-viewbinding-4.1.2/AndroidManifest.xml" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.databinding/viewbinding/4.1.2/f460b7c57a43705d73933813626a601f32ba2a21/viewbinding-4.1.2-sources.jar!/" />
++    </SOURCES>
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__androidx_fragment_fragment_1_1_0_aar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/Gradle__androidx_fragment_fragment_1_1_0_aar.xml	(date 1612104364209)
++++ .idea/libraries/Gradle__androidx_fragment_fragment_1_1_0_aar.xml	(date 1612104364209)
+@@ -0,0 +1,16 @@
++<component name="libraryTable">
++  <library name="Gradle: androidx.fragment:fragment:1.1.0@aar">
++    <ANNOTATIONS>
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/10bf8424f6b2f6df24d0ac6eeecb0e30/fragment-1.1.0/annotations.zip!/" />
++    </ANNOTATIONS>
++    <CLASSES>
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/10bf8424f6b2f6df24d0ac6eeecb0e30/fragment-1.1.0/jars/classes.jar!/" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/10bf8424f6b2f6df24d0ac6eeecb0e30/fragment-1.1.0/res" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/10bf8424f6b2f6df24d0ac6eeecb0e30/fragment-1.1.0/AndroidManifest.xml" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.fragment/fragment/1.1.0/b9ebb04df2cb0cad4419af3c658690bc82aa5706/fragment-1.1.0-sources.jar!/" />
++    </SOURCES>
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__androidx_fragment_fragment_1_3_0_rc01_aar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><component name=\"libraryTable\">\r\n  <library name=\"Gradle: androidx.fragment:fragment:1.3.0-rc01@aar\">\r\n    <ANNOTATIONS>\r\n      <root url=\"jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7af29d94babad165d0b68d4d353add53/fragment-1.3.0-rc01/annotations.zip!/\" />\r\n    </ANNOTATIONS>\r\n    <CLASSES>\r\n      <root url=\"jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7af29d94babad165d0b68d4d353add53/fragment-1.3.0-rc01/jars/classes.jar!/\" />\r\n      <root url=\"file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7af29d94babad165d0b68d4d353add53/fragment-1.3.0-rc01/res\" />\r\n      <root url=\"file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7af29d94babad165d0b68d4d353add53/fragment-1.3.0-rc01/AndroidManifest.xml\" />\r\n    </CLASSES>\r\n    <JAVADOC />\r\n    <SOURCES>\r\n      <root url=\"jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.fragment/fragment/1.3.0-rc01/d3e303766b5694fb0c1b07cc5bb1105bb7da6825/fragment-1.3.0-rc01-sources.jar!/\" />\r\n    </SOURCES>\r\n  </library>\r\n</component>
+===================================================================
+--- .idea/libraries/Gradle__androidx_fragment_fragment_1_3_0_rc01_aar.xml	(revision 03868c21a5a38d43e5a5983a55931ced756f0658)
++++ .idea/libraries/Gradle__androidx_fragment_fragment_1_3_0_rc02_aar.xml	(date 1612104364219)
+@@ -1,16 +1,16 @@
+ <component name="libraryTable">
+-  <library name="Gradle: androidx.fragment:fragment:1.3.0-rc01@aar">
++  <library name="Gradle: androidx.fragment:fragment:1.3.0-rc02@aar">
+     <ANNOTATIONS>
+-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7af29d94babad165d0b68d4d353add53/fragment-1.3.0-rc01/annotations.zip!/" />
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/30e8417be8116a7d17d71d2d212682e6/fragment-1.3.0-rc02/annotations.zip!/" />
+     </ANNOTATIONS>
+     <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7af29d94babad165d0b68d4d353add53/fragment-1.3.0-rc01/jars/classes.jar!/" />
+-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7af29d94babad165d0b68d4d353add53/fragment-1.3.0-rc01/res" />
+-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7af29d94babad165d0b68d4d353add53/fragment-1.3.0-rc01/AndroidManifest.xml" />
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/30e8417be8116a7d17d71d2d212682e6/fragment-1.3.0-rc02/jars/classes.jar!/" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/30e8417be8116a7d17d71d2d212682e6/fragment-1.3.0-rc02/res" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/30e8417be8116a7d17d71d2d212682e6/fragment-1.3.0-rc02/AndroidManifest.xml" />
+     </CLASSES>
+     <JAVADOC />
+     <SOURCES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.fragment/fragment/1.3.0-rc01/d3e303766b5694fb0c1b07cc5bb1105bb7da6825/fragment-1.3.0-rc01-sources.jar!/" />
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.fragment/fragment/1.3.0-rc02/e2e5c7bd6eec5b6afd45cba414e34aa05e8e10b0/fragment-1.3.0-rc02-sources.jar!/" />
+     </SOURCES>
+   </library>
+ </component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__androidx_fragment_fragment_ktx_1_3_0_rc01_aar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><component name=\"libraryTable\">\r\n  <library name=\"Gradle: androidx.fragment:fragment-ktx:1.3.0-rc01@aar\">\r\n    <CLASSES>\r\n      <root url=\"jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e9711218d5843d3ac4ce55f5eb920208/jetified-fragment-ktx-1.3.0-rc01/jars/classes.jar!/\" />\r\n      <root url=\"file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e9711218d5843d3ac4ce55f5eb920208/jetified-fragment-ktx-1.3.0-rc01/res\" />\r\n      <root url=\"file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e9711218d5843d3ac4ce55f5eb920208/jetified-fragment-ktx-1.3.0-rc01/AndroidManifest.xml\" />\r\n    </CLASSES>\r\n    <JAVADOC />\r\n    <SOURCES>\r\n      <root url=\"jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.fragment/fragment-ktx/1.3.0-rc01/b64a27a0cae3596d8bfba86d5fdb427c38b5a7ed/fragment-ktx-1.3.0-rc01-sources.jar!/\" />\r\n    </SOURCES>\r\n  </library>\r\n</component>
+===================================================================
+--- .idea/libraries/Gradle__androidx_fragment_fragment_ktx_1_3_0_rc01_aar.xml	(revision 03868c21a5a38d43e5a5983a55931ced756f0658)
++++ .idea/libraries/Gradle__androidx_fragment_fragment_ktx_1_3_0_rc02_aar.xml	(date 1612104364227)
+@@ -1,13 +1,13 @@
+ <component name="libraryTable">
+-  <library name="Gradle: androidx.fragment:fragment-ktx:1.3.0-rc01@aar">
++  <library name="Gradle: androidx.fragment:fragment-ktx:1.3.0-rc02@aar">
+     <CLASSES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e9711218d5843d3ac4ce55f5eb920208/jetified-fragment-ktx-1.3.0-rc01/jars/classes.jar!/" />
+-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e9711218d5843d3ac4ce55f5eb920208/jetified-fragment-ktx-1.3.0-rc01/res" />
+-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e9711218d5843d3ac4ce55f5eb920208/jetified-fragment-ktx-1.3.0-rc01/AndroidManifest.xml" />
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b344876527d62a05d7929ceb5f0762cb/jetified-fragment-ktx-1.3.0-rc02/jars/classes.jar!/" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b344876527d62a05d7929ceb5f0762cb/jetified-fragment-ktx-1.3.0-rc02/res" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b344876527d62a05d7929ceb5f0762cb/jetified-fragment-ktx-1.3.0-rc02/AndroidManifest.xml" />
+     </CLASSES>
+     <JAVADOC />
+     <SOURCES>
+-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.fragment/fragment-ktx/1.3.0-rc01/b64a27a0cae3596d8bfba86d5fdb427c38b5a7ed/fragment-ktx-1.3.0-rc01-sources.jar!/" />
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.fragment/fragment-ktx/1.3.0-rc02/b64a27a0cae3596d8bfba86d5fdb427c38b5a7ed/fragment-ktx-1.3.0-rc02-sources.jar!/" />
+     </SOURCES>
+   </library>
+ </component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__androidx_lifecycle_lifecycle_common_2_1_0.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/Gradle__androidx_lifecycle_lifecycle_common_2_1_0.xml	(date 1612104364236)
++++ .idea/libraries/Gradle__androidx_lifecycle_lifecycle_common_2_1_0.xml	(date 1612104364236)
+@@ -0,0 +1,11 @@
++<component name="libraryTable">
++  <library name="Gradle: androidx.lifecycle:lifecycle-common:2.1.0">
++    <CLASSES>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common/2.1.0/c67e7807d9cd6c329b9d0218b2ec4e505dd340b7/lifecycle-common-2.1.0.jar!/" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-common/2.1.0/ff1470ebad448355d3722c637c85d5174b584f38/lifecycle-common-2.1.0-sources.jar!/" />
++    </SOURCES>
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__androidx_lifecycle_lifecycle_livedata_2_0_0_aar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/Gradle__androidx_lifecycle_lifecycle_livedata_2_0_0_aar.xml	(date 1612104364249)
++++ .idea/libraries/Gradle__androidx_lifecycle_lifecycle_livedata_2_0_0_aar.xml	(date 1612104364249)
+@@ -0,0 +1,13 @@
++<component name="libraryTable">
++  <library name="Gradle: androidx.lifecycle:lifecycle-livedata:2.0.0@aar">
++    <CLASSES>
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/df99a974fa1bb5b12dbaca6a5601e706/lifecycle-livedata-2.0.0/jars/classes.jar!/" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/df99a974fa1bb5b12dbaca6a5601e706/lifecycle-livedata-2.0.0/res" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/df99a974fa1bb5b12dbaca6a5601e706/lifecycle-livedata-2.0.0/AndroidManifest.xml" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-livedata/2.0.0/740ce61935bd789380c01178bd8ce402402ebd2f/lifecycle-livedata-2.0.0-sources.jar!/" />
++    </SOURCES>
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/modules/nativetemplates/animeApp.nativetemplates.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/modules/nativetemplates/animeApp.nativetemplates.iml	(date 1612104364100)
++++ .idea/modules/nativetemplates/animeApp.nativetemplates.iml	(date 1612104364100)
+@@ -0,0 +1,102 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module external.linked.project.id=":nativetemplates" external.linked.project.path="$MODULE_DIR$/../../../nativetemplates" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="animeApp" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
++  <component name="FacetManager">
++    <facet type="android-gradle" name="Android-Gradle">
++      <configuration>
++        <option name="GRADLE_PROJECT_PATH" value=":nativetemplates" />
++        <option name="LAST_SUCCESSFUL_SYNC_AGP_VERSION" value="4.1.1" />
++        <option name="LAST_KNOWN_AGP_VERSION" value="4.1.1" />
++      </configuration>
++    </facet>
++    <facet type="android" name="Android">
++      <configuration>
++        <option name="SELECTED_BUILD_VARIANT" value="debug" />
++        <option name="ASSEMBLE_TASK_NAME" value="assembleDebug" />
++        <option name="COMPILE_JAVA_TASK_NAME" value="compileDebugSources" />
++        <afterSyncTasks>
++          <task>generateDebugSources</task>
++        </afterSyncTasks>
++        <option name="ALLOW_USER_CONFIGURATION" value="false" />
++        <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
++        <option name="RES_FOLDER_RELATIVE_PATH" value="/src/main/res" />
++        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/../../../nativetemplates/src/main/res;file://$MODULE_DIR$/../../../nativetemplates/src/debug/res;file://$MODULE_DIR$/../../../nativetemplates/build/generated/res/rs/debug;file://$MODULE_DIR$/../../../nativetemplates/build/generated/res/resValues/debug" />
++        <option name="TEST_RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/../../../nativetemplates/src/androidTest/res;file://$MODULE_DIR$/../../../nativetemplates/src/androidTestDebug/res;file://$MODULE_DIR$/../../../nativetemplates/build/generated/res/rs/androidTest/debug;file://$MODULE_DIR$/../../../nativetemplates/build/generated/res/resValues/androidTest/debug" />
++        <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/src/main/assets" />
++        <option name="PROJECT_TYPE" value="1" />
++      </configuration>
++    </facet>
++  </component>
++  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7">
++    <output url="file://$MODULE_DIR$/../../../nativetemplates/build/intermediates/javac/debug/classes" />
++    <output-test url="file://$MODULE_DIR$/../../../nativetemplates/build/intermediates/javac/debugUnitTest/classes" />
++    <exclude-output />
++    <content url="file://$MODULE_DIR$/../../../nativetemplates">
++      <sourceFolder url="file://$MODULE_DIR$/../../../nativetemplates/src/main/java" isTestSource="false" />
++      <sourceFolder url="file://$MODULE_DIR$/../../../nativetemplates/build/generated/ap_generated_sources/debug/out" isTestSource="false" generated="true" />
++      <sourceFolder url="file://$MODULE_DIR$/../../../nativetemplates/build/generated/source/buildConfig/debug" isTestSource="false" generated="true" />
++      <sourceFolder url="file://$MODULE_DIR$/../../../nativetemplates/src/main/res" type="java-resource" />
++      <sourceFolder url="file://$MODULE_DIR$/../../../nativetemplates/build/generated/res/resValues/debug" type="java-resource" />
++      <excludeFolder url="file://$MODULE_DIR$/../../../nativetemplates/.gradle" />
++      <excludeFolder url="file://$MODULE_DIR$/../../../nativetemplates/build" />
++    </content>
++    <orderEntry type="jdk" jdkName="Android API 30 Platform" jdkType="Android SDK" />
++    <orderEntry type="sourceFolder" forTests="false" />
++    <orderEntry type="library" name="Gradle: androidx.collection:collection:1.1.0" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.arch.core:core-common:2.1.0" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-common:2.1.0" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.annotation:annotation:1.1.0" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.constraintlayout:constraintlayout-solver:1.1.3" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.appcompat:appcompat:1.1.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-ads:18.3.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-ads-identifier:17.0.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-gass:18.3.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-ads-lite:18.3.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-measurement-sdk-api:17.1.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-tasks:17.0.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-measurement-base:17.1.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-basement:17.0.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.fragment:fragment:1.1.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.appcompat:appcompat-resources:1.1.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.browser:browser:1.0.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.legacy:legacy-support-core-ui:1.0.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.drawerlayout:drawerlayout:1.0.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.viewpager:viewpager:1.0.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.legacy:legacy-support-core-utils:1.0.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.loader:loader:1.0.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.activity:activity:1.0.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.vectordrawable:vectordrawable-animated:1.1.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.vectordrawable:vectordrawable:1.1.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.coordinatorlayout:coordinatorlayout:1.0.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.slidingpanelayout:slidingpanelayout:1.0.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.customview:customview:1.0.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.swiperefreshlayout:swiperefreshlayout:1.0.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.asynclayoutinflater:asynclayoutinflater:1.0.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.core:core:1.1.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.cursoradapter:cursoradapter:1.0.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.versionedparcelable:versionedparcelable:1.1.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-viewmodel:2.1.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.interpolator:interpolator:1.0.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-runtime:2.1.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.savedstate:savedstate:1.0.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-livedata:2.0.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-livedata-core:2.0.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.arch.core:core-runtime:2.0.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.documentfile:documentfile:1.0.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.localbroadcastmanager:localbroadcastmanager:1.0.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.print:print:1.0.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-ads-base:18.3.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.constraintlayout:constraintlayout:1.1.3@aar" level="project" />
++    <orderEntry type="library" scope="TEST" name="Gradle: junit:junit:4.12" level="project" />
++    <orderEntry type="library" scope="TEST" name="Gradle: org.hamcrest:hamcrest-integration:1.3" level="project" />
++    <orderEntry type="library" scope="TEST" name="Gradle: org.hamcrest:hamcrest-library:1.3" level="project" />
++    <orderEntry type="library" scope="TEST" name="Gradle: org.hamcrest:hamcrest-core:1.3" level="project" />
++    <orderEntry type="library" scope="TEST" name="Gradle: net.sf.kxml:kxml2:2.3.0" level="project" />
++    <orderEntry type="library" scope="TEST" name="Gradle: com.squareup:javawriter:2.1.1" level="project" />
++    <orderEntry type="library" scope="TEST" name="Gradle: javax.inject:javax.inject:1" level="project" />
++    <orderEntry type="library" scope="TEST" name="Gradle: com.google.code.findbugs:jsr305:2.0.1" level="project" />
++    <orderEntry type="library" scope="TEST" name="Gradle: androidx.test.espresso:espresso-core:3.1.0@aar" level="project" />
++    <orderEntry type="library" scope="TEST" name="Gradle: androidx.test:runner:1.1.0@aar" level="project" />
++    <orderEntry type="library" scope="TEST" name="Gradle: androidx.test:monitor:1.1.0@aar" level="project" />
++    <orderEntry type="library" scope="TEST" name="Gradle: androidx.test.espresso:espresso-idling-resource:3.1.0@aar" level="project" />
++  </component>
++</module>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__androidx_activity_activity_1_0_0_aar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/Gradle__androidx_activity_activity_1_0_0_aar.xml	(date 1612104364117)
++++ .idea/libraries/Gradle__androidx_activity_activity_1_0_0_aar.xml	(date 1612104364117)
+@@ -0,0 +1,13 @@
++<component name="libraryTable">
++  <library name="Gradle: androidx.activity:activity:1.0.0@aar">
++    <CLASSES>
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/cb7384ed093563fd62c0c50e88337911/jetified-activity-1.0.0/jars/classes.jar!/" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/cb7384ed093563fd62c0c50e88337911/jetified-activity-1.0.0/res" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/cb7384ed093563fd62c0c50e88337911/jetified-activity-1.0.0/AndroidManifest.xml" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.activity/activity/1.0.0/28eb83e6a29ac3fbb87aa632cfa0e644a313f491/activity-1.0.0-sources.jar!/" />
++    </SOURCES>
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/modules.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectModuleManager\">\r\n    <modules>\r\n      <module fileurl=\"file://$PROJECT_DIR$/.idea/modules/animeApp.iml\" filepath=\"$PROJECT_DIR$/.idea/modules/animeApp.iml\" />\r\n      <module fileurl=\"file://$PROJECT_DIR$/.idea/modules/app/animeApp.app.iml\" filepath=\"$PROJECT_DIR$/.idea/modules/app/animeApp.app.iml\" />\r\n    </modules>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/modules.xml	(revision 03868c21a5a38d43e5a5983a55931ced756f0658)
++++ .idea/modules.xml	(date 1612104364108)
+@@ -4,6 +4,7 @@
+     <modules>
+       <module fileurl="file://$PROJECT_DIR$/.idea/modules/animeApp.iml" filepath="$PROJECT_DIR$/.idea/modules/animeApp.iml" />
+       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/animeApp.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/animeApp.app.iml" />
++      <module fileurl="file://$PROJECT_DIR$/.idea/modules/nativetemplates/animeApp.nativetemplates.iml" filepath="$PROJECT_DIR$/.idea/modules/nativetemplates/animeApp.nativetemplates.iml" />
+     </modules>
+   </component>
+ </project>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__androidx_appcompat_appcompat_1_1_0_aar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/Gradle__androidx_appcompat_appcompat_1_1_0_aar.xml	(date 1612104364125)
++++ .idea/libraries/Gradle__androidx_appcompat_appcompat_1_1_0_aar.xml	(date 1612104364125)
+@@ -0,0 +1,16 @@
++<component name="libraryTable">
++  <library name="Gradle: androidx.appcompat:appcompat:1.1.0@aar">
++    <ANNOTATIONS>
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c7df135ec550a1f68683093418b84fcf/appcompat-1.1.0/annotations.zip!/" />
++    </ANNOTATIONS>
++    <CLASSES>
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c7df135ec550a1f68683093418b84fcf/appcompat-1.1.0/jars/classes.jar!/" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c7df135ec550a1f68683093418b84fcf/appcompat-1.1.0/res" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c7df135ec550a1f68683093418b84fcf/appcompat-1.1.0/AndroidManifest.xml" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.appcompat/appcompat/1.1.0/9865019bbd2d95e41dede3d8ebf964aa93f97766/appcompat-1.1.0-sources.jar!/" />
++    </SOURCES>
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__androidx_appcompat_appcompat_resources_1_1_0_aar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/Gradle__androidx_appcompat_appcompat_resources_1_1_0_aar.xml	(date 1612104364134)
++++ .idea/libraries/Gradle__androidx_appcompat_appcompat_resources_1_1_0_aar.xml	(date 1612104364134)
+@@ -0,0 +1,13 @@
++<component name="libraryTable">
++  <library name="Gradle: androidx.appcompat:appcompat-resources:1.1.0@aar">
++    <CLASSES>
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/356daa2a88d72112de69edb81aa10fc9/jetified-appcompat-resources-1.1.0/jars/classes.jar!/" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/356daa2a88d72112de69edb81aa10fc9/jetified-appcompat-resources-1.1.0/res" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/356daa2a88d72112de69edb81aa10fc9/jetified-appcompat-resources-1.1.0/AndroidManifest.xml" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.appcompat/appcompat-resources/1.1.0/a7dcffd1afb81e3c892ad061b33da031c2d7289f/appcompat-resources-1.1.0-sources.jar!/" />
++    </SOURCES>
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__androidx_arch_core_core_runtime_2_0_0_aar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/Gradle__androidx_arch_core_core_runtime_2_0_0_aar.xml	(date 1612104364144)
++++ .idea/libraries/Gradle__androidx_arch_core_core_runtime_2_0_0_aar.xml	(date 1612104364144)
+@@ -0,0 +1,13 @@
++<component name="libraryTable">
++  <library name="Gradle: androidx.arch.core:core-runtime:2.0.0@aar">
++    <CLASSES>
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0bac0aa362a5da50057ffefb39bd087c/core-runtime-2.0.0/jars/classes.jar!/" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0bac0aa362a5da50057ffefb39bd087c/core-runtime-2.0.0/res" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0bac0aa362a5da50057ffefb39bd087c/core-runtime-2.0.0/AndroidManifest.xml" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.arch.core/core-runtime/2.0.0/bc41b287c95bc50a3cd27cb1b7cfb301805ba7f1/core-runtime-2.0.0-sources.jar!/" />
++    </SOURCES>
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__androidx_browser_browser_1_0_0_aar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/Gradle__androidx_browser_browser_1_0_0_aar.xml	(date 1612104364154)
++++ .idea/libraries/Gradle__androidx_browser_browser_1_0_0_aar.xml	(date 1612104364154)
+@@ -0,0 +1,16 @@
++<component name="libraryTable">
++  <library name="Gradle: androidx.browser:browser:1.0.0@aar">
++    <ANNOTATIONS>
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/880d11b6c0395a34d7896d6a9bf33561/browser-1.0.0/annotations.zip!/" />
++    </ANNOTATIONS>
++    <CLASSES>
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/880d11b6c0395a34d7896d6a9bf33561/browser-1.0.0/jars/classes.jar!/" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/880d11b6c0395a34d7896d6a9bf33561/browser-1.0.0/res" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/880d11b6c0395a34d7896d6a9bf33561/browser-1.0.0/AndroidManifest.xml" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.browser/browser/1.0.0/804dc4c93b5f45da8f72c10a5080dbb21715d813/browser-1.0.0-sources.jar!/" />
++    </SOURCES>
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__androidx_constraintlayout_constraintlayout_1_1_3_aar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/Gradle__androidx_constraintlayout_constraintlayout_1_1_3_aar.xml	(date 1612104364163)
++++ .idea/libraries/Gradle__androidx_constraintlayout_constraintlayout_1_1_3_aar.xml	(date 1612104364163)
+@@ -0,0 +1,11 @@
++<component name="libraryTable">
++  <library name="Gradle: androidx.constraintlayout:constraintlayout:1.1.3@aar">
++    <CLASSES>
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/41f7325ed31562a4b05d7870220e644b/constraintlayout-1.1.3/jars/classes.jar!/" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/41f7325ed31562a4b05d7870220e644b/constraintlayout-1.1.3/res" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/41f7325ed31562a4b05d7870220e644b/constraintlayout-1.1.3/AndroidManifest.xml" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES />
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__androidx_constraintlayout_constraintlayout_solver_1_1_3.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/Gradle__androidx_constraintlayout_constraintlayout_solver_1_1_3.xml	(date 1612104364173)
++++ .idea/libraries/Gradle__androidx_constraintlayout_constraintlayout_solver_1_1_3.xml	(date 1612104364173)
+@@ -0,0 +1,9 @@
++<component name="libraryTable">
++  <library name="Gradle: androidx.constraintlayout:constraintlayout-solver:1.1.3">
++    <CLASSES>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.constraintlayout/constraintlayout-solver/1.1.3/54abe9ffb22cc9019b0b6fcc10f185cc4e67b34e/constraintlayout-solver-1.1.3.jar!/" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES />
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/modules/app/animeApp.app.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<module external.linked.project.id=\":app\" external.linked.project.path=\"$MODULE_DIR$/../../../app\" external.root.project.path=\"$MODULE_DIR$/../../..\" external.system.id=\"GRADLE\" external.system.module.group=\"animeApp\" external.system.module.version=\"unspecified\" type=\"JAVA_MODULE\" version=\"4\">\r\n  <component name=\"FacetManager\">\r\n    <facet type=\"android-gradle\" name=\"Android-Gradle\">\r\n      <configuration>\r\n        <option name=\"GRADLE_PROJECT_PATH\" value=\":app\" />\r\n        <option name=\"LAST_SUCCESSFUL_SYNC_AGP_VERSION\" value=\"4.1.1\" />\r\n        <option name=\"LAST_KNOWN_AGP_VERSION\" value=\"4.1.1\" />\r\n      </configuration>\r\n    </facet>\r\n    <facet type=\"android\" name=\"Android\">\r\n      <configuration>\r\n        <option name=\"SELECTED_BUILD_VARIANT\" value=\"debug\" />\r\n        <option name=\"ASSEMBLE_TASK_NAME\" value=\"assembleDebug\" />\r\n        <option name=\"COMPILE_JAVA_TASK_NAME\" value=\"compileDebugSources\" />\r\n        <afterSyncTasks>\r\n          <task>generateDebugSources</task>\r\n        </afterSyncTasks>\r\n        <option name=\"ALLOW_USER_CONFIGURATION\" value=\"false\" />\r\n        <option name=\"MANIFEST_FILE_RELATIVE_PATH\" value=\"/src/main/AndroidManifest.xml\" />\r\n        <option name=\"RES_FOLDER_RELATIVE_PATH\" value=\"/src/main/res\" />\r\n        <option name=\"RES_FOLDERS_RELATIVE_PATH\" value=\"file://$MODULE_DIR$/../../../app/src/main/res;file://$MODULE_DIR$/../../../app/src/debug/res;file://$MODULE_DIR$/../../../app/build/generated/res/google-services/debug;file://$MODULE_DIR$/../../../app/build/generated/res/rs/debug;file://$MODULE_DIR$/../../../app/build/generated/res/resValues/debug\" />\r\n        <option name=\"TEST_RES_FOLDERS_RELATIVE_PATH\" value=\"file://$MODULE_DIR$/../../../app/src/androidTest/res;file://$MODULE_DIR$/../../../app/src/androidTestDebug/res;file://$MODULE_DIR$/../../../app/build/generated/res/rs/androidTest/debug;file://$MODULE_DIR$/../../../app/build/generated/res/resValues/androidTest/debug\" />\r\n        <option name=\"ASSETS_FOLDER_RELATIVE_PATH\" value=\"/src/main/assets\" />\r\n      </configuration>\r\n    </facet>\r\n  </component>\r\n  <component name=\"NewModuleRootManager\" LANGUAGE_LEVEL=\"JDK_1_8\">\r\n    <output url=\"file://$MODULE_DIR$/../../../app/build/intermediates/javac/debug/classes\" />\r\n    <output-test url=\"file://$MODULE_DIR$/../../../app/build/intermediates/javac/debugUnitTest/classes\" />\r\n    <exclude-output />\r\n    <content url=\"file://$MODULE_DIR$/../../../app\">\r\n      <sourceFolder url=\"file://$MODULE_DIR$/../../../app/src/main/java\" isTestSource=\"false\" />\r\n      <sourceFolder url=\"file://$MODULE_DIR$/../../../app/src/androidTest/java\" isTestSource=\"true\" />\r\n      <sourceFolder url=\"file://$MODULE_DIR$/../../../app/src/test/java\" isTestSource=\"true\" />\r\n      <sourceFolder url=\"file://$MODULE_DIR$/../../../app/build/generated/ap_generated_sources/debug/out\" isTestSource=\"false\" generated=\"true\" />\r\n      <sourceFolder url=\"file://$MODULE_DIR$/../../../app/build/generated/source/buildConfig/debug\" isTestSource=\"false\" generated=\"true\" />\r\n      <sourceFolder url=\"file://$MODULE_DIR$/../../../app/src/main/res\" type=\"java-resource\" />\r\n      <sourceFolder url=\"file://$MODULE_DIR$/../../../app/build/generated/res/google-services/debug\" type=\"java-resource\" />\r\n      <sourceFolder url=\"file://$MODULE_DIR$/../../../app/build/generated/res/resValues/debug\" type=\"java-resource\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/../../../app/.gradle\" />\r\n      <excludeFolder url=\"file://$MODULE_DIR$/../../../app/build\" />\r\n    </content>\r\n    <orderEntry type=\"jdk\" jdkName=\"Android API 30 Platform\" jdkType=\"Android SDK\" />\r\n    <orderEntry type=\"sourceFolder\" forTests=\"false\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.room:room-common:2.2.5\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.collection:collection-ktx:1.1.0\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.collection:collection:1.1.0\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.arch.core:core-common:2.1.0\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.lifecycle:lifecycle-common:2.3.0-rc01\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.jakewharton:butterknife-annotations:10.0.0\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.annotation:annotation:1.1.0\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.constraintlayout:constraintlayout-solver:2.0.4\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.appodeal:protobuf-models:1.0.0\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.explorestack:protobuf-java:1.0.0\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.guava:listenablefuture:1.0\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.explorestack.amazon:sdk:5.9.0\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.explorestack.chartboost:sdk:7.5.0\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.squareup.retrofit2:converter-gson:2.9.0\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.squareup.retrofit2:retrofit:2.9.0\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.squareup.okhttp3:logging-interceptor:4.9.0\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.squareup.okhttp3:okhttp:4.9.0\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.squareup.okio:okio:2.8.0\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.10\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.21\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: org.jetbrains.kotlin:kotlin-parcelize-runtime:1.4.21\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: org.jetbrains.kotlin:kotlin-android-extensions-runtime:1.4.21\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.4.2\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.4.21\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.4.21\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: org.jetbrains:annotations:13.0\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.mopub.volley:mopub-volley:2.1.0\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.stripe:stripe-java:5.36.0\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.code.gson:gson:2.8.6\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: io.reactivex.rxjava2:rxjava:2.2.9\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: org.reactivestreams:reactive-streams:1.0.2\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.dagger:dagger:2.24\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: javax.inject:javax.inject:1\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.parse.bolts:bolts-android:1.4.0\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.parse.bolts:bolts-applinks:1.4.0\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.parse.bolts:bolts-tasks:1.4.0\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.zxing:core:3.3.3\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.github.bumptech.glide:disklrucache:4.11.0\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.github.bumptech.glide:annotations:4.11.0\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: org.bouncycastle:bcprov-jdk15to18:1.68\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.nimbusds:nimbus-jose-jwt:9.4\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.github.stephenc.jcip:jcip-annotations:1.0-1\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.databinding:databinding-common:3.5.0\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: org.greenrobot:eventbus:3.0.0\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.stripe:stripe-android:16.2.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.constraintlayout:constraintlayout:2.0.4@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.ads.mediation:inmobi:9.1.1.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.stripe:stripe-3ds2-android:5.0.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.material:material:1.2.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.crystal:crystalrangeseekbar:1.1.3@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.exoplayer:extension-cast:2.7.3@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.libraries.cast.companionlibrary:ccl:2.8.4@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.ads.consent:consent-library:1.0.8@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.facebook.android:facebook-android-sdk:8.1.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.facebook.android:facebook-login:8.1.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.facebook.android:facebook-gamingservices:8.1.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.facebook.android:facebook-share:8.1.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.facebook.android:facebook-common:8.1.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.gms:play-services-cast-framework:15.0.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.gms:play-services-cast:15.0.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.mediarouter:mediarouter:1.0.0-alpha5@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.ads.mediation:mopub:5.15.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.mopub:mopub-sdk:5.15.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.mopub:mopub-sdk-banner:5.15.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.mopub:mopub-sdk-fullscreen:5.15.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.mopub:mopub-sdk-native-static:5.15.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.mopub:mopub-sdk-base:5.15.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.media2:media2-widget:1.0.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.appcompat:appcompat:1.2.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.ads.mediation:applovin:9.14.5.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.ads.mediation:unity:3.5.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.ads.mediation:adcolony:4.3.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.ads.mediation:ironsource:7.0.3.1.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.ads.mediation:facebook:6.2.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.lifecycle:lifecycle-extensions:2.2.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.github.JakeWharton:ViewPagerIndicator:2.4.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.appodeal.ads:sdk:2.7.1.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.appodeal.ads.sdk:core:2.7.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.appodeal.ads.sdk.networks:inmobi:2.7.1.2@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.appodeal.ads.sdk.networks:my_target:2.7.1.3@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.legacy:legacy-support-v4:1.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.firebaseui:firebase-ui-auth:7.1.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.firebase:firebase-auth:20.0.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.github.bumptech.glide:glide:4.11.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.onesignal:OneSignal:3.15.4@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.firebase:firebase-messaging:21.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.ads.mediation:tapjoy:12.7.1.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.appodeal.ads.sdk.networks:a4g:2.7.1.2@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.appodeal.ads.sdk.networks:admob:2.7.1.3@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.appodeal.ads.sdk.networks:amazon_ads:2.7.1.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.appodeal.ads.sdk.networks:ironsource:2.7.1.4@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.appodeal.ads.sdk.networks:ogury:2.7.1.3@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.appodeal.ads.sdk.networks:tapjoy:2.7.1.3@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.gms:play-services-ads:19.5.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.appodeal.ads.sdk.networks:facebook:2.7.1.3@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.facebook.android:audience-network-sdk:6.2.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.appodeal.ads.sdk.networks:applovin:2.7.1.4@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.appodeal.ads.sdk.networks:chartboost:2.7.1.2@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.applovin:applovin-sdk:9.14.5@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.firebase:firebase-analytics:18.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.gms:play-services-measurement:18.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.gms:play-services-measurement-api:18.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.gms:play-services-gass:19.5.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.gms:play-services-measurement-sdk:18.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.gms:play-services-measurement-impl:18.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.gms:play-services-ads-identifier:17.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.tapjoy:tapjoy-android-sdk:12.7.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.gms:play-services-location:17.1.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.firebase:firebase-iid:21.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.gms:play-services-cloud-messaging:16.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.gms:play-services-stats:17.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.firebase:firebase-datatransport:17.0.3@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.firebase:firebase-installations:16.3.3@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.firebase:firebase-auth-interop:19.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.firebase:firebase-common:19.4.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.firebase:firebase-installations-interop:16.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.gms:play-services-auth:19.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.gms:play-services-auth-api-phone:17.4.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.gms:play-services-safetynet:17.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.gms:play-services-wallet:18.1.2@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.firebase:firebase-iid-interop:17.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.gms:play-services-auth-base:17.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.gms:play-services-identity:17.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.gms:play-services-maps:17.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.gms:play-services-flags:15.0.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.gms:play-services-base:17.3.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.gms:play-services-tasks:17.1.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.firebase:firebase-measurement-connector:18.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.gms:play-services-ads-lite:19.5.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.gms:play-services-places-placereport:17.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.gms:play-services-measurement-sdk-api:18.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.gms:play-services-measurement-base:18.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.gms:play-services-basement:17.3.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.viewpager2:viewpager2:1.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.fragment:fragment-ktx:1.3.0-rc01@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.fragment:fragment:1.3.0-rc01@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.activity:activity-ktx:1.2.0-rc01@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-rc01@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.activity:activity:1.2.0-rc01@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.0-rc01@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.room:room-rxjava2:2.2.5@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.legacy:legacy-support-core-ui:1.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.facebook.android:facebook-applinks:8.1.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.facebook.android:facebook-messenger:8.1.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.facebook.android:facebook-core:8.1.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.palette:palette:1.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.legacy:legacy-support-core-utils:1.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.loader:loader:1.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.lifecycle:lifecycle-viewmodel:2.3.0-rc01@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.appcompat:appcompat-resources:1.2.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.vectordrawable:vectordrawable-animated:1.1.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.vectordrawable:vectordrawable:1.1.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.browser:browser:1.2.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.cardview:cardview:1.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.my.target:mytarget-sdk:5.5.6@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.recyclerview:recyclerview:1.2.0-alpha06@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.facebook.shimmer:shimmer:0.4.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.squareup.picasso:picasso:2.71828@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.work:work-runtime:2.1.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.hootsuite.android:nachos:1.1.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.drawerlayout:drawerlayout:1.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.media2:media2-session:1.0.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.media2:media2-player:1.0.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.media2:media2:1.0.0-alpha02@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.media2:media2-common:1.0.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.media:media:1.1.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.coordinatorlayout:coordinatorlayout:1.1.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.transition:transition:1.2.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.viewpager:viewpager:1.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.slidingpanelayout:slidingpanelayout:1.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.customview:customview:1.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.jakewharton:butterknife:10.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.jakewharton:butterknife-runtime:10.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.swiperefreshlayout:swiperefreshlayout:1.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.asynclayoutinflater:asynclayoutinflater:1.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.core:core-ktx:1.3.2@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.core:core:1.3.2@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.lifecycle:lifecycle-service:2.2.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.github.IslamKhSh:CardSlider:0.4@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.databinding:databinding-adapters:3.5.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.databinding:databinding-runtime:3.5.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.lifecycle:lifecycle-process:2.2.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.lifecycle:lifecycle-runtime-ktx:2.3.0-rc01@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.lifecycle:lifecycle-runtime:2.3.0-rc01@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.cursoradapter:cursoradapter:1.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.room:room-runtime:2.2.5@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.sqlite:sqlite-framework:2.0.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.sqlite:sqlite:2.0.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.lifecycle:lifecycle-livedata-ktx:2.2.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.lifecycle:lifecycle-livedata:2.2.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.arch.core:core-runtime:2.1.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.versionedparcelable:versionedparcelable:1.1.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.datatransport:transport-backend-cct:2.2.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.datatransport:transport-runtime:2.2.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.firebase:firebase-components:16.0.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.firebase:firebase-encoders-json:16.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.localbroadcastmanager:localbroadcastmanager:1.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.exifinterface:exifinterface:1.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.github.bumptech.glide:gifdecoder:4.11.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.databinding:viewbinding:4.1.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.lifecycle:lifecycle-livedata-core-ktx:2.3.0-rc01@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.lifecycle:lifecycle-livedata-core:2.3.0-rc01@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.savedstate:savedstate-ktx:1.1.0-rc01@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.savedstate:savedstate:1.1.0-rc01@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.documentfile:documentfile:1.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.print:print:1.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.interpolator:interpolator:1.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.explorestack:consent-models:1.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.appodeal.ads.sdk.networks:yandex:2.7.1.3@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.yandex.android:mobileads:2.141@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.annotation:annotation-experimental:1.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.play:core:1.8.3@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.explorestack:iab:0.5.6@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.appodeal.ads.sdk.networks:appodeal:2.7.1.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.appodeal.ads.sdk.networks:appodealx:2.7.1.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.appodeal.ads.sdk.networks:mraid:2.7.1.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.appodeal.ads.sdk.networks:nast:2.7.1.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.appodeal.ads.sdk.networks:vast:2.7.1.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.gms:play-services-ads-base:19.5.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.appodeal.ads.sdk.networks:adcolony:2.7.1.3@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.adcolony:sdk:4.3.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.inmobi.monetization:inmobi-ads:9.1.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.paypal.sdk:paypal-android-sdk:2.16.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.appodeal.ads.sdk.networks:inner-active:2.7.1.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.ironsource.sdk:mediationsdk:7.0.3.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.exoplayer:exoplayer-core:2.8.4@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.exoplayer:exoplayer-hls:2.8.4@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.explorestack.ogury:sdk:4.7.2@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.appodeal.ads.sdk.networks:smaato:2.7.1.2@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.smaato.android.sdk:smaato-sdk:21.3.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.smaato.android.sdk:smaato-sdk-banner:21.3.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.smaato.android.sdk:smaato-sdk-interstitial:21.3.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.smaato.android.sdk:smaato-sdk-rewarded-ads:21.3.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.smaato.android.sdk:module-core:21.3.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.appodeal.ads.sdk.networks:startapp:2.7.1.4@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.startapp:inapp-sdk:4.5.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.appodeal.ads.sdk.networks:unity_ads:2.7.1.3@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.unity3d.ads:unity-ads:3.5.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.yandex.android:mobmetricalib:3.13.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: androidx.media2:media2-exoplayer:1.0.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: io.reactivex.rxjava2:rxandroid:2.1.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.github.Piashsarker:AndroidAppUpdateLibrary:1.0.3@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.datatransport:transport-api:2.2.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.android.installreferrer:installreferrer:1.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android:flexbox:0.3.2@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.makeramen:roundedimageview:2.3.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.orhanobut:dialogplus:1.11@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.balysv:material-ripple:1.0.2@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: jp.wasabeef:picasso-transformations:2.2.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.android.volley:volley:1.1.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: jp.wasabeef:glide-transformations:4.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.daimajia.easing:library:2.4@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.daimajia.androidanimations:library:2.4@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.mindorks.android:prdownloader:0.6.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.mani:ThinDownloadManager:1.4.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: io.card:android-sdk:5.5.1@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.razorpay:checkout:1.5.12@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.github.armcha:SpaceNavigationView:1.6.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.duolingo.open:rtl-viewpager:2.0.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.mikhaellopez:circularimageview:3.2.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: de.hdodenhof:circleimageview:3.1.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.exoplayer:exoplayer-dash:2.7.3@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.exoplayer:exoplayer-ui:2.7.3@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.google.android.exoplayer:extension-rtmp:2.7.3@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.github.HaarigerHarald:android-youtubeExtractor:master-SNAPSHOT@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.github.ixiDev:GDPRChecker:v0.2@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" name=\"Gradle: com.github.volsahin:bottomify-navigation-view:1.0.2@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" scope=\"TEST\" name=\"Gradle: junit:junit:4.12\" level=\"project\" />\r\n    <orderEntry type=\"library\" scope=\"TEST\" name=\"Gradle: org.hamcrest:hamcrest-integration:1.3\" level=\"project\" />\r\n    <orderEntry type=\"library\" scope=\"TEST\" name=\"Gradle: org.hamcrest:hamcrest-library:1.3\" level=\"project\" />\r\n    <orderEntry type=\"library\" scope=\"TEST\" name=\"Gradle: org.hamcrest:hamcrest-core:1.3\" level=\"project\" />\r\n    <orderEntry type=\"library\" scope=\"TEST\" name=\"Gradle: com.squareup:javawriter:2.1.1\" level=\"project\" />\r\n    <orderEntry type=\"library\" scope=\"TEST\" name=\"Gradle: com.google.code.findbugs:jsr305:2.0.1\" level=\"project\" />\r\n    <orderEntry type=\"library\" scope=\"TEST\" name=\"Gradle: com.google.code.gson:gson:2.8.5\" level=\"project\" />\r\n    <orderEntry type=\"library\" scope=\"TEST\" name=\"Gradle: androidx.test.ext:junit:1.1.2@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" scope=\"TEST\" name=\"Gradle: androidx.test.espresso:espresso-core:3.3.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" scope=\"TEST\" name=\"Gradle: androidx.test:runner:1.3.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" scope=\"TEST\" name=\"Gradle: androidx.test:core:1.3.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" scope=\"TEST\" name=\"Gradle: androidx.test:monitor:1.3.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" scope=\"TEST\" name=\"Gradle: androidx.test.espresso:espresso-idling-resource:3.3.0@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" scope=\"TEST\" name=\"Gradle: junit:junit:4.13.1\" level=\"project\" />\r\n    <orderEntry type=\"library\" scope=\"TEST\" name=\"Gradle: com.google.android.gms:play-services-cast-framework:11.4.2@aar\" level=\"project\" />\r\n    <orderEntry type=\"library\" scope=\"TEST\" name=\"Gradle: com.google.android.gms:play-services-cast:11.4.2@aar\" level=\"project\" />\r\n  </component>\r\n</module>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/modules/app/animeApp.app.iml	(revision 03868c21a5a38d43e5a5983a55931ced756f0658)
++++ .idea/modules/app/animeApp.app.iml	(date 1612104364079)
+@@ -84,14 +84,14 @@
+     <orderEntry type="library" name="Gradle: com.github.bumptech.glide:disklrucache:4.11.0" level="project" />
+     <orderEntry type="library" name="Gradle: com.github.bumptech.glide:annotations:4.11.0" level="project" />
+     <orderEntry type="library" name="Gradle: org.bouncycastle:bcprov-jdk15to18:1.68" level="project" />
+-    <orderEntry type="library" name="Gradle: com.nimbusds:nimbus-jose-jwt:9.4" level="project" />
++    <orderEntry type="library" name="Gradle: com.nimbusds:nimbus-jose-jwt:9.4.2" level="project" />
+     <orderEntry type="library" name="Gradle: com.github.stephenc.jcip:jcip-annotations:1.0-1" level="project" />
+     <orderEntry type="library" name="Gradle: androidx.databinding:databinding-common:3.5.0" level="project" />
+     <orderEntry type="library" name="Gradle: org.greenrobot:eventbus:3.0.0" level="project" />
+-    <orderEntry type="library" name="Gradle: com.stripe:stripe-android:16.2.0@aar" level="project" />
++    <orderEntry type="library" name="Gradle: com.stripe:stripe-android:16.2.1@aar" level="project" />
+     <orderEntry type="library" name="Gradle: androidx.constraintlayout:constraintlayout:2.0.4@aar" level="project" />
+     <orderEntry type="library" name="Gradle: com.google.ads.mediation:inmobi:9.1.1.0@aar" level="project" />
+-    <orderEntry type="library" name="Gradle: com.stripe:stripe-3ds2-android:5.0.1@aar" level="project" />
++    <orderEntry type="library" name="Gradle: com.stripe:stripe-3ds2-android:5.1.1@aar" level="project" />
+     <orderEntry type="library" name="Gradle: com.google.android.material:material:1.2.1@aar" level="project" />
+     <orderEntry type="library" name="Gradle: com.crystal:crystalrangeseekbar:1.1.3@aar" level="project" />
+     <orderEntry type="library" name="Gradle: com.google.android.exoplayer:extension-cast:2.7.3@aar" level="project" />
+@@ -178,8 +178,8 @@
+     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-measurement-base:18.0.0@aar" level="project" />
+     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-basement:17.3.0@aar" level="project" />
+     <orderEntry type="library" name="Gradle: androidx.viewpager2:viewpager2:1.0.0@aar" level="project" />
+-    <orderEntry type="library" name="Gradle: androidx.fragment:fragment-ktx:1.3.0-rc01@aar" level="project" />
+-    <orderEntry type="library" name="Gradle: androidx.fragment:fragment:1.3.0-rc01@aar" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.fragment:fragment-ktx:1.3.0-rc02@aar" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.fragment:fragment:1.3.0-rc02@aar" level="project" />
+     <orderEntry type="library" name="Gradle: androidx.activity:activity-ktx:1.2.0-rc01@aar" level="project" />
+     <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-rc01@aar" level="project" />
+     <orderEntry type="library" name="Gradle: androidx.activity:activity:1.2.0-rc01@aar" level="project" />
+@@ -243,7 +243,7 @@
+     <orderEntry type="library" name="Gradle: androidx.localbroadcastmanager:localbroadcastmanager:1.0.0@aar" level="project" />
+     <orderEntry type="library" name="Gradle: androidx.exifinterface:exifinterface:1.0.0@aar" level="project" />
+     <orderEntry type="library" name="Gradle: com.github.bumptech.glide:gifdecoder:4.11.0@aar" level="project" />
+-    <orderEntry type="library" name="Gradle: androidx.databinding:viewbinding:4.1.1@aar" level="project" />
++    <orderEntry type="library" name="Gradle: androidx.databinding:viewbinding:4.1.2@aar" level="project" />
+     <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-livedata-core-ktx:2.3.0-rc01@aar" level="project" />
+     <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-livedata-core:2.3.0-rc01@aar" level="project" />
+     <orderEntry type="library" name="Gradle: androidx.savedstate:savedstate-ktx:1.1.0-rc01@aar" level="project" />
+@@ -327,5 +327,6 @@
+     <orderEntry type="library" scope="TEST" name="Gradle: junit:junit:4.13.1" level="project" />
+     <orderEntry type="library" scope="TEST" name="Gradle: com.google.android.gms:play-services-cast-framework:11.4.2@aar" level="project" />
+     <orderEntry type="library" scope="TEST" name="Gradle: com.google.android.gms:play-services-cast:11.4.2@aar" level="project" />
++    <orderEntry type="module" module-name="animeApp.nativetemplates" />
+   </component>
+ </module>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__com_google_android_gms_play_services_ads_18_3_0_aar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/Gradle__com_google_android_gms_play_services_ads_18_3_0_aar.xml	(date 1612104364332)
++++ .idea/libraries/Gradle__com_google_android_gms_play_services_ads_18_3_0_aar.xml	(date 1612104364332)
+@@ -0,0 +1,13 @@
++<component name="libraryTable">
++  <library name="Gradle: com.google.android.gms:play-services-ads:18.3.0@aar">
++    <CLASSES>
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/512f9c72a7884a000ee8f0b1f3677a0f/jetified-play-services-ads-18.3.0/jars/classes.jar!/" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/512f9c72a7884a000ee8f0b1f3677a0f/jetified-play-services-ads-18.3.0/res" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/512f9c72a7884a000ee8f0b1f3677a0f/jetified-play-services-ads-18.3.0/AndroidManifest.xml" />
++    </CLASSES>
++    <JAVADOC>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-ads/18.3.0/7b2b904a57fae0b77a9d2faf5284e6788f3223ba/play-services-ads-18.3.0-javadoc.jar!/" />
++    </JAVADOC>
++    <SOURCES />
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__com_google_android_gms_play_services_ads_base_18_3_0_aar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/Gradle__com_google_android_gms_play_services_ads_base_18_3_0_aar.xml	(date 1612104364344)
++++ .idea/libraries/Gradle__com_google_android_gms_play_services_ads_base_18_3_0_aar.xml	(date 1612104364344)
+@@ -0,0 +1,13 @@
++<component name="libraryTable">
++  <library name="Gradle: com.google.android.gms:play-services-ads-base:18.3.0@aar">
++    <CLASSES>
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5c8d147076cb3030d54a230370964365/jetified-play-services-ads-base-18.3.0/jars/classes.jar!/" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5c8d147076cb3030d54a230370964365/jetified-play-services-ads-base-18.3.0/res" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5c8d147076cb3030d54a230370964365/jetified-play-services-ads-base-18.3.0/AndroidManifest.xml" />
++    </CLASSES>
++    <JAVADOC>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-ads-base/18.3.0/7b2b904a57fae0b77a9d2faf5284e6788f3223ba/play-services-ads-base-18.3.0-javadoc.jar!/" />
++    </JAVADOC>
++    <SOURCES />
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__com_google_android_gms_play_services_ads_lite_18_3_0_aar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/Gradle__com_google_android_gms_play_services_ads_lite_18_3_0_aar.xml	(date 1612104364355)
++++ .idea/libraries/Gradle__com_google_android_gms_play_services_ads_lite_18_3_0_aar.xml	(date 1612104364355)
+@@ -0,0 +1,13 @@
++<component name="libraryTable">
++  <library name="Gradle: com.google.android.gms:play-services-ads-lite:18.3.0@aar">
++    <CLASSES>
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/30891204a1c2ed7a2212e9067e9e558b/jetified-play-services-ads-lite-18.3.0/jars/classes.jar!/" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/30891204a1c2ed7a2212e9067e9e558b/jetified-play-services-ads-lite-18.3.0/res" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/30891204a1c2ed7a2212e9067e9e558b/jetified-play-services-ads-lite-18.3.0/AndroidManifest.xml" />
++    </CLASSES>
++    <JAVADOC>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-ads-lite/18.3.0/c08609e7434099cc6e5b3b495eb2edadab6aeaf2/play-services-ads-lite-18.3.0-javadoc.jar!/" />
++    </JAVADOC>
++    <SOURCES />
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__com_google_android_gms_play_services_basement_17_0_0_aar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/Gradle__com_google_android_gms_play_services_basement_17_0_0_aar.xml	(date 1612104364365)
++++ .idea/libraries/Gradle__com_google_android_gms_play_services_basement_17_0_0_aar.xml	(date 1612104364365)
+@@ -0,0 +1,13 @@
++<component name="libraryTable">
++  <library name="Gradle: com.google.android.gms:play-services-basement:17.0.0@aar">
++    <CLASSES>
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3dd31304fa3897abec167b59287e7e00/jetified-play-services-basement-17.0.0/jars/classes.jar!/" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3dd31304fa3897abec167b59287e7e00/jetified-play-services-basement-17.0.0/res" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3dd31304fa3897abec167b59287e7e00/jetified-play-services-basement-17.0.0/AndroidManifest.xml" />
++    </CLASSES>
++    <JAVADOC>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-basement/17.0.0/4faccf8c10bad282388a4067b8ef53d8476bbbc8/play-services-basement-17.0.0-javadoc.jar!/" />
++    </JAVADOC>
++    <SOURCES />
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__com_google_android_gms_play_services_gass_18_3_0_aar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/Gradle__com_google_android_gms_play_services_gass_18_3_0_aar.xml	(date 1612104364374)
++++ .idea/libraries/Gradle__com_google_android_gms_play_services_gass_18_3_0_aar.xml	(date 1612104364374)
+@@ -0,0 +1,13 @@
++<component name="libraryTable">
++  <library name="Gradle: com.google.android.gms:play-services-gass:18.3.0@aar">
++    <CLASSES>
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3b18212a99df269cf9cf0361a3acafa1/jetified-play-services-gass-18.3.0/jars/classes.jar!/" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3b18212a99df269cf9cf0361a3acafa1/jetified-play-services-gass-18.3.0/res" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3b18212a99df269cf9cf0361a3acafa1/jetified-play-services-gass-18.3.0/AndroidManifest.xml" />
++    </CLASSES>
++    <JAVADOC>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-gass/18.3.0/7b2b904a57fae0b77a9d2faf5284e6788f3223ba/play-services-gass-18.3.0-javadoc.jar!/" />
++    </JAVADOC>
++    <SOURCES />
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__com_google_android_gms_play_services_measurement_base_17_1_0_aar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/Gradle__com_google_android_gms_play_services_measurement_base_17_1_0_aar.xml	(date 1612104364385)
++++ .idea/libraries/Gradle__com_google_android_gms_play_services_measurement_base_17_1_0_aar.xml	(date 1612104364385)
+@@ -0,0 +1,13 @@
++<component name="libraryTable">
++  <library name="Gradle: com.google.android.gms:play-services-measurement-base:17.1.0@aar">
++    <CLASSES>
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7678a1acf0ad54916fdaf8d602864959/jetified-play-services-measurement-base-17.1.0/jars/classes.jar!/" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7678a1acf0ad54916fdaf8d602864959/jetified-play-services-measurement-base-17.1.0/res" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7678a1acf0ad54916fdaf8d602864959/jetified-play-services-measurement-base-17.1.0/AndroidManifest.xml" />
++    </CLASSES>
++    <JAVADOC>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-measurement-base/17.1.0/b18bc04db70f278c1485415dfaefe2ce66588fe8/play-services-measurement-base-17.1.0-javadoc.jar!/" />
++    </JAVADOC>
++    <SOURCES />
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__com_google_android_gms_play_services_measurement_sdk_api_17_1_0_aar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/Gradle__com_google_android_gms_play_services_measurement_sdk_api_17_1_0_aar.xml	(date 1612104364395)
++++ .idea/libraries/Gradle__com_google_android_gms_play_services_measurement_sdk_api_17_1_0_aar.xml	(date 1612104364395)
+@@ -0,0 +1,13 @@
++<component name="libraryTable">
++  <library name="Gradle: com.google.android.gms:play-services-measurement-sdk-api:17.1.0@aar">
++    <CLASSES>
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/298b90064dca2323e8eefbcfa9a2f83e/jetified-play-services-measurement-sdk-api-17.1.0/jars/classes.jar!/" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/298b90064dca2323e8eefbcfa9a2f83e/jetified-play-services-measurement-sdk-api-17.1.0/res" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/298b90064dca2323e8eefbcfa9a2f83e/jetified-play-services-measurement-sdk-api-17.1.0/AndroidManifest.xml" />
++    </CLASSES>
++    <JAVADOC>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-measurement-sdk-api/17.1.0/518f5c4c868378d826206557438219ae5880fdb2/play-services-measurement-sdk-api-17.1.0-javadoc.jar!/" />
++    </JAVADOC>
++    <SOURCES />
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__com_google_android_gms_play_services_tasks_17_0_0_aar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/Gradle__com_google_android_gms_play_services_tasks_17_0_0_aar.xml	(date 1612104364406)
++++ .idea/libraries/Gradle__com_google_android_gms_play_services_tasks_17_0_0_aar.xml	(date 1612104364406)
+@@ -0,0 +1,11 @@
++<component name="libraryTable">
++  <library name="Gradle: com.google.android.gms:play-services-tasks:17.0.0@aar">
++    <CLASSES>
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1610fa7d4d8dcf74753b9cee1e272637/jetified-play-services-tasks-17.0.0/jars/classes.jar!/" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1610fa7d4d8dcf74753b9cee1e272637/jetified-play-services-tasks-17.0.0/res" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1610fa7d4d8dcf74753b9cee1e272637/jetified-play-services-tasks-17.0.0/AndroidManifest.xml" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES />
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__androidx_lifecycle_lifecycle_livedata_core_2_0_0_aar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/Gradle__androidx_lifecycle_lifecycle_livedata_core_2_0_0_aar.xml	(date 1612104364258)
++++ .idea/libraries/Gradle__androidx_lifecycle_lifecycle_livedata_core_2_0_0_aar.xml	(date 1612104364258)
+@@ -0,0 +1,13 @@
++<component name="libraryTable">
++  <library name="Gradle: androidx.lifecycle:lifecycle-livedata-core:2.0.0@aar">
++    <CLASSES>
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a9076a1261d1926d6e714ab80d2474a5/lifecycle-livedata-core-2.0.0/jars/classes.jar!/" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a9076a1261d1926d6e714ab80d2474a5/lifecycle-livedata-core-2.0.0/res" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a9076a1261d1926d6e714ab80d2474a5/lifecycle-livedata-core-2.0.0/AndroidManifest.xml" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-livedata-core/2.0.0/c158207594782b42f3a2e08a5a029eb3319e4404/lifecycle-livedata-core-2.0.0-sources.jar!/" />
++    </SOURCES>
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__androidx_lifecycle_lifecycle_runtime_2_1_0_aar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/Gradle__androidx_lifecycle_lifecycle_runtime_2_1_0_aar.xml	(date 1612104364267)
++++ .idea/libraries/Gradle__androidx_lifecycle_lifecycle_runtime_2_1_0_aar.xml	(date 1612104364267)
+@@ -0,0 +1,13 @@
++<component name="libraryTable">
++  <library name="Gradle: androidx.lifecycle:lifecycle-runtime:2.1.0@aar">
++    <CLASSES>
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4ba4ece4477e65180e3d4799cbf3908e/lifecycle-runtime-2.1.0/jars/classes.jar!/" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4ba4ece4477e65180e3d4799cbf3908e/lifecycle-runtime-2.1.0/res" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4ba4ece4477e65180e3d4799cbf3908e/lifecycle-runtime-2.1.0/AndroidManifest.xml" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-runtime/2.1.0/533a0cd1a095abbdfd08a49c4d34bd0713977034/lifecycle-runtime-2.1.0-sources.jar!/" />
++    </SOURCES>
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__androidx_lifecycle_lifecycle_viewmodel_2_1_0_aar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/Gradle__androidx_lifecycle_lifecycle_viewmodel_2_1_0_aar.xml	(date 1612104364276)
++++ .idea/libraries/Gradle__androidx_lifecycle_lifecycle_viewmodel_2_1_0_aar.xml	(date 1612104364276)
+@@ -0,0 +1,13 @@
++<component name="libraryTable">
++  <library name="Gradle: androidx.lifecycle:lifecycle-viewmodel:2.1.0@aar">
++    <CLASSES>
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f3a3a99faf9bbb321e7613d44b699bb3/lifecycle-viewmodel-2.1.0/jars/classes.jar!/" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f3a3a99faf9bbb321e7613d44b699bb3/lifecycle-viewmodel-2.1.0/res" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f3a3a99faf9bbb321e7613d44b699bb3/lifecycle-viewmodel-2.1.0/AndroidManifest.xml" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-viewmodel/2.1.0/bfd86b9887c2343516f82bed91acbab34a45841d/lifecycle-viewmodel-2.1.0-sources.jar!/" />
++    </SOURCES>
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__androidx_savedstate_savedstate_1_0_0_aar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/Gradle__androidx_savedstate_savedstate_1_0_0_aar.xml	(date 1612104364285)
++++ .idea/libraries/Gradle__androidx_savedstate_savedstate_1_0_0_aar.xml	(date 1612104364285)
+@@ -0,0 +1,13 @@
++<component name="libraryTable">
++  <library name="Gradle: androidx.savedstate:savedstate:1.0.0@aar">
++    <CLASSES>
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1bb86eeb1c5d9a3a085a85765170daf2/jetified-savedstate-1.0.0/jars/classes.jar!/" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1bb86eeb1c5d9a3a085a85765170daf2/jetified-savedstate-1.0.0/res" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1bb86eeb1c5d9a3a085a85765170daf2/jetified-savedstate-1.0.0/AndroidManifest.xml" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.savedstate/savedstate/1.0.0/e6daf87ed227a6f80bb8accb466755a5ee01a652/savedstate-1.0.0-sources.jar!/" />
++    </SOURCES>
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__androidx_test_espresso_espresso_core_3_1_0_aar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/Gradle__androidx_test_espresso_espresso_core_3_1_0_aar.xml	(date 1612104364295)
++++ .idea/libraries/Gradle__androidx_test_espresso_espresso_core_3_1_0_aar.xml	(date 1612104364295)
+@@ -0,0 +1,15 @@
++<component name="libraryTable">
++  <library name="Gradle: androidx.test.espresso:espresso-core:3.1.0@aar">
++    <CLASSES>
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a255ce3c0205c203cbbf9864a475aa31/espresso-core-3.1.0/jars/classes.jar!/" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a255ce3c0205c203cbbf9864a475aa31/espresso-core-3.1.0/res" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a255ce3c0205c203cbbf9864a475aa31/espresso-core-3.1.0/AndroidManifest.xml" />
++    </CLASSES>
++    <JAVADOC>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.test.espresso/espresso-core/3.1.0/5ddd7bcd98d83c3eb699422855553fd877292623/espresso-core-3.1.0-javadoc.jar!/" />
++    </JAVADOC>
++    <SOURCES>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.test.espresso/espresso-core/3.1.0/e70a553facebdb90cec729ab6653ef91a2a2bc14/espresso-core-3.1.0-sources.jar!/" />
++    </SOURCES>
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__androidx_test_espresso_espresso_idling_resource_3_1_0_aar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/Gradle__androidx_test_espresso_espresso_idling_resource_3_1_0_aar.xml	(date 1612104364303)
++++ .idea/libraries/Gradle__androidx_test_espresso_espresso_idling_resource_3_1_0_aar.xml	(date 1612104364303)
+@@ -0,0 +1,15 @@
++<component name="libraryTable">
++  <library name="Gradle: androidx.test.espresso:espresso-idling-resource:3.1.0@aar">
++    <CLASSES>
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/977adcf8fdd5c8998c7baa22383a22d7/espresso-idling-resource-3.1.0/jars/classes.jar!/" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/977adcf8fdd5c8998c7baa22383a22d7/espresso-idling-resource-3.1.0/res" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/977adcf8fdd5c8998c7baa22383a22d7/espresso-idling-resource-3.1.0/AndroidManifest.xml" />
++    </CLASSES>
++    <JAVADOC>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.test.espresso/espresso-idling-resource/3.1.0/ac774bb29e6171578dc7508bf390a4a3ccbedfea/espresso-idling-resource-3.1.0-javadoc.jar!/" />
++    </JAVADOC>
++    <SOURCES>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.test.espresso/espresso-idling-resource/3.1.0/85d1f70a486b5bfbd0666d08e23b06bce5264fa6/espresso-idling-resource-3.1.0-sources.jar!/" />
++    </SOURCES>
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__androidx_test_monitor_1_1_0_aar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/Gradle__androidx_test_monitor_1_1_0_aar.xml	(date 1612104364313)
++++ .idea/libraries/Gradle__androidx_test_monitor_1_1_0_aar.xml	(date 1612104364313)
+@@ -0,0 +1,15 @@
++<component name="libraryTable">
++  <library name="Gradle: androidx.test:monitor:1.1.0@aar">
++    <CLASSES>
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/cfdeaed35bf434299bb2bf2401d497c3/monitor-1.1.0/jars/classes.jar!/" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/cfdeaed35bf434299bb2bf2401d497c3/monitor-1.1.0/res" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/cfdeaed35bf434299bb2bf2401d497c3/monitor-1.1.0/AndroidManifest.xml" />
++    </CLASSES>
++    <JAVADOC>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.test/monitor/1.1.0/3d1f748b5f88e6fedbc17128a6f1d24af649d64/monitor-1.1.0-javadoc.jar!/" />
++    </JAVADOC>
++    <SOURCES>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.test/monitor/1.1.0/d5021e13cb13f510b6d876a591a7eb9f33d52688/monitor-1.1.0-sources.jar!/" />
++    </SOURCES>
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__androidx_test_runner_1_1_0_aar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/Gradle__androidx_test_runner_1_1_0_aar.xml	(date 1612104364323)
++++ .idea/libraries/Gradle__androidx_test_runner_1_1_0_aar.xml	(date 1612104364323)
+@@ -0,0 +1,15 @@
++<component name="libraryTable">
++  <library name="Gradle: androidx.test:runner:1.1.0@aar">
++    <CLASSES>
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/fe4c75f24764e44bdd2ef8ce0d6af07e/runner-1.1.0/jars/classes.jar!/" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/fe4c75f24764e44bdd2ef8ce0d6af07e/runner-1.1.0/res" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/fe4c75f24764e44bdd2ef8ce0d6af07e/runner-1.1.0/AndroidManifest.xml" />
++    </CLASSES>
++    <JAVADOC>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.test/runner/1.1.0/c274a591e1dc9f8d64f8f10a71d0e282078b1043/runner-1.1.0-javadoc.jar!/" />
++    </JAVADOC>
++    <SOURCES>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.test/runner/1.1.0/c5c79ef06dbb738578ae3b6312fbca6755aa9193/runner-1.1.0-sources.jar!/" />
++    </SOURCES>
++  </library>
++</component>
+\ No newline at end of file
+Index: app/src/main/java/tvseries/koreandramaengsub/freemovieapp/utils/ads/NativeAds.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/tvseries/koreandramaengsub/freemovieapp/utils/ads/NativeAds.java	(date 1612104917532)
++++ app/src/main/java/tvseries/koreandramaengsub/freemovieapp/utils/ads/NativeAds.java	(date 1612104917532)
+@@ -0,0 +1,200 @@
++package tvseries.koreandramaengsub.freemovieapp.utils.ads;
++
++import android.app.Activity;
++import android.content.Intent;
++import android.net.Uri;
++import android.util.Log;
++import android.view.View;
++import android.widget.Button;
++import android.widget.ImageView;
++import android.widget.RelativeLayout;
++import android.widget.TextView;
++
++import com.facebook.ads.Ad;
++import com.facebook.ads.AdError;
++import com.facebook.ads.NativeAdListener;
++import com.facebook.ads.NativeBannerAd;
++import com.facebook.ads.NativeBannerAdView;
++import com.google.android.ads.nativetemplates.TemplateView;
++import com.google.android.gms.ads.AdLoader;
++import com.google.android.gms.ads.AdRequest;
++import com.google.android.gms.ads.MobileAds;
++import com.google.android.gms.ads.formats.UnifiedNativeAd;
++import com.squareup.picasso.Picasso;
++import com.startapp.sdk.ads.nativead.NativeAdDetails;
++import com.startapp.sdk.ads.nativead.NativeAdPreferences;
++import com.startapp.sdk.ads.nativead.StartAppNativeAd;
++import com.startapp.sdk.adsbase.StartAppAd;
++import com.startapp.sdk.adsbase.adlisteners.AdEventListener;
++
++import java.util.List;
++
++import tvseries.koreandramaengsub.freemovieapp.R;
++import tvseries.koreandramaengsub.freemovieapp.database.DatabaseHelper;
++import tvseries.koreandramaengsub.freemovieapp.utils.PreferenceUtils;
++
++public class NativeAds {
++    private static final String TAG = NativeAds.class.getSimpleName();
++    private static UnifiedNativeAd ad = null;
++
++    public NativeAds() {
++    }
++
++    public static void showAdmobNativeAds(Activity activity, TemplateView templateView) {
++        if (!PreferenceUtils.isActivePlan(activity)) {
++            String nativeAdId = new DatabaseHelper(activity).getConfigurationData().getAdsConfig().getAdmobNativeAdsId();
++            MobileAds.initialize(activity);
++            AdLoader adLoader = new AdLoader.Builder(activity, nativeAdId)
++                    .forUnifiedNativeAd(new UnifiedNativeAd.OnUnifiedNativeAdLoadedListener() {
++                        @Override
++                        public void onUnifiedNativeAdLoaded(UnifiedNativeAd unifiedNativeAd) {
++                            ad = unifiedNativeAd;
++                            if (unifiedNativeAd != null) {
++                                templateView.setNativeAd(ad);
++                            }
++                        }
++                    }).build();
++            adLoader.loadAd(new AdRequest.Builder().build());
++        } else {
++            templateView.setVisibility(View.GONE);
++        }
++    }
++
++    public static void releaseAdmobNativeAd() {
++        if (ad != null) {
++            ad.destroy();
++            Log.e(TAG, "Admob Native ad destroyed");
++        }
++    }
++
++    public static void showFANNativeBannerAd(Activity activity, RelativeLayout container) {
++        if (!PreferenceUtils.isActivePlan(activity)) {
++            String nativeAdId = new DatabaseHelper(activity).getConfigurationData().getAdsConfig().getFanNativeAdsPlacementId();
++            NativeBannerAd nativeBannerAd =
++                    new NativeBannerAd(activity, nativeAdId);
++            NativeAdListener listener = new NativeAdListener() {
++                @Override
++                public void onMediaDownloaded(Ad ad) {
++
++                }
++
++                @Override
++                public void onError(Ad ad, AdError adError) {
++                    Log.e(TAG, "FAN Native ad failed to load: " + adError.getErrorMessage());
++                }
++
++                @Override
++                public void onAdLoaded(Ad ad) {
++                    View adView = NativeBannerAdView.render(activity, nativeBannerAd,
++                            NativeBannerAdView.Type.HEIGHT_100);
++                    container.addView(adView);
++                }
++
++                @Override
++                public void onAdClicked(Ad ad) {
++
++                }
++
++                @Override
++                public void onLoggingImpression(Ad ad) {
++
++                }
++            };
++
++            //initiate a request to load an ad
++            nativeBannerAd.loadAd(
++                    nativeBannerAd.buildLoadAdConfig()
++                            .withAdListener(listener)
++                            .build());
++        }
++    }
++
++//    public void showStartAppNativeAds(Activity activity, RelativeLayout adView) {
++//        if (!PreferenceUtils.isActivePlan(activity)) {
++//            String startAppAppId = new DatabaseHelper(activity).getConfigurationData().getAdsConfig().getStartappAppId();
++//            //String developerId = "165678100";
++//            String developerId = new DatabaseHelper(activity).getConfigurationData().getAdsConfig().getStartappDeveloperId();
++//            StartAppAd.init(activity, developerId, startAppAppId);
++//
++//            StartAppNativeAd startAppNativeAd = new StartAppNativeAd(activity);
++//            // Declare Native Ad Preferences
++//            NativeAdPreferences nativePrefs = new NativeAdPreferences()
++//                    .setAdsNumber(1)                // Load 1 Native Ads
++//                    .setAutoBitmapDownload(true)    // Retrieve Images object
++//                    .setPrimaryImageSize(2);        // 150x150 image
++//            startAppNativeAd.loadAd(nativePrefs, new AdEventListener() {
++//                @Override
++//                public void onReceiveAd(com.startapp.sdk.adsbase.Ad ad) {
++//                    // Native Ad failed to receive
++//                    List<NativeAdDetails> ads = startAppNativeAd.getNativeAds();    // get NativeAds list
++//                    if (ads != null) {
++//                        NativeAdDetails details = ads.get(0);
++//                        if (details != null){
++//                            adView.setVisibility(View.VISIBLE);
++//                            populateViews(details, adView, activity);
++//                        }else {
++//                            adView.setVisibility(View.GONE);
++//                        }
++//                    }
++//                    // Print all ads details to log
++//                    /*Iterator iterator = ads.iterator();
++//                    while(iterator.hasNext()){
++//                        Log.d("StartAppNativeAds", iterator.next().toString());
++//                    }*/
++//                }
++//
++//                @Override
++//                public void onFailedToReceiveAd (com.startapp.sdk.adsbase.Ad ad){
++//                    // Native Ad failed to receive
++//                    adView.setVisibility(View.GONE);
++//                }
++//            });
++//        }
++//    }
++//
++//    private void populateViews(NativeAdDetails details, RelativeLayout adView, Activity activity) {
++//        //image
++//        ImageView icon = adView.findViewById(R.id.startapp_nativead_image);
++//        Picasso.get().load(details.getSecondaryImageUrl()).into(icon);
++//        /*Glide.with(activity)
++//                .asBitmap()
++//                .load(details.getImageBitmap())
++//                .into(new SimpleTarget<Bitmap>() {
++//                    @Override
++//                    public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
++//                        icon.setImageBitmap(resource);
++//                    }
++//                });*/
++//
++//        //Log.e("StartAppNativeAds", details.getImageUrl());
++//        //title
++//        TextView title = adView.findViewById(R.id.startapp_nativead_title);
++//        title.setText(details.getTitle());
++//        //description
++//        TextView des = adView.findViewById(R.id.startapp_nativead_details);
++//        des.setText(details.getDescription());
++//        //ratings
++//        TextView ratings = adView.findViewById(R.id.startapp_nativead_ratings);
++//        ratings.setText(String.valueOf(details.getRating()));
++//        //installs
++//        TextView installs = adView.findViewById(R.id.startapp_nativead_installs);
++//        installs.setText(details.getInstalls() + " installs");
++//
++//        //click
++//        Button button = adView.findViewById(R.id.startapp_nativead_button);
++//        button.setOnClickListener(new View.OnClickListener() {
++//            @Override
++//            public void onClick(View view) {
++//                String appPackageName = details.getPackacgeName();
++//                try {
++//                    activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
++//                } catch (android.content.ActivityNotFoundException anfe) {
++//                    activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
++//                }
++//            }
++//        });
++//
++//    }
++
++}
++
+Index: .idea/libraries/Gradle__com_nimbusds_nimbus_jose_jwt_9_4_2.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/Gradle__com_nimbusds_nimbus_jose_jwt_9_4_2.xml	(date 1612104364416)
++++ .idea/libraries/Gradle__com_nimbusds_nimbus_jose_jwt_9_4_2.xml	(date 1612104364416)
+@@ -0,0 +1,13 @@
++<component name="libraryTable">
++  <library name="Gradle: com.nimbusds:nimbus-jose-jwt:9.4.2">
++    <CLASSES>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.nimbusds/nimbus-jose-jwt/9.4.2/b7b335916cf01eb6627f301ba01534d6493ddd1/nimbus-jose-jwt-9.4.2.jar!/" />
++    </CLASSES>
++    <JAVADOC>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.nimbusds/nimbus-jose-jwt/9.4.2/f5171f31c7b65eca6927c696e7b5c6dda3c078e3/nimbus-jose-jwt-9.4.2-javadoc.jar!/" />
++    </JAVADOC>
++    <SOURCES>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.nimbusds/nimbus-jose-jwt/9.4.2/464cb79f9858ca7d00163ec7ccf6545d19fa6ec/nimbus-jose-jwt-9.4.2-sources.jar!/" />
++    </SOURCES>
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__com_stripe_stripe_3ds2_android_5_1_1_aar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/Gradle__com_stripe_stripe_3ds2_android_5_1_1_aar.xml	(date 1612104364424)
++++ .idea/libraries/Gradle__com_stripe_stripe_3ds2_android_5_1_1_aar.xml	(date 1612104364424)
+@@ -0,0 +1,14 @@
++<component name="libraryTable">
++  <library name="Gradle: com.stripe:stripe-3ds2-android:5.1.1@aar">
++    <CLASSES>
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b8ea044cbfa7ec6ca47290073d456116/jetified-stripe-3ds2-android-5.1.1/jars/classes.jar!/" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b8ea044cbfa7ec6ca47290073d456116/jetified-stripe-3ds2-android-5.1.1/res" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b8ea044cbfa7ec6ca47290073d456116/jetified-stripe-3ds2-android-5.1.1/AndroidManifest.xml" />
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b8ea044cbfa7ec6ca47290073d456116/jetified-stripe-3ds2-android-5.1.1/jars/libs/sdk_listeners_android.jar!/" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.stripe/stripe-3ds2-android/5.1.1/16a511468b5ee4fcf33b0cdfcb69e11fc43a51c7/stripe-3ds2-android-5.1.1-sources.jar!/" />
++    </SOURCES>
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__com_stripe_stripe_android_16_2_1_aar.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/Gradle__com_stripe_stripe_android_16_2_1_aar.xml	(date 1612104364432)
++++ .idea/libraries/Gradle__com_stripe_stripe_android_16_2_1_aar.xml	(date 1612104364432)
+@@ -0,0 +1,15 @@
++<component name="libraryTable">
++  <library name="Gradle: com.stripe:stripe-android:16.2.1@aar">
++    <CLASSES>
++      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/aa899a7c18f82ecf03bd3cb5e5848d48/jetified-stripe-android-16.2.1/jars/classes.jar!/" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/aa899a7c18f82ecf03bd3cb5e5848d48/jetified-stripe-android-16.2.1/res" />
++      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/aa899a7c18f82ecf03bd3cb5e5848d48/jetified-stripe-android-16.2.1/AndroidManifest.xml" />
++    </CLASSES>
++    <JAVADOC>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.stripe/stripe-android/16.2.1/950c72abc0ccd35c79ce00d5964f8889b334e10f/stripe-android-16.2.1-javadoc.jar!/" />
++    </JAVADOC>
++    <SOURCES>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.stripe/stripe-android/16.2.1/9806511d12bb50fc46255a1d1cd08c137774d278/stripe-android-16.2.1-sources.jar!/" />
++    </SOURCES>
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/libraries/Gradle__net_sf_kxml_kxml2_2_3_0.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/Gradle__net_sf_kxml_kxml2_2_3_0.xml	(date 1612104364440)
++++ .idea/libraries/Gradle__net_sf_kxml_kxml2_2_3_0.xml	(date 1612104364440)
+@@ -0,0 +1,13 @@
++<component name="libraryTable">
++  <library name="Gradle: net.sf.kxml:kxml2:2.3.0">
++    <CLASSES>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.kxml/kxml2/2.3.0/ccbc77a5fd907ef863c29f3596c6f54ffa4e9442/kxml2-2.3.0.jar!/" />
++    </CLASSES>
++    <JAVADOC>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.kxml/kxml2/2.3.0/dcb10030b92be67fd9dd224ade52310e40bbaf33/kxml2-2.3.0-javadoc.jar!/" />
++    </JAVADOC>
++    <SOURCES>
++      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sf.kxml/kxml2/2.3.0/309cd2cff7260e465792fda3dcbb063b730d8050/kxml2-2.3.0-sources.jar!/" />
++    </SOURCES>
++  </library>
++</component>
+\ No newline at end of file
+Index: app/src/main/res/layout/fragment_tvseries.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<RelativeLayout android:orientation=\"vertical\"\r\n    xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n    <include\r\n        android:id=\"@+id/shimmer_view_container\"\r\n        layout=\"@layout/layout_dimmer_tvseries\"/>\r\n\r\n    <RelativeLayout\r\n        android:layout_below=\"@+id/shimmer_view_container\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\"\r\n        android:layout_above=\"@+id/adView\">\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"match_parent\"\r\n            android:orientation=\"vertical\">\r\n\r\n            <tvseries.koreandramaengsub.freemovieapp.view.SwipeRefreshLayout\r\n                android:id=\"@+id/swipe_layout\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"match_parent\"\r\n                app:layout_behavior=\"@string/appbar_scrolling_view_behavior\">\r\n\r\n                <androidx.recyclerview.widget.RecyclerView\r\n                    android:id=\"@+id/recyclerView\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:scrollbars=\"vertical\"\r\n                    android:scrollingCache=\"true\"\r\n                    tools:listitem=\"@layout/card_reply\"\r\n                    android:paddingTop=\"70dp\"\r\n                    android:clipToPadding=\"false\"/>\r\n\r\n            </tvseries.koreandramaengsub.freemovieapp.view.SwipeRefreshLayout>\r\n\r\n        </LinearLayout>\r\n\r\n        <ProgressBar\r\n            android:id=\"@+id/item_progress_bar\"\r\n            android:layout_width=\"50dp\"\r\n            android:layout_height=\"50dp\"\r\n            android:layout_centerHorizontal=\"true\"\r\n            android:elevation=\"5dp\"\r\n            android:layout_alignParentBottom=\"true\"\r\n            android:padding=\"5dp\"\r\n            android:visibility=\"gone\" />\r\n\r\n    </RelativeLayout>\r\n\r\n    <RelativeLayout\r\n        android:id=\"@+id/adView\"\r\n        android:layout_alignParentBottom=\"true\"\r\n        android:layout_gravity=\"center\"\r\n        android:gravity=\"center\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"/>\r\n\r\n    <com.appodeal.ads.BannerView\r\n        android:id=\"@+id/appodealBannerView_fragment_tvseries\"\r\n        android:layout_alignParentBottom=\"true\"\r\n        android:layout_gravity=\"center\"\r\n        android:gravity=\"center\"\r\n        android:focusable=\"true\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"/>\r\n\r\n</RelativeLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/fragment_tvseries.xml	(revision 03868c21a5a38d43e5a5983a55931ced756f0658)
++++ app/src/main/res/layout/fragment_tvseries.xml	(date 1611028588890)
+@@ -21,7 +21,7 @@
+             android:layout_height="match_parent"
+             android:orientation="vertical">
+ 
+-            <tvseries.koreandramaengsub.freemovieapp.view.SwipeRefreshLayout
++            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                 android:id="@+id/swipe_layout"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+@@ -37,7 +37,7 @@
+                     android:paddingTop="70dp"
+                     android:clipToPadding="false"/>
+ 
+-            </tvseries.koreandramaengsub.freemovieapp.view.SwipeRefreshLayout>
++            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+ 
+         </LinearLayout>
+ 
+diff --git app/src/main/java/tvseries/koreandramaengsub/freemovieapp/database/DatabaseHelper.java app/src/main/java/tvseries/koreandramaengsub/freemovieapp/database/DatabaseHelper.java

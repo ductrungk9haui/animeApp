@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <com.paymentwall.pwunifiedsdk.ui.ProximaNovaRegularTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Card id"
+            android:textColor="@color/black_text"
+            android:textSize="16sp" />
+
+        <com.paymentwall.pwunifiedsdk.ui.ProximaNovaRegularEditText
+            android:id="@+id/etCardId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:inputType="textCapCharacters"
+            android:text=""
+            android:textColor="@color/saas_textPrimary"
+            android:textSize="20sp" />
+
+
+        <com.paymentwall.pwunifiedsdk.ui.ProximaNovaRegularTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Card password"
+            android:textColor="@color/black_text"
+            android:textSize="16sp" />
+
+        <com.paymentwall.pwunifiedsdk.ui.ProximaNovaRegularEditText
+            android:id="@+id/etCardPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:inputType="textCapCharacters"
+            android:text=""
+            android:textColor="@color/saas_textPrimary"
+            android:textSize="20sp" />
+
+        <com.paymentwall.pwunifiedsdk.ui.ProximaNovaRegularButton
+            android:id="@+id/btnProceed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@color/saas_colorPrimary"
+            android:text="Submit"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+</ScrollView>

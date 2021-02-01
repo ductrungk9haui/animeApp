@@ -1,0 +1,3 @@
+ninja: Entering directory `C:\Users\khaih\StudioProjects\animeApp\app\.cxx\cmake\debug\x86'
+[1/2] Building CXX object CMakeFiles/api_config.dir/api_config.cpp.o
+[2/2] Linking CXX shared library C:\Users\khaih\StudioProjects\animeApp\app\build\intermediates\cmake\debug\obj\x86\libapi_config.so

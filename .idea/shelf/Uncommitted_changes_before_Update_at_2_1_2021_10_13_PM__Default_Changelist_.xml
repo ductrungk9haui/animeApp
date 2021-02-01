@@ -1,0 +1,29 @@
+<changelist name="Uncommitted_changes_before_Update_at_2_1_2021_10_13_PM_[Default_Changelist]" date="1612193210335" recycled="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_1_2021_10_13_PM_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2/1/2021 10:13 PM [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="mycardadapter-release/mycardadapter-release.aar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_1_2021_10_13_PM_[Default_Changelist]/mycardadapter-release.aar" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="mobiamosdk/mobiamosdk.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_1_2021_10_13_PM_[Default_Changelist]/mobiamosdk.jar" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".gradle/checksums/md5-checksums.bin" />
+    <option name="AFTER_PATH" value=".gradle/checksums/md5-checksums.bin" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_1_2021_10_13_PM_[Default_Changelist]/md5-checksums.bin" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value=".idea/caches/build_file_checksums.ser" />
+    <option name="AFTER_PATH" value=".idea/caches/build_file_checksums.ser" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_1_2021_10_13_PM_[Default_Changelist]/build_file_checksums.ser" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="paymentwall-android-sdk/paymentwall-android-sdk.aar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_1_2021_10_13_PM_[Default_Changelist]/paymentwall-android-sdk.aar" />
+  </binary>
+</changelist>
