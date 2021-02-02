@@ -84,11 +84,23 @@ public class TvSeriesFragment extends Fragment {
     private void initComponent(View view) {
         mApiResources =new ApiResources();
         mShimmerLayout.startShimmer();
-        mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
-        mRecyclerView.addItemDecoration(new SpacingItemDecoration(3, Tools.dpToPx(getActivity(), 0), true));
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                switch ((position + 1) % 10) {
+                    case 0:
+                        return 3;
+                    default:
+                        return 1;
+                }
+            }
+        });
+        mRecyclerView.setLayoutManager(gridLayoutManager);
+       // mRecyclerView.addItemDecoration(new SpacingItemDecoration(3, Tools.dpToPx(getActivity(), 0), true));
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setNestedScrollingEnabled(false);
-        mAdapter = new CommonGridAdapter(getContext(), mListCommonModels);
+        mAdapter = new CommonGridAdapter(getActivity(),getContext(), mListCommonModels);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -145,7 +157,7 @@ public class TvSeriesFragment extends Fragment {
                 mActivity.setFailure(false);
                 mListCommonModels.clear();
                 mRecyclerView.removeAllViews();
-                mAdapter.notifyDataSetChanged();
+                mAdapter.setNotifyDataSetChanged();
                 if (new NetworkInst(getContext()).isNetworkAvailable()){
                     getTvSeriesData(mPageCount);
                 }else {
@@ -157,7 +169,7 @@ public class TvSeriesFragment extends Fragment {
             }
         });
 
-        loadAd();
+        //loadAd();
 
     }
 
@@ -219,7 +231,7 @@ public class TvSeriesFragment extends Fragment {
                     }else {
                         mActivity.setFailure(false);
                     }
-
+                    boolean newAdd =false;
                     for (int i = 0; i < response.body().size(); i++){
                         Video video = response.body().get(i);
                         CommonModels models =new CommonModels();
@@ -230,8 +242,11 @@ public class TvSeriesFragment extends Fragment {
                         models.setQuality(video.getVideoQuality());
                         models.setId(video.getVideosId());
                         mListCommonModels.add(models);
+                        newAdd = true;
                     }
-                    mAdapter.notifyDataSetChanged();
+                    if(newAdd){
+                        mAdapter.setNotifyDataSetChanged();
+                    }
 
                 }else {
                     mIsLoading =false;

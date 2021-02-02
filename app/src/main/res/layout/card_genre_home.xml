@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -48,6 +49,42 @@
 
         </androidx.recyclerview.widget.RecyclerView>
 
+        <RelativeLayout
+            android:id="@+id/admob_native_ad_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp">
+
+            <com.google.android.ads.nativetemplates.TemplateView
+                android:id="@+id/admob_nativead_template"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:gnt_template_type="@layout/gnt_small_template_view"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:focusable="true"
+            android:gravity="center"
+            android:nextFocusLeft="@id/slider_layout"
+            android:nextFocusRight="@id/genre_layout" />
+
+        <com.appodeal.ads.BannerView
+            android:id="@+id/appodealBannerView"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:focusable="true"
+            android:nextFocusRight="@id/genre_layout"
+            android:nextFocusLeft="@id/slider_layout"/>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

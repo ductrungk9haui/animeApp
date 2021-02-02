@@ -172,6 +172,7 @@
       "project": {
         "compilerSettingsCacheFolder": "D:\\Android\\animeApp\\.cxx",
         "cxxFolder": "D:\\Android\\animeApp\\.cxx",
+        "ideBuildTargetAbi": "x86",
         "isBuildOnlyTargetAbiEnabled": true,
         "isCmakeBuildCohabitationEnabled": false,
         "isNativeCompilerSettingsCacheEnabled": false,
@@ -195,10 +196,7 @@
     "objFolder": "D:\\Android\\animeApp\\app\\build\\intermediates\\cmake\\debug\\obj",
     "variantName": "debug",
     "validAbiList": [
-      "ARMEABI_V7A",
-      "ARM64_V8A",
-      "X86",
-      "X86_64"
+      "X86"
     ],
     "prefabDirectory": "D:\\Android\\animeApp\\app\\.cxx\\cmake\\debug\\prefab",
     "prefabPackageDirectoryList": []

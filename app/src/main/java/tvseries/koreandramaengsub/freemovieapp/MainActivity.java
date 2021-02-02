@@ -1,7 +1,6 @@
 package tvseries.koreandramaengsub.freemovieapp;
 
 import android.Manifest;
-import android.animation.Animator;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
@@ -67,7 +66,7 @@ import butterknife.Unbinder;
 import tvseries.koreandramaengsub.freemovieapp.adapters.NavigationAdapter;
 import tvseries.koreandramaengsub.freemovieapp.database.DatabaseHelper;
 import tvseries.koreandramaengsub.freemovieapp.fragments.AdvancedFragment;
-import tvseries.koreandramaengsub.freemovieapp.fragments.DownFragment;
+import tvseries.koreandramaengsub.freemovieapp.fragments.DailySubFragment;
 import tvseries.koreandramaengsub.freemovieapp.fragments.HomeFragment;
 import tvseries.koreandramaengsub.freemovieapp.fragments.MoviesFragment;
 import tvseries.koreandramaengsub.freemovieapp.fragments.TvSeriesFragment;
@@ -81,7 +80,6 @@ import tvseries.koreandramaengsub.freemovieapp.utils.PreferenceUtils;
 import tvseries.koreandramaengsub.freemovieapp.utils.RtlUtils;
 import tvseries.koreandramaengsub.freemovieapp.utils.SpacingItemDecoration;
 import tvseries.koreandramaengsub.freemovieapp.utils.Tools;
-import tvseries.koreandramaengsub.freemovieapp.utils.ads.PopUpAds;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, Serializable {
     @BindView(R.id.search_root_layout)
@@ -410,7 +408,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             Config.isOpenChildFragment = true;
                             break;
                         case 3:
-                            loadFragment(new DownFragment());
+                            loadFragment(new DailySubFragment());
                             Config.isOpenChildFragment = true;
                             break;
                         case 4:
@@ -441,7 +439,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             Config.isOpenChildFragment = true;
                             break;
                         case 3:
-                            loadFragment(new DownFragment());
+                            loadFragment(new DailySubFragment());
                             Config.isOpenChildFragment = true;
                             break;
                         case 4:

@@ -133,58 +133,88 @@
         <activity
             android:name="tvseries.koreandramaengsub.freemovieapp.ReplyActivity"
             android:label="@string/title_activity_reply"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
         <activity
             android:name="tvseries.koreandramaengsub.freemovieapp.ProfileActivity"
-            android:theme="@style/AppTheme.Nobar" />
+            android:theme="@style/AppTheme.Nobar"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
         <activity
             android:name="tvseries.koreandramaengsub.freemovieapp.PassResetActivity"
-            android:theme="@style/AppTheme.Nobar" />
+            android:theme="@style/AppTheme.Nobar"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
         <activity
             android:name="tvseries.koreandramaengsub.freemovieapp.SearchResultActivity"
-            android:theme="@style/AppTheme.Nobar" />
+            android:theme="@style/AppTheme.Nobar"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
         <activity
             android:name="tvseries.koreandramaengsub.freemovieapp.SignUpActivity"
-            android:theme="@style/AppTheme.Nobar" />
+            android:theme="@style/AppTheme.Nobar"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
         <activity
             android:name="tvseries.koreandramaengsub.freemovieapp.LoginActivity"
-            android:theme="@style/AppTheme.Nobar" />
+            android:theme="@style/AppTheme.Nobar"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
         <activity
             android:name="tvseries.koreandramaengsub.freemovieapp.DetailsActivity"
-            android:configChanges="screenLayout|screenSize|orientation"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_details"
             android:theme="@style/AppTheme.NoActionBar" /> <!-- android:configChanges="screenLayout|screenSize|orientation" -->
         <activity
             android:name="tvseries.koreandramaengsub.freemovieapp.MainActivity"
             android:theme="@style/AppTheme.Nobar"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
         <activity
             android:name="tvseries.koreandramaengsub.freemovieapp.SettingsActivity"
-            android:theme="@style/AppTheme.Nobar" />
+            android:theme="@style/AppTheme.Nobar"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
 
         <activity
             android:name="tvseries.koreandramaengsub.freemovieapp.ItemMovieActivity"
             android:label="@string/title_activity_item_show"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
         <activity
             android:name="tvseries.koreandramaengsub.freemovieapp.ItemTVActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/AppTheme.Nobar" />
         <activity
             android:name="tvseries.koreandramaengsub.freemovieapp.ItemSeriesActivity"
-            android:theme="@style/AppTheme.Nobar" />
+            android:theme="@style/AppTheme.Nobar"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
         <activity
             android:name="tvseries.koreandramaengsub.freemovieapp.SubscriptionActivity"
-            android:theme="@style/AppTheme.Nobar" />
+            android:theme="@style/AppTheme.Nobar"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
         <activity
             android:name="tvseries.koreandramaengsub.freemovieapp.StripePaymentActivity"
-            android:theme="@style/AppTheme.Nobar" />
+            android:theme="@style/AppTheme.Nobar"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
         <activity
             android:name="tvseries.koreandramaengsub.freemovieapp.PurchasePlanActivity"
-            android:theme="@style/AppTheme.Nobar" />
+            android:theme="@style/AppTheme.Nobar"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
         <activity
             android:name="tvseries.koreandramaengsub.freemovieapp.DownloadActivity"
-            android:configChanges="screenLayout|screenSize|orientation"
-            android:theme="@style/AppTheme.Nobar" /> <!-- StartApp activities integration -->
+            android:theme="@style/AppTheme.Nobar"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"/> <!-- StartApp activities integration -->
     </application>
 
 </manifest>

@@ -1,207 +1,262 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.AdvancedFragment">
 
-    <TextView
-        android:gravity="left|center_vertical"
-        android:textSize="17sp"
-        android:padding="10dp"
-        android:layout_marginTop="?actionBarSize"
-        style="@style/TextAppearance.Medium.Bold"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="From Admin:"/>
 
-    <TextView
-        android:gravity="left|center_vertical"
-        android:textSize="17sp"
-        android:paddingHorizontal="10dp"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/admin_talk"/>
+        android:layout_height="match_parent"
+        android:layout_marginBottom="70dp"
+        android:focusable="true">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/subscribe_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="?android:attr/selectableItemBackground"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="5dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="5dp"
-        android:gravity="left|center_vertical">
-
-        <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginVertical="5dp"
-            android:src="@drawable/ic_subtitle"
-            app:tint="@color/blue_400" />
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_marginLeft="55dp"
-            android:gravity="center_vertical"
-            android:includeFontPadding="false"
-            android:textSize="17sp"
-            android:layout_gravity="center_vertical"
-            android:text="Subscriptions"
-            android:textStyle="bold"
-            app:tint="?android:attr/colorPrimary" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_marginLeft="55dp"
-            android:gravity="center_vertical"
-            android:includeFontPadding="false"
-            android:textSize="20sp"
-            android:layout_marginRight="5dp"
-            android:layout_gravity="center_vertical|right"
-            android:text="〉"
-            android:textStyle="bold"
-            app:tint="?android:attr/colorPrimary" />
-    </androidx.cardview.widget.CardView>
+            <TextView
+                style="@style/TextAppearance.Medium.Bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="?actionBarSize"
+                android:gravity="left|center_vertical"
+                android:padding="10dp"
+                android:text="From Admin:"
+                android:textSize="17sp" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/request_layout"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_vertical"
+                android:paddingHorizontal="10dp"
+                android:text="@string/admin_talk"
+                android:textSize="17sp" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/subscribe_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginTop="20dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="left|center_vertical"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp">
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginVertical="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/ic_baseline_subscriptions_24"
+                    app:tint="@color/blue_400" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="55dp"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:text="Subscriptions"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:tint="?android:attr/colorPrimary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginLeft="55dp"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:text="〉"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:tint="?android:attr/colorPrimary" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/request_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="left|center_vertical"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp">
+
+                <ImageView
+                    android:layout_width="37dp"
+                    android:layout_height="37dp"
+                    android:layout_marginVertical="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/icon_movie"
+                    app:tint="@color/blue_400" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="55dp"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:text="Request Movie"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:tint="?android:attr/colorPrimary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginLeft="55dp"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:text="〉"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:tint="?android:attr/colorPrimary" />
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/facebook_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="left|center_vertical"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp">
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginVertical="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/facebook" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="55dp"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:text="Group Facebook"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:tint="?android:attr/colorPrimary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginLeft="55dp"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:text="〉"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:tint="?android:attr/colorPrimary" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/feedback_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginTop="5dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="left|center_vertical"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp">
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginVertical="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/ic_baseline_send_24" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="55dp"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:text="Rate/Feedback"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    app:tint="?android:attr/colorPrimary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginLeft="55dp"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:text="〉"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:tint="?android:attr/colorPrimary" />
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+    <RelativeLayout
+        android:id="@+id/adView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="?android:attr/selectableItemBackground"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="5dp"
-        android:layout_margin="5dp"
-        android:gravity="left|center_vertical">
-        <ImageView
-            android:layout_width="37dp"
-            android:layout_height="37dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginVertical="5dp"
-            android:src="@drawable/icon_movie"
-            app:tint="@color/blue_400" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginLeft="55dp"
-            android:gravity="center_vertical"
-            android:includeFontPadding="false"
-            android:textSize="17sp"
-            android:layout_gravity="center_vertical"
-            android:text="Request Movie"
-            android:textStyle="bold"
-            app:tint="?android:attr/colorPrimary" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_marginLeft="55dp"
-            android:gravity="center_vertical"
-            android:includeFontPadding="false"
-            android:textSize="20sp"
-            android:layout_marginRight="5dp"
-            android:layout_gravity="center_vertical|right"
-            android:text="〉"
-            android:textStyle="bold"
-            app:tint="?android:attr/colorPrimary" />
-    </androidx.cardview.widget.CardView>
-
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/facebook_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="?android:attr/selectableItemBackground"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="5dp"
-        android:layout_marginHorizontal="5dp"
-        android:gravity="left|center_vertical">
-        <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginVertical="5dp"
-            android:src="@drawable/facebook"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginLeft="55dp"
-            android:gravity="center_vertical"
-            android:includeFontPadding="false"
-            android:textSize="17sp"
-            android:layout_gravity="center_vertical"
-            android:text="Group Facebook"
-            android:textStyle="bold"
-            app:tint="?android:attr/colorPrimary" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_marginLeft="55dp"
-            android:gravity="center_vertical"
-            android:includeFontPadding="false"
-            android:textSize="20sp"
-            android:layout_marginRight="5dp"
-            android:layout_gravity="center_vertical|right"
-            android:text="〉"
-            android:textStyle="bold"
-            app:tint="?android:attr/colorPrimary" />
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/feedback_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="?android:attr/selectableItemBackground"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
         android:layout_marginTop="5dp"
-        android:layout_marginHorizontal="5dp"
-        android:gravity="left|center_vertical">
-        <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginVertical="5dp"
-            android:src="@drawable/ic_baseline_send_24"/>
+        android:focusable="true"
+        android:gravity="bottom" />
 
-        <TextView
+    <RelativeLayout
+        android:id="@+id/admob_native_ad_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="8dp">
+
+        <com.google.android.ads.nativetemplates.TemplateView
+            android:id="@+id/admob_nativead_template"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginLeft="55dp"
-            android:gravity="center_vertical"
-            android:includeFontPadding="false"
-            android:textSize="17sp"
-            android:layout_gravity="center_vertical"
-            android:text="Rate/Feedback"
-            android:textStyle="bold"
-            app:tint="?android:attr/colorPrimary" />
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:gnt_template_type="@layout/gnt_small_template_view" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_marginLeft="55dp"
-            android:gravity="center_vertical"
-            android:includeFontPadding="false"
-            android:textSize="20sp"
-            android:layout_marginRight="5dp"
-            android:layout_gravity="center_vertical|right"
-            android:text="〉"
-            android:textStyle="bold"
-            app:tint="?android:attr/colorPrimary" />
-    </androidx.cardview.widget.CardView>
-</LinearLayout>
+    </RelativeLayout>
+
+    <com.appodeal.ads.BannerView
+        android:id="@+id/appodealBannerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone" />
+
+</RelativeLayout>

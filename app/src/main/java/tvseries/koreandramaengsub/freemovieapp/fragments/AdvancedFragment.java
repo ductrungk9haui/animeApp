@@ -8,15 +8,21 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.appodeal.ads.Appodeal;
 import com.bumptech.glide.Glide;
+import com.google.android.ads.nativetemplates.TemplateView;
+import com.google.android.gms.ads.rewarded.RewardedAd;
 import com.google.android.material.textfield.TextInputEditText;
 
 import butterknife.BindView;
@@ -29,6 +35,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import tvseries.koreandramaengsub.freemovieapp.Config;
+import tvseries.koreandramaengsub.freemovieapp.DetailsActivity;
 import tvseries.koreandramaengsub.freemovieapp.MainActivity;
 import tvseries.koreandramaengsub.freemovieapp.ProfileActivity;
 import tvseries.koreandramaengsub.freemovieapp.R;
@@ -38,8 +45,15 @@ import tvseries.koreandramaengsub.freemovieapp.network.RetrofitClient;
 import tvseries.koreandramaengsub.freemovieapp.network.apis.MovieRequestApi;
 import tvseries.koreandramaengsub.freemovieapp.network.apis.UserDataApi;
 import tvseries.koreandramaengsub.freemovieapp.network.model.User;
+import tvseries.koreandramaengsub.freemovieapp.network.model.config.AdsConfig;
+import tvseries.koreandramaengsub.freemovieapp.utils.Constants;
 import tvseries.koreandramaengsub.freemovieapp.utils.PreferenceUtils;
 import tvseries.koreandramaengsub.freemovieapp.utils.ToastMsg;
+import tvseries.koreandramaengsub.freemovieapp.utils.ads.BannerAds;
+import tvseries.koreandramaengsub.freemovieapp.utils.ads.NativeAds;
+import tvseries.koreandramaengsub.freemovieapp.utils.ads.PopUpAds;
+import tvseries.koreandramaengsub.freemovieapp.utils.ads.VideoRewardAds;
+
 import android.content.SharedPreferences;
 
 /**
@@ -48,7 +62,10 @@ import android.content.SharedPreferences;
  * create an instance of this fragment.
  */
 public class AdvancedFragment extends Fragment {
-
+    @BindView(R.id.adView)
+    RelativeLayout mAdView;
+    @BindView(R.id.admob_nativead_template)
+    TemplateView admobNativeAdView;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -103,6 +120,18 @@ public class AdvancedFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        loadAd();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mUnbinder.unbind();
+    }
+
     @OnClick(R.id.subscribe_layout)
     void onSubscriptionClick(){
         Intent intent = new Intent(mActivity, SubscriptionActivity.class);
@@ -111,6 +140,17 @@ public class AdvancedFragment extends Fragment {
     }
     @OnClick(R.id.request_layout)
     void onRequestClick(){
+        AdsConfig adsConfig = mDBHelper.getConfigurationData().getAdsConfig();
+        if (PreferenceUtils.isLoggedIn(mActivity)) {
+            if (!PreferenceUtils.isActivePlan(mActivity)) {
+                if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
+                    PopUpAds.showAppodealInterstitialAds(mActivity);
+                } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
+                    VideoRewardAds.showRewardedVideo(mActivity);
+                }
+            }
+        }
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         View view = LayoutInflater.from(getContext()).inflate(R.layout.movie_request_dialog, null);
         builder.setView(view);
@@ -203,4 +243,24 @@ public class AdvancedFragment extends Fragment {
         intent.addFlags(flags);
         return intent;
     }
+
+    private void loadAd() {
+        AdsConfig adsConfig = mDBHelper.getConfigurationData().getAdsConfig();
+        if (PreferenceUtils.isLoggedIn(getContext()) && PreferenceUtils.isActivePlan(getContext())) return;
+        if (adsConfig.getAdsEnable().equals("1")) {
+            if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
+                VideoRewardAds.prepareAd(getContext());
+                admobNativeAdView.setVisibility(View.VISIBLE);
+                NativeAds.showAdmobNativeAds(mActivity, admobNativeAdView);
+            } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
+                BannerAds.showAppodealBanner(getActivity(), R.id.appodealBannerView);
+                Appodeal.cache(mActivity, Appodeal.NATIVE);
+            } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.NETWORK_AUDIENCE)) {
+                BannerAds.showFANBanner(getContext(), mAdView);
+                PopUpAds.showFANInterstitialAds(mActivity);
+            }
+        }
+    }
+
+
 }

@@ -88,11 +88,23 @@ public class MoviesFragment extends Fragment {
         mApiResources = new ApiResources();
         mShimmerLayout.startShimmer();
         //----movie's recycler view-----------------
-        mRecycleView.setLayoutManager(new GridLayoutManager(getContext(), 3));
-        mRecycleView.addItemDecoration(new SpacingItemDecoration(3, Tools.dpToPx(getActivity(), 0), true));
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                switch ((position + 1) % 10) {
+                    case 0:
+                        return 3;
+                    default:
+                        return 1;
+                }
+            }
+        });
+        mRecycleView.setLayoutManager(gridLayoutManager);
+        //mRecycleView.addItemDecoration(new SpacingItemDecoration(3, Tools.dpToPx(getActivity(), 0), true));
         mRecycleView.setHasFixedSize(true);
         mRecycleView.setNestedScrollingEnabled(false);
-        mAdapter = new CommonGridAdapter(getContext(), mListCommonModels);
+        mAdapter = new CommonGridAdapter(getActivity(),getContext(), mListCommonModels);
         mRecycleView.setAdapter(mAdapter);
 
         mRecycleView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -147,7 +159,7 @@ public class MoviesFragment extends Fragment {
                 mPageCount = 1;
                 mListCommonModels.clear();
                 mRecycleView.removeAllViews();
-                mAdapter.notifyDataSetChanged();
+                mAdapter.setNotifyDataSetChanged();
                 if (new NetworkInst(getContext()).isNetworkAvailable()) {
                     getData(mPageCount);
                 } else {
@@ -160,7 +172,7 @@ public class MoviesFragment extends Fragment {
         });
 
         //getAdDetails(new ApiResources().getAdDetails());
-        loadAd();
+        //loadAd();
     }
 
     private void loadAd() {
@@ -223,7 +235,7 @@ public class MoviesFragment extends Fragment {
                     }else {
                         mActivity.setFailure(false);
                     }
-
+                    boolean newAdd = false;
                     for (int i = 0; i < response.body().size(); i++){
                         Video video = response.body().get(i);
                         CommonModels models =new CommonModels();
@@ -237,13 +249,15 @@ public class MoviesFragment extends Fragment {
                         } else {
                             models.setVideoType("movie");
                         }
-
+                        newAdd = true;
 
                         models.setId(video.getVideosId());
                         mListCommonModels.add(models);
                     }
 
-                    mAdapter.notifyDataSetChanged();
+                    if(newAdd){
+                        mAdapter.setNotifyDataSetChanged();
+                    }
                 }else {
                     mIsLoading =false;
                     mProgressBar.setVisibility(View.GONE);

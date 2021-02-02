@@ -45,7 +45,7 @@ import tvseries.koreandramaengsub.freemovieapp.utils.ads.BannerAds;
 import tvseries.koreandramaengsub.freemovieapp.utils.ads.NativeAds;
 import tvseries.koreandramaengsub.freemovieapp.view.SwipeRefreshLayout;
 
-public class DownFragment extends Fragment {
+public class DailySubFragment extends Fragment {
     @BindView(R.id.adView) RelativeLayout mAdView;
     @BindView(R.id.admob_nativead_template) TemplateView admobNativeAdView;
     @BindView(R.id.item_progress_bar) ProgressBar mProgressBar;
@@ -88,11 +88,23 @@ public class DownFragment extends Fragment {
     private void initComponent(View view) {
         apiResources = new ApiResources();
         mShimmerLayout.startShimmer();
-        mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
-        mRecyclerView.addItemDecoration(new SpacingItemDecoration(3, Tools.dpToPx(getActivity(), 0), true));
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                switch ((position + 1) % 10) {
+                    case 0:
+                        return 3;
+                    default:
+                        return 1;
+                }
+            }
+        });
+        mRecyclerView.setLayoutManager(gridLayoutManager);
+        //mRecyclerView.addItemDecoration(new SpacingItemDecoration(3, Tools.dpToPx(getActivity(), 0), true));
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setNestedScrollingEnabled(false);
-        mAdapter = new CommonGridAdapter(getContext(), list);
+        mAdapter = new CommonGridAdapter(getActivity(),getContext(), list);
         mRecyclerView.setAdapter(mAdapter);
 
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -152,7 +164,7 @@ public class DownFragment extends Fragment {
                 mPageCount = 1;
                 list.clear();
                 mRecyclerView.removeAllViews();
-                mAdapter.notifyDataSetChanged();
+                mAdapter.setNotifyDataSetChanged();
                 if (new NetworkInst(getContext()).isNetworkAvailable()) {
                     getData(mPageCount);
                 } else {
@@ -165,7 +177,7 @@ public class DownFragment extends Fragment {
         });
 
         //getAdDetails(new ApiResources().getAdDetails());
-        loadAd();
+        //loadAd();
     }
 
 
@@ -232,7 +244,7 @@ public class DownFragment extends Fragment {
                     } else {
                         mActivity.setFailure(false);
                     }
-
+                    boolean newAdd=false;
                     for (int i = 0; i < response.body().size(); i++) {
                         Video video = response.body().get(i);
                         CommonModels models = new CommonModels();
@@ -247,12 +259,14 @@ public class DownFragment extends Fragment {
                             models.setVideoType("movie");
                         }
 
-
+                        newAdd =true;
                         models.setId(video.getVideosId());
                         list.add(models);
                     }
+                    if(newAdd){
+                        mAdapter.setNotifyDataSetChanged();
+                    }
 
-                    mAdapter.notifyDataSetChanged();
                 } else {
                     mIsLoading = false;
                     mProgressBar.setVisibility(View.GONE);

@@ -51,7 +51,7 @@ public class FavoriteFragment extends Fragment {
     @BindView(R.id.item_progress_bar) ProgressBar mProgressBar;
     @BindView(R.id.shimmer_view_container) ShimmerFrameLayout mShimmerLayout;
     @BindView(R.id.swipe_layout) SwipeRefreshLayout mSwipeRefreshLayout;
-    @BindView(R.id.recyclerView) RecyclerView RecyclerView;
+    @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
     Unbinder mUnbinder;
     private CommonGridAdapter mAdapter;
     private List<CommonModels> mListCommonModels =new ArrayList<>();
@@ -79,7 +79,7 @@ public class FavoriteFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initComponent(view);
-        loadAd();
+        //loadAd();
 
     }
 
@@ -93,13 +93,25 @@ public class FavoriteFragment extends Fragment {
         userId = PreferenceUtils.getUserId(getContext());
 
         //----favorite's recycler view-----------------
-        RecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
-        RecyclerView.addItemDecoration(new SpacingItemDecoration(3, Tools.dpToPx(getActivity(), 0), true));
-        RecyclerView.setHasFixedSize(true);
-        RecyclerView.setNestedScrollingEnabled(false);
-        mAdapter = new CommonGridAdapter(getContext(), mListCommonModels);
-        RecyclerView.setAdapter(mAdapter);
-        RecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                switch ((position + 1) % 10) {
+                    case 0:
+                        return 3;
+                    default:
+                        return 1;
+                }
+            }
+        });
+        mRecyclerView.setLayoutManager(gridLayoutManager);
+        //mRecyclerView.addItemDecoration(new SpacingItemDecoration(3, Tools.dpToPx(getActivity(), 0), true));
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setNestedScrollingEnabled(false);
+        mAdapter = new CommonGridAdapter(getActivity(),getContext(), mListCommonModels);
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -134,10 +146,10 @@ public class FavoriteFragment extends Fragment {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                RecyclerView.removeAllViews();
+                mRecyclerView.removeAllViews();
                 mPageCount =1;
                 mListCommonModels.clear();
-                mAdapter.notifyDataSetChanged();
+                mAdapter.setNotifyDataSetChanged();
 
                 if (new NetworkInst(getContext()).isNetworkAvailable()){
                     getData(userId, mPageCount);
@@ -232,7 +244,7 @@ public class FavoriteFragment extends Fragment {
                     }else {
                         mActivity.setFailure(false);
                     }
-
+                    boolean newAdd = false;
                     for (int i = 0; i < response.body().size(); i++){
                         CommonModels models =new CommonModels();
                         models.setImageUrl(response.body().get(i).getThumbnailUrl());
@@ -244,11 +256,14 @@ public class FavoriteFragment extends Fragment {
                         }else {
                             models.setVideoType("tvseries");
                         }
+                        newAdd = true;
                         models.setId(response.body().get(i).getVideosId());
                         mListCommonModels.add(models);
                     }
+                    if(newAdd){
+                        mAdapter.setNotifyDataSetChanged();
+                    }
 
-                    mAdapter.notifyDataSetChanged();
                 }
             }
 

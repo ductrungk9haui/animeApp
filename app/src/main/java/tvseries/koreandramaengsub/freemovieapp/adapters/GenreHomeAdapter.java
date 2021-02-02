@@ -1,24 +1,36 @@
 package tvseries.koreandramaengsub.freemovieapp.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.appodeal.ads.Appodeal;
+import com.appodeal.ads.BannerView;
+import com.google.android.ads.nativetemplates.TemplateView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import tvseries.koreandramaengsub.freemovieapp.ItemMovieActivity;
 import tvseries.koreandramaengsub.freemovieapp.R;
+import tvseries.koreandramaengsub.freemovieapp.database.DatabaseHelper;
 import tvseries.koreandramaengsub.freemovieapp.models.CommonModels;
 import tvseries.koreandramaengsub.freemovieapp.models.GenreModel;
+import tvseries.koreandramaengsub.freemovieapp.network.model.config.AdsConfig;
+import tvseries.koreandramaengsub.freemovieapp.utils.Constants;
 import tvseries.koreandramaengsub.freemovieapp.utils.ItemAnimation;
+import tvseries.koreandramaengsub.freemovieapp.utils.PreferenceUtils;
+import tvseries.koreandramaengsub.freemovieapp.utils.ads.BannerAds;
+import tvseries.koreandramaengsub.freemovieapp.utils.ads.NativeAds;
 
 public class GenreHomeAdapter extends RecyclerView.Adapter<GenreHomeAdapter.OriginalViewHolder> {
 
@@ -29,13 +41,26 @@ public class GenreHomeAdapter extends RecyclerView.Adapter<GenreHomeAdapter.Orig
     private int lastPosition = -1;
     private boolean on_attach = true;
     private int animation_type = 2;
+    private boolean isAdActive = false;
+    AdsConfig adsConfig;
+    Activity activity;
 
 
-    public GenreHomeAdapter(Context context, List<GenreModel> items) {
+    public GenreHomeAdapter(Activity activity, Context context, List<GenreModel> items) {
+        this.activity = activity;
         this.items = items;
         ctx = context;
+        isAdActive = getConfigAd();
     }
 
+    private boolean getConfigAd() {
+        adsConfig = new DatabaseHelper(ctx).getConfigurationData().getAdsConfig();
+        return !(PreferenceUtils.isLoggedIn(activity) && PreferenceUtils.isActivePlan(activity));
+    }
+
+    public void onDestroy() {
+        NativeAds.releaseAdmobNativeAd();
+    }
 
     @Override
     public GenreHomeAdapter.OriginalViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -51,30 +76,49 @@ public class GenreHomeAdapter extends RecyclerView.Adapter<GenreHomeAdapter.Orig
         final GenreModel obj = items.get(position);
         holder.name.setText(obj.getName());
 
-        HomePageAdapter adapter=new HomePageAdapter(ctx,obj.getList());
-        holder.recyclerView.setLayoutManager(new LinearLayoutManager(ctx,LinearLayoutManager.HORIZONTAL,false));
+        HomePageAdapter adapter = new HomePageAdapter(ctx, obj.getList());
+        holder.recyclerView.setLayoutManager(new LinearLayoutManager(ctx, LinearLayoutManager.HORIZONTAL, false));
         holder.recyclerView.setAdapter(adapter);
 
         holder.btnMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(ctx, ItemMovieActivity.class);
-                intent.putExtra("id",obj.getId());
-                intent.putExtra("title",obj.getName());
-                intent.putExtra("type","genre");
+                Intent intent = new Intent(ctx, ItemMovieActivity.class);
+                intent.putExtra("id", obj.getId());
+                intent.putExtra("title", obj.getName());
+                intent.putExtra("type", "genre");
                 ctx.startActivity(intent);
             }
         });
         holder.titleLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(ctx, ItemMovieActivity.class);
-                intent.putExtra("id",obj.getId());
-                intent.putExtra("title",obj.getName());
-                intent.putExtra("type","genre");
+                Intent intent = new Intent(ctx, ItemMovieActivity.class);
+                intent.putExtra("id", obj.getId());
+                intent.putExtra("title", obj.getName());
+                intent.putExtra("type", "genre");
                 ctx.startActivity(intent);
             }
         });
+        if (isAdActive && (position + 1) % 2 == 0) {
+            if(adsConfig.getAdsEnable().equals("1")){
+                if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
+                    holder.nativeAdView.setVisibility(View.VISIBLE);
+                    NativeAds.showAdmobNativeAds(activity, holder.nativeAdView);
+                } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
+                    holder.bannerViewStartApp.setVisibility(View.VISIBLE);
+                    Appodeal.setBannerViewId(holder.bannerViewStartApp.getId());
+                    Appodeal.show(activity, Appodeal.BANNER_VIEW);
+                } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.NETWORK_AUDIENCE)) {
+                    holder.adview.setVisibility(View.VISIBLE);
+                    BannerAds.showFANBanner(ctx, holder.adview);
+                }
+            }
+        } else {
+            holder.nativeAdView.setVisibility(View.GONE);
+            holder.bannerViewStartApp.setVisibility(View.GONE);
+            holder.adview.setVisibility(View.GONE);
+        }
 
         setAnimation(holder.itemView, position);
 
@@ -91,13 +135,19 @@ public class GenreHomeAdapter extends RecyclerView.Adapter<GenreHomeAdapter.Orig
         RecyclerView recyclerView;
         Button btnMore;
         View titleLayout;
+        TemplateView nativeAdView;
+        RelativeLayout adview;
+        BannerView bannerViewStartApp;
 
         public OriginalViewHolder(View v) {
             super(v);
             name = v.findViewById(R.id.tv_name);
-            recyclerView=v.findViewById(R.id.recyclerView);
-            btnMore=v.findViewById(R.id.btn_more);
-            titleLayout= v.findViewById(R.id.title_layout);
+            recyclerView = v.findViewById(R.id.recyclerView);
+            btnMore = v.findViewById(R.id.btn_more);
+            titleLayout = v.findViewById(R.id.title_layout);
+            nativeAdView = v.findViewById(R.id.admob_nativead_template);
+            adview = v.findViewById(R.id.adView);
+            bannerViewStartApp = v.findViewById(R.id.appodealBannerView);
         }
     }
 
@@ -122,8 +172,6 @@ public class GenreHomeAdapter extends RecyclerView.Adapter<GenreHomeAdapter.Orig
             lastPosition = position;
         }
     }
-
-
 
 
 }

@@ -98,12 +98,24 @@ public class ItemMovieActivity extends AppCompatActivity {
 
         //----movie's recycler view-----------------
         recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
-        recyclerView.addItemDecoration(new SpacingItemDecoration(3, Tools.dpToPx(this, 8), true));
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                switch ((position + 1) % 10) {
+                    case 0:
+                        return 3;
+                    default:
+                        return 1;
+                }
+            }
+        });
+        recyclerView.setLayoutManager(gridLayoutManager);
+        //recyclerView.addItemDecoration(new SpacingItemDecoration(3, Tools.dpToPx(this, 8), true));
         recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(false);
 
-        mAdapter = new CommonGridAdapter(this, list);
+        mAdapter = new CommonGridAdapter(this,this, list);
         recyclerView.setAdapter(mAdapter);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -145,7 +157,7 @@ public class ItemMovieActivity extends AppCompatActivity {
 
                 list.clear();
                 recyclerView.removeAllViews();
-                mAdapter.notifyDataSetChanged();
+                mAdapter.setNotifyDataSetChanged();
 
                 if (new NetworkInst(ItemMovieActivity.this).isNetworkAvailable()){
                     initData();
@@ -159,7 +171,7 @@ public class ItemMovieActivity extends AppCompatActivity {
             }
         });
 
-        loadAd();
+        //loadAd();
     }
 
 
@@ -193,7 +205,7 @@ public class ItemMovieActivity extends AppCompatActivity {
                     }else {
                         coordinatorLayout.setVisibility(View.GONE);
                     }
-
+                    boolean newAdd = false;
                     for (int i = 0; i < response.body().size(); i++){
                         Video video = response.body().get(i);
                         CommonModels models =new CommonModels();
@@ -206,13 +218,14 @@ public class ItemMovieActivity extends AppCompatActivity {
                         } else {
                             models.setVideoType("movie");
                         }
-
+                        newAdd = true;
 
                         models.setId(video.getVideosId());
                         list.add(models);
                     }
-
-                    mAdapter.notifyDataSetChanged();
+                    if(newAdd){
+                        mAdapter.setNotifyDataSetChanged();
+                    }
                 }else {
                     isLoading=false;
                     progressBar.setVisibility(View.GONE);
@@ -258,7 +271,7 @@ public class ItemMovieActivity extends AppCompatActivity {
                     }else {
                         coordinatorLayout.setVisibility(View.GONE);
                     }
-
+                    boolean newAdd = false;
                     for (int i = 0; i < response.body().size(); i++){
                         Video video = response.body().get(i);
                         CommonModels models =new CommonModels();
@@ -272,12 +285,14 @@ public class ItemMovieActivity extends AppCompatActivity {
                             models.setVideoType("movie");
                         }
 
-
+                        newAdd =true;
                         models.setId(video.getVideosId());
                         list.add(models);
                     }
 
-                    mAdapter.notifyDataSetChanged();
+                    if(newAdd){
+                        mAdapter.setNotifyDataSetChanged();
+                    }
                 }else {
                     isLoading=false;
                     progressBar.setVisibility(View.GONE);
@@ -353,7 +368,7 @@ public class ItemMovieActivity extends AppCompatActivity {
                     }else {
                         coordinatorLayout.setVisibility(View.GONE);
                     }
-
+                    boolean newAdd = false;
                     for (int i = 0; i < response.body().size(); i++){
                         Video video = response.body().get(i);
                         CommonModels models =new CommonModels();
@@ -367,12 +382,14 @@ public class ItemMovieActivity extends AppCompatActivity {
                             models.setVideoType("movie");
                         }
 
-
+                        newAdd = true;
                         models.setId(video.getVideosId());
                         list.add(models);
                     }
+                    if(newAdd){
+                        mAdapter.setNotifyDataSetChanged();
+                    }
 
-                    mAdapter.notifyDataSetChanged();
                 }else {
                     isLoading=false;
                     progressBar.setVisibility(View.GONE);

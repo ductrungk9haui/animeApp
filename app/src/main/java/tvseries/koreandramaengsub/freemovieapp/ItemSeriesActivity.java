@@ -46,11 +46,11 @@ public class ItemSeriesActivity extends AppCompatActivity {
     private ShimmerFrameLayout shimmerFrameLayout;
     private RecyclerView recyclerView;
     private CommonGridAdapter mAdapter;
-    private List<CommonModels> list =new ArrayList<>();
+    private List<CommonModels> list = new ArrayList<>();
 
-    private boolean isLoading=false;
+    private boolean isLoading = false;
     private ProgressBar progressBar;
-    private int pageCount=1;
+    private int pageCount = 1;
     private CoordinatorLayout coordinatorLayout;
     private SwipeRefreshLayout swipeRefreshLayout;
     private TextView tvNoItem;
@@ -85,21 +85,33 @@ public class ItemSeriesActivity extends AppCompatActivity {
         bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "activity");
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
 
-        adView=findViewById(R.id.adView);
-        progressBar=findViewById(R.id.item_progress_bar);
-        shimmerFrameLayout=findViewById(R.id.shimmer_view_container);
+        adView = findViewById(R.id.adView);
+        progressBar = findViewById(R.id.item_progress_bar);
+        shimmerFrameLayout = findViewById(R.id.shimmer_view_container);
         shimmerFrameLayout.startShimmer();
-        swipeRefreshLayout=findViewById(R.id.swipe_layout);
-        coordinatorLayout=findViewById(R.id.coordinator_lyt);
-        tvNoItem=findViewById(R.id.tv_noitem);
+        swipeRefreshLayout = findViewById(R.id.swipe_layout);
+        coordinatorLayout = findViewById(R.id.coordinator_lyt);
+        tvNoItem = findViewById(R.id.tv_noitem);
 
         //----movie's recycler view-----------------
         recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
-        recyclerView.addItemDecoration(new SpacingItemDecoration(3, Tools.dpToPx(this, 12), true));
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                switch ((position + 1) % 10) {
+                    case 0:
+                        return 3;
+                    default:
+                        return 1;
+                }
+            }
+        });
+        recyclerView.setLayoutManager(gridLayoutManager);
+        //recyclerView.addItemDecoration(new SpacingItemDecoration(3, Tools.dpToPx(this, 12), true));
         recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(false);
-        mAdapter = new CommonGridAdapter(this, list);
+        mAdapter = new CommonGridAdapter(this, this, list);
         recyclerView.setAdapter(mAdapter);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -108,7 +120,7 @@ public class ItemSeriesActivity extends AppCompatActivity {
 
                 if (!recyclerView.canScrollVertically(1) && !isLoading) {
 
-                    pageCount=pageCount+1;
+                    pageCount = pageCount + 1;
                     isLoading = true;
 
                     progressBar.setVisibility(View.VISIBLE);
@@ -118,9 +130,9 @@ public class ItemSeriesActivity extends AppCompatActivity {
             }
         });
 
-        if (new NetworkInst(this).isNetworkAvailable()){
+        if (new NetworkInst(this).isNetworkAvailable()) {
             getTvSeriesData(pageCount);
-        }else {
+        } else {
             tvNoItem.setText(getString(R.string.no_internet));
             shimmerFrameLayout.stopShimmer();
             shimmerFrameLayout.setVisibility(View.GONE);
@@ -128,20 +140,19 @@ public class ItemSeriesActivity extends AppCompatActivity {
         }
 
 
-
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 coordinatorLayout.setVisibility(View.GONE);
-                pageCount=1;
+                pageCount = 1;
 
                 list.clear();
                 recyclerView.removeAllViews();
-                mAdapter.notifyDataSetChanged();
+                mAdapter.setNotifyDataSetChanged();
 
-                if (new NetworkInst(ItemSeriesActivity.this).isNetworkAvailable()){
+                if (new NetworkInst(ItemSeriesActivity.this).isNetworkAvailable()) {
                     getTvSeriesData(pageCount);
-                }else {
+                } else {
                     tvNoItem.setText(getString(R.string.no_internet));
                     shimmerFrameLayout.stopShimmer();
                     shimmerFrameLayout.setVisibility(View.GONE);
@@ -151,10 +162,10 @@ public class ItemSeriesActivity extends AppCompatActivity {
             }
         });
 
-        loadAd();
+        //loadAd();
     }
 
-    private void loadAd(){
+    private void loadAd() {
         AdsConfig adsConfig = new DatabaseHelper(ItemSeriesActivity.this).getConfigurationData().getAdsConfig();
         if (PreferenceUtils.isLoggedIn(this)) {
             if (!PreferenceUtils.isActivePlan(this)) {
@@ -164,13 +175,13 @@ public class ItemSeriesActivity extends AppCompatActivity {
                     } else if (adsConfig.getMobileAdsNetwork().equals(Constants.START_APP)) {
                         // BannerAds.showStartAppBanner(ItemSeriesActivity.this, adView);
                         Appodeal.setBannerViewId(R.id.appodealBannerView_item_tvseries);
-                        Appodeal.show(ItemSeriesActivity.this,Appodeal.BANNER_VIEW);
-                    } else if(adsConfig.getMobileAdsNetwork().equals(Constants.NETWORK_AUDIENCE)) {
+                        Appodeal.show(ItemSeriesActivity.this, Appodeal.BANNER_VIEW);
+                    } else if (adsConfig.getMobileAdsNetwork().equals(Constants.NETWORK_AUDIENCE)) {
                         BannerAds.showFANBanner(this, adView);
                     }
                 }
             }
-        }else{
+        } else {
             if (adsConfig.getAdsEnable().equals("1")) {
                 if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
                     BannerAds.ShowAdmobBannerAds(ItemSeriesActivity.this, adView);
@@ -178,37 +189,37 @@ public class ItemSeriesActivity extends AppCompatActivity {
                 } else if (adsConfig.getMobileAdsNetwork().equals(Constants.START_APP)) {
                     // BannerAds.showStartAppBanner(ItemSeriesActivity.this, adView);
                     Appodeal.setBannerViewId(R.id.appodealBannerView_item_tvseries);
-                    Appodeal.show(ItemSeriesActivity.this,Appodeal.BANNER_VIEW);
-                } else if(adsConfig.getMobileAdsNetwork().equals(Constants.NETWORK_AUDIENCE)) {
+                    Appodeal.show(ItemSeriesActivity.this, Appodeal.BANNER_VIEW);
+                } else if (adsConfig.getMobileAdsNetwork().equals(Constants.NETWORK_AUDIENCE)) {
                     BannerAds.showFANBanner(this, adView);
                 }
             }
         }
     }
 
-    private void getTvSeriesData(int pageNum){
+    private void getTvSeriesData(int pageNum) {
         Retrofit retrofit = RetrofitClient.getRetrofitInstance();
         TvSeriesApi api = retrofit.create(TvSeriesApi.class);
         Call<List<Video>> call = api.getTvSeries(Config.API_KEY, pageNum);
         call.enqueue(new Callback<List<Video>>() {
             @Override
             public void onResponse(Call<List<Video>> call, retrofit2.Response<List<Video>> response) {
-                if (response.code() == 200){
-                    isLoading=false;
+                if (response.code() == 200) {
+                    isLoading = false;
                     progressBar.setVisibility(View.GONE);
                     shimmerFrameLayout.stopShimmer();
                     shimmerFrameLayout.setVisibility(View.GONE);
                     swipeRefreshLayout.setRefreshing(false);
 
-                    if (response.body().size() ==  0 && pageCount==1){
+                    if (response.body().size() == 0 && pageCount == 1) {
                         coordinatorLayout.setVisibility(View.VISIBLE);
-                    }else {
+                    } else {
                         coordinatorLayout.setVisibility(View.GONE);
                     }
-
-                    for (int i = 0; i < response.body().size(); i++){
+                    boolean isNew = false;
+                    for (int i = 0; i < response.body().size(); i++) {
                         Video video = response.body().get(i);
-                        CommonModels models =new CommonModels();
+                        CommonModels models = new CommonModels();
                         models.setImageUrl(video.getThumbnailUrl());
                         models.setTitle(video.getTitle());
                         models.setVideoType("tvseries");
@@ -216,16 +227,19 @@ public class ItemSeriesActivity extends AppCompatActivity {
                         models.setQuality(video.getVideoQuality());
                         models.setId(video.getVideosId());
                         list.add(models);
+                        isNew = true;
                     }
-                    mAdapter.notifyDataSetChanged();
+                    if(isNew){
+                        mAdapter.setNotifyDataSetChanged();
+                    }
 
-                }else {
-                    isLoading=false;
+                } else {
+                    isLoading = false;
                     progressBar.setVisibility(View.GONE);
                     shimmerFrameLayout.stopShimmer();
                     shimmerFrameLayout.setVisibility(View.GONE);
                     swipeRefreshLayout.setRefreshing(false);
-                    if (pageCount==1){
+                    if (pageCount == 1) {
                         coordinatorLayout.setVisibility(View.VISIBLE);
                     }
                 }
@@ -233,12 +247,12 @@ public class ItemSeriesActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Video>> call, Throwable t) {
-                isLoading=false;
+                isLoading = false;
                 progressBar.setVisibility(View.GONE);
                 shimmerFrameLayout.stopShimmer();
                 shimmerFrameLayout.setVisibility(View.GONE);
                 swipeRefreshLayout.setRefreshing(false);
-                if (pageCount==1){
+                if (pageCount == 1) {
                     coordinatorLayout.setVisibility(View.VISIBLE);
                 }
             }

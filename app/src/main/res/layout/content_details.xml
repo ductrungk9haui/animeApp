@@ -764,7 +764,7 @@
                         android:layout_gravity="right"
                         android:text="@string/add_comments"
                         android:textAllCaps="false"
-                        android:textColor="@color/colorPrimary" />
+                        android:textColor="@color/gnt_white" />
 
 
                 </RelativeLayout>
