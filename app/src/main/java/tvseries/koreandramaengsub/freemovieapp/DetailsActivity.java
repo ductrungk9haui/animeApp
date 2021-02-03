@@ -8,7 +8,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -49,6 +51,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.mediarouter.app.MediaRouteButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -81,14 +84,18 @@ import com.google.android.exoplayer2.source.ExtractorMediaSource;
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.source.MergingMediaSource;
 import com.google.android.exoplayer2.source.SingleSampleMediaSource;
+import com.google.android.exoplayer2.source.TrackGroupArray;
 import com.google.android.exoplayer2.source.hls.HlsMediaSource;
+import com.google.android.exoplayer2.text.CaptionStyleCompat;
 import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
+import com.google.android.exoplayer2.trackselection.MappingTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelection;
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
 import com.google.android.exoplayer2.ui.PlaybackControlView;
 import com.google.android.exoplayer2.ui.PlayerControlView;
 import com.google.android.exoplayer2.ui.PlayerView;
+import com.google.android.exoplayer2.ui.SubtitleView;
 import com.google.android.exoplayer2.upstream.BandwidthMeter;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
@@ -1353,6 +1360,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
         DefaultTrackSelector trackSelector = new
                 DefaultTrackSelector(videoTrackSelectionFactory);
+
         mPlayer = ExoPlayerFactory.newSimpleInstance(context, trackSelector);
         // player.setPlayWhenReady(true);
         //simpleExoPlayerView.setPlayer(player);
@@ -1376,6 +1384,17 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         //Toast.makeText(context, "castSession:"+getCastSessionObj()+"", Toast.LENGTH_SHORT).show();
         mPlayer.prepare(mMediaSource, true, false);
         mSimpleExoPlayerView.setPlayer(mPlayer);
+        SubtitleView  view = mSimpleExoPlayerView.getSubtitleView();
+        int defaultSubtitleColor = Color.argb(255, 255, 255, 255);
+        int outlineColor = Color.argb(255, 43, 43, 43);
+        Typeface subtitleTypeface = ResourcesCompat.getFont(this, R.font.amazon);
+        CaptionStyleCompat style = new CaptionStyleCompat(defaultSubtitleColor,
+                        Color.TRANSPARENT, Color.TRANSPARENT,
+                        CaptionStyleCompat.EDGE_TYPE_OUTLINE,
+                        outlineColor, subtitleTypeface);
+        view.setApplyEmbeddedStyles(false);
+        view.setStyle(style);
+
         mPlayer.setPlayWhenReady(true);
         if (resumePosition > 0) {
             mPlayer.seekTo(resumePosition);

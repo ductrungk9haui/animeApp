@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -32,6 +34,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.work.Data;
@@ -48,12 +51,14 @@ import com.google.android.exoplayer2.source.ExtractorMediaSource;
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.source.MergingMediaSource;
 import com.google.android.exoplayer2.source.SingleSampleMediaSource;
+import com.google.android.exoplayer2.text.CaptionStyleCompat;
 import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelection;
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
 import com.google.android.exoplayer2.ui.PlayerControlView;
 import com.google.android.exoplayer2.ui.PlayerView;
+import com.google.android.exoplayer2.ui.SubtitleView;
 import com.google.android.exoplayer2.upstream.BandwidthMeter;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DataSpec;
@@ -591,6 +596,18 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
         mMediaSource = buildMediaSourceNew(videoUrl);
         mDownloadPlayer.prepare(mMediaSource);
         mSimpleExoPlayerView.setPlayer(mDownloadPlayer);
+
+        SubtitleView view = mSimpleExoPlayerView.getSubtitleView();
+        int defaultSubtitleColor = Color.argb(255, 218, 218, 218);
+        int outlineColor = Color.argb(255, 43, 43, 43);
+        Typeface subtitleTypeface = ResourcesCompat.getFont(this, R.font.amazon);
+        CaptionStyleCompat style = new CaptionStyleCompat(defaultSubtitleColor,
+                Color.TRANSPARENT, Color.TRANSPARENT,
+                CaptionStyleCompat.EDGE_TYPE_OUTLINE,
+                outlineColor, subtitleTypeface);
+        view.setApplyEmbeddedStyles(false);
+        view.setStyle(style);
+
         mDownloadPlayer.setPlayWhenReady(true);
         mActiveMovie = true;
         if (mListSub.size() > 0) {
