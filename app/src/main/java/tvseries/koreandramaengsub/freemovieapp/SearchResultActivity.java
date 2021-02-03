@@ -290,6 +290,10 @@ public class SearchResultActivity extends AppCompatActivity implements SearchAda
 
     private void splitQuery(String query) {
         query = query.replaceAll(" ","");
+        if(query.length() <= 4){
+            mKeywordList.add(query);
+            return;
+        }
         int index1 = 0;
         for(int i=0;i<query.length()-4;i++){
             if(index1 > query.length()-4 - index1)return;

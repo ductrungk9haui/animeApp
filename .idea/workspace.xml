@@ -30,8 +30,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ac142d87-5c2b-4e32-8948-daeba4b28bdb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/DetailsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/DetailsActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/DownloadActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/DownloadActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/SearchResultActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/SearchResultActivity.java" afterDir="false" />
     </list>
     <list id="690dd8c0-ad25-496b-819d-5468c546c26e" name="Uncommitted changes before Update at 1/31/2021 10:32 PM [Default Changelist]" comment="" />
     <list id="e98f8c02-988d-45d3-8c01-acfeb18f8a1c" name="Uncommitted changes before Update at 2/1/2021 10:13 PM [Default Changelist]" comment="" />
@@ -266,22 +265,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1612170154681" />
-    <state width="1476" height="456" key="GridCell.Tab.0.bottom" timestamp="1612343900803">
+    <state width="1476" height="383" key="GridCell.Tab.0.bottom" timestamp="1612353007235">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1476" height="456" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1612343900803" />
-    <state width="1476" height="456" key="GridCell.Tab.0.center" timestamp="1612343900803">
+    <state width="1476" height="383" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1612353007235" />
+    <state width="1476" height="383" key="GridCell.Tab.0.center" timestamp="1612353007235">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1476" height="456" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1612343900803" />
-    <state width="1476" height="456" key="GridCell.Tab.0.left" timestamp="1612343900803">
+    <state width="1476" height="383" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1612353007235" />
+    <state width="1476" height="383" key="GridCell.Tab.0.left" timestamp="1612353007234">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1476" height="456" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1612343900803" />
-    <state width="1476" height="456" key="GridCell.Tab.0.right" timestamp="1612343900803">
+    <state width="1476" height="383" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1612353007234" />
+    <state width="1476" height="383" key="GridCell.Tab.0.right" timestamp="1612353007235">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1476" height="456" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1612343900803" />
+    <state width="1476" height="383" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1612353007235" />
     <state width="1491" height="143" key="GridCell.Tab.1.bottom" timestamp="1612124385665">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -326,10 +325,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1612156460762" />
-    <state x="475" y="145" width="928" height="534" key="find.popup" timestamp="1612342490727">
+    <state x="475" y="145" width="928" height="534" key="find.popup" timestamp="1612358345872">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="475" y="145" width="928" height="534" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1612342490727" />
+    <state x="475" y="145" width="928" height="534" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1612358345872" />
     <state x="487" y="201" key="git4idea.merge.GitPullDialog" timestamp="1611027110603">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
