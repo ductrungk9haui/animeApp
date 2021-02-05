@@ -31,15 +31,6 @@
     <list default="true" id="ac142d87-5c2b-4e32-8948-daeba4b28bdb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/.cxx/cmake/debug/x86/build_model.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/cmake/debug/x86/build_model.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/utils/MyAppClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/utils/MyAppClass.java" afterDir="false" />
     </list>
     <list id="690dd8c0-ad25-496b-819d-5468c546c26e" name="Uncommitted changes before Update at 1/31/2021 10:32 PM [Default Changelist]" comment="" />
     <list id="e98f8c02-988d-45d3-8c01-acfeb18f8a1c" name="Uncommitted changes before Update at 2/1/2021 10:13 PM [Default Changelist]" comment="" />
@@ -274,22 +265,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1612535260047" />
-    <state width="1491" height="235" key="GridCell.Tab.0.bottom" timestamp="1612539582583">
+    <state width="1491" height="235" key="GridCell.Tab.0.bottom" timestamp="1612540806004">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="235" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1612539582583" />
-    <state width="1491" height="235" key="GridCell.Tab.0.center" timestamp="1612539582583">
+    <state width="1491" height="235" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1612540806004" />
+    <state width="1491" height="235" key="GridCell.Tab.0.center" timestamp="1612540806004">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="235" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1612539582583" />
-    <state width="1491" height="235" key="GridCell.Tab.0.left" timestamp="1612539582583">
+    <state width="1491" height="235" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1612540806004" />
+    <state width="1491" height="235" key="GridCell.Tab.0.left" timestamp="1612540806004">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="235" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1612539582583" />
-    <state width="1491" height="235" key="GridCell.Tab.0.right" timestamp="1612539582583">
+    <state width="1491" height="235" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1612540806004" />
+    <state width="1491" height="235" key="GridCell.Tab.0.right" timestamp="1612540806004">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="235" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1612539582583" />
+    <state width="1491" height="235" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1612540806004" />
     <state width="1491" height="143" key="GridCell.Tab.1.bottom" timestamp="1612124385665">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
