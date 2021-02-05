@@ -1034,6 +1034,12 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                     PopUpAds.ShowAdmobInterstitialAds(DetailsActivity.this);
                 }
             }
+        }else{
+            if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
+                PopUpAds.showAppodealInterstitialAds(DetailsActivity.this);
+            } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
+                PopUpAds.ShowAdmobInterstitialAds(DetailsActivity.this);
+            }
         }
         if (type.equalsIgnoreCase("embed")) {
             CommonModels model = new CommonModels();
@@ -2740,6 +2746,12 @@ public class RelativeLayoutTouchListener implements View.OnTouchListener {
                 } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
                     PopUpAds.ShowAdmobInterstitialAds(DetailsActivity.this);
                 }
+            }
+        }else{
+            if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
+                PopUpAds.showAppodealInterstitialAds(DetailsActivity.this);
+            } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
+                PopUpAds.ShowAdmobInterstitialAds(DetailsActivity.this);
             }
         }
         if (!mListServer.isEmpty()) {
