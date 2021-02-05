@@ -45,6 +45,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import tvseries.koreandramaengsub.freemovieapp.utils.ToastMsg;
 
 public class SubscriptionActivity extends AppCompatActivity implements ActiveSubscriptionAdapter.OnItemClickLiestener {
     private RecyclerView mInactiveRv;
@@ -117,30 +118,36 @@ public class SubscriptionActivity extends AppCompatActivity implements ActiveSub
                 SubscriptionHistory subscriptionHistory = response.body();
                 if (response.code() == 200) {
 
-                    shimmerFrameLayout.stopShimmer();
-                    shimmerFrameLayout.setVisibility(View.GONE);
-                    swipeRefreshLayout.setVisibility(View.VISIBLE);
-                    swipeRefreshLayout.setRefreshing(false);
+                    if (PreferenceUtils.isLoggedIn(SubscriptionActivity.this)) {
+                        shimmerFrameLayout.stopShimmer();
+                        shimmerFrameLayout.setVisibility(View.GONE);
+                        swipeRefreshLayout.setVisibility(View.VISIBLE);
+                        swipeRefreshLayout.setRefreshing(false);
 
-                    activeSubscriptions = subscriptionHistory.getActiveSubscription();
-                    if (subscriptionHistory.getActiveSubscription().size() > 0) {
-                        mNoActiveLayout.setVisibility(View.GONE);
-                    } else {
-                        mNoActiveLayout.setVisibility(View.VISIBLE);
+                        activeSubscriptions = subscriptionHistory.getActiveSubscription();
+                        if (subscriptionHistory.getActiveSubscription().size() > 0) {
+                            mNoActiveLayout.setVisibility(View.GONE);
+                        } else {
+                            mNoActiveLayout.setVisibility(View.VISIBLE);
+                        }
+
+                        if (subscriptionHistory.getInactiveSubscription().size() > 0) {
+                            mNoHistoryTv.setVisibility(View.GONE);
+                            mSubHistoryLayout.setVisibility(View.VISIBLE);
+                            inactiveSubscriptionAdapter = new InactiveSubscriptionAdapter(subscriptionHistory.getInactiveSubscription(),
+                                    SubscriptionActivity.this);
+                            mInactiveRv.setAdapter(inactiveSubscriptionAdapter);
+
+                        } else {
+                            mNoHistoryTv.setVisibility(View.VISIBLE);
+                            mSubHistoryLayout.setVisibility(View.GONE);
+                        }
+                        progressBar.setVisibility(View.GONE);
+                    }else{
+                        Intent intent = new Intent(SubscriptionActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        new ToastMsg(SubscriptionActivity.this).toastIconError(getString(R.string.login_first));
                     }
-
-                    if (subscriptionHistory.getInactiveSubscription().size() > 0) {
-                        mNoHistoryTv.setVisibility(View.GONE);
-                        mSubHistoryLayout.setVisibility(View.VISIBLE);
-                        inactiveSubscriptionAdapter = new InactiveSubscriptionAdapter(subscriptionHistory.getInactiveSubscription(),
-                                SubscriptionActivity.this);
-                        mInactiveRv.setAdapter(inactiveSubscriptionAdapter);
-
-                    } else {
-                        mNoHistoryTv.setVisibility(View.VISIBLE);
-                        mSubHistoryLayout.setVisibility(View.GONE);
-                    }
-                    progressBar.setVisibility(View.GONE);
                 }
             }
 

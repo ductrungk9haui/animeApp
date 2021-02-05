@@ -29,10 +29,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac142d87-5c2b-4e32-8948-daeba4b28bdb" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/database/DatabaseHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/database/DatabaseHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/model/config/AdsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/model/config/AdsConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.cxx/abi_configuration_4p36t424.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/abi_configuration_4p36t424.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.cxx/abi_configuration_4p36t424.log" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/abi_configuration_4p36t424.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.cxx/abi_configuration_4p36t424_key.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/abi_configuration_4p36t424_key.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.cxx/cmake/debug/arm64-v8a/android_gradle_build_api_config_arm64-v8a.command.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/cmake/debug/arm64-v8a/android_gradle_build_api_config_arm64-v8a.command.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.cxx/cmake/debug/arm64-v8a/build_model.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/cmake/debug/arm64-v8a/build_model.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.cxx/cmake/debug/arm64-v8a/json_generation_record.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/cmake/debug/arm64-v8a/json_generation_record.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.cxx/ndk_locator_record_513d3o2q.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/ndk_locator_record_513d3o2q.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.cxx/ndk_locator_record_513d3o2q.log" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/ndk_locator_record_513d3o2q.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.cxx/ndk_locator_record_513d3o2q_key.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/ndk_locator_record_513d3o2q_key.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/SubscriptionActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/SubscriptionActivity.java" afterDir="false" />
     </list>
     <list id="690dd8c0-ad25-496b-819d-5468c546c26e" name="Uncommitted changes before Update at 1/31/2021 10:32 PM [Default Changelist]" comment="" />
     <list id="e98f8c02-988d-45d3-8c01-acfeb18f8a1c" name="Uncommitted changes before Update at 2/1/2021 10:13 PM [Default Changelist]" comment="" />
@@ -205,7 +219,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612541977886</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="- ads id reward">
+      <created>1612543136368</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1612543136369</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -252,7 +273,8 @@
     <MESSAGE value="- admob ads" />
     <MESSAGE value="- fix some bugs" />
     <MESSAGE value="- fix popupads" />
-    <option name="LAST_COMMIT_MESSAGE" value="- fix popupads" />
+    <MESSAGE value="- ads id reward" />
+    <option name="LAST_COMMIT_MESSAGE" value="- ads id reward" />
   </component>
   <component name="WindowStateProjectService">
     <state x="334" y="166" key="#PSD" timestamp="1612536720779">
@@ -263,18 +285,18 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1610903601249" />
-    <state x="574" y="96" key="#com.intellij.ide.util.MemberChooser" timestamp="1612268137080">
+    <state x="574" y="96" key="#com.intellij.ide.util.MemberChooser" timestamp="1612542940577">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="96" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1612268137080" />
+    <state x="574" y="96" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1612542940577" />
     <state x="565" y="159" key="AndroidProcessChooserDialog" timestamp="1612111516104">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="565" y="159" key="AndroidProcessChooserDialog/0.0.1536.824@0.0.1536.824" timestamp="1612111516104" />
-    <state x="383" y="0" key="CommitChangelistDialog2" timestamp="1612541974074">
+    <state x="383" y="0" key="CommitChangelistDialog2" timestamp="1612543134086">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="383" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1612541974074" />
+    <state x="383" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1612543134086" />
     <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1612193592825">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -283,22 +305,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1612535260047" />
-    <state width="1491" height="235" key="GridCell.Tab.0.bottom" timestamp="1612540806004">
+    <state width="1491" height="235" key="GridCell.Tab.0.bottom" timestamp="1612544196256">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="235" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1612540806004" />
-    <state width="1491" height="235" key="GridCell.Tab.0.center" timestamp="1612540806004">
+    <state width="1491" height="235" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1612544196256" />
+    <state width="1491" height="235" key="GridCell.Tab.0.center" timestamp="1612544196256">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="235" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1612540806004" />
-    <state width="1491" height="235" key="GridCell.Tab.0.left" timestamp="1612540806004">
+    <state width="1491" height="235" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1612544196256" />
+    <state width="1491" height="235" key="GridCell.Tab.0.left" timestamp="1612544196256">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="235" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1612540806004" />
-    <state width="1491" height="235" key="GridCell.Tab.0.right" timestamp="1612540806004">
+    <state width="1491" height="235" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1612544196256" />
+    <state width="1491" height="235" key="GridCell.Tab.0.right" timestamp="1612544196256">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="235" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1612540806004" />
+    <state width="1491" height="235" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1612544196256" />
     <state width="1491" height="143" key="GridCell.Tab.1.bottom" timestamp="1612124385665">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -331,10 +353,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="93" y="93" width="1350" height="638" key="VCS.FileHistoryDialog/0.0.1536.824@0.0.1536.824" timestamp="1612192930431" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1612541994296">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1612543196849">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1612541994296" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1612543196849" />
     <state x="347" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1612108322618">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -343,10 +365,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1612539355943" />
-    <state x="475" y="145" width="928" height="534" key="find.popup" timestamp="1612542377198">
+    <state x="475" y="145" width="928" height="534" key="find.popup" timestamp="1612543864419">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="475" y="145" width="928" height="534" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1612542377198" />
+    <state x="475" y="145" width="928" height="534" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1612543864419" />
     <state x="487" y="201" key="git4idea.merge.GitPullDialog" timestamp="1611027110603">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
