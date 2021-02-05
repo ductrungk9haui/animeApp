@@ -22,6 +22,9 @@ public class AdsConfig {
     @SerializedName("admob_interstitial_ads_id")
     @Expose
     private String admobInterstitialAdsId;
+    @SerializedName("admob_reawardedvideo_ads_id")
+    @Expose
+    private String admobRewardedVideoAdsId;
     @SerializedName("admob_native_ads_id")
     @Expose
     private String admobNativeAdsId;
@@ -42,6 +45,14 @@ public class AdsConfig {
     private String startappDeveloperId;
 
     public AdsConfig() {
+    }
+
+    public String getAdmobRewardedVideoAdsId() {
+        return admobRewardedVideoAdsId;
+    }
+
+    public void setAdmobRewardedVideoAdsId(String admobRewardedVideoAdsId) {
+        this.admobRewardedVideoAdsId = admobRewardedVideoAdsId;
     }
 
     public String getAdsEnable() {

@@ -22,7 +22,7 @@ public class VideoRewardAds {
     public static void prepareAd(Context context){
         if (mRewardedAd == null || !mRewardedAd.isLoaded()) {
             adsConfig = new DatabaseHelper(context).getConfigurationData().getAdsConfig();
-            mRewardedAd = new RewardedAd(context, "ca-app-pub-3940256099942544/5224354917");
+            mRewardedAd = new RewardedAd(context, adsConfig.getAdmobRewardedVideoAdsId());
             mRewardedAd.loadAd(
                     new AdRequest.Builder().build(),
                     new RewardedAdLoadCallback() {
