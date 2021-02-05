@@ -106,7 +106,7 @@ public class MyAppClass extends Application {
     private Picasso getCustomPicasso() {
         Picasso.Builder builder = new Picasso.Builder(this);
         //set 12% of available app memory for image cachecc
-        builder.memoryCache(new LruCache(getBytesForMemCache(12)));
+        builder.memoryCache(new LruCache(getBytesForMemCache(20)));
         //set request transformer
         Picasso.RequestTransformer requestTransformer =  new Picasso.RequestTransformer() {
             @Override
