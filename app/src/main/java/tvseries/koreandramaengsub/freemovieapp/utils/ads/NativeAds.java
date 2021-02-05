@@ -45,7 +45,7 @@ public class NativeAds {
     }
 
     public static void showAdmobNativeAds(Activity activity, TemplateView templateView) {
-        if (!PreferenceUtils.isActivePlan(activity)) {
+
             String nativeAdId = new DatabaseHelper(activity).getConfigurationData().getAdsConfig().getAdmobNativeAdsId();
             MobileAds.initialize(activity);
             AdLoader adLoader = new AdLoader.Builder(activity, nativeAdId)
@@ -59,9 +59,7 @@ public class NativeAds {
                         }
                     }).build();
             adLoader.loadAd(new AdRequest.Builder().build());
-        } else {
-            templateView.setVisibility(View.GONE);
-        }
+
     }
 
     public static void releaseAdmobNativeAd() {
