@@ -39,6 +39,10 @@ public class VideoRewardAds {
     }
 
     public static void showRewardedVideo(Activity activity) {
+        if(mRewardedAd == null){
+            prepareAd(activity);
+            return;
+        }
         if(!mRewardedAd.isLoaded())return;
         RewardedAdCallback adCallback =
                 new RewardedAdCallback() {

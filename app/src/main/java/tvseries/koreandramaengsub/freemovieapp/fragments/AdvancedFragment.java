@@ -36,6 +36,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import tvseries.koreandramaengsub.freemovieapp.Config;
 import tvseries.koreandramaengsub.freemovieapp.DetailsActivity;
+import tvseries.koreandramaengsub.freemovieapp.LoginActivity;
 import tvseries.koreandramaengsub.freemovieapp.MainActivity;
 import tvseries.koreandramaengsub.freemovieapp.ProfileActivity;
 import tvseries.koreandramaengsub.freemovieapp.R;
@@ -149,6 +150,9 @@ public class AdvancedFragment extends Fragment {
                     VideoRewardAds.showRewardedVideo(mActivity);
                 }
             }
+        }else{
+            Intent intent = new Intent(getContext(), LoginActivity.class);
+            startActivity(intent);
         }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
