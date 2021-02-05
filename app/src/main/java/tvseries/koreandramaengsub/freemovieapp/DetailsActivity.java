@@ -2772,10 +2772,10 @@ public class RelativeLayoutTouchListener implements View.OnTouchListener {
     @OnClick(R.id.download_bt)
     void onDownloadClick() {
         if (PreferenceUtils.isLoggedIn(DetailsActivity.this)) {
-            //PopUpAds.ShowAdmobInterstitialAds(DetailsActivity.this);
-//                    DetailsActivity.getInstance().loadAdReward();
-            VideoRewardAds.showRewardedVideo(DetailsActivity.getInstance());
             if (!mListInternalDownload.isEmpty() || !mListExternalDownload.isEmpty()) {
+                if(!PreferenceUtils.isActivePlan(this)){
+                    VideoRewardAds.showRewardedVideo(DetailsActivity.getInstance());
+                }
                 if (Config.ENABLE_DOWNLOAD_TO_ALL) {
                     openDownloadServerDialog();
                 } else {
