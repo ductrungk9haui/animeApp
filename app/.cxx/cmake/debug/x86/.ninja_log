@@ -1,3 +1,4 @@
 # ninja log v5
-1	1180	634241711	CMakeFiles/api_config.dir/api_config.cpp.o	46129ce90e85a319
-1182	1411	634241711	C:/Users/khaih/Documents/GitHub/animeApp/app/build/intermediates/cmake/debug/obj/x86/libapi_config.so	46ad54017968321e
+1	13	0	clean	33df79701f7cad1
+1	378	634312128	CMakeFiles/api_config.dir/api_config.cpp.o	aebd6172cbbc76fa
+380	484	634312128	D:/Android/animeApp/app/build/intermediates/cmake/debug/obj/x86/libapi_config.so	f6b561d0701bac5d

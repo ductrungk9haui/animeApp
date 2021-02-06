@@ -29,14 +29,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac142d87-5c2b-4e32-8948-daeba4b28bdb" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/anime_logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/s_logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/anime_logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/s_logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/anime_logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/s_logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/anime_logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/s_logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/anime_logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/s_logo.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/jarAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/Config.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/PurchasePlanActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/PurchasePlanActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/database/DatabaseHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/database/DatabaseHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/model/config/PaymentConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/model/config/PaymentConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/utils/MyAppClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/utils/MyAppClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/SplashScreenActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/SplashScreenActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/launch_screen.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/launch_screen.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" afterDir="false" />
     </list>
     <list id="690dd8c0-ad25-496b-819d-5468c546c26e" name="Uncommitted changes before Update at 1/31/2021 10:32 PM [Default Changelist]" comment="" />
     <list id="e98f8c02-988d-45d3-8c01-acfeb18f8a1c" name="Uncommitted changes before Update at 2/1/2021 10:13 PM [Default Changelist]" comment="" />
@@ -45,7 +61,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[127.0.0.1:62001]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[R58M61WTLQX]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -83,8 +99,6 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="127.0.0.1:62001" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2021-02-06T19:14:05.456Z" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -211,21 +225,7 @@
       <option name="project" value="LOCAL" />
       <updated>1612541977886</updated>
     </task>
-    <task id="LOCAL-00004" summary="- ads id reward">
-      <created>1612543136368</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1612543136369</updated>
-    </task>
-    <task id="LOCAL-00005" summary="- check login subscription">
-      <created>1612544317147</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1612544317147</updated>
-    </task>
-    <option name="localTasksCounter" value="6" />
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.History.Properties">
@@ -272,9 +272,7 @@
     <MESSAGE value="- admob ads" />
     <MESSAGE value="- fix some bugs" />
     <MESSAGE value="- fix popupads" />
-    <MESSAGE value="- ads id reward" />
-    <MESSAGE value="- check login subscription" />
-    <option name="LAST_COMMIT_MESSAGE" value="- check login subscription" />
+    <option name="LAST_COMMIT_MESSAGE" value="- fix popupads" />
   </component>
   <component name="WindowStateProjectService">
     <state x="334" y="166" key="#PSD" timestamp="1612536720779">
@@ -285,42 +283,42 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1610903601249" />
-    <state x="574" y="96" key="#com.intellij.ide.util.MemberChooser" timestamp="1612635865369">
+    <state x="574" y="96" key="#com.intellij.ide.util.MemberChooser" timestamp="1612268137080">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="96" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1612635865369" />
+    <state x="574" y="96" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1612268137080" />
     <state x="565" y="159" key="AndroidProcessChooserDialog" timestamp="1612111516104">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="565" y="159" key="AndroidProcessChooserDialog/0.0.1536.824@0.0.1536.824" timestamp="1612111516104" />
-    <state x="383" y="0" key="CommitChangelistDialog2" timestamp="1612544315161">
+    <state x="383" y="0" key="CommitChangelistDialog2" timestamp="1612541974074">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="383" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1612544315161" />
+    <state x="383" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1612541974074" />
     <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1612193592825">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1612193592825" />
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1612627761765">
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1612535260047">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1612627761765" />
-    <state width="1491" height="235" key="GridCell.Tab.0.bottom" timestamp="1612638873121">
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1612535260047" />
+    <state width="1491" height="235" key="GridCell.Tab.0.bottom" timestamp="1612540806004">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="235" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1612638873121" />
-    <state width="1491" height="235" key="GridCell.Tab.0.center" timestamp="1612638873120">
+    <state width="1491" height="235" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1612540806004" />
+    <state width="1491" height="235" key="GridCell.Tab.0.center" timestamp="1612540806004">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="235" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1612638873120" />
-    <state width="1491" height="235" key="GridCell.Tab.0.left" timestamp="1612638873120">
+    <state width="1491" height="235" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1612540806004" />
+    <state width="1491" height="235" key="GridCell.Tab.0.left" timestamp="1612540806004">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="235" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1612638873120" />
-    <state width="1491" height="235" key="GridCell.Tab.0.right" timestamp="1612638873120">
+    <state width="1491" height="235" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1612540806004" />
+    <state width="1491" height="235" key="GridCell.Tab.0.right" timestamp="1612540806004">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="235" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1612638873120" />
+    <state width="1491" height="235" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1612540806004" />
     <state width="1491" height="143" key="GridCell.Tab.1.bottom" timestamp="1612124385665">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -353,10 +351,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="93" y="93" width="1350" height="638" key="VCS.FileHistoryDialog/0.0.1536.824@0.0.1536.824" timestamp="1612192930431" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1612543196849">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1612541994296">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1612543196849" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1612541994296" />
     <state x="347" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1612108322618">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -365,10 +363,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1612539355943" />
-    <state x="475" y="145" width="928" height="558" key="find.popup" timestamp="1612638629057">
+    <state x="475" y="145" width="928" height="534" key="find.popup" timestamp="1612542377198">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="475" y="145" width="928" height="558" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1612638629057" />
+    <state x="475" y="145" width="928" height="534" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1612542377198" />
     <state x="487" y="201" key="git4idea.merge.GitPullDialog" timestamp="1611027110603">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
