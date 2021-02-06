@@ -85,6 +85,8 @@ public class PurchasePlanActivity extends AppCompatActivity implements PackageAd
     private Package packageItem;
     private PaymentBottomShitDialog paymentBottomShitDialog;
 
+    private DatabaseHelper databaseHelper;
+    private String paymentwall_secretKey, paymentwall_projectKey;
 
 
     @Override
@@ -115,6 +117,12 @@ public class PurchasePlanActivity extends AppCompatActivity implements PackageAd
         exchangeRate = config.getExchangeRate();
         packageRv.setHasFixedSize(true);
         packageRv.setLayoutManager(new LinearLayoutManager(this));
+
+        databaseHelper = new DatabaseHelper(PurchasePlanActivity.this);
+
+        PaymentConfig paymentConfig = databaseHelper.getConfigurationData().getPaymentConfig();
+        paymentwall_secretKey = paymentConfig.getStripePublishableKey();
+        paymentwall_projectKey = paymentConfig.getStripeSecretKey();
 
         getPurchasePlanInfo();
     }
@@ -335,8 +343,8 @@ public class PurchasePlanActivity extends AppCompatActivity implements PackageAd
         final String userId = PreferenceUtils.getUserId(PurchasePlanActivity.this);
 
         UnifiedRequest request = new UnifiedRequest();
-        request.setPwProjectKey("35b78a1fae7fcf4117b9dd5712d85cf9");//project key
-        request.setPwSecretKey("f2156268111a290b38b18eb9656e89b2");//PW_SECRET_KEY
+        request.setPwProjectKey(paymentwall_projectKey);//project key
+        request.setPwSecretKey(paymentwall_secretKey);//PW_SECRET_KEY
         request.setAmount(priceInUSD);
         request.setCurrency("USD");
         request.setItemName(packageItem.getName());

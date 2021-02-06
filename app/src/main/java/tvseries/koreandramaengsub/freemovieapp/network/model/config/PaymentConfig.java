@@ -31,6 +31,17 @@ public class PaymentConfig {
     @SerializedName("stripe_secret_key")
     @Expose
     private String stripeSecretKey;
+
+    @SerializedName("paymentwall_enable")
+    @Expose
+    private Boolean paymentwallEnable;
+    @SerializedName("paymentwall_project_key")
+    @Expose
+    private String paymentwallProjectKey;
+    @SerializedName("paymentwall_secret_key")
+    @Expose
+    private String paymentwallSecretKey;
+
     @SerializedName("razorpay_enable")
     @Expose
     private Boolean razorpayEnable;
@@ -44,6 +55,29 @@ public class PaymentConfig {
     @Expose
     private String razorpayExchangeRate;
 
+    public Boolean getPaymentwallEnable() {
+        return paymentwallEnable;
+    }
+
+    public void setPaymentwallEnable(Boolean paymentwallEnable) {
+        this.paymentwallEnable = paymentwallEnable;
+    }
+
+    public String getPaymentwallProjectKey() {
+        return paymentwallProjectKey;
+    }
+
+    public void setPaymentwallProjectKey(String paymentwallProjectKey) {
+        this.paymentwallProjectKey = paymentwallProjectKey;
+    }
+
+    public String getPaymentwallSecretKey() {
+        return paymentwallSecretKey;
+    }
+
+    public void setPaymentwallSecretKey(String paymentwallSecretKey) {
+        this.paymentwallSecretKey = paymentwallSecretKey;
+    }
 
     public String getCurrencySymbol() {
         return currencySymbol;

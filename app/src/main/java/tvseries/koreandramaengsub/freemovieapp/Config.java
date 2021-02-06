@@ -26,7 +26,7 @@ public class Config {
     public static final boolean ENABLE_EXTERNAL_PLAYER = false;
 
     //default theme
-    public static boolean DEFAULT_DARK_THEME_ENABLE = false;
+    public static boolean DEFAULT_DARK_THEME_ENABLE = true;
 
     // First, you have to configure firebase to enable facebook, phone and google login
     // facebook authentication

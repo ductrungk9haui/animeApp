@@ -36,7 +36,7 @@ public class MyAppClass extends Application {
     public static final String NOTIFICATION_CHANNEL_ID = "download_channel_id";
     private static Context mContext;
 
-    private static AppOpenManager appOpenManager;
+    //private static AppOpenManager appOpenManager;
 
 
     @Override
@@ -54,7 +54,7 @@ public class MyAppClass extends Application {
                     public void onInitializationComplete(InitializationStatus initializationStatus) {}
                 });
 
-        appOpenManager = new AppOpenManager(this);
+       // appOpenManager = new AppOpenManager(this);
 
         Picasso.setSingletonInstance(getCustomPicasso());
 

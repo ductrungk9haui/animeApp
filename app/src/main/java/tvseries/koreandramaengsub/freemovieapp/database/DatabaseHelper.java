@@ -51,12 +51,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String PAYMENT_CONFIG_PAYPAL_CLIENT_ID = "payment_config_paypal_client_id";
     private static final String PAYMENT_CONFIG_STRIPE_PUBLISH_KEY = "payment_config_stripe_publishable_key";
     private static final String PAYMENT_CONFIG_STRIPE_SECRET_KEY = "payment_config_stripe_secret_key";
+    private static final String PAYMENT_CONFIG_PAYMENTWALL_PROJECTT_KEY = "payment_config_paymentwall_project_key";
+    private static final String PAYMENT_CONFIG_PAYMENTWALL_SECRET_KEY = "payment_config_paymentwall_secret_key";
     private static final String PAYMENT_CONFIG_CURRENCY = "payment_config_currency";
     private static final String PAYMENT_CONFIG_EXCHANGE_RATE = "exchange_rate";
     private static final String PAYMENT_CONFIG_RAZOR_PAY_KEY_ID = "razorpay_key_id";
     private static final String PAYMENT_CONFIG_RAZOR_PAY_KEY_SECRETE = "razorpay_key_secrete";
     private static final String PAYMENT_CONFIG_PAYPAL_ENABLE = "paypal_enable";
     private static final String PAYMENT_CONFIG_STRIPE_ENABLE = "stripe_enable";
+    private static final String PAYMENT_CONFIG_PAYMENTWALL_ENABLE = "paymentwall_enable";
     private static final String PAYMENT_CONFIG_RAZORPAY_ENABLE = "razorpay_enable";
     //private static final String PAYMENT_CONFIG_RAZORPAY_EXCHANGE_RATE = "razorpay_exchange_rate";
 
@@ -205,10 +208,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 PAYMENT_CONFIG_EXCHANGE_RATE + " TEXT," +
                 PAYMENT_CONFIG_STRIPE_PUBLISH_KEY + " TEXT," +
                 PAYMENT_CONFIG_STRIPE_SECRET_KEY + " TEXT," +
+                PAYMENT_CONFIG_PAYMENTWALL_PROJECTT_KEY + " TEXT," +
+                PAYMENT_CONFIG_PAYMENTWALL_SECRET_KEY + " TEXT," +
                 PAYMENT_CONFIG_RAZOR_PAY_KEY_ID + " TEXT," +
                 PAYMENT_CONFIG_RAZOR_PAY_KEY_SECRETE + " TEXT," +
                 PAYMENT_CONFIG_PAYPAL_ENABLE + " INTEGER DEFAULT 0," +
                 PAYMENT_CONFIG_STRIPE_ENABLE + " INTEGER DEFAULT 0," +
+                PAYMENT_CONFIG_PAYMENTWALL_ENABLE + " INTEGER DEFAULT 0," +
                 PAYMENT_CONFIG_RAZORPAY_ENABLE + " INTEGER DEFAULT 0," +
                 //PAYMENT_CONFIG_RAZORPAY_EXCHANGE_RATE + " TEXT," +
                 PAYMENT_CONFIG_CURRENCY + " TEXT" + ")";
@@ -242,12 +248,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(PAYMENT_CONFIG_PAYPAL_CLIENT_ID, configuration.getPaymentConfig().getPaypalClientId());
         contentValues.put(PAYMENT_CONFIG_STRIPE_PUBLISH_KEY, configuration.getPaymentConfig().getStripePublishableKey());
         contentValues.put(PAYMENT_CONFIG_STRIPE_SECRET_KEY, configuration.getPaymentConfig().getStripeSecretKey());
+        contentValues.put(PAYMENT_CONFIG_PAYMENTWALL_PROJECTT_KEY, configuration.getPaymentConfig().getPaymentwallProjectKey());
+        contentValues.put(PAYMENT_CONFIG_PAYMENTWALL_SECRET_KEY, configuration.getPaymentConfig().getPaymentwallSecretKey());
         contentValues.put(PAYMENT_CONFIG_CURRENCY, configuration.getPaymentConfig().getCurrency());
         contentValues.put(PAYMENT_CONFIG_EXCHANGE_RATE, configuration.getPaymentConfig().getExchangeRate());
         contentValues.put(PAYMENT_CONFIG_RAZOR_PAY_KEY_ID, configuration.getPaymentConfig().getRazorpayKeyId());
         contentValues.put(PAYMENT_CONFIG_RAZOR_PAY_KEY_SECRETE, configuration.getPaymentConfig().getRazorpayKeySecret());
         contentValues.put(PAYMENT_CONFIG_PAYPAL_ENABLE, configuration.getPaymentConfig().getPaypalEnable());
         contentValues.put(PAYMENT_CONFIG_STRIPE_ENABLE, configuration.getPaymentConfig().getStripeEnable());
+        contentValues.put(PAYMENT_CONFIG_PAYMENTWALL_ENABLE, configuration.getPaymentConfig().getPaymentwallEnable());
         contentValues.put(PAYMENT_CONFIG_RAZORPAY_ENABLE, configuration.getPaymentConfig().getRazorpayEnable());
         //contentValues.put(PAYMENT_CONFIG_RAZORPAY_EXCHANGE_RATE, configuration.getPaymentConfig().getRazorpayExchangeRate());
 
@@ -295,11 +304,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     paymentConfig.setPaypalClientId(cursor.getString(cursor.getColumnIndex(PAYMENT_CONFIG_PAYPAL_CLIENT_ID)));
                     paymentConfig.setStripePublishableKey(cursor.getString(cursor.getColumnIndex(PAYMENT_CONFIG_STRIPE_PUBLISH_KEY)));
                     paymentConfig.setStripeSecretKey(cursor.getString(cursor.getColumnIndex(PAYMENT_CONFIG_STRIPE_SECRET_KEY)));
+                    paymentConfig.setPaymentwallProjectKey(cursor.getString(cursor.getColumnIndex(PAYMENT_CONFIG_PAYMENTWALL_PROJECTT_KEY)));
+                    paymentConfig.setPaymentwallSecretKey(cursor.getString(cursor.getColumnIndex(PAYMENT_CONFIG_PAYMENTWALL_SECRET_KEY)));
                     paymentConfig.setExchangeRate(cursor.getString(cursor.getColumnIndex(PAYMENT_CONFIG_EXCHANGE_RATE)));
                     paymentConfig.setRazorpayKeyId(cursor.getString(cursor.getColumnIndex(PAYMENT_CONFIG_RAZOR_PAY_KEY_ID)));
                     paymentConfig.setRazorpayKeySecret(cursor.getString(cursor.getColumnIndex(PAYMENT_CONFIG_RAZOR_PAY_KEY_SECRETE)));
                     paymentConfig.setPaypalEnable(cursor.getInt(cursor.getColumnIndex(PAYMENT_CONFIG_PAYPAL_ENABLE)) > 0);
                     paymentConfig.setStripeEnable(cursor.getInt(cursor.getColumnIndex(PAYMENT_CONFIG_STRIPE_ENABLE)) > 0);
+                    paymentConfig.setPaymentwallEnable(cursor.getInt(cursor.getColumnIndex(PAYMENT_CONFIG_PAYMENTWALL_ENABLE)) > 0);
                     paymentConfig.setRazorpayEnable(cursor.getInt(cursor.getColumnIndex(PAYMENT_CONFIG_RAZORPAY_ENABLE)) > 0);
                     // paymentConfig.setRazorpayExchangeRate(cursor.getString(cursor.getColumnIndex(PAYMENT_CONFIG_RAZORPAY_EXCHANGE_RATE)));
 
@@ -362,12 +374,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(PAYMENT_CONFIG_PAYPAL_CLIENT_ID, configuration.getPaymentConfig().getPaypalClientId());
         contentValues.put(PAYMENT_CONFIG_STRIPE_PUBLISH_KEY, configuration.getPaymentConfig().getStripePublishableKey());
         contentValues.put(PAYMENT_CONFIG_STRIPE_SECRET_KEY, configuration.getPaymentConfig().getStripeSecretKey());
+        contentValues.put(PAYMENT_CONFIG_PAYMENTWALL_PROJECTT_KEY, configuration.getPaymentConfig().getPaymentwallProjectKey());
+        contentValues.put(PAYMENT_CONFIG_PAYMENTWALL_SECRET_KEY, configuration.getPaymentConfig().getPaymentwallSecretKey());
         contentValues.put(PAYMENT_CONFIG_CURRENCY, configuration.getPaymentConfig().getCurrency());
         contentValues.put(PAYMENT_CONFIG_EXCHANGE_RATE, configuration.getPaymentConfig().getExchangeRate());
         contentValues.put(PAYMENT_CONFIG_RAZOR_PAY_KEY_ID, configuration.getPaymentConfig().getRazorpayKeyId());
         contentValues.put(PAYMENT_CONFIG_RAZOR_PAY_KEY_SECRETE, configuration.getPaymentConfig().getRazorpayKeySecret());
         contentValues.put(PAYMENT_CONFIG_PAYPAL_ENABLE, configuration.getPaymentConfig().getPaypalEnable());
         contentValues.put(PAYMENT_CONFIG_STRIPE_ENABLE, configuration.getPaymentConfig().getStripeEnable());
+        contentValues.put(PAYMENT_CONFIG_PAYMENTWALL_ENABLE, configuration.getPaymentConfig().getPaymentwallEnable());
         contentValues.put(PAYMENT_CONFIG_RAZORPAY_ENABLE, configuration.getPaymentConfig().getRazorpayEnable());
         // contentValues.put(PAYMENT_CONFIG_RAZORPAY_EXCHANGE_RATE, configuration.getPaymentConfig().getRazorpayExchangeRate());
 
