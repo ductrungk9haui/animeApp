@@ -31,30 +31,6 @@
   },
   {
     "level": "INFO",
-    "message": "- a dependent build file changed",
-    "file": "D:\\Android\\animeApp\\app\\src\\main\\jni\\CMakeLists.txt",
-    "tag": "release|x86_64"
-  },
-  {
-    "level": "INFO",
-    "message": "  - C:\\Users\\khaih\\Documents\\GitHub\\animeApp\\app\\src\\main\\jni\\CMakeLists.txt",
-    "file": "D:\\Android\\animeApp\\app\\src\\main\\jni\\CMakeLists.txt",
-    "tag": "release|x86_64"
-  },
-  {
-    "level": "INFO",
-    "message": "  - C:\\Users\\khaih\\AppData\\Local\\Android\\Sdk\\ndk-bundle\\build\\cmake\\android.toolchain.cmake",
-    "file": "D:\\Android\\animeApp\\app\\src\\main\\jni\\CMakeLists.txt",
-    "tag": "release|x86_64"
-  },
-  {
-    "level": "INFO",
-    "message": "  - C:\\Users\\khaih\\AppData\\Local\\Android\\Sdk\\ndk-bundle\\build\\cmake\\platforms.cmake",
-    "file": "D:\\Android\\animeApp\\app\\src\\main\\jni\\CMakeLists.txt",
-    "tag": "release|x86_64"
-  },
-  {
-    "level": "INFO",
     "message": "removing stale contents from \u0027D:\\Android\\animeApp\\app\\.cxx\\cmake\\release\\x86_64\u0027",
     "file": "D:\\Android\\animeApp\\app\\src\\main\\jni\\CMakeLists.txt",
     "tag": "release|x86_64"
