@@ -99,17 +99,20 @@ public class ItemMovieActivity extends AppCompatActivity {
         //----movie's recycler view-----------------
         recyclerView = findViewById(R.id.recyclerView);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
-        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-            @Override
-            public int getSpanSize(int position) {
-                switch ((position + 1) % 10) {
-                    case 0:
-                        return 3;
-                    default:
-                        return 1;
+        if( !(PreferenceUtils.isLoggedIn(this) && PreferenceUtils.isActivePlan(this))){
+            gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    switch ((position + 1) % 10) {
+                        case 0:
+                            return 3;
+                        default:
+                            return 1;
+                    }
                 }
-            }
-        });
+            });
+        }
+
         recyclerView.setLayoutManager(gridLayoutManager);
         //recyclerView.addItemDecoration(new SpacingItemDecoration(3, Tools.dpToPx(this, 8), true));
         recyclerView.setHasFixedSize(true);

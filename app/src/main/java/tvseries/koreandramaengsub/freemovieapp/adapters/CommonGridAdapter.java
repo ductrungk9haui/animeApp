@@ -48,6 +48,7 @@ public class CommonGridAdapter extends RecyclerView.Adapter<CommonGridAdapter.Or
     private int fromIndex;
     AdsConfig adsConfig;
     private Activity activity;
+
     @Override
     public void onViewRecycled(@NonNull OriginalViewHolder holder) {
         super.onViewRecycled(holder);
@@ -62,18 +63,18 @@ public class CommonGridAdapter extends RecyclerView.Adapter<CommonGridAdapter.Or
         isAdActive = getConfigAd();
     }
 
-    public void setNotifyDataSetChanged(){
-        if(items.size() == 0){
-            adCount=0;
+    public void setNotifyDataSetChanged() {
+        if (items.size() == 0) {
+            adCount = 0;
             fromIndex = 9;
-        }else{
-            if(isAdActive){
+        } else {
+            if (isAdActive) {
                 int sizeItem = items.size();
-                while(sizeItem >= fromIndex){
-                    items.add(9 + adCount,new CommonModels());
-                    sizeItem  = sizeItem - 9;
+                while (sizeItem >= fromIndex) {
+                    items.add(9 + adCount, new CommonModels());
+                    sizeItem = sizeItem - 9;
                     adCount = adCount + 10;
-                    if(sizeItem < fromIndex){
+                    if (sizeItem < fromIndex) {
                         fromIndex = 9 + adCount;
                     }
                 }
@@ -81,10 +82,12 @@ public class CommonGridAdapter extends RecyclerView.Adapter<CommonGridAdapter.Or
         }
         notifyDataSetChanged();
     }
+
     private boolean getConfigAd() {
         adsConfig = new DatabaseHelper(ctx).getConfigurationData().getAdsConfig();
         return !(PreferenceUtils.isLoggedIn(activity) && PreferenceUtils.isActivePlan(activity));
     }
+
     @Override
     public CommonGridAdapter.OriginalViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -97,28 +100,26 @@ public class CommonGridAdapter extends RecyclerView.Adapter<CommonGridAdapter.Or
 
     @Override
     public void onBindViewHolder(CommonGridAdapter.OriginalViewHolder holder, final int position) {
-        if((position + 1) % 10 == 0){
-            if (isAdActive) {
-                holder.mainLayout.setVisibility(View.GONE);
-                if(adsConfig.getAdsEnable().equals("1")){
-                    if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                        holder.nativeAdView.setVisibility(View.VISIBLE);
-                        NativeAds.showAdmobNativeAds(activity, holder.nativeAdView);
-                    } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
-                        holder.bannerViewStartApp.setVisibility(View.VISIBLE);
-                        Appodeal.setBannerViewId(holder.bannerViewStartApp.getId());
-                        Appodeal.show(activity, Appodeal.BANNER_VIEW);
-                    } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.NETWORK_AUDIENCE)) {
-                        holder.adview.setVisibility(View.VISIBLE);
-                        BannerAds.showFANBanner(ctx, holder.adview);
-                    }
+        if (isAdActive && (position + 1) % 10 == 0) {
+            holder.mainLayout.setVisibility(View.GONE);
+            if (adsConfig.getAdsEnable().equals("1")) {
+                if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
+                    holder.nativeAdView.setVisibility(View.VISIBLE);
+                    NativeAds.showAdmobNativeAds(activity, holder.nativeAdView);
+                } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
+                    holder.bannerViewStartApp.setVisibility(View.VISIBLE);
+                    Appodeal.setBannerViewId(holder.bannerViewStartApp.getId());
+                    Appodeal.show(activity, Appodeal.BANNER_VIEW);
+                } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.NETWORK_AUDIENCE)) {
+                    holder.adview.setVisibility(View.VISIBLE);
+                    BannerAds.showFANBanner(ctx, holder.adview);
                 }
-            } else {
-                holder.nativeAdView.setVisibility(View.GONE);
-                holder.bannerViewStartApp.setVisibility(View.GONE);
-                holder.adview.setVisibility(View.GONE);
             }
-        }else{
+        } else {
+            holder.nativeAdView.setVisibility(View.GONE);
+            holder.bannerViewStartApp.setVisibility(View.GONE);
+            holder.adview.setVisibility(View.GONE);
+
             holder.mainLayout.setVisibility(View.VISIBLE);
             holder.nativeAdView.setVisibility(View.GONE);
             holder.bannerViewStartApp.setVisibility(View.GONE);
@@ -135,13 +136,13 @@ public class CommonGridAdapter extends RecyclerView.Adapter<CommonGridAdapter.Or
             holder.lyt_parent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (PreferenceUtils.isMandatoryLogin(ctx)){
-                        if (PreferenceUtils.isLoggedIn(ctx)){
+                    if (PreferenceUtils.isMandatoryLogin(ctx)) {
+                        if (PreferenceUtils.isLoggedIn(ctx)) {
                             goToDetailsActivity(obj);
-                        }else {
+                        } else {
                             ctx.startActivity(new Intent(ctx, LoginActivity.class));
                         }
-                    }else {
+                    } else {
                         goToDetailsActivity(obj);
                     }
                 }
@@ -150,11 +151,10 @@ public class CommonGridAdapter extends RecyclerView.Adapter<CommonGridAdapter.Or
     }
 
 
-
     private void goToDetailsActivity(CommonModels obj) {
-        Intent intent=new Intent(ctx,DetailsActivity.class);
-        intent.putExtra("vType",obj.getVideoType());
-        intent.putExtra("id",obj.getId());
+        Intent intent = new Intent(ctx, DetailsActivity.class);
+        intent.putExtra("vType", obj.getVideoType());
+        intent.putExtra("id", obj.getId());
         ctx.startActivity(intent);
     }
 

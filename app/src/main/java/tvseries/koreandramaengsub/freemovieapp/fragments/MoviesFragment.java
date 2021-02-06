@@ -89,17 +89,19 @@ public class MoviesFragment extends Fragment {
         mShimmerLayout.startShimmer();
         //----movie's recycler view-----------------
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
-        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-            @Override
-            public int getSpanSize(int position) {
-                switch ((position + 1) % 10) {
-                    case 0:
-                        return 3;
-                    default:
-                        return 1;
+        if( !(PreferenceUtils.isLoggedIn(getContext()) && PreferenceUtils.isActivePlan(getContext()))){
+            gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    switch ((position + 1) % 10) {
+                        case 0:
+                            return 3;
+                        default:
+                            return 1;
+                    }
                 }
-            }
-        });
+            });
+        }
         mRecycleView.setLayoutManager(gridLayoutManager);
         //mRecycleView.addItemDecoration(new SpacingItemDecoration(3, Tools.dpToPx(getActivity(), 0), true));
         mRecycleView.setHasFixedSize(true);

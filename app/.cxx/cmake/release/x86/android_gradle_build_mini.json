@@ -1,19 +1,19 @@
 {
   "buildFiles": [
-    "C:\\Users\\khaih\\Documents\\GitHub\\animeApp\\app\\src\\main\\jni\\CMakeLists.txt",
-    "C:\\Users\\khaih\\AppData\\Local\\Android\\Sdk\\ndk-bundle\\build\\cmake\\android.toolchain.cmake",
-    "C:\\Users\\khaih\\AppData\\Local\\Android\\Sdk\\ndk-bundle\\build\\cmake\\platforms.cmake"
+    "D:\\Android\\animeApp\\app\\src\\main\\jni\\CMakeLists.txt",
+    "C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\ndk\\21.3.6528147\\build\\cmake\\android.toolchain.cmake",
+    "C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\ndk\\21.3.6528147\\build\\cmake\\platforms.cmake"
   ],
   "cleanCommands": [
-    "C:\\Users\\khaih\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"C:\\Users\\khaih\\Documents\\GitHub\\animeApp\\app\\.cxx\\cmake\\release\\x86\" clean"
+    "C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"D:\\Android\\animeApp\\app\\.cxx\\cmake\\release\\x86\" clean"
   ],
-  "buildTargetsCommand": "C:\\Users\\khaih\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe  -C \"C:\\Users\\khaih\\Documents\\GitHub\\animeApp\\app\\.cxx\\cmake\\release\\x86\" {LIST_OF_TARGETS_TO_BUILD}",
+  "buildTargetsCommand": "C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe  -C \"D:\\Android\\animeApp\\app\\.cxx\\cmake\\release\\x86\" {LIST_OF_TARGETS_TO_BUILD}",
   "libraries": {
     "api_config-Release-x86": {
       "artifactName": "api_config",
-      "buildCommand": "C:\\Users\\khaih\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"C:\\Users\\khaih\\Documents\\GitHub\\animeApp\\app\\.cxx\\cmake\\release\\x86\" api_config",
+      "buildCommand": "C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"D:\\Android\\animeApp\\app\\.cxx\\cmake\\release\\x86\" api_config",
       "abi": "x86",
-      "output": "C:\\Users\\khaih\\Documents\\GitHub\\animeApp\\app\\build\\intermediates\\cmake\\release\\obj\\x86\\libapi_config.so",
+      "output": "D:\\Android\\animeApp\\app\\build\\intermediates\\cmake\\release\\obj\\x86\\libapi_config.so",
       "runtimeFiles": []
     }
   }

@@ -94,17 +94,19 @@ public class FavoriteFragment extends Fragment {
 
         //----favorite's recycler view-----------------
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
-        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-            @Override
-            public int getSpanSize(int position) {
-                switch ((position + 1) % 10) {
-                    case 0:
-                        return 3;
-                    default:
-                        return 1;
+        if( !(PreferenceUtils.isLoggedIn(getContext()) && PreferenceUtils.isActivePlan(getContext()))){
+            gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    switch ((position + 1) % 10) {
+                        case 0:
+                            return 3;
+                        default:
+                            return 1;
+                    }
                 }
-            }
-        });
+            });
+        }
         mRecyclerView.setLayoutManager(gridLayoutManager);
         //mRecyclerView.addItemDecoration(new SpacingItemDecoration(3, Tools.dpToPx(getActivity(), 0), true));
         mRecyclerView.setHasFixedSize(true);
