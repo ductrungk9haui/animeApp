@@ -1,14 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.android.exoplayer:extension-cast:2.7.3@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/48a3e9d127113064194d6de15a9cf339/jetified-extension-cast-2.7.3/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/99efe02079c762fb377921b6c3e9d8da/jetified-extension-cast-2.7.3/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0344f4108b2c79f06c0af1c66531ae46/jetified-extension-cast-2.7.3/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0344f4108b2c79f06c0af1c66531ae46/jetified-extension-cast-2.7.3/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0344f4108b2c79f06c0af1c66531ae46/jetified-extension-cast-2.7.3/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/96f7dad2758d2923348c26422ec86adb/jetified-extension-cast-2.7.3/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/96f7dad2758d2923348c26422ec86adb/jetified-extension-cast-2.7.3/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/96f7dad2758d2923348c26422ec86adb/jetified-extension-cast-2.7.3/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/96f7dad2758d2923348c26422ec86adb/jetified-extension-cast-2.7.3/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.exoplayer/extension-cast/2.7.3/5b310eba0b8f9fe0a483222dd4eabe5492f7e174/extension-cast-2.7.3-javadoc.jar!/" />

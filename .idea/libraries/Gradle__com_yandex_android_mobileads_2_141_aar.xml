@@ -4,9 +4,6 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b15aff88cb90a385f62e6aa112092a13/jetified-mobileads-2.141/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b15aff88cb90a385f62e6aa112092a13/jetified-mobileads-2.141/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b15aff88cb90a385f62e6aa112092a13/jetified-mobileads-2.141/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/14dd53e7cb5d02c0e8f2432fe4fde251/jetified-mobileads-2.141/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/14dd53e7cb5d02c0e8f2432fe4fde251/jetified-mobileads-2.141/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/14dd53e7cb5d02c0e8f2432fe4fde251/jetified-mobileads-2.141/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.yandex.android/mobileads/2.141/aede3855d8cd88592154c3ff322045f4502a7af6/mobileads-2.141-javadoc.jar!/" />
