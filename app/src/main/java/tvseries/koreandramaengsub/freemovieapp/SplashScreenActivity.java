@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
@@ -20,6 +21,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.OvershootInterpolator;
 import android.view.animation.RotateAnimation;
+import android.view.animation.ScaleAnimation;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -51,11 +54,13 @@ import tvseries.koreandramaengsub.freemovieapp.utils.ToastMsg;
 public class SplashScreenActivity extends AppCompatActivity {
     private static final String TAG = "SplashScreen";
     private final int PERMISSION_REQUEST_CODE = 100;
-    private int SPLASH_TIME = 2000;
+    private int SPLASH_TIME = 2500;
     private Thread timer;
     private DatabaseHelper db;
     AnimationDrawable anim;
     @BindView(R.id.logo) ImageView mLogo;
+    @BindView(R.id.logo1) ImageView mAnimeLogo;
+    @BindView(R.id.logo2) ImageView mSLogo;
     @BindView(R.id.icon) ImageView mIcon;
     @BindView(R.id.content) TextView mContent;
     Unbinder mUnBinder;
@@ -125,11 +130,46 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     private void startWelcomeAnimation() {
         AlphaAnimation alphaAnimation = new AlphaAnimation(0f,1f);
-        alphaAnimation.setDuration(2000);
+        alphaAnimation.setDuration(1000);
         alphaAnimation.setFillAfter(true);
-        mLogo.startAnimation(alphaAnimation);
-        //mIcon.startAnimation(alphaAnimation);
-        //mContent.startAnimation(alphaAnimation);
+        alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                AnimationSet set = new AnimationSet(true);
+                ScaleAnimation scaleAnimation = new ScaleAnimation(1,0.9f, 1, 0.9f,Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                TranslateAnimation translateAnimation = new TranslateAnimation(0,getResources().getDimensionPixelSize(R.dimen.animate_translate_logo),0,0);
+                set.addAnimation(scaleAnimation);
+                set.addAnimation(translateAnimation);
+                set.setDuration(1500);
+                set.setFillAfter(true);
+                set.setInterpolator(new OvershootInterpolator(2));
+                mAnimeLogo.clearAnimation();
+                mAnimeLogo.startAnimation(set);
+
+                AlphaAnimation alphaAnimation = new AlphaAnimation(0f,1f);
+                alphaAnimation.setDuration(1000);
+                alphaAnimation.setFillAfter(true);
+                alphaAnimation.setStartOffset(500);
+                mSLogo.setVisibility(View.VISIBLE);
+                mSLogo.startAnimation(alphaAnimation);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+
+
+
+        mAnimeLogo.startAnimation(alphaAnimation);
+
     }
 
     @Override
