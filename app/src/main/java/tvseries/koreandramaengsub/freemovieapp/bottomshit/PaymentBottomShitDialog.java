@@ -39,25 +39,25 @@ public class PaymentBottomShitDialog extends BottomSheetDialogFragment {
         stripBt = view.findViewById(R.id.stripe_btn);
         razorpayBt = view.findViewById(R.id.razorpay_btn);
         mobiamoBt=view.findViewById(R.id.mobiamobtn);
-        Space space = view.findViewById(R.id.space2);
-        Space space3 = view.findViewById(R.id.space3);
+     /*   Space space = view.findViewById(R.id.space2);
+        Space space3 = view.findViewById(R.id.space3);*/
 
         if (!config.getPaypalEnable()) {
             paypalBt.setVisibility(View.GONE);
-            space.setVisibility(View.GONE);
+           // space.setVisibility(View.GONE);
         }
 
         if (!config.getStripeEnable()) {
             stripBt.setVisibility(View.GONE);
-            space.setVisibility(View.GONE);
+            //space.setVisibility(View.GONE);
         }
         if (!config.getRazorpayEnable()){
             razorpayBt.setVisibility(View.GONE);
-            space3.setVisibility(View.GONE);
+           // space3.setVisibility(View.GONE);
         }
         if (!checkmobiamo){
             mobiamoBt.setVisibility(View.GONE);
-            space3.setVisibility(View.GONE);
+            //space3.setVisibility(View.GONE);
         }
 
 

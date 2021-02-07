@@ -224,7 +224,7 @@
     <string name="all_tv_series">All TV Series</string>
     <string name="no_ad">No Advertisement</string>
     <string name="unlimited_movies">Unlimited Movies</string>
-    <string name="please_select_your_payment_method">Please select your payment method</string>
+    <string name="please_select_your_payment_method">Please select your payment method \n If you have trouble in your selected method. Please try another one.</string>
     <string name="download_appear_text">Your download item will be appear here.  Download item not found.</string>
     <string name="send">Send</string>
     <string name="searcHError_message">Title Or Type can\'t be empty</string>
