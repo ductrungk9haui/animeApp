@@ -545,4 +545,10 @@ public class HomeFragment extends Fragment {
         intent.putExtra("title", "Anime Series");
         getActivity().startActivity(intent);
     }
+
+    @OnClick(R.id.continue_watching_clear_btn)
+    void onClearContinue(){
+        continueWatchingViewModel.deleteAllContent();
+    }
+
 }
