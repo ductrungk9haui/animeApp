@@ -121,8 +121,8 @@ public class PurchasePlanActivity extends AppCompatActivity implements PackageAd
         databaseHelper = new DatabaseHelper(PurchasePlanActivity.this);
 
         PaymentConfig paymentConfig = databaseHelper.getConfigurationData().getPaymentConfig();
-        paymentwall_secretKey = paymentConfig.getStripePublishableKey();
-        paymentwall_projectKey = paymentConfig.getStripeSecretKey();
+        paymentwall_secretKey = paymentConfig.getPaymentwallSecretKey();
+        paymentwall_projectKey = paymentConfig.getPaymentwallProjectKey();
 
         getPurchasePlanInfo();
     }

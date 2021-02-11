@@ -24,7 +24,6 @@ public class PaymentBottomShitDialog extends BottomSheetDialogFragment {
     public static final String RAZOR_PAY = "razorpay";
     public static final String MOBIAMO_PAY = "mobiamo";
     private DatabaseHelper databaseHelper;
-    private boolean checkmobiamo=true;
     private OnBottomShitClickListener bottomShitClickListener;
 
     @Nullable
@@ -55,7 +54,8 @@ public class PaymentBottomShitDialog extends BottomSheetDialogFragment {
             razorpayBt.setVisibility(View.GONE);
            // space3.setVisibility(View.GONE);
         }
-        if (!checkmobiamo){
+
+        if (!config.getPaymentwallEnable()){
             mobiamoBt.setVisibility(View.GONE);
             //space3.setVisibility(View.GONE);
         }
