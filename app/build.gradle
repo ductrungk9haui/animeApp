@@ -29,7 +29,7 @@ android {
     compileSdkVersion 30
     buildToolsVersion '30.0.2'
     defaultConfig {
-        applicationId "tvseries.koreandramaengsub.freemovieapp"
+        applicationId "animes.englishsubtitle.freemovieseries"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
@@ -38,7 +38,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         manifestPlaceholders = [
-                onesignal_app_id: '8f8f1416-8631-4856-809c-9a2dffbf1592',
+                onesignal_app_id: '9ad61069-62db-4f64-ad9a-fd60f570e3fe',
                 // Project number pulled from dashboard, local value is ignored.
                 onesignal_google_project_number: 'REMOTE'
         ]

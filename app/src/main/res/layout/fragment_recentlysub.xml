@@ -22,7 +22,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <tvseries.koreandramaengsub.freemovieapp.view.SwipeRefreshLayout
+            <animes.englishsubtitle.freemovieseries.view.SwipeRefreshLayout
                 android:id="@+id/swipe_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -38,7 +38,7 @@
                     android:paddingTop="70dp"
                     android:clipToPadding="false"/>
 
-            </tvseries.koreandramaengsub.freemovieapp.view.SwipeRefreshLayout>
+            </animes.englishsubtitle.freemovieseries.view.SwipeRefreshLayout>
 
         </LinearLayout>
 

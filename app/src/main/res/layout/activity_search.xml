@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context="tvseries.koreandramaengsub.freemovieapp.SearchActivity">
+    tools:context="animes.englishsubtitle.freemovieseries.SearchActivity">
 
     <include
         android:id="@+id/toolbar"
@@ -204,7 +204,7 @@
                 android:layout_marginTop="@dimen/spacing_large"
                 android:orientation="vertical">
 
-                <tvseries.koreandramaengsub.freemovieapp.widget.RangeSeekBar
+                <animes.englishsubtitle.freemovieseries.widget.RangeSeekBar
                     android:id="@+id/range_seek_bar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

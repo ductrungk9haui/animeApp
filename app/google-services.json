@@ -1,42 +1,41 @@
 {
   "project_info": {
-    "project_number": "716725314748",
-    "firebase_url": "https://koreandrama-d886f.firebaseio.com",
-    "project_id": "koreandrama-d886f",
-    "storage_bucket": "koreandrama-d886f.appspot.com"
+    "project_number": "660507651614",
+    "project_id": "animes-edeb1",
+    "storage_bucket": "animes-edeb1.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:716725314748:android:38247e491905ac2c2c9cb9",
+        "mobilesdk_app_id": "1:660507651614:android:4084d23f93ec14fc80080f",
         "android_client_info": {
-          "package_name": "tvseries.koreandramaengsub.freemovieapp"
+          "package_name": "animes.englishsubtitle.freemovieseries"
         }
       },
       "oauth_client": [
         {
-          "client_id": "716725314748-70a4fnq8gua46eu2gia0oj2rl81eticq.apps.googleusercontent.com",
+          "client_id": "660507651614-ndtqq560fdihfgtngis0bq4b421br11c.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "tvseries.koreandramaengsub.freemovieapp",
-            "certificate_hash": "e26eea30b16a868aadbaed2535e29b1597650763"
+            "package_name": "animes.englishsubtitle.freemovieseries",
+            "certificate_hash": "806d0bd20d612c4afe7030e5bff4d9760e73cb81"
           }
         },
         {
-          "client_id": "716725314748-mt71d0955nb5uvv4k1f1knepbtu17d3m.apps.googleusercontent.com",
+          "client_id": "660507651614-4ls5diodad23jub60e67juqvdn6k6sjt.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDGouV2jXqoQ24-Ib94z3WwoY5OwIayuFc"
+          "current_key": "AIzaSyCJnnU9LlSjRa_gM_7XQjsJ4G1umrkAo0M"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "716725314748-mt71d0955nb5uvv4k1f1knepbtu17d3m.apps.googleusercontent.com",
+              "client_id": "660507651614-4ls5diodad23jub60e67juqvdn6k6sjt.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

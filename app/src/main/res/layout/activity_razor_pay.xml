@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="tvseries.koreandramaengsub.freemovieapp.RazorPayActivity">
+    tools:context="animes.englishsubtitle.freemovieseries.RazorPayActivity">
 
     <ProgressBar
         android:id="@+id/progress_bar"

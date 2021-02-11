@@ -11,7 +11,7 @@
         layout="@layout/layout_dimmer_home"
         tools:visibility="gone" />
 
-    <tvseries.koreandramaengsub.freemovieapp.view.SwipeRefreshLayout
+    <animes.englishsubtitle.freemovieseries.view.SwipeRefreshLayout
         android:id="@+id/swipe_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -413,5 +413,5 @@
                 </androidx.core.widget.NestedScrollView>
             </LinearLayout>
         </RelativeLayout>
-    </tvseries.koreandramaengsub.freemovieapp.view.SwipeRefreshLayout>
+    </animes.englishsubtitle.freemovieseries.view.SwipeRefreshLayout>
 </RelativeLayout>

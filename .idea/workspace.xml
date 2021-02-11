@@ -29,8 +29,249 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac142d87-5c2b-4e32-8948-daeba4b28bdb" name="Default Changelist" comment="- fix popupads">
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/jarAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/fragments/HomeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/fragments/HomeFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.cxx/cmake/debug/arm64-v8a/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/cmake/debug/arm64-v8a/.ninja_deps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.cxx/cmake/debug/arm64-v8a/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/cmake/debug/arm64-v8a/.ninja_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.cxx/cmake/debug/x86/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/cmake/debug/x86/.ninja_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.cxx/cmake/debug/x86/CMakeFiles/api_config.dir/api_config.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/google-services.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/google-services.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/tvseries/koreandramaengsub/freemovieapp/ExampleInstrumentedTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/animes/englishsubtitle/freemovieseries/ExampleInstrumentedTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/AppOpenManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/AppOpenManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/DetailsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/DetailsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/DownloadActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/DownloadActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/EventPaymentStripeActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/EventPaymentStripeActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/FirebaseSignUpActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/FirebaseSignUpActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/ItemMovieActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/ItemMovieActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/ItemSeriesActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/ItemSeriesActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/ItemTVActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/ItemTVActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/LoginActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/NotificationClickHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/NotificationClickHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/PapalPaymentActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/PapalPaymentActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/PassResetActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/PassResetActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/ProfileActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/ProfileActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/PurchasePlanActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/PurchasePlanActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/RazorPayActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/RazorPayActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/ReplyActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/ReplyActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/SearchActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/SearchActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/SearchResultActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/SearchResultActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/SettingsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/SettingsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/SignUpActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/SignUpActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/SplashScreenActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/SplashScreenActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/StripePaymentActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/StripePaymentActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/SubscriptionActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/SubscriptionActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/TermsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/TermsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/WebViewActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/WebViewActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/adapters/ActiveSubscriptionAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/ActiveSubscriptionAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/adapters/CastCrewAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/CastCrewAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/adapters/ChannelAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/ChannelAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/adapters/CommentsAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/CommentsAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/adapters/CommonGridAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/CommonGridAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/adapters/ContinueWatchingAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/ContinueWatchingAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/adapters/CountryAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/CountryAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/adapters/DownloadAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/DownloadAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/adapters/DownloadHistoryAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/DownloadHistoryAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/adapters/EpisodeAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/EpisodeAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/adapters/FileDownloadAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/FileDownloadAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/adapters/GenreAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/GenreAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/adapters/GenreHomeAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/GenreHomeAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/adapters/HomePageAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/HomePageAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/adapters/InactiveSubscriptionAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/InactiveSubscriptionAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/adapters/LiveTVAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/LiveTVAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/adapters/LiveTvAdapter2.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/LiveTvAdapter2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/adapters/LiveTvCategoryAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/LiveTvCategoryAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/adapters/LiveTvHomeAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/LiveTvHomeAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/adapters/NavigationAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/NavigationAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/adapters/PackageAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/PackageAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/adapters/ProgramAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/ProgramAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/adapters/RelatedTvAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/RelatedTvAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/adapters/ReplyAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/ReplyAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/adapters/SearchAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/SearchAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/adapters/SearchGenreAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/SearchGenreAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/adapters/ServerAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/ServerAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/adapters/SliderAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/SliderAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/adapters/SubtitleAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/SubtitleAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/bottomshit/PaymentBottomShitDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/bottomshit/PaymentBottomShitDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/database/DatabaseHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/database/DatabaseHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/database/continueWatching/ContinueWatchingDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/database/continueWatching/ContinueWatchingDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/database/continueWatching/ContinueWatchingDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/database/continueWatching/ContinueWatchingDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/database/continueWatching/ContinueWatchingModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/database/continueWatching/ContinueWatchingModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/database/continueWatching/ContinueWatchingRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/database/continueWatching/ContinueWatchingRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/database/continueWatching/ContinueWatchingViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/database/continueWatching/ContinueWatchingViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/fragments/AdvancedFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/fragments/AdvancedFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/fragments/DailySubFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/fragments/DailySubFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/fragments/HomeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/fragments/HomeFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/fragments/LiveTvFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/fragments/LiveTvFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/fragments/MoviesFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/fragments/MoviesFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/fragments/TvSeriesFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/fragments/TvSeriesFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/listener/OnItemClickLIstener.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/listener/OnItemClickLIstener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/CastCrew.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/CastCrew.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/CommonModels.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/CommonModels.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/DownloadInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/DownloadInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/EpiModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/EpiModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/GenreModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/GenreModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/GetCommentsModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/GetCommentsModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/HomeContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/HomeContent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/LiveTvModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/LiveTvModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/Movie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/NavigationModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/NavigationModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/PostCommentModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/PostCommentModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/Program.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/SubtitleModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/SubtitleModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/VideoContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/VideoContent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/VideoFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/VideoFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/Work.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/Work.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/home_content/AllCountry.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/home_content/AllCountry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/home_content/AllGenre.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/home_content/AllGenre.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/home_content/FeaturedTvChannel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/home_content/FeaturedTvChannel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/home_content/FeaturesGenreAndMovie.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/home_content/FeaturesGenreAndMovie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/home_content/HomeContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/home_content/HomeContent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/home_content/LatestMovie.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/home_content/LatestMovie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/home_content/LatestTvseries.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/home_content/LatestTvseries.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/home_content/Slide.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/home_content/Slide.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/home_content/Slider.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/home_content/Slider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/home_content/TopviewTvseries.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/home_content/TopviewTvseries.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/home_content/Video.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/home_content/Video.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/single_details/Cast.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/single_details/Cast.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/single_details/CastAndCrew.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/single_details/CastAndCrew.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/single_details/Country.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/single_details/Country.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/single_details/Director.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/single_details/Director.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/single_details/DownloadLink.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/single_details/DownloadLink.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/single_details/Episode.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/single_details/Episode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/single_details/Genre.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/single_details/Genre.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/single_details/RelatedMovie.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/single_details/RelatedMovie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/single_details/Season.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/single_details/Season.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/single_details/SingleDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/single_details/SingleDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/single_details/Subtitle.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/single_details/Subtitle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/single_details/Video.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/single_details/Video.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/single_details/Writer.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/single_details/Writer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/single_details_tv/AdditionalMediaSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/single_details_tv/AdditionalMediaSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/single_details_tv/AllTvChannel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/single_details_tv/AllTvChannel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/single_details_tv/ProgramGuide.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/single_details_tv/ProgramGuide.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/models/single_details_tv/SingleDetailsTV.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/single_details_tv/SingleDetailsTV.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/nav_fragments/CountryFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/nav_fragments/CountryFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/nav_fragments/FavoriteFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/nav_fragments/FavoriteFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/nav_fragments/GenreFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/nav_fragments/GenreFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/BasicAuthInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/BasicAuthInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/RetrofitClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/RetrofitClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/apis/CommentApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/apis/CommentApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/apis/ConfigurationApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/apis/ConfigurationApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/apis/CountryApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/apis/CountryApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/apis/CouponApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/apis/CouponApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/apis/DeactivateAccountApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/apis/DeactivateAccountApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/apis/DownApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/apis/DownApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/apis/EventApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/apis/EventApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/apis/FavouriteApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/apis/FavouriteApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/apis/FeaturedRadioApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/apis/FeaturedRadioApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/apis/FirebaseAuthApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/apis/FirebaseAuthApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/apis/GenreApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/apis/GenreApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/apis/HomeContentApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/apis/HomeContentApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/apis/LiveTvApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/apis/LiveTvApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/apis/LoginApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/apis/LoginApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/apis/MovieApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/apis/MovieApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/apis/MovieRequestApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/apis/MovieRequestApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/apis/PackageApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/apis/PackageApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/apis/PassResetApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/apis/PassResetApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/apis/PaymentApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/apis/PaymentApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/apis/ProfileApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/apis/ProfileApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/apis/RadioApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/apis/RadioApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/apis/ReportApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/apis/ReportApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/apis/SearchApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/apis/SearchApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/apis/SetPasswordApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/apis/SetPasswordApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/apis/SignUpApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/apis/SignUpApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/apis/SingleDetailsApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/apis/SingleDetailsApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/apis/SingleDetailsTVApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/apis/SingleDetailsTVApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/apis/SubscriptionApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/apis/SubscriptionApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/apis/TvConnectionApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/apis/TvConnectionApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/apis/TvSeriesApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/apis/TvSeriesApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/apis/UserDataApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/apis/UserDataApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/model/ActiveStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/model/ActiveStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/model/ActiveSubscription.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/model/ActiveSubscription.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/model/AllPackage.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/model/AllPackage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/model/Channel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/model/Channel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/model/CommonModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/model/CommonModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/model/Coupon.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/model/Coupon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/model/CouponDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/model/CouponDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/model/FavoriteModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/model/FavoriteModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/model/InactiveSubscription.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/model/InactiveSubscription.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/model/LiveTvCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/model/LiveTvCategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/model/Package.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/model/Package.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/model/PasswordReset.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/model/PasswordReset.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/model/RadioCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/model/RadioCategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/model/RadioModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/model/RadioModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/model/ResponseStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/model/ResponseStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/model/SearchModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/model/SearchModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/model/SubscriptionHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/model/SubscriptionHistory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/model/TvCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/model/TvCategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/model/TvChannel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/model/TvChannel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/model/TvConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/model/TvConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/model/TvModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/model/TvModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/model/config/AdsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/model/config/AdsConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/model/config/ApkUpdateInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/model/config/ApkUpdateInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/model/config/AppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/model/config/AppConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/model/config/Configuration.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/model/config/Configuration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/network/model/config/PaymentConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/model/config/PaymentConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/service/DownloadWorkManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/service/DownloadWorkManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/service/LiveDataHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/service/LiveDataHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/utils/ApiResources.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/ApiResources.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/utils/ChromeCastUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/ChromeCastUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/utils/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/utils/FileUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/FileUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/utils/HidingScrollListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/HidingScrollListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/utils/ItemAnimation.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/ItemAnimation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/utils/MyAppClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/MyAppClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/utils/NestedScroll.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/NestedScroll.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/utils/NetworkInst.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/NetworkInst.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/utils/PaidDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/PaidDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/utils/PreferenceUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/PreferenceUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/utils/RoundedBackgroundSpan.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/RoundedBackgroundSpan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/utils/RtlUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/RtlUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/utils/SpacingItemDecoration.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/SpacingItemDecoration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/utils/ToastMsg.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/ToastMsg.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/utils/Tools.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/Tools.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/utils/VerticalSeekBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/VerticalSeekBar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/utils/VolleySingleton.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/VolleySingleton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/utils/ads/BannerAds.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/ads/BannerAds.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/utils/ads/NativeAds.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/ads/NativeAds.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/utils/ads/PopUpAds.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/ads/PopUpAds.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/utils/ads/VideoRewardAds.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/ads/VideoRewardAds.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/view/CircleImageView.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/view/CircleImageView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/view/SwipeRefreshLayout.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/view/SwipeRefreshLayout.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/widget/RangeSeekBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/widget/RangeSeekBar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/widget/ViewLoadingDotsFade.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/widget/ViewLoadingDotsFade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_firebase_sign_up.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_firebase_sign_up.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_razor_pay.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_razor_pay.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_search.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_search.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_favorite.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_favorite.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_movies.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_movies.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_recentlysub.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_recentlysub.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_tvseries.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_tvseries.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_country.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_country.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_genre.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_genre.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/java/tvseries/koreandramaengsub/freemovieapp/ExampleUnitTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/java/animes/englishsubtitle/freemovieseries/ExampleUnitTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nativetemplates/build/intermediates/aar_main_jar/debug/classes.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nativetemplates/build/intermediates/annotations_typedef_file/debug/typedefs.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nativetemplates/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/nativetemplates/build/intermediates/incremental/packageDebugResources/compile-file-map.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nativetemplates/build/outputs/aar/nativetemplates-debug.aar" beforeDir="false" />
     </list>
     <list id="690dd8c0-ad25-496b-819d-5468c546c26e" name="Uncommitted changes before Update at 1/31/2021 10:32 PM [Default Changelist]" comment="" />
     <list id="e98f8c02-988d-45d3-8c01-acfeb18f8a1c" name="Uncommitted changes before Update at 2/1/2021 10:13 PM [Default Changelist]" comment="" />
@@ -49,9 +290,28 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
         <projects_view>
           <tree_state>
-            <expand />
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="AnimeS" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="AnimeS" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="AnimeS" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="android" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
             <select />
           </tree_state>
         </projects_view>
@@ -105,7 +365,7 @@
       <recent name="C:\Users\khaih\StudioProjects\animeApp" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Android App.app">
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
       <option name="TEST_OBJECT" value="class" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -170,6 +430,30 @@
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration name="AnimeS [signingReport]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="signingReport" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.AnimeS [signingReport]" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="true" />
   <component name="SvnConfiguration">
@@ -288,22 +572,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1612535260047" />
-    <state width="1476" height="383" key="GridCell.Tab.0.bottom" timestamp="1613027716250">
+    <state width="1476" height="208" key="GridCell.Tab.0.bottom" timestamp="1613033949104">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1476" height="383" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1613027716250" />
-    <state width="1476" height="383" key="GridCell.Tab.0.center" timestamp="1613027716250">
+    <state width="1476" height="208" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1613033949104" />
+    <state width="1476" height="208" key="GridCell.Tab.0.center" timestamp="1613033949104">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1476" height="383" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1613027716250" />
-    <state width="1476" height="383" key="GridCell.Tab.0.left" timestamp="1613027716250">
+    <state width="1476" height="208" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1613033949104" />
+    <state width="1476" height="208" key="GridCell.Tab.0.left" timestamp="1613033949104">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1476" height="383" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1613027716250" />
-    <state width="1476" height="383" key="GridCell.Tab.0.right" timestamp="1613027716250">
+    <state width="1476" height="208" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1613033949104" />
+    <state width="1476" height="208" key="GridCell.Tab.0.right" timestamp="1613033949104">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1476" height="383" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1613027716250" />
+    <state width="1476" height="208" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1613033949104" />
     <state width="1491" height="143" key="GridCell.Tab.1.bottom" timestamp="1612124385665">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -352,10 +636,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1612539355943" />
-    <state x="475" y="145" width="928" height="534" key="find.popup" timestamp="1613030974141">
+    <state x="475" y="145" width="928" height="534" key="find.popup" timestamp="1613047508299">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="475" y="145" width="928" height="534" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1613030974141" />
+    <state x="475" y="145" width="928" height="534" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1613047508299" />
     <state x="487" y="201" key="git4idea.merge.GitPullDialog" timestamp="1611027110603">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -381,12 +665,12 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/fragments/TvSeriesFragment.java</url>
+          <url>file://$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/fragments/TvSeriesFragment.java</url>
           <line>200</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/tvseries/koreandramaengsub/freemovieapp/fragments/TvSeriesFragment.java</url>
+          <url>file://$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/fragments/TvSeriesFragment.java</url>
           <line>199</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
