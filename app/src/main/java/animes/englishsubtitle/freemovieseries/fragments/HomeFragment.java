@@ -376,8 +376,8 @@ public class HomeFragment extends Fragment {
                         models.setVideoType("movie");
                         models.setReleaseDate(movie.getRelease());
                         models.setQuality(movie.getVideoQuality());
-                        models.setId(movie.getVideosId());
                         models.setIsPaid(movie.getIsPaid());
+                        models.setId(movie.getVideosId());
                         listMovie.add(models);
                     }
                     adapterMovie.notifyDataSetChanged();
