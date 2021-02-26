@@ -242,6 +242,7 @@ public class MoviesFragment extends Fragment {
                         models.setImageUrl(video.getThumbnailUrl());
                         models.setTitle(video.getTitle());
                         models.setQuality(video.getVideoQuality());
+                        models.setIsPaid(video.getIsPaid());
                         models.setVideoType("movie");
                         models.setReleaseDate(video.getRelease());
                         if (video.getIsTvseries().equals("1") ) {

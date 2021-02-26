@@ -99,16 +99,16 @@
                         android:layout_height="80dp"
                         android:layout_gravity="center" />
 
-                   <!-- <TextView
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginStart="10dp"
-                        android:textSize="18sp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/app_title"
-                        android:textColor="@color/white"
-                        android:gravity="center_horizontal"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title"/>-->
+                    <!-- <TextView
+                         android:layout_marginBottom="10dp"
+                         android:layout_marginStart="10dp"
+                         android:textSize="18sp"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:text="@string/app_title"
+                         android:textColor="@color/white"
+                         android:gravity="center_horizontal"
+                         android:textAppearance="@style/TextAppearance.AppCompat.Title"/>-->
 
                 </LinearLayout>
                 <!--<include layout="@layout/navigation_header" />-->
@@ -203,38 +203,71 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:layout_marginTop="1dp"
-                android:gravity="center_vertical"
-                android:id="@+id/group_facebook"
-                android:clickable="true">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_marginTop="1dp"
+                    android:gravity="center_vertical"
+                    android:id="@+id/group_facebook"
+                    android:clickable="true">
 
-                <ImageView
-                    android:id="@+id/image_facebook"
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:background="@drawable/com_facebook_favicon_blue"
-                    android:gravity="center_horizontal"
-                    android:layout_marginStart="15dp"
-                    />
+                    <ImageView
+                        android:id="@+id/image_facebook"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:background="@drawable/com_facebook_favicon_blue"
+                        android:gravity="center_horizontal"
+                        android:layout_marginStart="15dp"
+                        />
 
-                <TextView
-                    android:text="Group Facebook"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_marginStart="20dp"
-                    android:textStyle="bold"
-                    android:textSize="12sp"
-                    android:textColor="@color/default_text"
-                    android:layout_toEndOf="@+id/image_facebook"
-                    android:gravity="center_horizontal"
-                    android:layout_marginTop="3dp"/>
+                    <TextView
+                        android:text="Group Facebook"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="20dp"
+                        android:textStyle="bold"
+                        android:textSize="12sp"
+                        android:textColor="@color/default_text"
+                        android:layout_toEndOf="@+id/image_facebook"
+                        android:gravity="center_horizontal"
+                        android:layout_marginTop="3dp"/>
 
 
-            </RelativeLayout>
+                </RelativeLayout>
 
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_marginTop="1dp"
+                    android:gravity="center_vertical"
+                    android:id="@+id/clearda_btn"
+                    android:clickable="true">
+
+                    <ImageView
+                        android:id="@+id/image_clearda"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:background="@drawable/ic_baseline_clear_data_24"
+                        android:gravity="center_horizontal"
+                        android:layout_marginStart="15dp"
+                        />
+
+                    <TextView
+                        android:text="@string/clearda"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="20dp"
+                        android:textStyle="bold"
+                        android:textSize="12sp"
+                        android:textColor="@color/default_text"
+                        android:layout_toEndOf="@+id/image_clearda"
+                        android:gravity="center_horizontal"
+                        android:layout_marginTop="3dp"/>
+
+
+                </RelativeLayout>
 
             </LinearLayout>
 

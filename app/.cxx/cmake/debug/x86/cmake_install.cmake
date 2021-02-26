@@ -1,4 +1,4 @@
-# Install script for directory: D:/Android/AnimeS/app/src/main/jni
+# Install script for directory: C:/Users/khaih/StudioProjects/animeApp/app/src/main/jni
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "D:/Android/AnimeS/app/.cxx/cmake/debug/x86/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/khaih/StudioProjects/animeApp/app/.cxx/cmake/debug/x86/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

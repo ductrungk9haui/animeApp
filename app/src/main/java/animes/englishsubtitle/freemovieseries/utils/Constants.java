@@ -21,7 +21,7 @@ public class Constants {
     //public static String DOWNLOAD_DIR = Environment.getExternalStorageDirectory().toString()+File.separator + Environment.DIRECTORY_DOWNLOADS + File.separator;
 
     public static String getDownloadDir(Context context) {
-        return context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).toString() + File.separator;
+        return context.getDir(Environment.DIRECTORY_DOWNLOADS,context.MODE_PRIVATE).toString() + File.separator;
     }
 
     public static final String USER_LOGIN_STATUS = "login_status";

@@ -213,6 +213,7 @@ public class ItemMovieActivity extends AppCompatActivity {
                         models.setImageUrl(video.getThumbnailUrl());
                         models.setTitle(video.getTitle());
                         models.setQuality(video.getVideoQuality());
+                        models.setIsPaid(video.getIsPaid());
                         models.setReleaseDate(video.getRelease());
                         if (video.getIsTvseries().equals("1") ) {
                             models.setVideoType("tvseries");

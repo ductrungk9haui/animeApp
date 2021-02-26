@@ -306,6 +306,6 @@
     <string name="your_name">Your Name</string>
     <string name="movie_name">Movie Name</string>
     <string name="request">Request</string>
-
+    <string name="clearda">Clear Storage Data</string>
     <string name="admin_talk">  We highly recommend that you should use our <b><u>Subcriptions</u></b> service to get a best experience without the ad, unlimited series and more.It\'s also the way to help us to have a fee to maintain our sever and keep a good work to serve you.\n\n  Try the <b><u>Request Movie</u></b> or <b><u>Feedback</u></b> to let me know what do you want.\nThank You</string>
 </resources>

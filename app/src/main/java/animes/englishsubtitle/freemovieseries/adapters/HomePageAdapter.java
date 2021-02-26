@@ -53,7 +53,12 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.Origin
         holder.name.setText(obj.getTitle());
         Picasso.get().load(obj.getImageUrl()).placeholder(R.drawable.poster_placeholder).into(holder.image);
 
-        holder.qualityTv.setText(obj.getQuality());
+        //holder.qualityTv.setText(obj.getQuality());
+        if(Integer.parseInt(obj.getIsPaid())==1){
+            holder.qualityTv.setText("VIP");
+        }else {
+            holder.qualityTv.setText("Free");
+        }
         holder.releaseDateTv.setText(obj.getReleaseDate());
 
 

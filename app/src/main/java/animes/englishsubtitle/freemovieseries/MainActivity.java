@@ -1,6 +1,7 @@
 package animes.englishsubtitle.freemovieseries;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
@@ -10,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -493,6 +495,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    @OnClick(R.id.clearda_btn)
+    void onClearButtonClick(View view) {
+        Toast.makeText(this, "Wait 3 seconds after clearing the storage data, the app will reboot automatically", Toast.LENGTH_LONG).show();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                clearApplicationData();
+                Intent i = getBaseContext().getPackageManager().getLaunchIntentForPackage(getBaseContext().getPackageName());
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(i);
+                if (getBaseContext() instanceof Activity) {
+                    ((Activity) getBaseContext()).finish();
+                }
+                Runtime.getRuntime().exit(0);
+            }
+        }, 2000);
+    }
+
     @OnCheckedChanged(R.id.theme_switch)
     void onThemeSwitchChange(boolean isChecked) {
         SharedPreferences.Editor editor = getSharedPreferences("push", MODE_PRIVATE).edit();
@@ -503,6 +524,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(new Intent(MainActivity.this, MainActivity.class));
             finish();
         }
+    }
+
+    public void clearApplicationData() {
+        File cache = getCacheDir();
+        File appDir = new File(cache.getParent());
+        if (appDir.exists()) {
+            String[] children = appDir.list();
+            for (String s : children) {
+                if (!s.equals("lib")) {
+                    deleteDir(new File(appDir, s));
+                    Log.i("TAG", "**************** File /data/data/APP_PACKAGE/" + s + " DELETED *******************");
+                }
+            }
+        }
+    }
+
+    public static boolean deleteDir(File dir) {
+        if (dir != null && dir.isDirectory()) {
+            String[] children = dir.list();
+            for (int i = 0; i < children.length; i++) {
+                boolean success = deleteDir(new File(dir, children[i]));
+                if (!success) {
+                    return false;
+                }
+            }
+        }
+
+        return dir.delete();
     }
 
     public DatabaseHelper getDBHelper() {

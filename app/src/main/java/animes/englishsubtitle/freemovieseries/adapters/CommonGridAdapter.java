@@ -127,7 +127,12 @@ public class CommonGridAdapter extends RecyclerView.Adapter<CommonGridAdapter.Or
 
             final CommonModels obj = items.get(position);
             setAnimation(holder.itemView, position);
-            holder.qualityTv.setText(obj.getQuality());
+           // holder.qualityTv.setText(obj.getQuality());
+            if(obj.isPaid.equals("1")){
+                holder.qualityTv.setText("VIP");
+            }else {
+                holder.qualityTv.setText("Free");
+            }
             holder.releaseDateTv.setText(obj.getReleaseDate());
             holder.name.setText(obj.getTitle());
 

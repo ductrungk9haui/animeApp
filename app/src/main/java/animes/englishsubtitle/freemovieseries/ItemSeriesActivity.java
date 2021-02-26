@@ -225,6 +225,7 @@ public class ItemSeriesActivity extends AppCompatActivity {
                         models.setVideoType("tvseries");
                         models.setReleaseDate(video.getRelease());
                         models.setQuality(video.getVideoQuality());
+                        models.setIsPaid(video.getIsPaid());
                         models.setId(video.getVideosId());
                         list.add(models);
                         isNew = true;
