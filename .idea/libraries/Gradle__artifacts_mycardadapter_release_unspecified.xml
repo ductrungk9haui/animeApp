@@ -4,9 +4,9 @@
       <root url="file://$PROJECT_DIR$/mycardadapter-release/build/.transforms/e15a9806af51aee279eac1e905f5c6b0/jetified-mycardadapter-release/AndroidManifest.xml" />
       <root url="jar://$PROJECT_DIR$/mycardadapter-release/build/.transforms/e15a9806af51aee279eac1e905f5c6b0/jetified-mycardadapter-release/jars/classes.jar!/" />
       <root url="file://$PROJECT_DIR$/mycardadapter-release/build/.transforms/e15a9806af51aee279eac1e905f5c6b0/jetified-mycardadapter-release/res" />
-      <root url="jar://$PROJECT_DIR$/mycardadapter-release/build/.transforms/810d535344a31bbb04ff92b0868fa260/jetified-mycardadapter-release/jars/classes.jar!/" />
-      <root url="file://$PROJECT_DIR$/mycardadapter-release/build/.transforms/810d535344a31bbb04ff92b0868fa260/jetified-mycardadapter-release/res" />
-      <root url="file://$PROJECT_DIR$/mycardadapter-release/build/.transforms/810d535344a31bbb04ff92b0868fa260/jetified-mycardadapter-release/AndroidManifest.xml" />
+      <root url="jar://$PROJECT_DIR$/mycardadapter-release/build/.transforms/271d50c8fa5914801f88347e527100c3/jetified-mycardadapter-release/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/mycardadapter-release/build/.transforms/271d50c8fa5914801f88347e527100c3/jetified-mycardadapter-release/AndroidManifest.xml" />
+      <root url="file://$PROJECT_DIR$/mycardadapter-release/build/.transforms/271d50c8fa5914801f88347e527100c3/jetified-mycardadapter-release/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

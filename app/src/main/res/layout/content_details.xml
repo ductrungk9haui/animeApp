@@ -334,6 +334,30 @@
                 </RelativeLayout>
 
                 <LinearLayout
+                    android:id="@+id/subs_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_subtitle"
+                        android:layout_gravity="top"
+                        app:tint="@color/green_500" />
+                    <TextView
+                        android:id="@+id/subs_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:layout_marginHorizontal="5dp"
+                        android:text="Updating..."/>
+                </LinearLayout>
+
+
+
+                <LinearLayout
                     android:id="@+id/llbottomparent"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

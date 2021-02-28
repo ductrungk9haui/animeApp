@@ -7,6 +7,9 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3c94eb2d5674ba68b3b8fd16c98ee71c/jetified-nast-2.7.1.1/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3c94eb2d5674ba68b3b8fd16c98ee71c/jetified-nast-2.7.1.1/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3c94eb2d5674ba68b3b8fd16c98ee71c/jetified-nast-2.7.1.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c348cb2c2b64776ba58c8e5e1a60f0c0/jetified-nast-2.7.1.1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c348cb2c2b64776ba58c8e5e1a60f0c0/jetified-nast-2.7.1.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c348cb2c2b64776ba58c8e5e1a60f0c0/jetified-nast-2.7.1.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

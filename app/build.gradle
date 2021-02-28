@@ -33,7 +33,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
-        versionName "1.0.1"
+        versionName "1.0.5"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
@@ -86,7 +86,6 @@ dependencies {
 
 //appodeal
     implementation 'com.appodeal.ads:sdk:2.7.1.+'
-
     //sdk mediation
     //applovin
     implementation 'com.google.ads.mediation:applovin:9.14.5.0'

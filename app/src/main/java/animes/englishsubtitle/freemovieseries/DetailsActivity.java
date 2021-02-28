@@ -317,6 +317,10 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     RelativeLayout mContentDetails;
     @BindView(R.id.subscribe_layout)
     LinearLayout mSubscriptionLayout;
+    @BindView(R.id.subs_layout)
+    View mSubsLayout;
+    @BindView(R.id.subs_text)
+    TextView mSubsText;
     @BindView(R.id.subscribe_bt)
     Button mSubscribeBt;
     @BindView(R.id.topbar)
@@ -1064,14 +1068,20 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                 initMoviePlayer(obj.getStreamURL(), obj.getServerType(), DetailsActivity.this);
             }
             if (mListSub.size() > 0) {
-                setSelectedSubtitle(mMediaSource, mListSub.get(0).getUrl(), DetailsActivity.this);
+                String subURL = mListSub.get(0).getUrl();
+                for(SubtitleModel model : mListSub){
+                    if(model.getLanguage().equals(Constants.DEFAULT_LANGUAGE)){
+                        subURL = model.getUrl();
+                        break;
+                    }
+                }
+                setSelectedSubtitle(mMediaSource, subURL, DetailsActivity.this);
             }
             //reset
             playerCurrentPosition = 0L;
             resumePosition = 0;
         }
     }
-
 
     private void loadAd() {
         adsConfig = mDBHelper.getConfigurationData().getAdsConfig();
@@ -1841,6 +1851,9 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                         mListServer.add(models);
                         if (seasonList.size() > 0) {
                             setSeasonData(seasonList, singleDetails.getSeason());
+                        }else{
+                            mSubsLayout.setVisibility(GONE);
+                            mSeasonSpinnerContainer.setVisibility(GONE);
                         }
 
                     }
@@ -1879,6 +1892,13 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                         mListServer.get(position).getListEpi());
                 if (mListServer.get(position).getListEpi().size() == 0) {
                     mSeasonSpinnerContainer.setVisibility(View.GONE);
+                }else{
+                    StringBuilder subs = new StringBuilder("");
+                    List<SubtitleModel> lists = mListServer.get(position).getListEpi().get(0).getSubtitleList();
+                    for(SubtitleModel model : lists){
+                        subs.append(" ").append(model.getLanguage());
+                    }
+                    mSubsText.setText(subs);
                 }
                 if (mMapMovies.containsKey(mId) && mMapMovies.get(mId) != null) {
                     mEpisodeAdapter.setNowPlaying(mMapMovies.get(mId));
@@ -2040,15 +2060,17 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                         List<Subtitle> subArray = new ArrayList<>();
                         subArray.addAll(singleDetails.getVideos().get(i).getSubtitle());
                         if (subArray.size() != 0) {
-
+                            StringBuilder subs = new StringBuilder("");
                             List<SubtitleModel> list = new ArrayList<>();
                             for (int j = 0; j < subArray.size(); j++) {
                                 Subtitle subtitle = subArray.get(j);
                                 SubtitleModel subtitleModel = new SubtitleModel();
                                 subtitleModel.setUrl(subtitle.getUrl());
                                 subtitleModel.setLanguage(subtitle.getLanguage());
+                                subs.append(" ").append(subtitle.getLanguage());
                                 list.add(subtitleModel);
                             }
+                            mSubsText.setText(subs);
                             if (i == 0) {
                                 mListSub.addAll(list);
                             }
@@ -2234,17 +2256,20 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     public void hideDescriptionLayout() {
         mDescriptionLayout.setVisibility(GONE);
         mLPlay.setVisibility(VISIBLE);
+        mSubsLayout.setVisibility(GONE);
     }
 
     public void showSeriesLayout() {
         mSeriesLayout.setVisibility(VISIBLE);
         mTopShareLayout.setVisibility(GONE);
+        mSubsLayout.setVisibility(GONE);
     }
 
     public void showDescriptionLayout() {
         mDescriptionLayout.setVisibility(VISIBLE);
         mLPlay.setVisibility(GONE);
         mSeriesLayout.setVisibility(GONE);
+        mSubsLayout.setVisibility(VISIBLE);
         mTopShareLayout.setVisibility(VISIBLE);
         if (mRvServer != null) {
             if (mRvServer.getAdapter() != null) {

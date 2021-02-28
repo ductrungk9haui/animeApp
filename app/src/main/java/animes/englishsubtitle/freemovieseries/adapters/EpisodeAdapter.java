@@ -28,7 +28,7 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.Original
     private OnTVSeriesEpisodeItemClickListener mOnTVSeriesEpisodeItemClickListener;
     EpisodeAdapter.OriginalViewHolder viewHolder;
     int i=0;
-    private int lastPosition = 0;
+    private int lastPosition = -1;
     private DetailsActivity activity;
     private int seasonNo;
 
@@ -122,6 +122,7 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.Original
     }
     public void getWatchEpisode(){
         if(items.size()>0){
+            if(lastPosition == -1) lastPosition = 0;
             onClickEpisode(viewHolder, lastPosition, items.get(lastPosition));
         }else{
             Toast.makeText(ctx, "Wait for Episode updating, please try later", Toast.LENGTH_SHORT).show();

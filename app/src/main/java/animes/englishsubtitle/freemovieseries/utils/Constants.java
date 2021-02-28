@@ -45,5 +45,7 @@ public class Constants {
     public static final String YOUTUBE = "youtube";
     public static final String YOUTUBE_LIVE = "youtube_live";
 
+    public static final String DEFAULT_LANGUAGE = "English";
+
 
 }

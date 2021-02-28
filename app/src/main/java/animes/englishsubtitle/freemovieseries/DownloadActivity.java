@@ -479,6 +479,9 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
                         String SubExtension = fileSubName.substring(fileSubName.lastIndexOf("."));
                         if (SubExtension.equals(".vtt") && fileSubName.contains(fileName.substring(0, fileName.lastIndexOf(".")))) {
                             subPath.add(fileSubPath);
+                            if ( fileSubName.contains(Constants.DEFAULT_LANGUAGE)) {
+                                vf.setDefaultSubPath(fileSubPath);
+                            }
                         }
                     }
                     vf.setSubList(subPath);
@@ -611,7 +614,7 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
         mDownloadPlayer.setPlayWhenReady(true);
         mActiveMovie = true;
         if (mListSub.size() > 0) {
-            setSelectedSubtitle(mMediaSource, mListSub.get(0), DownloadActivity.this);
+            setSelectedSubtitle(mMediaSource, videoFile.getDefaultSubPath(), DownloadActivity.this);
         }
 
     }

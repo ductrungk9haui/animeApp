@@ -11,6 +11,7 @@ public class VideoFile implements Serializable {
     private long totalSpace;
     private String path;
     private String fileExtension;
+    private String defaultSubPath;
     private List<String> subList = new ArrayList<>();
 
     public String getFileName() {
@@ -59,5 +60,12 @@ public class VideoFile implements Serializable {
 
     public void setSubList(List<String> subList) {
         this.subList = subList;
+    }
+    public void setDefaultSubPath(String defaultSubPath) {
+        this.defaultSubPath = defaultSubPath;
+    }
+
+    public String getDefaultSubPath() {
+        return defaultSubPath.isEmpty()?subList.get(0):defaultSubPath;
     }
 }

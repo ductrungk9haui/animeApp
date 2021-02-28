@@ -9,6 +9,10 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4cf65f4859924df87a488caaebd17742/jetified-adcolony-2.7.1.3/jars/libs/r-classes.jar!/" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4cf65f4859924df87a488caaebd17742/jetified-adcolony-2.7.1.3/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4cf65f4859924df87a488caaebd17742/jetified-adcolony-2.7.1.3/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/48efb178c38cab8215462dcc4ba48325/jetified-adcolony-2.7.1.3/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/48efb178c38cab8215462dcc4ba48325/jetified-adcolony-2.7.1.3/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/48efb178c38cab8215462dcc4ba48325/jetified-adcolony-2.7.1.3/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/48efb178c38cab8215462dcc4ba48325/jetified-adcolony-2.7.1.3/jars/libs/r-classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -7,6 +7,9 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a343fd58f7063adc04ac4cef4ae15b83/jetified-tapjoy-android-sdk-12.7.1/res" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a343fd58f7063adc04ac4cef4ae15b83/jetified-tapjoy-android-sdk-12.7.1/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a343fd58f7063adc04ac4cef4ae15b83/jetified-tapjoy-android-sdk-12.7.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5a5333d08720e9324b76ee0a756efa5f/jetified-tapjoy-android-sdk-12.7.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5a5333d08720e9324b76ee0a756efa5f/jetified-tapjoy-android-sdk-12.7.1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5a5333d08720e9324b76ee0a756efa5f/jetified-tapjoy-android-sdk-12.7.1/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
