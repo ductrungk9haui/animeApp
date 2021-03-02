@@ -454,6 +454,8 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
         mVideoFiles.clear();
         mWorks.clear();
         mWorks = mDBHelper.getAllWork();
+        SharedPreferences sharedPreferences = getSharedPreferences("push", MODE_PRIVATE);
+        String df_language = sharedPreferences.getString("df_subtitle",Constants.DEFAULT_LANGUAGE);
 
         String path = Constants.getDownloadDir(DownloadActivity.this) + getResources().getString(R.string.app_name);
         File directory = new File(path);
@@ -479,7 +481,7 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
                         String SubExtension = fileSubName.substring(fileSubName.lastIndexOf("."));
                         if (SubExtension.equals(".vtt") && fileSubName.contains(fileName.substring(0, fileName.lastIndexOf(".")))) {
                             subPath.add(fileSubPath);
-                            if ( fileSubName.contains(Constants.DEFAULT_LANGUAGE)) {
+                            if ( fileSubName.contains(df_language)) {
                                 vf.setDefaultSubPath(fileSubPath);
                             }
                         }

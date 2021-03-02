@@ -934,6 +934,9 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
     @Override
     public void onClickSubtitles(int position) {
+        SharedPreferences.Editor editor = getSharedPreferences("push", MODE_PRIVATE).edit();
+        editor.putString("df_subtitle", mListSub.get(position).getLanguage());
+        editor.apply();
         setSelectedSubtitle(mMediaSource, mListSub.get(position).getUrl(), this);
         mAlertDialog.cancel();
     }
@@ -1069,8 +1072,10 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             }
             if (mListSub.size() > 0) {
                 String subURL = mListSub.get(0).getUrl();
+                SharedPreferences sharedPreferences = getSharedPreferences("push", MODE_PRIVATE);
+                String df_language = sharedPreferences.getString("df_subtitle",Constants.DEFAULT_LANGUAGE);
                 for(SubtitleModel model : mListSub){
-                    if(model.getLanguage().equals(Constants.DEFAULT_LANGUAGE)){
+                    if(model.getLanguage().equals(df_language)){
                         subURL = model.getUrl();
                         break;
                     }
