@@ -30,19 +30,15 @@ public class AdsController implements AdsHelper {
         DatabaseHelper dbHelper = new DatabaseHelper(activity);
         AdsConfig adsConfig = dbHelper.getConfigurationData().getAdsConfig();
         if (adsConfig.getAdsEnable().equals("1")) {
-            if (PreferenceUtils.isLoggedIn(activity)) {
-                if (!PreferenceUtils.isActivePlan(activity)) {
-                    mIsAdsEnable = true;
-                    if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
-                        mAdsHelper = new AppodealHelper(activity);
-                    } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                        mAdsHelper = new AdMobHelper(activity);
-                    } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.NETWORK_AUDIENCE)) {
-                        mAdsHelper = AudienceNetworkHelper.getInstance(activity);
-                    }
+            mIsAdsEnable = !(PreferenceUtils.isLoggedIn(activity) && PreferenceUtils.isActivePlan(activity));
+            if (mIsAdsEnable) {
+                if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
+                    mAdsHelper = new AppodealHelper(activity);
+                } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
+                    mAdsHelper = new AdMobHelper(activity);
+                } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.NETWORK_AUDIENCE)) {
+                    mAdsHelper = AudienceNetworkHelper.getInstance(activity);
                 }
-            } else {
-                mIsAdsEnable = false;
             }
         }
 

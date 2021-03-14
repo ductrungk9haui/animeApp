@@ -1313,16 +1313,16 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         //Toast.makeText(context, "castSession:"+getCastSessionObj()+"", Toast.LENGTH_SHORT).show();
         mPlayer.prepare(mMediaSource, true, false);
         mSimpleExoPlayerView.setPlayer(mPlayer);
-        SubtitleView view = mSimpleExoPlayerView.getSubtitleView();
+       /* SubtitleView view = mSimpleExoPlayerView.getSubtitleView();
         int defaultSubtitleColor = Color.argb(255, 255, 255, 255);
         int outlineColor = Color.argb(255, 43, 43, 43);
         Typeface subtitleTypeface = ResourcesCompat.getFont(this, R.font.amazon);
         CaptionStyleCompat style = new CaptionStyleCompat(defaultSubtitleColor,
-                Color.TRANSPARENT, Color.TRANSPARENT,
+                Color.TRANSPARENT, Color.BLACK,
                 CaptionStyleCompat.EDGE_TYPE_OUTLINE,
                 outlineColor, subtitleTypeface);
         view.setApplyEmbeddedStyles(false);
-        view.setStyle(style);
+        view.setStyle(style);*/
 
         mPlayer.setPlayWhenReady(true);
         if (resumePosition > 0) {

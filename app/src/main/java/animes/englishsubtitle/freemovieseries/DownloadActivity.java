@@ -602,7 +602,7 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
         mDownloadPlayer.prepare(mMediaSource);
         mSimpleExoPlayerView.setPlayer(mDownloadPlayer);
 
-        SubtitleView view = mSimpleExoPlayerView.getSubtitleView();
+       /* SubtitleView view = mSimpleExoPlayerView.getSubtitleView();
         int defaultSubtitleColor = Color.argb(255, 218, 218, 218);
         int outlineColor = Color.argb(255, 43, 43, 43);
         Typeface subtitleTypeface = ResourcesCompat.getFont(this, R.font.amazon);
@@ -611,7 +611,7 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
                 CaptionStyleCompat.EDGE_TYPE_OUTLINE,
                 outlineColor, subtitleTypeface);
         view.setApplyEmbeddedStyles(false);
-        view.setStyle(style);
+        view.setStyle(style);*/
 
         mDownloadPlayer.setPlayWhenReady(true);
         mActiveMovie = true;
