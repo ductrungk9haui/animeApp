@@ -60,15 +60,10 @@ import androidx.work.Data;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
-import com.appodeal.ads.Appodeal;
-import com.appodeal.ads.Native;
-import com.appodeal.ads.NativeAd;
-import com.appodeal.ads.NativeCallbacks;
 import com.balysv.materialripple.MaterialRippleLayout;
 import com.downloader.PRDownloader;
 import com.downloader.Status;
 import com.facebook.shimmer.ShimmerFrameLayout;
-import com.google.android.ads.nativetemplates.TemplateView;
 import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.Format;
@@ -100,7 +95,6 @@ import com.google.android.exoplayer2.util.Util;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-import com.google.android.gms.ads.rewarded.RewardedAd;
 import com.google.android.gms.cast.MediaInfo;
 import com.google.android.gms.cast.MediaMetadata;
 import com.google.android.gms.cast.MediaQueueItem;
@@ -126,6 +120,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+import animes.englishsubtitle.freemovieseries.utils.ads.AdsController;
 import at.huber.youtubeExtractor.VideoMeta;
 import at.huber.youtubeExtractor.YouTubeExtractor;
 import at.huber.youtubeExtractor.YtFile;
@@ -188,10 +183,6 @@ import animes.englishsubtitle.freemovieseries.utils.PreferenceUtils;
 import animes.englishsubtitle.freemovieseries.utils.RtlUtils;
 import animes.englishsubtitle.freemovieseries.utils.ToastMsg;
 import animes.englishsubtitle.freemovieseries.utils.Tools;
-import animes.englishsubtitle.freemovieseries.utils.ads.BannerAds;
-import animes.englishsubtitle.freemovieseries.utils.ads.NativeAds;
-import animes.englishsubtitle.freemovieseries.utils.ads.PopUpAds;
-import animes.englishsubtitle.freemovieseries.utils.ads.VideoRewardAds;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -211,8 +202,6 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     private static final int PRELOAD_TIME_S = 20;
     public static final String TAG = DetailsActivity.class.getSimpleName();
 
-    @BindView(R.id.adView)
-    RelativeLayout mAdView;
     @BindView(R.id.llbottom)
     LinearLayout mLLBottom;
     @BindView(R.id.tv_details)
@@ -347,8 +336,10 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     TextView mSeriesTitleTv;
     @BindView(R.id.linear_share)
     View mTopShareLayout;
-    @BindView(R.id.admob_nativead_template)
-    TemplateView admobNativeAdView;
+    @BindView(R.id.ads_container)
+    View mAdsContainer;
+
+    private AdsController mAdsController;
     private Unbinder mUnbinder;
     private ContinueWatchingViewModel mContinueViewModel;
     private boolean isFromContinueWatching = false;
@@ -417,7 +408,6 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     private int mAspectClickCount = 1;
     private DatabaseHelper mDBHelper;
     private static DetailsActivity instance;
-    private RewardedAd mRewardedAd;
     private AdsConfig adsConfig;
     String videoReport = "", audioReport = "", subtitleReport = "", messageReport = "";
 
@@ -444,6 +434,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         });
         // loadAdReward();
         mDBHelper = new DatabaseHelper(DetailsActivity.this);
+        mAdsController = AdsController.getInstance(this);
         mAudioManager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
         //---analytics-----------
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
@@ -513,6 +504,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             public void onRefresh() {
                 clear_previous();
                 initGetData();
+                loadAd();
             }
         });
         //handle Continue watching task
@@ -1019,22 +1011,9 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     //if it is embed player will go full screen
     @Override
     public void onEpisodeItemClickTvSeries(String type, EpiModel obj, int position) {
-        //PopUpAds.ShowAdmobInterstitialAds(this);
-        if (PreferenceUtils.isLoggedIn(DetailsActivity.this)) {
-            if (!PreferenceUtils.isActivePlan(DetailsActivity.this)) {
-                if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
-                    PopUpAds.showAppodealInterstitialAds(DetailsActivity.this);
-                } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                    PopUpAds.ShowAdmobInterstitialAds(DetailsActivity.this);
-                }
-            }
-        }else{
-            if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
-                PopUpAds.showAppodealInterstitialAds(DetailsActivity.this);
-            } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                PopUpAds.ShowAdmobInterstitialAds(DetailsActivity.this);
-            }
-        }
+        mAdsController.showNativeAds(mAdsContainer, true);
+        mAdsController.showInterstitialAds();
+
         if (type.equalsIgnoreCase("embed")) {
             CommonModels model = new CommonModels();
             model.setStremURL(obj.getStreamURL());
@@ -1073,9 +1052,9 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             if (mListSub.size() > 0) {
                 String subURL = mListSub.get(0).getUrl();
                 SharedPreferences sharedPreferences = getSharedPreferences("push", MODE_PRIVATE);
-                String df_language = sharedPreferences.getString("df_subtitle",Constants.DEFAULT_LANGUAGE);
-                for(SubtitleModel model : mListSub){
-                    if(model.getLanguage().equals(df_language)){
+                String df_language = sharedPreferences.getString("df_subtitle", Constants.DEFAULT_LANGUAGE);
+                for (SubtitleModel model : mListSub) {
+                    if (model.getLanguage().equals(df_language)) {
                         subURL = model.getUrl();
                         break;
                     }
@@ -1089,68 +1068,10 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     }
 
     private void loadAd() {
-        adsConfig = mDBHelper.getConfigurationData().getAdsConfig();
-        if (PreferenceUtils.isLoggedIn(this) && PreferenceUtils.isActivePlan(this)) return;
-        if (adsConfig.getAdsEnable().equals("1")) {
-            if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                //BannerAds.ShowAdmobBannerAds(this, mAdView);
-                VideoRewardAds.prepareAd(this);
-                //PopUpAds.ShowAdmobInterstitialAds(this);
-
-                admobNativeAdView.setVisibility(View.VISIBLE);
-                NativeAds.showAdmobNativeAds(DetailsActivity.this, admobNativeAdView);
-            } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
-                //   PopUpAds.showStartappInterstitialAds(DetailsActivity.this);
-                BannerAds.showAppodealBanner(DetailsActivity.this, R.id.appodealBannerView);
-
-                Appodeal.cache(DetailsActivity.this, Appodeal.NATIVE);
-               // List<NativeAd> loadedNativeAds = Appodeal.getNativeAds(1)[0];
-
-                //NativeAd nativeAd = Appodeal.getNativeAds(1)[0];
-               // NativeAdViewContentStream nativeAdView = (NativeAdViewContentStream) findViewById(R.id.native_ad_view_content_stream);
-                //nativeAdView.setNativeAd(loadedNativeAds);
-            } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.NETWORK_AUDIENCE)) {
-                BannerAds.showFANBanner(this, mAdView);
-                PopUpAds.showFANInterstitialAds(DetailsActivity.this);
-            }
-
-        }
+        mAdsController.showNativeAds(mAdsContainer, true);
+        mAdsController.initInterstitialAds();
+        mAdsController.initRewardVideoAds();
     }
-
-    public void loadNativeAds() {
-        Appodeal.setRequiredNativeMediaAssetType(Native.MediaAssetType.ICON);
-        Appodeal.setNativeCallbacks(new NativeCallbacks() {
-            @Override
-            public void onNativeLoaded() {
-                Toast.makeText(DetailsActivity.this, "onNativeLoaded", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNativeFailedToLoad() {
-                Toast.makeText(DetailsActivity.this, "onNativeFailedToLoad", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNativeShown(NativeAd nativeAd) {
-                Toast.makeText(DetailsActivity.this, "onNativeShown", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNativeShowFailed(NativeAd nativeAd) {
-
-            }
-
-            @Override
-            public void onNativeClicked(NativeAd nativeAd) {
-                Toast.makeText(DetailsActivity.this, "onNativeClicked", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNativeExpired() {
-                Toast.makeText(DetailsActivity.this, "onNativeExpired", Toast.LENGTH_SHORT).show();
-            }
-        });
-    };
 
     private void initGetData() {
         if (!mType.equals("tv")) {
@@ -1392,14 +1313,14 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         //Toast.makeText(context, "castSession:"+getCastSessionObj()+"", Toast.LENGTH_SHORT).show();
         mPlayer.prepare(mMediaSource, true, false);
         mSimpleExoPlayerView.setPlayer(mPlayer);
-        SubtitleView  view = mSimpleExoPlayerView.getSubtitleView();
+        SubtitleView view = mSimpleExoPlayerView.getSubtitleView();
         int defaultSubtitleColor = Color.argb(255, 255, 255, 255);
         int outlineColor = Color.argb(255, 43, 43, 43);
         Typeface subtitleTypeface = ResourcesCompat.getFont(this, R.font.amazon);
         CaptionStyleCompat style = new CaptionStyleCompat(defaultSubtitleColor,
-                        Color.TRANSPARENT, Color.TRANSPARENT,
-                        CaptionStyleCompat.EDGE_TYPE_OUTLINE,
-                        outlineColor, subtitleTypeface);
+                Color.TRANSPARENT, Color.TRANSPARENT,
+                CaptionStyleCompat.EDGE_TYPE_OUTLINE,
+                outlineColor, subtitleTypeface);
         view.setApplyEmbeddedStyles(false);
         view.setStyle(style);
 
@@ -1856,7 +1777,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                         mListServer.add(models);
                         if (seasonList.size() > 0) {
                             setSeasonData(seasonList, singleDetails.getSeason());
-                        }else{
+                        } else {
                             mSubsLayout.setVisibility(GONE);
                             mSeasonSpinnerContainer.setVisibility(GONE);
                         }
@@ -1897,10 +1818,10 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                         mListServer.get(position).getListEpi());
                 if (mListServer.get(position).getListEpi().size() == 0) {
                     mSeasonSpinnerContainer.setVisibility(View.GONE);
-                }else{
+                } else {
                     StringBuilder subs = new StringBuilder("");
                     List<SubtitleModel> lists = mListServer.get(position).getListEpi().get(0).getSubtitleList();
-                    for(SubtitleModel model : lists){
+                    for (SubtitleModel model : lists) {
                         subs.append(" ").append(model.getLanguage());
                     }
                     mSubsText.setText(subs);
@@ -2305,6 +2226,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mAdsController.onDestroy();
         updateContinueWatchingData();
         resetCastPlayer();
         releasePlayer();
@@ -2583,69 +2505,69 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     }
 
 
-public class RelativeLayoutTouchListener implements View.OnTouchListener {
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
+    public class RelativeLayoutTouchListener implements View.OnTouchListener {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
 
-                //touch is start
-                downX = event.getX();
-                downY = event.getY();
-                if (event.getX() < (sWidth / 2)) {
+                    //touch is start
+                    downX = event.getX();
+                    downY = event.getY();
+                    if (event.getX() < (sWidth / 2)) {
 
-                    //here check touch is screen left or right side
-                    mIntLeft = true;
-                    mIntRight = false;
+                        //here check touch is screen left or right side
+                        mIntLeft = true;
+                        mIntRight = false;
 
-                } else if (event.getX() > (sWidth / 2)) {
+                    } else if (event.getX() > (sWidth / 2)) {
 
-                    //here check touch is screen left or right side
-                    mIntLeft = false;
-                    mIntRight = true;
-                }
-                break;
+                        //here check touch is screen left or right side
+                        mIntLeft = false;
+                        mIntRight = true;
+                    }
+                    break;
 
-            case MotionEvent.ACTION_UP:
+                case MotionEvent.ACTION_UP:
 
-            case MotionEvent.ACTION_MOVE:
+                case MotionEvent.ACTION_MOVE:
 
-                //finger move to screen
-                float x2 = event.getX();
-                float y2 = event.getY();
+                    //finger move to screen
+                    float x2 = event.getX();
+                    float y2 = event.getY();
 
-                diffX = (long) (Math.ceil(event.getX() - downX));
-                diffY = (long) (Math.ceil(event.getY() - downY));
+                    diffX = (long) (Math.ceil(event.getX() - downX));
+                    diffY = (long) (Math.ceil(event.getY() - downY));
 
-                if (Math.abs(diffY) > Math.abs(diffX)) {
-                    if (mIntLeft) {
-                        //if left its for brightness
+                    if (Math.abs(diffY) > Math.abs(diffX)) {
+                        if (mIntLeft) {
+                            //if left its for brightness
 
-                        if (downY < y2) {
-                            //down swipe brightness decrease
-                        } else if (downY > y2) {
-                            //up  swipe brightness increase
-                        }
+                            if (downY < y2) {
+                                //down swipe brightness decrease
+                            } else if (downY > y2) {
+                                //up  swipe brightness increase
+                            }
 
-                    } else if (mIntRight) {
+                        } else if (mIntRight) {
 
-                        //if right its for audio
-                        if (downY < y2) {
-                            //down swipe volume decrease
-                            mAudioManager.adjustVolume(AudioManager.ADJUST_LOWER, AudioManager.FLAG_PLAY_SOUND);
+                            //if right its for audio
+                            if (downY < y2) {
+                                //down swipe volume decrease
+                                mAudioManager.adjustVolume(AudioManager.ADJUST_LOWER, AudioManager.FLAG_PLAY_SOUND);
 
-                        } else if (downY > y2) {
-                            //up  swipe volume increase
-                            mAudioManager.adjustVolume(AudioManager.ADJUST_RAISE, AudioManager.FLAG_PLAY_SOUND);
+                            } else if (downY > y2) {
+                                //up  swipe volume increase
+                                mAudioManager.adjustVolume(AudioManager.ADJUST_RAISE, AudioManager.FLAG_PLAY_SOUND);
+                            }
                         }
                     }
-                }
+            }
+            return true;
         }
-        return true;
+
+
     }
-
-
-}
 
     @Override
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
@@ -2755,22 +2677,7 @@ public class RelativeLayoutTouchListener implements View.OnTouchListener {
             Toast.makeText(DetailsActivity.this, "Please select an episode", Toast.LENGTH_SHORT).show();
             return;
         }
-        //PopUpAds.ShowAdmobInterstitialAds(DetailsActivity.this);
-        if (PreferenceUtils.isLoggedIn(DetailsActivity.this)) {
-            if (!PreferenceUtils.isActivePlan(DetailsActivity.this)) {
-                if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
-                    PopUpAds.showAppodealInterstitialAds(DetailsActivity.this);
-                } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                    PopUpAds.ShowAdmobInterstitialAds(DetailsActivity.this);
-                }
-            }
-        }else{
-            if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
-                PopUpAds.showAppodealInterstitialAds(DetailsActivity.this);
-            } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                PopUpAds.ShowAdmobInterstitialAds(DetailsActivity.this);
-            }
-        }
+
         if (!mListServer.isEmpty()) {
             if (mListServer.size() == 1) {
                 releasePlayer();
@@ -2790,9 +2697,7 @@ public class RelativeLayoutTouchListener implements View.OnTouchListener {
     void onDownloadClick() {
         if (PreferenceUtils.isLoggedIn(DetailsActivity.this)) {
             if (!mListInternalDownload.isEmpty() || !mListExternalDownload.isEmpty()) {
-                if(!PreferenceUtils.isActivePlan(this)){
-                    VideoRewardAds.showRewardedVideo(DetailsActivity.getInstance());
-                }
+                mAdsController.showRewardVideoAds();
                 if (Config.ENABLE_DOWNLOAD_TO_ALL) {
                     openDownloadServerDialog();
                 } else {
@@ -2954,6 +2859,20 @@ public class RelativeLayoutTouchListener implements View.OnTouchListener {
 
         dialog.show();
 
+    }
+
+    public void onAdFinish() {
+        if (mPlayer != null && !mPlayer.getPlayWhenReady()) {
+            Log.d(TAG,"onAdFinish");
+            mPlayer.setPlayWhenReady(true);
+        }
+    }
+
+    public void onAdStart() {
+        if (mPlayer != null) {
+            Log.d("TAG","onAdStart");
+            mPlayer.setPlayWhenReady(false);
+        }
     }
 }
 

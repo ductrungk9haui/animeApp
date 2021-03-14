@@ -1,18 +1,10 @@
 <component name="libraryTable">
   <library name="Gradle: com.appodeal.ads.sdk:core:2.7.1@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/448ec2f2b94a09d59b0b546f1bbb99b6/jetified-core-2.7.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/448ec2f2b94a09d59b0b546f1bbb99b6/jetified-core-2.7.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/448ec2f2b94a09d59b0b546f1bbb99b6/jetified-core-2.7.1/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/448ec2f2b94a09d59b0b546f1bbb99b6/jetified-core-2.7.1/jars/libs/r-classes.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/cf297db749d73d088698aac8b4c0a82b/jetified-core-2.7.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/cf297db749d73d088698aac8b4c0a82b/jetified-core-2.7.1/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/cf297db749d73d088698aac8b4c0a82b/jetified-core-2.7.1/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/cf297db749d73d088698aac8b4c0a82b/jetified-core-2.7.1/jars/libs/r-classes.jar!/" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2477b287af32507f114888353c38292b/jetified-core-2.7.1/jars/classes.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2477b287af32507f114888353c38292b/jetified-core-2.7.1/jars/libs/r-classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2477b287af32507f114888353c38292b/jetified-core-2.7.1/AndroidManifest.xml" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2477b287af32507f114888353c38292b/jetified-core-2.7.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2477b287af32507f114888353c38292b/jetified-core-2.7.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2477b287af32507f114888353c38292b/jetified-core-2.7.1/jars/libs/r-classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.appodeal.ads.sdk/core/2.7.1/f0f065440553a1c41c764d5e7c6b6c05e52557dd/core-2.7.1-javadoc.jar!/" />

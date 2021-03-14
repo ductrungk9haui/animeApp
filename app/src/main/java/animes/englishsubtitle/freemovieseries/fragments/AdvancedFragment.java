@@ -15,13 +15,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.appodeal.ads.Appodeal;
-import com.google.android.ads.nativetemplates.TemplateView;
 import com.google.android.material.textfield.TextInputEditText;
 
+import animes.englishsubtitle.freemovieseries.utils.ads.AdsController;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -40,14 +38,7 @@ import animes.englishsubtitle.freemovieseries.database.DatabaseHelper;
 import animes.englishsubtitle.freemovieseries.network.RetrofitClient;
 import animes.englishsubtitle.freemovieseries.network.apis.MovieRequestApi;
 import animes.englishsubtitle.freemovieseries.network.model.User;
-import animes.englishsubtitle.freemovieseries.network.model.config.AdsConfig;
-import animes.englishsubtitle.freemovieseries.utils.Constants;
-import animes.englishsubtitle.freemovieseries.utils.PreferenceUtils;
 import animes.englishsubtitle.freemovieseries.utils.ToastMsg;
-import animes.englishsubtitle.freemovieseries.utils.ads.BannerAds;
-import animes.englishsubtitle.freemovieseries.utils.ads.NativeAds;
-import animes.englishsubtitle.freemovieseries.utils.ads.PopUpAds;
-import animes.englishsubtitle.freemovieseries.utils.ads.VideoRewardAds;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,10 +46,8 @@ import animes.englishsubtitle.freemovieseries.utils.ads.VideoRewardAds;
  * create an instance of this fragment.
  */
 public class AdvancedFragment extends Fragment {
-    @BindView(R.id.adView)
-    RelativeLayout mAdView;
-    @BindView(R.id.admob_nativead_template)
-    TemplateView admobNativeAdView;
+    @BindView(R.id.ads_container)
+    View mAdsContainer;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -66,6 +55,7 @@ public class AdvancedFragment extends Fragment {
     private MainActivity mActivity;
     private Unbinder mUnbinder;
     private DatabaseHelper mDBHelper;
+    AdsController mAdsController;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -108,6 +98,7 @@ public class AdvancedFragment extends Fragment {
         mActivity = (MainActivity) getActivity();
         mUnbinder = ButterKnife.bind(this,view);
         mActivity.setTitle(getResources().getString(R.string.explore));
+        mAdsController = AdsController.getInstance(mActivity);
         mDBHelper = new DatabaseHelper(getContext());
         // Inflate the layout for this fragment
         return view;
@@ -116,7 +107,8 @@ public class AdvancedFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        loadAd();
+        mAdsController.showNativeAds(mAdsContainer,true);
+        mAdsController.initRewardVideoAds();
     }
 
     @Override
@@ -133,15 +125,8 @@ public class AdvancedFragment extends Fragment {
     }
     @OnClick(R.id.request_layout)
     void onRequestClick(){
-        AdsConfig adsConfig = mDBHelper.getConfigurationData().getAdsConfig();
-        if (PreferenceUtils.isLoggedIn(mActivity)) {
-            if (!PreferenceUtils.isActivePlan(mActivity)) {
-                if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
-                    PopUpAds.showAppodealInterstitialAds(mActivity);
-                } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                    VideoRewardAds.showRewardedVideo(mActivity);
-                }
-            }
+        if (mAdsController.isAdsEnable()) {
+            mAdsController.showRewardVideoAds();
         }else{
             Intent intent = new Intent(getContext(), LoginActivity.class);
             startActivity(intent);
@@ -240,23 +225,6 @@ public class AdvancedFragment extends Fragment {
         return intent;
     }
 
-    private void loadAd() {
-        AdsConfig adsConfig = mDBHelper.getConfigurationData().getAdsConfig();
-        if (PreferenceUtils.isLoggedIn(getContext()) && PreferenceUtils.isActivePlan(getContext())) return;
-        if (adsConfig.getAdsEnable().equals("1")) {
-            if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                VideoRewardAds.prepareAd(getContext());
-                admobNativeAdView.setVisibility(View.VISIBLE);
-                NativeAds.showAdmobNativeAds(mActivity, admobNativeAdView);
-            } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
-                BannerAds.showAppodealBanner(getActivity(), R.id.appodealBannerView);
-                Appodeal.cache(mActivity, Appodeal.NATIVE);
-            } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.NETWORK_AUDIENCE)) {
-                BannerAds.showFANBanner(getContext(), mAdView);
-                PopUpAds.showFANInterstitialAds(mActivity);
-            }
-        }
-    }
 
 
 }

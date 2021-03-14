@@ -1,15 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.appodeal.ads.sdk.networks:admob:2.7.1.3@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c660152c2d407b4e3cc3a25207b94451/jetified-admob-2.7.1.3/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c660152c2d407b4e3cc3a25207b94451/jetified-admob-2.7.1.3/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c660152c2d407b4e3cc3a25207b94451/jetified-admob-2.7.1.3/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/36c9a4e3b34bc2c4cba20e3295f977a8/jetified-admob-2.7.1.3/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/36c9a4e3b34bc2c4cba20e3295f977a8/jetified-admob-2.7.1.3/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/36c9a4e3b34bc2c4cba20e3295f977a8/jetified-admob-2.7.1.3/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/55006eee937f810709b01b64a8a48fcb/jetified-admob-2.7.1.3/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/55006eee937f810709b01b64a8a48fcb/jetified-admob-2.7.1.3/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/55006eee937f810709b01b64a8a48fcb/jetified-admob-2.7.1.3/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/55006eee937f810709b01b64a8a48fcb/jetified-admob-2.7.1.3/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -1,18 +1,10 @@
 <component name="libraryTable">
   <library name="Gradle: com.appodeal.ads.sdk.networks:tapjoy:2.7.1.3@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/25114b1f58563074ddc3fcc350effc05/jetified-tapjoy-2.7.1.3/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/25114b1f58563074ddc3fcc350effc05/jetified-tapjoy-2.7.1.3/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/25114b1f58563074ddc3fcc350effc05/jetified-tapjoy-2.7.1.3/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/25114b1f58563074ddc3fcc350effc05/jetified-tapjoy-2.7.1.3/jars/libs/r-classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/317acefc825cf92cc9d3a9a1f4fd500e/jetified-tapjoy-2.7.1.3/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/317acefc825cf92cc9d3a9a1f4fd500e/jetified-tapjoy-2.7.1.3/jars/libs/r-classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/317acefc825cf92cc9d3a9a1f4fd500e/jetified-tapjoy-2.7.1.3/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/317acefc825cf92cc9d3a9a1f4fd500e/jetified-tapjoy-2.7.1.3/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/99526cbe8d4025bcaeeb0bdd9accd345/jetified-tapjoy-2.7.1.3/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/99526cbe8d4025bcaeeb0bdd9accd345/jetified-tapjoy-2.7.1.3/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/99526cbe8d4025bcaeeb0bdd9accd345/jetified-tapjoy-2.7.1.3/jars/libs/r-classes.jar!/" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/99526cbe8d4025bcaeeb0bdd9accd345/jetified-tapjoy-2.7.1.3/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/99526cbe8d4025bcaeeb0bdd9accd345/jetified-tapjoy-2.7.1.3/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/99526cbe8d4025bcaeeb0bdd9accd345/jetified-tapjoy-2.7.1.3/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/99526cbe8d4025bcaeeb0bdd9accd345/jetified-tapjoy-2.7.1.3/jars/libs/r-classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

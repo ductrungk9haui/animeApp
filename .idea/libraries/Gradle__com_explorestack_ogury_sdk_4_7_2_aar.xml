@@ -1,15 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.explorestack.ogury:sdk:4.7.2@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8a52c03b8766feb6377a28b7bd6ef568/jetified-sdk-4.7.2/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8a52c03b8766feb6377a28b7bd6ef568/jetified-sdk-4.7.2/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8a52c03b8766feb6377a28b7bd6ef568/jetified-sdk-4.7.2/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/409f641b8cdd6a3318b525177ad4823c/jetified-sdk-4.7.2/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/409f641b8cdd6a3318b525177ad4823c/jetified-sdk-4.7.2/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/409f641b8cdd6a3318b525177ad4823c/jetified-sdk-4.7.2/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3d286d58ae83552618eeb79136aba5d7/jetified-sdk-4.7.2/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3d286d58ae83552618eeb79136aba5d7/jetified-sdk-4.7.2/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3d286d58ae83552618eeb79136aba5d7/jetified-sdk-4.7.2/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3d286d58ae83552618eeb79136aba5d7/jetified-sdk-4.7.2/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

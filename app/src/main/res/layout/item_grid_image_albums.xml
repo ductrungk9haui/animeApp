@@ -103,34 +103,10 @@
         </LinearLayout>
     </LinearLayout>
 
-    <RelativeLayout
-        android:id="@+id/adView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center" />
-
-    <RelativeLayout
-        android:id="@+id/admob_native_ad_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.google.android.ads.nativetemplates.TemplateView
-            android:id="@+id/admob_nativead_template"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:gnt_template_type="@layout/gnt_small_template_view" />
-
-    </RelativeLayout>
-
-    <com.appodeal.ads.BannerView
-        android:id="@+id/appodealBannerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:visibility="gone" />
+    <include
+        layout="@layout/ads_container"
+        android:id="@+id/ads_container"
+        android:visibility="gone"/>
 
 </androidx.cardview.widget.CardView>
 

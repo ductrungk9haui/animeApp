@@ -12,7 +12,6 @@
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="70dp"
         android:focusable="true">
 
         <LinearLayout
@@ -222,41 +221,15 @@
                     android:textStyle="bold"
                     app:tint="?android:attr/colorPrimary" />
             </androidx.cardview.widget.CardView>
+
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/ads_container"
+                android:id="@+id/ads_container"
+                android:layout_marginTop="20dp"/>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-
-    <RelativeLayout
-        android:id="@+id/adView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center"
-        android:layout_marginTop="5dp"
-        android:focusable="true"
-        android:gravity="bottom" />
-
-    <RelativeLayout
-        android:id="@+id/admob_native_ad_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="8dp">
-
-        <com.google.android.ads.nativetemplates.TemplateView
-            android:id="@+id/admob_nativead_template"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:gnt_template_type="@layout/gnt_small_template_view" />
-
-    </RelativeLayout>
-
-    <com.appodeal.ads.BannerView
-        android:id="@+id/appodealBannerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:visibility="gone" />
 
 </RelativeLayout>

@@ -172,6 +172,7 @@
       "project": {
         "compilerSettingsCacheFolder": "D:\\AnimeS\\AnimeS\\.cxx",
         "cxxFolder": "D:\\AnimeS\\AnimeS\\.cxx",
+        "ideBuildTargetAbi": "arm64-v8a,armeabi-v7a,armeabi",
         "isBuildOnlyTargetAbiEnabled": true,
         "isCmakeBuildCohabitationEnabled": false,
         "isNativeCompilerSettingsCacheEnabled": false,
@@ -195,10 +196,7 @@
     "objFolder": "D:\\AnimeS\\AnimeS\\app\\build\\intermediates\\cmake\\debug\\obj",
     "variantName": "debug",
     "validAbiList": [
-      "ARMEABI_V7A",
-      "ARM64_V8A",
-      "X86",
-      "X86_64"
+      "ARM64_V8A"
     ],
     "prefabDirectory": "D:\\AnimeS\\AnimeS\\app\\.cxx\\cmake\\debug\\prefab",
     "prefabPackageDirectoryList": []

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
@@ -25,13 +26,23 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.appodeal.ads.Appodeal;
+import com.explorestack.consent.Consent;
+import com.explorestack.consent.ConsentForm;
+import com.explorestack.consent.ConsentFormListener;
+import com.explorestack.consent.ConsentInfoUpdateListener;
+import com.explorestack.consent.ConsentManager;
+import com.explorestack.consent.exception.ConsentManagerException;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import animes.englishsubtitle.freemovieseries.network.model.config.AdsConfig;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -52,16 +63,25 @@ import animes.englishsubtitle.freemovieseries.utils.ToastMsg;
 
 public class SplashScreenActivity extends AppCompatActivity {
     private static final String TAG = "SplashScreen";
+    private boolean mIsRequested;
     private final int PERMISSION_REQUEST_CODE = 100;
     private int SPLASH_TIME = 2500;
     private Thread timer;
     private DatabaseHelper db;
+    @Nullable
+    private ConsentForm consentForm;
+
     AnimationDrawable anim;
-    @BindView(R.id.logo) ImageView mLogo;
-    @BindView(R.id.logo1) ImageView mAnimeLogo;
-    @BindView(R.id.logo2) ImageView mSLogo;
-    @BindView(R.id.icon) ImageView mIcon;
-    @BindView(R.id.content) TextView mContent;
+    @BindView(R.id.logo)
+    ImageView mLogo;
+    @BindView(R.id.logo1)
+    ImageView mAnimeLogo;
+    @BindView(R.id.logo2)
+    ImageView mSLogo;
+    @BindView(R.id.icon)
+    ImageView mIcon;
+    @BindView(R.id.content)
+    TextView mContent;
     Unbinder mUnBinder;
 
     @Override
@@ -71,12 +91,11 @@ public class SplashScreenActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.launch_screen);
-        mUnBinder  = ButterKnife.bind(this);
+        mUnBinder = ButterKnife.bind(this);
         db = new DatabaseHelper(SplashScreenActivity.this);
         startWelcomeAnimation();
         //print keyHash for facebook login
-       // createKeyHash(SplashScreenActivity.this, BuildConfig.APPLICATION_ID);
-
+        // createKeyHash(SplashScreenActivity.this, BuildConfig.APPLICATION_ID);
         // checking storage permission
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkStoragePermission()) {
@@ -127,8 +146,102 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     }
 
+    // Requesting Consent from European Users using Stack ConsentManager (https://wiki.appodeal.com/en/android/consent-manager).
+    private void resolveUserConsent() {
+        // Note: YOU MUST SPECIFY YOUR APPODEAL SDK KET HERE
+        String appodealAppKey = "d5675c3aa36eae2ba5a4d8d978a28137e1854b6353cbf7fa";
+        ConsentManager consentManager = ConsentManager.getInstance(this);
+        // Requesting Consent info update
+        consentManager.requestConsentInfoUpdate(
+                appodealAppKey,
+                new ConsentInfoUpdateListener() {
+                    @Override
+                    public void onConsentInfoUpdated(Consent consent) {
+                        Log.d("AppodealHelper","onConsentInfoUpdated " );
+                        Consent.ShouldShow consentShouldShow =
+                                consentManager.shouldShowConsentDialog();
+                        // If ConsentManager return Consent.ShouldShow.TRUE, than we should show consent form
+                        if (consentShouldShow == Consent.ShouldShow.TRUE) {
+                            showConsentForm();
+                        } else {
+                            if (consent.getStatus() == Consent.Status.UNKNOWN) {
+                                Log.d("AppodealHelper","onConsentInfoUpdated  UNKNOWN" );
+                                // Start our main activity with default Consent value = true
+                                timer.start();
+                            } else {
+                                boolean hasConsent = consent.getStatus() == Consent.Status.PERSONALIZED;
+                                // Start our main activity with resolved Consent value
+                                //timer.start();
+                                SharedPreferences.Editor editor = getSharedPreferences("push", MODE_PRIVATE).edit();
+                                editor.putBoolean(Constants.CONSENT,hasConsent);
+                                editor.apply();
+                                // Update Appodeal SDK Consent value with resolved Consent value
+                                Appodeal.updateConsent(hasConsent);
+                                timer.start();
+                                Log.d("AppodealHelper","onConsentInfoUpdated " + hasConsent);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailedToUpdateConsentInfo(ConsentManagerException e) {
+                        // Start our main activity with default Consent value
+                        timer.start();
+                        Log.d("AppodealHelper","onFailedToUpdateConsentInfo " + e.getReason());
+                    }
+                });
+
+    }
+
+    // Displaying ConsentManger Consent request form
+    private void showConsentForm() {
+        if (consentForm == null) {
+            consentForm = new ConsentForm.Builder(this)
+                    .withListener(new ConsentFormListener() {
+                        @Override
+                        public void onConsentFormLoaded() {
+                            // Show ConsentManager Consent request form
+                            consentForm.showAsActivity();
+                            Log.d("AppodealHelper","onConsentFormLoaded" );
+                        }
+
+                        @Override
+                        public void onConsentFormError(ConsentManagerException error) {
+                            Log.d("AppodealHelper","onConsentFormError" );
+                            // Start our main activity with default Consent value
+                            timer.start();
+                        }
+
+                        @Override
+                        public void onConsentFormOpened() {
+                            //ignore
+                        }
+
+                        @Override
+                        public void onConsentFormClosed(Consent consent) {
+                            boolean hasConsent = consent.getStatus() == Consent.Status.PERSONALIZED;
+                            // Start our main activity with resolved Consent value
+                            SharedPreferences.Editor editor = getSharedPreferences("push", MODE_PRIVATE).edit();
+                            editor.putBoolean(Constants.CONSENT,hasConsent);
+                            editor.apply();
+                            // Update Appodeal SDK Consent value with resolved Consent value
+                            Appodeal.updateConsent(hasConsent);
+                            timer.start();
+                            Log.d("AppodealHelper","onConsentFormClosed " + hasConsent);
+                        }
+                    }).build();
+        }
+        // If Consent request form is already loaded, then we can display it, otherwise, we should load it first
+        if (consentForm.isLoaded()) {
+            consentForm.showAsActivity();
+        } else {
+            consentForm.load();
+        }
+    }
+
+
     private void startWelcomeAnimation() {
-        AlphaAnimation alphaAnimation = new AlphaAnimation(0f,1f);
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0f, 1f);
         alphaAnimation.setDuration(1000);
         alphaAnimation.setFillAfter(true);
         alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
@@ -140,8 +253,8 @@ public class SplashScreenActivity extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 AnimationSet set = new AnimationSet(true);
-                ScaleAnimation scaleAnimation = new ScaleAnimation(1,0.9f, 1, 0.9f,Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-                TranslateAnimation translateAnimation = new TranslateAnimation(0,getResources().getDimensionPixelSize(R.dimen.animate_translate_logo),0,0);
+                ScaleAnimation scaleAnimation = new ScaleAnimation(1, 0.9f, 1, 0.9f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                TranslateAnimation translateAnimation = new TranslateAnimation(0, getResources().getDimensionPixelSize(R.dimen.animate_translate_logo), 0, 0);
                 set.addAnimation(scaleAnimation);
                 set.addAnimation(translateAnimation);
                 set.setDuration(1500);
@@ -150,7 +263,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                 mAnimeLogo.clearAnimation();
                 mAnimeLogo.startAnimation(set);
 
-                AlphaAnimation alphaAnimation = new AlphaAnimation(0f,1f);
+                AlphaAnimation alphaAnimation = new AlphaAnimation(0f, 1f);
                 alphaAnimation.setDuration(1000);
                 alphaAnimation.setFillAfter(true);
                 alphaAnimation.setStartOffset(500);
@@ -163,8 +276,6 @@ public class SplashScreenActivity extends AppCompatActivity {
 
             }
         });
-
-
 
 
         mAnimeLogo.startAnimation(alphaAnimation);
@@ -212,7 +323,16 @@ public class SplashScreenActivity extends AppCompatActivity {
                         }
 
                         if (db.getConfigurationData() != null) {
-                            timer.start();
+                            AdsConfig adsConfig = db.getConfigurationData().getAdsConfig();
+                            if (PreferenceUtils.isLoggedIn(getApplicationContext()) && PreferenceUtils.isActivePlan(getApplicationContext())){
+                                timer.start();
+                                return;
+                            }
+                            if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
+                                resolveUserConsent();
+                            }else{
+                                timer.start();
+                            }
                         } else {
                             showErrorDialog(getString(R.string.error_toast), getString(R.string.no_configuration_data_found));
                         }
@@ -314,7 +434,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED
                 && grantResults.length > 0 && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
             //resume tasks needing this permission
-            getConfigurationData();
+             getConfigurationData();
         }
     }
 

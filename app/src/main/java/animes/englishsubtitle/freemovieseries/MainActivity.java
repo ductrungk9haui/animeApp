@@ -151,6 +151,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mUnbinder = ButterKnife.bind(this);
+
         setupTheme();
         //PopUpAds.ShowAdmobInterstitialAds(MainActivity.this);
         // To resolve cast button visibility problem. Check Cast State when app is open.

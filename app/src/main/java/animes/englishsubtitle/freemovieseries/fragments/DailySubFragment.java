@@ -29,18 +29,13 @@ import animes.englishsubtitle.freemovieseries.Config;
 import animes.englishsubtitle.freemovieseries.MainActivity;
 import animes.englishsubtitle.freemovieseries.R;
 import animes.englishsubtitle.freemovieseries.adapters.CommonGridAdapter;
-import animes.englishsubtitle.freemovieseries.database.DatabaseHelper;
 import animes.englishsubtitle.freemovieseries.models.CommonModels;
 import animes.englishsubtitle.freemovieseries.models.home_content.Video;
 import animes.englishsubtitle.freemovieseries.network.RetrofitClient;
 import animes.englishsubtitle.freemovieseries.network.apis.DownApi;
-import animes.englishsubtitle.freemovieseries.network.model.config.AdsConfig;
 import animes.englishsubtitle.freemovieseries.utils.ApiResources;
-import animes.englishsubtitle.freemovieseries.utils.Constants;
 import animes.englishsubtitle.freemovieseries.utils.NetworkInst;
 import animes.englishsubtitle.freemovieseries.utils.PreferenceUtils;
-import animes.englishsubtitle.freemovieseries.utils.ads.BannerAds;
-import animes.englishsubtitle.freemovieseries.utils.ads.NativeAds;
 import animes.englishsubtitle.freemovieseries.view.SwipeRefreshLayout;
 
 public class DailySubFragment extends Fragment {
@@ -186,43 +181,6 @@ public class DailySubFragment extends Fragment {
         super.onStart();
     }
 
-    private void loadAd() {
-        AdsConfig adsConfig = new DatabaseHelper(getContext()).getConfigurationData().getAdsConfig();
-
-        if (PreferenceUtils.isLoggedIn(mActivity)) {
-            if (!PreferenceUtils.isActivePlan(mActivity)) {
-                if (adsConfig.getAdsEnable().equals("1")) {
-
-                    if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                       // BannerAds.ShowAdmobBannerAds(mActivity, mAdView);
-
-                        admobNativeAdView.setVisibility(View.VISIBLE);
-                        NativeAds.showAdmobNativeAds(getActivity(), admobNativeAdView);
-                    } else if (adsConfig.getMobileAdsNetwork().equals(Constants.START_APP)) {
-                        BannerAds.showAppodealBanner(mActivity, R.id.appodealBannerView_fragment_recentlysub);
-
-                    } else if (adsConfig.getMobileAdsNetwork().equals(Constants.NETWORK_AUDIENCE)) {
-                        BannerAds.showFANBanner(getContext(), mAdView);
-                    }
-                }
-            }
-        }else{
-            if (adsConfig.getAdsEnable().equals("1")) {
-
-                if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                    BannerAds.ShowAdmobBannerAds(mActivity, mAdView);
-
-                } else if (adsConfig.getMobileAdsNetwork().equals(Constants.START_APP)) {
-                    BannerAds.showAppodealBanner(mActivity, R.id.appodealBannerView_fragment_recentlysub);
-
-                } else if (adsConfig.getMobileAdsNetwork().equals(Constants.NETWORK_AUDIENCE)) {
-                    BannerAds.showFANBanner(getContext(), mAdView);
-                }
-            }
-        }
-
-
-    }
 
     private void getData(int pageNum) {
         Retrofit retrofit = RetrofitClient.getRetrofitInstance();

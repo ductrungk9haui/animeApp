@@ -1,15 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.appodeal.ads.sdk.networks:appodeal:2.7.1.1@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a304d3f19685cf4b901a2aa38f999133/jetified-appodeal-2.7.1.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a304d3f19685cf4b901a2aa38f999133/jetified-appodeal-2.7.1.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a304d3f19685cf4b901a2aa38f999133/jetified-appodeal-2.7.1.1/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f9057e2d629153af22cacb0d27ec09ea/jetified-appodeal-2.7.1.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f9057e2d629153af22cacb0d27ec09ea/jetified-appodeal-2.7.1.1/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f9057e2d629153af22cacb0d27ec09ea/jetified-appodeal-2.7.1.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5921b6336b0a50a53a0205f6c31eb15f/jetified-appodeal-2.7.1.1/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5921b6336b0a50a53a0205f6c31eb15f/jetified-appodeal-2.7.1.1/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5921b6336b0a50a53a0205f6c31eb15f/jetified-appodeal-2.7.1.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5921b6336b0a50a53a0205f6c31eb15f/jetified-appodeal-2.7.1.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
 
-import com.facebook.ads.AudienceNetworkAds;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
@@ -19,6 +18,7 @@ import com.squareup.picasso.LruCache;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Request;
 
+import animes.englishsubtitle.freemovieseries.utils.ads.AudienceNetworkHelper;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -99,7 +99,7 @@ public class MyAppClass extends Application {
         }
 
         // Initialize the Audience Network SDK
-        AudienceNetworkAds.initialize(this);
+        AudienceNetworkHelper.initialize(this);
      }
 
     private Picasso getCustomPicasso() {

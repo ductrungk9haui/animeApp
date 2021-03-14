@@ -7,33 +7,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.appodeal.ads.Appodeal;
-import com.appodeal.ads.BannerView;
 import com.balysv.materialripple.MaterialRippleLayout;
-import com.google.android.ads.nativetemplates.TemplateView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import animes.englishsubtitle.freemovieseries.utils.ads.AdsController;
 import animes.englishsubtitle.freemovieseries.DetailsActivity;
 import animes.englishsubtitle.freemovieseries.LoginActivity;
 import animes.englishsubtitle.freemovieseries.R;
-import animes.englishsubtitle.freemovieseries.database.DatabaseHelper;
 import animes.englishsubtitle.freemovieseries.models.CommonModels;
-import animes.englishsubtitle.freemovieseries.network.model.config.AdsConfig;
-import animes.englishsubtitle.freemovieseries.utils.Constants;
 import animes.englishsubtitle.freemovieseries.utils.ItemAnimation;
 import animes.englishsubtitle.freemovieseries.utils.PreferenceUtils;
-import animes.englishsubtitle.freemovieseries.utils.ads.BannerAds;
-import animes.englishsubtitle.freemovieseries.utils.ads.NativeAds;
 
 public class CommonGridAdapter extends RecyclerView.Adapter<CommonGridAdapter.OriginalViewHolder> {
 
@@ -44,9 +36,8 @@ public class CommonGridAdapter extends RecyclerView.Adapter<CommonGridAdapter.Or
     private boolean on_attach = true;
     private int animation_type = 2;
     private int adCount;
-    private boolean isAdActive = false;
     private int fromIndex;
-    AdsConfig adsConfig;
+    private AdsController adsController;
     private Activity activity;
 
     @Override
@@ -57,10 +48,10 @@ public class CommonGridAdapter extends RecyclerView.Adapter<CommonGridAdapter.Or
     public CommonGridAdapter(Activity activity, Context context, List<CommonModels> items) {
         this.items = items;
         this.activity = activity;
+        adsController = AdsController.getInstance(activity);
         ctx = context;
         adCount = 0;
         fromIndex = 9;
-        isAdActive = getConfigAd();
     }
 
     public void setNotifyDataSetChanged() {
@@ -68,7 +59,7 @@ public class CommonGridAdapter extends RecyclerView.Adapter<CommonGridAdapter.Or
             adCount = 0;
             fromIndex = 9;
         } else {
-            if (isAdActive) {
+            if (adsController.isAdsEnable()) {
                 int sizeItem = items.size();
                 while (sizeItem >= fromIndex) {
                     items.add(9 + adCount, new CommonModels());
@@ -83,10 +74,6 @@ public class CommonGridAdapter extends RecyclerView.Adapter<CommonGridAdapter.Or
         notifyDataSetChanged();
     }
 
-    private boolean getConfigAd() {
-        adsConfig = new DatabaseHelper(ctx).getConfigurationData().getAdsConfig();
-        return !(PreferenceUtils.isLoggedIn(activity) && PreferenceUtils.isActivePlan(activity));
-    }
 
     @Override
     public CommonGridAdapter.OriginalViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -100,30 +87,13 @@ public class CommonGridAdapter extends RecyclerView.Adapter<CommonGridAdapter.Or
 
     @Override
     public void onBindViewHolder(CommonGridAdapter.OriginalViewHolder holder, final int position) {
-        if (isAdActive && (position + 1) % 10 == 0) {
+        if (adsController.isAdsEnable() && (position + 1) % 10 == 0) {
             holder.mainLayout.setVisibility(View.GONE);
-            if (adsConfig.getAdsEnable().equals("1")) {
-                if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                    holder.nativeAdView.setVisibility(View.VISIBLE);
-                    NativeAds.showAdmobNativeAds(activity, holder.nativeAdView);
-                } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
-                    holder.bannerViewStartApp.setVisibility(View.VISIBLE);
-                    Appodeal.setBannerViewId(holder.bannerViewStartApp.getId());
-                    Appodeal.show(activity, Appodeal.BANNER_VIEW);
-                } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.NETWORK_AUDIENCE)) {
-                    holder.adview.setVisibility(View.VISIBLE);
-                    BannerAds.showFANBanner(ctx, holder.adview);
-                }
-            }
+            holder.adContainer.setVisibility(View.VISIBLE);
+            adsController.showNativeAds(holder.adContainer,false);
         } else {
-            holder.nativeAdView.setVisibility(View.GONE);
-            holder.bannerViewStartApp.setVisibility(View.GONE);
-            holder.adview.setVisibility(View.GONE);
-
+            holder.adContainer.setVisibility(View.GONE);
             holder.mainLayout.setVisibility(View.VISIBLE);
-            holder.nativeAdView.setVisibility(View.GONE);
-            holder.bannerViewStartApp.setVisibility(View.GONE);
-            holder.adview.setVisibility(View.GONE);
 
             final CommonModels obj = items.get(position);
             setAnimation(holder.itemView, position);
@@ -177,9 +147,7 @@ public class CommonGridAdapter extends RecyclerView.Adapter<CommonGridAdapter.Or
         public View view;
 
         public CardView cardView;
-        TemplateView nativeAdView;
-        RelativeLayout adview;
-        BannerView bannerViewStartApp;
+        public View adContainer;
 
         public OriginalViewHolder(View v) {
             super(v);
@@ -190,9 +158,7 @@ public class CommonGridAdapter extends RecyclerView.Adapter<CommonGridAdapter.Or
             qualityTv = v.findViewById(R.id.quality_tv);
             releaseDateTv = v.findViewById(R.id.release_date_tv);
             cardView = v.findViewById(R.id.top_layout);
-            nativeAdView = v.findViewById(R.id.admob_nativead_template);
-            adview = v.findViewById(R.id.adView);
-            bannerViewStartApp = v.findViewById(R.id.appodealBannerView);
+            adContainer = v.findViewById(R.id.ads_container);
             mainLayout = v.findViewById(R.id.main_content);
         }
 

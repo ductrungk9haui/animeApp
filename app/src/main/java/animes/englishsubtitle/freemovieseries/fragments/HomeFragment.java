@@ -17,10 +17,8 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.appodeal.ads.Appodeal;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.github.islamkhsh.CardSliderViewPager;
-import com.google.android.ads.nativetemplates.TemplateView;
 import com.ixidev.gdpr.GDPRChecker;
 import com.viewpagerindicator.LinePageIndicator;
 
@@ -29,6 +27,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Timer;
 
+import animes.englishsubtitle.freemovieseries.utils.ads.AdsController;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -64,19 +63,15 @@ import animes.englishsubtitle.freemovieseries.models.home_content.Video;
 import animes.englishsubtitle.freemovieseries.network.RetrofitClient;
 import animes.englishsubtitle.freemovieseries.network.apis.HomeContentApi;
 import animes.englishsubtitle.freemovieseries.network.model.config.AdsConfig;
-import animes.englishsubtitle.freemovieseries.utils.Constants;
 import animes.englishsubtitle.freemovieseries.utils.NetworkInst;
-import animes.englishsubtitle.freemovieseries.utils.PreferenceUtils;
-import animes.englishsubtitle.freemovieseries.utils.ads.BannerAds;
-import animes.englishsubtitle.freemovieseries.utils.ads.NativeAds;
 import animes.englishsubtitle.freemovieseries.view.SwipeRefreshLayout;
 
 
 public class HomeFragment extends Fragment {
-    @BindView(R.id.adView)
-    RelativeLayout mAdView;
-    @BindView(R.id.adView1)
-    RelativeLayout mAdView1;
+    @BindView(R.id.ads_container1)
+    RelativeLayout mAdContainer1;
+    @BindView(R.id.ads_container2)
+    RelativeLayout mAdContainer2;
     @BindView(R.id.shimmer_view_container)
     ShimmerFrameLayout mShimmerLayout;
     @BindView(R.id.swipe_layout)
@@ -93,10 +88,6 @@ public class HomeFragment extends Fragment {
     RelativeLayout mGenreLayout;
     @BindView(R.id.country_layout)
     RelativeLayout mCountryLayout;
-    @BindView(R.id.admob_nativead_template)
-    TemplateView admobNativeAdView;
-    @BindView(R.id.admob_nativead_template_1)
-    TemplateView admobNativeAdView_1;
     @BindView(R.id.c_viewPager)
     CardSliderViewPager mCViewPager;
     @BindView(R.id.movie_layout)
@@ -116,6 +107,7 @@ public class HomeFragment extends Fragment {
     @BindView(R.id.recyclerViewContinueWatching)
     RecyclerView recyclerViewContinueWatching;
 
+    private AdsController mAdsController;
     private ContinueWatchingViewModel continueWatchingViewModel;
     private ArrayList<CommonModels> listSlider = new ArrayList<>();
     private Timer timer;
@@ -156,6 +148,7 @@ public class HomeFragment extends Fragment {
         if (db.getConfigurationData().getAppConfig().getCountryVisible()) {
             mCountryLayout.setVisibility(View.VISIBLE);
         }
+        mAdsController  = AdsController.getInstance(getActivity());
         //----init timer slider--------------------
         timer = new Timer();
         // --- genre recycler view ---------
@@ -211,6 +204,7 @@ public class HomeFragment extends Fragment {
 
         mShimmerLayout.startShimmer();
 
+        getAdDetails();
         if (new NetworkInst(getContext()).isNetworkAvailable()) {
 
             getHomeContent();
@@ -244,9 +238,8 @@ public class HomeFragment extends Fragment {
 
 
                 if (new NetworkInst(getContext()).isNetworkAvailable()) {
-
                     getHomeContent();
-
+                    getAdDetails();
                 } else {
                     mShimmerLayout.stopShimmer();
                     mShimmerLayout.setVisibility(View.GONE);
@@ -291,7 +284,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        getAdDetails();
     }
 
 
@@ -395,9 +387,9 @@ public class HomeFragment extends Fragment {
                         models.setIsPaid(tvSeries.getIsPaid());
                         listSeries.add(models);
                     }
-                    if(listMovie.size() == 0){
+                    if (listMovie.size() == 0) {
                         mMovieLayout.setVisibility(View.GONE);
-                    }else{
+                    } else {
                         mMovieLayout.setVisibility(View.VISIBLE);
                     }
                     adapterSeries.notifyDataSetChanged();
@@ -473,37 +465,11 @@ public class HomeFragment extends Fragment {
         });
     }
 
-    private void loadAd() {
-        AdsConfig adsConfig = new DatabaseHelper(getContext()).getConfigurationData().getAdsConfig();
-        if (PreferenceUtils.isLoggedIn(mActivity) && PreferenceUtils.isActivePlan(mActivity))
-            return;
-        if (adsConfig.getAdsEnable().equals("1")) {
-            if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                //BannerAds.ShowAdmobBannerAds(getContext(), mAdView);
-                // BannerAds.ShowAdmobBannerAds(getContext(), mAdView1);
-                admobNativeAdView.setVisibility(View.VISIBLE);
-                NativeAds.showAdmobNativeAds(getActivity(), admobNativeAdView);
-
-                admobNativeAdView_1.setVisibility(View.VISIBLE);
-                NativeAds.showAdmobNativeAds(getActivity(), admobNativeAdView_1);
-
-            } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
-                // BannerAds.showStartAppBanner(getContext(), adView);
-                Appodeal.setBannerViewId(R.id.appodealBannerView1_home);
-                Appodeal.show(mActivity, Appodeal.BANNER_VIEW);
-            } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.NETWORK_AUDIENCE)) {
-                BannerAds.showFANBanner(getContext(), mAdView);
-                BannerAds.showFANBanner(getContext(), mAdView1);
-            }
-        }
-    }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
-        genreHomeAdapter.onDestroy();
+        mAdsController.onDestroy();
         mUnbinder.unbind();
-        NativeAds.releaseAdmobNativeAd();
     }
 
     private void getAdDetails() {
@@ -517,14 +483,20 @@ public class HomeFragment extends Fragment {
                 //.withTestMode("9424DF76F06983D1392E609FC074596C") // remove this on real project
                 .check();
 
-        loadAd();
+        mAdsController.initNativeAds();
+        mAdsController.showNativeAds(mAdContainer1,true);
+        mAdsController.showNativeAds(mAdContainer2,false);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-
         mShimmerLayout.startShimmer();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
     }
 
     @Override
@@ -546,7 +518,7 @@ public class HomeFragment extends Fragment {
         getActivity().startActivity(intent);
     }
 
-    @OnClick({R.id.btn_more_series, R.id.btn_more_series1,R.id.last_anime_layout,R.id.top_anime_layout})
+    @OnClick({R.id.btn_more_series, R.id.btn_more_series1, R.id.last_anime_layout, R.id.top_anime_layout})
     void onBtnMoreSeriesClick() {
         Intent intent = new Intent(getContext(), ItemSeriesActivity.class);
         intent.putExtra("title", "Anime Series");
@@ -554,7 +526,7 @@ public class HomeFragment extends Fragment {
     }
 
     @OnClick(R.id.continue_watching_clear_btn)
-    void onClearContinue(){
+    void onClearContinue() {
         continueWatchingViewModel.deleteAllContent();
     }
 
