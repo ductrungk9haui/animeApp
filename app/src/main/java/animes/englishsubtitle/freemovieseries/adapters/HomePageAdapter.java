@@ -2,6 +2,7 @@ package animes.englishsubtitle.freemovieseries.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +21,12 @@ import animes.englishsubtitle.freemovieseries.DetailsActivity;
 import animes.englishsubtitle.freemovieseries.LoginActivity;
 import animes.englishsubtitle.freemovieseries.R;
 import animes.englishsubtitle.freemovieseries.models.CommonModels;
+import animes.englishsubtitle.freemovieseries.models.single_details.SingleDetails;
+import animes.englishsubtitle.freemovieseries.network.RetrofitClient;
+import animes.englishsubtitle.freemovieseries.network.apis.SingleDetailsApi;
 import animes.englishsubtitle.freemovieseries.utils.ItemAnimation;
 import animes.englishsubtitle.freemovieseries.utils.PreferenceUtils;
+import retrofit2.Retrofit;
 
 public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.OriginalViewHolder> {
 
@@ -52,12 +57,23 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.Origin
         final CommonModels obj = items.get(position);
         holder.name.setText(obj.getTitle());
         Picasso.get().load(obj.getImageUrl()).placeholder(R.drawable.poster_placeholder).into(holder.image);
-
         //holder.qualityTv.setText(obj.getQuality());
         if(Integer.parseInt(obj.getIsPaid())==1){
             holder.qualityTv.setText("VIP");
         }else {
             holder.qualityTv.setText("Free");
+        }
+        if(Integer.parseInt(obj.getStatus_movie())==1){
+            holder.countEp.setVisibility(View.VISIBLE);
+            if(obj.getCount_status_movie()!=null){
+                holder.countEp.setText("EP"+String.valueOf(obj.getCount_status_movie()));
+            }else {
+                holder.countEp.setText("EP0");
+            }
+            holder.statusMovie.setText("On-going");
+            holder.statusMovie.setBackgroundResource(R.drawable.circle_status_movie_on_going);
+        }else {
+            holder.statusMovie.setText("Full");
         }
         holder.releaseDateTv.setText(obj.getReleaseDate());
 
@@ -102,7 +118,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.Origin
     public class OriginalViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView image;
-        public TextView name, qualityTv, releaseDateTv;
+        public TextView name, qualityTv, releaseDateTv, statusMovie, countEp;
         public MaterialRippleLayout lyt_parent;
 
 
@@ -112,6 +128,8 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.Origin
             name = v.findViewById(R.id.name);
             lyt_parent=v.findViewById(R.id.lyt_parent);
             qualityTv=v.findViewById(R.id.quality_tv);
+            statusMovie=v.findViewById(R.id.status_movie);
+            countEp=v.findViewById(R.id.count_ep);
             releaseDateTv=v.findViewById(R.id.release_date_tv);
         }
     }

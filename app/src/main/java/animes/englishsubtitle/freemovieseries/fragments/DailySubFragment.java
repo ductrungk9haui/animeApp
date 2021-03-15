@@ -210,6 +210,8 @@ public class DailySubFragment extends Fragment {
                         models.setTitle(video.getTitle());
                         models.setQuality(video.getVideoQuality());
                         models.setIsPaid(video.getIsPaid());
+                        models.setStatus_movie(video.getStatusMovie());
+                        models.setCount_status_movie(video.getCountStatusMovie());
                         models.setVideoType("movie");
                         models.setReleaseDate(video.getRelease());
                         if (video.getIsTvseries().equals("1")) {

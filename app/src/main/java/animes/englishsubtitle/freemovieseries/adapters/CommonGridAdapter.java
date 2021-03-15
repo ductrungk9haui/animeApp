@@ -103,6 +103,19 @@ public class CommonGridAdapter extends RecyclerView.Adapter<CommonGridAdapter.Or
             }else {
                 holder.qualityTv.setText("Free");
             }
+            if(Integer.parseInt(obj.getStatus_movie())==1){
+                holder.countEp.setVisibility(View.VISIBLE);
+                if(obj.getCount_status_movie()!=null){
+                    holder.countEp.setText("EP"+String.valueOf(obj.getCount_status_movie()));
+                }else {
+                    holder.countEp.setText("EP0");
+                }
+
+                holder.statusMovie.setText("On-going");
+                holder.statusMovie.setBackgroundResource(R.drawable.circle_status_movie_on_going);
+            }else {
+                holder.statusMovie.setText("Full");
+            }
             holder.releaseDateTv.setText(obj.getReleaseDate());
             holder.name.setText(obj.getTitle());
 
@@ -141,7 +154,7 @@ public class CommonGridAdapter extends RecyclerView.Adapter<CommonGridAdapter.Or
     public class OriginalViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView image;
-        public TextView name, qualityTv, releaseDateTv;
+        public TextView name, qualityTv, releaseDateTv, statusMovie, countEp;
         public MaterialRippleLayout lyt_parent;
         public View mainLayout;
         public View view;
@@ -156,6 +169,8 @@ public class CommonGridAdapter extends RecyclerView.Adapter<CommonGridAdapter.Or
             name = v.findViewById(R.id.name);
             lyt_parent = v.findViewById(R.id.lyt_parent);
             qualityTv = v.findViewById(R.id.quality_tv);
+            statusMovie=v.findViewById(R.id.status_movie);
+            countEp=v.findViewById(R.id.count_ep);
             releaseDateTv = v.findViewById(R.id.release_date_tv);
             cardView = v.findViewById(R.id.top_layout);
             adContainer = v.findViewById(R.id.ads_container);

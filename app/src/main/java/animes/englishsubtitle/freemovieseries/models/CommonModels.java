@@ -24,8 +24,26 @@ public class CommonModels {
     public String fileSize;
     public String resulation;
     public String isPaid;
+    public String status_movie;
+    public String count_status_movie;
     public String price;
     public boolean isInAppDownload;
+
+    public String getCount_status_movie() {
+        return count_status_movie;
+    }
+
+    public void setCount_status_movie(String count_status_movie) {
+        this.count_status_movie = count_status_movie;
+    }
+
+    public String getStatus_movie() {
+        return status_movie;
+    }
+
+    public void setStatus_movie(String status_movie) {
+        this.status_movie = status_movie;
+    }
 
     public String getFileSize() {
         return fileSize;

@@ -26,6 +26,7 @@ public class FeaturesGenreAndMovie {
     @Expose
     private List<Video> videos = null;
 
+
     public String getGenreId() {
         return genreId;
     }

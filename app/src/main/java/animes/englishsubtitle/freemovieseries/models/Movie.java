@@ -41,6 +41,32 @@ public class Movie implements Serializable {
     @Expose
     private String isPaid;
 
+    public String getStatusMovie() {
+        return statusMovie;
+    }
+
+    public void setStatusMovie(String statusMovie) {
+        this.statusMovie = statusMovie;
+    }
+
+    @SerializedName("status_movie")
+    @Expose
+    private String statusMovie;
+
+
+
+    public String getCountStatusMovie() {
+        return countStatusMovie;
+    }
+
+    public void setCountStatusMovie(String countStatusMovie) {
+        this.countStatusMovie = countStatusMovie;
+    }
+
+    @SerializedName("count_status_movie")
+    @Expose
+    private String countStatusMovie;
+
     public String getVideosId() {
         return videosId;
     }

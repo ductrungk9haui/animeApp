@@ -241,6 +241,8 @@ public class TvSeriesFragment extends Fragment {
                         models.setReleaseDate(video.getRelease());
                         models.setQuality(video.getVideoQuality());
                         models.setIsPaid(video.getIsPaid());
+                        models.setStatus_movie(video.getStatusMovie());
+                        models.setCount_status_movie(video.getCountStatusMovie());
                         models.setId(video.getVideosId());
                         mListCommonModels.add(models);
                         newAdd = true;

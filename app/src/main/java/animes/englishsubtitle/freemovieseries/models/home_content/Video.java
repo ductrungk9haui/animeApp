@@ -39,6 +39,29 @@ public class Video {
     @SerializedName("poster_url")
     @Expose
     private String posterUrl;
+    @SerializedName("status_movie")
+    @Expose
+    private String statusMovie;
+
+    @SerializedName("count_status_movie")
+    @Expose
+    private String countStatusMovie;
+
+    public String getStatusMovie() {
+        return statusMovie;
+    }
+
+    public void setStatusMovie(String statusMovie) {
+        this.statusMovie = statusMovie;
+    }
+
+    public String getCountStatusMovie() {
+        return countStatusMovie;
+    }
+
+    public void setCountStatusMovie(String countStatusMovie) {
+        this.countStatusMovie = countStatusMovie;
+    }
 
     public String getVideosId() {
         return videosId;

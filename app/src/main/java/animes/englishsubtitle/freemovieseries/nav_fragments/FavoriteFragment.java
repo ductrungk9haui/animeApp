@@ -250,7 +250,8 @@ public class FavoriteFragment extends Fragment {
                         models.setImageUrl(response.body().get(i).getThumbnailUrl());
                         models.setTitle(response.body().get(i).getTitle());
                         models.setQuality(response.body().get(i).getVideoQuality());
-
+                        models.setStatus_movie(response.body().get(i).getStatusMovie());
+                       // models.setCount_status_movie(response.body().get(i).getCountStatusMovie());
                         if (response.body().get(i).getIsTvseries().equals("0")){
                             models.setVideoType("movie");
                         }else {

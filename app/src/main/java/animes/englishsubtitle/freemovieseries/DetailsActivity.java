@@ -1655,7 +1655,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
     }
 
-    private void getSeriesData(String vtype, String vId) {
+    public void getSeriesData(String vtype, String vId) {
         final List<String> seasonList = new ArrayList<>();
         final List<String> seasonListForDownload = new ArrayList<>();
         Retrofit retrofit = RetrofitClient.getRetrofitInstance();
@@ -1670,7 +1670,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                     mShimmerLayout.stopShimmer();
                     mShimmerLayout.setVisibility(GONE);
 
-                    SingleDetails singleDetails = response.body();
+                   SingleDetails singleDetails = response.body();
                     String isPaid = singleDetails.getIsPaid();
                     paidControl(isPaid);
 
@@ -1741,6 +1741,8 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                         models.setId(relatedTvSeries.getVideosId());
                         models.setVideoType("tvseries");
                         models.setIsPaid(relatedTvSeries.getIsPaid());
+                        models.setStatus_movie(relatedTvSeries.getStatusMovie());
+                        models.setCount_status_movie(relatedTvSeries.getCountStatusMovie());
                         mListRelated.add(models);
                     }
                     if (mListRelated.size() == 0) {
@@ -1782,6 +1784,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                             mSeasonSpinnerContainer.setVisibility(GONE);
                         }
 
+                        //Toast.makeText(DetailsActivity.this,String.valueOf(singleDetails.getSeason().get(i).getEpisodes().size()) , Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -2020,7 +2023,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                         models.setId(relatedMovie.getVideosId());
                         models.setVideoType("movie");
                         models.setIsPaid(relatedMovie.getIsPaid());
-                        models.setIsPaid(relatedMovie.getIsPaid());
+                       // models.setIsPaid(relatedMovie.getIsPaid());
                         mListRelated.add(models);
                     }
 
