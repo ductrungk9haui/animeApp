@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="Gradle: animeApp.mobiamosdk.mobiamosdk">
+  <library name="Gradle: AnimeS.mobiamosdk.mobiamosdk">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/mobiamosdk/mobiamosdk.jar!/" />
     </CLASSES>
