@@ -33,6 +33,7 @@ import animes.englishsubtitle.freemovieseries.utils.Constants;
 import animes.englishsubtitle.freemovieseries.utils.NetworkInst;
 import animes.englishsubtitle.freemovieseries.utils.PreferenceUtils;
 import animes.englishsubtitle.freemovieseries.utils.RtlUtils;
+import animes.englishsubtitle.freemovieseries.utils.ads.AdsController;
 import animes.englishsubtitle.freemovieseries.utils.ads.BannerAds;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -97,7 +98,7 @@ public class ItemMovieActivity extends AppCompatActivity {
         //----movie's recycler view-----------------
         recyclerView = findViewById(R.id.recyclerView);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
-        if( !(PreferenceUtils.isLoggedIn(this) && PreferenceUtils.isActivePlan(this))){
+        if(AdsController.getInstance(this).isAdsEnable()){
             gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                 @Override
                 public int getSpanSize(int position) {

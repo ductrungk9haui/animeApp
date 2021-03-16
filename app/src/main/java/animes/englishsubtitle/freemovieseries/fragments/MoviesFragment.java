@@ -19,6 +19,7 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import animes.englishsubtitle.freemovieseries.utils.ads.AdsController;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -87,7 +88,7 @@ public class MoviesFragment extends Fragment {
         mShimmerLayout.startShimmer();
         //----movie's recycler view-----------------
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
-        if( !(PreferenceUtils.isLoggedIn(getContext()) && PreferenceUtils.isActivePlan(getContext()))){
+        if( AdsController.getInstance(getActivity()).isAdsEnable()){
             gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                 @Override
                 public int getSpanSize(int position) {
