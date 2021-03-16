@@ -205,7 +205,7 @@ public class LiveTvFragment extends Fragment {
                     if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
                         BannerAds.ShowAdmobBannerAds(activity, adView);
 
-                    } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
+                    } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.APPODEAL)) {
                         // BannerAds.showStartAppBanner(activity, adView);
                         Appodeal.setBannerViewId(R.id.appodealBannerView_fragment_livetv);
                         Appodeal.show(getActivity(),Appodeal.BANNER_VIEW);
@@ -220,7 +220,7 @@ public class LiveTvFragment extends Fragment {
                 if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
                     BannerAds.ShowAdmobBannerAds(activity, adView);
 
-                } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
+                } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.APPODEAL)) {
                     // BannerAds.showStartAppBanner(activity, adView);
                     Appodeal.setBannerViewId(R.id.appodealBannerView_fragment_livetv);
                     Appodeal.show(getActivity(),Appodeal.BANNER_VIEW);

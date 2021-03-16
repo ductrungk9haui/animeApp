@@ -389,7 +389,7 @@ public class HomeFragment extends Fragment {
                         models.setId(tvSeries.getVideosId());
                         //status movie
                         models.setStatus_movie(tvSeries.getStatusMovie());
-                       models.setCount_status_movie(tvSeries.getCountStatusMovie());
+                        models.setCount_status_movie(tvSeries.getCountStatusMovie());
                         models.setIsPaid(tvSeries.getIsPaid());
                         listSeries.add(models);
                     }

@@ -61,6 +61,10 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.Original
     public void onBindViewHolder(final EpisodeAdapter.OriginalViewHolder holder, final int position) {
         final EpiModel obj = items.get(position);
         holder.name.setText(obj.getEpi());
+        if(obj.getIs_epi_paid().equals("1")){
+            holder.statusEpisode.setVisibility(View.VISIBLE );
+            holder.statusEpisode.setText("VIP");
+        }
         holder.position = position;
 
         Picasso.get().load(obj.getImageUrl()).placeholder(R.drawable.poster_placeholder)
@@ -135,13 +139,14 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeAdapter.Original
 
     public class OriginalViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView name, playStatusTv;
+        public TextView name, playStatusTv, statusEpisode;
         public MaterialRippleLayout cardView;
         public ImageView episodIv;
         public int position = -1;
         public OriginalViewHolder(View v) {
             super(v);
             name = v.findViewById(R.id.name);
+            statusEpisode= v.findViewById(R.id.status_episode);
             playStatusTv = v.findViewById(R.id.play_status_tv);
             cardView=v.findViewById(R.id.lyt_parent);
             episodIv=v.findViewById(R.id.image);

@@ -185,7 +185,7 @@ public class MoviesFragment extends Fragment {
                         BannerAds.ShowAdmobBannerAds(getContext(), mAdView);
                         //BannerAds.ShowAdmobBannerAds(getContext(), adView1);
 
-                    } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
+                    } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.APPODEAL)) {
                         // BannerAds.showStartAppBanner(getContext(), adView);
                         Appodeal.setBannerViewId(R.id.appodealBannerView_fragment_movies);
                         Appodeal.show(mActivity,Appodeal.BANNER_VIEW);
@@ -202,7 +202,7 @@ public class MoviesFragment extends Fragment {
                     BannerAds.ShowAdmobBannerAds(getContext(), mAdView);
                     //BannerAds.ShowAdmobBannerAds(getContext(), adView1);
 
-                } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
+                } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.APPODEAL)) {
                     // BannerAds.showStartAppBanner(getContext(), adView);
                     Appodeal.setBannerViewId(R.id.appodealBannerView_fragment_movies);
                     Appodeal.show(mActivity,Appodeal.BANNER_VIEW);
@@ -244,7 +244,7 @@ public class MoviesFragment extends Fragment {
                         models.setQuality(video.getVideoQuality());
                         models.setIsPaid(video.getIsPaid());
                         models.setStatus_movie(video.getStatusMovie());
-                       models.setCount_status_movie(video.getCountStatusMovie());
+                        models.setCount_status_movie(video.getCountStatusMovie());
                         models.setVideoType("movie");
                         models.setReleaseDate(video.getRelease());
                         if (video.getIsTvseries().equals("1") ) {

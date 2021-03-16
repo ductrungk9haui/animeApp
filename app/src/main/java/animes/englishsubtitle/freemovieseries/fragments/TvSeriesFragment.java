@@ -186,7 +186,7 @@ public class TvSeriesFragment extends Fragment {
                 if (adsConfig.getAdsEnable().equals("1")) {
                     if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
                         BannerAds.ShowAdmobBannerAds(mActivity, mAdView);
-                    } else if (adsConfig.getMobileAdsNetwork().equals(Constants.START_APP)) {
+                    } else if (adsConfig.getMobileAdsNetwork().equals(Constants.APPODEAL)) {
                         // BannerAds.showStartAppBanner(activity, adView);
                         Appodeal.setBannerViewId(R.id.appodealBannerView_fragment_tvseries);
                         Appodeal.show(mActivity,Appodeal.BANNER_VIEW);
@@ -199,7 +199,7 @@ public class TvSeriesFragment extends Fragment {
             if (adsConfig.getAdsEnable().equals("1")) {
                 if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
                     BannerAds.ShowAdmobBannerAds(mActivity, mAdView);
-                } else if (adsConfig.getMobileAdsNetwork().equals(Constants.START_APP)) {
+                } else if (adsConfig.getMobileAdsNetwork().equals(Constants.APPODEAL)) {
                     // BannerAds.showStartAppBanner(activity, adView);
                     Appodeal.setBannerViewId(R.id.appodealBannerView_fragment_tvseries);
                     Appodeal.show(mActivity,Appodeal.BANNER_VIEW);

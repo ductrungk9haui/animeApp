@@ -13,7 +13,7 @@ import animes.englishsubtitle.freemovieseries.network.model.TvCategory;
 public class Constants {
 
     public static final String ADMOB = "admob";
-    public static final String START_APP = "startApp";
+    public static final String APPODEAL = "appodeal";
     public static final String NETWORK_AUDIENCE = "fan";
 
     public static String workId;

@@ -328,7 +328,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                                 timer.start();
                                 return;
                             }
-                            if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
+                            if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.APPODEAL)) {
                                 resolveUserConsent();
                             }else{
                                 timer.start();

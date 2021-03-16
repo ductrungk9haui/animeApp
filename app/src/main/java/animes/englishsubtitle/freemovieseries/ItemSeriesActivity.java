@@ -172,7 +172,7 @@ public class ItemSeriesActivity extends AppCompatActivity {
                 if (adsConfig.getAdsEnable().equals("1")) {
                     if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
                         BannerAds.ShowAdmobBannerAds(ItemSeriesActivity.this, adView);
-                    } else if (adsConfig.getMobileAdsNetwork().equals(Constants.START_APP)) {
+                    } else if (adsConfig.getMobileAdsNetwork().equals(Constants.APPODEAL)) {
                         // BannerAds.showStartAppBanner(ItemSeriesActivity.this, adView);
                         Appodeal.setBannerViewId(R.id.appodealBannerView_item_tvseries);
                         Appodeal.show(ItemSeriesActivity.this, Appodeal.BANNER_VIEW);
@@ -186,7 +186,7 @@ public class ItemSeriesActivity extends AppCompatActivity {
                 if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
                     BannerAds.ShowAdmobBannerAds(ItemSeriesActivity.this, adView);
 
-                } else if (adsConfig.getMobileAdsNetwork().equals(Constants.START_APP)) {
+                } else if (adsConfig.getMobileAdsNetwork().equals(Constants.APPODEAL)) {
                     // BannerAds.showStartAppBanner(ItemSeriesActivity.this, adView);
                     Appodeal.setBannerViewId(R.id.appodealBannerView_item_tvseries);
                     Appodeal.show(ItemSeriesActivity.this, Appodeal.BANNER_VIEW);

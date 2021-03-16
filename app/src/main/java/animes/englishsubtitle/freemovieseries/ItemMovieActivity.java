@@ -331,7 +331,7 @@ public class ItemMovieActivity extends AppCompatActivity {
                 if (adsConfig.getAdsEnable().equals("1")) {
                     if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
                         BannerAds.ShowAdmobBannerAds(ItemMovieActivity.this, adView);
-                    } else if (adsConfig.getMobileAdsNetwork().equals(Constants.START_APP)) {
+                    } else if (adsConfig.getMobileAdsNetwork().equals(Constants.APPODEAL)) {
                         //BannerAds.showStartAppBanner(ItemMovieActivity.this, adView);
                         BannerAds.showAppodealBanner(ItemMovieActivity.this,R.id.appodealBannerView_movie);
                     } else if(adsConfig.getMobileAdsNetwork().equals(Constants.NETWORK_AUDIENCE)) {
@@ -343,7 +343,7 @@ public class ItemMovieActivity extends AppCompatActivity {
             if (adsConfig.getAdsEnable().equals("1")) {
                 if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
                     BannerAds.ShowAdmobBannerAds(ItemMovieActivity.this, adView);
-                } else if (adsConfig.getMobileAdsNetwork().equals(Constants.START_APP)) {
+                } else if (adsConfig.getMobileAdsNetwork().equals(Constants.APPODEAL)) {
                     //BannerAds.showStartAppBanner(ItemMovieActivity.this, adView);
                     BannerAds.showAppodealBanner(ItemMovieActivity.this,R.id.appodealBannerView_movie);
                 } else if(adsConfig.getMobileAdsNetwork().equals(Constants.NETWORK_AUDIENCE)) {

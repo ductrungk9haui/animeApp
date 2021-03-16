@@ -39,6 +39,16 @@
                     android:layout_height="38dp" />
 
                 <TextView
+                    android:layout_width="40dp"
+                    android:layout_height="20dp"
+                    android:textSize="8sp"
+                    android:background="@drawable/rounded_textview_status_movie"
+                    android:textColor="@android:color/white"
+                    android:gravity="center"
+                    android:id="@+id/status_episode"
+                    android:visibility="gone"/>
+
+                <TextView
                     android:id="@+id/play_status_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

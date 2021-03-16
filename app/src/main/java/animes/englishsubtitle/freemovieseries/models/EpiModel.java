@@ -3,7 +3,21 @@ package animes.englishsubtitle.freemovieseries.models;
 import java.util.List;
 
 public class EpiModel {
-    String seson,epi,streamURL,serverType, imageUrl;
+    String seson;
+    String epi;
+    String streamURL;
+    String serverType;
+    String imageUrl;
+
+    public String getIs_epi_paid() {
+        return is_epi_paid;
+    }
+
+    public void setIs_epi_paid(String is_epi_paid) {
+        this.is_epi_paid = is_epi_paid;
+    }
+
+    String is_epi_paid;
     List<SubtitleModel> subtitleList;
 
     public String getImageUrl() {

@@ -140,7 +140,7 @@ public class CountryFragment extends Fragment {
                     if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
                         BannerAds.ShowAdmobBannerAds(getContext(), mAdView);
 
-                    } else if (adsConfig.getMobileAdsNetwork().equals(Constants.START_APP)) {
+                    } else if (adsConfig.getMobileAdsNetwork().equals(Constants.APPODEAL)) {
                         //BannerAds.showStartAppBanner(getContext(), adView);
                         Appodeal.setBannerViewId(R.id.appodealBannerView_fragment_country);
                         Appodeal.show(getActivity(),Appodeal.BANNER_VIEW);
@@ -155,7 +155,7 @@ public class CountryFragment extends Fragment {
                 if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
                     BannerAds.ShowAdmobBannerAds(getContext(), mAdView);
 
-                } else if (adsConfig.getMobileAdsNetwork().equals(Constants.START_APP)) {
+                } else if (adsConfig.getMobileAdsNetwork().equals(Constants.APPODEAL)) {
                     //BannerAds.showStartAppBanner(getContext(), adView);
                     Appodeal.setBannerViewId(R.id.appodealBannerView_fragment_country);
                     Appodeal.show(getActivity(),Appodeal.BANNER_VIEW);

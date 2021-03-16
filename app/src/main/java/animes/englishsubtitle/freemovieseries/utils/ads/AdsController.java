@@ -32,7 +32,7 @@ public class AdsController implements AdsHelper {
         if (adsConfig.getAdsEnable().equals("1")) {
             mIsAdsEnable = !(PreferenceUtils.isLoggedIn(activity) && PreferenceUtils.isActivePlan(activity));
             if (mIsAdsEnable) {
-                if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
+                if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.APPODEAL)) {
                     mAdsHelper = new AppodealHelper(activity);
                 } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
                     mAdsHelper = new AdMobHelper(activity);

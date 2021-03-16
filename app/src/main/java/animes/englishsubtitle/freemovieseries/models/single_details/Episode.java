@@ -13,6 +13,18 @@ public class Episode {
     @SerializedName("episodes_name")
     @Expose
     private String episodesName;
+
+    public String getIsEpiPaid() {
+        return isEpiPaid;
+    }
+
+    public void setIsEpiPaid(String isEpiPaid) {
+        this.isEpiPaid = isEpiPaid;
+    }
+
+    @SerializedName("is_epi_paid")
+    @Expose
+    private String isEpiPaid;
     @SerializedName("stream_key")
     @Expose
     private String streamKey;

@@ -409,6 +409,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     private DatabaseHelper mDBHelper;
     private static DetailsActivity instance;
     private AdsConfig adsConfig;
+    private boolean is_hide_subscribe_layout=false;
     String videoReport = "", audioReport = "", subtitleReport = "", messageReport = "";
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -1014,56 +1015,86 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         mAdsController.showNativeAds(mAdsContainer, true);
         mAdsController.showInterstitialAds();
 
-        if (type.equalsIgnoreCase("embed")) {
-            CommonModels model = new CommonModels();
-            model.setStremURL(obj.getStreamURL());
-            model.setServerType(obj.getServerType());
-            model.setListSub(null);
-            releasePlayer();
-            resetCastPlayer();
-            mMapMovies.put(mId, position);
-            mDBHelper.deleteAllMapMovie();
-            mDBHelper.insertMapMovie(getMapMovies());
-            if (mMapMovies.containsKey(mId) && mMapMovies.get(mId) != null) {
-                mRvServer.scrollToPosition(mMapMovies.get(mId) - 1);
-            }
-            mActiveMovie = true;
-            preparePlayer(model);
-        } else {
-            mMapMovies.put(mId, position);
-            mDBHelper.deleteAllMapMovie();
-            mDBHelper.insertMapMovie(getMapMovies());
-            mActiveMovie = true;
-            if (mMapMovies.containsKey(mId) && mMapMovies.get(mId) != null) {
-                mRvServer.scrollToPosition(mMapMovies.get(mId));
-            }
-            if (obj != null) {
-                if (obj.getSubtitleList().size() != 0) {
-                    mListSub.clear();
-                    mListSub.addAll(obj.getSubtitleList());
-                    mImgSubtitle.setVisibility(VISIBLE);
-                } else {
-                    mListSub.clear();
-                    mImgSubtitle.setVisibility(GONE);
-                }
+        if (obj.getIs_epi_paid().equals("1")) {
+            if (PreferenceUtils.isLoggedIn(DetailsActivity.this)) {
+                if (PreferenceUtils.isActivePlan(DetailsActivity.this)) {
+                    if (PreferenceUtils.isValid(DetailsActivity.this)) {
+                        //mContentDetails.setVisibility(VISIBLE);
+                       // mSubscriptionLayout.setVisibility(GONE);
+                        Log.e("SUBCHECK", "validity: " + PreferenceUtils.isValid(DetailsActivity.this));
 
-                initMoviePlayer(obj.getStreamURL(), obj.getServerType(), DetailsActivity.this);
-            }
-            if (mListSub.size() > 0) {
-                String subURL = mListSub.get(0).getUrl();
-                SharedPreferences sharedPreferences = getSharedPreferences("push", MODE_PRIVATE);
-                String df_language = sharedPreferences.getString("df_subtitle", Constants.DEFAULT_LANGUAGE);
-                for (SubtitleModel model : mListSub) {
-                    if (model.getLanguage().equals(df_language)) {
-                        subURL = model.getUrl();
-                        break;
+                        Toast.makeText(instance, String.valueOf(obj.getIs_epi_paid()), Toast.LENGTH_SHORT).show();
+                        if (type.equalsIgnoreCase("embed")) {
+                            CommonModels model = new CommonModels();
+                            model.setStremURL(obj.getStreamURL());
+                            model.setServerType(obj.getServerType());
+                            model.setListSub(null);
+                            releasePlayer();
+                            resetCastPlayer();
+                            mMapMovies.put(mId, position);
+                            mDBHelper.deleteAllMapMovie();
+                            mDBHelper.insertMapMovie(getMapMovies());
+                            if (mMapMovies.containsKey(mId) && mMapMovies.get(mId) != null) {
+                                mRvServer.scrollToPosition(mMapMovies.get(mId) - 1);
+                            }
+                            mActiveMovie = true;
+                            preparePlayer(model);
+                        } else {
+                            mMapMovies.put(mId, position);
+                            mDBHelper.deleteAllMapMovie();
+                            mDBHelper.insertMapMovie(getMapMovies());
+                            mActiveMovie = true;
+                            if (mMapMovies.containsKey(mId) && mMapMovies.get(mId) != null) {
+                                mRvServer.scrollToPosition(mMapMovies.get(mId));
+                            }
+                            if (obj != null) {
+                                if (obj.getSubtitleList().size() != 0) {
+                                    mListSub.clear();
+                                    mListSub.addAll(obj.getSubtitleList());
+                                    mImgSubtitle.setVisibility(VISIBLE);
+                                } else {
+                                    mListSub.clear();
+                                    mImgSubtitle.setVisibility(GONE);
+                                }
+
+                                initMoviePlayer(obj.getStreamURL(), obj.getServerType(), DetailsActivity.this);
+                            }
+                            if (mListSub.size() > 0) {
+                                String subURL = mListSub.get(0).getUrl();
+                                SharedPreferences sharedPreferences = getSharedPreferences("push", MODE_PRIVATE);
+                                String df_language = sharedPreferences.getString("df_subtitle", Constants.DEFAULT_LANGUAGE);
+                                for (SubtitleModel model : mListSub) {
+                                    if (model.getLanguage().equals(df_language)) {
+                                        subURL = model.getUrl();
+                                        break;
+                                    }
+                                }
+                                setSelectedSubtitle(mMediaSource, subURL, DetailsActivity.this);
+                            }
+                            //reset
+                            playerCurrentPosition = 0L;
+                            resumePosition = 0;
+                        }
+
+                    } else {
+                        Log.e("SUBCHECK", "not valid");
+                        /*contentDetails.setVisibility(GONE);
+                        subscriptionLayout.setVisibility(VISIBLE);*/
+                        PreferenceUtils.updateSubscriptionStatus(DetailsActivity.this);
+                        //paidControl(isPaid);
                     }
+                } else {
+                    Log.e("SUBCHECK", "not active plan");
+                    mContentDetails.setVisibility(GONE);
+                    releasePlayer();
+                    mSubscriptionLayout.setVisibility(VISIBLE);
+                    is_hide_subscribe_layout=true;
                 }
-                setSelectedSubtitle(mMediaSource, subURL, DetailsActivity.this);
+            } else {
+                startActivity(new Intent(DetailsActivity.this, LoginActivity.class));
+                finish();
             }
-            //reset
-            playerCurrentPosition = 0L;
-            resumePosition = 0;
+
         }
     }
 
@@ -1672,6 +1703,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
                    SingleDetails singleDetails = response.body();
                     String isPaid = singleDetails.getIsPaid();
+                    String is_epi_paid= singleDetails.getIsEpiPaid();
                     paidControl(isPaid);
 
                     mTitle = singleDetails.getTitle();
@@ -1773,6 +1805,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                             model.setServerType(episode.getFileType());
                             model.setImageUrl(episode.getImageUrl());
                             model.setSubtitleList(episode.getSubtitle());
+                            model.setIs_epi_paid(episode.getIsEpiPaid());
                             epList.add(model);
                         }
                         models.setListEpi(epList);
@@ -2246,7 +2279,12 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             }
             showDescriptionLayout();
             mActiveMovie = false;
-        } else {
+        }else if(is_hide_subscribe_layout==true){
+            mContentDetails.setVisibility(VISIBLE);
+            mSubscriptionLayout.setVisibility(GONE);
+            is_hide_subscribe_layout=false;
+        }
+        else {
             releasePlayer();
             super.onBackPressed();
         }
@@ -2586,7 +2624,12 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
     @OnClick(R.id.img_back)
     void onBackClick() {
-        if (mActiveMovie) {
+        if(is_hide_subscribe_layout==true){
+            mContentDetails.setVisibility(VISIBLE);
+            mSubscriptionLayout.setVisibility(GONE);
+            is_hide_subscribe_layout=false;
+        }
+        else if (mActiveMovie) {
             setPlayerNormalScreen();
             if (mPlayer != null) {
                 mPlayer.setPlayWhenReady(false);
@@ -2594,7 +2637,8 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             }
             showDescriptionLayout();
             mActiveMovie = false;
-        } else {
+        }
+        else {
             finish();
         }
     }

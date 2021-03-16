@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         RtlUtils.setScreenDirection(this);
         mDBHelper = new DatabaseHelper(MainActivity.this);
         AdsConfig adsConfig = new DatabaseHelper(MainActivity.this).getConfigurationData().getAdsConfig();
-        if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.START_APP)) {
+        if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.APPODEAL)) {
             Appodeal.setTesting(true);
             Appodeal.disableLocationPermissionCheck();
             Appodeal.initialize(MainActivity.this,adsConfig.getStartappAppId(),Appodeal.BANNER | Appodeal.INTERSTITIAL| Appodeal.NATIVE);

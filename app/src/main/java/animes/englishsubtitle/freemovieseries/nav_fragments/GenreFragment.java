@@ -155,7 +155,7 @@ public class GenreFragment extends Fragment {
                     if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
                         BannerAds.ShowAdmobBannerAds(mActivity, mAdView);
 
-                    } else if (adsConfig.getMobileAdsNetwork().equals(Constants.START_APP)) {
+                    } else if (adsConfig.getMobileAdsNetwork().equals(Constants.APPODEAL)) {
                         //BannerAds.showStartAppBanner(activity, adView);
                         Appodeal.setBannerViewId(R.id.appodealBannerView_fragment_genre);
                         Appodeal.show(getActivity(),Appodeal.BANNER_VIEW);
@@ -170,7 +170,7 @@ public class GenreFragment extends Fragment {
                 if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
                     BannerAds.ShowAdmobBannerAds(mActivity, mAdView);
 
-                } else if (adsConfig.getMobileAdsNetwork().equals(Constants.START_APP)) {
+                } else if (adsConfig.getMobileAdsNetwork().equals(Constants.APPODEAL)) {
                     //BannerAds.showStartAppBanner(activity, adView);
                     Appodeal.setBannerViewId(R.id.appodealBannerView_fragment_genre);
                     Appodeal.show(getActivity(),Appodeal.BANNER_VIEW);

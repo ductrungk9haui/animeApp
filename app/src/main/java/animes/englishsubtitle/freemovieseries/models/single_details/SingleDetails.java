@@ -37,6 +37,18 @@ public class SingleDetails {
     @SerializedName("is_paid")
     @Expose
     private String isPaid;
+
+    public String getIsEpiPaid() {
+        return isEpiPaid;
+    }
+
+    public void setIsEpiPaid(String isEpiPaid) {
+        this.isEpiPaid = isEpiPaid;
+    }
+
+    @SerializedName("is_epi_paid")
+    @Expose
+    private String isEpiPaid;
     @SerializedName("enable_download")
     @Expose
     private String enableDownload;
