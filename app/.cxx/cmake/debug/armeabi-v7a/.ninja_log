@@ -1,0 +1,5 @@
+# ninja log v5
+1	8	0	clean	124208e87b73ee86
+1	17	0	clean	124208e87b73ee86
+1	531	637639472	CMakeFiles/api_config.dir/api_config.cpp.o	19c6961ef21e52c5
+533	725	637639472	C:/Users/khaih/Documents/GitHub/animeApp/app/build/intermediates/cmake/debug/obj/armeabi-v7a/libapi_config.so	474c268a97bcc906
