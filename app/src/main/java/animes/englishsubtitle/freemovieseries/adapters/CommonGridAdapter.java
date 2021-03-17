@@ -103,18 +103,37 @@ public class CommonGridAdapter extends RecyclerView.Adapter<CommonGridAdapter.Or
             }else {
                 holder.qualityTv.setText("Free");
             }
-            if(Integer.parseInt(obj.getStatus_movie())==1){
-                holder.countEp.setVisibility(View.VISIBLE);
-                if(obj.getCount_status_movie()!=null){
-                    holder.countEp.setText("EP"+String.valueOf(obj.getCount_status_movie()));
-                }else {
-                    holder.countEp.setText("EP0");
-                }
+            if(Integer.parseInt(obj.getCount_status_movie())>=0){
+                if(obj.getStatus_movie().equals("On-going")){
+                    holder.countEp.setVisibility(View.VISIBLE);
+                    if(obj.getCount_status_movie()!=null){
+                        holder.countEp.setText("EP"+String.valueOf(obj.getCount_status_movie()));
+                    }else {
+                        holder.countEp.setText("EP0");
+                    }
 
-                holder.statusMovie.setText("On-going");
-                holder.statusMovie.setBackgroundResource(R.drawable.circle_status_movie_on_going);
-            }else {
-                holder.statusMovie.setText("Full");
+                    holder.statusMovie.setText(String.valueOf(obj.getStatus_movie()));
+                    holder.statusMovie.setBackgroundResource(R.drawable.circle_status_movie_on_going);
+
+                }else if(obj.getStatus_movie().equals("Trailer")){
+                    holder.statusMovie.setText(String.valueOf(obj.getStatus_movie()));
+                    holder.statusMovie.setBackgroundResource(R.drawable.circle_status_movie_trailer);
+                }
+                else{
+                    holder.statusMovie.setText(String.valueOf(obj.getStatus_movie()));
+                }
+            }else if(Integer.parseInt(obj.getCount_status_movie())==-1){
+                if(obj.getStatus_movie().equals("New")){
+                    holder.statusMovie.setText(String.valueOf(obj.getStatus_movie()));
+                    holder.statusMovie.setBackgroundResource(R.drawable.circle_status_movie_trailer);
+                }else if(obj.getStatus_movie().equals("Trailer")){
+                    holder.statusMovie.setText(String.valueOf(obj.getStatus_movie()));
+                    holder.statusMovie.setBackgroundResource(R.drawable.circle_status_movie_trailer);
+                }
+                else {
+                    holder.statusMovie.setText(String.valueOf(obj.getStatus_movie()));
+                    holder.statusMovie.setBackgroundResource(R.drawable.circle_status_movie_on_going);
+                }
             }
             holder.releaseDateTv.setText(obj.getReleaseDate());
             holder.name.setText(obj.getTitle());

@@ -40,6 +40,28 @@ public class CommonModel implements Serializable {
     @SerializedName("is_paid")
     @Expose
     private String isPaid;
+    @SerializedName("status_movie")
+    @Expose
+    private String status_movie;
+    @SerializedName("count_status_movie")
+    @Expose
+    private String count_status_movie;
+
+    public String getStatus_movie() {
+        return status_movie;
+    }
+
+    public void setStatus_movie(String status_movie) {
+        this.status_movie = status_movie;
+    }
+
+    public String getCount_status_movie() {
+        return count_status_movie;
+    }
+
+    public void setCount_status_movie(String count_status_movie) {
+        this.count_status_movie = count_status_movie;
+    }
 
     public String getVideosId() {
         return videosId;

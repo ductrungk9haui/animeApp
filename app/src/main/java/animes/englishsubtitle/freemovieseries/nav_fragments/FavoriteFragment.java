@@ -46,11 +46,17 @@ import animes.englishsubtitle.freemovieseries.utils.ads.BannerAds;
 import animes.englishsubtitle.freemovieseries.view.SwipeRefreshLayout;
 
 public class FavoriteFragment extends Fragment {
-    @BindView(R.id.adView) RelativeLayout mAdView;
-    @BindView(R.id.item_progress_bar) ProgressBar mProgressBar;
-    @BindView(R.id.shimmer_view_container) ShimmerFrameLayout mShimmerLayout;
-    @BindView(R.id.swipe_layout) SwipeRefreshLayout mSwipeRefreshLayout;
-    @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
+
+    @BindView(R.id.adView)
+    RelativeLayout mAdView;
+    @BindView(R.id.item_progress_bar)
+    ProgressBar mProgressBar;
+    @BindView(R.id.shimmer_view_container)
+    ShimmerFrameLayout mShimmerLayout;
+    @BindView(R.id.swipe_layout)
+    SwipeRefreshLayout mSwipeRefreshLayout;
+    @BindView(R.id.recyclerView)
+    RecyclerView mRecyclerView;
     Unbinder mUnbinder;
     private CommonGridAdapter mAdapter;
     private List<CommonModels> mListCommonModels =new ArrayList<>();
@@ -93,7 +99,7 @@ public class FavoriteFragment extends Fragment {
 
         //----favorite's recycler view-----------------
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 3);
-        if(AdsController.getInstance(getActivity()).isAdsEnable()){
+        if( AdsController.getInstance(getActivity()).isAdsEnable()){
             gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                 @Override
                 public int getSpanSize(int position) {
@@ -251,8 +257,9 @@ public class FavoriteFragment extends Fragment {
                         models.setImageUrl(response.body().get(i).getThumbnailUrl());
                         models.setTitle(response.body().get(i).getTitle());
                         models.setQuality(response.body().get(i).getVideoQuality());
+                        models.setIsPaid(response.body().get(i).getIsPaid());
                         models.setStatus_movie(response.body().get(i).getStatusMovie());
-                       // models.setCount_status_movie(response.body().get(i).getCountStatusMovie());
+                        models.setCount_status_movie(response.body().get(i).getCountStatusMovie());
                         if (response.body().get(i).getIsTvseries().equals("0")){
                             models.setVideoType("movie");
                         }else {

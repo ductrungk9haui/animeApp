@@ -24,18 +24,6 @@ public class LatestMovie {
     @SerializedName("is_paid")
     @Expose
     private String isPaid;
-
-    public String getStatusMovie() {
-        return statusMovie;
-    }
-
-    public void setStatusMovie(String statusMovie) {
-        this.statusMovie = statusMovie;
-    }
-
-    @SerializedName("status_movie")
-    @Expose
-    private String statusMovie;
     @SerializedName("runtime")
     @Expose
     private String runtime;
@@ -48,9 +36,20 @@ public class LatestMovie {
     @SerializedName("poster_url")
     @Expose
     private String posterUrl;
+    @SerializedName("status_movie")
+    @Expose
+    private String statusMovie;
     @SerializedName("count_status_movie")
     @Expose
     private String countStatusMovie;
+
+    public String getStatusMovie() {
+        return statusMovie;
+    }
+
+    public void setStatusMovie(String statusMovie) {
+        this.statusMovie = statusMovie;
+    }
 
     public String getCountStatusMovie() {
         return countStatusMovie;

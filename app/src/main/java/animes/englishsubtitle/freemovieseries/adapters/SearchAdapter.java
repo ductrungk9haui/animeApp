@@ -59,7 +59,37 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
             holder.name.setText(commonModel.getTitle());
             holder.qualityTv.setText(commonModel.getVideoQuality());
             holder.releaseDateTv.setText(commonModel.getRelease());
+            if(Integer.parseInt(commonModel.getCount_status_movie())>=0){
+                if(commonModel.getStatus_movie().equals("On-going")){
+                    holder.countEp.setVisibility(View.VISIBLE);
+                    if(commonModel.getCount_status_movie()!=null){
+                        holder.countEp.setText("EP"+String.valueOf(commonModel.getCount_status_movie()));
+                    }else {
+                        holder.countEp.setText("EP0");
+                    }
 
+                    holder.statusMovie.setText(String.valueOf(commonModel.getStatus_movie()));
+                    holder.statusMovie.setBackgroundResource(R.drawable.circle_status_movie_on_going);
+
+                }else if(commonModel.getStatus_movie().equals("Trailer")){
+                    holder.statusMovie.setText(String.valueOf(commonModel.getStatus_movie()));
+                    holder.statusMovie.setBackgroundResource(R.drawable.circle_status_movie_trailer);
+                }
+                else{
+                    holder.statusMovie.setText(String.valueOf(commonModel.getStatus_movie()));
+                }
+            }else if(Integer.parseInt(commonModel.getCount_status_movie())==-1){
+                if(commonModel.getStatus_movie().equals("New")){
+                    holder.statusMovie.setText("New");
+                }else if(commonModel.getStatus_movie().equals("Trailer")){
+                    holder.statusMovie.setText(String.valueOf(commonModel.getStatus_movie()));
+                    holder.statusMovie.setBackgroundResource(R.drawable.circle_status_movie_trailer);
+                }
+                else {
+                    holder.statusMovie.setText(String.valueOf(commonModel.getStatus_movie()));
+                    holder.statusMovie.setBackgroundResource(R.drawable.circle_status_movie_on_going);
+                }
+            }
             Picasso.get().load(commonModel.getThumbnailUrl()).into(holder.image);
 
 
@@ -79,7 +109,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
 
         public ImageView image;
-        public TextView name, qualityTv, releaseDateTv;
+        public TextView name, qualityTv, releaseDateTv, statusMovie, countEp;
         public MaterialRippleLayout lyt_parent;
 
 
@@ -90,6 +120,8 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
             lyt_parent = v.findViewById(R.id.lyt_parent);
             qualityTv = v.findViewById(R.id.quality_tv);
             releaseDateTv = v.findViewById(R.id.release_date_tv);
+            statusMovie=v.findViewById(R.id.status_movie);
+            countEp=v.findViewById(R.id.count_ep);
 
 
             lyt_parent.setOnClickListener(new View.OnClickListener() {

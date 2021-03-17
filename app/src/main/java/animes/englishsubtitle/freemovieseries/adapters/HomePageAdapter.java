@@ -63,18 +63,33 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.Origin
         }else {
             holder.qualityTv.setText("Free");
         }
-        if(Integer.parseInt(obj.getStatus_movie())==1){
-            holder.countEp.setVisibility(View.VISIBLE);
-            if(obj.getCount_status_movie()!=null){
-                holder.countEp.setText("EP"+String.valueOf(obj.getCount_status_movie()));
-            }else {
-                holder.countEp.setText("EP0");
+
+            if(obj.getStatus_movie().equals("On-going")){
+                holder.countEp.setVisibility(View.VISIBLE);
+                if(obj.getCount_status_movie()!=null){
+                    holder.countEp.setText("EP"+String.valueOf(obj.getCount_status_movie()));
+                }else {
+                    holder.countEp.setText("EP0");
+                }
+
+                holder.statusMovie.setText(String.valueOf(obj.getStatus_movie()));
+                holder.statusMovie.setBackgroundResource(R.drawable.circle_status_movie_on_going);
+
+            }else if(obj.getStatus_movie().equals("Trailer")){
+                holder.statusMovie.setText(String.valueOf(obj.getStatus_movie()));
+                holder.statusMovie.setBackgroundResource(R.drawable.circle_status_movie_trailer);
+            }else if(obj.getStatus_movie().equals("New")){
+                holder.statusMovie.setText(String.valueOf(obj.getStatus_movie()));
+                holder.statusMovie.setBackgroundResource(R.drawable.circle_status_movie_on_going);
             }
-            holder.statusMovie.setText("On-going");
-            holder.statusMovie.setBackgroundResource(R.drawable.circle_status_movie_on_going);
-        }else {
-            holder.statusMovie.setText("Full");
-        }
+            else if(obj.getStatus_movie().equals("Aired")){
+                holder.statusMovie.setText(String.valueOf(obj.getStatus_movie()));
+                holder.statusMovie.setBackgroundResource(R.drawable.circle_status_movie_on_going);
+            }
+            else{
+                holder.statusMovie.setText(String.valueOf(obj.getStatus_movie()));
+            }
+
         holder.releaseDateTv.setText(obj.getReleaseDate());
 
 

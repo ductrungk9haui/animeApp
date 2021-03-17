@@ -2017,6 +2017,8 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                         models.setTitle(video.getLabel());
                         models.setStremURL(video.getFileUrl());
                         models.setServerType(video.getFileType());
+                        models.setStatus_movie(video.getStatusMovie());
+                        models.setCount_status_movie(video.getCountStatusMovie());
 
                         if (video.getFileType().equals("mp4")) {
                             V_URL = video.getFileUrl();
@@ -2060,7 +2062,8 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                         models.setId(relatedMovie.getVideosId());
                         models.setVideoType("movie");
                         models.setIsPaid(relatedMovie.getIsPaid());
-                       // models.setIsPaid(relatedMovie.getIsPaid());
+                        models.setStatus_movie(relatedMovie.getStatusMovie());
+                        models.setCount_status_movie(relatedMovie.getCountStatusMovie());
                         mListRelated.add(models);
                     }
 

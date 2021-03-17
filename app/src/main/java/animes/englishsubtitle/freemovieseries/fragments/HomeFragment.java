@@ -368,11 +368,10 @@ public class HomeFragment extends Fragment {
                         models.setVideoType("movie");
                         models.setReleaseDate(movie.getRelease());
                         models.setQuality(movie.getVideoQuality());
+                        models.setId(movie.getVideosId());
                         models.setIsPaid(movie.getIsPaid());
-                        //status movie
                         models.setStatus_movie(movie.getStatusMovie());
                         models.setCount_status_movie(movie.getCountStatusMovie());
-                        models.setId(movie.getVideosId());
                         listMovie.add(models);
                     }
                     adapterMovie.notifyDataSetChanged();
@@ -387,7 +386,6 @@ public class HomeFragment extends Fragment {
                         models.setReleaseDate(tvSeries.getRelease());
                         models.setQuality(tvSeries.getVideoQuality());
                         models.setId(tvSeries.getVideosId());
-                        //status movie
                         models.setStatus_movie(tvSeries.getStatusMovie());
                         models.setCount_status_movie(tvSeries.getCountStatusMovie());
                         models.setIsPaid(tvSeries.getIsPaid());
@@ -411,7 +409,6 @@ public class HomeFragment extends Fragment {
                         models.setQuality(topviewtvSeries.getVideoQuality());
                         models.setId(topviewtvSeries.getVideosId());
                         models.setIsPaid(topviewtvSeries.getIsPaid());
-                        //status movie
                         models.setStatus_movie(topviewtvSeries.getStatusMovie());
                         models.setCount_status_movie(topviewtvSeries.getCountStatusMovie());
                         listTopViewSeries.add(models);
