@@ -436,6 +436,8 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
         String workId;
         workId = url.replaceAll(" ", "_");
         workId = workId.replaceAll(":", "_");
+
+        workId = workId.replaceAll("'", "_");
         work.setWorkId(workId);
         mDBHelper.updateWork(work);
         Data data = new Data.Builder()

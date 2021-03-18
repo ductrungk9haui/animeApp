@@ -27,6 +27,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import animes.englishsubtitle.freemovieseries.DetailsActivity;
+import animes.englishsubtitle.freemovieseries.utils.PreferenceUtils;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import animes.englishsubtitle.freemovieseries.R;
@@ -36,6 +38,9 @@ import animes.englishsubtitle.freemovieseries.models.Work;
 import animes.englishsubtitle.freemovieseries.service.DownloadWorkManager;
 import animes.englishsubtitle.freemovieseries.utils.Constants;
 import animes.englishsubtitle.freemovieseries.utils.ToastMsg;
+
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.OriginalViewHolder> {
 
@@ -56,6 +61,9 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.Origin
     private boolean check = false;
 
     public RewardedVideoAd mrewardedAd;
+
+
+    public static boolean is_hide_subscribe_layout=false;
 
 
     public DownloadAdapter(Context ctx, String filmName, List<CommonModels> items, boolean isDialog) {
@@ -101,24 +109,54 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.Origin
         holder.itemLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.icon.setColorFilter(ContextCompat.getColor(mContext, R.color.green_500));
-                if (obj.isInAppDownload()) {
-                    //Toast.makeText(mContext, "Download after ad finish (5s)", Toast.LENGTH_SHORT).show();
-                    final Handler handler = new Handler(Looper.getMainLooper());
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            downloadFileInsideApp(obj);
-                        }
-                    }, 0);
-                } else {
-                    String url = obj.getStremURL();
-                    Intent i = new Intent(Intent.ACTION_VIEW);
-                    i.setData(Uri.parse(url));
-                    mContext.startActivity(i);
+                epiPaidControl(obj.getIs_epi_download_paid());
+                if(is_hide_subscribe_layout!=true){
+                    holder.icon.setColorFilter(ContextCompat.getColor(mContext, R.color.green_500));
+                    if (obj.isInAppDownload()) {
+                        //Toast.makeText(mContext, "Download after ad finish (5s)", Toast.LENGTH_SHORT).show();
+                        final Handler handler = new Handler(Looper.getMainLooper());
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                downloadFileInsideApp(obj);
+                            }
+                        }, 0);
+                    } else {
+                        String url = obj.getStremURL();
+                        Intent i = new Intent(Intent.ACTION_VIEW);
+                        i.setData(Uri.parse(url));
+                        mContext.startActivity(i);
+                    }
                 }
             }
         });
+    }
+
+    private void epiPaidControl(String isPaid) {
+        if (isPaid.equals("1")) {
+            if (PreferenceUtils.isLoggedIn(DetailsActivity.getInstance())) {
+                if (PreferenceUtils.isActivePlan(DetailsActivity.getInstance())) {
+                    if (PreferenceUtils.isValid(DetailsActivity.getInstance())) {
+                        //mContentDetails.setVisibility(VISIBLE);
+                        DetailsActivity.getInstance().mSubscriptionLayout.setVisibility(GONE);
+                        //Log.e("SUBCHECK", "validity: " + PreferenceUtils.isValid(DetailsActivity.this));
+
+                    } else {
+                        Log.e("SUBCHECK", "not valid");
+                            /*contentDetails.setVisibility(GONE);
+                            subscriptionLayout.setVisibility(VISIBLE);*/
+                        PreferenceUtils.updateSubscriptionStatus(DetailsActivity.getInstance());
+                        //paidControl(isPaid);
+                    }
+                } else {
+                    Log.e("SUBCHECK", "not active plan");
+                    is_hide_subscribe_layout=true;
+                    DetailsActivity.getInstance().mContentDetails.setVisibility(GONE);
+                    DetailsActivity.getInstance().hideDownloadServerDialog();
+                    DetailsActivity.getInstance().mSubscriptionLayout.setVisibility(VISIBLE);
+                }
+            }
+        }
     }
 
 
@@ -140,6 +178,7 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.Origin
 
         fileName = fileName.replaceAll(" ", "_");
         fileName = fileName.replaceAll(":", "_");
+        fileName = fileName.replaceAll("'", "_");
 
         File file = new File(path, fileName); // e_ for encode
         if (file.exists()) {
@@ -149,6 +188,7 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.Origin
             String workId;
             workId = streamURL.replaceAll(" ", "_");
             workId = workId.replaceAll(":", "_");
+            workId = workId.replaceAll("'", "_");
             List<Work> workList = mDBHelper.getAllWork();
             for (Work w : workList) {
                 if (w.getUrl().equals(streamURL)) {
@@ -196,6 +236,7 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.Origin
 
         fileName = fileName.replaceAll(" ", "_");
         fileName = fileName.replaceAll(":", "_");
+        fileName = fileName.replaceAll("'", "_");
 
         File file = new File(path, fileName); // e_ for encode
         return file.exists();

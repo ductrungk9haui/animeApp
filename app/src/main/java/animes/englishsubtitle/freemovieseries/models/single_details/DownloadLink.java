@@ -27,6 +27,17 @@ public class DownloadLink {
     @SerializedName("in_app_download")
     @Expose
     private boolean isInAppDownload;
+    @SerializedName("is_epi_download_paid")
+    @Expose
+    private String isEpiDownloadPaid;
+
+    public String getIsEpiDownloadPaid() {
+        return isEpiDownloadPaid;
+    }
+
+    public void setIsEpiDownloadPaid(String isEpiDownloadPaid) {
+        this.isEpiDownloadPaid = isEpiDownloadPaid;
+    }
 
     public String getDownloadLinkId() {
         return downloadLinkId;

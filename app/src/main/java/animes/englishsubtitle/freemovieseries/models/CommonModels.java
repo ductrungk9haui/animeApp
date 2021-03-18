@@ -29,6 +29,16 @@ public class CommonModels {
     public String price;
     public boolean isInAppDownload;
 
+    public String is_epi_download_paid;
+
+    public String getIs_epi_download_paid() {
+        return is_epi_download_paid;
+    }
+
+    public void setIs_epi_download_paid(String is_epi_download_paid) {
+        this.is_epi_download_paid = is_epi_download_paid;
+    }
+
     public String getCount_status_movie() {
         return count_status_movie;
     }

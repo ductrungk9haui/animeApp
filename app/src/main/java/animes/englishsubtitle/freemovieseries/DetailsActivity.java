@@ -303,9 +303,9 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     @BindView(R.id.watch_live_tv)
     TextView mWatchLiveTv;
     @BindView(R.id.content_details)
-    RelativeLayout mContentDetails;
+    public RelativeLayout mContentDetails;
     @BindView(R.id.subscribe_layout)
-    LinearLayout mSubscriptionLayout;
+    public LinearLayout mSubscriptionLayout;
     @BindView(R.id.subs_layout)
     View mSubsLayout;
     @BindView(R.id.subs_text)
@@ -411,6 +411,12 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     private AdsConfig adsConfig;
     private boolean is_hide_subscribe_layout=false;
     String videoReport = "", audioReport = "", subtitleReport = "", messageReport = "";
+
+    public View mViewopendiaglog;
+    public LinearLayout mInternalDownloadLayoutOpenDownload;
+    public LinearLayout mExternalDownloadLayoutOpenDownload;
+    public AlertDialog.Builder mBuilderOpenDownload;
+    public static AlertDialog mDialogopendownload;
 
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
@@ -737,18 +743,18 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     }
 
     private void openDownloadServerDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        View view = LayoutInflater.from(this).inflate(R.layout.layout_download_server_dialog, null);
-        LinearLayout internalDownloadLayout = view.findViewById(R.id.internal_download_layout);
-        LinearLayout externalDownloadLayout = view.findViewById(R.id.external_download_layout);
+        mBuilderOpenDownload = new AlertDialog.Builder(this);
+        mViewopendiaglog = LayoutInflater.from(this).inflate(R.layout.layout_download_server_dialog, null);
+        mInternalDownloadLayoutOpenDownload = mViewopendiaglog.findViewById(R.id.internal_download_layout);
+        mExternalDownloadLayoutOpenDownload = mViewopendiaglog.findViewById(R.id.external_download_layout);
         if (mListExternalDownload.isEmpty()) {
-            externalDownloadLayout.setVisibility(GONE);
+            mExternalDownloadLayoutOpenDownload.setVisibility(GONE);
         }
         if (mListInternalDownload.isEmpty()) {
-            internalDownloadLayout.setVisibility(GONE);
+            mInternalDownloadLayoutOpenDownload.setVisibility(GONE);
         }
-        RecyclerView internalServerRv = view.findViewById(R.id.internal_download_rv);
-        RecyclerView externalServerRv = view.findViewById(R.id.external_download_rv);
+        RecyclerView internalServerRv = mViewopendiaglog.findViewById(R.id.internal_download_rv);
+        RecyclerView externalServerRv = mViewopendiaglog.findViewById(R.id.external_download_rv);
         DownloadAdapter internalDownloadAdapter = new DownloadAdapter(this, mTitle, mListInternalDownload, true);
         internalServerRv.setLayoutManager(new LinearLayoutManager(this));
         internalServerRv.setHasFixedSize(true);
@@ -759,10 +765,12 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         externalServerRv.setHasFixedSize(true);
         externalServerRv.setAdapter(externalDownloadAdapter);
 
-        builder.setView(view);
+        mBuilderOpenDownload.setView(mViewopendiaglog);
 
-        final AlertDialog dialog = builder.create();
-        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+
+
+        mDialogopendownload = mBuilderOpenDownload.create();
+        mDialogopendownload.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
                 if (isDownloading()) {
@@ -770,8 +778,15 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                 }
             }
         });
-        dialog.show();
+        mDialogopendownload.show();
 
+    }
+
+    public void hideDownloadServerDialog() {
+        mExternalDownloadLayoutOpenDownload.setVisibility(GONE);
+        mViewopendiaglog.setVisibility(GONE);
+        mInternalDownloadLayoutOpenDownload.setVisibility(GONE);
+        mDialogopendownload.dismiss();
     }
 
     private boolean isDownloading() {
@@ -1886,6 +1901,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                     models.setFileSize(downloadLink.getFileSize());
                     models.setResulation(downloadLink.getResolution());
                     models.setInAppDownload(downloadLink.isInAppDownload());
+                    models.setIs_epi_download_paid(downloadLink.getIsEpiDownloadPaid());
                     models.setListSub(mListServer.get(position).getListEpi().get(i).getSubtitleList());
                     if (downloadLink.isInAppDownload()) {
                         mListInternalDownload.add(models);
@@ -2290,6 +2306,11 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             mContentDetails.setVisibility(VISIBLE);
             mSubscriptionLayout.setVisibility(GONE);
             is_hide_subscribe_layout=false;
+        }else if(DownloadAdapter.getInstance().is_hide_subscribe_layout==true){
+            mContentDetails.setVisibility(VISIBLE);
+            mSubscriptionLayout.setVisibility(GONE);
+            DownloadAdapter.getInstance().is_hide_subscribe_layout=false;
+            openDownloadServerDialog();
         }
         else {
             releasePlayer();
@@ -2635,6 +2656,11 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             mContentDetails.setVisibility(VISIBLE);
             mSubscriptionLayout.setVisibility(GONE);
             is_hide_subscribe_layout=false;
+        }else if(DownloadAdapter.getInstance().is_hide_subscribe_layout==true){
+            mContentDetails.setVisibility(VISIBLE);
+            mSubscriptionLayout.setVisibility(GONE);
+            DownloadAdapter.getInstance().is_hide_subscribe_layout=false;
+            openDownloadServerDialog();
         }
         else if (mActiveMovie) {
             setPlayerNormalScreen();
