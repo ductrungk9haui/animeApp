@@ -103,6 +103,7 @@ public class CommonGridAdapter extends RecyclerView.Adapter<CommonGridAdapter.Or
             }else {
                 holder.qualityTv.setText("Free");
             }
+            holder.countEp.setVisibility(View.INVISIBLE);
             if(Integer.parseInt(obj.getCount_status_movie())>=0){
                 if(obj.getStatus_movie().equals("On-going")){
                     holder.countEp.setVisibility(View.VISIBLE);
@@ -111,30 +112,22 @@ public class CommonGridAdapter extends RecyclerView.Adapter<CommonGridAdapter.Or
                     }else {
                         holder.countEp.setText("EP0");
                     }
-
-                    holder.statusMovie.setText(String.valueOf(obj.getStatus_movie()));
                     holder.statusMovie.setBackgroundResource(R.drawable.circle_status_movie_on_going);
-
                 }else if(obj.getStatus_movie().equals("Trailer")){
-                    holder.statusMovie.setText(String.valueOf(obj.getStatus_movie()));
                     holder.statusMovie.setBackgroundResource(R.drawable.circle_status_movie_trailer);
-                }
-                else{
-                    holder.statusMovie.setText(String.valueOf(obj.getStatus_movie()));
+                } else if(obj.getStatus_movie().equals("Full")){
+                    holder.statusMovie.setBackgroundResource(R.drawable.circle_status_movie);
                 }
             }else if(Integer.parseInt(obj.getCount_status_movie())==-1){
                 if(obj.getStatus_movie().equals("New")){
-                    holder.statusMovie.setText(String.valueOf(obj.getStatus_movie()));
                     holder.statusMovie.setBackgroundResource(R.drawable.circle_status_movie_trailer);
                 }else if(obj.getStatus_movie().equals("Trailer")){
-                    holder.statusMovie.setText(String.valueOf(obj.getStatus_movie()));
                     holder.statusMovie.setBackgroundResource(R.drawable.circle_status_movie_trailer);
-                }
-                else {
-                    holder.statusMovie.setText(String.valueOf(obj.getStatus_movie()));
+                } else {
                     holder.statusMovie.setBackgroundResource(R.drawable.circle_status_movie_on_going);
                 }
             }
+            holder.statusMovie.setText(String.valueOf(obj.getStatus_movie()));
             holder.releaseDateTv.setText(obj.getReleaseDate());
             holder.name.setText(obj.getTitle());
 

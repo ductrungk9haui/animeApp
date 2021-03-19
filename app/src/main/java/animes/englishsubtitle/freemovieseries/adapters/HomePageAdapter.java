@@ -3,6 +3,7 @@ package animes.englishsubtitle.freemovieseries.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,65 +54,56 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.Origin
 
     @Override
     public void onBindViewHolder(final HomePageAdapter.OriginalViewHolder holder, final int position) {
-
         final CommonModels obj = items.get(position);
         holder.name.setText(obj.getTitle());
         Picasso.get().load(obj.getImageUrl()).placeholder(R.drawable.poster_placeholder).into(holder.image);
         //holder.qualityTv.setText(obj.getQuality());
-        if(Integer.parseInt(obj.getIsPaid())==1){
+        if (Integer.parseInt(obj.getIsPaid()) == 1) {
             holder.qualityTv.setText("VIP");
-        }else {
+        } else {
             holder.qualityTv.setText("Free");
         }
-
-            if(obj.getStatus_movie().equals("On-going")){
-                holder.countEp.setVisibility(View.VISIBLE);
-                if(obj.getCount_status_movie()!=null){
-                    holder.countEp.setText("EP"+String.valueOf(obj.getCount_status_movie()));
-                }else {
-                    holder.countEp.setText("EP0");
-                }
-
-                holder.statusMovie.setText(String.valueOf(obj.getStatus_movie()));
-                holder.statusMovie.setBackgroundResource(R.drawable.circle_status_movie_on_going);
-
-            }else if(obj.getStatus_movie().equals("Trailer")){
-                holder.statusMovie.setText(String.valueOf(obj.getStatus_movie()));
-                holder.statusMovie.setBackgroundResource(R.drawable.circle_status_movie_trailer);
-            }else if(obj.getStatus_movie().equals("New")){
-                holder.statusMovie.setText(String.valueOf(obj.getStatus_movie()));
-                holder.statusMovie.setBackgroundResource(R.drawable.circle_status_movie_on_going);
+        holder.countEp.setVisibility(View.INVISIBLE);
+        if (obj.getStatus_movie().equals("On-going")) {
+            holder.countEp.setVisibility(View.VISIBLE);
+            if (obj.getCount_status_movie() != null) {
+                holder.countEp.setText("EP" + obj.getCount_status_movie());
+            } else {
+                holder.countEp.setText("EP0");
             }
-            else if(obj.getStatus_movie().equals("Aired")){
-                holder.statusMovie.setText(String.valueOf(obj.getStatus_movie()));
-                holder.statusMovie.setBackgroundResource(R.drawable.circle_status_movie_on_going);
-            }
-            else{
-                holder.statusMovie.setText(String.valueOf(obj.getStatus_movie()));
-            }
+            holder.statusMovie.setBackgroundResource(R.drawable.circle_status_movie_on_going);
 
+        } else if (obj.getStatus_movie().equals("Trailer")) {
+            holder.statusMovie.setBackgroundResource(R.drawable.circle_status_movie_trailer);
+        } else if (obj.getStatus_movie().equals("New")) {
+            holder.statusMovie.setBackgroundResource(R.drawable.circle_status_movie_on_going);
+        } else if (obj.getStatus_movie().equals("Aired")) {
+            holder.statusMovie.setBackgroundResource(R.drawable.circle_status_movie_on_going);
+        } else if (obj.getStatus_movie().equals("Full")) {
+            holder.statusMovie.setBackgroundResource(R.drawable.circle_status_movie);
+        }
+        holder.statusMovie.setText(String.valueOf(obj.getStatus_movie()));
         holder.releaseDateTv.setText(obj.getReleaseDate());
-
 
 
         holder.lyt_parent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (PreferenceUtils.isMandatoryLogin(ctx)){
-                    if (PreferenceUtils.isLoggedIn(ctx)){
-                        Intent intent=new Intent(ctx, DetailsActivity.class);
-                        intent.putExtra("vType",obj.getVideoType());
-                        intent.putExtra("id",obj.getId());
+                if (PreferenceUtils.isMandatoryLogin(ctx)) {
+                    if (PreferenceUtils.isLoggedIn(ctx)) {
+                        Intent intent = new Intent(ctx, DetailsActivity.class);
+                        intent.putExtra("vType", obj.getVideoType());
+                        intent.putExtra("id", obj.getId());
 
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         ctx.startActivity(intent);
-                    }else {
+                    } else {
                         ctx.startActivity(new Intent(ctx, LoginActivity.class));
                     }
-                }else {
-                    Intent intent=new Intent(ctx, DetailsActivity.class);
-                    intent.putExtra("vType",obj.getVideoType());
-                    intent.putExtra("id",obj.getId());
+                } else {
+                    Intent intent = new Intent(ctx, DetailsActivity.class);
+                    intent.putExtra("vType", obj.getVideoType());
+                    intent.putExtra("id", obj.getId());
 
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     ctx.startActivity(intent);
@@ -141,11 +133,11 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.Origin
             super(v);
             image = v.findViewById(R.id.image);
             name = v.findViewById(R.id.name);
-            lyt_parent=v.findViewById(R.id.lyt_parent);
-            qualityTv=v.findViewById(R.id.quality_tv);
-            statusMovie=v.findViewById(R.id.status_movie);
-            countEp=v.findViewById(R.id.count_ep);
-            releaseDateTv=v.findViewById(R.id.release_date_tv);
+            lyt_parent = v.findViewById(R.id.lyt_parent);
+            qualityTv = v.findViewById(R.id.quality_tv);
+            statusMovie = v.findViewById(R.id.status_movie);
+            countEp = v.findViewById(R.id.count_ep);
+            releaseDateTv = v.findViewById(R.id.release_date_tv);
         }
     }
 
@@ -160,7 +152,6 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.Origin
             }
 
         });
-
 
 
         super.onAttachedToRecyclerView(recyclerView);
