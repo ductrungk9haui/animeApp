@@ -31,9 +31,15 @@ public class AdsConfig {
     @SerializedName("fan_native_ads_placement_id")
     @Expose
     private String fanNativeAdsPlacementId;
+    @SerializedName("fan_native_ads_placement_id_1")
+    @Expose
+    private String fanNativeAdsPlacementId1;
     @SerializedName("fan_banner_ads_placement_id")
     @Expose
     private String fanBannerAdsPlacementId;
+    @SerializedName("fan_reward_ads_placement_id")
+    @Expose
+    private String fanRewardedAdsPlacementId;
     @SerializedName("fan_interstitial_ads_placement_id")
     @Expose
     private String fanInterstitialAdsPlacementId;
@@ -43,6 +49,22 @@ public class AdsConfig {
     @SerializedName("startapp_developer_id")
     @Expose
     private String startappDeveloperId;
+
+    public String getFanNativeAdsPlacementId1() {
+        return fanNativeAdsPlacementId1;
+    }
+
+    public String getFanRewardedAdsPlacementId() {
+        return fanRewardedAdsPlacementId;
+    }
+
+    public void setFanRewardedAdsPlacementId(String fanRewardedAdsPlacementId) {
+        this.fanRewardedAdsPlacementId = fanRewardedAdsPlacementId;
+    }
+
+    public void setFanNativeAdsPlacementId1(String fanNativeAdsPlacementId1) {
+        this.fanNativeAdsPlacementId1 = fanNativeAdsPlacementId1;
+    }
 
     public AdsConfig() {
     }

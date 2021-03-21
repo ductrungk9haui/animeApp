@@ -41,8 +41,10 @@ import java.util.EnumSet;
 import java.util.List;
 
 import animes.englishsubtitle.freemovieseries.DetailsActivity;
+import animes.englishsubtitle.freemovieseries.ItemMovieActivity;
 import animes.englishsubtitle.freemovieseries.R;
 import animes.englishsubtitle.freemovieseries.database.DatabaseHelper;
+import animes.englishsubtitle.freemovieseries.network.model.config.AdsConfig;
 import animes.englishsubtitle.freemovieseries.utils.PreferenceUtils;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -64,10 +66,11 @@ public class AudienceNetworkHelper
     private Activity mActivity;
     private boolean mIsDark;
     NativeAdViewAttributes mNativeAttributes;
-    private final String NATIVE_HOME_PLACEMENT_ID = "260014365597300_260035628928507";
-    private final String NATIVE_DETAIL_PLACEMENT_ID = "260014365597300_263663331899070";
-    private final String NATIVE_INTERSTITIAL_PLACEMENT_ID = "260014365597300_263052941960109";
-    private final String NATIVE_REWARD_PLACEMENT_ID = "260014365597300_263089818623088";
+//    private final String NATIVE_HOME_PLACEMENT_ID = "260014365597300_260035628928507";
+//    private final String NATIVE_DETAIL_PLACEMENT_ID = "260014365597300_263663331899070";
+//    private final String NATIVE_INTERSTITIAL_PLACEMENT_ID = "260014365597300_263052941960109";
+//    private final String NATIVE_REWARD_PLACEMENT_ID = "260014365597300_263089818623088";
+
 
     static AudienceNetworkHelper instance;
 
@@ -87,6 +90,8 @@ public class AudienceNetworkHelper
         return instance;
     }
 
+
+
     /**
      * It's recommended to call this method from Application.onCreate().
      * Otherwise you can call it from all mActivity.onCreate()
@@ -105,6 +110,8 @@ public class AudienceNetworkHelper
                     .withInitListener(new AudienceNetworkHelper())
                     .initialize();
         }
+
+
     }
 
     @Override
@@ -130,6 +137,9 @@ public class AudienceNetworkHelper
             rewardedVideoAd.destroy();
             rewardedVideoAd = null;
         }
+
+        String NATIVE_REWARD_PLACEMENT_ID = new DatabaseHelper(mActivity).getConfigurationData().getAdsConfig().getFanRewardedAdsPlacementId();
+
         rewardedVideoAd =
                 new RewardedVideoAd(mActivity, NATIVE_REWARD_PLACEMENT_ID);
         RewardedVideoAd.RewardedVideoLoadAdConfig loadAdConfig =
@@ -203,6 +213,8 @@ public class AudienceNetworkHelper
             interstitialAd.destroy();
             interstitialAd = null;
         }
+        String NATIVE_INTERSTITIAL_PLACEMENT_ID = new DatabaseHelper(mActivity).getConfigurationData().getAdsConfig().getFanInterstitialAdsPlacementId();
+
 
         interstitialAd = new InterstitialAd(mActivity, NATIVE_INTERSTITIAL_PLACEMENT_ID);
         // Load a new interstitial.
@@ -387,6 +399,8 @@ public class AudienceNetworkHelper
     }
 
     private void loadCustomNativeAds(View adContainer, boolean isNothing){
+        String NATIVE_DETAIL_PLACEMENT_ID = new DatabaseHelper(mActivity).getConfigurationData().getAdsConfig().getFanNativeAdsPlacementId1();
+
         nativeAd = new NativeAd(mActivity, NATIVE_DETAIL_PLACEMENT_ID);
 
         NativeAdListener nativeAdListener = new NativeAdListener() {
@@ -489,6 +503,8 @@ public class AudienceNetworkHelper
     public void loadScrollNativeAd(View AdsContainer, int AdsHeight) {
         // Instantiate a NativeAd object.
         NativeAdsManager manager;
+        String NATIVE_HOME_PLACEMENT_ID = new DatabaseHelper(mActivity).getConfigurationData().getAdsConfig().getFanNativeAdsPlacementId();
+
         LinearLayout fanAdsScrollViewContainer = (LinearLayout) AdsContainer.findViewById(R.id.hscroll_container);
         manager = new NativeAdsManager(mActivity, NATIVE_HOME_PLACEMENT_ID, 5);
         manager.setListener(new NativeAdsManager.Listener() {

@@ -36,13 +36,13 @@
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/DetailsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/DetailsActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/DownloadActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/DownloadActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/DownloadAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/DownloadAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/database/DatabaseHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/database/DatabaseHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/CommonModels.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/CommonModels.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/single_details/DownloadLink.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/single_details/DownloadLink.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/model/config/AdsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/network/model/config/AdsConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/ads/AdsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/ads/AdsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/ads/AudienceNetworkHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/ads/AudienceNetworkHelper.java" afterDir="false" />
     </list>
     <list id="690dd8c0-ad25-496b-819d-5468c546c26e" name="Uncommitted changes before Update at 1/31/2021 10:32 PM [Default Changelist]" comment="" />
     <list id="e98f8c02-988d-45d3-8c01-acfeb18f8a1c" name="Uncommitted changes before Update at 2/1/2021 10:13 PM [Default Changelist]" comment="" />
@@ -399,10 +399,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1610903601249" />
-    <state x="574" y="96" key="#com.intellij.ide.util.MemberChooser" timestamp="1616100772760">
+    <state x="574" y="96" key="#com.intellij.ide.util.MemberChooser" timestamp="1616338717078">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="96" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1616100772760" />
+    <state x="574" y="96" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1616338717078" />
     <state x="718" y="121" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1615653664475" />
     <state x="584" y="444" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1615037446089">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -442,42 +442,42 @@
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1616080067437" />
     <state x="915" y="245" width="440" height="487" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1615720446182" />
-    <state width="1491" height="272" key="GridCell.Tab.0.bottom" timestamp="1616079675489">
+    <state width="1491" height="272" key="GridCell.Tab.0.bottom" timestamp="1616340065987">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="272" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1616079675489" />
+    <state width="1491" height="272" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1616340065987" />
     <state width="1877" height="509" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1615912865823" />
-    <state width="1491" height="272" key="GridCell.Tab.0.center" timestamp="1616079675489">
+    <state width="1491" height="272" key="GridCell.Tab.0.center" timestamp="1616340065986">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="272" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1616079675489" />
+    <state width="1491" height="272" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1616340065986" />
     <state width="1877" height="509" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1615912865822" />
-    <state width="1491" height="272" key="GridCell.Tab.0.left" timestamp="1616079675488">
+    <state width="1491" height="272" key="GridCell.Tab.0.left" timestamp="1616340065986">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="272" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1616079675488" />
+    <state width="1491" height="272" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1616340065986" />
     <state width="1877" height="509" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1615912865822" />
-    <state width="1491" height="272" key="GridCell.Tab.0.right" timestamp="1616079675489">
+    <state width="1491" height="272" key="GridCell.Tab.0.right" timestamp="1616340065987">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="272" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1616079675489" />
+    <state width="1491" height="272" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1616340065987" />
     <state width="1877" height="509" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1615912865823" />
-    <state width="1491" height="272" key="GridCell.Tab.1.bottom" timestamp="1616079675489">
+    <state width="1491" height="272" key="GridCell.Tab.1.bottom" timestamp="1616340065987">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="272" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1616079675489" />
-    <state width="1491" height="272" key="GridCell.Tab.1.center" timestamp="1616079675489">
+    <state width="1491" height="272" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1616340065987" />
+    <state width="1491" height="272" key="GridCell.Tab.1.center" timestamp="1616340065987">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="272" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1616079675489" />
-    <state width="1491" height="272" key="GridCell.Tab.1.left" timestamp="1616079675489">
+    <state width="1491" height="272" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1616340065987" />
+    <state width="1491" height="272" key="GridCell.Tab.1.left" timestamp="1616340065987">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="272" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1616079675489" />
-    <state width="1491" height="272" key="GridCell.Tab.1.right" timestamp="1616079675489">
+    <state width="1491" height="272" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1616340065987" />
+    <state width="1491" height="272" key="GridCell.Tab.1.right" timestamp="1616340065987">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1491" height="272" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1616079675489" />
+    <state width="1491" height="272" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1616340065987" />
     <state x="349" y="155" key="IDE.errors.dialog" timestamp="1612258184829">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -514,10 +514,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="332" y="141" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1536.824@0.0.1536.824" timestamp="1616004892636" />
-    <state x="475" y="144" width="928" height="624" key="find.popup" timestamp="1616070305966">
+    <state x="475" y="144" width="928" height="624" key="find.popup" timestamp="1616340265288">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="475" y="144" width="928" height="624" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1616070305966" />
+    <state x="475" y="144" width="928" height="624" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1616340265288" />
     <state x="677" y="129" width="1160" height="674" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1615912424466" />
     <state x="487" y="201" key="git4idea.merge.GitPullDialog" timestamp="1611027110603">
       <screen x="0" y="0" width="1536" height="824" />
@@ -574,6 +574,26 @@
           <url>file://$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/fragments/HomeFragment.java</url>
           <line>373</line>
           <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/ads/AudienceNetworkHelper.java</url>
+          <line>140</line>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/ads/AudienceNetworkHelper.java</url>
+          <line>215</line>
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/ads/AudienceNetworkHelper.java</url>
+          <line>401</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/ads/AudienceNetworkHelper.java</url>
+          <line>505</line>
+          <option name="timeStamp" value="34" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
