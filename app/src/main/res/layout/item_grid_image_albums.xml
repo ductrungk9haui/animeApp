@@ -37,7 +37,6 @@
                     android:textSize="8sp"
                     android:background="@drawable/rounded_textview_count_ep"
                     android:textColor="@android:color/black"
-                    android:text="EP166"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:id="@+id/count_ep"
