@@ -44,6 +44,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String CONFIG_COLUMN_FAN_NATIVE_ID = "fan_native_id";
     private static final String CONFIG_COLUMN_FAN_NATIVE_ID_1 = "fan_native_id_1";
     private static final String CONFIG_COLUMN_FAN_INTERSTITIAL_ID = "fan_interstitial_id";
+    private static final String CONFIG_COLUMN_FAN_REWARD_ID = "fan_reward_id";
     private static final String CONFIG_COLUMN_STARTAPP_ID = "startapp_id";
 
     private static final String PAYMENT_CONFIG_CURRENCY_SYMBOL = "payment_config_currency_symbol";
@@ -201,6 +202,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 CONFIG_COLUMN_FAN_NATIVE_ID + " TEXT," +
                 CONFIG_COLUMN_FAN_NATIVE_ID_1 + " TEXT," +
                 CONFIG_COLUMN_FAN_INTERSTITIAL_ID + " TEXT," +
+                CONFIG_COLUMN_FAN_REWARD_ID + " TEXT," +
                 CONFIG_COLUMN_STARTAPP_ID + " TEXT," +
 
                 PAYMENT_CONFIG_CURRENCY_SYMBOL + " TEXT," +
@@ -243,6 +245,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(CONFIG_COLUMN_FAN_NATIVE_ID, configuration.getAdsConfig().getFanNativeAdsPlacementId());
         contentValues.put(CONFIG_COLUMN_FAN_NATIVE_ID_1, configuration.getAdsConfig().getFanNativeAdsPlacementId1());
         contentValues.put(CONFIG_COLUMN_FAN_INTERSTITIAL_ID, configuration.getAdsConfig().getFanInterstitialAdsPlacementId());
+        contentValues.put(CONFIG_COLUMN_FAN_REWARD_ID, configuration.getAdsConfig().getFanRewardedAdsPlacementId());
         contentValues.put(CONFIG_COLUMN_STARTAPP_ID, configuration.getAdsConfig().getStartappAppId());
 
         contentValues.put(PAYMENT_CONFIG_CURRENCY_SYMBOL, configuration.getPaymentConfig().getCurrencySymbol());
@@ -296,9 +299,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     adsConfig.setAdmobRewardedVideoAdsId(cursor.getString(cursor.getColumnIndex(CONFIG_COLUMN_ADMOB_REWARDEDVIDEO_ID)));
                     //adsConfig.setAdmobAppOpenAdsId(cursor.getString(cursor.getColumnIndex(CONFIG_COLUMN_ADMOB_APPOPEN_ID)));
                     adsConfig.setFanNativeAdsPlacementId(cursor.getString(cursor.getColumnIndex(CONFIG_COLUMN_FAN_NATIVE_ID)));
-                    adsConfig.setFanNativeAdsPlacementId(cursor.getString(cursor.getColumnIndex(CONFIG_COLUMN_FAN_NATIVE_ID_1)));
+                    adsConfig.setFanNativeAdsPlacementId1(cursor.getString(cursor.getColumnIndex(CONFIG_COLUMN_FAN_NATIVE_ID_1)));
                     adsConfig.setFanBannerAdsPlacementId(cursor.getString(cursor.getColumnIndex(CONFIG_COLUMN_FAN_BANNER_ID)));
                     adsConfig.setFanInterstitialAdsPlacementId(cursor.getString(cursor.getColumnIndex(CONFIG_COLUMN_FAN_INTERSTITIAL_ID)));
+                    adsConfig.setFanRewardedAdsPlacementId(cursor.getString(cursor.getColumnIndex(CONFIG_COLUMN_FAN_REWARD_ID)));
                     adsConfig.setStartappAppId(cursor.getString(cursor.getColumnIndex(CONFIG_COLUMN_STARTAPP_ID)));
 
                     paymentConfig.setCurrencySymbol(cursor.getString(cursor.getColumnIndex(PAYMENT_CONFIG_CURRENCY_SYMBOL)));
@@ -371,6 +375,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(CONFIG_COLUMN_FAN_NATIVE_ID, configuration.getAdsConfig().getFanNativeAdsPlacementId());
         contentValues.put(CONFIG_COLUMN_FAN_NATIVE_ID_1, configuration.getAdsConfig().getFanNativeAdsPlacementId1());
         contentValues.put(CONFIG_COLUMN_FAN_INTERSTITIAL_ID, configuration.getAdsConfig().getFanInterstitialAdsPlacementId());
+        contentValues.put(CONFIG_COLUMN_FAN_REWARD_ID, configuration.getAdsConfig().getFanRewardedAdsPlacementId());
         contentValues.put(CONFIG_COLUMN_STARTAPP_ID, configuration.getAdsConfig().getStartappAppId());
 
         contentValues.put(PAYMENT_CONFIG_CURRENCY_SYMBOL, configuration.getPaymentConfig().getCurrencySymbol());

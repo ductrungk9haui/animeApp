@@ -37,7 +37,7 @@ public class AdsController implements AdsHelper {
                 } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
                     mAdsHelper = new AdMobHelper(activity);
                 } else if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.NETWORK_AUDIENCE)) {
-                    mAdsHelper = new AudienceNetworkHelper(activity);
+                    mAdsHelper = AudienceNetworkHelper.getInstance(activity);
                 }
             }
         }

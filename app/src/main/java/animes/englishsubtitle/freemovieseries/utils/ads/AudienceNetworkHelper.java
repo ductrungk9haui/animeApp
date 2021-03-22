@@ -139,7 +139,7 @@ public class AudienceNetworkHelper
         }
 
         String NATIVE_REWARD_PLACEMENT_ID = new DatabaseHelper(mActivity).getConfigurationData().getAdsConfig().getFanRewardedAdsPlacementId();
-
+        Log.d("Reward", NATIVE_REWARD_PLACEMENT_ID);
         rewardedVideoAd =
                 new RewardedVideoAd(mActivity, NATIVE_REWARD_PLACEMENT_ID);
         RewardedVideoAd.RewardedVideoLoadAdConfig loadAdConfig =
