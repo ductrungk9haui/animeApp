@@ -21,7 +21,7 @@ import animes.englishsubtitle.freemovieseries.network.model.config.PaymentConfig
 import animes.englishsubtitle.freemovieseries.utils.PreferenceUtils;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
     public static final String DATABASE_NAME = "com.oxoo.spagreen.db";
 
     //config table

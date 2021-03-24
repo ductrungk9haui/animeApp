@@ -575,6 +575,7 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
         mPlayerLayout.setVisibility(VISIBLE);
         releasePlayer();
         mListSub.addAll(videoFile.getSubList());
+        mListSub.add("Off");
 
         String filePath = videoFile.getPath();
         Uri videoUrl = Uri.fromFile(new File(filePath));
@@ -618,7 +619,14 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
         mDownloadPlayer.setPlayWhenReady(true);
         mActiveMovie = true;
         if (mListSub.size() > 0) {
-            setSelectedSubtitle(mMediaSource, videoFile.getDefaultSubPath(), DownloadActivity.this);
+            SharedPreferences sharedPreferences = getSharedPreferences("push", MODE_PRIVATE);
+            String df_language = sharedPreferences.getString("df_subtitle",Constants.DEFAULT_LANGUAGE);
+            if(df_language.equals("Off")){
+                mSimpleExoPlayerView.getSubtitleView().setVisibility(GONE);
+            }else{
+                setSelectedSubtitle(mMediaSource, videoFile.getDefaultSubPath(), DownloadActivity.this);
+            }
+
         }
 
     }
@@ -631,6 +639,7 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
 
     private void setSelectedSubtitle(MediaSource mediaSource, String subtitle, Context context) {
         MergingMediaSource mergedSource;
+        mSimpleExoPlayerView.getSubtitleView().setVisibility(VISIBLE);
         if (subtitle != null) {
             //Uri subtitleUri = Uri.parse(subtitle);
             Uri subtitleUri = Uri.fromFile(new File(subtitle));
@@ -798,7 +807,12 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
 
     @Override
     public void onClickSubtitles(int position) {
-        setSelectedSubtitle(mMediaSource, mListSub.get(position), getApplicationContext());
+        String language =  mListSub.get(position);
+        if(language.equals("Off")){
+            mSimpleExoPlayerView.getSubtitleView().setVisibility(GONE);
+        }else{
+            setSelectedSubtitle(mMediaSource, mListSub.get(position), getApplicationContext());
+        }
         mAlertDialog.cancel();
     }
 }

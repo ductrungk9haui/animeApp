@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/animeApp.iml" filepath="$PROJECT_DIR$/.idea/modules/animeApp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/animeApp.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/animeApp.app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mobiamosdk/animeApp.mobiamosdk.iml" filepath="$PROJECT_DIR$/.idea/modules/mobiamosdk/animeApp.mobiamosdk.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mycardadapter-release/animeApp.mycardadapter-release.iml" filepath="$PROJECT_DIR$/.idea/modules/mycardadapter-release/animeApp.mycardadapter-release.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/nativetemplates/animeApp.nativetemplates.iml" filepath="$PROJECT_DIR$/.idea/modules/nativetemplates/animeApp.nativetemplates.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/paymentwall-android-sdk/animeApp.paymentwall-android-sdk.iml" filepath="$PROJECT_DIR$/.idea/modules/paymentwall-android-sdk/animeApp.paymentwall-android-sdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AnimeS.iml" filepath="$PROJECT_DIR$/.idea/modules/AnimeS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/AnimeS.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/AnimeS.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mobiamosdk/AnimeS.mobiamosdk.iml" filepath="$PROJECT_DIR$/.idea/modules/mobiamosdk/AnimeS.mobiamosdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mycardadapter-release/AnimeS.mycardadapter-release.iml" filepath="$PROJECT_DIR$/.idea/modules/mycardadapter-release/AnimeS.mycardadapter-release.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/nativetemplates/AnimeS.nativetemplates.iml" filepath="$PROJECT_DIR$/.idea/modules/nativetemplates/AnimeS.nativetemplates.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/paymentwall-android-sdk/AnimeS.paymentwall-android-sdk.iml" filepath="$PROJECT_DIR$/.idea/modules/paymentwall-android-sdk/AnimeS.paymentwall-android-sdk.iml" />
     </modules>
   </component>
 </project>

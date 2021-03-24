@@ -1,6 +1,7 @@
 package animes.englishsubtitle.freemovieseries.utils.ads;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.View;
 
 import animes.englishsubtitle.freemovieseries.database.DatabaseHelper;
@@ -31,6 +32,7 @@ public class AdsController implements AdsHelper {
         AdsConfig adsConfig = dbHelper.getConfigurationData().getAdsConfig();
         if (adsConfig.getAdsEnable().equals("1")) {
             mIsAdsEnable = !(PreferenceUtils.isLoggedIn(activity) && PreferenceUtils.isActivePlan(activity));
+            Log.i("AdsHelper", "#adsEnable : " +  mIsAdsEnable);
             if (mIsAdsEnable) {
                 if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.APPODEAL)) {
                     mAdsHelper = new AppodealHelper(activity);

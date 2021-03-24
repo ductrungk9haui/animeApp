@@ -66,10 +66,6 @@ public class AudienceNetworkHelper
     private Activity mActivity;
     private boolean mIsDark;
     NativeAdViewAttributes mNativeAttributes;
-//    private final String NATIVE_HOME_PLACEMENT_ID = "260014365597300_260035628928507";
-//    private final String NATIVE_DETAIL_PLACEMENT_ID = "260014365597300_263663331899070";
-//    private final String NATIVE_INTERSTITIAL_PLACEMENT_ID = "260014365597300_263052941960109";
-//    private final String NATIVE_REWARD_PLACEMENT_ID = "260014365597300_263089818623088";
 
 
     static AudienceNetworkHelper instance;
@@ -139,7 +135,6 @@ public class AudienceNetworkHelper
         }
 
         String NATIVE_REWARD_PLACEMENT_ID = new DatabaseHelper(mActivity).getConfigurationData().getAdsConfig().getFanRewardedAdsPlacementId();
-        Log.d("Reward", NATIVE_REWARD_PLACEMENT_ID);
         rewardedVideoAd =
                 new RewardedVideoAd(mActivity, NATIVE_REWARD_PLACEMENT_ID);
         RewardedVideoAd.RewardedVideoLoadAdConfig loadAdConfig =
@@ -181,10 +176,6 @@ public class AudienceNetworkHelper
                             @Override
                             public void onError(Ad ad, AdError adError) {
                                 Log.e(TAG, "RewardVideo onError");
-                                if ((mActivity instanceof DetailsActivity)) {
-                                    ((DetailsActivity) mActivity).onAdFinish();
-                                }
-                                initRewardVideoAds();
                             }
 
                             @Override
@@ -244,10 +235,6 @@ public class AudienceNetworkHelper
                                 if (ad == interstitialAd) {
                                     Log.e(TAG, "Interstitial ad failed to load: " + adError.getErrorMessage());
                                 }
-                                if ((mActivity instanceof DetailsActivity)) {
-                                    ((DetailsActivity) mActivity).onAdFinish();
-                                }
-                                initInterstitialAds();
                             }
 
                             @Override

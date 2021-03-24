@@ -8,9 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.graphics.Point;
-import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -50,7 +48,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.mediarouter.app.MediaRouteButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -76,7 +73,6 @@ import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.source.MergingMediaSource;
 import com.google.android.exoplayer2.source.SingleSampleMediaSource;
 import com.google.android.exoplayer2.source.hls.HlsMediaSource;
-import com.google.android.exoplayer2.text.CaptionStyleCompat;
 import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelection;
@@ -84,7 +80,6 @@ import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
 import com.google.android.exoplayer2.ui.PlaybackControlView;
 import com.google.android.exoplayer2.ui.PlayerControlView;
 import com.google.android.exoplayer2.ui.PlayerView;
-import com.google.android.exoplayer2.ui.SubtitleView;
 import com.google.android.exoplayer2.upstream.BandwidthMeter;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
@@ -120,19 +115,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import animes.englishsubtitle.freemovieseries.utils.ads.AdsController;
-import at.huber.youtubeExtractor.VideoMeta;
-import at.huber.youtubeExtractor.YouTubeExtractor;
-import at.huber.youtubeExtractor.YtFile;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
 import animes.englishsubtitle.freemovieseries.adapters.CastCrewAdapter;
 import animes.englishsubtitle.freemovieseries.adapters.CommentsAdapter;
 import animes.englishsubtitle.freemovieseries.adapters.DownloadAdapter;
@@ -183,10 +165,22 @@ import animes.englishsubtitle.freemovieseries.utils.PreferenceUtils;
 import animes.englishsubtitle.freemovieseries.utils.RtlUtils;
 import animes.englishsubtitle.freemovieseries.utils.ToastMsg;
 import animes.englishsubtitle.freemovieseries.utils.Tools;
+import animes.englishsubtitle.freemovieseries.utils.ads.AdsController;
+import at.huber.youtubeExtractor.VideoMeta;
+import at.huber.youtubeExtractor.YouTubeExtractor;
+import at.huber.youtubeExtractor.YtFile;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
-import static com.google.android.gms.ads.AdActivity.CLASS_NAME;
 import static animes.englishsubtitle.freemovieseries.utils.Constants.CATEGORY_TYPE;
 import static animes.englishsubtitle.freemovieseries.utils.Constants.CONTENT_ID;
 import static animes.englishsubtitle.freemovieseries.utils.Constants.CONTENT_TITLE;
@@ -195,6 +189,7 @@ import static animes.englishsubtitle.freemovieseries.utils.Constants.IS_FROM_CON
 import static animes.englishsubtitle.freemovieseries.utils.Constants.POSITION;
 import static animes.englishsubtitle.freemovieseries.utils.Constants.SERVER_TYPE;
 import static animes.englishsubtitle.freemovieseries.utils.Constants.STREAM_URL;
+import static com.google.android.gms.ads.AdActivity.CLASS_NAME;
 
 public class DetailsActivity extends AppCompatActivity implements CastPlayer.SessionAvailabilityListener, ProgramAdapter.OnProgramClickListener, EpisodeAdapter.OnTVSeriesEpisodeItemClickListener,
         RelatedTvAdapter.RelatedTvClickListener, SubtitleAdapter.Listener {
@@ -409,7 +404,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     private DatabaseHelper mDBHelper;
     private static DetailsActivity instance;
     private AdsConfig adsConfig;
-    private boolean is_hide_subscribe_layout=false;
+    private boolean is_hide_subscribe_layout = false;
     String videoReport = "", audioReport = "", subtitleReport = "", messageReport = "";
 
     public View mViewopendiaglog;
@@ -768,7 +763,6 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         mBuilderOpenDownload.setView(mViewopendiaglog);
 
 
-
         mDialogopendownload = mBuilderOpenDownload.create();
         mDialogopendownload.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
@@ -873,6 +867,9 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             mListSub.clear();
             if (obj.getListSub() != null) {
                 mListSub.addAll(obj.getListSub());
+                SubtitleModel model = new SubtitleModel();
+                model.setLanguage("Off");
+                mListSub.add(model);
             }
 
             if (mListSub.size() != 0) {
@@ -945,7 +942,12 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         SharedPreferences.Editor editor = getSharedPreferences("push", MODE_PRIVATE).edit();
         editor.putString("df_subtitle", mListSub.get(position).getLanguage());
         editor.apply();
-        setSelectedSubtitle(mMediaSource, mListSub.get(position).getUrl(), this);
+        if(mListSub.get(position).getLanguage().equals("Off")){
+            mSimpleExoPlayerView.getSubtitleView().setVisibility(GONE);
+        }else{
+            setSelectedSubtitle(mMediaSource, mListSub.get(position).getUrl(), this);
+        }
+
         mAlertDialog.cancel();
     }
 
@@ -1030,8 +1032,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         mAdsController.showNativeAds(mAdsContainer, true);
         mAdsController.showInterstitialAds();
         episodePaidControl(String.valueOf(obj.getIs_epi_paid()));
-        if(is_hide_subscribe_layout!=true){
-            Toast.makeText(instance, String.valueOf(obj.getIs_epi_paid()), Toast.LENGTH_SHORT).show();
+        if (is_hide_subscribe_layout != true) {
             if (type.equalsIgnoreCase("embed")) {
                 CommonModels model = new CommonModels();
                 model.setStremURL(obj.getStreamURL());
@@ -1059,6 +1060,9 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                     if (obj.getSubtitleList().size() != 0) {
                         mListSub.clear();
                         mListSub.addAll(obj.getSubtitleList());
+                        SubtitleModel model = new SubtitleModel();
+                        model.setLanguage("Off");
+                        mListSub.add(model);
                         mImgSubtitle.setVisibility(VISIBLE);
                     } else {
                         mListSub.clear();
@@ -1071,13 +1075,18 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                     String subURL = mListSub.get(0).getUrl();
                     SharedPreferences sharedPreferences = getSharedPreferences("push", MODE_PRIVATE);
                     String df_language = sharedPreferences.getString("df_subtitle", Constants.DEFAULT_LANGUAGE);
-                    for (SubtitleModel model : mListSub) {
-                        if (model.getLanguage().equals(df_language)) {
-                            subURL = model.getUrl();
-                            break;
+                    if (!df_language.equals("Off")) {
+                        for (SubtitleModel model : mListSub) {
+                            if (model.getLanguage().equals(df_language)) {
+                                subURL = model.getUrl();
+                                break;
+                            }
                         }
+                        setSelectedSubtitle(mMediaSource, subURL, DetailsActivity.this);
+                    } else {
+                        mSimpleExoPlayerView.getSubtitleView().setVisibility(GONE);
                     }
-                    setSelectedSubtitle(mMediaSource, subURL, DetailsActivity.this);
+
                 }
                 //reset
                 playerCurrentPosition = 0L;
@@ -1443,6 +1452,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
     public void setSelectedSubtitle(MediaSource mediaSource, String subtitle, Context context) {
         MergingMediaSource mergedSource;
+        mSimpleExoPlayerView.getSubtitleView().setVisibility(VISIBLE);
         if (subtitle != null) {
             Uri subtitleUri = Uri.parse(subtitle);
 
@@ -1501,7 +1511,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
     }
 
-    private void episodePaidControl(String isPaid){
+    private void episodePaidControl(String isPaid) {
         if (isPaid.equals("1")) {
             if (PreferenceUtils.isLoggedIn(DetailsActivity.this)) {
                 if (PreferenceUtils.isActivePlan(DetailsActivity.this)) {
@@ -1522,7 +1532,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                     mContentDetails.setVisibility(GONE);
                     releasePlayer();
                     mSubscriptionLayout.setVisibility(VISIBLE);
-                    is_hide_subscribe_layout=true;
+                    is_hide_subscribe_layout = true;
                 }
             } else {
                 startActivity(new Intent(DetailsActivity.this, LoginActivity.class));
@@ -1606,7 +1616,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                         mSwipeRefreshLayout.setRefreshing(false);
                         mShimmerLayout.stopShimmer();
                         mShimmerLayout.setVisibility(GONE);
-                      //  paidControl(response.body().getIsPaid());
+                        //  paidControl(response.body().getIsPaid());
 
                         SingleDetailsTV detailsModel = response.body();
 
@@ -1720,10 +1730,10 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                     mShimmerLayout.stopShimmer();
                     mShimmerLayout.setVisibility(GONE);
 
-                   SingleDetails singleDetails = response.body();
+                    SingleDetails singleDetails = response.body();
                     String isPaid = singleDetails.getIsPaid();
-                    String is_epi_paid= singleDetails.getIsEpiPaid();
-                  //  paidControl(isPaid);
+                    String is_epi_paid = singleDetails.getIsEpiPaid();
+                    //  paidControl(isPaid);
 
                     mTitle = singleDetails.getTitle();
                     mImdb_rating = singleDetails.getImdb_rating();
@@ -2057,6 +2067,9 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                             mSubsText.setText(subs);
                             if (i == 0) {
                                 mListSub.addAll(list);
+                                SubtitleModel model = new SubtitleModel();
+                                model.setLanguage("Off");
+                                mListSub.add(model);
                             }
                             models.setListSub(list);
                         } else {
@@ -2302,17 +2315,16 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             }
             showDescriptionLayout();
             mActiveMovie = false;
-        }else if(is_hide_subscribe_layout==true){
+        } else if (is_hide_subscribe_layout == true) {
             mContentDetails.setVisibility(VISIBLE);
             mSubscriptionLayout.setVisibility(GONE);
-            is_hide_subscribe_layout=false;
-        }else if(DownloadAdapter.getInstance().is_hide_subscribe_layout==true){
+            is_hide_subscribe_layout = false;
+        } else if (DownloadAdapter.getInstance().is_hide_subscribe_layout == true) {
             mContentDetails.setVisibility(VISIBLE);
             mSubscriptionLayout.setVisibility(GONE);
-            DownloadAdapter.getInstance().is_hide_subscribe_layout=false;
+            DownloadAdapter.getInstance().is_hide_subscribe_layout = false;
             openDownloadServerDialog();
-        }
-        else {
+        } else {
             releasePlayer();
             super.onBackPressed();
         }
@@ -2652,17 +2664,16 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
     @OnClick(R.id.img_back)
     void onBackClick() {
-        if(is_hide_subscribe_layout==true){
+        if (is_hide_subscribe_layout == true) {
             mContentDetails.setVisibility(VISIBLE);
             mSubscriptionLayout.setVisibility(GONE);
-            is_hide_subscribe_layout=false;
-        }else if(DownloadAdapter.getInstance().is_hide_subscribe_layout==true){
+            is_hide_subscribe_layout = false;
+        } else if (DownloadAdapter.getInstance().is_hide_subscribe_layout == true) {
             mContentDetails.setVisibility(VISIBLE);
             mSubscriptionLayout.setVisibility(GONE);
-            DownloadAdapter.getInstance().is_hide_subscribe_layout=false;
+            DownloadAdapter.getInstance().is_hide_subscribe_layout = false;
             openDownloadServerDialog();
-        }
-        else if (mActiveMovie) {
+        } else if (mActiveMovie) {
             setPlayerNormalScreen();
             if (mPlayer != null) {
                 mPlayer.setPlayWhenReady(false);
@@ -2670,8 +2681,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             }
             showDescriptionLayout();
             mActiveMovie = false;
-        }
-        else {
+        } else {
             finish();
         }
     }
@@ -2943,14 +2953,14 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
     public void onAdFinish() {
         if (mPlayer != null && !mPlayer.getPlayWhenReady()) {
-            Log.d(TAG,"onAdFinish");
+            Log.d(TAG, "onAdFinish");
             mPlayer.setPlayWhenReady(true);
         }
     }
 
     public void onAdStart() {
         if (mPlayer != null) {
-            Log.d("TAG","onAdStart");
+            Log.d("TAG", "onAdStart");
             mPlayer.setPlayWhenReady(false);
         }
     }

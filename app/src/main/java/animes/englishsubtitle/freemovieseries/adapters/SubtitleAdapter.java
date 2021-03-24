@@ -42,9 +42,14 @@ public class SubtitleAdapter extends RecyclerView.Adapter<SubtitleAdapter.Origin
     public void onBindViewHolder(SubtitleAdapter.OriginalViewHolder holder, final int position) {
         String language = "Unknown";
         if(subList.size() > 0 ){
-            File file = new File(subList.get(position));
-            String fileName = file.getName();
-            language = fileName.substring(fileName.lastIndexOf("_") + 1,fileName.lastIndexOf("."));
+            if(!subList.get(position).equals("Off")){
+                File file = new File(subList.get(position));
+                String fileName = file.getName();
+                language = fileName.substring(fileName.lastIndexOf("_") + 1,fileName.lastIndexOf("."));
+            }else{
+                language = "Off";
+            }
+
         }
         if(items.size() > 0){
             SubtitleModel obj = items.get(position);
