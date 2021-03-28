@@ -30,6 +30,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac142d87-5c2b-4e32-8948-daeba4b28bdb" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__animeApp_mobiamosdk_mobiamosdk.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/animeApp.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/app/animeApp.app.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/mobiamosdk/animeApp.mobiamosdk.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/mycardadapter-release/animeApp.mycardadapter-release.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/nativetemplates/animeApp.nativetemplates.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/paymentwall-android-sdk/animeApp.paymentwall-android-sdk.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_baseline_animeview24.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/fileHashes/fileHashes.bin" afterDir="false" />
@@ -40,28 +48,18 @@
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.5/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.5/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__animeApp_mobiamosdk_mobiamosdk.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__artifacts_mycardadapter_release_unspecified.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__artifacts_mycardadapter_release_unspecified.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__artifacts_paymentwall_android_sdk_unspecified.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__artifacts_paymentwall_android_sdk_unspecified.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/animeApp.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/app/animeApp.app.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/mobiamosdk/animeApp.mobiamosdk.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/mycardadapter-release/animeApp.mycardadapter-release.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/nativetemplates/animeApp.nativetemplates.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/paymentwall-android-sdk/animeApp.paymentwall-android-sdk.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_31_2021_10_32_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_31_2021_10_32_PM__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_1_2021_10_13_PM__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_1_2021_10_13_PM__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/.cxx/abi_configuration_4p36t424.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/abi_configuration_4p36t424.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/.cxx/abi_configuration_4p36t424.log" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/abi_configuration_4p36t424.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/.cxx/abi_configuration_4p36t424_key.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/abi_configuration_4p36t424_key.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/.cxx/abi_configuration_72w3k6c7.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/abi_configuration_72w3k6c7.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/.cxx/abi_configuration_72w3k6c7_key.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/abi_configuration_72w3k6c7_key.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/.cxx/cmake/debug/arm64-v8a/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/cmake/debug/arm64-v8a/.ninja_deps" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/.cxx/cmake/debug/arm64-v8a/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/cmake/debug/arm64-v8a/.ninja_log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/.cxx/cmake/debug/arm64-v8a/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/cmake/debug/arm64-v8a/CMakeCache.txt" afterDir="false" />
@@ -250,20 +248,32 @@
       <change beforePath="$PROJECT_DIR$/app/.cxx/cmake/release/x86_64/compile_commands.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/cmake/release/x86_64/compile_commands.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/.cxx/cmake/release/x86_64/json_generation_record.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/cmake/release/x86_64/json_generation_record.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/.cxx/cmake/release/x86_64/rules.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/cmake/release/x86_64/rules.ninja" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.cxx/ndk_locator_record_513d3o2q.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/ndk_locator_record_513d3o2q.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.cxx/ndk_locator_record_513d3o2q.log" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/ndk_locator_record_513d3o2q.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.cxx/ndk_locator_record_513d3o2q_key.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/.cxx/ndk_locator_record_513d3o2q_key.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/debug/app-debug.aab" beforeDir="false" afterPath="$PROJECT_DIR$/app/debug/app-debug.aab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/DetailsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/DetailsActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/DownloadActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/DownloadActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/SubtitleAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/SubtitleAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/ItemMovieActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/ItemMovieActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/ItemSeriesActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/ItemSeriesActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/CommonGridAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/CommonGridAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/HomePageAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/adapters/HomePageAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/database/DatabaseHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/database/DatabaseHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/ads/AdsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/ads/AdsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/ads/AudienceNetworkHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/ads/AudienceNetworkHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/fragments/DailySubFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/fragments/DailySubFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/fragments/HomeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/fragments/HomeFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/fragments/MoviesFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/fragments/MoviesFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/fragments/TvSeriesFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/fragments/TvSeriesFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/CommonModels.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/CommonModels.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/Movie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/home_content/LatestMovie.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/home_content/LatestMovie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/home_content/LatestTvseries.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/home_content/LatestTvseries.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/home_content/TopviewTvseries.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/home_content/TopviewTvseries.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/home_content/Video.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/models/home_content/Video.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/nav_fragments/FavoriteFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/nav_fragments/FavoriteFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/PreferenceUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/animes/englishsubtitle/freemovieseries/utils/PreferenceUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/card_home_view.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/card_home_view.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_grid_image_albums.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_grid_image_albums.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nativetemplates/build/.transforms/320f798846fe930c27df7729790778c8.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nativetemplates/build/.transforms/320f798846fe930c27df7729790778c8/classes/classes.dex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nativetemplates/build/.transforms/5510607baf55e809694539c7d974103d.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nativetemplates/build/.transforms/5510607baf55e809694539c7d974103d/classes/classes.dex" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/nativetemplates/build/intermediates/compiled_local_resources/debug/out/drawable_gnt_outline_shape.xml.flat" beforeDir="false" afterPath="$PROJECT_DIR$/nativetemplates/build/intermediates/compiled_local_resources/debug/out/drawable_gnt_outline_shape.xml.flat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nativetemplates/build/intermediates/compiled_local_resources/debug/out/drawable_gnt_rounded_corners_shape.xml.flat" beforeDir="false" afterPath="$PROJECT_DIR$/nativetemplates/build/intermediates/compiled_local_resources/debug/out/drawable_gnt_rounded_corners_shape.xml.flat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nativetemplates/build/intermediates/compiled_local_resources/debug/out/layout_gnt_medium_template_view.xml.flat" beforeDir="false" afterPath="$PROJECT_DIR$/nativetemplates/build/intermediates/compiled_local_resources/debug/out/layout_gnt_medium_template_view.xml.flat" afterDir="false" />
@@ -284,7 +294,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[R58M61WTLQX]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[o7m7ypba5d8tkzcy]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -370,7 +380,7 @@
     <property name="android-custom-viewD:/AnimeS/AnimeS/app/src/main/java/animes/englishsubtitle/freemovieseries/view/SwipeRefreshLayout.java_SELECTED" value="SwipeRefreshLayout" />
     <property name="android-custom-viewD:/AnimeS/AnimeS/app/src/main/java/animes/englishsubtitle/freemovieseries/widget/RangeSeekBar.java_SELECTED" value="RangeSeekBar" />
     <property name="dart.analysis.tool.window.visible" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../key_build/keyanime.jks" />
+    <property name="last_opened_file_path" value="E:/MovieStreamingAPP/movie_done/ANDROID/ANDROID SOURCE CODE" />
     <property name="multi-representation-previewC:/Users/XFACTOR/.gradle/caches/modules-2/files-2.1/androidx.cardview/cardview/1.0.0/c9f3ce7ca74ad2c978230f4094ba6804c5166f9c/cardview-1.0.0-sources.jar!/androidx/cardview/widget/CardView.java_selected" value="Custom views" />
     <property name="multi-representation-previewC:/Users/XFACTOR/.gradle/caches/modules-2/files-2.1/com.crystal/crystalrangeseekbar/1.1.3/906916ce8d18a676bed8eb6b1875f9b839d11cd1/crystalrangeseekbar-1.1.3-sources.jar!/com/crystal/crystalrangeseekbar/widgets/CrystalRangeSeekbar.java_selected" value="Custom views" />
     <property name="multi-representation-previewC:/Users/XFACTOR/.gradle/caches/modules-2/files-2.1/com.google.android.exoplayer/exoplayer-ui/2.7.3/2f0cd71ec618d6c232e720c46d675ac34e10aee4/exoplayer-ui-2.7.3-sources.jar!/com/google/android/exoplayer2/ui/PlayerControlView.java_selected" value="Custom views" />
@@ -408,7 +418,7 @@
       </method>
     </configuration>
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
-      <module name="AnimeS.app" />
+      <module name="animeApp.app" />
       <option name="DEPLOY" value="true" />
       <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
       <option name="DEPLOY_AS_INSTANT" value="false" />
@@ -594,10 +604,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1616340618214" />
-    <state x="574" y="96" key="#com.intellij.ide.util.MemberChooser" timestamp="1616100772760">
+    <state x="574" y="96" key="#com.intellij.ide.util.MemberChooser" timestamp="1616930631091">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="96" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1616100772760" />
+    <state x="574" y="96" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1616930631091" />
     <state x="718" y="121" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1615653664475" />
     <state x="584" y="444" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1615037446089">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -615,10 +625,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1615658633991" />
-    <state x="349" y="179" key="AndroidCreateResourceFileDialog" timestamp="1615998552286">
+    <state x="349" y="179" key="AndroidCreateResourceFileDialog" timestamp="1616931422838">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="349" y="179" key="AndroidCreateResourceFileDialog/0.0.1536.824@0.0.1536.824" timestamp="1615998552286" />
+    <state x="349" y="179" key="AndroidCreateResourceFileDialog/0.0.1536.824@0.0.1536.824" timestamp="1616931422838" />
     <state x="436" y="226" key="AndroidCreateResourceFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1615203582580" />
     <state x="565" y="159" key="AndroidProcessChooserDialog" timestamp="1612111516104">
       <screen x="0" y="0" width="1536" height="824" />
@@ -632,10 +642,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1612193592825" />
-    <state x="915" y="245" width="440" height="487" key="FileChooserDialogImpl" timestamp="1616504519666">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="549" y="167" width="440" height="487" key="FileChooserDialogImpl" timestamp="1616957537012">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1616340652800" />
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1616957537012" />
     <state x="915" y="245" width="440" height="487" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1616504519666" />
     <state width="1859" height="696" key="GridCell.Tab.0.bottom" timestamp="1616504319803">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -701,18 +711,18 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="347" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.824@0.0.1536.824" timestamp="1612108322618" />
-    <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1615938002396">
+    <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1616612359751">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1615938002396" />
+    <state x="578" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1616612359751" />
     <state x="332" y="141" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1616004892636">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="332" y="141" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1536.824@0.0.1536.824" timestamp="1616004892636" />
-    <state x="677" y="129" width="1160" height="674" key="find.popup" timestamp="1616504371991">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="475" y="144" width="928" height="624" key="find.popup" timestamp="1616944930034">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="475" y="144" width="928" height="624" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1616415428059" />
+    <state x="475" y="144" width="928" height="624" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1616944930034" />
     <state x="677" y="129" width="1160" height="674" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1616504371991" />
     <state x="487" y="201" key="git4idea.merge.GitPullDialog" timestamp="1611027110603">
       <screen x="0" y="0" width="1536" height="824" />

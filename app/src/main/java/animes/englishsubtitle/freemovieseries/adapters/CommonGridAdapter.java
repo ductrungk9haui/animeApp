@@ -98,11 +98,13 @@ public class CommonGridAdapter extends RecyclerView.Adapter<CommonGridAdapter.Or
             final CommonModels obj = items.get(position);
             setAnimation(holder.itemView, position);
            // holder.qualityTv.setText(obj.getQuality());
-            if(obj.isPaid.equals("1")){
-                holder.qualityTv.setText("VIP");
-            }else {
-                holder.qualityTv.setText("Free");
-            }
+//            if(obj.isPaid.equals("1")){
+//                holder.qualityTv.setText("VIP");
+//            }else {
+//                holder.qualityTv.setText("Free");
+//            }
+            holder.qualityTv.setText(obj.getStatus_sub());
+
             holder.countEp.setVisibility(View.INVISIBLE);
             if(Integer.parseInt(obj.getCount_status_movie())>=0){
                 if(obj.getStatus_movie().equals("On-going")){
@@ -128,7 +130,7 @@ public class CommonGridAdapter extends RecyclerView.Adapter<CommonGridAdapter.Or
                 }
             }
             holder.statusMovie.setText(String.valueOf(obj.getStatus_movie()));
-            holder.releaseDateTv.setText(obj.getReleaseDate());
+            holder.releaseDateTv.setText(obj.getTotal_view());
             holder.name.setText(obj.getTitle());
 
             Picasso.get().load(obj.getImageUrl()).placeholder(R.drawable.poster_placeholder).into(holder.image);

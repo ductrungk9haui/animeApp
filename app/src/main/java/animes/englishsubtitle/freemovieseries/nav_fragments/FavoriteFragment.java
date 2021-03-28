@@ -260,6 +260,8 @@ public class FavoriteFragment extends Fragment {
                         models.setIsPaid(response.body().get(i).getIsPaid());
                         models.setStatus_movie(response.body().get(i).getStatusMovie());
                         models.setCount_status_movie(response.body().get(i).getCountStatusMovie());
+                        models.setTotal_view(response.body().get(i).getTotalview());
+                        models.setStatus_sub(response.body().get(i).getStatusSub());
                         if (response.body().get(i).getIsTvseries().equals("0")){
                             models.setVideoType("movie");
                         }else {

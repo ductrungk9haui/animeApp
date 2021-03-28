@@ -58,11 +58,14 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.Origin
         holder.name.setText(obj.getTitle());
         Picasso.get().load(obj.getImageUrl()).placeholder(R.drawable.poster_placeholder).into(holder.image);
         //holder.qualityTv.setText(obj.getQuality());
-        if (Integer.parseInt(obj.getIsPaid()) == 1) {
-            holder.qualityTv.setText("VIP");
-        } else {
-            holder.qualityTv.setText("Free");
-        }
+//        if (Integer.parseInt(obj.getIsPaid()) == 1) {
+//            holder.qualityTv.setText("VIP");
+//        } else {
+//            holder.qualityTv.setText("Free");
+//        }
+        holder.qualityTv.setText(obj.getStatus_sub());
+        holder.releaseDateTv.setText(obj.getTotal_view());
+
         holder.countEp.setVisibility(View.INVISIBLE);
         if (obj.getStatus_movie().equals("On-going")) {
             holder.countEp.setVisibility(View.VISIBLE);
@@ -83,7 +86,7 @@ public class HomePageAdapter extends RecyclerView.Adapter<HomePageAdapter.Origin
             holder.statusMovie.setBackgroundResource(R.drawable.circle_status_movie);
         }
         holder.statusMovie.setText(String.valueOf(obj.getStatus_movie()));
-        holder.releaseDateTv.setText(obj.getReleaseDate());
+       // holder.releaseDateTv.setText(obj.getReleaseDate());
 
 
         holder.lyt_parent.setOnClickListener(new View.OnClickListener() {

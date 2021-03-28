@@ -1029,10 +1029,10 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     //if it is embed player will go full screen
     @Override
     public void onEpisodeItemClickTvSeries(String type, EpiModel obj, int position) {
-        mAdsController.showNativeAds(mAdsContainer, true);
-        mAdsController.showInterstitialAds();
         episodePaidControl(String.valueOf(obj.getIs_epi_paid()));
         if (is_hide_subscribe_layout != true) {
+            mAdsController.showNativeAds(mAdsContainer, true);
+            mAdsController.showInterstitialAds();
             if (type.equalsIgnoreCase("embed")) {
                 CommonModels model = new CommonModels();
                 model.setStremURL(obj.getStreamURL());

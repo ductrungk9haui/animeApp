@@ -360,6 +360,17 @@ public class SplashScreenActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //update clicked
+
+                        DatabaseHelper databaseHelper = new DatabaseHelper(SplashScreenActivity.this);
+                        databaseHelper.deleteAllDownloadData();
+                        databaseHelper.deleteUserData();
+                        databaseHelper.deleteAllActiveStatusData();
+
+                        SharedPreferences.Editor sp = getSharedPreferences(Constants.USER_LOGIN_STATUS, MODE_PRIVATE).edit();
+                        sp.putBoolean(Constants.USER_LOGIN_STATUS, false);
+                        sp.apply();
+                        sp.commit();
+
                         dialog.dismiss();
                         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(info.getApkUrl()));
                         startActivity(browserIntent);

@@ -43,6 +43,29 @@ public class LatestMovie {
     @Expose
     private String countStatusMovie;
 
+    @SerializedName("total_view")
+    @Expose
+    private String totalview;
+    @SerializedName("status_sub")
+    @Expose
+    private String statusSub;
+
+    public String getTotalview() {
+        return totalview;
+    }
+
+    public void setTotalview(String totalview) {
+        this.totalview = totalview;
+    }
+
+    public String getStatusSub() {
+        return statusSub;
+    }
+
+    public void setStatusSub(String statusSub) {
+        this.statusSub = statusSub;
+    }
+
     public String getStatusMovie() {
         return statusMovie;
     }

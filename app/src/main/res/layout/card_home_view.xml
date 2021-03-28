@@ -36,24 +36,25 @@
 
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
                     android:textSize="8sp"
                     android:background="@drawable/rounded_textview_count_ep"
                     android:textColor="@android:color/black"
-                    android:text=""
+                    android:text="EP166"
                     android:layout_weight="1"
-                    android:gravity="center_vertical"
+                    android:gravity="end|center"
                     android:id="@+id/count_ep"
                     android:visibility="gone"
-                    android:paddingLeft="45dp"
-                    android:paddingRight="5dp"/>
+                    android:paddingRight="5dp"
+                    android:layout_marginTop="5dp"/>
 
                 <TextView
                     android:layout_width="40dp"
                     android:layout_height="20dp"
+                    android:layout_marginTop="5dp"
                     android:textSize="8sp"
-                    android:background="@drawable/rounded_textview_status_movie"
+                    android:background="@drawable/circle_status_movie"
                     android:textColor="@android:color/white"
                     android:gravity="center"
                     android:id="@+id/status_movie" />
@@ -109,14 +110,31 @@
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
                     />
 
-                <TextView
-                    android:id="@+id/release_date_tv"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="2019"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+                    android:orientation="horizontal"
+                    android:layout_alignParentEnd="true">
+                    <TextView
+                        android:layout_gravity="center"
+                        android:id="@+id/release_date_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="2019"
+                        android:layout_marginRight="5dp"
+                        android:layout_toLeftOf="@+id/icon_total_view"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption" />
 
-                    android:layout_alignParentEnd="true"/>
+                    <ImageView
+                        android:id="@+id/icon_total_view"
+                        android:layout_width="12sp"
+                        android:layout_height="12sp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_gravity="center"
+                        android:background="@drawable/ic_baseline_animeview24" />
+
+                </LinearLayout>
 
             </RelativeLayout>
 

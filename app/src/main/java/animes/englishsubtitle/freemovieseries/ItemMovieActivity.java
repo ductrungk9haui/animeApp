@@ -217,6 +217,8 @@ public class ItemMovieActivity extends AppCompatActivity {
                         models.setIsPaid(video.getIsPaid());
                         models.setStatus_movie(video.getStatusMovie());
                         models.setCount_status_movie(video.getCountStatusMovie());
+                        models.setTotal_view(video.getTotalview());
+                        models.setStatus_sub(video.getStatusSub());
                         models.setReleaseDate(video.getRelease());
                         if (video.getIsTvseries().equals("1") ) {
                             models.setVideoType("tvseries");
@@ -286,6 +288,8 @@ public class ItemMovieActivity extends AppCompatActivity {
                         models.setIsPaid(video.getIsPaid());
                         models.setStatus_movie(video.getStatusMovie());
                         models.setCount_status_movie(video.getCountStatusMovie());
+                        models.setTotal_view(video.getTotalview());
+                        models.setStatus_sub(video.getStatusSub());
                         models.setReleaseDate(video.getRelease());
                         if (video.getIsTvseries().equals("1") ) {
                             models.setVideoType("tvseries");
@@ -386,6 +390,8 @@ public class ItemMovieActivity extends AppCompatActivity {
                         models.setIsPaid(video.getIsPaid());
                         models.setStatus_movie(video.getStatusMovie());
                         models.setCount_status_movie(video.getCountStatusMovie());
+                        models.setTotal_view(video.getTotalview());
+                        models.setStatus_sub(video.getStatusSub());
                         models.setReleaseDate(video.getRelease());
                         if (video.getIsTvseries().equals("1") ) {
                             models.setVideoType("tvseries");

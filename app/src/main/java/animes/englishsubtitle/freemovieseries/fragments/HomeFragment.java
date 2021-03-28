@@ -1,6 +1,7 @@
 package animes.englishsubtitle.freemovieseries.fragments;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -130,7 +131,7 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        mActivity = (MainActivity) getActivity();
+       // mActivity = (MainActivity) getActivity();
         mUnbinder = ButterKnife.bind(this, view);
         mActivity.setTitle(getResources().getString(R.string.home));
         mSwipeRefreshLayout.setToolbar(mActivity.getToolbar());
@@ -148,7 +149,7 @@ public class HomeFragment extends Fragment {
         if (db.getConfigurationData().getAppConfig().getCountryVisible()) {
             mCountryLayout.setVisibility(View.VISIBLE);
         }
-        mAdsController  = AdsController.getInstance(getActivity());
+        mAdsController  = AdsController.getInstance(mActivity);
         //----init timer slider--------------------
         timer = new Timer();
         // --- genre recycler view ---------
@@ -372,6 +373,8 @@ public class HomeFragment extends Fragment {
                         models.setIsPaid(movie.getIsPaid());
                         models.setStatus_movie(movie.getStatusMovie());
                         models.setCount_status_movie(movie.getCountStatusMovie());
+                        models.setTotal_view(movie.getTotalview());
+                        models.setStatus_sub(movie.getStatusSub());
                         listMovie.add(models);
                     }
                     adapterMovie.notifyDataSetChanged();
@@ -388,6 +391,8 @@ public class HomeFragment extends Fragment {
                         models.setId(tvSeries.getVideosId());
                         models.setStatus_movie(tvSeries.getStatusMovie());
                         models.setCount_status_movie(tvSeries.getCountStatusMovie());
+                        models.setTotal_view(tvSeries.getTotalview());
+                        models.setStatus_sub(tvSeries.getStatusSub());
                         models.setIsPaid(tvSeries.getIsPaid());
                         listSeries.add(models);
                     }
@@ -411,6 +416,8 @@ public class HomeFragment extends Fragment {
                         models.setIsPaid(topviewtvSeries.getIsPaid());
                         models.setStatus_movie(topviewtvSeries.getStatusMovie());
                         models.setCount_status_movie(topviewtvSeries.getCountStatusMovie());
+                        models.setTotal_view(topviewtvSeries.getTotalview());
+                        models.setStatus_sub(topviewtvSeries.getStatusSub());
                         listTopViewSeries.add(models);
                     }
                     adapterTopviewSeries.notifyDataSetChanged();
@@ -432,6 +439,8 @@ public class HomeFragment extends Fragment {
                             commonModels.setIsPaid(video.getIsPaid());
                             commonModels.setStatus_movie(video.getStatusMovie());
                             commonModels.setCount_status_movie(video.getCountStatusMovie());
+                            commonModels.setTotal_view(video.getTotalview());
+                            commonModels.setStatus_sub(video.getStatusSub());
                             if (video.getIsTvseries().equals("0")) {
                                 commonModels.setVideoType("movie");
                             } else {
@@ -504,6 +513,12 @@ public class HomeFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        mActivity = (MainActivity) context;
     }
 
     @Override

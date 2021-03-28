@@ -47,7 +47,7 @@ public class AdsController implements AdsHelper {
     }
 
     public boolean isAdsEnable() {
-        return mIsAdsEnable;
+        return mIsAdsEnable && mAdsHelper!=null;
     }
 
     @Override
@@ -93,7 +93,7 @@ public class AdsController implements AdsHelper {
 
     @Override
     public void setActivity(Activity activity) {
-        if (!isAdsEnable()) return;
+        if (!isAdsEnable() || mAdsHelper == null) return;
         mAdsHelper.setActivity(activity);
     }
 

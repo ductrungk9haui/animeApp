@@ -30,6 +30,24 @@ public class CommonModels {
     public boolean isInAppDownload;
 
     public String is_epi_download_paid;
+    public String total_view;
+    public String status_sub;
+
+    public String getTotal_view() {
+        return total_view;
+    }
+
+    public void setTotal_view(String total_view) {
+        this.total_view = total_view;
+    }
+
+    public String getStatus_sub() {
+        return status_sub;
+    }
+
+    public void setStatus_sub(String status_sub) {
+        this.status_sub = status_sub;
+    }
 
     public String getIs_epi_download_paid() {
         return is_epi_download_paid;
