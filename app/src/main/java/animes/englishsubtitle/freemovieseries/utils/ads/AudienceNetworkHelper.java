@@ -3,12 +3,10 @@ package animes.englishsubtitle.freemovieseries.utils.ads;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -27,7 +25,6 @@ import com.facebook.ads.NativeAd;
 import com.facebook.ads.NativeAdLayout;
 import com.facebook.ads.NativeAdListener;
 import com.facebook.ads.NativeAdScrollView;
-import com.facebook.ads.NativeAdView;
 import com.facebook.ads.NativeAdViewAttributes;
 import com.facebook.ads.NativeAdsManager;
 import com.facebook.ads.NativeBannerAd;
@@ -41,14 +38,11 @@ import java.util.EnumSet;
 import java.util.List;
 
 import animes.englishsubtitle.freemovieseries.DetailsActivity;
-import animes.englishsubtitle.freemovieseries.ItemMovieActivity;
 import animes.englishsubtitle.freemovieseries.R;
 import animes.englishsubtitle.freemovieseries.database.DatabaseHelper;
-import animes.englishsubtitle.freemovieseries.network.model.config.AdsConfig;
 import animes.englishsubtitle.freemovieseries.utils.PreferenceUtils;
 
 import static android.content.Context.MODE_PRIVATE;
-import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static animes.englishsubtitle.freemovieseries.BuildConfig.DEBUG;
 
 public class AudienceNetworkHelper
@@ -343,6 +337,11 @@ public class AudienceNetworkHelper
                         .setButtonBorderColor(activity.getResources().getColor(R.color.com_facebook_button_background_color));
     }
 
+    @Override
+    public void getNativeAds(RecycleContainer fragment) {
+        loadScrollNativeAd(fragment);
+    }
+
     public void showFANNativeBannerAd(RelativeLayout container) {
         if (!PreferenceUtils.isActivePlan(mActivity)) {
             String nativeAdId = new DatabaseHelper(mActivity).getConfigurationData().getAdsConfig().getFanNativeAdsPlacementId();
@@ -510,6 +509,27 @@ public class AudienceNetworkHelper
                 params.setMargins(0, 0, 0, 0);
                 fanAdsScrollView.setLayoutParams(params);
                 fanAdsScrollViewContainer.addView(fanAdsScrollView);
+            }
+
+            @Override
+            public void onAdError(AdError adError) {
+                Log.d(TAG, "Scroll Native ad onAdError");
+            }
+        });
+        manager.loadAds(NativeAd.MediaCacheFlag.ALL);
+    }
+
+    public void loadScrollNativeAd(RecycleContainer fragment){
+        NativeAdsManager manager;
+        String NATIVE_HOME_PLACEMENT_ID = new DatabaseHelper(mActivity).getConfigurationData().getAdsConfig().getFanNativeAdsPlacementId();
+        manager = new NativeAdsManager(mActivity, NATIVE_HOME_PLACEMENT_ID, 5);
+        manager.setListener(new NativeAdsManager.Listener() {
+            @Override
+            public void onAdsLoaded() {
+                if (mActivity == null) {
+                    return;
+                }
+                fragment.setAdsManager(manager, mNativeAttributes);
             }
 
             @Override

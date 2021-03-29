@@ -27,7 +27,7 @@ public class AdsController implements AdsHelper {
         return instance;
     }
 
-    private void init(Activity activity) {
+    public void init(Activity activity) {
         DatabaseHelper dbHelper = new DatabaseHelper(activity);
         AdsConfig adsConfig = dbHelper.getConfigurationData().getAdsConfig();
         if (adsConfig.getAdsEnable().equals("1")) {
@@ -93,8 +93,14 @@ public class AdsController implements AdsHelper {
 
     @Override
     public void setActivity(Activity activity) {
-        if (!isAdsEnable() || mAdsHelper == null) return;
+        if (!isAdsEnable()) return;
         mAdsHelper.setActivity(activity);
+    }
+
+    @Override
+    public void getNativeAds(RecycleContainer fragment) {
+        if (!isAdsEnable()) return;
+        mAdsHelper.getNativeAds(fragment);
     }
 
     @Override

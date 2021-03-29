@@ -42,6 +42,11 @@ public class AppodealHelper implements AdsHelper {
     }
 
     @Override
+    public void getNativeAds(RecycleContainer fragment) {
+
+    }
+
+    @Override
     public void onDestroy() {
 
     }

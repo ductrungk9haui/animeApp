@@ -32,6 +32,7 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.Arrays;
 import java.util.List;
 
+import animes.englishsubtitle.freemovieseries.utils.ads.AdsController;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -216,6 +217,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         //save user login time, expire time
                         updateSubscriptionStatus(db.getUserData().getUserId());
+
                     } else {
                         new ToastMsg(LoginActivity.this).toastIconError(response.body().getData());
                         dialog.dismiss();
@@ -273,7 +275,7 @@ public class LoginActivity extends AppCompatActivity {
                         DatabaseHelper db = new DatabaseHelper(LoginActivity.this);
                         db.deleteAllActiveStatusData();
                         db.insertActiveStatusData(activeStatus);
-
+                        AdsController.getInstance(LoginActivity.this).init(LoginActivity.this);
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

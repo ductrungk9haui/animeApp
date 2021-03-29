@@ -32,7 +32,7 @@ public class Constants {
 
     //room related constants
     public static final String ROOM_DB_NAME = "continue_watching_db";
-
+    public static final String APP_VERSION = "app_version";
     public static final String CONTENT_ID = "content_id";
     public static final String CONTENT_TITLE = "title";
     public static final String IMAGE_URL = "image_url";

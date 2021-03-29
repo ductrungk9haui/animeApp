@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.appodeal.ads.Appodeal;
+import com.facebook.ads.NativeAdViewAttributes;
+import com.facebook.ads.NativeAdsManager;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
@@ -36,11 +38,12 @@ import animes.englishsubtitle.freemovieseries.utils.PreferenceUtils;
 import animes.englishsubtitle.freemovieseries.utils.RtlUtils;
 import animes.englishsubtitle.freemovieseries.utils.ads.AdsController;
 import animes.englishsubtitle.freemovieseries.utils.ads.BannerAds;
+import animes.englishsubtitle.freemovieseries.utils.ads.RecycleContainer;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
 
-public class ItemSeriesActivity extends AppCompatActivity {
+public class ItemSeriesActivity extends AppCompatActivity implements RecycleContainer {
 
     private ShimmerFrameLayout shimmerFrameLayout;
     private RecyclerView recyclerView;
@@ -94,6 +97,7 @@ public class ItemSeriesActivity extends AppCompatActivity {
 
         //----movie's recycler view-----------------
         recyclerView = findViewById(R.id.recyclerView);
+        mAdapter = new CommonGridAdapter(this, this, list);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
         if(AdsController.getInstance(this).isAdsEnable()){
             gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
@@ -107,12 +111,13 @@ public class ItemSeriesActivity extends AppCompatActivity {
                     }
                 }
             });
+            AdsController.getInstance(this).getNativeAds(this);
         }
         recyclerView.setLayoutManager(gridLayoutManager);
         //recyclerView.addItemDecoration(new SpacingItemDecoration(3, Tools.dpToPx(this, 12), true));
         recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(false);
-        mAdapter = new CommonGridAdapter(this, this, list);
+
         recyclerView.setAdapter(mAdapter);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -153,6 +158,7 @@ public class ItemSeriesActivity extends AppCompatActivity {
 
                 if (new NetworkInst(ItemSeriesActivity.this).isNetworkAvailable()) {
                     getTvSeriesData(pageCount);
+                    AdsController.getInstance(ItemSeriesActivity.this).getNativeAds(ItemSeriesActivity.this);
                 } else {
                     tvNoItem.setText(getString(R.string.no_internet));
                     shimmerFrameLayout.stopShimmer();
@@ -277,4 +283,8 @@ public class ItemSeriesActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void setAdsManager(NativeAdsManager manager, NativeAdViewAttributes attributes) {
+        mAdapter.setAdsManager(manager,attributes);
+    }
 }

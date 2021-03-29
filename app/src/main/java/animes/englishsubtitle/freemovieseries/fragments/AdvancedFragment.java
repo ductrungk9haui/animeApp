@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import animes.englishsubtitle.freemovieseries.utils.PreferenceUtils;
 import animes.englishsubtitle.freemovieseries.utils.ads.AdsController;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -125,11 +126,12 @@ public class AdvancedFragment extends Fragment {
     }
     @OnClick(R.id.request_layout)
     void onRequestClick(){
-        if (mAdsController.isAdsEnable()) {
+        if (PreferenceUtils.isLoggedIn(mActivity)) {
             mAdsController.showRewardVideoAds();
         }else{
             Intent intent = new Intent(getContext(), LoginActivity.class);
             startActivity(intent);
+            return;
         }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());

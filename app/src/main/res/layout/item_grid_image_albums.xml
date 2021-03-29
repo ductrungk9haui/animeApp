@@ -124,9 +124,5 @@
                 android:visibility="gone" />
         </LinearLayout>
     </LinearLayout>
-    <include
-        layout="@layout/ads_container"
-        android:id="@+id/ads_container"
-        android:visibility="gone"/>
 
 </androidx.cardview.widget.CardView>

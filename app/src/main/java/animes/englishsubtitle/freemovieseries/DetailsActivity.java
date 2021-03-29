@@ -1031,7 +1031,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     public void onEpisodeItemClickTvSeries(String type, EpiModel obj, int position) {
         episodePaidControl(String.valueOf(obj.getIs_epi_paid()));
         if (is_hide_subscribe_layout != true) {
-            mAdsController.showNativeAds(mAdsContainer, true);
+           // mAdsController.showNativeAds(mAdsContainer, true);
             mAdsController.showInterstitialAds();
             if (type.equalsIgnoreCase("embed")) {
                 CommonModels model = new CommonModels();

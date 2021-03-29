@@ -2,6 +2,7 @@ package animes.englishsubtitle.freemovieseries;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -38,11 +39,14 @@ import com.explorestack.consent.ConsentFormListener;
 import com.explorestack.consent.ConsentInfoUpdateListener;
 import com.explorestack.consent.ConsentManager;
 import com.explorestack.consent.exception.ConsentManagerException;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import animes.englishsubtitle.freemovieseries.network.model.config.AdsConfig;
+import animes.englishsubtitle.freemovieseries.utils.ads.AdsController;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -321,6 +325,8 @@ public class SplashScreenActivity extends AppCompatActivity {
                             showAppUpdateDialog(configuration.getApkUpdateInfo());
                             return;
                         }
+                        resetInfo();
+
 
                         if (db.getConfigurationData() != null) {
                             AdsConfig adsConfig = db.getConfigurationData().getAdsConfig();
@@ -360,17 +366,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //update clicked
-
-                        DatabaseHelper databaseHelper = new DatabaseHelper(SplashScreenActivity.this);
-                        databaseHelper.deleteAllDownloadData();
-                        databaseHelper.deleteUserData();
-                        databaseHelper.deleteAllActiveStatusData();
-
-                        SharedPreferences.Editor sp = getSharedPreferences(Constants.USER_LOGIN_STATUS, MODE_PRIVATE).edit();
-                        sp.putBoolean(Constants.USER_LOGIN_STATUS, false);
-                        sp.apply();
-                        sp.commit();
-
+                        resetInfo();
                         dialog.dismiss();
                         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(info.getApkUrl()));
                         startActivity(browserIntent);
@@ -462,5 +458,30 @@ public class SplashScreenActivity extends AppCompatActivity {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
+    }
+
+    private void resetInfo(){
+        SharedPreferences preferences = getSharedPreferences("push", Context.MODE_PRIVATE);
+        String appVer =  preferences.getString(Constants.APP_VERSION, getResources().getString(R.string.app_version));
+        if(!appVer.equals(getResources().getString(R.string.app_version))) {
+            preferences.edit()
+                .putString(Constants.APP_VERSION, appVer)
+                .apply();
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            if (user != null) {
+                FirebaseAuth.getInstance().signOut();
+            }
+
+            db.deleteAllDownloadData();
+            db.deleteUserData();
+            db.deleteAllActiveStatusData();
+            AdsController.getInstance(this).init(this);
+
+            getSharedPreferences(Constants.USER_LOGIN_STATUS, MODE_PRIVATE)
+                    .edit()
+                    .putBoolean(Constants.USER_LOGIN_STATUS, false)
+                    .apply();
+        }
+
     }
 }

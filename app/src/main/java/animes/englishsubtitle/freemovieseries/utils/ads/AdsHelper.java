@@ -13,6 +13,7 @@ public interface AdsHelper {
     void showNativeAds(View adView, boolean isSpecialAd);
 
     void setActivity(Activity activity);
+    void getNativeAds(RecycleContainer fragment);
 
     void onDestroy();
 }

@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.facebook.ads.NativeAdViewAttributes;
+import com.facebook.ads.NativeAdsManager;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
@@ -35,11 +37,14 @@ import animes.englishsubtitle.freemovieseries.utils.PreferenceUtils;
 import animes.englishsubtitle.freemovieseries.utils.RtlUtils;
 import animes.englishsubtitle.freemovieseries.utils.ads.AdsController;
 import animes.englishsubtitle.freemovieseries.utils.ads.BannerAds;
+import animes.englishsubtitle.freemovieseries.utils.ads.RecycleContainer;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
 
-public class ItemMovieActivity extends AppCompatActivity {
+import static com.unity3d.services.core.properties.ClientProperties.getActivity;
+
+public class ItemMovieActivity extends AppCompatActivity implements RecycleContainer {
 
 
     private ShimmerFrameLayout shimmerFrameLayout;
@@ -97,6 +102,7 @@ public class ItemMovieActivity extends AppCompatActivity {
 
         //----movie's recycler view-----------------
         recyclerView = findViewById(R.id.recyclerView);
+        mAdapter = new CommonGridAdapter(this,this, list);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
         if(AdsController.getInstance(this).isAdsEnable()){
             gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
@@ -110,6 +116,7 @@ public class ItemMovieActivity extends AppCompatActivity {
                     }
                 }
             });
+            AdsController.getInstance(getActivity()).getNativeAds(this);
         }
 
         recyclerView.setLayoutManager(gridLayoutManager);
@@ -117,7 +124,7 @@ public class ItemMovieActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(false);
 
-        mAdapter = new CommonGridAdapter(this,this, list);
+
         recyclerView.setAdapter(mAdapter);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -163,6 +170,7 @@ public class ItemMovieActivity extends AppCompatActivity {
 
                 if (new NetworkInst(ItemMovieActivity.this).isNetworkAvailable()){
                     initData();
+                    AdsController.getInstance(getActivity()).getNativeAds(ItemMovieActivity.this);
                 }else {
                     tvNoItem.setText(getString(R.string.no_internet));
                     shimmerFrameLayout.stopShimmer();
@@ -444,4 +452,8 @@ public class ItemMovieActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void setAdsManager(NativeAdsManager manager, NativeAdViewAttributes attributes) {
+        mAdapter.setAdsManager(manager,attributes);
+    }
 }

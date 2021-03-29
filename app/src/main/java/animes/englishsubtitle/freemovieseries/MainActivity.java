@@ -60,6 +60,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import animes.englishsubtitle.freemovieseries.fragments.DailySubContainer;
+import animes.englishsubtitle.freemovieseries.fragments.MoviesContainer;
+import animes.englishsubtitle.freemovieseries.fragments.TvSeriesContainer;
+import animes.englishsubtitle.freemovieseries.nav_fragments.FavoriteContainer;
+import animes.englishsubtitle.freemovieseries.utils.ads.AdsController;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
@@ -68,13 +73,9 @@ import butterknife.Unbinder;
 import animes.englishsubtitle.freemovieseries.adapters.NavigationAdapter;
 import animes.englishsubtitle.freemovieseries.database.DatabaseHelper;
 import animes.englishsubtitle.freemovieseries.fragments.AdvancedFragment;
-import animes.englishsubtitle.freemovieseries.fragments.DailySubFragment;
 import animes.englishsubtitle.freemovieseries.fragments.HomeFragment;
-import animes.englishsubtitle.freemovieseries.fragments.MoviesFragment;
-import animes.englishsubtitle.freemovieseries.fragments.TvSeriesFragment;
 import animes.englishsubtitle.freemovieseries.models.NavigationModel;
 import animes.englishsubtitle.freemovieseries.nav_fragments.CountryFragment;
-import animes.englishsubtitle.freemovieseries.nav_fragments.FavoriteFragment;
 import animes.englishsubtitle.freemovieseries.nav_fragments.GenreFragment;
 import animes.englishsubtitle.freemovieseries.network.model.config.AdsConfig;
 import animes.englishsubtitle.freemovieseries.utils.Constants;
@@ -180,11 +181,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (fragment != null) {
             if (fragment instanceof HomeFragment) {
                 NaviSelected(mAdapter.getViewHolder(0),0);
-            }else if(fragment instanceof MoviesFragment){
+            }else if(fragment instanceof MoviesContainer){
                 NaviSelected(mAdapter.getViewHolder(1),1);
-            }else if(fragment instanceof  TvSeriesFragment){
+            }else if(fragment instanceof TvSeriesContainer){
                 NaviSelected(mAdapter.getViewHolder(2),2);
-            }else if(fragment instanceof  FavoriteFragment){
+            }else if(fragment instanceof FavoriteContainer){
                 NaviSelected(mAdapter.getViewHolder(6),6);
             }else{
                mBottomNaviDark.clearSelection();
@@ -403,15 +404,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             loadFragment(new HomeFragment());
                             break;
                         case 1:
-                            loadFragment(new MoviesFragment());
+                            loadFragment(new MoviesContainer());
                             Config.isOpenChildFragment = true;
                             break;
                         case 2:
-                            loadFragment(new TvSeriesFragment());
+                            loadFragment(new TvSeriesContainer());
                             Config.isOpenChildFragment = true;
                             break;
                         case 3:
-                            loadFragment(new DailySubFragment());
+                            loadFragment(new DailySubContainer());
                             Config.isOpenChildFragment = true;
                             break;
                         case 4:
@@ -434,15 +435,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             loadFragment(new HomeFragment());
                             break;
                         case 1:
-                            loadFragment(new MoviesFragment());
+                            loadFragment(new MoviesContainer());
                             Config.isOpenChildFragment = true;
                             break;
                         case 2:
-                            loadFragment(new TvSeriesFragment());
+                            loadFragment(new TvSeriesContainer());
                             Config.isOpenChildFragment = true;
                             break;
                         case 3:
-                            loadFragment(new DailySubFragment());
+                            loadFragment(new DailySubContainer());
                             Config.isOpenChildFragment = true;
                             break;
                         case 4:
@@ -676,7 +677,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                             startActivity(intent);
                         } else if (position == 6) {
-                            loadFragment(new FavoriteFragment());
+                            loadFragment(new FavoriteContainer());
                             Config.isOpenChildFragment = true;
                         } else if (position == 7) {
                             Intent intent = new Intent(MainActivity.this, SubscriptionActivity.class);
@@ -707,7 +708,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                             databaseHelper.deleteUserData();
 
                                             PreferenceUtils.clearSubscriptionSavedData(MainActivity.this);
-
+                                            AdsController.getInstance(MainActivity.this).init(MainActivity.this);
                                             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                                             startActivity(intent);
                                             finish();

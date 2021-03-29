@@ -202,6 +202,11 @@ public class AdMobHelper implements AdsHelper {
     }
 
     @Override
+    public void getNativeAds(RecycleContainer fragment) {
+
+    }
+
+    @Override
     public void onDestroy() {
         for (UnifiedNativeAd ad : mUnifiedNativeAds) {
             if (ad != null) {

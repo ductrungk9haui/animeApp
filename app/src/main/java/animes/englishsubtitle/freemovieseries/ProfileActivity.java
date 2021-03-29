@@ -33,6 +33,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.io.File;
 
+import animes.englishsubtitle.freemovieseries.utils.ads.AdsController;
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -293,11 +294,11 @@ public class ProfileActivity extends AppCompatActivity {
         databaseHelper.deleteAllDownloadData();
         databaseHelper.deleteUserData();
         databaseHelper.deleteAllActiveStatusData();
-
         SharedPreferences.Editor sp = getSharedPreferences(Constants.USER_LOGIN_STATUS, MODE_PRIVATE).edit();
         sp.putBoolean(Constants.USER_LOGIN_STATUS, false);
         sp.apply();
         sp.commit();
+        AdsController.getInstance(this).init(this);
     }
 
     private void openGallery() {
