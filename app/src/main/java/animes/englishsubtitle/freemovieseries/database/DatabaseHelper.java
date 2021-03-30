@@ -21,7 +21,7 @@ import animes.englishsubtitle.freemovieseries.network.model.config.PaymentConfig
 import animes.englishsubtitle.freemovieseries.utils.PreferenceUtils;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 7;
+    private static final int DATABASE_VERSION = 8;
     public static final String DATABASE_NAME = "com.oxoo.spagreen.db";
 
     //config table
@@ -46,6 +46,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String CONFIG_COLUMN_FAN_INTERSTITIAL_ID = "fan_interstitial_id";
     private static final String CONFIG_COLUMN_FAN_REWARD_ID = "fan_reward_id";
     private static final String CONFIG_COLUMN_STARTAPP_ID = "startapp_id";
+    private static final String CONFIG_COLUMN_CHECK_FIRST_VERSION = "check_first";
 
     private static final String PAYMENT_CONFIG_CURRENCY_SYMBOL = "payment_config_currency_symbol";
     private static final String PAYMENT_CONFIG_PAYPAL_EMAIL = "payment_config_paypal_email";
@@ -204,6 +205,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 CONFIG_COLUMN_FAN_INTERSTITIAL_ID + " TEXT," +
                 CONFIG_COLUMN_FAN_REWARD_ID + " TEXT," +
                 CONFIG_COLUMN_STARTAPP_ID + " TEXT," +
+                CONFIG_COLUMN_CHECK_FIRST_VERSION + " TEXT," +
 
                 PAYMENT_CONFIG_CURRENCY_SYMBOL + " TEXT," +
                 PAYMENT_CONFIG_PAYPAL_EMAIL + " TEXT," +
@@ -245,8 +247,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(CONFIG_COLUMN_FAN_NATIVE_ID, configuration.getAdsConfig().getFanNativeAdsPlacementId());
         contentValues.put(CONFIG_COLUMN_FAN_NATIVE_ID_1, configuration.getAdsConfig().getFanNativeAdsPlacementId1());
         contentValues.put(CONFIG_COLUMN_FAN_INTERSTITIAL_ID, configuration.getAdsConfig().getFanInterstitialAdsPlacementId());
-        contentValues.put(CONFIG_COLUMN_FAN_REWARD_ID, configuration.getAdsConfig().getFanRewardedAdsPlacementId());
+        contentValues.put(CONFIG_COLUMN_FAN_REWARD_ID, configuration.getAdsConfig().getFanRewardAdsPlacementId());
         contentValues.put(CONFIG_COLUMN_STARTAPP_ID, configuration.getAdsConfig().getStartappAppId());
+        contentValues.put(CONFIG_COLUMN_CHECK_FIRST_VERSION, configuration.getAdsConfig().getFirstCheckVersion());
+
 
         contentValues.put(PAYMENT_CONFIG_CURRENCY_SYMBOL, configuration.getPaymentConfig().getCurrencySymbol());
         contentValues.put(PAYMENT_CONFIG_PAYPAL_EMAIL, configuration.getPaymentConfig().getPaypalEmail());
@@ -302,8 +306,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     adsConfig.setFanNativeAdsPlacementId1(cursor.getString(cursor.getColumnIndex(CONFIG_COLUMN_FAN_NATIVE_ID_1)));
                     adsConfig.setFanBannerAdsPlacementId(cursor.getString(cursor.getColumnIndex(CONFIG_COLUMN_FAN_BANNER_ID)));
                     adsConfig.setFanInterstitialAdsPlacementId(cursor.getString(cursor.getColumnIndex(CONFIG_COLUMN_FAN_INTERSTITIAL_ID)));
-                    adsConfig.setFanRewardedAdsPlacementId(cursor.getString(cursor.getColumnIndex(CONFIG_COLUMN_FAN_REWARD_ID)));
+                    adsConfig.setFanRewardAdsPlacementId(cursor.getString(cursor.getColumnIndex(CONFIG_COLUMN_FAN_REWARD_ID)));
                     adsConfig.setStartappAppId(cursor.getString(cursor.getColumnIndex(CONFIG_COLUMN_STARTAPP_ID)));
+                    adsConfig.setFirstCheckVersion(cursor.getString(cursor.getColumnIndex(CONFIG_COLUMN_CHECK_FIRST_VERSION)));
 
                     paymentConfig.setCurrencySymbol(cursor.getString(cursor.getColumnIndex(PAYMENT_CONFIG_CURRENCY_SYMBOL)));
                     paymentConfig.setCurrency(cursor.getString(cursor.getColumnIndex(PAYMENT_CONFIG_CURRENCY)));
@@ -375,8 +380,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(CONFIG_COLUMN_FAN_NATIVE_ID, configuration.getAdsConfig().getFanNativeAdsPlacementId());
         contentValues.put(CONFIG_COLUMN_FAN_NATIVE_ID_1, configuration.getAdsConfig().getFanNativeAdsPlacementId1());
         contentValues.put(CONFIG_COLUMN_FAN_INTERSTITIAL_ID, configuration.getAdsConfig().getFanInterstitialAdsPlacementId());
-        contentValues.put(CONFIG_COLUMN_FAN_REWARD_ID, configuration.getAdsConfig().getFanRewardedAdsPlacementId());
+        contentValues.put(CONFIG_COLUMN_FAN_REWARD_ID, configuration.getAdsConfig().getFanRewardAdsPlacementId());
         contentValues.put(CONFIG_COLUMN_STARTAPP_ID, configuration.getAdsConfig().getStartappAppId());
+        contentValues.put(CONFIG_COLUMN_CHECK_FIRST_VERSION, configuration.getAdsConfig().getFirstCheckVersion());
 
         contentValues.put(PAYMENT_CONFIG_CURRENCY_SYMBOL, configuration.getPaymentConfig().getCurrencySymbol());
         contentValues.put(PAYMENT_CONFIG_PAYPAL_EMAIL, configuration.getPaymentConfig().getPaypalEmail());

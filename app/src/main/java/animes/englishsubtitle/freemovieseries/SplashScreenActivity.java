@@ -463,10 +463,40 @@ public class SplashScreenActivity extends AppCompatActivity {
     private void resetInfo(){
         SharedPreferences preferences = getSharedPreferences("push", Context.MODE_PRIVATE);
         String appVer =  preferences.getString(Constants.APP_VERSION, getResources().getString(R.string.app_version));
-        if(!appVer.equals(getResources().getString(R.string.app_version))) {
+
+        Integer version_code = BuildConfig.VERSION_CODE;
+
+        Log.d("equals first",String.valueOf(version_code));
+        Log.d("equals first",String.valueOf(db.getConfigurationData().getAdsConfig().getFirstCheckVersion()));
+
+        //  Log.d("check loi",String.valueOf(NATIVE_HOME_PLACEMENT_ID));
+        if(version_code<Integer.parseInt(db.getConfigurationData().getAdsConfig().getFirstCheckVersion())){
             preferences.edit()
-                .putString(Constants.APP_VERSION, appVer)
-                .apply();
+                    .putString(Constants.APP_VERSION,  getResources().getString(R.string.app_version))
+                    .apply();
+            Log.d("equals first",String.valueOf(version_code));
+            Log.d("equals first",String.valueOf(db.getConfigurationData().getAdsConfig().getFirstCheckVersion()));
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            if (user != null) {
+                FirebaseAuth.getInstance().signOut();
+            }
+
+            db.deleteAllDownloadData();
+            db.deleteUserData();
+            db.deleteAllActiveStatusData();
+            AdsController.getInstance(SplashScreenActivity.this).init(SplashScreenActivity.this);
+
+            getSharedPreferences(Constants.USER_LOGIN_STATUS, MODE_PRIVATE)
+                    .edit()
+                    .putBoolean(Constants.USER_LOGIN_STATUS, false)
+                    .apply();
+
+        } else if(!appVer.equals(getResources().getString(R.string.app_version))) {
+            Log.d("equals second",appVer);
+            Log.d("equals second",getResources().getString(R.string.app_version));
+            preferences.edit()
+                    .putString(Constants.APP_VERSION, getResources().getString(R.string.app_version))
+                    .apply();
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             if (user != null) {
                 FirebaseAuth.getInstance().signOut();

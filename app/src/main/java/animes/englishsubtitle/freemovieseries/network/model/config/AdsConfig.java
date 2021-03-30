@@ -31,42 +31,58 @@ public class AdsConfig {
     @SerializedName("fan_native_ads_placement_id")
     @Expose
     private String fanNativeAdsPlacementId;
+
     @SerializedName("fan_native_ads_placement_id_1")
     @Expose
     private String fanNativeAdsPlacementId1;
+
     @SerializedName("fan_banner_ads_placement_id")
     @Expose
     private String fanBannerAdsPlacementId;
-    @SerializedName("fan_reward_ads_placement_id")
-    @Expose
-    private String fanRewardedAdsPlacementId;
+
     @SerializedName("fan_interstitial_ads_placement_id")
     @Expose
     private String fanInterstitialAdsPlacementId;
+
+    @SerializedName("fan_reward_ads_placement_id")
+    @Expose
+    private String fanRewardAdsPlacementId;
+
     @SerializedName("startapp_app_id")
     @Expose
     private String startappAppId;
     @SerializedName("startapp_developer_id")
     @Expose
     private String startappDeveloperId;
+    @SerializedName("first_check_version")
+    @Expose
+    private String firstCheckVersion;
+
+    public String getFirstCheckVersion() {
+        return firstCheckVersion;
+    }
+
+    public void setFirstCheckVersion(String firstCheckVersion) {
+        this.firstCheckVersion = firstCheckVersion;
+    }
+
+    public AdsConfig() {
+    }
 
     public String getFanNativeAdsPlacementId1() {
         return fanNativeAdsPlacementId1;
-    }
-
-    public String getFanRewardedAdsPlacementId() {
-        return fanRewardedAdsPlacementId;
-    }
-
-    public void setFanRewardedAdsPlacementId(String fanRewardedAdsPlacementId) {
-        this.fanRewardedAdsPlacementId = fanRewardedAdsPlacementId;
     }
 
     public void setFanNativeAdsPlacementId1(String fanNativeAdsPlacementId1) {
         this.fanNativeAdsPlacementId1 = fanNativeAdsPlacementId1;
     }
 
-    public AdsConfig() {
+    public String getFanRewardAdsPlacementId() {
+        return fanRewardAdsPlacementId;
+    }
+
+    public void setFanRewardAdsPlacementId(String fanRewardAdsPlacementId) {
+        this.fanRewardAdsPlacementId = fanRewardAdsPlacementId;
     }
 
     public String getAdmobRewardedVideoAdsId() {
