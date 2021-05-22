@@ -1,2 +1,4 @@
 # ninja log v5
-0	17	0	clean	124208e87b73ee86
+0	11	0	clean	33df79701f7cad1
+2	605	643398252	CMakeFiles/api_config.dir/api_config.cpp.o	a931d4b731df09ff
+608	924	643398252	D:/AnimeS/AnimeS/app/build/intermediates/cmake/release/obj/x86/libapi_config.so	4607aa94276dd72a
