@@ -10,6 +10,9 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/df587683d57e6a1522497d1bf08516f7/jetified-GDPRChecker-v0.2/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/df587683d57e6a1522497d1bf08516f7/jetified-GDPRChecker-v0.2/AndroidManifest.xml" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/df587683d57e6a1522497d1bf08516f7/jetified-GDPRChecker-v0.2/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/39a4e05ae5b36621fb702445941ec9f8/jetified-GDPRChecker-v0.2/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/39a4e05ae5b36621fb702445941ec9f8/jetified-GDPRChecker-v0.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/39a4e05ae5b36621fb702445941ec9f8/jetified-GDPRChecker-v0.2/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

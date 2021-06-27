@@ -13,6 +13,10 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/30c7ec5f79dad09b5954559ee8504606/jetified-core-2.7.1/jars/libs/r-classes.jar!/" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/30c7ec5f79dad09b5954559ee8504606/jetified-core-2.7.1/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/30c7ec5f79dad09b5954559ee8504606/jetified-core-2.7.1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2e102958e2ad29d2be21e11c8a386ea7/jetified-core-2.7.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2e102958e2ad29d2be21e11c8a386ea7/jetified-core-2.7.1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2e102958e2ad29d2be21e11c8a386ea7/jetified-core-2.7.1/jars/libs/r-classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2e102958e2ad29d2be21e11c8a386ea7/jetified-core-2.7.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.appodeal.ads.sdk/core/2.7.1/f0f065440553a1c41c764d5e7c6b6c05e52557dd/core-2.7.1-javadoc.jar!/" />

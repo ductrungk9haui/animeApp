@@ -10,6 +10,9 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a93650c31a9307a9a4bf31767981509e/jetified-mediationsdk-7.0.3.1/AndroidManifest.xml" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a93650c31a9307a9a4bf31767981509e/jetified-mediationsdk-7.0.3.1/res" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a93650c31a9307a9a4bf31767981509e/jetified-mediationsdk-7.0.3.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0ee4d0b9ad5abec5bd4513803f32fa3e/jetified-mediationsdk-7.0.3.1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0ee4d0b9ad5abec5bd4513803f32fa3e/jetified-mediationsdk-7.0.3.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0ee4d0b9ad5abec5bd4513803f32fa3e/jetified-mediationsdk-7.0.3.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

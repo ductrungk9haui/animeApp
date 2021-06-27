@@ -10,6 +10,9 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2e946732c1706e35eeaa03dbc1c682eb/jetified-inmobi-2.7.1.2/AndroidManifest.xml" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2e946732c1706e35eeaa03dbc1c682eb/jetified-inmobi-2.7.1.2/res" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2e946732c1706e35eeaa03dbc1c682eb/jetified-inmobi-2.7.1.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f67a80a0a8ac9871f828156fc3298444/jetified-inmobi-2.7.1.2/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f67a80a0a8ac9871f828156fc3298444/jetified-inmobi-2.7.1.2/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f67a80a0a8ac9871f828156fc3298444/jetified-inmobi-2.7.1.2/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

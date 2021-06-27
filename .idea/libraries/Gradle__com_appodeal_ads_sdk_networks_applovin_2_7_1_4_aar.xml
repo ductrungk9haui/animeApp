@@ -13,6 +13,10 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/875baf7a73b7d9a76bed54680abc0d7f/jetified-applovin-2.7.1.4/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/875baf7a73b7d9a76bed54680abc0d7f/jetified-applovin-2.7.1.4/jars/libs/r-classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/875baf7a73b7d9a76bed54680abc0d7f/jetified-applovin-2.7.1.4/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3c421db50eb614a3f51ec0c7eace9343/jetified-applovin-2.7.1.4/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3c421db50eb614a3f51ec0c7eace9343/jetified-applovin-2.7.1.4/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3c421db50eb614a3f51ec0c7eace9343/jetified-applovin-2.7.1.4/jars/libs/r-classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3c421db50eb614a3f51ec0c7eace9343/jetified-applovin-2.7.1.4/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -10,6 +10,9 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3f27f87ffb4c8401504f3f85554f59d7/jetified-amazon_ads-2.7.1.1/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3f27f87ffb4c8401504f3f85554f59d7/jetified-amazon_ads-2.7.1.1/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3f27f87ffb4c8401504f3f85554f59d7/jetified-amazon_ads-2.7.1.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6d7bd59299ba76764c878d909eae771d/jetified-amazon_ads-2.7.1.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6d7bd59299ba76764c878d909eae771d/jetified-amazon_ads-2.7.1.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6d7bd59299ba76764c878d909eae771d/jetified-amazon_ads-2.7.1.1/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

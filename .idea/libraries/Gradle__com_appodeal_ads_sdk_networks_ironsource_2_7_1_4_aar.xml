@@ -10,6 +10,9 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7074b1ec43909e0a132a97c976a43def/jetified-ironsource-2.7.1.4/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7074b1ec43909e0a132a97c976a43def/jetified-ironsource-2.7.1.4/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7074b1ec43909e0a132a97c976a43def/jetified-ironsource-2.7.1.4/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4e40096f7aa4aa11ff97591f65009ea6/jetified-ironsource-2.7.1.4/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4e40096f7aa4aa11ff97591f65009ea6/jetified-ironsource-2.7.1.4/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4e40096f7aa4aa11ff97591f65009ea6/jetified-ironsource-2.7.1.4/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
