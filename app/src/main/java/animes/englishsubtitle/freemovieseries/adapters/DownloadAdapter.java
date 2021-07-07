@@ -1,5 +1,6 @@
 package animes.englishsubtitle.freemovieseries.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -12,9 +13,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewbinding.BuildConfig;
 import androidx.work.Data;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
@@ -22,6 +25,10 @@ import androidx.work.WorkManager;
 import com.downloader.PRDownloader;
 import com.downloader.Status;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
+import com.google.android.gms.ads.rewarded.RewardedAd;
+import com.yausername.youtubedl_android.DownloadProgressCallback;
+import com.yausername.youtubedl_android.YoutubeDL;
+import com.yausername.youtubedl_android.YoutubeDLRequest;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -38,9 +45,16 @@ import animes.englishsubtitle.freemovieseries.models.Work;
 import animes.englishsubtitle.freemovieseries.service.DownloadWorkManager;
 import animes.englishsubtitle.freemovieseries.utils.Constants;
 import animes.englishsubtitle.freemovieseries.utils.ToastMsg;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static animes.englishsubtitle.freemovieseries.DetailsActivity.TAG;
+import static com.applovin.sdk.AppLovinSdkUtils.runOnUiThread;
 
 public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.OriginalViewHolder> {
 
@@ -51,7 +65,7 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.Origin
     private List<Work> mWorks;
     private View v = null;
     private DatabaseHelper mDBHelper;
-    private boolean mIsDownloading = false;
+    public boolean mIsDownloading = false;
 
     private ServerAdapter.OnItemClickListener mOnItemClickListener;
 
@@ -60,9 +74,7 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.Origin
     private static DownloadAdapter instance;
     private boolean check = false;
 
-    public RewardedVideoAd mrewardedAd;
-
-
+    public RewardedAd mrewardedAd;
     public static boolean is_hide_subscribe_layout=false;
 
 
@@ -75,6 +87,7 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.Origin
         mWorks = mDBHelper.getAllWork();
 
     }
+
 
     @Override
     public DownloadAdapter.OriginalViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -99,28 +112,34 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.Origin
         if (mWorks.size() > 0) {
             for (Work work : mWorks) {
                 if (work.getUrl().equals(obj.getStremURL())) {
-                    holder.icon.setColorFilter(ContextCompat.getColor(mContext, R.color.green_500));
+                    holder.icon.setColorFilter(ContextCompat.getColor(mContext, R.color.primary_color));
                 }
             }
         }
         if (isExistFile(obj.getTitle())) {
-            holder.icon.setColorFilter(ContextCompat.getColor(mContext, R.color.green_500));
+            holder.icon.setColorFilter(ContextCompat.getColor(mContext, R.color.primary_color));
         }
         holder.itemLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Log.d("Hoan-sub-sub", String.valueOf(obj.getListSub()));
                 epiPaidControl(obj.getIs_epi_download_paid());
                 if(is_hide_subscribe_layout!=true){
-                    holder.icon.setColorFilter(ContextCompat.getColor(mContext, R.color.green_500));
+                    holder.icon.setColorFilter(ContextCompat.getColor(mContext, R.color.primary_color));
                     if (obj.isInAppDownload()) {
                         //Toast.makeText(mContext, "Download after ad finish (5s)", Toast.LENGTH_SHORT).show();
                         final Handler handler = new Handler(Looper.getMainLooper());
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                downloadFileInsideApp(obj);
+                                try {
+                                    downloadFileInsideApp(obj);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
                             }
                         }, 0);
+
                     } else {
                         String url = obj.getStremURL();
                         Intent i = new Intent(Intent.ACTION_VIEW);
@@ -160,20 +179,28 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.Origin
     }
 
 
+
     public static DownloadAdapter getInstance() {
         return instance;
     }
 
-    public void downloadFileInsideApp(CommonModels obj) {
+    @SuppressLint("RestrictedApi")
+    public void downloadFileInsideApp(CommonModels obj) throws Exception {
 
         String fileName = mFilmName + "_" + obj.getTitle();
         String streamURL = obj.getStremURL();
+        String namefilm=mFilmName;
         if (streamURL == null || streamURL.isEmpty()) {
             return;
         }
         String path = Constants.getDownloadDir(mContext) + mContext.getResources().getString(R.string.app_name);
+        String fileExt;
+        if(!streamURL.substring(streamURL.lastIndexOf('.')).equals("mp4") && !streamURL.substring(streamURL.lastIndexOf('.')).equals("m3u8")){
+            fileExt=".m3u8";
+        }else {
+            fileExt = streamURL.substring(streamURL.lastIndexOf('.'));; // output like .mkv
+        }
 
-        String fileExt = ".mp4"; // output like .mkv
         fileName = fileName + fileExt;
 
         fileName = fileName.replaceAll(" ", "_");
@@ -181,13 +208,14 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.Origin
         fileName = fileName.replaceAll("'", "_");
 
         File file = new File(path, fileName); // e_ for encode
+        //Log.d("Hoan",file.getAbsolutePath());
         if (file.exists()) {
             new ToastMsg(mContext).toastIconError("File already exist.");
         } else {
             String dir = mContext.getExternalCacheDir().toString();
             String workId;
             workId = streamURL.replaceAll(" ", "_");
-            workId = workId.replaceAll(":", "_");
+            //workId = workId.replaceAll(":", "_");
             workId = workId.replaceAll("'", "_");
             List<Work> workList = mDBHelper.getAllWork();
             for (Work w : workList) {
@@ -200,6 +228,7 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.Origin
             work.setUrl(streamURL);
             work.setWorkId(workId);
             work.setFileName(fileName);
+            work.setMovieName(namefilm);
             work.setDir(dir);
             work.setSubList(obj.getListSub());
             work.setDownloadStatus(mContext.getResources().getString(R.string.download_waiting));
@@ -209,23 +238,40 @@ public class DownloadAdapter extends RecyclerView.Adapter<DownloadAdapter.Origin
             if (isDownloading() || mIsDownloading) return;
 
             mIsDownloading = true;
-            Data data = new Data.Builder()
-                    .putString("url", streamURL)
-                    .putString("type", ".mp4")
-                    .putString("fileName", fileName)
-                    .build();
+
+            Data data;
+
+            if(fileExt.equals(".m3u8")){
+                data = new Data.Builder()
+                        .putString("url", streamURL)
+                        .putString("type", ".m3u8")
+                        .putString("fileName", fileName)
+                        .build();
+                Log.d("Hoan-check",fileName);
+            }else {
+                data = new Data.Builder()
+                        .putString("url", streamURL)
+                        .putString("type", ".mp4")
+                        .putString("fileName", fileName)
+                        .build();
+                Log.d("Hoan-check","mp4");
+            }
+
+
+
 
             OneTimeWorkRequest request = new OneTimeWorkRequest.Builder(DownloadWorkManager.class)
                     .setInputData(data)
                     .build();
 
-            //String workId = request.getId().toString();
-            // Constants.workId = workId;
+            // String workId = request.getId().toString();
+            //  Constants.workId = workId;
             WorkManager.getInstance(mContext).enqueue(request);
             new ToastMsg(mContext).toastIconSuccess("Download started");
             Log.d("TRUNG", "Request download " + fileName);
         }
     }
+
 
     private boolean isExistFile(String title) {
         String fileName = title;

@@ -1,3 +1,0 @@
-ninja: Entering directory `C:\Users\khaih\Documents\GitHub\animeApp\app\.cxx\cmake\debug\x86'
-[1/2] Building CXX object CMakeFiles/api_config.dir/api_config.cpp.o
-[2/2] Linking CXX shared library C:\Users\khaih\Documents\GitHub\animeApp\app\build\intermediates\cmake\debug\obj\x86\libapi_config.so

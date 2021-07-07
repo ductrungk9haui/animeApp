@@ -9,6 +9,14 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8cd93e3ab1981b7f0a21f412084ea0f4/jetified-appodealx-2.7.1.1/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8cd93e3ab1981b7f0a21f412084ea0f4/jetified-appodealx-2.7.1.1/res" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8cd93e3ab1981b7f0a21f412084ea0f4/jetified-appodealx-2.7.1.1/jars/libs/r-classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/183d229a935ff8352e8109d163d16d13/jetified-appodealx-2.7.1.1/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/183d229a935ff8352e8109d163d16d13/jetified-appodealx-2.7.1.1/jars/libs/r-classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/183d229a935ff8352e8109d163d16d13/jetified-appodealx-2.7.1.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/183d229a935ff8352e8109d163d16d13/jetified-appodealx-2.7.1.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/15246c0c73df29332637d94026e03b30/jetified-appodealx-2.7.1.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/15246c0c73df29332637d94026e03b30/jetified-appodealx-2.7.1.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/15246c0c73df29332637d94026e03b30/jetified-appodealx-2.7.1.1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/15246c0c73df29332637d94026e03b30/jetified-appodealx-2.7.1.1/jars/libs/r-classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

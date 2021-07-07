@@ -12,7 +12,16 @@ public class VideoFile implements Serializable {
     private String path;
     private String fileExtension;
     private String defaultSubPath;
+    private String movieName;
     private List<String> subList = new ArrayList<>();
+
+    public String getMovieName() {
+        return movieName;
+    }
+
+    public void setMovieName(String movieName) {
+        this.movieName = movieName;
+    }
 
     public String getFileName() {
         return fileName;

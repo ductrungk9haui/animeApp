@@ -20,6 +20,7 @@ import com.facebook.ads.AudienceNetworkAds;
 import com.facebook.ads.CacheFlag;
 import com.facebook.ads.InterstitialAd;
 import com.facebook.ads.InterstitialAdExtendedListener;
+import com.facebook.ads.InterstitialAdListener;
 import com.facebook.ads.MediaView;
 import com.facebook.ads.NativeAd;
 import com.facebook.ads.NativeAdLayout;
@@ -31,6 +32,7 @@ import com.facebook.ads.NativeBannerAd;
 import com.facebook.ads.NativeBannerAdView;
 import com.facebook.ads.RewardData;
 import com.facebook.ads.RewardedVideoAd;
+import com.facebook.ads.RewardedVideoAdListener;
 import com.facebook.ads.S2SRewardedVideoAdListener;
 
 import java.util.ArrayList;
@@ -81,7 +83,6 @@ public class AudienceNetworkHelper
     }
 
 
-
     /**
      * It's recommended to call this method from Application.onCreate().
      * Otherwise you can call it from all mActivity.onCreate()
@@ -128,67 +129,51 @@ public class AudienceNetworkHelper
             rewardedVideoAd = null;
         }
 
-        String NATIVE_REWARD_PLACEMENT_ID = new DatabaseHelper(mActivity).getConfigurationData().getAdsConfig().getFanRewardedAdsPlacementId();
+        String NATIVE_REWARD_PLACEMENT_ID = new DatabaseHelper(mActivity).getConfigurationData().getAdsConfig().getFanRewardAdsPlacementId();
         rewardedVideoAd =
                 new RewardedVideoAd(mActivity, NATIVE_REWARD_PLACEMENT_ID);
-        RewardedVideoAd.RewardedVideoLoadAdConfig loadAdConfig =
-                rewardedVideoAd
-                        .buildLoadAdConfig()
-                        .withAdListener(new S2SRewardedVideoAdListener() {
-                            @Override
-                            public void onRewardServerFailed() {
-                                Log.e(TAG, "RewardVideo onRewardServerFailed");
-                            }
 
-                            @Override
-                            public void onRewardServerSuccess() {
-                                Log.e(TAG, "RewardVideo onRewardServerSuccess");
-                            }
+        if (rewardedVideoAd != null) {
+            if (rewardedVideoAd.isAdLoaded()) {
+                rewardedVideoAd.show();
 
-                            @Override
-                            public void onRewardedVideoCompleted() {
-                                Log.e(TAG, "RewardVideo onRewardedVideoCompleted");
-                            }
+            } else {
+                com.facebook.ads.RewardedVideoAdListener rewardedAdListener = new RewardedVideoAdListener() {
+                    @Override
+                    public void onError(Ad ad, AdError adError) {
 
-                            @Override
-                            public void onLoggingImpression(Ad ad) {
-                                Log.e(TAG, "RewardVideo onLoggingImpression");
-                                if ((mActivity instanceof DetailsActivity)) {
-                                    ((DetailsActivity) mActivity).onAdStart();
-                                }
-                            }
+                    }
 
-                            @Override
-                            public void onRewardedVideoClosed() {
-                                Log.e(TAG, "RewardVideo onRewardedVideoClosed");
-                                if ((mActivity instanceof DetailsActivity)) {
-                                    ((DetailsActivity) mActivity).onAdFinish();
-                                }
-                                initRewardVideoAds();
-                            }
+                    @Override
+                    public void onAdLoaded(Ad ad) {
+                        rewardedVideoAd.show();
+                    }
 
-                            @Override
-                            public void onError(Ad ad, AdError adError) {
-                                Log.e(TAG, "RewardVideo onError");
-                            }
+                    @Override
+                    public void onAdClicked(Ad ad) {
 
-                            @Override
-                            public void onAdLoaded(Ad ad) {
-                                Log.e(TAG, "RewardVideo onAdLoaded");
-                                if (isRewardVideoAdasShowReq) {
-                                    showRewardVideoAds();
-                                }
-                            }
+                    }
 
-                            @Override
-                            public void onAdClicked(Ad ad) {
-                                Log.e(TAG, "RewardVideo onAdClicked");
-                            }
-                        })
-                        .withFailOnCacheFailureEnabled(true)
-                        .withRewardData(new RewardData(PreferenceUtils.getUserId(mActivity), "points", 10))
-                        .build();
-        rewardedVideoAd.loadAd(loadAdConfig);
+                    @Override
+                    public void onLoggingImpression(Ad ad) {
+
+                    }
+
+                    @Override
+                    public void onRewardedVideoCompleted() {
+
+                    }
+
+                    @Override
+                    public void onRewardedVideoClosed() {
+
+                    }
+
+                };
+                rewardedVideoAd = new com.facebook.ads.RewardedVideoAd(mActivity, NATIVE_REWARD_PLACEMENT_ID);
+                rewardedVideoAd.loadAd(rewardedVideoAd.buildLoadAdConfig().withAdListener(rewardedAdListener).build());
+            }
+        }
     }
 
     @Override
@@ -200,84 +185,49 @@ public class AudienceNetworkHelper
         }
         String NATIVE_INTERSTITIAL_PLACEMENT_ID = new DatabaseHelper(mActivity).getConfigurationData().getAdsConfig().getFanInterstitialAdsPlacementId();
 
-
         interstitialAd = new InterstitialAd(mActivity, NATIVE_INTERSTITIAL_PLACEMENT_ID);
         // Load a new interstitial.
-        InterstitialAd.InterstitialLoadAdConfig loadAdConfig =
-                interstitialAd
-                        .buildLoadAdConfig()
-                        // Set a listener to get notified on changes
-                        // or when the user interact with the ad.
-                        .withAdListener(new InterstitialAdExtendedListener() {
-                            @Override
-                            public void onRewardedAdCompleted() {
-                                Log.e(TAG, "InterstitialAd onRewardedAdCompleted");
-                            }
 
-                            @Override
-                            public void onRewardedAdServerSucceeded() {
-                                Log.e(TAG, "InterstitialAd onRewardedAdServerSucceeded");
-                            }
+        if (interstitialAd != null) {
+            if (interstitialAd.isAdLoaded()) {
+                interstitialAd.show();
 
-                            @Override
-                            public void onRewardedAdServerFailed() {
-                                Log.e(TAG, "InterstitialAd onRewardedAdServerFailed");
-                            }
+            } else {
+                com.facebook.ads.InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
+                    @Override
+                    public void onInterstitialDisplayed(Ad ad) {
 
-                            @Override
-                            public void onError(Ad ad, AdError adError) {
-                                if (ad == interstitialAd) {
-                                    Log.e(TAG, "Interstitial ad failed to load: " + adError.getErrorMessage());
-                                }
-                            }
+                    }
 
-                            @Override
-                            public void onAdLoaded(Ad ad) {
-                                if (ad == interstitialAd) {
-                                    Log.e(TAG, "InterstitialAd onAdLoaded");
-                                    // Ad was loaded, show it!
-                                    if (isInterstitialAdasShowReq) {
-                                        showInterstitialAds();
-                                    }
-                                }
-                            }
+                    @Override
+                    public void onInterstitialDismissed(Ad ad) {
 
-                            @Override
-                            public void onAdClicked(Ad ad) {
-                                Log.e(TAG, "InterstitialAd onAdClicked");
-                            }
+                    }
 
-                            @Override
-                            public void onLoggingImpression(Ad ad) {
-                                Log.e(TAG, "InterstitialAd onLoggingImpression");
-                            }
+                    @Override
+                    public void onError(Ad ad, AdError adError) {
+                        Log.d("ADerror", adError.getErrorMessage());
+                    }
 
-                            @Override
-                            public void onInterstitialDisplayed(Ad ad) {
-                                Log.e(TAG, "InterstitialAdonInterstitialDisplayed");
-                                if ((mActivity instanceof DetailsActivity)) {
-                                    ((DetailsActivity) mActivity).onAdStart();
-                                }
-                            }
+                    @Override
+                    public void onAdLoaded(Ad ad) {
+                        interstitialAd.show();
+                    }
 
-                            @Override
-                            public void onInterstitialDismissed(Ad ad) {
-                                Log.e(TAG, "InterstitialAd onInterstitialDismissed");
-                                if ((mActivity instanceof DetailsActivity)) {
-                                    ((DetailsActivity) mActivity).onAdFinish();
-                                }
-                                initInterstitialAds();
-                            }
+                    @Override
+                    public void onAdClicked(Ad ad) {
 
-                            @Override
-                            public void onInterstitialActivityDestroyed() {
-                                Log.e(TAG, "InterstitialAd onInterstitialmActivityDestroyed");
-                            }
-                        })
-                        .withCacheFlags(EnumSet.of(CacheFlag.VIDEO))
-                        .withRewardData(new RewardData(PreferenceUtils.getUserId(mActivity), "points", 10))
-                        .build();
-        interstitialAd.loadAd(loadAdConfig);
+                    }
+
+                    @Override
+                    public void onLoggingImpression(Ad ad) {
+
+                    }
+                };
+                interstitialAd = new com.facebook.ads.InterstitialAd(mActivity, NATIVE_INTERSTITIAL_PLACEMENT_ID);
+                interstitialAd.loadAd(interstitialAd.buildLoadAdConfig().withAdListener(interstitialAdListener).build());
+            }
+        }
     }
 
     @Override
@@ -314,9 +264,9 @@ public class AudienceNetworkHelper
     public void showNativeAds(View adContainer, boolean isTemplateNativeAds) {
         // Instantiate a NativeAd object.
         if (!isTemplateNativeAds) {
-            loadScrollNativeAd(adContainer,NATIVE_AD_VIEW_HEIGHT_DP);
-        }else{
-            loadScrollNativeAd(adContainer,NATIVE_AD_VIEW_HEIGHT_DP_500);
+            loadScrollNativeAd(adContainer, NATIVE_AD_VIEW_HEIGHT_DP);
+        } else {
+            loadScrollNativeAd(adContainer, NATIVE_AD_VIEW_HEIGHT_DP_500);
         }
 
     }
@@ -384,7 +334,7 @@ public class AudienceNetworkHelper
         }
     }
 
-    private void loadCustomNativeAds(View adContainer, boolean isNothing){
+    private void loadCustomNativeAds(View adContainer, boolean isNothing) {
         String NATIVE_DETAIL_PLACEMENT_ID = new DatabaseHelper(mActivity).getConfigurationData().getAdsConfig().getFanNativeAdsPlacementId1();
 
         nativeAd = new NativeAd(mActivity, NATIVE_DETAIL_PLACEMENT_ID);
@@ -519,7 +469,7 @@ public class AudienceNetworkHelper
         manager.loadAds(NativeAd.MediaCacheFlag.ALL);
     }
 
-    public void loadScrollNativeAd(RecycleContainer fragment){
+    public void loadScrollNativeAd(RecycleContainer fragment) {
         NativeAdsManager manager;
         String NATIVE_HOME_PLACEMENT_ID = new DatabaseHelper(mActivity).getConfigurationData().getAdsConfig().getFanNativeAdsPlacementId();
         manager = new NativeAdsManager(mActivity, NATIVE_HOME_PLACEMENT_ID, 5);

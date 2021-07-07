@@ -49,6 +49,10 @@ android {
                 cppFlags ""
             }
         }
+
+        ndk {
+            abiFilters 'x86', 'x86_64', 'armeabi-v7a', 'arm64-v8a'
+        }
     }
     buildTypes {
         release {
@@ -62,6 +66,15 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'x86', 'x86_64', 'armeabi-v7a', 'arm64-v8a'
+            universalApk true
+        }
+    }
+
     externalNativeBuild {
         cmake {
             path "src/main/jni/CMakeLists.txt"
@@ -72,12 +85,20 @@ android {
 }
 
 dependencies {
+
+    implementation 'com.github.yausername.youtubedl-android:library:0.12.+'
+    implementation 'com.github.yausername.youtubedl-android:ffmpeg:0.12.+'
+
     def room_version = "2.2.5"
     def lifecycle_version = '2.2.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    implementation "commons-io:commons-io:2.4"
+
+    implementation 'com.arthenica:ffmpeg-kit-full:4.4.LTS'
 
     implementation project(':paymentwall-android-sdk')
 
@@ -185,12 +206,13 @@ dependencies {
     implementation 'com.mikhaellopez:circularimageview:3.2.0'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     // exo player
-    implementation 'com.google.android.exoplayer:exoplayer-core:2.7.3'
-    implementation 'com.google.android.exoplayer:exoplayer-dash:2.7.3'
-    implementation 'com.google.android.exoplayer:exoplayer-ui:2.7.3'
-    implementation 'com.google.android.exoplayer:exoplayer-hls:2.7.3'
-    implementation 'com.google.android.exoplayer:extension-rtmp:2.7.3'
-    implementation 'com.google.android.exoplayer:extension-cast:2.7.3'
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.14.1'
+    implementation 'com.google.android.exoplayer:exoplayer-dash:2.14.1'
+    implementation 'com.google.android.exoplayer:exoplayer-ui:2.14.1'
+    implementation 'com.google.android.exoplayer:exoplayer-hls:2.14.1'
+    implementation 'com.google.android.exoplayer:extension-rtmp:2.14.1'
+    implementation 'com.google.android.exoplayer:extension-cast:2.14.1'
+    implementation 'com.google.android.exoplayer:exoplayer-smoothstreaming:2.14.1'
     implementation 'com.github.HaarigerHarald:android-youtubeExtractor:master-SNAPSHOT'
     implementation 'com.google.android.libraries.cast.companionlibrary:ccl:2.8.4'
     // start app ad

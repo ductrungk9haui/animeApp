@@ -10,6 +10,12 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b97c53383da5b4cea60769d030781f8d/jetified-AndroidAppUpdateLibrary-1.0.3/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b97c53383da5b4cea60769d030781f8d/jetified-AndroidAppUpdateLibrary-1.0.3/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b97c53383da5b4cea60769d030781f8d/jetified-AndroidAppUpdateLibrary-1.0.3/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7d6a6e72eb8f94d59c79877b0df30e07/jetified-AndroidAppUpdateLibrary-1.0.3/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7d6a6e72eb8f94d59c79877b0df30e07/jetified-AndroidAppUpdateLibrary-1.0.3/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7d6a6e72eb8f94d59c79877b0df30e07/jetified-AndroidAppUpdateLibrary-1.0.3/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/22a144ab359a8a762cc654a52886a11c/jetified-AndroidAppUpdateLibrary-1.0.3/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/22a144ab359a8a762cc654a52886a11c/jetified-AndroidAppUpdateLibrary-1.0.3/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/22a144ab359a8a762cc654a52886a11c/jetified-AndroidAppUpdateLibrary-1.0.3/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -58,7 +58,14 @@ public class AdsController implements AdsHelper {
 
     public void initInterstitialAds() {
         if (!isAdsEnable()) return;
-        mAdsHelper.initInterstitialAds();
+        if (count == 3) {
+            count = 0;
+            mAdsHelper.initRewardVideoAds();
+        } else {
+            count++;
+            mAdsHelper.initInterstitialAds();
+        }
+
     }
 
     @Override
@@ -76,13 +83,6 @@ public class AdsController implements AdsHelper {
     @Override
     public void showInterstitialAds() {
         if (!isAdsEnable()) return;
-        if (count == 3) {
-            count = 0;
-            showRewardVideoAds();
-        } else {
-            count++;
-            mAdsHelper.showInterstitialAds();
-        }
     }
 
     @Override

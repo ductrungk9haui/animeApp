@@ -4,12 +4,19 @@ import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.work.Data;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
+import com.arthenica.ffmpegkit.FFmpegKit;
+import com.arthenica.ffmpegkit.FFmpegKitConfig;
+import com.arthenica.ffmpegkit.FFmpegSession;
+import com.arthenica.ffmpegkit.ReturnCode;
+import com.arthenica.ffmpegkit.Statistics;
+import com.arthenica.ffmpegkit.StatisticsCallback;
 import com.downloader.Error;
 import com.downloader.OnCancelListener;
 import com.downloader.OnDownloadListener;
@@ -23,6 +30,9 @@ import com.downloader.Progress;
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 import animes.englishsubtitle.freemovieseries.R;
@@ -31,6 +41,7 @@ import animes.englishsubtitle.freemovieseries.models.SubtitleModel;
 import animes.englishsubtitle.freemovieseries.models.Work;
 import animes.englishsubtitle.freemovieseries.utils.Constants;
 import animes.englishsubtitle.freemovieseries.utils.ToastMsg;
+import io.reactivex.disposables.CompositeDisposable;
 
 public class DownloadWorkManager extends Worker {
     int mDownloadId;
@@ -40,6 +51,38 @@ public class DownloadWorkManager extends Worker {
     private String mWorkId;
     private String mCurrentBytes;
     private String mTotalBytes;
+    private AppCompatActivity activity;
+    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private final CompositeDisposable compositeDisposable1 = new CompositeDisposable();
+//    public final DownloadProgressCallback callback = new DownloadProgressCallback() {
+//        @Override
+//        public void onProgressUpdate(float progress, long etaInSeconds) {
+//            new Handler(Looper.getMainLooper()).post(new Runnable() {
+//                public void run() {
+//                    Work work = new Work();
+//                    work.setDownloadId(mDownloadId);
+//                    work.setCurrentBytes((long) progress);
+//                    mCurrentBytes = String.valueOf(progress) + "";
+//                    work.setTotalBytes(100);
+//                    mTotalBytes = String.valueOf(100)+ "";
+//                    EventBus.getDefault().post(new onProgress(work));
+//                    Log.d("Hoan-progress", String.valueOf(progress));
+//                }
+//            });
+//        }
+//    };
+//    public final DownloadProgressCallback callback2 = new DownloadProgressCallback() {
+//        @Override
+//        public void onProgressUpdate(float progress, long etaInSeconds) {
+//            runOnUiThread(() -> {
+//            // tvCommandStatus.setText(String.valueOf(progress) + "% (ETA " + String.valueOf(etaInSeconds) + " seconds)");
+//
+//                    }
+//            );
+//        }
+//    };
+
+
     public DownloadWorkManager(@NonNull Context mContext, @NonNull WorkerParameters workerParams) {
         super(mContext, workerParams);
         this.mContext = mContext;
@@ -52,8 +95,10 @@ public class DownloadWorkManager extends Worker {
         Data data = getInputData();
         final String url = data.getString("url");
         final String type = data.getString("type");
-        final String fileNameSub = data.getString("fileName").substring(0,data.getString("fileName").indexOf("."));
+        final String fileNameSub = data.getString("fileName").substring(0,data.getString("fileName").lastIndexOf("."));
+        Log.d("Hoan-fileNameSub",fileNameSub);
         final String fileName = fileNameSub + type;
+
         final int downloadMainId = data.getInt("downloadID",0);
 
         new Thread(new Runnable() {
@@ -72,6 +117,7 @@ public class DownloadWorkManager extends Worker {
                         .setOnStartOrResumeListener(new OnStartOrResumeListener() {
                             @Override
                             public void onStartOrResume() {
+                                Log.d("Hoan-type",type);
                                 if(type.equals(".mp4")){
                                     Work work = mDBHelper.getWorkByDownloadId(mDownloadId);
                                     if(work.getDownloadStatus().equals(mContext.getResources().getString(R.string.download_start))){
@@ -84,6 +130,23 @@ public class DownloadWorkManager extends Worker {
                                     isDownloadingID = mDownloadId;
                                     work.setDownloadStatus(mContext.getResources().getString(R.string.downloading));
                                     // set app close status false
+                                    work.setAppCloseStatus("false");
+                                    // save the data to the database
+                                    mDBHelper.updateWork(work);
+                                    //new ToastMsg(context).toastIconSuccess("Download started.");
+                                    EventBus.getDefault().post(new onStartOrResume(work));
+                                }
+                                else if(type.equals(".m3u8")){
+                                    Work work = mDBHelper.getWorkByDownloadId(mDownloadId);
+                                    if(work.getDownloadStatus().equals(mContext.getResources().getString(R.string.download_start))){
+                                        downloadSubtitle(work,fileNameSub);
+                                    }else if(work.getDownloadStatus().equals(mContext.getResources().getString(R.string.download_pause))){
+                                        for(int subId : work.getDownloadSubIdList()){
+                                            PRDownloader.resume(subId);
+                                        }
+                                    }
+                                    isDownloadingID = mDownloadId;
+                                    work.setDownloadStatus(mContext.getResources().getString(R.string.downloading));
                                     work.setAppCloseStatus("false");
                                     // save the data to the database
                                     mDBHelper.updateWork(work);
@@ -117,6 +180,15 @@ public class DownloadWorkManager extends Worker {
                             public void onCancel() {
                                 Log.d("TRUNG","onCancel download " + fileName);
                                 if(type.equals(".mp4")) {
+                                    Work work = mDBHelper.getWorkByDownloadId(mDownloadId);
+                                    for(int subId : work.getDownloadSubIdList()){
+                                        PRDownloader.cancel(subId);
+                                    }
+                                    mDBHelper.deleteByDownloadId(mDownloadId);
+                                    new ToastMsg(mContext).toastIconSuccess(fileName + " canceled");
+                                    nextDownload();
+                                    EventBus.getDefault().post(new onCancel(work));
+                                }else if(type.equals(".m3u8")){
                                     Work work = mDBHelper.getWorkByDownloadId(mDownloadId);
                                     for(int subId : work.getDownloadSubIdList()){
                                         PRDownloader.cancel(subId);
@@ -165,7 +237,7 @@ public class DownloadWorkManager extends Worker {
                                         PRDownloader.cancel(subId);
                                     }
                                     mDBHelper.deleteByDownloadId(mDownloadId);
-                                    new ToastMsg(mContext).toastIconError(fileName + " Error");
+                                    // new ToastMsg(mContext).toastIconError(fileName + " Error");
                                     nextDownload();
                                     EventBus.getDefault().post(new onError(mDownloadId));
                                 }
@@ -173,34 +245,103 @@ public class DownloadWorkManager extends Worker {
                             }
                         });
 
-               List<Work> works = mDBHelper.getAllWork();
-               for(Work work : works){
-                   if(type.equals(".mp4")){
-                       if(work.getUrl().equals(url) && work.getFileName().equals(fileName)){
-                           work.setDownloadId(mDownloadId);
-                           work.setDownloadStatus(mContext.getResources().getString(R.string.download_start));
-                           work.setAppCloseStatus("false");
-                           mDBHelper.updateWork(work);
-                       }
-                   }else{
-                       if(work.getDownloadId() == downloadMainId){
-                           work.addDownloadSubId(mDownloadId);
-                           mDBHelper.updateWork(work);
-                       }
-                   }
+                List<Work> works = mDBHelper.getAllWork();
+                for(Work work : works){
+                    if(type.equals(".mp4")){
+                        if(work.getUrl().equals(url) && work.getFileName().equals(fileName)){
+                            work.setDownloadId(mDownloadId);
+                            work.setDownloadStatus(mContext.getResources().getString(R.string.download_start));
+                            work.setAppCloseStatus("false");
+                            mDBHelper.updateWork(work);
+                        }
+                    }else{
+                        if(work.getUrl().equals(url) && work.getFileName().equals(fileName)){
+                            //work.addDownloadSubId(mDownloadId);
+                            work.setDownloadId(mDownloadId);
+                            work.setDownloadStatus(mContext.getResources().getString(R.string.download_start));
+                            work.setAppCloseStatus("false");
+                            mDBHelper.updateWork(work);
+                            Log.d("Hoan-download-mana", String.valueOf(mDownloadId));
 
-               }
-               Log.d("TRUNG","start download " + fileName + " id: " + mDownloadId);
+
+
+                            File downldir=new File(mContext.getCacheDir().toString());
+//                            String nameDownl=fileName.replace(".m3u8",".mp4")
+//                                    .replace(work.getMovieName()+"_","");
+                            String cmd = String.format("-i %s -acodec %s -bsf:a aac_adtstoasc -vcodec %s %s", work.getUrl().toString(), "copy", "copy", downldir.getAbsoluteFile() + "/"+fileName.replace(".m3u8",".mp4"));
+                            Log.d("Hoan-cmd-file",cmd);
+                            String[] commands = cmd.split(" ");
+
+                            FFmpegSession session = FFmpegKit.execute(commands);
+                            if (ReturnCode.isSuccess(session.getReturnCode())) {
+                                Work work1 = mDBHelper.getWorkByDownloadId(mDownloadId);
+                                work1.setDownloadStatus(mContext.getResources().getString(R.string.download_completed));
+                                Log.d("Hoan-mfile",work.getMovieName());
+                                final File mfile=new File(Constants.getDownloadDir(mContext) + mContext.getResources().getString(R.string.app_name),work.getMovieName());
+                                if (!mfile.exists()) {
+                                    mfile.mkdirs();
+                                }
+                                mDBHelper.deleteByDownloadId(mDownloadId);
+                                nextDownload();
+                                EventBus.getDefault().post(new onDownloadCompleted(work));
+                                Log.d("Hoan-sucess","1");
+
+
+//                                String nameDownl=fileName.replace(".m3u8",".mp4")
+//                                    .replace(movieName+"_","");
+                                try {
+                                    // Log.d("Hoan-mfile",mfile.getAbsolutePath() + "/"+nameDownl);
+                                    Files.move(Paths.get(downldir.getAbsoluteFile() + "/"+fileName.replace(".m3u8",".mp4")), Paths.get(mfile.getAbsolutePath() + "/"+fileName.replace(".m3u8",".mp4")));
+                                    Log.d("Hoan-movie-file","1");
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+
+
+                            } else if (ReturnCode.isCancel(session.getReturnCode())) {
+
+                                // CANCEL
+                                Log.d("Hoan-cancel","1");
+
+                            } else {
+                                Work work2 = mDBHelper.getWorkByDownloadId(mDownloadId);
+                                for(int subId : work2.getDownloadSubIdList()){
+                                    PRDownloader.cancel(subId);
+                                }
+                                mDBHelper.deleteByDownloadId(mDownloadId);
+                                //new ToastMsg(mContext).toastIconError(fileName + " Error");
+                                nextDownload();
+                                EventBus.getDefault().post(new onError(mDownloadId));
+                                //DownloadActivity.getInstance().updateFiles();
+                                Log.d("Hoan-succesful","0");
+                            }
+
+                            FFmpegKitConfig.enableStatisticsCallback(new StatisticsCallback() {
+
+                                @Override
+                                public void apply(final Statistics newStatistics) {
+                                    // newStatistics.getSize();
+                                    //    Log.d("Hoan",String.valueOf(newStatistics.getSize())+String.valueOf(newStatistics.getSpeed()));
+                                }
+                            });
+                        }
+                    }
+
+                }
+                Log.d("TRUNG","start download " + fileName + " id: " + mDownloadId);
             }
         }).start();
         return Result.success();
     }
 
-    private void  downloadSubtitle(Work obj, String fileName){
+    private void  downloadSubtitle(Work obj,String fileName){
+
         for(SubtitleModel sublist : obj.getListSubs()){
+            Log.d("Hoan-listsub",String.valueOf(obj.getListSubs()));
             String subtitleName = fileName +"_" + sublist.getLanguage() + ".vtt";
-            String path = Constants.getDownloadDir(mContext) + mContext.getResources().getString(R.string.app_name);
-            File file = new File(path, subtitleName); // e_ for encode
+            String path = Constants.getDownloadDir(mContext).toString()+"/";
+            File file = new File(path, subtitleName.replace(" ","_")); // e_ for encode
+            Log.d("Hoan-downsub-path", subtitleName);
             if(file.exists()){
                 Log.d("TRUNG","sub already exist.");
                 //new ToastMsg(mContext).toastIconError("sub already exist.");
@@ -210,8 +351,9 @@ public class DownloadWorkManager extends Worker {
                     .putString("url", sublist.getUrl())
                     .putString("type", ".vtt")
                     .putInt("downloadID", mDownloadId)
-                    .putString("fileName",subtitleName)
+                    .putString("fileName",obj.getMovieName()+"/"+subtitleName)
                     .build();
+            Log.d("Hoan-sublist",obj.getMovieName()+"/"+subtitleName);
             OneTimeWorkRequest request = new OneTimeWorkRequest.Builder(DownloadWorkManager.class)
                     .setInputData(data)
                     .build();
@@ -226,11 +368,18 @@ public class DownloadWorkManager extends Worker {
             if (nextDownloadWork.getDownloadStatus().equals(mContext.getString(R.string.download_pause))) {
                 PRDownloader.resume(nextDownloadWork.getDownloadId());
             }else{
-                Data data = new Data.Builder()
+                String checkUrl=nextDownloadWork.getUrl().substring(nextDownloadWork.getUrl().lastIndexOf('.'));
+                // Log.d("Hoan-nextdownload",String.valueOf(nextDownloadWork.getUrl()));
+                Data data;
+
+                data = new Data.Builder()
                         .putString("url", nextDownloadWork.getUrl())
-                        .putString("type", ".mp4")
+                        .putString("type", ".m3u8")
                         .putString("fileName", nextDownloadWork.getFileName())
                         .build();
+                Log.d("Hoan-check-next",nextDownloadWork.getFileName());
+
+
                 OneTimeWorkRequest request = new OneTimeWorkRequest.Builder(DownloadWorkManager.class)
                         .setInputData(data)
                         .build();
@@ -293,6 +442,7 @@ public class DownloadWorkManager extends Worker {
         public Work getWork() {
             return work;
         }
+
     }
     public class onError{
         int downloadID;

@@ -47,5 +47,7 @@ public class Constants {
     public static final String CONSENT = "consent";
     public static final String DEFAULT_LANGUAGE = "English";
 
+    public static int COUNTADS = 0;
+
 
 }

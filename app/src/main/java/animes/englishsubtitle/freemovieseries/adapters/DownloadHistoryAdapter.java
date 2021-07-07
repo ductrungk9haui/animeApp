@@ -1,6 +1,7 @@
 package animes.englishsubtitle.freemovieseries.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +41,8 @@ public class DownloadHistoryAdapter extends RecyclerView.Adapter<DownloadHistory
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final VideoFile videoFile = videoFiles.get(position);
-        holder.fileNameTv.setText(videoFile.getFileName());
+        Log.d("Hoan-movieName-history",videoFile.getMovieName());
+        holder.fileNameTv.setText(videoFile.getFileName().replace(videoFile.getMovieName()+"_","").replace(".mp4",""));
         holder.fileSizeTv.setText("Size: " + Tools.byteToMb(videoFile.getTotalSpace()));
         holder.dateTv.setText(Tools.milliToDate(videoFile.getLastModified()));
         holder.item_holder.setOnLongClickListener(new View.OnLongClickListener() {

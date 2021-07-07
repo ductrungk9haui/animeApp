@@ -4,6 +4,8 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ed6feaa14857e55fbe2de2f3d02ea439/jetified-inmobi-ads-9.1.1/annotations.zip!/" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1a273bfb723ac0b07f83277eae2a6566/jetified-inmobi-ads-9.1.1/annotations.zip!/" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8edbd3a51bb9dc9a265bf0101b7ec4ec/jetified-inmobi-ads-9.1.1/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/72dfc76b53cb718ddbb7dbfb18a65466/jetified-inmobi-ads-9.1.1/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c50736056380092f52722067a5bcd3dc/jetified-inmobi-ads-9.1.1/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/ed6feaa14857e55fbe2de2f3d02ea439/jetified-inmobi-ads-9.1.1/jars/classes.jar!/" />
@@ -15,6 +17,12 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8edbd3a51bb9dc9a265bf0101b7ec4ec/jetified-inmobi-ads-9.1.1/res" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8edbd3a51bb9dc9a265bf0101b7ec4ec/jetified-inmobi-ads-9.1.1/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8edbd3a51bb9dc9a265bf0101b7ec4ec/jetified-inmobi-ads-9.1.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/72dfc76b53cb718ddbb7dbfb18a65466/jetified-inmobi-ads-9.1.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/72dfc76b53cb718ddbb7dbfb18a65466/jetified-inmobi-ads-9.1.1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/72dfc76b53cb718ddbb7dbfb18a65466/jetified-inmobi-ads-9.1.1/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c50736056380092f52722067a5bcd3dc/jetified-inmobi-ads-9.1.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c50736056380092f52722067a5bcd3dc/jetified-inmobi-ads-9.1.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c50736056380092f52722067a5bcd3dc/jetified-inmobi-ads-9.1.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

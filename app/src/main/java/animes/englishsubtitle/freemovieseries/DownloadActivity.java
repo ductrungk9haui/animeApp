@@ -1,6 +1,7 @@
 package animes.englishsubtitle.freemovieseries;
 
 import android.annotation.SuppressLint;
+import android.app.UiModeManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -8,6 +9,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.AudioManager;
@@ -16,6 +18,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -44,14 +47,12 @@ import androidx.work.WorkManager;
 import com.downloader.PRDownloader;
 import com.downloader.Status;
 import com.google.android.exoplayer2.C;
-import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.Format;
 import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.source.ExtractorMediaSource;
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.source.MergingMediaSource;
+import com.google.android.exoplayer2.source.ProgressiveMediaSource;
 import com.google.android.exoplayer2.source.SingleSampleMediaSource;
-import com.google.android.exoplayer2.text.CaptionStyleCompat;
 import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelection;
@@ -68,6 +69,7 @@ import com.google.android.exoplayer2.upstream.FileDataSource;
 import com.google.android.exoplayer2.util.MimeTypes;
 import com.google.android.exoplayer2.util.Util;
 
+import org.apache.commons.io.FileUtils;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -77,6 +79,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import animes.englishsubtitle.freemovieseries.adapters.DownloadFolderAdapter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -95,8 +98,9 @@ import animes.englishsubtitle.freemovieseries.utils.ToastMsg;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static com.google.android.exoplayer2.ui.SubtitleView.DEFAULT_TEXT_SIZE_FRACTION;
 
-public class DownloadActivity extends AppCompatActivity implements FileDownloadAdapter.OnProgressUpdateListener, DownloadHistoryAdapter.HistoryDownloadedListener, SubtitleAdapter.Listener {
+public class DownloadActivity extends AppCompatActivity implements FileDownloadAdapter.OnProgressUpdateListener,DownloadFolderAdapter.HistoryFolerListener, DownloadHistoryAdapter.HistoryDownloadedListener, SubtitleAdapter.Listener {
     public static DownloadActivity instance;
     public static final String ACTION_PLAY_VIDEO = "play_video";
     @BindView(R.id.download_rv)
@@ -105,7 +109,9 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
     TextView mDownloadedFileTV;
     @BindView(R.id.downloaded_file_rv)
     RecyclerView mDownloadedFileRv;
-    @BindView(R.id.appBar)
+    @BindView(R.id.downloaded_foler_rv)
+    RecyclerView mDownloadedFolRv;
+    @BindView(R.id.toolbar)
     Toolbar mToolbar;
     @BindView(R.id.coordinator_lyt)
     CoordinatorLayout mNoItemLayout;
@@ -118,7 +124,7 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
     @BindView(R.id.volumn_seekbar)
     SeekBar mVolumnSeekbar;
     @BindView(R.id.progressBar)
-    ProgressBar mProgressBar;
+    public ProgressBar mProgressBar;
     @BindView(R.id.play)
     RelativeLayout mLPlay;
     @BindView(R.id.cast_control_view)
@@ -141,17 +147,23 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
     private List<Work> mWorks = new ArrayList<>();
     private FileDownloadAdapter mFileDownloadAdapter;
     private DownloadHistoryAdapter mDownloadHistoryAdapter;
+    private DownloadFolderAdapter mDownloadFolAdapter;
     private List<VideoFile> mVideoFiles = new ArrayList<>();
+    private ArrayList<File> inFiles = new ArrayList<File>();
     private boolean mIsDark;
     DatabaseHelper mDBHelper;
     public static SimpleExoPlayer mDownloadPlayer;
     private int mAspectClickCount = 1;
     private boolean mIsFullScr;
-    private int mPlayerHeight;
+    private int mPlayerHeight, mPlayerWidth;
     private AudioManager mAudioManager;
     private MediaSource mMediaSource;
     private android.app.AlertDialog mAlertDialog;
     VideoFile mPlayingVideoFile;
+    private boolean isFolRV=false;
+
+
+    private float widthscreen, heightscreen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -173,6 +185,7 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
+        instance=this;
 
         mDBHelper = new DatabaseHelper(this);
         mFileDownloadAdapter = new FileDownloadAdapter(mWorks, this, mIsDark);
@@ -185,15 +198,24 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
         mProgressBar.setProgress(50);
         mPlayerHeight = mLPlay.getLayoutParams().height;
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+
+        LinearLayoutManager layoutManageritemfol = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         // mDownloadRv.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL));
-        mDownloadedFileRv.setLayoutManager(layoutManager);
+        mDownloadedFileRv.setLayoutManager(layoutManageritemfol);
         mDownloadHistoryAdapter = new DownloadHistoryAdapter(this, mVideoFiles);
         mDownloadHistoryAdapter.setListener(this);
         mDownloadedFileRv.setAdapter(mDownloadHistoryAdapter);
         mDownloadedFileRv.setHasFixedSize(true);
 
-        updateFiles();
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+        // mDownloadRv.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL));
+        mDownloadedFolRv.setLayoutManager(layoutManager);
+        mDownloadFolAdapter = new DownloadFolderAdapter(this, inFiles);
+        mDownloadFolAdapter.setListener(this);
+        mDownloadedFolRv.setAdapter(mDownloadFolAdapter);
+        mDownloadedFolRv.setHasFixedSize(true);
+
+        updateFols();
 
         registerReceiver(playVideoBroadcast, new IntentFilter(ACTION_PLAY_VIDEO));
 
@@ -209,7 +231,7 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 if (b) {
                     //volumnTv.setText(i+"");
-                    mAudioManager.setStreamVolume(mDownloadPlayer.getAudioStreamType(), i, 0);
+                    mAudioManager.setStreamVolume(mDownloadPlayer.getAudioAttributes().contentType, i, 0);
                 }
             }
 
@@ -269,17 +291,29 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
             PRDownloader.cancel(work.getDownloadId());
         } else {
             mDBHelper.deleteByDownloadId(work.getDownloadId());
-            updateFiles();
+            updateFols();
         }
     }
 
     @Override
     public void onBackPressed() {
-        if (mLPlay.getVisibility() == View.VISIBLE) {
-            mLPlay.setVisibility(View.GONE);
-            mMainLayout.setVisibility(View.VISIBLE);
-        } else {
-            releasePlayer();
+        if(isFolRV) {
+            mDownloadedFileRv.setVisibility(GONE);
+            mDownloadedFolRv.setVisibility(VISIBLE);
+            if (inFiles.size() > 0) {
+                mNoItemLayout.setVisibility(View.GONE);
+            }
+            isFolRV=false;
+        } else if(mActiveMovie) {
+            if (mIsFullScr) {
+                controlFullScreenPlayer();
+            } else {
+                releasePlayer();
+                mLPlay.setVisibility(GONE);
+                mMainLayout.setVisibility(VISIBLE);
+                mToolbar.setVisibility(VISIBLE);
+            }
+        }else{
             super.onBackPressed();
         }
 
@@ -289,6 +323,14 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
     public void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
+        UiModeManager uiModeManager = (UiModeManager) getSystemService(UI_MODE_SERVICE);
+        if (uiModeManager.getCurrentModeType() == Configuration.UI_MODE_TYPE_TELEVISION) {
+            mPlayerWidth = getWindowManager().getDefaultDisplay().getHeight();
+            // Log.d("Hoan-TV",String.valueOf(mPlayerWidth));
+        } else {
+            mPlayerWidth = getWindowManager().getDefaultDisplay().getWidth();
+            //  Log.d("Hoan-non-TV",String.valueOf(mPlayerWidth));
+        }
     }
 
     @Override
@@ -310,7 +352,7 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
     public void onDownloadStartOrResume(DownloadWorkManager.onStartOrResume object) {
         Work work = object.getWork();
         final int downloadId = work.getDownloadId();
-        updateFiles();
+        updateFols();
         Log.d("TRUNG", "start download " + " id: " + downloadId);
     }
 
@@ -318,6 +360,7 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
     public void onUpdateDownloadProgress(DownloadWorkManager.onProgress object) {
         Work work = object.getWork();
         final int downloadId = work.getDownloadId();
+        Log.d("Hoan-downloadid",String.valueOf(work.getDownloadId()));
         final long downloadedByte = work.currentBytes;
         final long totalByte = work.totalBytes;
         final FileDownloadAdapter.ViewHolder viewHolder = mFileDownloadAdapter.getViewHolderFromId(downloadId);
@@ -331,13 +374,15 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
                     double downloadMb = downloadKb / 1024;
                     // set download status
                     viewHolder.setDownloadStatus(getResources().getString(R.string.downloading));
-                    viewHolder.setProgress((int) totalKb, (int) downloadKb);
-                    viewHolder.setDownloadAmount(downloadMb, totalMb);
+                    //viewHolder.progressBar.setIndeterminate(true);
+                    viewHolder.setProgress((int)totalByte,(int) downloadedByte);
+                    viewHolder.setDownloadAmount((int)totalByte,(int) downloadedByte);
+                    Log.d("TRUNG", "Update Byte: : " + downloadedByte + "/" + totalByte);
                 }
             };
             handler.post(runnable);
         }
-        Log.d("TRUNG", "Update Byte: : " + downloadedByte + "/" + totalByte);
+
 
     }
 
@@ -349,7 +394,10 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
         if (viewHolder != null) {
             viewHolder.setDownloadStatus(getResources().getString(R.string.download_completed));
         }
-        updateFiles();
+        new ToastMsg(DownloadActivity.this).toastIconSuccess(object.getWork().getFileName()+" Completed");
+        Log.d("Hoan-notify",object.getWork().getFileName()+" Completed");
+        //DownloadActivity.getInstance().updateFiles();
+        DownloadActivity.getInstance().updateFols();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -364,7 +412,7 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onCancelDownload(DownloadWorkManager.onCancel object) {
-        updateFiles();
+        updateFols();
         Work work = object.getWork();
         for (SubtitleModel sublist : work.getListSubs()) {
             String fileName = work.getFileName().substring(0, work.getFileName().lastIndexOf("."));
@@ -372,14 +420,15 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
             String path = Constants.getDownloadDir(getApplicationContext()) + getApplicationContext().getResources().getString(R.string.app_name);
             File file = new File(path, subtitleName); // e_ for encode
             if (file.exists()) {
-                deleteFile(file, true);
+                deleteFile(file, true,work.getPath());
             }
         }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onDownloadError(DownloadWorkManager.onError object) {
-        updateFiles();
+        //new ToastMsg(DownloadActivity.this).toastIconError(" Error");
+        updateFols();
         Log.d("TRUNG", "error " + " id: " + object.getDownloadID());
     }
 
@@ -436,7 +485,6 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
         String workId;
         workId = url.replaceAll(" ", "_");
         workId = workId.replaceAll(":", "_");
-
         workId = workId.replaceAll("'", "_");
         work.setWorkId(workId);
         mDBHelper.updateWork(work);
@@ -452,20 +500,22 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
         Log.d("TRUNG", "next download " + work.getFileName());
     }
 
-    public void updateFiles() {
-        mVideoFiles.clear();
-        mWorks.clear();
-        mWorks = mDBHelper.getAllWork();
+    public void updateFiles(String filepath) {
         SharedPreferences sharedPreferences = getSharedPreferences("push", MODE_PRIVATE);
         String df_language = sharedPreferences.getString("df_subtitle",Constants.DEFAULT_LANGUAGE);
+        mVideoFiles.clear();
+        // String path = Constants.getDownloadDir(DownloadActivity.this) + getResources().getString(R.string.app_name);
+        String path=filepath;
+        String movieName=path.replace(Constants.getDownloadDir(DownloadActivity.this) + getResources().getString(R.string.app_name)+"/","");
 
-        String path = Constants.getDownloadDir(DownloadActivity.this) + getResources().getString(R.string.app_name);
         File directory = new File(path);
+        Log.d("Hoan-directory",directory.getAbsolutePath());
         File[] files = directory.listFiles();
         assert files != null;
         //get file from path
         for (File file : files) {
             String fileName = file.getName();
+            Log.d("Hoan-file",fileName);
             String filePath = file.getPath();
             String extension = fileName.substring(fileName.lastIndexOf("."));
             if (!extension.equals(".temp")) {
@@ -476,9 +526,12 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
                     vf.setLastModified(file.lastModified());
                     vf.setTotalSpace(file.length());
                     vf.setPath(filePath);
+                    vf.setMovieName(movieName.replace(" ","_"));
+                    Log.d("Hoan-movieName",movieName.replace(" ","_"));
                     vf.setFileExtension(extension);
                     for (File fileSub : files) {
                         String fileSubName = fileSub.getName();
+                        //  Log.d("Hoan-namesub",fileSubName);
                         String fileSubPath = fileSub.getPath();
                         String SubExtension = fileSubName.substring(fileSubName.lastIndexOf("."));
                         if (SubExtension.equals(".vtt") && fileSubName.contains(fileName.substring(0, fileName.lastIndexOf(".")))) {
@@ -491,19 +544,21 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
                     vf.setSubList(subPath);
                     mVideoFiles.add(vf);
                 }
-
             }
         }
         if (mDownloadHistoryAdapter != null) {
+            // mDownloadHistoryAdapter.notifyDataSetChanged();
             mDownloadHistoryAdapter.notifyDataSetChanged();
         }
         if (mVideoFiles.size() > 0) {
             mDownloadedFileTV.setVisibility(View.VISIBLE);
             mDownloadedFileRv.setVisibility(View.VISIBLE);
             mNoItemLayout.setVisibility(View.GONE);
+            mDownloadedFolRv.setVisibility(GONE);
         } else {
             mDownloadedFileTV.setVisibility(View.GONE);
-            mDownloadedFileRv.setVisibility(View.GONE);
+            mDownloadedFolRv.setVisibility(View.GONE);
+            mDownloadedFileRv.setVisibility(GONE);
             if (mWorks.size() == 0) {
                 mNoItemLayout.setVisibility(View.VISIBLE);
             } else {
@@ -516,6 +571,64 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
             mDownloadRv.setVisibility(View.VISIBLE);
             mFileDownloadAdapter.setNotifyChanged(mWorks);
         }
+    }
+
+    public void updateFols() {
+        // mVideoFiles.clear();
+        inFiles.clear();
+        mWorks.clear();
+        mWorks = mDBHelper.getAllWork();
+        SharedPreferences sharedPreferences = getSharedPreferences("push", MODE_PRIVATE);
+        String df_language = sharedPreferences.getString("df_subtitle",Constants.DEFAULT_LANGUAGE);
+
+        String path = Constants.getDownloadDir(DownloadActivity.this) + getResources().getString(R.string.app_name);
+        //String path=this.getExternalCacheDir().toString();
+        File directory = new File(path);
+        File[] files = directory.listFiles();
+        assert files != null;
+        //get file from path
+        for (File file : files) {
+            String fileName = file.getName();
+            String filePath = file.getPath();
+            String extension;
+            Log.d("Hoan-getname",file.getName());
+            if(!file.getName().contains(".")){
+                inFiles.add(file);
+                Log.d("Hoan-folder",filePath+"/"+file.getName());
+                //updateFiles(filePath);
+            }
+        }
+
+        Log.d("Hoan-listfoler",String.valueOf(inFiles.size()));
+        if (mDownloadFolAdapter != null) {
+            mDownloadHistoryAdapter.notifyDataSetChanged();
+            mDownloadFolAdapter.notifyDataSetChanged();
+        }
+        if (inFiles.size() > 0) {
+            mDownloadedFileTV.setVisibility(View.VISIBLE);
+            mDownloadedFolRv.setVisibility(View.VISIBLE);
+            mNoItemLayout.setVisibility(View.GONE);
+            mDownloadedFileRv.setVisibility(GONE);
+        } else {
+            mDownloadedFileTV.setVisibility(View.GONE);
+            mDownloadedFolRv.setVisibility(View.GONE);
+            mDownloadedFileRv.setVisibility(GONE);
+            if (mWorks.size() == 0) {
+                mNoItemLayout.setVisibility(View.VISIBLE);
+            } else {
+                mNoItemLayout.setVisibility(View.GONE);
+            }
+        }
+        if (mWorks.size() == 0) {
+            mDownloadRv.setVisibility(View.GONE);
+        } else {
+            mDownloadRv.setVisibility(View.VISIBLE);
+            mFileDownloadAdapter.setNotifyChanged(mWorks);
+        }
+    }
+
+    public static DownloadActivity getInstance() {
+        return instance;
     }
 
     public void progressHideShowControl() {
@@ -539,6 +652,7 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
             releasePlayer();
         }
         mUnbinder.unbind();
+        mDBHelper.close();
     }
 
 
@@ -552,16 +666,24 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mVideoFiles.remove(videoFile);
-                deleteFile(new File(videoFile.getPath()), false);
-                for (String subLink : videoFile.getSubList()) {
-                    deleteFile(new File(subLink), true);
-                }
-                if (mVideoFiles.size() == 0 || videoFile.getPath().equals(mPlayingVideoFile.getPath())) {
-                    releasePlayer();
-                    mMainLayout.setVisibility(VISIBLE);
-                    mLPlay.setVisibility(GONE);
-                }
+                String path=videoFile.getPath().substring(0,videoFile.getPath().lastIndexOf("/"));
+                String pathm3u8=Constants.getDownloadDir(DownloadActivity.this) + DownloadActivity.this.getResources().getString(R.string.app_name)+"/";
+                Log.d("Hoan-delete",pathm3u8+videoFile.getFileName().replace(".mp4",".m3u8"));
+                deleteFile(new File(videoFile.getPath()), false,path);
+                deleteFilecheck(new File(pathm3u8+videoFile.getFileName().replace(".mp4",".m3u8")), false);
 
+                //deleteFile(new File(videoFile.getPath().replace(".m3u8","")), false,path);
+                //   Log.d("Hoan",String.valueOf(videoFile.getPath()));
+                for (String subLink : videoFile.getSubList()) {
+                    deleteFilecheck(new File(subLink), true);
+                }
+                if(mPlayingVideoFile!=null) {
+                    if (mVideoFiles.size() == 0 || videoFile.getPath().equals(mPlayingVideoFile.getPath())) {
+                        releasePlayer();
+                        mMainLayout.setVisibility(VISIBLE);
+                        mLPlay.setVisibility(GONE);
+                    }
+                }
             }
         });
         dialog.setNegativeButton("No", null);
@@ -575,18 +697,30 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
         mPlayerLayout.setVisibility(VISIBLE);
         releasePlayer();
         mListSub.addAll(videoFile.getSubList());
+        Log.d("Hoan-sub-download",String.valueOf(videoFile.getSubList().size()));
         mListSub.add("Off");
 
         String filePath = videoFile.getPath();
         Uri videoUrl = Uri.fromFile(new File(filePath));
         Log.d("filePathLocation", filePath);
         //simpleExoPlayer = new SimpleExoPlayer.Builder(this).build();
-        BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
-        TrackSelection.Factory videoTrackSelectionFactory = new
-                AdaptiveTrackSelection.Factory(bandwidthMeter);
-        DefaultTrackSelector trackSelector = new
-                DefaultTrackSelector(videoTrackSelectionFactory);
-        mDownloadPlayer = ExoPlayerFactory.newSimpleInstance(getApplicationContext(), trackSelector);
+//        BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
+//        TrackSelection.Factory videoTrackSelectionFactory = new
+//                AdaptiveTrackSelection.Factory(bandwidthMeter);
+//        DefaultTrackSelector trackSelector = new
+//                DefaultTrackSelector(videoTrackSelectionFactory);
+//        mDownloadPlayer = ExoPlayerFactory.newSimpleInstance(getApplicationContext(), trackSelector);
+
+        DefaultTrackSelector trackSelector = new DefaultTrackSelector(this);
+        trackSelector.setParameters(
+                trackSelector.buildUponParameters().setMaxVideoSizeSd());
+
+//        DefaultTrackSelector trackSelector = new
+//                DefaultTrackSelector(videoTrackSelectionFactory);
+
+        mDownloadPlayer = new SimpleExoPlayer.Builder(this)
+                .setTrackSelector(trackSelector)
+                .build();
 
         DataSpec dataSpec = new DataSpec(videoUrl);
         final FileDataSource fileDataSource = new FileDataSource();
@@ -605,36 +739,49 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
         mDownloadPlayer.prepare(mMediaSource);
         mSimpleExoPlayerView.setPlayer(mDownloadPlayer);
 
-       /* SubtitleView view = mSimpleExoPlayerView.getSubtitleView();
-        int defaultSubtitleColor = Color.argb(255, 218, 218, 218);
-        int outlineColor = Color.argb(255, 43, 43, 43);
-        Typeface subtitleTypeface = ResourcesCompat.getFont(this, R.font.amazon);
-        CaptionStyleCompat style = new CaptionStyleCompat(defaultSubtitleColor,
-                Color.TRANSPARENT, Color.TRANSPARENT,
-                CaptionStyleCompat.EDGE_TYPE_OUTLINE,
-                outlineColor, subtitleTypeface);
-        view.setApplyEmbeddedStyles(false);
-        view.setStyle(style);*/
 
         mDownloadPlayer.setPlayWhenReady(true);
         mActiveMovie = true;
         if (mListSub.size() > 0) {
+            // setSelectedSubtitle(mMediaSource, videoFile.getDefaultSubPath(), DownloadActivity.this);
             SharedPreferences sharedPreferences = getSharedPreferences("push", MODE_PRIVATE);
             String df_language = sharedPreferences.getString("df_subtitle",Constants.DEFAULT_LANGUAGE);
             if(df_language.equals("Off")){
                 mSimpleExoPlayerView.getSubtitleView().setVisibility(GONE);
             }else{
-                setSelectedSubtitle(mMediaSource, videoFile.getDefaultSubPath(), DownloadActivity.this);
+                // Log.d("Hoan",String.valueOf(videoFile.getSubList()));
+                if(!videoFile.getSubList().equals("")){
+                    try {
+                        setSelectedSubtitle(mMediaSource, videoFile.getDefaultSubPath(), DownloadActivity.this);
+                    } catch (Exception e) {
+                        System.out.println("Error " + e.getMessage());
+                    }
+                }
             }
-
         }
+        mPlayingVideoFile = videoFile;
+
+//        SubtitleView view = mSimpleExoPlayerView.getSubtitleView();
+//        int defaultSubtitleColor = Color.argb(255, 218, 218, 218);
+//        int outlineColor = Color.argb(255, 43, 43, 43);
+//        Typeface subtitleTypeface = ResourcesCompat.getFont(this, R.font.amazon);
+//        CaptionStyleCompat style = new CaptionStyleCompat(defaultSubtitleColor,
+//                Color.TRANSPARENT, Color.TRANSPARENT,
+//                CaptionStyleCompat.EDGE_TYPE_OUTLINE,
+//                outlineColor, subtitleTypeface);
+//        view.setApplyEmbeddedStyles(false);
+//        view.setStyle(style);
+        SubtitleView view = mSimpleExoPlayerView.getSubtitleView();
+        view.setBottomPaddingFraction((float) 0.1);
+        view.setFixedTextSize(TypedValue.COMPLEX_UNIT_PX, DEFAULT_TEXT_SIZE_FRACTION*mPlayerHeight);
+        Log.d("Hoan-play",String.valueOf(DEFAULT_TEXT_SIZE_FRACTION*mPlayerHeight));
 
     }
 
     private MediaSource buildMediaSourceNew(Uri uri) {
         DataSource.Factory datasourceFactroy = new DefaultDataSourceFactory(this,
                 Util.getUserAgent(this, getResources().getString(R.string.app_name)));
-        return new ExtractorMediaSource.Factory(datasourceFactroy).createMediaSource(uri);
+        return new ProgressiveMediaSource.Factory(datasourceFactroy).createMediaSource(uri);
     }
 
     private void setSelectedSubtitle(MediaSource mediaSource, String subtitle, Context context) {
@@ -667,10 +814,41 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
         }
     }
 
-    private void deleteFile(File file, boolean isSub) {
+    private void deleteFilecheck(File file, boolean isSub) {
         if (file.exists()) {
             try {
                 boolean isDeleted = file.getCanonicalFile().delete();
+                file.getCanonicalFile().delete();
+                if (isDeleted) {
+                    Log.d("TRUNG", file.getName() + "was deleted");
+                    if (!isSub) {
+                        Toast.makeText(this, "File deleted successfully.", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(this, getString(R.string.something_went_text), Toast.LENGTH_SHORT).show();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (file.exists()) {
+                boolean isDeleted = getApplicationContext().deleteFile(file.getName());
+                if (isDeleted) {
+                    Log.d("TRUNG", file.getName() + "was deleted");
+                    if (!isSub) {
+                        Toast.makeText(this, "File deleted successfully.", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(this, getString(R.string.something_went_text), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
+
+    private void deleteFile(File file, boolean isSub,String path) {
+        if (file.exists()) {
+            try {
+                boolean isDeleted = file.getCanonicalFile().delete();
+                file.getCanonicalFile().delete();
                 if (isDeleted) {
                     Log.d("TRUNG", file.getName() + "was deleted");
                     if (!isSub) {
@@ -695,7 +873,7 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
             }
         }
 
-        updateFiles();
+        updateFiles(path);
     }
 
     @OnClick(R.id.img_full_scr)
@@ -781,6 +959,12 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             mLPlay.setLayoutParams(new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT, mPlayerHeight));
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+
+            SubtitleView view = mSimpleExoPlayerView.getSubtitleView();
+            view.setBottomPaddingFraction((float) 0.1);
+            view.setFixedTextSize(TypedValue.COMPLEX_UNIT_PX, DEFAULT_TEXT_SIZE_FRACTION*mPlayerHeight);
+            Log.d("Hoan-SmallScreen",String.valueOf(DEFAULT_TEXT_SIZE_FRACTION*mPlayerHeight));
+
         } else {
             mIsFullScr = true;
             mMainLayout.setVisibility(GONE);
@@ -788,6 +972,13 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
             mLPlay.setLayoutParams(new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.MATCH_PARENT));
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            mToolbar.setVisibility(GONE);
+
+
+            SubtitleView view = mSimpleExoPlayerView.getSubtitleView();
+            view.setBottomPaddingFraction((float) 0.1);
+            view.setFixedTextSize(TypedValue.COMPLEX_UNIT_PX, DEFAULT_TEXT_SIZE_FRACTION*mPlayerWidth);
+            Log.d("Hoan-SmallScreen",String.valueOf(mPlayerWidth*DEFAULT_TEXT_SIZE_FRACTION));
         }
     }
 
@@ -800,13 +991,14 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
                 releasePlayer();
                 mLPlay.setVisibility(GONE);
                 mMainLayout.setVisibility(VISIBLE);
+                mToolbar.setVisibility(VISIBLE);
             }
         }
-
     }
 
     @Override
     public void onClickSubtitles(int position) {
+        // setSelectedSubtitle(mMediaSource, mListSub.get(position), getApplicationContext());
         String language =  mListSub.get(position);
         if(language.equals("Off")){
             mSimpleExoPlayerView.getSubtitleView().setVisibility(GONE);
@@ -814,5 +1006,51 @@ public class DownloadActivity extends AppCompatActivity implements FileDownloadA
             setSelectedSubtitle(mMediaSource, mListSub.get(position), getApplicationContext());
         }
         mAlertDialog.cancel();
+    }
+
+    @Override
+    public void onDeleteDownloadFoler(File videoFile) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("Attention");
+        dialog.setMessage("Do you want to delete this file?");
+        dialog.setIcon(R.drawable.ic_warning);
+        dialog.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String path=videoFile.getAbsolutePath();
+                File directory = new File(path);
+                File[] files = directory.listFiles();
+                try {
+                    FileUtils.deleteDirectory(directory);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                assert directory != null;
+                //get file from path
+                for (File file : files) {
+                    String fileName = file.getName();
+                    Log.d("Hoan-file", fileName);
+                    String filePath = file.getPath();
+                    String pathm3u8=Constants.getDownloadDir(DownloadActivity.this) + DownloadActivity.this.getResources().getString(R.string.app_name)+"/";
+                    Log.d("Hoan-delete",pathm3u8+fileName.replace(".mp4",".m3u8"));
+                    deleteFilecheck(new File(pathm3u8+"/"+fileName.replace(".mp4",".m3u8")), false);
+                }
+                updateFols();
+            }
+        });
+        dialog.setNegativeButton("No", null);
+        dialog.show();
+    }
+
+    @Override
+    public void onClickFoler(File videoFile) {
+        // mDownloadedFolRv.setVisibility(GONE);
+        // mDownloadedFileRv.setVisibility(VISIBLE);
+        Log.d("Hoan-click",String.valueOf(videoFile.getName()));
+        Log.d("Hoan-path-click",videoFile.getAbsolutePath());
+        mVideoFiles.clear();
+        updateFiles(videoFile.getAbsolutePath());
+
+        isFolRV=true;
     }
 }

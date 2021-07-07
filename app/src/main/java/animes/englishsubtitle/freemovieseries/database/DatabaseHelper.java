@@ -90,6 +90,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String WORK_ID = "work_id";
     public static final String DOWNLOAD_ID = "download_id";
     public static final String FILE_NAME = "file_name";
+    public static final String MOVIE_NAME = "movie_name";
     public static final String TOTAL_SIZE = "total_size";
     public static final String DOWNLOAD_SIZE = "download_size";
     public static final String DOWNLOAD_STATUS = "download_status";
@@ -586,6 +587,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 URL + " TEXT," +
                 URL_SUB_LIST + " TEXT," +
                 FILE_NAME + " TEXT," +
+                MOVIE_NAME + " TEXT," +
                 APP_CLOSE_STATUS + " TEXT," +
                 DOWNLOAD_STATUS + " TEXT" + ")";
     }
@@ -615,6 +617,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(URL, work.getUrl());
         values.put(URL_SUB_LIST, work.getSubListJson());
         values.put(FILE_NAME, work.getFileName());
+        values.put(MOVIE_NAME, work.getMovieName());
         values.put(APP_CLOSE_STATUS, work.getAppCloseStatus());
         values.put(DOWNLOAD_STATUS, work.getDownloadStatus());
         // insert row
@@ -635,6 +638,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(URL, work.getUrl());
         values.put(URL_SUB_LIST, work.getSubListJson());
         values.put(FILE_NAME, work.getFileName());
+        values.put(MOVIE_NAME, work.getMovieName());
         values.put(APP_CLOSE_STATUS, work.getAppCloseStatus());
         values.put(DOWNLOAD_STATUS, work.getDownloadStatus());
 
@@ -669,6 +673,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             work.setWorkId(cursor.getString(cursor.getColumnIndex(WORK_ID)));
             work.setDownloadId(cursor.getInt(cursor.getColumnIndex(DOWNLOAD_ID)));
             work.setFileName(cursor.getString(cursor.getColumnIndex(FILE_NAME)));
+            work.setMovieName(cursor.getString(cursor.getColumnIndex(MOVIE_NAME)));
             work.setTotalSize(cursor.getString(cursor.getColumnIndex(TOTAL_SIZE)));
             work.setDownloadSize(cursor.getString(cursor.getColumnIndex(DOWNLOAD_SIZE)));
             work.setDownloadStatus(cursor.getString(cursor.getColumnIndex(DOWNLOAD_STATUS)));
@@ -695,6 +700,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     work.setWorkId(cursor.getString(cursor.getColumnIndex(WORK_ID)));
                     work.setDownloadId(cursor.getInt(cursor.getColumnIndex(DOWNLOAD_ID)));
                     work.setFileName(cursor.getString(cursor.getColumnIndex(FILE_NAME)));
+                    work.setMovieName(cursor.getString(cursor.getColumnIndex(MOVIE_NAME)));
                     work.setTotalSize(cursor.getString(cursor.getColumnIndex(TOTAL_SIZE)));
                     work.setDownloadSize(cursor.getString(cursor.getColumnIndex(DOWNLOAD_SIZE)));
                     work.setDownloadStatus(cursor.getString(cursor.getColumnIndex(DOWNLOAD_STATUS)));

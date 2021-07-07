@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.yausername.youtubedl-android:library:0.12.4@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c7dcef8056e637c82fb579a61fa690d4/jetified-library-0.12.4/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c7dcef8056e637c82fb579a61fa690d4/jetified-library-0.12.4/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c7dcef8056e637c82fb579a61fa690d4/jetified-library-0.12.4/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.yausername.youtubedl-android/library/0.12.4/afd2001073e1a96aa2fbf2bfabe3ba2553890821/library-0.12.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -10,6 +10,12 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5a5333d08720e9324b76ee0a756efa5f/jetified-tapjoy-android-sdk-12.7.1/AndroidManifest.xml" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5a5333d08720e9324b76ee0a756efa5f/jetified-tapjoy-android-sdk-12.7.1/res" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5a5333d08720e9324b76ee0a756efa5f/jetified-tapjoy-android-sdk-12.7.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0d48fcc2287839c942e380e2ba7ef730/jetified-tapjoy-android-sdk-12.7.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0d48fcc2287839c942e380e2ba7ef730/jetified-tapjoy-android-sdk-12.7.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/0d48fcc2287839c942e380e2ba7ef730/jetified-tapjoy-android-sdk-12.7.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a5bb8fca800bf3c714a7ee25f8436657/jetified-tapjoy-android-sdk-12.7.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a5bb8fca800bf3c714a7ee25f8436657/jetified-tapjoy-android-sdk-12.7.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a5bb8fca800bf3c714a7ee25f8436657/jetified-tapjoy-android-sdk-12.7.1/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

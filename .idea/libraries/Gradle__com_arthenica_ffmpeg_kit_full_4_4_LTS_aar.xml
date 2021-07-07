@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.arthenica:ffmpeg-kit-full:4.4.LTS@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/670f35c04ddf74958a162aadbfbe9fb8/jetified-ffmpeg-kit-full-4.4.LTS/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/670f35c04ddf74958a162aadbfbe9fb8/jetified-ffmpeg-kit-full-4.4.LTS/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/670f35c04ddf74958a162aadbfbe9fb8/jetified-ffmpeg-kit-full-4.4.LTS/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.arthenica/ffmpeg-kit-full/4.4.LTS/259f8dd54256f048ec5e6ab87bc407b64b1ca466/ffmpeg-kit-full-4.4.LTS-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.arthenica/ffmpeg-kit-full/4.4.LTS/eacd39b5519325a57550c7592f0c11e639c4194c/ffmpeg-kit-full-4.4.LTS-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

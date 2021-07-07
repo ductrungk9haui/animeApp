@@ -50,7 +50,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
-        android:networkSecurityConfig="@xml/network_security_config">
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:extractNativeLibs="true"
+        android:requestLegacyExternalStorage="true">
         <activity
             android:name="animes.englishsubtitle.freemovieseries.SplashScreenActivity"
             android:screenOrientation="portrait"

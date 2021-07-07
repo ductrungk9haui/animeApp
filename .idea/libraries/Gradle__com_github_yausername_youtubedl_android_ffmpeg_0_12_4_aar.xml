@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.yausername.youtubedl-android:ffmpeg:0.12.4@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9e7ee360d625c2b07cb7a0b81ce662c8/jetified-ffmpeg-0.12.4/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9e7ee360d625c2b07cb7a0b81ce662c8/jetified-ffmpeg-0.12.4/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9e7ee360d625c2b07cb7a0b81ce662c8/jetified-ffmpeg-0.12.4/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.yausername.youtubedl-android/ffmpeg/0.12.4/407afa9cd6f2d442c13c8144f2fda1c08b3ffb54/ffmpeg-0.12.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

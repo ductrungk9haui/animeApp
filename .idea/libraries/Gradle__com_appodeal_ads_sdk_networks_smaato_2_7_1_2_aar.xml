@@ -7,6 +7,12 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/92c821f19ad213ae69d6f378233392ec/jetified-smaato-2.7.1.2/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/92c821f19ad213ae69d6f378233392ec/jetified-smaato-2.7.1.2/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/92c821f19ad213ae69d6f378233392ec/jetified-smaato-2.7.1.2/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/99988e16e7207c6c883bc0b1f89fe660/jetified-smaato-2.7.1.2/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/99988e16e7207c6c883bc0b1f89fe660/jetified-smaato-2.7.1.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/99988e16e7207c6c883bc0b1f89fe660/jetified-smaato-2.7.1.2/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/db1649d57d010d320597d15ae4239cd4/jetified-smaato-2.7.1.2/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/db1649d57d010d320597d15ae4239cd4/jetified-smaato-2.7.1.2/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/db1649d57d010d320597d15ae4239cd4/jetified-smaato-2.7.1.2/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

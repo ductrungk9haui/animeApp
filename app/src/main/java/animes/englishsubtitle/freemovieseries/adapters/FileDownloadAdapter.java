@@ -51,8 +51,16 @@ public class FileDownloadAdapter extends RecyclerView.Adapter<FileDownloadAdapte
         Work work = mWorks.get(position);
         holder.id = work.getDownloadId();
         mViewHolders.add(holder);
-        holder.fileNameTv.setText(work.getFileName());
+        holder.fileNameTv.setText(work.getFileName().replace(".m3u8","")
+                .replace(".mp4","")
+                .replace("_"," ")
+        );
         Log.d("TRUNGX", "" + work.getFileName());
+        if (work.getDownloadStatus().equals("Waiting")) {
+            holder.progressBar.setIndeterminate(false);
+        }else {
+            holder.progressBar.setIndeterminate(true);
+        }
         if (work.getDownloadSize() != null && work.getTotalSize() != null) {
             double downloadedByte = Double.parseDouble(work.getDownloadSize());
             double totalByte = Double.parseDouble(work.getTotalSize());
@@ -78,6 +86,7 @@ public class FileDownloadAdapter extends RecyclerView.Adapter<FileDownloadAdapte
         }
     }
 
+
     @Override
     public int getItemCount() {
         return mWorks.size();
@@ -99,7 +108,7 @@ public class FileDownloadAdapter extends RecyclerView.Adapter<FileDownloadAdapte
         @BindView(R.id.download_amount_tv)
         TextView downloadAmountTv;
         @BindView(R.id.progressBarOne)
-        ProgressBar progressBar;
+        public ProgressBar progressBar;
         @BindView(R.id.download_status_tv)
         TextView downloadStatusTv;
 
@@ -130,9 +139,11 @@ public class FileDownloadAdapter extends RecyclerView.Adapter<FileDownloadAdapte
                 downloadStatusTv.setText(status);
                 Log.d("TRUNGX", "" + status);
                 if (status.equals(mContext.getResources().getString(R.string.download_pause)) || status.equals(mContext.getResources().getString(R.string.download_waiting))) {
-                    startPauseIv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_play_circle_tranparent));
+                    // startPauseIv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_play_circle_tranparent));
+                    startPauseIv.setVisibility(View.GONE);
                 } else {
-                    startPauseIv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_pause_circle_transparent));
+                    //  startPauseIv.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_pause_circle_transparent));
+                    startPauseIv.setVisibility(View.GONE);
                 }
             }
         }
@@ -145,7 +156,7 @@ public class FileDownloadAdapter extends RecyclerView.Adapter<FileDownloadAdapte
         @SuppressLint({"DefaultLocale", "SetTextI18n"})
         public void setDownloadAmount(double downloadMb, double totalMb) {
 //            downloadAmountTv.setText(Double.parseDouble(String.format("%.1f", downloadMb)) + " MB / "
- //                   + Double.parseDouble(String.format("%.1f", totalMb)) + " MB");
+            //                   + Double.parseDouble(String.format("%.1f", totalMb)) + " MB");
         }
     }
 

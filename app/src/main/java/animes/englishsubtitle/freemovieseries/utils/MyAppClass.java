@@ -17,6 +17,9 @@ import com.onesignal.OneSignal;
 import com.squareup.picasso.LruCache;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Request;
+import com.yausername.ffmpeg.FFmpeg;
+import com.yausername.youtubedl_android.YoutubeDL;
+import com.yausername.youtubedl_android.YoutubeDLException;
 
 import animes.englishsubtitle.freemovieseries.utils.ads.AudienceNetworkHelper;
 import retrofit2.Call;
@@ -45,6 +48,13 @@ public class MyAppClass extends Application {
 //        if (AudienceNetworkAds.isInAdsProcess(this)) {
 //            return;
 //        }
+
+        try {
+            YoutubeDL.getInstance().init(getApplicationContext());
+            FFmpeg.getInstance().init(getApplicationContext());
+        } catch (YoutubeDLException e) {
+            Log.e("Hoan", "failed to initialize youtubedl-android", e);
+        }
 
         MobileAds.initialize(
                 this,

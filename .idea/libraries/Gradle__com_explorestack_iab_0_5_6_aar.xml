@@ -7,6 +7,12 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f95808d78da915807de906c7b01931e0/jetified-iab-0.5.6/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f95808d78da915807de906c7b01931e0/jetified-iab-0.5.6/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f95808d78da915807de906c7b01931e0/jetified-iab-0.5.6/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/702441405e8217fa9c70ddf3e812dfda/jetified-iab-0.5.6/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/702441405e8217fa9c70ddf3e812dfda/jetified-iab-0.5.6/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/702441405e8217fa9c70ddf3e812dfda/jetified-iab-0.5.6/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9f49be4633703e22fdd2f71894066849/jetified-iab-0.5.6/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9f49be4633703e22fdd2f71894066849/jetified-iab-0.5.6/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/9f49be4633703e22fdd2f71894066849/jetified-iab-0.5.6/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

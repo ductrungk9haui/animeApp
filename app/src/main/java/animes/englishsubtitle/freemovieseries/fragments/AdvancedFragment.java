@@ -109,7 +109,7 @@ public class AdvancedFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mAdsController.showNativeAds(mAdsContainer,true);
-        mAdsController.initRewardVideoAds();
+        //mAdsController.initRewardVideoAds();
     }
 
     @Override
@@ -127,7 +127,7 @@ public class AdvancedFragment extends Fragment {
     @OnClick(R.id.request_layout)
     void onRequestClick(){
         if (PreferenceUtils.isLoggedIn(mActivity)) {
-            mAdsController.showRewardVideoAds();
+            mAdsController.initRewardVideoAds();
         }else{
             Intent intent = new Intent(getContext(), LoginActivity.class);
             startActivity(intent);

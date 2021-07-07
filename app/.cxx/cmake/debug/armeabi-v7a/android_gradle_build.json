@@ -1,12 +1,12 @@
 {
   "stringTable": {
     "0": "C:/Users/khaih/Documents/GitHub/animeApp/app/.cxx/cmake/debug/armeabi-v7a",
-    "1": "--target=armv7-none-linux-androideabi21 --gcc-toolchain=C:/Users/khaih/AppData/Local/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=C:/Users/khaih/AppData/Local/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/sysroot -Dapi_config_EXPORTS -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security -O0 -fno-limit-debug-info -fPIC"
+    "1": "--target=armv7-none-linux-androideabi21 --gcc-toolchain=C:/Users/khaih/AppData/Local/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=C:/Users/khaih/AppData/Local/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/windows-x86_64/sysroot -Dapi_config_EXPORTS -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security -O0 -fno-limit-debug-info -fPIC"
   },
   "buildFiles": [
     "C:\\Users\\khaih\\Documents\\GitHub\\animeApp\\app\\src\\main\\jni\\CMakeLists.txt",
-    "C:\\Users\\khaih\\AppData\\Local\\Android\\Sdk\\ndk-bundle\\build\\cmake\\android.toolchain.cmake",
-    "C:\\Users\\khaih\\AppData\\Local\\Android\\Sdk\\ndk-bundle\\build\\cmake\\platforms.cmake"
+    "C:\\Users\\khaih\\AppData\\Local\\Android\\Sdk\\ndk\\21.3.6528147\\build\\cmake\\android.toolchain.cmake",
+    "C:\\Users\\khaih\\AppData\\Local\\Android\\Sdk\\ndk\\21.3.6528147\\build\\cmake\\platforms.cmake"
   ],
   "cleanCommands": [
     "C:\\Users\\khaih\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"C:\\Users\\khaih\\Documents\\GitHub\\animeApp\\app\\.cxx\\cmake\\debug\\armeabi-v7a\" clean"
@@ -16,7 +16,7 @@
     "api_config-Debug-armeabi-v7a": {
       "buildCommand": "C:\\Users\\khaih\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"C:\\Users\\khaih\\Documents\\GitHub\\animeApp\\app\\.cxx\\cmake\\debug\\armeabi-v7a\" api_config",
       "buildType": "debug",
-      "toolchain": "2609248028",
+      "toolchain": "975740682",
       "abi": "armeabi-v7a",
       "artifactName": "api_config",
       "files": [
@@ -32,8 +32,8 @@
     }
   },
   "toolchains": {
-    "2609248028": {
-      "cppCompilerExecutable": "C:\\Users\\khaih\\AppData\\Local\\Android\\Sdk\\ndk-bundle\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe"
+    "975740682": {
+      "cppCompilerExecutable": "C:\\Users\\khaih\\AppData\\Local\\Android\\Sdk\\ndk\\21.3.6528147\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe"
     }
   },
   "cFileExtensions": [],

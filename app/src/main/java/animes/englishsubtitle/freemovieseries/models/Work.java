@@ -21,9 +21,18 @@ public class Work {
     private String dir;
     private String subListJson;
     private String path;
+    private String movieName;
     public long currentBytes = 0;
     public long totalBytes = 0;
     List<SubtitleModel> listSubs = new ArrayList<>();
+
+    public String getMovieName() {
+        return movieName;
+    }
+
+    public void setMovieName(String movieName) {
+        this.movieName = movieName;
+    }
 
     public String getAppCloseStatus() {
         return appCloseStatus;

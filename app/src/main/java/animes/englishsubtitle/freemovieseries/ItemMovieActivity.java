@@ -38,15 +38,17 @@ import animes.englishsubtitle.freemovieseries.utils.RtlUtils;
 import animes.englishsubtitle.freemovieseries.utils.ads.AdsController;
 import animes.englishsubtitle.freemovieseries.utils.ads.BannerAds;
 import animes.englishsubtitle.freemovieseries.utils.ads.RecycleContainer;
+import butterknife.BindView;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 
 import static com.unity3d.services.core.properties.ClientProperties.getActivity;
 
 public class ItemMovieActivity extends AppCompatActivity implements RecycleContainer {
 
-
+    public static final String INTENT_TYPE_STAR = "star";
     private ShimmerFrameLayout shimmerFrameLayout;
     private RecyclerView recyclerView;
     private CommonGridAdapter mAdapter;
@@ -61,6 +63,10 @@ public class ItemMovieActivity extends AppCompatActivity implements RecycleConta
     private TextView tvNoItem;
     private RelativeLayout adView;
     private FirebaseAnalytics mFirebaseAnalytics;
+
+    private AdsController mAdsController;
+    @BindView(R.id.ads_container)
+    View mAdsContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +104,7 @@ public class ItemMovieActivity extends AppCompatActivity implements RecycleConta
 
         swipeRefreshLayout=findViewById(R.id.swipe_layout);
         tvNoItem=findViewById(R.id.tv_noitem);
-
+        mAdsController = AdsController.getInstance(this);
 
         //----movie's recycler view-----------------
         recyclerView = findViewById(R.id.recyclerView);
@@ -116,15 +122,19 @@ public class ItemMovieActivity extends AppCompatActivity implements RecycleConta
                     }
                 }
             });
-            AdsController.getInstance(getActivity()).getNativeAds(this);
+            AdsController.getInstance(this).getNativeAds(this);
         }
+//        if(AdsController.getInstance(this).isAdsEnable()){
+//
+//            AdsController.getInstance(getActivity()).getNativeAds(this);
+//        }
 
         recyclerView.setLayoutManager(gridLayoutManager);
         //recyclerView.addItemDecoration(new SpacingItemDecoration(3, Tools.dpToPx(this, 8), true));
         recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(false);
 
-
+        // mAdapter = new CommonGridAdapter(this,this, list);
         recyclerView.setAdapter(mAdapter);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -132,13 +142,16 @@ public class ItemMovieActivity extends AppCompatActivity implements RecycleConta
                 super.onScrollStateChanged(recyclerView, newState);
 
                 if (!recyclerView.canScrollVertically(1) && !isLoading) {
-
                     pageCount=pageCount+1;
                     isLoading = true;
-
                     progressBar.setVisibility(View.VISIBLE);
-
-                    getMovie(pageCount);
+                    if (id == null){
+                        getMovie(pageCount);
+                    }else if (type.equals("country")){
+                        getMovieByCountryId(id, pageCount);
+                    } else {
+                        getMovieByGenreId(id, pageCount);
+                    }
                 }
             }
         });
@@ -170,7 +183,7 @@ public class ItemMovieActivity extends AppCompatActivity implements RecycleConta
 
                 if (new NetworkInst(ItemMovieActivity.this).isNetworkAvailable()){
                     initData();
-                    AdsController.getInstance(getActivity()).getNativeAds(ItemMovieActivity.this);
+                    AdsController.getInstance(ItemMovieActivity.this).getNativeAds(ItemMovieActivity.this);
                 }else {
                     tvNoItem.setText(getString(R.string.no_internet));
                     shimmerFrameLayout.stopShimmer();
@@ -181,7 +194,7 @@ public class ItemMovieActivity extends AppCompatActivity implements RecycleConta
             }
         });
 
-        //loadAd();
+        loadAd();
     }
 
 
@@ -190,7 +203,7 @@ public class ItemMovieActivity extends AppCompatActivity implements RecycleConta
             getMovie(pageCount);
         }else if (type.equals("country")){
             getMovieByCountryId(id, pageCount);
-        }else {
+        }  else {
             getMovieByGenreId(id, pageCount);
         }
 
@@ -222,11 +235,12 @@ public class ItemMovieActivity extends AppCompatActivity implements RecycleConta
                         models.setImageUrl(video.getThumbnailUrl());
                         models.setTitle(video.getTitle());
                         models.setQuality(video.getVideoQuality());
-                        models.setIsPaid(video.getIsPaid());
+                        //status movie
                         models.setStatus_movie(video.getStatusMovie());
                         models.setCount_status_movie(video.getCountStatusMovie());
-                        models.setTotal_view(video.getTotalview());
                         models.setStatus_sub(video.getStatusSub());
+                        models.setTotal_view(video.getTotalview());
+                        models.setIsPaid(video.getIsPaid());
                         models.setReleaseDate(video.getRelease());
                         if (video.getIsTvseries().equals("1") ) {
                             models.setVideoType("tvseries");
@@ -294,6 +308,7 @@ public class ItemMovieActivity extends AppCompatActivity implements RecycleConta
                         models.setTitle(video.getTitle());
                         models.setQuality(video.getVideoQuality());
                         models.setIsPaid(video.getIsPaid());
+                        //status movie
                         models.setStatus_movie(video.getStatusMovie());
                         models.setCount_status_movie(video.getCountStatusMovie());
                         models.setTotal_view(video.getTotalview());
@@ -340,31 +355,14 @@ public class ItemMovieActivity extends AppCompatActivity implements RecycleConta
     }
 
     private void loadAd(){
-        AdsConfig adsConfig = new DatabaseHelper(ItemMovieActivity.this).getConfigurationData().getAdsConfig();
-        if (PreferenceUtils.isLoggedIn(this)) {
-            if (!PreferenceUtils.isActivePlan(this)) {
-                if (adsConfig.getAdsEnable().equals("1")) {
-                    if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                        BannerAds.ShowAdmobBannerAds(ItemMovieActivity.this, adView);
-                    } else if (adsConfig.getMobileAdsNetwork().equals(Constants.APPODEAL)) {
-                        //BannerAds.showStartAppBanner(ItemMovieActivity.this, adView);
-                        BannerAds.showAppodealBanner(ItemMovieActivity.this,R.id.appodealBannerView_movie);
-                    } else if(adsConfig.getMobileAdsNetwork().equals(Constants.NETWORK_AUDIENCE)) {
-                        BannerAds.showFANBanner(ItemMovieActivity.this, adView);
-                    }
-                }
-            }
-        }else{
-            if (adsConfig.getAdsEnable().equals("1")) {
-                if (adsConfig.getMobileAdsNetwork().equalsIgnoreCase(Constants.ADMOB)) {
-                    BannerAds.ShowAdmobBannerAds(ItemMovieActivity.this, adView);
-                } else if (adsConfig.getMobileAdsNetwork().equals(Constants.APPODEAL)) {
-                    //BannerAds.showStartAppBanner(ItemMovieActivity.this, adView);
-                    BannerAds.showAppodealBanner(ItemMovieActivity.this,R.id.appodealBannerView_movie);
-                } else if(adsConfig.getMobileAdsNetwork().equals(Constants.NETWORK_AUDIENCE)) {
-                    BannerAds.showFANBanner(ItemMovieActivity.this, adView);
-                }
-            }
+        //mAdsController.initInterstitialAds();
+        // mAdsController.initNativeAds();
+        // mAdsController.showNativeAds(mAdsContainer,true);
+        if(Constants.COUNTADS==4){
+            Constants.COUNTADS=0;
+            mAdsController.initInterstitialAds();
+        }else {
+            Constants.COUNTADS++;
         }
     }
 
@@ -396,6 +394,7 @@ public class ItemMovieActivity extends AppCompatActivity implements RecycleConta
                         models.setTitle(video.getTitle());
                         models.setQuality(video.getVideoQuality());
                         models.setIsPaid(video.getIsPaid());
+                        //status movie
                         models.setStatus_movie(video.getStatusMovie());
                         models.setCount_status_movie(video.getCountStatusMovie());
                         models.setTotal_view(video.getTotalview());
@@ -453,7 +452,14 @@ public class ItemMovieActivity extends AppCompatActivity implements RecycleConta
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+//         DetailsActivity.getInstance().clear_previous();
+    }
+
+    @Override
     public void setAdsManager(NativeAdsManager manager, NativeAdViewAttributes attributes) {
         mAdapter.setAdsManager(manager,attributes);
     }
 }
+

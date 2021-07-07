@@ -62,22 +62,21 @@ import com.downloader.PRDownloader;
 import com.downloader.Status;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.exoplayer2.C;
-import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.Format;
 import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.ext.cast.CastPlayer;
+import com.google.android.exoplayer2.ext.cast.SessionAvailabilityListener;
 import com.google.android.exoplayer2.ext.rtmp.RtmpDataSourceFactory;
-import com.google.android.exoplayer2.source.ExtractorMediaSource;
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.source.MergingMediaSource;
+import com.google.android.exoplayer2.source.ProgressiveMediaSource;
 import com.google.android.exoplayer2.source.SingleSampleMediaSource;
 import com.google.android.exoplayer2.source.hls.HlsMediaSource;
 import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelection;
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
-import com.google.android.exoplayer2.ui.PlaybackControlView;
 import com.google.android.exoplayer2.ui.PlayerControlView;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.BandwidthMeter;
@@ -191,7 +190,7 @@ import static animes.englishsubtitle.freemovieseries.utils.Constants.SERVER_TYPE
 import static animes.englishsubtitle.freemovieseries.utils.Constants.STREAM_URL;
 import static com.google.android.gms.ads.AdActivity.CLASS_NAME;
 
-public class DetailsActivity extends AppCompatActivity implements CastPlayer.SessionAvailabilityListener, ProgramAdapter.OnProgramClickListener, EpisodeAdapter.OnTVSeriesEpisodeItemClickListener,
+public class DetailsActivity extends AppCompatActivity implements SessionAvailabilityListener, ProgramAdapter.OnProgramClickListener, EpisodeAdapter.OnTVSeriesEpisodeItemClickListener,
         RelatedTvAdapter.RelatedTvClickListener, SubtitleAdapter.Listener {
     private static final int PERMISSION_REQUEST_CODE = 1;
     private static final int PRELOAD_TIME_S = 20;
@@ -623,7 +622,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 if (b) {
                     //volumnTv.setText(i+"");
-                    mAudioManager.setStreamVolume(mPlayer.getAudioStreamType(), i, 0);
+                    mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, i, 0);
                 }
             }
 
@@ -637,7 +636,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
             }
         });
-        mCastPlayer.addListener(new Player.DefaultEventListener() {
+        mCastPlayer.addListener(new Player.Listener() {
             @Override
             public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
 
@@ -831,6 +830,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         mServerAdapter.setOnItemClickListener(new ServerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, CommonModels obj, int position, ServerAdapter.OriginalViewHolder holder) {
+                mAdsController.initInterstitialAds();
                 releasePlayer();
                 resetCastPlayer();
                 preparePlayer(obj);
@@ -972,7 +972,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         // visible control ui of casting
         mCastControlView.setVisibility(VISIBLE);
         mCastControlView.setPlayer(mCastPlayer);
-        mCastControlView.setVisibilityListener(new PlaybackControlView.VisibilityListener() {
+        mCastControlView.addVisibilityListener(new PlayerControlView.VisibilityListener() {
             @Override
             public void onVisibilityChange(int visibility) {
                 if (visibility == GONE) {
@@ -1032,7 +1032,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         episodePaidControl(String.valueOf(obj.getIs_epi_paid()));
         if (is_hide_subscribe_layout != true) {
            // mAdsController.showNativeAds(mAdsContainer, true);
-            mAdsController.showInterstitialAds();
+            mAdsController.initInterstitialAds();
             if (type.equalsIgnoreCase("embed")) {
                 CommonModels model = new CommonModels();
                 model.setStremURL(obj.getStreamURL());
@@ -1096,9 +1096,14 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     }
 
     private void loadAd() {
-        mAdsController.showNativeAds(mAdsContainer, true);
-        mAdsController.initInterstitialAds();
-        mAdsController.initRewardVideoAds();
+        mAdsController.initNativeAds();
+        mAdsController.showNativeAds(mAdsContainer,true);
+        if(Constants.COUNTADS==4){
+            Constants.COUNTADS=0;
+            mAdsController.initInterstitialAds();
+        }else {
+            Constants.COUNTADS++;
+        }
     }
 
     private void initGetData() {
@@ -1311,14 +1316,14 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         mWebView.setVisibility(GONE);
         mPlayerLayout.setVisibility(VISIBLE);
 
-        BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
-        TrackSelection.Factory videoTrackSelectionFactory = new
-                AdaptiveTrackSelection.Factory(bandwidthMeter);
+        DefaultTrackSelector trackSelector = new DefaultTrackSelector(this);
+        trackSelector.setParameters(
+                trackSelector.buildUponParameters().setMaxVideoSizeSd());
 
-        DefaultTrackSelector trackSelector = new
-                DefaultTrackSelector(videoTrackSelectionFactory);
+        mPlayer = new SimpleExoPlayer.Builder(context)
+                .setTrackSelector(trackSelector)
+                .build();
 
-        mPlayer = ExoPlayerFactory.newSimpleInstance(context, trackSelector);
         // player.setPlayWhenReady(true);
         //simpleExoPlayerView.setPlayer(player);
 
@@ -1358,7 +1363,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
             mPlayer.setPlayWhenReady(true);
         }
 
-        mPlayer.addListener(new Player.DefaultEventListener() {
+        mPlayer.addListener(new Player.Listener() {
             @Override
             public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
                 if (playWhenReady && playbackState == Player.STATE_READY) {
@@ -1425,7 +1430,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     private MediaSource rtmpMediaSource(Uri uri) {
         MediaSource videoSource = null;
         RtmpDataSourceFactory dataSourceFactory = new RtmpDataSourceFactory();
-        videoSource = new ExtractorMediaSource.Factory(dataSourceFactory)
+        videoSource = new ProgressiveMediaSource.Factory(dataSourceFactory)
                 .createMediaSource(uri);
 
         return videoSource;
@@ -1444,7 +1449,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     }
 
     private MediaSource mediaSource(Uri uri, Context context) {
-        return new ExtractorMediaSource.Factory(
+        return new ProgressiveMediaSource.Factory(
                 new DefaultHttpDataSourceFactory("exoplayer")).
                 createMediaSource(uri);
     }
@@ -2113,6 +2118,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
                         models.setFileSize(downloadLink.getFileSize());
                         models.setResulation(downloadLink.getResolution());
                         models.setInAppDownload(downloadLink.isInAppDownload());
+                        models.setListSub(mListServer.get(0).getListSub());
                         if (downloadLink.isInAppDownload()) {
                             mListInternalDownload.add(models);
                         } else {
@@ -2402,7 +2408,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
         mCastControlView.setVisibility(VISIBLE);
         mCastControlView.setPlayer(mCastPlayer);
         //simpleExoPlayerView.setDefaultArtwork();
-        mCastControlView.setVisibilityListener(new PlaybackControlView.VisibilityListener() {
+        mCastControlView.addVisibilityListener(new PlayerControlView.VisibilityListener() {
             @Override
             public void onVisibilityChange(int visibility) {
                 if (visibility == GONE) {
@@ -2501,6 +2507,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case PERMISSION_REQUEST_CODE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -2770,6 +2777,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
 
         if (!mListServer.isEmpty()) {
             if (mListServer.size() == 1) {
+                mAdsController.initInterstitialAds();
                 releasePlayer();
                 resetCastPlayer();
                 preparePlayer(mListServer.get(0));
@@ -2787,7 +2795,7 @@ public class DetailsActivity extends AppCompatActivity implements CastPlayer.Ses
     void onDownloadClick() {
         if (PreferenceUtils.isLoggedIn(DetailsActivity.this)) {
             if (!mListInternalDownload.isEmpty() || !mListExternalDownload.isEmpty()) {
-                mAdsController.showRewardVideoAds();
+                mAdsController.initInterstitialAds();
                 if (Config.ENABLE_DOWNLOAD_TO_ALL) {
                     openDownloadServerDialog();
                 } else {
