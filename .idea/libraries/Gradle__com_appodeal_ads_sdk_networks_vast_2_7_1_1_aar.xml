@@ -7,12 +7,12 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/aff306ce201c0f0b6caf1c2be58812bb/jetified-vast-2.7.1.1/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/aff306ce201c0f0b6caf1c2be58812bb/jetified-vast-2.7.1.1/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/aff306ce201c0f0b6caf1c2be58812bb/jetified-vast-2.7.1.1/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d2d289ae978f57fb32a9dafa88571579/jetified-vast-2.7.1.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d2d289ae978f57fb32a9dafa88571579/jetified-vast-2.7.1.1/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d2d289ae978f57fb32a9dafa88571579/jetified-vast-2.7.1.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/321ba3577ddabc3d3c06da4baab25862/jetified-vast-2.7.1.1/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/321ba3577ddabc3d3c06da4baab25862/jetified-vast-2.7.1.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/321ba3577ddabc3d3c06da4baab25862/jetified-vast-2.7.1.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/dea20ecf65355d37ad3495b2eaa4ec96/jetified-vast-2.7.1.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/dea20ecf65355d37ad3495b2eaa4ec96/jetified-vast-2.7.1.1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/dea20ecf65355d37ad3495b2eaa4ec96/jetified-vast-2.7.1.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/05f2e814def814e90f161719f84e71f2/jetified-vast-2.7.1.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/05f2e814def814e90f161719f84e71f2/jetified-vast-2.7.1.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/05f2e814def814e90f161719f84e71f2/jetified-vast-2.7.1.1/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

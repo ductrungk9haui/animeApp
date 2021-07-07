@@ -2,31 +2,211 @@
   {
     "level": "INFO",
     "message": "Start JSON generation. Platform version: 21 min SDK version: armeabi-v7a",
-    "file": "C:\\Users\\khaih\\Documents\\GitHub\\animeApp\\app\\src\\main\\jni\\CMakeLists.txt",
+    "file": "D:\\AnimeS\\AnimeS\\app\\src\\main\\jni\\CMakeLists.txt",
     "tag": "debug|armeabi-v7a"
   },
   {
     "level": "INFO",
     "message": "Trying to locate CMake in local SDK repository.",
-    "file": "C:\\Users\\khaih\\Documents\\GitHub\\animeApp\\app\\src\\main\\jni\\CMakeLists.txt",
+    "file": "D:\\AnimeS\\AnimeS\\app\\src\\main\\jni\\CMakeLists.txt",
     "tag": "debug|armeabi-v7a"
   },
   {
     "level": "INFO",
-    "message": "- CMake found in SDK at \u0027C:\\Users\\khaih\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\u0027 had version \u00273.10.2\u0027",
-    "file": "C:\\Users\\khaih\\Documents\\GitHub\\animeApp\\app\\src\\main\\jni\\CMakeLists.txt",
+    "message": "Parsing C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\build-tools\\25.0.0\\package.xml",
+    "file": "D:\\AnimeS\\AnimeS\\app\\src\\main\\jni\\CMakeLists.txt",
     "tag": "debug|armeabi-v7a"
   },
   {
     "level": "INFO",
-    "message": "JSON \u0027C:\\Users\\khaih\\Documents\\GitHub\\animeApp\\app\\.cxx\\cmake\\debug\\armeabi-v7a\\android_gradle_build.json\u0027 was up-to-date",
-    "file": "C:\\Users\\khaih\\Documents\\GitHub\\animeApp\\app\\src\\main\\jni\\CMakeLists.txt",
+    "message": "Parsing C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\build-tools\\25.0.3\\package.xml",
+    "file": "D:\\AnimeS\\AnimeS\\app\\src\\main\\jni\\CMakeLists.txt",
+    "tag": "debug|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\build-tools\\28.0.3\\package.xml",
+    "file": "D:\\AnimeS\\AnimeS\\app\\src\\main\\jni\\CMakeLists.txt",
+    "tag": "debug|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\build-tools\\29.0.0\\package.xml",
+    "file": "D:\\AnimeS\\AnimeS\\app\\src\\main\\jni\\CMakeLists.txt",
+    "tag": "debug|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\build-tools\\29.0.1\\package.xml",
+    "file": "D:\\AnimeS\\AnimeS\\app\\src\\main\\jni\\CMakeLists.txt",
+    "tag": "debug|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\build-tools\\29.0.2\\package.xml",
+    "file": "D:\\AnimeS\\AnimeS\\app\\src\\main\\jni\\CMakeLists.txt",
+    "tag": "debug|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\build-tools\\29.0.3\\package.xml",
+    "file": "D:\\AnimeS\\AnimeS\\app\\src\\main\\jni\\CMakeLists.txt",
+    "tag": "debug|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\build-tools\\30.0.0-rc4\\package.xml",
+    "file": "D:\\AnimeS\\AnimeS\\app\\src\\main\\jni\\CMakeLists.txt",
+    "tag": "debug|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\build-tools\\30.0.2\\package.xml",
+    "file": "D:\\AnimeS\\AnimeS\\app\\src\\main\\jni\\CMakeLists.txt",
+    "tag": "debug|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\build-tools\\30.0.3\\package.xml",
+    "file": "D:\\AnimeS\\AnimeS\\app\\src\\main\\jni\\CMakeLists.txt",
+    "tag": "debug|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\\package.xml",
+    "file": "D:\\AnimeS\\AnimeS\\app\\src\\main\\jni\\CMakeLists.txt",
+    "tag": "debug|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\cmdline-tools\\latest\\package.xml",
+    "file": "D:\\AnimeS\\AnimeS\\app\\src\\main\\jni\\CMakeLists.txt",
+    "tag": "debug|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\emulator\\package.xml",
+    "file": "D:\\AnimeS\\AnimeS\\app\\src\\main\\jni\\CMakeLists.txt",
+    "tag": "debug|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\extras\\android\\gapid\\3\\package.xml",
+    "file": "D:\\AnimeS\\AnimeS\\app\\src\\main\\jni\\CMakeLists.txt",
+    "tag": "debug|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\extras\\google\\usb_driver\\package.xml",
+    "file": "D:\\AnimeS\\AnimeS\\app\\src\\main\\jni\\CMakeLists.txt",
+    "tag": "debug|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\extras\\intel\\Hardware_Accelerated_Execution_Manager\\package.xml",
+    "file": "D:\\AnimeS\\AnimeS\\app\\src\\main\\jni\\CMakeLists.txt",
+    "tag": "debug|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\ndk\\21.0.6113669\\package.xml",
+    "file": "D:\\AnimeS\\AnimeS\\app\\src\\main\\jni\\CMakeLists.txt",
+    "tag": "debug|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\ndk\\21.3.6528147\\package.xml",
+    "file": "D:\\AnimeS\\AnimeS\\app\\src\\main\\jni\\CMakeLists.txt",
+    "tag": "debug|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\patcher\\v4\\package.xml",
+    "file": "D:\\AnimeS\\AnimeS\\app\\src\\main\\jni\\CMakeLists.txt",
+    "tag": "debug|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\platform-tools\\package.xml",
+    "file": "D:\\AnimeS\\AnimeS\\app\\src\\main\\jni\\CMakeLists.txt",
+    "tag": "debug|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\platforms\\android-24\\package.xml",
+    "file": "D:\\AnimeS\\AnimeS\\app\\src\\main\\jni\\CMakeLists.txt",
+    "tag": "debug|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\platforms\\android-25\\package.xml",
+    "file": "D:\\AnimeS\\AnimeS\\app\\src\\main\\jni\\CMakeLists.txt",
+    "tag": "debug|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\platforms\\android-28\\package.xml",
+    "file": "D:\\AnimeS\\AnimeS\\app\\src\\main\\jni\\CMakeLists.txt",
+    "tag": "debug|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\platforms\\android-29\\package.xml",
+    "file": "D:\\AnimeS\\AnimeS\\app\\src\\main\\jni\\CMakeLists.txt",
+    "tag": "debug|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\platforms\\android-30\\package.xml",
+    "file": "D:\\AnimeS\\AnimeS\\app\\src\\main\\jni\\CMakeLists.txt",
+    "tag": "debug|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\sources\\android-29\\package.xml",
+    "file": "D:\\AnimeS\\AnimeS\\app\\src\\main\\jni\\CMakeLists.txt",
+    "tag": "debug|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\sources\\android-30\\package.xml",
+    "file": "D:\\AnimeS\\AnimeS\\app\\src\\main\\jni\\CMakeLists.txt",
+    "tag": "debug|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\system-images\\android-22\\google_apis\\x86\\package.xml",
+    "file": "D:\\AnimeS\\AnimeS\\app\\src\\main\\jni\\CMakeLists.txt",
+    "tag": "debug|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\system-images\\android-30\\google_apis\\x86\\package.xml",
+    "file": "D:\\AnimeS\\AnimeS\\app\\src\\main\\jni\\CMakeLists.txt",
+    "tag": "debug|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\tools\\package.xml",
+    "file": "D:\\AnimeS\\AnimeS\\app\\src\\main\\jni\\CMakeLists.txt",
+    "tag": "debug|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "- CMake found in SDK at \u0027C:\\Users\\XFACTOR\\AppData\\Local\\Android\\Sdk\\cmake\\3.10.2.4988404\u0027 had version \u00273.10.2\u0027",
+    "file": "D:\\AnimeS\\AnimeS\\app\\src\\main\\jni\\CMakeLists.txt",
+    "tag": "debug|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "JSON \u0027D:\\AnimeS\\AnimeS\\app\\.cxx\\cmake\\debug\\armeabi-v7a\\android_gradle_build.json\u0027 was up-to-date",
+    "file": "D:\\AnimeS\\AnimeS\\app\\src\\main\\jni\\CMakeLists.txt",
     "tag": "debug|armeabi-v7a"
   },
   {
     "level": "INFO",
     "message": "JSON generation completed without problems",
-    "file": "C:\\Users\\khaih\\Documents\\GitHub\\animeApp\\app\\src\\main\\jni\\CMakeLists.txt",
+    "file": "D:\\AnimeS\\AnimeS\\app\\src\\main\\jni\\CMakeLists.txt",
     "tag": "debug|armeabi-v7a"
   }
 ]

@@ -24,7 +24,9 @@ import androidx.core.content.ContextCompat;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -428,6 +430,7 @@ public class LoginActivity extends AppCompatActivity {
     private void sendGoogleDataToServer() {
         progressBar.setVisibility(View.VISIBLE);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
         String username = user.getDisplayName();
         String email = user.getEmail();
         Uri image = user.getPhotoUrl();

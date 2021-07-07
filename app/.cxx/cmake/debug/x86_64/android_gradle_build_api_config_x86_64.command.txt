@@ -1,0 +1,7 @@
+Executable : C:\Users\XFACTOR\AppData\Local\Android\Sdk\cmake\3.10.2.4988404\bin\ninja.exe
+arguments : 
+-C
+D:\AnimeS\AnimeS\app\.cxx\cmake\debug\x86_64
+api_config
+jvmArgs : 
+
